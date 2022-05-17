@@ -10,6 +10,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<P>  1팀 화이팅!!!! </P>
+<h1>한글</h1>
+
 </body>
 </html>
