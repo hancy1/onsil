@@ -8,6 +8,7 @@
 </head>
 <body>
 	<jsp:forward page="WEB-INF/views/main.jsp"/>
-	<!-- 안녕 -->
+
+    
 </body>
 </html>
