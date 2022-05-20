@@ -7,6 +7,18 @@
 <!-- Title -->
 <title>온실</title>
 
+<!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="resources/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="resources/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="resources/js/active.js"></script>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/favicon.ico">
 
@@ -26,7 +38,7 @@
             <!-- Single Hero Post -->
             <div class="single-hero-post bg-overlay">
                 <!-- Post Image -->
-                <div class="slide-img bg-img" style="background-image: url(img/bg-img/1.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(resources/img/bg-img/1.jpg);"></div>
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
@@ -768,16 +780,6 @@
     
     
     
-    <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="resources/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="resources/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="resources/js/active.js"></script>
+    
 </body>
 
