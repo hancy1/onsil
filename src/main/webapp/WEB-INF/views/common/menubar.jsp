@@ -37,18 +37,18 @@
 							<!-- Top Header Content -->
 							<div class="top-header-meta">
 								<a href="#" data-toggle="tooltip" data-placement="bottom"
-									title="infodeercreative@gmail.com"><i
+									title="onsil@gmail.com"><i
 									class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email:
-										infodeercreative@gmail.com</span></a> <a href="#" data-toggle="tooltip"
-									data-placement="bottom" title="+1 234 122 122"><i
+										onsil@gmail.com</span></a> <a href="#" data-toggle="tooltip"
+									data-placement="bottom" title="+82 234 122 122"><i
 									class="fa fa-phone" aria-hidden="true"></i> <span>Call
-										Us: +1 234 122 122</span></a>
+										Kor: +82 234 122 122</span></a>
 							</div>
 
 							<!-- Top Header Content -->
 							<div class="top-header-meta d-flex">
 								<!-- Language Dropdown -->
-								<div class="language-dropdown">
+								<!-- <div class="language-dropdown">
 									<div class="dropdown">
 										<button class="btn btn-secondary dropdown-toggle mr-30"
 											type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -63,10 +63,14 @@
 												class="dropdown-item" href="#">Latin</a>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- Login -->
 								<div class="login">
 									<a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+								</div>
+								<!-- 회원가입 -->
+								<div class="join">
+									<a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
 								</div>
 								<!-- Cart -->
 								<div class="cart">
@@ -89,7 +93,7 @@
 					<nav class="classy-navbar justify-content-between" id="alazeaNav">
 
 						<!-- Nav Brand -->
-						<a href="index.html" class="nav-brand"><img
+						<a href="index.jsp" class="nav-brand"><img
 							src="resources/img/core-img/logo.png" alt=""></a>
 
 						<!-- Navbar Toggler -->
@@ -110,35 +114,47 @@
 							<!-- Navbar Start -->
 							<div class="classynav">
 								<ul>
-									<li><a href="index.html">Home</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="#">Pages</a>
+									
+									<li><a href="#">상품</a></li>						
+									<li><a href="#">예약</a></li>
+									<li><a href="#">정원관리</a></li>
+									<li><a href="#">자유게시판</a></li>
+									<li><a href="#">질문게시판</a></li>
+									<li><a href="#">고객센터</a>
 										<ul class="dropdown">
-											<li><a href="index.html">Home</a></li>
-											<li><a href="about.html">About</a></li>
-											<li><a href="shop.html">Shop</a>
-												<ul class="dropdown">
-													<li><a href="shop.html">Shop</a></li>
-													<li><a href="shop-details.html">Shop Details</a></li>
-													<li><a href="cart.html">Shopping Cart</a></li>
-													<li><a href="checkout.html">Checkout</a></li>
-												</ul></li>
-											<li><a href="portfolio.html">Portfolio</a>
-												<ul class="dropdown">
-													<li><a href="portfolio.html">Portfolio</a></li>
-													<li><a href="single-portfolio.html">Portfolio
-															Details</a></li>
-												</ul></li>
+											<li><a href="#">자주묻는질문</a></li>
+											<li><a href="#">공지사항</a></li>
+											<li><a href="#">문의사항</a></li>
+											<li><a href="#">1:1 채팅</a></li>
+										</ul>
+									</li>
+									
+									<!-- 관리자메뉴. 관리자로 로그인했을 때만 보이게 설정 -->
+									<li><a href="#">관리자메뉴</a>
+										<ul class="dropdown">
+											<li><a href="#">문의답변관리</a></li>
+											<li><a href="#">공지관리</a></li>
+											<li><a href="#">회원관리</a></li>
+											<li><a href="#">판매제품관리</a></li>
+											<li><a href="#">제품등록</a></li>
+											<li><a href="#">제품수정</a></li>
+											<li><a href="#">재고관리</a></li>
+											<li><a href="#">매출관리</a></li>
+											<li><a href="#">리뷰관리</a></li>
+											<li><a href="#">신고된 게시글</a></li>
+											<li><a href="#">티켓등록</a></li>
+											<li><a href="#">후기관리</a></li>
+											<li><a href="#">식물등록</a></li>
+										</ul>
+									</li> 
+											<!-- 
+											토글 예시를 위해 남겨뒀음											
 											<li><a href="blog.html">Blog</a>
 												<ul class="dropdown">
 													<li><a href="blog.html">Blog</a></li>
 													<li><a href="single-post.html">Blog Details</a></li>
-												</ul></li>
-											<li><a href="contact.html">Contact</a></li>
-										</ul></li>
-									<li><a href="shop.html">Shop</a></li>
-									<li><a href="portfolio.html">Portfolio</a></li>
-									<li><a href="contact.html">Contact</a></li>
+												</ul></li> -->	
+										
 								</ul>
 
 								<!-- Search Icon -->
