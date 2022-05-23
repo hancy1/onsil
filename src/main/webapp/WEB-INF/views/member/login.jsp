@@ -40,7 +40,7 @@
             <!-- Loging form -->
                   <form action="login.do" method="post">
                     <div class="form-group">
-                      <input type="email" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" placeholder="Enter ID">
+                      <input class="form-control" id="userId" name="userId" placeholder="Enter ID">
                       
                     </div>
                     <div class="form-group">

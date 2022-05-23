@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,20 +65,37 @@
 										</div>
 									</div>
 								</div> -->
-								<!-- Login : login 페이지로 이동 -->
-								<div class="login">
-									<a href="loginForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
-								</div>
-								<!-- 회원가입 -->
-								<div class="join">
-									<a href="enrollForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
-								</div>
-								<!-- Cart -->
-								<div class="cart">
-									<a href="#"><i class="fa fa-shopping-cart"
-										aria-hidden="true"></i> <span>Cart <span
-											class="cart-quantity">(1)</span></span></a>
-								</div>
+								
+								<!-- 로그인 전 -->
+               					 <c:if test="${ empty sessionScope.loginUser }">
+									<!-- Login : login 페이지로 이동 -->
+									<div class="login">
+									
+									
+										<a href="loginForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+									</div>
+									<!-- 회원가입 -->
+									<div class="join">
+										<a href="enrollForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
+									</div>
+								 </c:if>
+								
+								<!-- 로그인 후  -->
+								 <c:if test="${ !empty sessionScope.loginUser }">
+								 	<div class="login">								
+										<a href="myPage.do"><i class="fa fa-user" aria-hidden="true"></i> <span>${ sessionScope.loginUser.userName }님</span></a>
+									</div>
+									<div class="join">
+										<a href="logout.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Logout</span></a>
+									</div>
+					                				                 
+									<!-- Cart -->
+									<div class="cart">
+										<a href="#"><i class="fa fa-shopping-cart"
+											aria-hidden="true"></i> <span>Cart <span
+												class="cart-quantity">(1)</span></span></a>
+									</div>
+								</c:if> 
 							</div>
 						</div>
 					</div>

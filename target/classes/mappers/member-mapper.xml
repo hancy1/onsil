@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<resultMap type="Member" id="memberResultSet"> 
+		<id property="userNo" column="USER_NO"/>		
+		<result property="userId" column="USER_ID" />
+		<result property="userPwd" column="USER_PWD" />
+		<result property="userName" column="USER_NAME" />	
+		<result property="birth" column="BIRTH" />
+		<result property="gender" column="AGE" />
+		<result property="address" column="ADDRESS" />
+		<result property="addressDetail" column="ADDRESS_DETAIL" />
+		<result property="tel" column="TEL" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />	
+		<result property="preference" column="PREFERENCE" />	
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="delDate" column="DEL_DATE" />	
+		<result property="status" column="STATUS" />	
+	</resultMap>
+
+	<!-- 암호화 하기 전 로그인  -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">	
+		 
+		SELECT * 
+		FROM MEMBER
+		WHERE USER_ID=#{userId} 
+			AND USER_PWD=#{userPwd} 
+			AND STATUS='Y'		
+	</select>
+	
+</mapper>
