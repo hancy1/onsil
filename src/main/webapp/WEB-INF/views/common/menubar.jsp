@@ -93,8 +93,9 @@
 					<nav class="classy-navbar justify-content-between" id="alazeaNav">
 
 						<!-- Nav Brand -->
-						<a href="index.jsp" class="nav-brand"><img
-							src="resources/img/core-img/logo.png" alt=""></a>
+						<a href="index.jsp" class="nav-brand">
+						<!-- 로고 나중에 바꾸기! -->
+						<img src="resources/img/core-img/logo.png" alt=""></a>
 
 						<!-- Navbar Toggler -->
 						<div class="classy-navbar-toggler">
@@ -113,9 +114,14 @@
 
 							<!-- Navbar Start -->
 							<div class="classynav">
-								<ul>
-									
-									<li><a href="#">상품</a></li>						
+								<ul>									
+						            <li><a href="#">상품</a>
+										<ul class="dropdown">
+											<li><a href="#">구매하기</a></li>
+											<li><a href="#">내 리뷰 보기</a></li>
+											<li><a href="#">내 주문 내역</a></li>											
+										</ul>
+									</li>			
 									<li><a href="#">예약</a></li>
 									<li><a href="#">정원관리</a></li>
 									<li><a href="#">자유게시판</a></li>
