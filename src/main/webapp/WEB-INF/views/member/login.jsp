@@ -38,13 +38,13 @@
             <h1>Login</h1>
             
             <!-- Loging form -->
-                  <form>
+                  <form action="login.do" method="post">
                     <div class="form-group">
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter ID">
+                      <input type="email" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" placeholder="Enter ID">
                       
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Password">
                     </div>
 
                       <div class="form-check">
