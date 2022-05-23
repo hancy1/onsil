@@ -66,11 +66,11 @@
 								</div> -->
 								<!-- Login -->
 								<div class="login">
-									<a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+									<a href="login.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
 								</div>
 								<!-- 회원가입 -->
 								<div class="join">
-									<a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
+									<a href="enrollForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
 								</div>
 								<!-- Cart -->
 								<div class="cart">
