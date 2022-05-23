@@ -11,8 +11,8 @@ import com.uni.spring.garden.model.dao.GardenDao;
 @Service
 public class GardenServiceImpl implements GardenService{
 
-	//@Autowired
-	//private SqlSessionTemplate sqlSession;
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
 	private GardenDao gardenDao;
