@@ -31,19 +31,20 @@
 	</bean>
 
 	<!-- 일단 붙여넣은거라 나중에 파일 보고 수정.. -->
+	<!-- 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="select*" read-only="true" rollback-for="Exception"/>
 			<tx:method name="insert*" rollback-for="Exception"/>
 			<tx:method name="update*" rollback-for="Exception"/>
 			<tx:method name="delete*" rollback-for="Exception"/>
-			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/> <!-- 모든 메소드에 적용 -->
-		</tx:attributes>	
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/> --> <!-- 모든 메소드에 적용 -->
+		<!-- </tx:attributes>	
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut expression="execution(* com.uni.spring..*ServiceImpl*.*(..))" id="serviceMethod"/>
 		<aop:advisor id="transactionAdvisor" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
-	</aop:config>
+	</aop:config> -->
 	
 	<!-- 파일 업로드 시 사용 (파일크기지정)
 		MultipartResolver -->
