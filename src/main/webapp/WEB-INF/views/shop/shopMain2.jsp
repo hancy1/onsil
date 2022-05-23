@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
-<html>
+
+
 <head>
 <meta charset="UTF-8">
 
@@ -11,9 +14,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!-- jQuery library 
+<!-- jQuery library -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <!-- Favicon -->
@@ -27,6 +30,7 @@
 <title>온실 - Gardening SHOP</title>
 
 </head>
+
 <body>
 
 	<jsp:include page="../common/menubar.jsp" />
@@ -465,20 +469,8 @@
 
 
 	<jsp:include page="../common/footer.jsp" />
-	
-	
-	
-    <!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
-	<!-- Popper js -->
-	<script src="resources/js/bootstrap/popper.min.js"></script>
-	<!-- Bootstrap js -->
-	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
-	<!-- All Plugins js -->
-	<script src="resources/js/plugins/plugins.js"></script>
-	<!-- Active js -->
-	<script src="resources/js/active.js"></script>
+
 
 </body>
+
 </html>
