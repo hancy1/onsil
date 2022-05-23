@@ -117,7 +117,7 @@
 								<ul>									
 						            <li><a href="#">상품</a>
 										<ul class="dropdown">
-											<li><a href="#">구매하기</a></li>
+											<li><a href="listProducts.do">구매하기</a></li>
 											<li><a href="#">내 리뷰 보기</a></li>
 											<li><a href="#">내 주문 내역</a></li>											
 										</ul>
