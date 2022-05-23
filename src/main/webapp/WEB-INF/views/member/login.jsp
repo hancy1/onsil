@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/login_styles.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/login_styles.css">
 
     <title>Login</title>
   </head>
@@ -29,18 +29,18 @@
     </div>
 
     <!-- End Backgrounds -->
-
     <div class="container" id="login">
+    	
         <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="login">
-
+			<button type="button" onclick="history.back()" class="btn btn-lg btn-block btn-success" style="width: 100px; height: 30px; font-size: 15px; padding-top: 5px"> 뒤로가기</button>
             <h1>Login</h1>
             
             <!-- Loging form -->
                   <form>
                     <div class="form-group">
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter ID">
                       
                     </div>
                     <div class="form-group">
@@ -61,6 +61,7 @@
                   
                     <br>
                     <button type="submit" class="btn btn-lg btn-block btn-success">Sign in</button>
+                    
                   </form>
              <!-- End Loging form -->
 

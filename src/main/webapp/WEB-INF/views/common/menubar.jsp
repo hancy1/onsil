@@ -64,9 +64,9 @@
 										</div>
 									</div>
 								</div> -->
-								<!-- Login -->
+								<!-- Login : login 페이지로 이동 -->
 								<div class="login">
-									<a href="login.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+									<a href="loginForm.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
 								</div>
 								<!-- 회원가입 -->
 								<div class="join">
@@ -128,10 +128,10 @@
 									<li><a href="#">질문게시판</a></li>
 									<li><a href="#">고객센터</a>
 										<ul class="dropdown">
-											<li><a href="#">자주묻는질문</a></li>
-											<li><a href="#">공지사항</a></li>
-											<li><a href="#">문의사항</a></li>
-											<li><a href="#">1:1 채팅</a></li>
+											<li><a href="faqList.do">자주묻는질문</a></li>
+											<li><a href="noticeList.do">공지사항</a></li>
+											<li><a href="inquiryList.do">문의사항</a></li>
+											<li><a href="chat.do">1:1 채팅</a></li>
 										</ul>
 									</li>
 									
