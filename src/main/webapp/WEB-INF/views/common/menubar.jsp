@@ -123,7 +123,7 @@
 										</ul>
 									</li>			
 									<li><a href="#">예약</a></li>
-									<li><a href="#">정원관리</a></li>
+									<li><a href="gardenMain.do">정원관리</a></li>
 									<li><a href="#">자유게시판</a></li>
 									<li><a href="#">질문게시판</a></li>
 									<li><a href="#">고객센터</a>
