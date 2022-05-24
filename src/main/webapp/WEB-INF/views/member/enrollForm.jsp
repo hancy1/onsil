@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>온실 | 회원가입</title>
+
+	<!-- Favicon -->
+	<link rel="icon" href="resources/img/core-img/favicon.ico">
+	
    <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -34,6 +38,7 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+        
   </style>
 </head>
 
@@ -43,8 +48,9 @@
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h4 class="mb-3">회원가입</h4>
-        <form class="validation-form" novalidate>
+        <h4 class="mb-3" style="text-align: center;">회 원 가 입</h4>
+        
+        <form id="enrollForm" action="insertMember.do" method="post" class="validation-form" novalidate>
           <div class="row">
           	<div class="col-md-6 mb-3">
               <label for="id">아이디</label>
@@ -56,16 +62,17 @@
              <div class="col-md-6 mb-3" style="padding-top: 30px;">
               <button style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">중복확인</button>
             </div>
+            
             <div class="col-md-6 mb-3">
               <label for="password">비밀번호</label>
-              <input type="text" class="form-control" id="password" placeholder="" value="" required>
+              <input type="password" class="form-control" id="password" placeholder="" value="" required>
               <div class="invalid-feedback">
                 	비밀번호를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="passwordFeedback">비밀번호 확인</label>
-              <input type="text" class="form-control" id="passwordFeedback" placeholder="" value="" required>
+              <input type="password" class="form-control" id="passwordFeedback" placeholder="" value="" required>
               <div class="invalid-feedback">
                 	비밀번호 확인을 입력해주세요.
               </div>
@@ -78,26 +85,50 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="gender">성별</label>
-              <input type="text" class="form-control" id="gender" placeholder="" value="" required>
+            <div style="float: left;">
+              <label for="gender">성별</label>              
+              <select class="form-control" id="gender" name="gender"  required>
+              	<option> </option>
+              	<option> 여성 </option>
+              	<option> 남성 </option>
+              	<option> 미공개 </option>
+              </select>
               <div class="invalid-feedback">
                 	성별을 선택해주세요.
               </div>
-            </div>
-          </div>
+              </div>
+              <div class="col-md-6 mb-3" style="float: left; margin-left: 20px">
+              <label for="birth">생년월일</label>              
+              <input class="form-control" type="date" id="birth" name="birth" required>
+              <div class="invalid-feedback">
+                	생년월일을 입력해주세요.
+              </div>
+              </div>
+            </div>                     
 
-          <div class="mb-3">
+          <div class="col-md-10 mb-3">
             <label for="address">주소</label>
-            <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
+            <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" style="width: 100%" required>            
             <div class="invalid-feedback">
              	 주소를 입력해주세요.
             </div>
           </div>
+          <div class="col-md-2 mb-3" style="padding-top: 30px; ">
+          	<button style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
+          </div>
+		 </div>
+
+
 
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted" ></span></label>
             <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요." required>
+            <div class="invalid-feedback">
+             	 상세주소를 입력해주세요.
+            </div>
           </div>
+
+
 
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
@@ -113,6 +144,8 @@
             </div>
             </div>
 
+
+
 		  <div class="mb-3">
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
@@ -122,13 +155,17 @@
           </div>
           
           <div class="mb-3">
-            <label for="preference">선호도</label>
-            <input type="radio" class="form-control" name="preference" required>나무
-            <input type="radio" class="form-control" name="preference" required>꽃
-            <input type="radio" class="form-control" name="preference" required>식용재배
-            <div class="invalid-feedback">
-              	선택해주세요.
+            <label for="preference">선호도</label>                  
+            <div style=" display: flex;">            	
+	            <input class="form-control" type="radio" class="form-control" name="preference" value="1" style="width: 30px; height: 18px;" required>나무
+	            <input class="form-control" type="radio" class="form-control" name="preference" value="2" style="width: 30px; height: 18px;" required>꽃
+	            <input class="form-control" type="radio" class="form-control" name="preference" value="3" style="width: 30px; height: 18px;" required>식용재배	            
+            <div class="invalid-feedback" style="width: 40%; margin-left: 30px">
+             	선택해주세요.
+            </div>    
             </div>
+           	         
+                        
           </div>
           
           
@@ -143,7 +180,7 @@
       </div>
     </div>
     <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2021 YD</p>
+      <p class="mb-1">&copy; 2022 Onsil</p>
     </footer>
   </div>
   <jsp:include page="../common/footer.jsp" />
