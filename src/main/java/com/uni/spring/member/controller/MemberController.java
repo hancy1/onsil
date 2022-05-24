@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.member.model.service.MemberService;
@@ -48,4 +49,17 @@ public class MemberController {
 		}
 		
 	}
+	
+	//로그아웃
+	@RequestMapping("logout.do")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "redirect:/";
+	}
+	
+	// 회원가입 폼
+		@RequestMapping("enrollForm.do")
+		public String enrollForm() {
+			return "member/enrollForm";
+		}
 }
