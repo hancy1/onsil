@@ -25,7 +25,7 @@ public class Product {
 		PRO_STATUS
 	*/
 	
-	private int proCode; //제품코드
+	private String proCode; //제품코드
 	private int cateCode; //카테코드
 	private String proName; //제품네임
 	private int price; //가격
