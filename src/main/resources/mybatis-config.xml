@@ -11,11 +11,16 @@
 	<typeAliases>
 	 
 		<typeAlias type="com.uni.spring.member.model.dto.Member" alias="Member"/>
+		
+		<typeAlias type="com.uni.spring.garden.model.dto.VisitorBoard" alias="VBoard"/>
+		<typeAlias type="com.uni.spring.garden.model.dto.VisitorComment" alias="VComment"/>
+		<typeAlias type="com.uni.spring.garden.model.dto.DailyLog" alias="DailyLog"/>
 
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>		
+		<mapper resource="/mappers/garden-mapper.xml"/>		
 	</mappers>
 	
 	
