@@ -85,6 +85,9 @@
 								 	<div class="login">								
 										<a href="myPage.do"><i class="fa fa-user" aria-hidden="true"></i> <span>${ sessionScope.loginUser.userName }님</span></a>
 									</div>
+									<div class="reservation">								
+										<a href="reservation.do"><i class="fa fa-user" aria-hidden="true"></i> <span>예약확인</span></a>
+									</div>
 									<div class="join">
 										<a href="logout.do"><i class="fa fa-user" aria-hidden="true"></i> <span>Logout</span></a>
 									</div>
@@ -140,7 +143,14 @@
 											<li><a href="#">내 주문 내역</a></li>											
 										</ul>
 									</li>			
-									<li><a href="#">예약</a></li>
+									<li><a href="#">예약</a>
+									<ul class="dropdown">
+											<li><a href="fair.do">박람회</a></li>
+											<li><a href="exhibition.do">전시회</a></li>
+											<li><a href="reviewBoard.do">후기게시판</a></li>
+										</ul>
+									</li>
+									
 									<li><a href="gardenMain.do">정원관리</a></li>
 									<li><a href="#">자유게시판</a></li>
 									<li><a href="#">질문게시판</a></li>
