@@ -1,10 +1,15 @@
 package com.uni.spring.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -58,8 +63,29 @@ public class MemberController {
 	}
 	
 	// 회원가입 폼
-		@RequestMapping("enrollForm.do")
-		public String enrollForm() {
-			return "member/enrollForm";
-		}
+	@RequestMapping("enrollForm.do")
+	public String enrollForm() {
+		return "member/enrollForm";
+	}
+		
+	// 아이디 중복체크
+	@ResponseBody
+	@RequestMapping("idCheck.do")
+	public String idCheck(String id) {
+		
+		int count = memberService.idCheck(id);
+		
+		return String.valueOf(count);
+	}
+		
+	// 회원가입
+	@RequestMapping("insertMember.do")
+	public String insertMember(@ModelAttribute Member m, HttpSession session) {
+		
+		memberService.insertMember(m);
+		System.out.println(m);
+		session.setAttribute("msg", "회원가입 성공");
+		return "redirect:/";	
+		
+	}
 }
