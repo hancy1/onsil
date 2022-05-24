@@ -17,7 +17,8 @@ import lombok.ToString;
 public class VisitorBoard { //방명록dto
 
 	private String boardNo; //글번호
-	private String userNo; //회원번호
+	private String writer; //작성자회원번호
+	private String hostUser; //방명록 주인 회원번호
 	private String content; //내용
  	private Date enrollDate; //등록일
 	private String status; //상태

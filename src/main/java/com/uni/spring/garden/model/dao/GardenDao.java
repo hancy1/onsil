@@ -10,9 +10,13 @@ import com.uni.spring.garden.model.dto.VisitorBoard;
 @Repository
 public class GardenDao {
 
-	public ArrayList<VisitorBoard> getBoardList(String userNo, SqlSessionTemplate sqlSession) {
+	public ArrayList<VisitorBoard> getBoardList(String hostUser, SqlSessionTemplate sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("gardenMapper.getBoardList", userNo);
+		ArrayList<VisitorBoard> list = (ArrayList)sqlSession.selectList("gardenMapper.getBoardList", hostUser);
+			
+		System.out.println("다오 list " + list);
+		
+		return list;
 	}
 
 }

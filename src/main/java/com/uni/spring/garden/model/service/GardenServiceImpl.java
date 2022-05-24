@@ -21,9 +21,11 @@ public class GardenServiceImpl implements GardenService{
 	private GardenDao gardenDao;
 
 	@Override
-	public ArrayList<VisitorBoard> getBoardList(String userNo) {
+	public ArrayList<VisitorBoard> getBoardList(String hostUser) {
 		
-		ArrayList<VisitorBoard> list = gardenDao.getBoardList(userNo, sqlSession);
+		ArrayList<VisitorBoard> list = gardenDao.getBoardList(hostUser, sqlSession);
+		
+		System.out.println("서비스 list" + list);
 		
 		return list;
 	}

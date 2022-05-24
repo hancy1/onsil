@@ -2,21 +2,24 @@
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="gardenMapper">
-	<resultMap type="VBoard" id="VBoardResultSet"> 
-		<id property="boardNo" column="BOARD_NO"/>		
-		<result property="userNo" column="USER_NO" />
+
+	<resultMap type="com.uni.spring.garden.model.dto.VisitorBoard" id="VBoardResultSet"> 
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="writer" column="WRITER" />		
+		<result property="hostUser" column="HOST_USER" />
 		<result property="content" column="CONTENT" />
 		<result property="enrollDate" column="ENROLL_DATE" />	
 		<result property="status" column="STATUS" />
 	</resultMap>
 
 	
-	<select id="getBoardList" resultMap="VBoardResultSet">
+	<select id="getBoardList" parameterType="string" resultMap="VBoardResultSet">
 		
 		SELECT *
 		FROM VISITOR_BOARD
-		WHERE USER_NO = #{userNo}
+		WHERE HOST_USER = #{hostUser} 
 		AND STATUS='Y'
 	
 	</select>
