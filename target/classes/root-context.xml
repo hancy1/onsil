@@ -17,7 +17,7 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@Localhost:1521:xe"/>
 		<property name="username" value="onsil"/>
@@ -25,26 +25,37 @@
 		<property name="defaultAutoCommit" value="false"/>
 	</bean>
 
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="realDataSource"/>
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE"/>
+				<property name="sqlPrefix" value="[SQL] "/>
+			</bean>
+		</property>
+	</bean>
+	
+	
 	<!-- 트렌젝션처리 구문 추가하기 -->	 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 	<!-- 일단 붙여넣은거라 나중에 파일 보고 수정.. -->
-	<!-- 
+	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="select*" read-only="true" rollback-for="Exception"/>
 			<tx:method name="insert*" rollback-for="Exception"/>
 			<tx:method name="update*" rollback-for="Exception"/>
 			<tx:method name="delete*" rollback-for="Exception"/>
-			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/> --> <!-- 모든 메소드에 적용 -->
-		<!-- </tx:attributes>	
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>  <!-- 모든 메소드에 적용 -->
+		</tx:attributes>	
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut expression="execution(* com.uni.spring..*ServiceImpl*.*(..))" id="serviceMethod"/>
 		<aop:advisor id="transactionAdvisor" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
-	</aop:config> -->
+	</aop:config> 
 	
 	<!-- 파일 업로드 시 사용 (파일크기지정)
 		MultipartResolver -->
