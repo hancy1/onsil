@@ -6,6 +6,6 @@ import com.uni.spring.garden.model.dto.VisitorBoard;
 
 public interface GardenService {
 
-	ArrayList<VisitorBoard> getBoardList(String userNo);
+	ArrayList<VisitorBoard> getBoardList(String hostUser);
 
 }
