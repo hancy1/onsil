@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<jsp:include page="../common/menubar.jsp" />
+	<jsp:include page="../garden/gardenMenubar.jsp" />
 	
 <!-- Preloader-->
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -51,11 +51,10 @@
                 <div class="col-12">
                     <div class="alazea-portfolio-filter">
                         <div class="portfolio-filter">
-                            <button class="btn active" data-filter="*">All</button>
-                            <button class="btn" data-filter=".design">Coffee Design</button>
-                            <button class="btn" data-filter=".garden">Garden</button>
-                            <button class="btn" data-filter=".home-design">Home Design</button>
-                            <button class="btn" data-filter=".office-design">Office Design</button>
+                            <button class="btn active" data-filter="*">모두보기</button>
+                            <button class="btn" data-filter=".design">캘린더</button>
+                            <button class="btn" data-filter=".garden">방명록</button>
+                            <button class="btn" data-filter=".home-design">데일리로그</button>                       
                         </div>
                     </div>
                 </div>
@@ -64,57 +63,22 @@
             <hr>
          	<!-- 방명록 -->
          	<div class="row">
-         		<div class="col-6">
+         		<div class="col-12">
          			<table class="visitor_board">
-         				<c:if test="${ board != null }">
+         				<c:if test="${ !board.isEmpty() }">
          					<c:forEach items="${board}" var="b">
-	         					<tr>
-	         						<td>작성자 : ${b.writer}</td>
-	         						<td>${b.content}</td>
-	         						<td><button class="reply">댓글달기</button><button class="visitGarden">정원방문</button></td>
-	         					</tr>
+	         					<tr><td> 작성자 </td><td> ${b.writer} </td><td rowspan="2"><button class="reply">댓글달기</button><button class="visitGarden">정원방문</button></td></tr>
+	         					<tr><td></td><td>${b.content}</td></tr>
+	         					
          					</c:forEach>
          				</c:if>
-         				<c:if test="${ board == null }">
+         				<c:if test="${ board.isEmpty() }">
          					작성된 방명록이 없습니다.
-         				</c:if>
-         			
+         				</c:if>	
          			</table>
-         		
          		</div>
          	</div>   
-         	
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 			<hr>
 
             <div class="row alazea-portfolio">
