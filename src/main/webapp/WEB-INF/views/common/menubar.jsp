@@ -164,6 +164,7 @@
 									</li>
 									
 									<!-- 관리자메뉴. 관리자로 로그인했을 때만 보이게 설정 -->
+									<c:if test="${ sessionScope.loginUser.userId eq 'admin'}">
 									<li><a href="#">관리자메뉴</a>
 										<ul class="dropdown">
 											<li><a href="#">문의답변관리</a></li>
@@ -181,6 +182,7 @@
 											<li><a href="#">식물등록</a></li>
 										</ul>
 									</li> 
+									</c:if> 
 											<!-- 
 											토글 예시를 위해 남겨뒀음											
 											<li><a href="blog.html">Blog</a>

@@ -16,7 +16,11 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" type="text/css" href="resources/css/login_styles.css">
 
-    <title>Login</title>
+    <title>온실 | 로그인</title>
+    
+    <!-- Favicon -->
+	<link rel="icon" href="resources/img/core-img/favicon.ico">
+	
   </head>
   <body>
 
