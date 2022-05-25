@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.board.model.dto.Board;
+import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
@@ -19,8 +20,6 @@ public class GardenDao {
 	public ArrayList<VisitorBoard> getBoardList(String hostUser, SqlSessionTemplate sqlSession) {
 		
 		ArrayList<VisitorBoard> list = (ArrayList)sqlSession.selectList("gardenMapper.getBoardList", hostUser);
-			
-		System.out.println("다오 list " + list);
 		
 		return list;
 	}
@@ -44,6 +43,17 @@ public class GardenDao {
 	public Object boardEnroll(Map map, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.insert("gardenMapper.boardEnroll", map);
+	}
+
+	public void boardDelete(String boardNo, SqlSessionTemplate sqlSession) {
+
+		sqlSession.update("gardenMapper.boardDelete", boardNo);
+		
+	}
+
+	public ArrayList<Neighbor> getNeighborList(String userNo, SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.getNeighborList", userNo);
 	}
 
 }

@@ -95,8 +95,10 @@
 	function deleteBoard(boardNo){
 		
 		var yn = confirm("방명록을 삭제하시겠습니까?")
-		if(yn == 'y'){
+		console.log(yn)
+		if(yn){
 			location.href="deleteVBoard.do?boardNo=" + boardNo;
+			alert("방명록을 삭제했습니다.")
 		}else{
 			alert("삭제를 취소했습니다.")
 		}
