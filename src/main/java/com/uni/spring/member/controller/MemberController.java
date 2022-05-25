@@ -3,12 +3,12 @@ package com.uni.spring.member.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -27,6 +27,8 @@ public class MemberController {
 	@Autowired 
 	private MemberServiceImpl memberServiceImpl;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; // 암호화
 	
 	// 로그인 페이지
 	@RequestMapping("loginForm.do")
@@ -35,7 +37,7 @@ public class MemberController {
 	}
 	
 	// 암호화 전 로그인
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String loginMember(Member m, Model model) {
 		
 		Member loginUser;
@@ -53,7 +55,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 		
-	}
+	}*/
 	
 	//로그아웃
 	@RequestMapping("logout.do")
@@ -81,11 +83,42 @@ public class MemberController {
 	// 회원가입
 	@RequestMapping("insertMember.do")
 	public String insertMember(@ModelAttribute Member m, HttpSession session) {
+				
+		// 솔팅(salting)기법
+		// 평문 + 랜덤값(솔트값) --> 암호화
+		System.out.println("암호화전 : " + m.getUserPwd());
 		
-		memberService.insertMember(m);
-		System.out.println(m);
+		// 암호화 작업
+		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+		
+		System.out.println("암호화후 : " + encPwd);
+		
+		m.setUserPwd(encPwd); // 암호화된 비밀번호를 Member 객체에 세팅
+		
+		memberService.insertMember(m); // 암호화 작업 한 비밀번호를 세팅한 객체를 보냄
 		session.setAttribute("msg", "회원가입 성공");
 		return "redirect:/";	
+		
+	}
+	
+	
+	// 암호화 처리 후 로그인 부분
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public String loginMember(Member m, Model model) {
+				
+		Member loginUser;
+			
+				System.out.println("ID : " + m.getUserId());
+				System.out.println("PWD : " + m.getUserPwd());
+				String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd()); // 원래 비밀번호를 암호화 하여 encPwd 에 담는다.
+				System.out.println("암호화 후 : " + encPwd);
+				
+				loginUser = memberService.loginMember(bCryptPasswordEncoder, m);
+				System.out.println(loginUser);
+				model.addAttribute("loginUser", loginUser);
+				
+		        
+				return "redirect:/";			
 		
 	}
 }
