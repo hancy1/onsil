@@ -47,25 +47,51 @@
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
+	
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>온실 :: 회원정보수정</h2>
+		</div>
 
+		<!--  
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><i
+									class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
+							<li class="breadcrumb-item active" aria-current="page">판매제품관리</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	-->
+	<!-- ##### Breadcrumb Area End ##### -->
+	
   <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
-        <h4 class="mb-3" style="text-align: center;">회 원 가 입</h4>
+      <div class="input-form col-md-12 mx-auto" style="margin-top: 100px;">
+        <h4 class="mb-3" style="text-align: center;">회원정보수정</h4>
         
-        <form id="enrollForm" action="insertMember.do" method="post" class="validation-form" novalidate>
+        <form id="modifyForm" action="updateMember.do" method="post" class="validation-form" novalidate>
           <div class="row">
           	<div class="col-md-6 mb-3">
               <label for="id">아이디</label>
-              <input type="text" class="form-control" id="id" name="userId" placeholder="" value="" required>
+              <input type="text" class="form-control" id="id" name="userId" placeholder="" value="${ loginUser.userId }" readonly>
               <div class="invalid-feedback" id="idRegex">
                 	아이디를 입력해주세요.
               </div>              
             </div>
              <div class="col-md-6 mb-3" style="padding-top: 30px;">
-              <button type="button" onclick="idCheck();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">
-              	중복확인
-              </button>
+              
             </div>
             
             <div class="col-md-6 mb-3">
@@ -86,7 +112,7 @@
             </div>
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
-              <input type="text" class="form-control" id="name" name="userName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="name" name="userName" placeholder="" value="${ loginUser.userName }" required>
               <div id="nameValid"></div>
               <div class="invalid-feedback">
                 	이름을 입력해주세요.
@@ -97,9 +123,9 @@
               <label for="gender">성별</label>              
               <select class="form-control" id="gender" name="gender"  required>
               	<option> </option>
-              	<option name="gender" value="F"> 여성 </option>
-              	<option name="gender" value="M"> 남성 </option>
-              	<option name="gender" value="T"> 미공개 </option>
+              	<option name="gender" id="Female" value="F"> 여성 </option>
+              	<option name="gender" id="Male" value="M"> 남성 </option>
+              	<option name="gender" id="Nothing" value="T"> 미공개 </option>
               </select>
               <div class="invalid-feedback">
                 	성별을 선택해주세요.
@@ -107,7 +133,7 @@
               </div>
               <div class="col-md-6 mb-3" style="float: left; margin-left: 20px">
               <label for="birth">생년월일</label>              
-              <input class="form-control" type="date" id="birth" name="birth" required>
+              <input class="form-control" type="date" id="birth" name="birth" value="${ loginUser.birth }" required>
               <div class="invalid-feedback">
                 	생년월일을 입력해주세요.
               </div>
@@ -116,13 +142,13 @@
 
           <div class="col-md-10 mb-3">
             <label for="address">주소</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="서울특별시 강남구" style="width: 100%" required>            
+            <input type="text" class="form-control" id="address" name="address" placeholder="주소검색을 해주세요." style="width: 100%" value="${ loginUser.address }" required>            
             <div class="invalid-feedback">
              	 주소를 입력해주세요.
             </div>
           </div>
           <div class="col-md-2 mb-3" style="padding-top: 30px; ">
-          	<button type="button" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
+          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
           </div>
 		 </div>
 
@@ -130,7 +156,7 @@
 
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted" ></span></label>
-            <input type="text" class="form-control" id="address2" name="addressDetail" placeholder="상세주소를 입력해주세요." required>
+            <input type="text" class="form-control" id="address2" name="addressDetail" placeholder="상세주소를 입력해주세요." value="${ loginUser.addressDetail }" required>
             <div class="invalid-feedback">
              	 상세주소를 입력해주세요.
             </div>
@@ -141,11 +167,11 @@
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
               <label for="password">일반전화</label>
-              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="">              
+              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="${ loginUser.tel }">              
             </div>
             <div class="col-md-6 mb-3">
               <label for="passwordFeedback">휴대전화</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" required>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="${ loginUser.phone }" required>
               <div class="invalid-feedback">
                 	휴대전화를 입력해주세요.
               </div>
@@ -156,7 +182,7 @@
 
 		  <div class="mb-3">
             <label for="email">이메일</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="${ loginUser.email }" required>
             <div id="emailValid"></div>
             <div class="invalid-feedback">
               	이메일을 입력해주세요.
@@ -166,9 +192,9 @@
           <div class="mb-3">
             <label for="preference">선호도</label>                  
             <div style=" display: flex;">            	
-	            <input class="form-control" type="radio" class="form-control" name="preference" value="1" style="width: 30px; height: 18px;" required>나무
-	            <input class="form-control" type="radio" class="form-control" name="preference" value="2" style="width: 30px; height: 18px;" required>꽃
-	            <input class="form-control" type="radio" class="form-control" name="preference" value="3" style="width: 30px; height: 18px;" required>식용재배	            
+	            <input class="form-control" id="tree" type="radio" class="form-control" name="preference" value="1" style="width: 30px; height: 18px;" disabled>나무
+	            <input class="form-control" id="flower" type="radio" class="form-control" name="preference" value="2" style="width: 30px; height: 18px;" disabled>꽃
+	            <input class="form-control" id="eat" type="radio" class="form-control" name="preference" value="3" style="width: 30px; height: 18px;" disabled>식용재배	            
             <div class="invalid-feedback" style="width: 40%; margin-left: 30px">
              	선택해주세요.
             </div>    
@@ -177,17 +203,24 @@
                         
           </div>
           
+          <div class="row">
+		   	<div class="col-md-6 mb-3">
+              <button id="modifyBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" >수정</button>             
+            </div>
+            <div class="col-md-6 mb-3">
+              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="$('#postForm').submit();" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+            </div>
+          </div>               
           
-          <hr class="mb-4">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="aggrement" required>
-            <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-          </div>
-          <div class="mb-4"></div>
-          <button id="enrollBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" disabled="disabled">가입 완료</button>
         </form>
       </div>
     </div>
+    
+    <!-- 탈퇴 시 필요한 정보 -->
+    <form action="deleteMember.do" method="post" id="postForm">
+    	<input type="hidden" name="userId" value="${ loginUser.userId }">
+    </form>
+    
     <footer class="my-3 text-center text-small">
       <p class="mb-1">&copy; 2022 Onsil</p>
     </footer>
@@ -325,6 +358,38 @@
                     }
                 })
                 
+    // 성별
+  	$(function(){
+                    	
+   		if("${loginUser.gender}" == "F"){
+   			$("#Female").attr("selected", true);
+   		}else if("${loginUser.gender}" == "M"){
+   			$("#Male").attr("selected", true);
+   		}else{
+   			$("#Nothing").attr("selected", true);
+   		}
+   	});
+  
+  
+    // 선호도 라디오 버튼 
+    $(function(){
+      	
+  		if("${loginUser.preference}" == "1"){
+  			$("#tree").attr("checked", true);
+  		}else if("${loginUser.preference}" == "2"){
+  			$("#flower").attr("checked", true);
+  		}else{
+  			$("#eat").attr("checked", true);
+  		}
+  	});
+    
+    // 칸 누르면 주소검색이 뜨도록
+    $(function(){
+    	$("#address").click(function(){
+    		$("#searchAdd").click();
+    	});
+    });
+    
   </script>
 </body>
 
