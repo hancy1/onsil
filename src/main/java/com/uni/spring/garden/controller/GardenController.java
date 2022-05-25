@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uni.spring.board.model.dto.Board;
-import com.uni.spring.garden.Pagination;
+import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
@@ -58,7 +58,7 @@ public class GardenController {
 			int listCount = gardenService.selectListCount(hostUser);
 
 			//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
 			
 			ArrayList<Board> list = gardenService.selectList(pi, hostUser);
 			

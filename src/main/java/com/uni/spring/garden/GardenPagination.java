@@ -2,7 +2,7 @@ package com.uni.spring.garden;
 
 import com.uni.spring.garden.model.dto.PageInfo;
 
-public class Pagination {
+public class GardenPagination {
 	
 	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		
