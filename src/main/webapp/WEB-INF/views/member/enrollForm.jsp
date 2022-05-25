@@ -122,7 +122,7 @@
             </div>
           </div>
           <div class="col-md-2 mb-3" style="padding-top: 30px; ">
-          	<button type="button" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
+          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
           </div>
 		 </div>
 
@@ -325,6 +325,13 @@
                     }
                 })
                 
+    // 칸 누르면 주소검색이 뜨도록
+    $(function(){
+    	$("#address").click(function(){
+    		$("#searchAdd").click();
+    	});
+    });
+
   </script>
 </body>
 
