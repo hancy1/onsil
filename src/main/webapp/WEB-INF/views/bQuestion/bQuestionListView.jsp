@@ -51,122 +51,37 @@
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="row">
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/6.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/7.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/8.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/6.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/7.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/8.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+					
+					<!-- 게시판 목록 -->                
+					<table class="table table-striped table-sm">
+			         <thead>
+			           <tr>
+						<th width="100">글번호</th>
+						<th width="100">카테고리</th>
+						<th width="300">글제목</th>
+						<th width="100">작성자</th>
+						<th width="150">작성일</th>
+						<th width="100">조회수</th>
+						<th width="100">좋아요</th>
+			           </tr>
+			         </thead>
+			         <tbody>
+			           
+					<tr>
+						<td colspan="7">리스트 목록들....</td>
+					</tr>
+						<tr>
+						</tr>
+			        </tbody>
+				<br><br>
+				</table>
+				
+				<div class="single-widget-area">
+					<ol class="popular-tags d-flex flex-wrap">
+	                	<li><a href="#">글쓰기</a></li>
+	                </ol>
+                </div>
+                </div>
 
                     <div class="row">
                         <div class="col-12">
