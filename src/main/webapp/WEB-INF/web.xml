@@ -30,7 +30,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-<!-- 스프링에서 제공하는 인코딩 -->
+	<!-- 스프링에서 제공하는 인코딩 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -56,5 +56,12 @@
 		<location>/WEB-INF/views/common/errorPageFilter.jsp</location>
 	</error-page>
 
+	<!-- 암호화 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value> classpath:root-context.xml
+		/WEB-INF/spring/spring-security.xml
+		</param-value>		
+	</context-param>
 
 </web-app>
