@@ -21,6 +21,8 @@
 		
 		<typeAlias type="com.uni.spring.shop.model.dto.Product" alias="Product"/>
 		
+		<typeAlias type="com.uni.spring.board.model.dto.Board" alias="Board"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -29,7 +31,9 @@
 		
 		
 		<mapper resource="/mappers/adminShop-mapper.xml"/>
-		<mapper resource="/mappers/shop-mapper.xml"/>			
+		<mapper resource="/mappers/shop-mapper.xml"/>
+		
+		<mapper resource="/mappers/board-mapper.xml"/>			
 	</mappers>
 	
 	
