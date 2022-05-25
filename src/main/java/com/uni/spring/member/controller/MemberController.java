@@ -121,4 +121,16 @@ public class MemberController {
 				return "redirect:/";			
 		
 	}
+	
+	// 마이페이지 이동
+	@RequestMapping("myPage.do")
+	public String mypage() {
+		return "member/myPage";
+	}
+	
+	// 마이페이지 수정으로 이동	
+	@RequestMapping("myPageModify.do")
+	public String myPageModify() {
+		return "member/myPageModify";
+	}	
 }

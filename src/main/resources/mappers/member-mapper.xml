@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userPwd" column="USER_PWD" />
 		<result property="userName" column="USER_NAME" />	
 		<result property="birth" column="BIRTH" />
-		<result property="gender" column="AGE" />
+		<result property="gender" column="GENDER" />
 		<result property="address" column="ADDRESS" />
 		<result property="addressDetail" column="ADDRESS_DETAIL" />
 		<result property="tel" column="TEL" />
