@@ -49,125 +49,40 @@
     <section class="alazea-blog-area mb-100">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-8">
-                    <div class="row">
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/6.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/7.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/8.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/6.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>Garden designers across the country forecast ideas shaping the gardening world in 2018</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Alan Jackson</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/7.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>2018 Midwest Tree and Shrub Conference: Resilient Plants for a Lasting Landscape</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 20 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Christina Aguilera</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-lg-6">
-                            <div class="single-blog-post mb-50">
-                                <div class="post-thumbnail mb-30">
-                                    <a href="single-post.html"><img src="img/bg-img/8.jpg" alt=""></a>
-                                </div>
-                                <div class="post-content">
-                                    <a href="single-post.html" class="post-title">
-                                        <h5>The summer coming up, it’s time for both us and the flowers to soak up the sunshine</h5>
-                                    </a>
-                                    <div class="post-meta">
-                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> 19 Jun 2018</a>
-                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Mason Jenkins</a>
-                                    </div>
-                                    <p class="post-excerpt">Integer luctus diam ac scerisque consectetur. Vimus ottawas nec lacus sit amet. Aenean interdus mid vitae.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+            	<div class="col-12 col-md-8">
+                    <div class="row"> 
+                <!-- 게시판 목록 -->
+                
+					<table class="table table-striped table-sm">
+			         <thead>
+			           <tr>
+						<th width="100">글번호</th>
+						<th width="100">카테고리</th>
+						<th width="300">글제목</th>
+						<th width="100">작성자</th>
+						<th width="150">작성일</th>
+						<th width="100">조회수</th>
+						<th width="100">좋아요</th>
+			           </tr>
+			         </thead>
+			         <tbody>
+			           
+					<tr>
+						<td colspan="7">리스트 목록들....</td>
+					</tr>
+						<tr>
+						</tr>
+			        </tbody>
+				<br><br>
+				</table>
+				
+				<div class="single-widget-area">
+					<ol class="popular-tags d-flex flex-wrap">
+	                	<li><a href="#">글쓰기</a></li>
+	                </ol>
+                </div>
+                </div>
+		
                     <div class="row">
                         <div class="col-12">
                             <nav aria-label="Page navigation">
@@ -196,14 +111,11 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Recent post</h4>
+                                <h4>최신 게시글</h4>
                             </div>
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/30.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>New Harris Bugg design for Bridgewater</h6>
@@ -214,22 +126,6 @@
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/31.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>The designers will create a new kitchen garden</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/32.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>SGD Members win Best of Houzz Design Award</h6>
@@ -240,9 +136,6 @@
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/33.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>Shepherding Vegetables From Roof to Restaurant</h6>
@@ -256,82 +149,19 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Tag Cloud</h4>
+                                <h4>카테고리</h4>
                             </div>
                             <!-- Tags -->
                             <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">NEW PRODUCTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
+                                <li><a href="#">정보</a></li>
+                                <li><a href="#">사진</a></li>
+                                <li><a href="#">후기</a></li>
                                 <li><a href="#">DESIGN</a></li>
                                 <li><a href="#">NEWS</a></li>
                                 <li><a href="#">TRENDING</a></li>
                                 <li><a href="#">VIDEO</a></li>
                                 <li><a href="#">GARDEN DESIGN</a></li>
                             </ol>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>BEST SELLER</h4>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/4.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Cactus Flower</a>
-                                    <p>$10.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/5.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Tulip Flower</a>
-                                    <p>$11.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/34.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Recuerdos Plant</a>
-                                    <p>$9.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
