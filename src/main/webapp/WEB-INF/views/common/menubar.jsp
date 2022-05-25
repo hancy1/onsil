@@ -151,7 +151,14 @@
 										</ul>
 									</li>
 									
-									<li><a href="gardenMain.do">정원관리</a></li>
+									<li><a href="gardenMain.do">정원관리</a>
+										<ul class="dropdown">
+											<li><a href="visitorBoard.do">방명록</a></li>
+											<li><a href="#">데일리로그</a>
+											<li><a href="#">내 식물 관리</a></li>
+											<li><a href="#">이웃관리</a></li>											
+										</ul>
+									</li>
 									<li><a href="boardList.do">자유게시판</a></li>
 									<li><a href="bQuestionList.do">질문게시판</a></li>
 									<li><a href="#">고객센터</a>
