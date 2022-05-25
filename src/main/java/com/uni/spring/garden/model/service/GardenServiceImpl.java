@@ -1,6 +1,7 @@
 package com.uni.spring.garden.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class GardenServiceImpl implements GardenService{
 		
 		return gardenDao.getBoardList(hostUser, pi, sqlSession);
 	}
+
+	@Override
+	public void boardEnroll(Map map) {
+		
+		gardenDao.boardEnroll(map, sqlSession);	
+	}
+
+	
+
+	
 
 	
 }
