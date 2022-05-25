@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<jsp:include page="../garden/gardenMenubar.jsp" />
+	<jsp:include page="../common/menubar.jsp" />
 	
 <!-- Preloader-->
     <div class="preloader d-flex align-items-center justify-content-center">

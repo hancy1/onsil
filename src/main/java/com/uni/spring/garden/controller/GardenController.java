@@ -62,11 +62,21 @@ public class GardenController {
 			
 			System.out.println("list 확인 " + list);
 			
-			model.addAttribute("list", list);
+			model.addAttribute("board", list);
 			model.addAttribute("pi", pi);
 
 			return "garden/visitorBoardList";
 		}
 
+	@RequestMapping("vBoardEnroll.do")
+	public String boardEnroll(HttpSession session, String content, Model model) {
+		
+		
+		
+		
+		return "garden/visitorBoardList";
+		
 	}
+
+}
 
