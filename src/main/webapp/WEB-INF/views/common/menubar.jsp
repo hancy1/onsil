@@ -185,7 +185,8 @@
 											<li><a href="adminNotice.do">공지관리</a></li>
 											<li><a href="adminInquiry.do">문의관리</a></li>											
 											<li><a href="adminMember.do">회원관리</a></li>
-											<li><a href="adminProducts.do">판매제품관리</a></li>											
+											<li><a href="adminProducts.do">판매제품관리</a></li>
+											<li><a href="adminFreebie.do">사은품관리</a></li>											
 											<li><a href="#">재고관리</a></li>
 											<li><a href="#">매출관리</a></li>
 											<li><a href="#">리뷰관리</a></li>
