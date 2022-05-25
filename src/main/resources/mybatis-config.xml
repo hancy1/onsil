@@ -12,15 +12,23 @@
 	 
 		<typeAlias type="com.uni.spring.member.model.dto.Member" alias="Member"/>
 		
+		
 		<typeAlias type="com.uni.spring.garden.model.dto.VisitorBoard" alias="VBoard"/>
 		<typeAlias type="com.uni.spring.garden.model.dto.VisitorComment" alias="VComment"/>
 		<typeAlias type="com.uni.spring.garden.model.dto.DailyLog" alias="DailyLog"/>
 
+		<!-- 민보 (이 주석은 나중에 지울거에욥!) -->
+		<typeAlias type="com.uni.spring.shop.model.dto.Product" alias="Product"/>
+		
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>		
-		<mapper resource="/mappers/garden-mapper.xml"/>		
+		<mapper resource="/mappers/garden-mapper.xml"/>
+		
+		<!-- 민보 (이 주석은 나중에 지울거에욥!) -->
+		<mapper resource="/mappers/adminShop-mapper.xml"/>
+		<mapper resource="/mappers/shop-mapper.xml"/>			
 	</mappers>
 	
 	

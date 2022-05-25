@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productMapper">
+
+	<resultMap type="Product" id="productResultSet"> 
+		<id property="proCode" column="PRO_CODE"/>		
+		<result property="cateCode" column="CATE_CODE" />
+		<result property="proName" column="PRO_NAME" />
+		<result property="price" column="PRICE" />	
+		<result property="detailOri" column="DETAIL_ORI" />
+		<result property="detailCha" column="DETAIL_CHA" />
+		<result property="proAmount" column="PRO_AMOUNT" />
+		<result property="proStatus" column="PRO_STATUS" />
+		
+	</resultMap>
+	
+	
+	<!-- 관리자 페이지 : 등록된 product 수  -->
+	<select id = "selectListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 등록된 제품들 전부 select해오기 -->
+	<select id="loginMember" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	    
+	</select>
+	
+
+</mapper>
