@@ -17,6 +17,13 @@
 </head>
 
 <body>
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
+	
 	<!-- Preloader 
 	<div class="preloader d-flex align-items-center justify-content-center">
 		<div class="preloader-circle"></div>
@@ -174,9 +181,10 @@
 									<c:if test="${ sessionScope.loginUser.userId eq 'admin'}">
 									<li><a href="#">관리자메뉴</a>
 										<ul class="dropdown">
-											<li><a href="#">문의답변관리</a></li>
-											<li><a href="#">공지관리</a></li>
-											<li><a href="#">회원관리</a></li>
+											<li><a href="adminFaq.do">FAQ관리</a></li>
+											<li><a href="adminNotice.do">공지관리</a></li>
+											<li><a href="adminInquiry.do">문의관리</a></li>											
+											<li><a href="adminMember.do">회원관리</a></li>
 											<li><a href="adminProducts.do">판매제품관리</a></li>											
 											<li><a href="#">재고관리</a></li>
 											<li><a href="#">매출관리</a></li>
