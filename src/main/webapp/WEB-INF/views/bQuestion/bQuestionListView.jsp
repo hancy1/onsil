@@ -26,7 +26,7 @@
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
             <h2>질문게시판</h2>
         </div>
 
@@ -57,7 +57,6 @@
 			         <thead>
 			           <tr>
 						<th width="100">글번호</th>
-						<th width="100">카테고리</th>
 						<th width="300">글제목</th>
 						<th width="100">작성자</th>
 						<th width="150">작성일</th>
@@ -111,14 +110,11 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Recent post</h4>
+                                <h4>최근 게시물</h4>
                             </div>
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/30.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>New Harris Bugg design for Bridgewater</h6>
@@ -129,22 +125,6 @@
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/31.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>The designers will create a new kitchen garden</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/32.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>SGD Members win Best of Houzz Design Award</h6>
@@ -155,9 +135,6 @@
 
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/33.jpg" alt="">
-                                </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
                                         <h6>Shepherding Vegetables From Roof to Restaurant</h6>
@@ -171,26 +148,7 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Tag Cloud</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">NEW PRODUCTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
-                                <li><a href="#">DESIGN</a></li>
-                                <li><a href="#">NEWS</a></li>
-                                <li><a href="#">TRENDING</a></li>
-                                <li><a href="#">VIDEO</a></li>
-                                <li><a href="#">GARDEN DESIGN</a></li>
-                            </ol>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>BEST SELLER</h4>
+                                <h4>인기 질문글....</h4>
                             </div>
 
                             <!-- Single Best Seller Products -->
@@ -260,14 +218,14 @@
 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="resources/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="resources/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="resources/js/active.js"></script>
 </body>
 </html>

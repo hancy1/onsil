@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +28,7 @@
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
             <h2>자유게시판</h2>
         </div>
 
@@ -51,34 +53,42 @@
             <div class="row">
             	<div class="col-12 col-md-8">
                     <div class="row"> 
-                <!-- 게시판 목록 -->
-                
+                	
+                	<!-- 게시판 목록 -->                
 					<table class="table table-striped table-sm">
-			         <thead>
-			           <tr>
-						<th width="100">글번호</th>
-						<th width="100">카테고리</th>
-						<th width="300">글제목</th>
-						<th width="100">작성자</th>
-						<th width="150">작성일</th>
-						<th width="100">조회수</th>
-						<th width="100">좋아요</th>
-			           </tr>
-			         </thead>
-			         <tbody>
-			           
-					<tr>
-						<td colspan="7">리스트 목록들....</td>
-					</tr>
-						<tr>
-						</tr>
+			        	<thead>
+			          		<tr>
+								<th width="100">글번호</th>
+								<th width="100">카테고리</th>
+								<th width="300">글제목</th>
+								<th width="100">작성자</th>
+								<th width="150">작성일</th>
+								<th width="100">조회수</th>
+								<th width="100">좋아요</th>
+					        </tr>
+					    </thead>
+					<tbody>
+	                	<c:forEach items="${ list }" var="b">
+		                    <tr>
+		                        <td>${ b.bNo }</td>
+		                        <td>${ b.bCategoryNo }</td>
+		                        <td>${ b.bTitle }</td>
+		                        <td>${ b.bContent }</td>
+		                        <td>${ b.userNo }</td>
+		                        <td>${ b.bDate }</td>
+		                        <td>${ b.bCount }</td>
+		                        <td>♥</td>
+		                    </tr>
+	                    </c:forEach>
 			        </tbody>
 				<br><br>
 				</table>
 				
 				<div class="single-widget-area">
-					<ol class="popular-tags d-flex flex-wrap">
+						<!-- <ol class="popular-tags d-flex flex-wrap">
+						<c:if test="${ !empty loginUser }"> -->
 	                	<li><a href="#">글쓰기</a></li>
+	                	<!-- </c:if> -->
 	                </ol>
                 </div>
                 </div>
@@ -106,12 +116,31 @@
                                 <button type="submit"><i class="icon_search"></i></button>
                             </form>
                         </div>
-
+                        
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>최신 게시글</h4>
+                                <h4>카테고리</h4>
+                            </div>
+                            <!-- Tags -->
+                            <ol class="popular-tags d-flex flex-wrap">
+                                <li><a href="#">정보</a></li>
+                                <li><a href="#">사진</a></li>
+                                <li><a href="#">후기</a></li>
+                                <li><a href="#">DESIGN</a></li>
+                                <li><a href="#">NEWS</a></li>
+                                <li><a href="#">TRENDING</a></li>
+                                <li><a href="#">VIDEO</a></li>
+                                <li><a href="#">GARDEN DESIGN</a></li>
+                            </ol>
+                        </div>
+                        
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <!-- Title -->
+                            <div class="widget-title">
+                                <h4>최근 게시물</h4>
                             </div>
 
                             <!-- Single Latest Posts -->
@@ -144,25 +173,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>카테고리</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">정보</a></li>
-                                <li><a href="#">사진</a></li>
-                                <li><a href="#">후기</a></li>
-                                <li><a href="#">DESIGN</a></li>
-                                <li><a href="#">NEWS</a></li>
-                                <li><a href="#">TRENDING</a></li>
-                                <li><a href="#">VIDEO</a></li>
-                                <li><a href="#">GARDEN DESIGN</a></li>
-                            </ol>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -175,14 +186,14 @@
 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="resources/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="resources/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="resources/js/active.js"></script>
 </body>
 </html>
