@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정원 | 방명록</title>
+<title>정원 | 방명록관리</title>
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
