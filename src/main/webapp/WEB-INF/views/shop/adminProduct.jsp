@@ -129,10 +129,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${ list }" var="b">
+                	<c:forEach items="${ list }" var="p">
 	                    <tr>
 	                        <td>${ p.proCode }</td>
-	                        <td>${ p.boardTitle }</td>
+	                        <td>${ p.cateCode }</td>
 	                        <td>${ p.proName }</td>
 	                        <td>${ p.proAmount }</td>
 	                        <td>${ p.proStatus }</td>

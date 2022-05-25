@@ -26,7 +26,7 @@ public class Product {
 	*/
 	
 	private String proCode; //제품코드
-	private int cateCode; //카테코드
+	private String cateCode; //카테코드
 	private String proName; //제품네임
 	private int price; //가격
 	private String detailOri; //제품사진원본명
