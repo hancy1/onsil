@@ -170,9 +170,7 @@
 											<li><a href="#">문의답변관리</a></li>
 											<li><a href="#">공지관리</a></li>
 											<li><a href="#">회원관리</a></li>
-											<li><a href="#">판매제품관리</a></li>
-											<li><a href="#">제품등록</a></li>
-											<li><a href="#">제품수정</a></li>
+											<li><a href="adminProducts.do">판매제품관리</a></li>											
 											<li><a href="#">재고관리</a></li>
 											<li><a href="#">매출관리</a></li>
 											<li><a href="#">리뷰관리</a></li>
