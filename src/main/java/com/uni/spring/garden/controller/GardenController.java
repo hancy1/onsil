@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.Pagination;
+import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 import com.uni.spring.garden.model.service.GardenService;
@@ -84,6 +85,31 @@ public class GardenController {
 		return "redirect:visitorBoard.do";
 		
 	}
+	
+	@RequestMapping("deleteVBoard.do")
+	public String boardDelete(HttpSession session, String boardNo, Model model) {
+		
+		gardenService.boardDelete(boardNo);
 
+		return "redirect:visitorBoard.do";
+		
+	}
+
+	
+	//이웃관리
+	@RequestMapping("neighborList.do")
+	public String neighborList(HttpSession session, Model model) {
+		
+		//로그인한 회원 번호
+		String userNo = ((Member) session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Neighbor> list = gardenService.getNeighborList(userNo);
+		System.out.println("list 확인 " + list.get(0));
+		
+		model.addAttribute("list", list);
+		
+		return "garden/neighborList";	
+	}
+	
 }
 

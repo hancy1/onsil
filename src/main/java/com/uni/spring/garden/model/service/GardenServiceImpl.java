@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dao.GardenDao;
+import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
@@ -27,8 +28,6 @@ public class GardenServiceImpl implements GardenService{
 	public ArrayList<VisitorBoard> getBoardList(String hostUser) {
 		
 		ArrayList<VisitorBoard> list = gardenDao.getBoardList(hostUser, sqlSession);
-		
-		System.out.println("서비스 list" + list);
 		
 		return list;
 	}
@@ -49,6 +48,18 @@ public class GardenServiceImpl implements GardenService{
 	public void boardEnroll(Map map) {
 		
 		gardenDao.boardEnroll(map, sqlSession);	
+	}
+
+	@Override
+	public void boardDelete(String boardNo) {
+		gardenDao.boardDelete(boardNo, sqlSession);	
+		
+	}
+
+	@Override
+	public ArrayList<Neighbor> getNeighborList(String userNo) {
+		
+		return gardenDao.getNeighborList(userNo, sqlSession);
 	}
 
 	

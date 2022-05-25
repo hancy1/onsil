@@ -62,4 +62,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 	
+	<update id="boardDelete">
+	
+		UPDATE VISITOR_BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+		
+	</update>
+	
+	
+	
+	
+	<!-- 이웃관리 -->
+	
+	<resultMap type="Neighbor" id="NeighborResultSet"> 
+		<id property="neighborNo" column="NEIGHBOR_NO"/>
+		<result property="userNo" column="USER_NO" />		
+		<result property="nUserNo" column="USER_ID" />
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
+	<select id="getNeighborList" resultMap="NeighborResultSet">
+	
+		SELECT A.NEIGHBOR_NO, B.USER_ID, A.ENROLL_DATE, A.STATUS
+		FROM NEIGHBOR A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		WHERE A.USER_NO = #{userNo}
+		AND A.STATUS = 'Y'
+		ORDER BY A.ENROLL_DATE DESC
+	
+	</select>
 </mapper>
