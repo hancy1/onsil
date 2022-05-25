@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,224 +10,120 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 정원</title>
+    <title>온실 - 티켓등록</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="resources/img/core-img/favicon.ico">
+    <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="resources/style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-	<!--<jsp:include page="common/menubar.jsp" />-->
+	<jsp:include page="../common/menubar.jsp" />
 	
-<!-- Preloader-->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="resources/img/core-img/leaf.png" alt="">
-        </div>
-    </div> 
-    
-    <!-- ##### Portfolio Area Start ##### -->
-    <section class="alazea-portfolio-area portfolio-page section-padding-0-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center">
-                        <h2>정원</h2>
-                        <p>정원소개하기</p>
-                    </div>
-                </div>
-            </div>
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
+            <h2>자유게시판</h2>
         </div>
 
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="alazea-portfolio-filter">
-                        <div class="portfolio-filter">
-                            <button class="btn active" data-filter="*">All</button>
-                            <button class="btn" data-filter=".design">Coffee Design</button>
-                            <button class="btn" data-filter=".garden">Garden</button>
-                            <button class="btn" data-filter=".home-design">Home Design</button>
-                            <button class="btn" data-filter=".office-design">Office Design</button>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <section class="alazea-blog-area mb-100">
+        <div class="container">
+            <div class="row">
+            	<div class="col-12 col-md-8">
+                    <div class="row"> 
+                <!-- 게시판 목록 -->
+                
+					<table class="table table-striped table-sm">
+			         <thead>
+			           <tr>
+						<th width="100">글번호</th>
+						<th width="100">카테고리</th>
+						<th width="300">글제목</th>
+						<th width="100">작성자</th>
+						<th width="150">작성일</th>
+						<th width="100">조회수</th>
+						<th width="100">좋아요</th>
+			           </tr>
+			         </thead>
+			         <tbody>
+			           
+					<tr>
+						<td colspan="7">리스트 목록들....</td>
+					</tr>
+						<tr>
+						</tr>
+			        </tbody>
+				<br><br>
+				</table>
+				
+				<div class="single-widget-area">
+					<ol class="popular-tags d-flex flex-wrap">
+	                	<li><a href="#">글쓰기</a></li>
+	                </ol>
+                </div>
+                </div>
+		
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <hr>
-         	<!-- 방명록 -->
-         	<div class="row">
-         		<div class="col-6">
-         			<table class="visitor_board">
-         				<c:if test="${ board != null }">
-         					<c:forEach items="${board}" var="b">
-	         					<tr>
-	         						<td>작성자 : ${b.writer}</td>
-	         						<td>${b.content}</td>
-	         						<td><button class="reply">댓글달기</button><button class="visitGarden">정원방문</button></td>
-	         					</tr>
-         					</c:forEach>
-         				</c:if>
-         				<c:if test="${ board == null }">
-         					작성된 방명록이 없습니다.
-         				</c:if>
-         			
-         			</table>
-         		
-         		</div>
-         	</div>   
-         	
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			<hr>
-
-            <div class="row alazea-portfolio">
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design home-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/16.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/16.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 1">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-6 single_portfolio_item garden">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/17.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/17.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 2">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden office-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/19.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/19.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 4">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design office-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/20.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/20.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 5">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/21.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/21.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 6">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-6 single_portfolio_item home-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/22.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/22.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 7">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
                 
+                <div class="col-12 col-md-4">
+                    <div class="post-sidebar-area">
 
-            </div>
-        </div>
+                        <!-- ##### Single Widget Area ##### -->
+                        <div class="single-widget-area">
+                            <form action="#" method="get" class="search-form">
+                                <input type="search" name="search" id="widgetsearch" placeholder="Search...">
+                                <button type="submit"><i class="icon_search"></i></button>
+                            </form>
+                        </div>
+
+                      
     </section>
-    <!-- ##### Portfolio Area End ##### -->
+    
+    <!-- ##### Blog Area End ##### -->
 
-    <jsp:include page="common/footer.jsp" />
-    
+    <jsp:include page="../common/footer.jsp" />
+
     <!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
-	<!-- Popper js -->
-	<script src="resources/js/bootstrap/popper.min.js"></script>
-	<!-- Bootstrap js -->
-	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
-	<!-- All Plugins js -->
-	<script src="resources/js/plugins/plugins.js"></script>
-	<!-- Active js -->
-	<script src="resources/js/active.js"></script>
-    
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
 </body>
 </html>

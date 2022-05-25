@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+   <title>온실-티켓등록</title>
 <style>
 	#boardList{text-align: center;}
     #boardList>tbody>tr:hover{cursor:pointer;}
@@ -24,13 +24,60 @@
     .select{width:20%;}
     .text{width:53%;}
     .searchBtn{Width:20%;}
+    
+    .btn-grad {
+      background-image: linear-gradient(to right, #16A085 0%, #F4D03F  51%, #16A085  100%);
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+      Width:150px;
+      height:30px;
+    }
+
+    .btn-grad:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+    }
 </style>
+
 </head>
 <body>
 	 
 
     <jsp:include page="../common/menubar.jsp"/>
 
+
+     <!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>티켓등록</h2>
+		</div>
+    	<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><i
+									class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
+							<li class="breadcrumb-item active" aria-current="page">티켓등록</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
     <div class="content">
         <br><br>
         <div class="innerOuter" style="padding:5% 10%;">
@@ -41,7 +88,7 @@
             	<a class="btn btn-secondary" style="float:right" href="enrollTicket.do">글쓰기</a>
             </c:if>
             <br>
-            <table id="boardList" class="table table-hover" align="center">
+            <table id="ticketList" class="table table-hover" align="center">
                 <thead>
                   <tr>
                     <th>티켓번호</th>              
@@ -57,9 +104,9 @@
 	                    <tr>
 	                        <td>${ t.ticketNo }</td>
 	                        <td>${ t.ticketTitle }</td>
-	                        <td>${ t.userName }</td>
+	                        <td>${ t.writer }</td>
 	                        <td>${ t.phone }</td>
-	                        <td>${ b.createDate }</td>
+	                        <td>${ t.createDate }</td>
 	                        <c:if test="${ !empty t.originName }">
 	                        	<td>★</td>
 	                        </c:if>
@@ -116,13 +163,24 @@
     
     <script>
     	$(function(){
-    		$("#boardList tbody tr").click(function(){
+    		$("#ticketList tbody tr").click(function(){
     			location.href="detailTicket.do?bno=" + $(this).children().eq(0).text();
     		});
     	});
     </script>
 
-
-    <jsp:include page="../common/footer.jsp"/>
+  <jsp:include page="../common/footer.jsp"/>
+    
+    <!-- ##### All Javascript Files ##### -->
+	<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="resources/js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap js -->
+	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="resources/js/plugins/plugins.js"></script>
+	<!-- Active js -->
+	<script src="resources/js/active.js"></script>
 </body>
 </html>
