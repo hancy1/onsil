@@ -24,6 +24,32 @@
 
 	<jsp:include page="../common/menubar.jsp" />
 	
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>MY GARDEN</h2>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><i
+									class="fa fa-home"></i> Home</a></li>
+							<!-- <li class="breadcrumb-item "><a href="#">정원 메인화면</a></li> -->
+							<li class="breadcrumb-item active" aria-current="page">정원 메인화면</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ##### Breadcrumb Area End ##### -->
+	
 <!-- Preloader-->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-circle"></div>
@@ -34,17 +60,17 @@
     
     <!-- ##### Portfolio Area Start ##### -->
     <section class="alazea-portfolio-area portfolio-page section-padding-0-100">
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!-- Section Heading -->
+                    <!-- Section Heading 
                     <div class="section-heading text-center">
                         <h2>정원</h2>
                         <p>정원소개하기</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="container">
             <div class="row">

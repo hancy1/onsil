@@ -9,6 +9,31 @@
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>MY GARDEN</h2>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><i
+									class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item "><a href="gardenMain.do">정원 메인화면</a></li>
+							<li class="breadcrumb-item active" aria-current="page">방명록</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ##### Breadcrumb Area End ##### -->
 	
 	<section id="aa-product-category">
 		<div class="container" align="center">
@@ -34,7 +59,10 @@
 	         								<td>${b.writer}</td>	
 	         								<td>${b.content}</td>
 	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply"><i class="fa-solid fa-pen"></i></button> <button class="btn btn-outline-success visitGarden"><i class="fa-solid fa-leaf"></i></button></td>
+											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button> 
+											<button class="btn btn-outline-success visitGarden" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											<button class="btn btn-outline-success visitGarden" data-bs-toggle="tooltip" title="정원방문" onclick=""><i class="fa-solid fa-leaf"></i></button>
+											</td>
 	         								</tr>			
 	         							</c:forEach>
          							</c:if>
@@ -50,7 +78,7 @@
 							</p>
 							<div class="collapse" id="collapseExample">
 							  <div class="card card-body">
-							    <div><form action="vBoardEnroll.do"><input type="text" name="content"> <button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form></div>
+							    <div><form action="vBoardEnroll.do"><input type="text" name="content"><input type="hidden" name="writer" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form></div>
 							  </div>
 							</div>
 							
@@ -61,6 +89,20 @@
 		</div>
 		</div>
 </section>
+<script>
+
+	//방명록 삭제하기
+	function deleteBoard(boardNo){
+		
+		var yn = confirm("방명록을 삭제하시겠습니까?")
+		if(yn == 'y'){
+			location.href="deleteVBoard.do?boardNo=" + boardNo;
+		}else{
+			alert("삭제를 취소했습니다.")
+		}
+	}
+
+</script>
 		<!-- 페이징바 만들기 -->
 		
 	

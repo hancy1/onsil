@@ -55,4 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<insert id="boardEnroll">
+	
+		INSERT INTO VISITOR_BOARD VALUES
+		(SEQ_V_BOARD_NO.NEXTVAL, #{writer}, #{hostUser}, #{content}, DEFAULT, DEFAULT)
+		
+	</insert>
+	
 </mapper>

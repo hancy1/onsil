@@ -2,6 +2,7 @@ package com.uni.spring.garden.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -38,6 +39,11 @@ public class GardenDao {
 		
 		return (ArrayList)sqlSession.selectList("gardenMapper.getBoardListAll", hostUser, rowBounds);
 
+	}
+
+	public Object boardEnroll(Map map, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.boardEnroll", map);
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.uni.spring.garden.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,14 +55,11 @@ public class GardenController {
 			String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
 		
 			int listCount = gardenService.selectListCount(hostUser);
-			System.out.println("listCount 확인 : " + listCount);
 
 			//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 			
 			ArrayList<Board> list = gardenService.selectList(pi, hostUser);
-			
-			System.out.println("list 확인 " + list);
 			
 			model.addAttribute("board", list);
 			model.addAttribute("pi", pi);
@@ -69,12 +68,20 @@ public class GardenController {
 		}
 
 	@RequestMapping("vBoardEnroll.do")
-	public String boardEnroll(HttpSession session, String content, Model model) {
+	public String boardEnroll(HttpSession session, String content, String writer, Model model) {
 		
+		System.out.println("content" + content);
+		System.out.println("writer" + writer);
+		String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
 		
+		Map map = new HashMap<String, String>();
+		map.put("content", content);
+		map.put("writer", writer);
+		map.put("hostUser", hostUser);
 		
-		
-		return "garden/visitorBoardList";
+		gardenService.boardEnroll(map);
+
+		return "redirect:visitorBoard.do";
 		
 	}
 
