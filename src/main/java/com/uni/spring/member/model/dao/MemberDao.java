@@ -33,4 +33,10 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
 
+	// 탈퇴하기
+	public int deleteMember(SqlSessionTemplate sqlSession, String userId) {
+		
+		return sqlSession.update("memberMapper.deleteMember", userId);
+	}
+
 }
