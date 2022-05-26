@@ -85,6 +85,9 @@
         
         <form method="post" class="validation-form" novalidate>
           <div class="row">
+          
+          
+          	<!-- 아이디 -->
           	<div class="col-md-6 mb-3">
               <label for="id">아이디</label>
               <input type="text" class="form-control" id="id" name="userId" placeholder="" value="${ loginUser.userId }" readonly>                           
@@ -93,6 +96,7 @@
             </div>
             
             
+            <!-- 이름, 성별, 생년월일 -->
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" id="name" name="userName" placeholder="" value="${ loginUser.userName }" readonly>
@@ -124,6 +128,8 @@
             </div>     
            </div>                
 
+
+		  <!-- 주소 -->
           <div class="mb-3">
             <label for="address">주소</label>
             <input type="text" class="form-control" id="address" name="address" value="${ loginUser.address }" readonly style="width: 100%" >            
@@ -134,7 +140,7 @@
 		 
 
 
-
+		  <!-- 상세주소 -->
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted" ></span></label>
             <input type="text" class="form-control" id="address2" name="addressDetail" value="${ loginUser.addressDetail }" readonly>
@@ -144,7 +150,7 @@
           </div>
 
 
-
+		   <!-- 일반전화, 휴대전화 -->
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
               <label for="password">일반전화</label>
@@ -160,7 +166,7 @@
             </div>
 
 
-
+		  <!-- 이메일 -->
 		  <div class="mb-3">
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" name="email" value="${ loginUser.email }" readonly>
@@ -170,6 +176,8 @@
             </div>
           </div>
           
+          
+          <!-- 선호도 -->
           <div class="mb-3">
             <label for="preference">선호도</label>                  
             <div style=" display: flex;">            	
@@ -179,10 +187,9 @@
             <div class="invalid-feedback" style="width: 40%; margin-left: 30px">
              	선택해주세요.
             </div>    
-            </div>
-           	   
-                        
+            </div>                        
           </div>
+          
            
            <!-- 수정, 탈퇴 버튼 -->        
            <div class="row">
@@ -190,7 +197,7 @@
               <button id="modifyBtn" onclick="location.href='/spring/myPageModify.do'" class="btn btn-primary btn-lg btn-block" type="button" style="background: #3ac240; border-color: #3ac240" >수정</button>             
             </div>
             <div class="col-md-6 mb-3">
-              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="$('#postForm').submit();" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='/spring/leavePage.do'" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
             </div>
           </div>                 
           
@@ -201,11 +208,6 @@
       <p class="mb-1">&copy; 2022 Onsil</p>
     </footer>
   </div>
-  
-  <!-- 탈퇴 시 필요한 정보 -->
-    <form action="deleteMember.do" method="post" id="postForm">
-    	<input type="hidden" name="userId" value="${ loginUser.userId }">
-    </form>    
     
   <jsp:include page="../common/footer.jsp" />
   

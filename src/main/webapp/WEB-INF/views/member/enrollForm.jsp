@@ -50,7 +50,7 @@
 
   <div class="container">
     <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
+      <div class="input-form col-md-12 mx-auto" style="margin-top: 100px;">
         <h4 class="mb-3" style="text-align: center;">회 원 가 입</h4>
         
         
