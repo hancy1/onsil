@@ -13,5 +13,7 @@ public interface MemberService {
 	void insertMember(Member m); // 회원가입
 
 	Member loginMember(BCryptPasswordEncoder bCryptPasswordEncoder, Member m); // 암호화 후 로그인
+
+	Member updateMember(Member m) throws Exception; // 회원정보수정
  
 }

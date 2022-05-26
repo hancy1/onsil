@@ -133,4 +133,14 @@ public class MemberController {
 	public String myPageModify() {
 		return "member/myPageModify";
 	}	
+	
+	// 마이페이지 회원정보 수정
+	@RequestMapping("updateMember.do")
+	public String updateMember(@ModelAttribute Member m, Model model) throws Exception {
+		
+		Member userInfo = memberService.updateMember(m);
+		model.addAttribute("loginUser", userInfo);
+		
+		return "member/myPage";
+	}
 }

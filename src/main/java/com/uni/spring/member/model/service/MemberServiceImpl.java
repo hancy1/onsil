@@ -76,4 +76,20 @@ public class MemberServiceImpl implements MemberService {
 		
 		return loginUser;
 	}
+
+
+	@Override // 회원정보 수정
+	public Member updateMember(Member m) throws Exception{
+		
+		int result = memberDao.updateMember(sqlSession, m);
+		
+		if(result > 0) {
+			Member loginUser = memberDao.loginMember(sqlSession, m);
+			return loginUser;
+		}else {
+			throw new Exception("회원수정실패");
+		}
+		
+		
+	}
 }

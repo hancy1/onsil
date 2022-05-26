@@ -183,9 +183,17 @@
            	   
                         
           </div>
-                   
-          <div class="mb-4"></div>
-          <button type="button" onclick="location.href='/spring/myPageModify.do'" id="modifyBtn" class="btn btn-primary btn-lg btn-block" style="background: #3ac240; border-color: #3ac240">수정</button>
+           
+           <!-- 수정, 탈퇴 버튼 -->        
+           <div class="row">
+		   	<div class="col-md-6 mb-3">
+              <button id="modifyBtn" onclick="location.href='/spring/myPageModify.do'" class="btn btn-primary btn-lg btn-block" type="button" style="background: #3ac240; border-color: #3ac240" >수정</button>             
+            </div>
+            <div class="col-md-6 mb-3">
+              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="$('#postForm').submit();" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+            </div>
+          </div>                 
+          
         </form>
       </div>
     </div>
@@ -193,6 +201,12 @@
       <p class="mb-1">&copy; 2022 Onsil</p>
     </footer>
   </div>
+  
+  <!-- 탈퇴 시 필요한 정보 -->
+    <form action="deleteMember.do" method="post" id="postForm">
+    	<input type="hidden" name="userId" value="${ loginUser.userId }">
+    </form>    
+    
   <jsp:include page="../common/footer.jsp" />
   
   <!-- ##### All Javascript Files ##### -->
