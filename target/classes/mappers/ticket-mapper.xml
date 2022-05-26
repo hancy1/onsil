@@ -19,6 +19,7 @@ T_CHANGE_NAME-->
 
     <id property="ticketNo" column="TICKET_NO"/>
          <result property="writer" column="USER_NO"/>
+         <result property="price" column="TICKET_CODE"/>
          <result property="ticketPhone" column="TICKET_PHONE"/>
          <result property="ticketTitle" column="TICKET_NAME"/>
          <result property="ticketNotice" column="TICKET_NOTICE"/>
@@ -30,6 +31,20 @@ T_CHANGE_NAME-->
 
 </resultMap>
 
+<select id="selectListCount"  resultType="_int">
+  
+  SELECT COUNT(*)
+  FROM TICKET
+  WHERE TICKET_STATUS='Y'
+  
+  </select>
 
-
+  <select id="selectList" resultMap="ticketResultSet">
+  
+   SELECT *
+   FROM TICKET
+   WHERE TICKET_STATUS = 'Y'
+   ORDER BY TICKET_NO DESC
+  
+  </select>
 </mapper>
