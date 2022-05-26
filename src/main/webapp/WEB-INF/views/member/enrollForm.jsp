@@ -53,8 +53,12 @@
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3" style="text-align: center;">회 원 가 입</h4>
         
+        
+        <!-- 회원가입 -->
         <form id="enrollForm" action="insertMember.do" method="post" class="validation-form" novalidate>
           <div class="row">
+          
+          	<!-- 아이디 & 중복확인 버튼 -->
           	<div class="col-md-6 mb-3">
               <label for="id">아이디</label>
               <input type="text" class="form-control" id="id" name="userId" placeholder="" value="" required>
@@ -68,6 +72,8 @@
               </button>
             </div>
             
+            
+            <!-- 비밀번호, 비밀번호 확인 -->
             <div class="col-md-6 mb-3">
               <label for="password">비밀번호</label>
               <input type="password" class="form-control" id="pwd" name="userPwd" placeholder="" value="" required>
@@ -84,6 +90,9 @@
                 	비밀번호 확인을 입력해주세요.
               </div>
             </div>
+            
+            
+            <!-- 이름, 성별, 생년월일 -->
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" id="name" name="userName" placeholder="" value="" required>
@@ -92,6 +101,7 @@
                 	이름을 입력해주세요.
               </div>
             </div>
+            
             <div class="col-md-6 mb-3">
             <div style="float: left;">
               <label for="gender">성별</label>              
@@ -105,6 +115,7 @@
                 	성별을 선택해주세요.
               </div>
               </div>
+              
               <div class="col-md-6 mb-3" style="float: left; margin-left: 20px">
               <label for="birth">생년월일</label>              
               <input class="form-control" type="date" id="birth" name="birth" required>
@@ -114,6 +125,8 @@
               </div>
             </div>                     
 
+
+		  <!-- 주소, 주소검색 -->
           <div class="col-md-10 mb-3">
             <label for="address">주소</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="서울특별시 강남구" style="width: 100%" required>            
@@ -127,7 +140,7 @@
 		 </div>
 
 
-
+		  <!-- 상세주소  -->
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted" ></span></label>
             <input type="text" class="form-control" id="address2" name="addressDetail" placeholder="상세주소를 입력해주세요." required>
@@ -137,15 +150,17 @@
           </div>
 
 
-
+		   <!-- 일반전화, 휴대전화 -->
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
               <label for="password">일반전화</label>
-              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="">              
+              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}">  
+              <div id="telValid"></div>            
             </div>
             <div class="col-md-6 mb-3">
               <label for="passwordFeedback">휴대전화</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" required>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
+              <div id="phoneValid"></div>
               <div class="invalid-feedback">
                 	휴대전화를 입력해주세요.
               </div>
@@ -153,7 +168,7 @@
             </div>
 
 
-
+		  <!-- 이메일 -->
 		  <div class="mb-3">
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
@@ -163,6 +178,8 @@
             </div>
           </div>
           
+          
+          <!-- 선호도 -->
           <div class="mb-3">
             <label for="preference">선호도</label>                  
             <div style=" display: flex;">            	
@@ -178,11 +195,14 @@
           </div>
           
           
+          <!-- 개인정보수집동의  -->
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
+          
+          <!-- 회원가입 버튼 -->
           <div class="mb-4"></div>
           <button id="enrollBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" disabled="disabled">가입 완료</button>
         </form>
@@ -311,7 +331,8 @@
 
 		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
 		
-	});
+	});    
+    
     
     // 이메일 유효성 검사
     $("#email").on("input",function(){
