@@ -34,5 +34,17 @@ public class TicketController {
 		
 		return "Ticket/ticket2";
 	}
+	
+	@RequestMapping("enrollTicket.do")
+	public String enrollForm() {
+		return "Ticket/TicketEnrollForm";
+		
+	}
+	
+	@RequestMapping("ticketAddress.do")
+	public String Address() {
+		return "Ticket/TicketAddress";
+		
+	}
 
 }
