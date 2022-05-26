@@ -154,4 +154,10 @@ public class MemberController {
 		
 		return "member/myPage";
 	}
+	
+	// 탈퇴페이지로 이동	
+	@RequestMapping("leavePage.do")
+	public String leavePage() {
+		return "member/leavePage";
+	}	
 }
