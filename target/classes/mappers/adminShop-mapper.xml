@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="detailCha" column="DETAIL_CHA" />
 		<result property="proAmount" column="PRO_AMOUNT" />
 		<result property="proStatus" column="PRO_STATUS" />
+		<result property="proContent" column="PRO_CONTENT" />
 		
 	</resultMap>
 	

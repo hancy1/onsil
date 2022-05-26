@@ -41,4 +41,14 @@ public class AdminShopController {
 		return "shop/adminProduct";
 	}
 	
+	
+	
+	@RequestMapping("adminEnrollFormProduct.do")
+	public String enrollFormProduct() {
+		
+	  return "shop/adminProductEnrollForm";
+	
+	}
+
+	
 }
