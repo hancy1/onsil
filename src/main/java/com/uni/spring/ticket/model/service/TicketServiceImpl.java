@@ -23,13 +23,13 @@ public class TicketServiceImpl implements TicketService{
 	@Override
 	public int selectListCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ticketDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Ticket> selectListCount(PageInfo pi) {
 		// TODO Auto-generated method stub
-		return null;
+		return ticketDao.selectList(sqlSession,pi);
 	}
 
 }
