@@ -90,18 +90,42 @@
          	<!-- 방명록 -->
          	<div class="row">
          		<div class="col-12">
-         			<table class="visitor_board">
-         				<c:if test="${ !board.isEmpty() }">
-         					<c:forEach items="${board}" var="b">
-	         					<tr><td> 작성자 </td><td> ${b.writer} </td><td rowspan="2"><button class="reply">댓글달기</button><button class="visitGarden">정원방문</button></td></tr>
-	         					<tr><td></td><td>${b.content}</td></tr>
-	         					
-         					</c:forEach>
-         				</c:if>
-         				<c:if test="${ board.isEmpty() }">
-         					작성된 방명록이 없습니다.
-         				</c:if>	
-         			</table>
+         			<table class="table table-striped">
+									<tr class="danger">
+										<th>작성자</th>
+										<th>내용</th>
+										<th>작성일</th>
+										<th></th>
+										
+									</tr>
+									<c:if test="${ !board.isEmpty() }">
+         								<c:forEach items="${board}" var="b">
+	         								<tr>
+	         								<td>${b.writer}</td>	
+	         								<td>${b.content}</td>
+	         								<td>${b.enrollDate}</td>
+											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button> 
+											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
+											</td>
+	         								</tr>			
+	         							</c:forEach>
+         							</c:if>
+         							<c:if test="${ board.isEmpty() }">
+									<tr><td colspan="4" align="center">작성된 방명록이 없습니다.</td></tr>
+									</c:if>
+								</table>
+		
+							<p>
+							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							    방명록 작성하기
+							</button>
+							</p>
+							<div class="collapse" id="collapseExample">
+							  <div class="card card-body">
+							    <div><form action="vBoardEnroll.do"><input type="text" name="content"><input type="hidden" name="writer" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form></div>
+							  </div>
+							</div>
          		</div>
          	</div>   
  
@@ -205,9 +229,41 @@
         </div>
     </section>
     <!-- ##### Portfolio Area End ##### -->
+    
+    <script>
+
+	//방명록 삭제하기
+	function deleteBoard(boardNo){
+		
+		var yn = confirm("방명록을 삭제하시겠습니까?")
+		console.log(yn)
+		if(yn){
+			location.href="deleteVBoard.do?boardNo=" + boardNo;
+			alert("방명록을 삭제했습니다.")
+		}else{
+			alert("삭제를 취소했습니다.")
+		}
+	}
+	
+	//회원의 정원 방문하기
+	function visitGarden(userId){
+		
+		location.href = "gardenMain.do?hostUser=" + userId;
+		
+	}
+
+</script>
 
     <jsp:include page="../common/footer.jsp" />
     
+    
+    <!-- i태그 이미지 cdn -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="resources/js/scripts.js"></script>
     <!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>

@@ -28,12 +28,21 @@ public class GardenController {
 	
 	
 	@RequestMapping("gardenMain.do")
-	public String toMain(HttpSession session, Model model) {
+		public String toMain(@RequestParam(value="hostUser", required=false)String hostUser, HttpSession session, Model model) {
+		
+		System.out.println("hostUser 널 체크 전 확인" + hostUser);
 		
 		//방명록 주인 회원번호
-		String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+		if(hostUser == null) {
+			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+		}
+		//호스트 유저 값은 다른 곳에서도 쓰이니까 세션에 값을 저장
+		session.setAttribute("hostUser", hostUser);
 		
-		//방문한 페이지의 
+		System.out.println("hostUser확인" + hostUser);
+				
+		
+		//방문한 페이지의 방명록 3개 가져오기
 		ArrayList<VisitorBoard> list = gardenService.getBoardList(hostUser);
 		
 		model.addAttribute("board", list);
@@ -53,7 +62,13 @@ public class GardenController {
 			//defaultValue : 넘어오는 값이 null인 경우에 해당 파라미터 기본 값을 지정함
 			
 			//방명록 주인 회원번호
-			String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+			//String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+			String hostUser = (String) session.getAttribute("hostUser");
+			
+			if(hostUser == null) {
+				hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+			}
+			
 		
 			int listCount = gardenService.selectListCount(hostUser);
 
@@ -73,7 +88,8 @@ public class GardenController {
 		
 		System.out.println("content" + content);
 		System.out.println("writer" + writer);
-		String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+		//String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+		String hostUser = (String) session.getAttribute("hostUser");
 		
 		Map map = new HashMap<String, String>();
 		map.put("content", content);
