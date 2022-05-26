@@ -19,7 +19,10 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDao memberDao;
 
-
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
 	@Override // 암호화 전 로그인
 	public Member loginMember(Member m) throws Exception {
 		
@@ -92,4 +95,20 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 	}
+
+
+	@Override // 탈퇴하기
+	public void deleteMember(String userId) { 
+		
+		int result = memberDao.deleteMember(sqlSession, userId);
+		
+		if(result < 0) {
+			
+			throw new CommException("회원탈퇴실패");
+		}
+		
+	}
+
+
+	
 }

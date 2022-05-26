@@ -15,5 +15,8 @@ public interface MemberService {
 	Member loginMember(BCryptPasswordEncoder bCryptPasswordEncoder, Member m); // 암호화 후 로그인
 
 	Member updateMember(Member m) throws Exception; // 회원정보수정
- 
+
+	void deleteMember(String userId); // 탈퇴하기
+
+	
 }

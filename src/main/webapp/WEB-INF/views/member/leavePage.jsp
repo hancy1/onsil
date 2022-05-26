@@ -61,6 +61,7 @@
 	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 100px; margin-left: 0px; margin-bottom: 100px;">
 		 		<h4>탈퇴페이지</h4>
 		 		<br><br>	 		
+		 		<form action="deleteMember.do" method="post" id="postForm">
 		 		<div>
 		 			<p>
 		 				저희 온실(溫室)을 탈퇴하시면, 열심히 가꾸었던 나의 정원과 이제껏 기록해왔던 회원님의 일정들,<br>
@@ -76,24 +77,22 @@
 		 			<table style="margin: auto; border-style: solid; border-color: #12D400; width: 200px;">
 		 				<tr>
 		 					<td style="width: 50px;"><i class="bi bi-key"></i></td>
-		 					<td><input type="password" id="password" name="userPwd" style="border-style: none;"></td>
+		 					<td><input type="password" id="password" name="inputPwd" style="border-style: none;" required></td>				 					
 		 				</tr>
 		 			</table>
 		 		</div>
-		 		
+		 		<div id="pwdFeedback"></div>
 		 		<br>
 		 		
 				<div>
-			      <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="pwdCheck();" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+			      <button id="deleteMemberBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="checkPwd();"  style="background: #3ac240; border-color: #3ac240">탈퇴</button>              
 			    </div>
+			    </form>   
 		    </div>
 	 	</div>
  	</div>
  	
-  <!-- 탈퇴 시 필요한 정보 -->
-    <form action="deleteMember.do" method="post" id="postForm">
-    	<input type="hidden" name="userId" value="${ loginUser.userId }">
-    </form>    
+   
     
   <jsp:include page="../common/footer.jsp" />
   
@@ -111,27 +110,38 @@
 	
 	
   <script>  
-   
-    // 탈퇴 시 비밀번호 한번 더 체크
-  	function pwdCheck(){
+  	function checkPwd(){ 		  		
   		
-  		var pwd = $("#password").val();
+  		var inputPwd = $("#password").val(); 
   		
-  		if(pwd == "${ loginUser.userPwd }" ) {
-  			
-  			var check = confirm("정말 탈퇴하시곘습니까?");
-  			
-  			if(check){
-  				$('#postForm').submit();
-  				//location.href="'/spring/deleteMember.do'"
-  			}else{
-  				alert("회원탈퇴를 취소하셨습니다.")
-  			}
-  		}else{
-  			alert("비밀번호가 일치하지 않습니다.")
-  		}
+  		
+  			$.ajax({
+  	    		url:"checkPwd.do",
+  	    		type:"post",
+  	    		data:{inputPwd:inputPwd},
+  	    		success:function(result){
+  	    			if(result) {        				
+  	    				
+  	    				if(confirm("정말 탈퇴하시겠습니까?")){
+  	    					$('#postForm').submit();
+  	    				}else{
+  	    					alert("탈퇴를 취소하셨습니다.");
+  	    				}    				
+  	    			}else{
+  	    				alert("비밀번호가 일치하지 않습니다.");
+  	    			}
+  	    		},
+  	    		error:function(){
+  	    			console.log("비밀번호 체크 ajax 통신 실패")
+  	    		}
+  	    	});  		
   	}
+  
+  
+	
+    
   </script>
+  
 </body>
 
 </html>

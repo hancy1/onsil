@@ -59,4 +59,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		TEL=#{tel}, PHONE=#{phone}, EMAIL=#{email}
 		WHERE USER_ID=#{userId}
 	</update>
+	
+	<!-- 탈퇴하기 -->
+	<update id="deleteMember" parameterType="String">		
+		UPDATE MEMBER
+		SET STATUS='N', DEL_DATE=SYSDATE
+		WHERE USER_ID=#{userId}
+	</update>
+	
 </mapper>

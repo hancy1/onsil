@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -160,4 +161,32 @@ public class MemberController {
 	public String leavePage() {
 		return "member/leavePage";
 	}	
+	
+	// 탈퇴 전 비밀번호 일치 여부 확인 ajax 
+	@ResponseBody
+	@RequestMapping("checkPwd.do")
+	public boolean checkPwd(HttpSession session, @RequestParam("inputPwd") String inputPwd) {
+		
+		Member m = (Member) session.getAttribute("loginUser");		
+		String userPwd = m.getUserPwd();
+		
+		if(bCryptPasswordEncoder.matches(inputPwd, userPwd)) {
+			return true;
+		}else {
+			return false;
+		}	
+	}
+	
+	// 탈퇴하기
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(HttpSession session) {
+		
+		Member m = (Member) session.getAttribute("loginUser");		
+		String userId = m.getUserId();
+		
+		memberService.deleteMember(userId);	
+		session.setAttribute("msg", "다음에 또 만나요!");
+		return "redirect:logout.do";		
+		
+	}
 }
