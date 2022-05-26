@@ -60,7 +60,7 @@
 	         								<td>${b.content}</td>
 	         								<td>${b.enrollDate}</td>
 											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button> 
-											<button class="btn btn-outline-success visitGarden" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											<button class="btn btn-outline-success visitGarden" data-bs-toggle="tooltip" title="정원방문" onclick=""><i class="fa-solid fa-leaf"></i></button>
 											</td>
 	         								</tr>			

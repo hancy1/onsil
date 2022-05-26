@@ -53,14 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<insert id="boardEnroll">
+	<insert id="insertBoard">
 	
 		INSERT INTO VISITOR_BOARD VALUES
 		(SEQ_V_BOARD_NO.NEXTVAL, #{writer}, #{hostUser}, #{content}, DEFAULT, DEFAULT)
 		
 	</insert>
 	
-	<update id="boardDelete">
+	<update id="deleteBoard">
 	
 		UPDATE VISITOR_BOARD
 		SET STATUS = 'N'
@@ -85,10 +85,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		SELECT A.NEIGHBOR_NO, B.USER_ID, A.ENROLL_DATE, A.STATUS
 		FROM NEIGHBOR A
-		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		JOIN MEMBER B ON A.N_USER_NO = B.USER_NO
 		WHERE A.USER_NO = #{userNo}
 		AND A.STATUS = 'Y'
 		ORDER BY A.ENROLL_DATE DESC
 	
 	</select>
+	
+	<update id="deleteNeighbor">
+	
+		UPDATE NEIGHBOR
+		SET STATUS = 'N'
+		WHERE NEIGHBOR_NO = #{neighborNo}
+		
+	</update>
+	
+	<insert id="insertNeighbor">
+	
+		INSERT INTO NEIGHBOR VALUES
+		(SEQ_NEIGHBOR_NO.NEXTVAL, #{userNo}, (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{nUserId}), DEFAULT, DEFAULT)
+	
+	</insert>
 </mapper>

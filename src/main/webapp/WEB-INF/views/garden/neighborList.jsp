@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>정원 | 이웃관리</title>
+<style>
+
+th, td {
+  text-align: center;
+}
+
+.danger {
+
+	font-weight: bold;
+}
+</style>
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
@@ -37,26 +48,41 @@
 	<section id="aa-product-category">
 		<div class="container" align="center">
 			<div class="row my-5">
-				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-8 col-md-8 col-sm-8">
 					<div class="aa-product-catg-content">
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
 								<h5>이웃관리</h5>
 								<br>
-								<table class="table table-striped">
+								<table class="table table-striped" text-align="center">
 									<tr class="danger">
-										<th>유저아이디</th>
-										<th>정원 바로가기</th>
-										<th>이웃삭제</th>			
+										<td>유저아이디</td>
+										<td>정원 바로가기</td>
+										<td>이웃삭제</td>			
 									</tr>
 									<c:if test="${ !list.isEmpty() }">
-										<h1>테스트</h1>
-									
+										<c:forEach items="${list}" var="l">
+											<tr>
+											<td>${l.NUserNo}</td>
+											<td><button class="btn btn-outline-success visitGarden" onclick='visitGarden("${l.NUserNo}");'><i class="fa-solid fa-leaf"></i></button></td>
+											<td><button class="btn btn-outline-success deleteNeighbor" onclick='deleteNeighbor("${l.neighborNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
+											</tr>
+										</c:forEach>
          							</c:if>
          							<c:if test="${ list.isEmpty() }">
 									<tr><td colspan="3" align="center">추가된 이웃이 없습니다.</td></tr>
 									</c:if>
-								</table>							
+								</table>
+								<p>
+							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							    이웃추가하기
+							</button>
+							</p>
+							<div class="collapse" id="collapseExample">
+							  <div class="card card-body">
+							    <div><form action="insertNeighbor.do"><input type="text" name="nUserId"><input type="hidden" name="userNo" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit">추가하기</button></form></div>
+							  </div>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -67,11 +93,16 @@
 <script>
 
 	function visitGarden(nUserNo){
+		//location.href = "gardenMain.do?hostUser=" + nUserNo;
 		console.log(nUserNo)
 	}
 	
-	function deleteNeighbor(nUserNo){
-		console.log(nUserNo)
+	function deleteNeighbor(neighborNo){
+		var yn = confirm("정말 삭제하시겠습니까?")
+		if(yn){
+			location.href = "deleteNeighbor.do?neighborNo=" + neighborNo;
+			alert("삭제되었습니다")
+		}
 	}
 
 </script>

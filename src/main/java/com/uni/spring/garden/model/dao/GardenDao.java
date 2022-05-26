@@ -40,14 +40,14 @@ public class GardenDao {
 
 	}
 
-	public Object boardEnroll(Map map, SqlSessionTemplate sqlSession) {
+	public int insertBoard(Map map, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.insert("gardenMapper.boardEnroll", map);
+		return sqlSession.insert("gardenMapper.insertBoard", map);
 	}
 
-	public void boardDelete(String boardNo, SqlSessionTemplate sqlSession) {
+	public int deleteBoard(String boardNo, SqlSessionTemplate sqlSession) {
 
-		sqlSession.update("gardenMapper.boardDelete", boardNo);
+		return sqlSession.update("gardenMapper.deleteBoard", boardNo);
 		
 	}
 
@@ -55,6 +55,15 @@ public class GardenDao {
 		
 		return (ArrayList)sqlSession.selectList("gardenMapper.getNeighborList", userNo);
 
+	}
+
+	public int deleteNeighbor(String neighborNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.deleteNeighbor", neighborNo);
+	}
+
+	public int insertNeighbor(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("gardenMapper.insertNeighbor", map);		
 	}
 
 }

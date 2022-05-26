@@ -1,6 +1,7 @@
 package com.uni.spring.garden.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.uni.spring.board.model.dto.Board;
@@ -16,11 +17,16 @@ public interface GardenService {
 
 	ArrayList<Board> selectList(PageInfo pi, String hostUser);
 
-	void boardEnroll(Map map);
+	void insertBoard(Map map);
 
-	void boardDelete(String boardNo);
+	void deleteBoard(String boardNo);
 
 	ArrayList<Neighbor> getNeighborList(String userNo);
+
+	void deleteNeighbor(String neighborNo);
+
+	void insertNeighbor(HashMap<String, String> map);
+
 
 	
 
