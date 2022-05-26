@@ -80,7 +80,7 @@ public class GardenController {
 		map.put("writer", writer);
 		map.put("hostUser", hostUser);
 		
-		gardenService.boardEnroll(map);
+		gardenService.insertBoard(map);
 
 		return "redirect:visitorBoard.do";
 		
@@ -89,7 +89,7 @@ public class GardenController {
 	@RequestMapping("deleteVBoard.do")
 	public String boardDelete(HttpSession session, String boardNo, Model model) {
 		
-		gardenService.boardDelete(boardNo);
+		gardenService.deleteBoard(boardNo);
 
 		return "redirect:visitorBoard.do";
 		
@@ -104,11 +104,34 @@ public class GardenController {
 		String userNo = ((Member) session.getAttribute("loginUser")).getUserNo();
 		
 		ArrayList<Neighbor> list = gardenService.getNeighborList(userNo);
-		System.out.println("list 확인 " + list.get(0));
 		
 		model.addAttribute("list", list);
 		
+		System.out.println("list확인 " + list);
+		
 		return "garden/neighborList";	
+	}
+	
+	@RequestMapping("deleteNeighbor.do")
+	public String deleteNeighbor(String neighborNo) {
+		
+		gardenService.deleteNeighbor(neighborNo);
+		
+		return "redirect:neighborList.do";			
+	}
+	
+	@RequestMapping("insertNeighbor.do")
+	public String insertNeighbor(String nUserId, String userNo) {
+		
+		System.out.println("nUserId" + nUserId);
+		System.out.println("userNo" + userNo);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("nUserId", nUserId); //추가하고 싶은 이웃의 아이디
+		map.put("userNo", userNo); //로그인한 회원 번호		
+		
+		gardenService.insertNeighbor(map);
+		return "redirect:neighborList.do";
 	}
 	
 }
