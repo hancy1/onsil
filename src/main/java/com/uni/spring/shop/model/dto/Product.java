@@ -23,6 +23,7 @@ public class Product {
 		DETAIL_CHA
 		PRO_AMOUNT
 		PRO_STATUS
+		PRO_CONTENT
 	*/
 	
 	private String proCode; //제품코드
@@ -33,5 +34,6 @@ public class Product {
 	private String detailCha; //제품사진수정명
 	private int proAmount; //재고
 	private String proStatus; //판매상태
+	private String proContent; //세부정보
 
 }
