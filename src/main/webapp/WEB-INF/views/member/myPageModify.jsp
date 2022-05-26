@@ -81,8 +81,11 @@
       <div class="input-form col-md-12 mx-auto" style="margin-top: 100px;">
         <h4 class="mb-3" style="text-align: center;">회원정보수정</h4>
         
+        <!-- 회원정보 수정 -->
         <form id="modifyForm" action="updateMember.do" method="post" class="validation-form" novalidate>
           <div class="row">
+          
+          	<!-- 아이디  -->
           	<div class="col-md-6 mb-3">
               <label for="id">아이디</label>
               <input type="text" class="form-control" id="id" name="userId" placeholder="" value="${ loginUser.userId }" readonly>
@@ -94,6 +97,7 @@
               
             </div>
             
+            <!-- 비밀번호 & 비밀번호 확인 -->
             <div class="col-md-6 mb-3">
               <label for="password">비밀번호</label>
               <input type="password" class="form-control" id="pwd" name="userPwd" placeholder="" value="" required>
@@ -110,6 +114,8 @@
                 	비밀번호 확인을 입력해주세요.
               </div>
             </div>
+            
+            <!-- 이름, 성별, 생년월일 -->
             <div class="col-md-6 mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" id="name" name="userName" placeholder="" value="${ loginUser.userName }" required>
@@ -118,6 +124,7 @@
                 	이름을 입력해주세요.
               </div>
             </div>
+            
             <div class="col-md-6 mb-3">
             <div style="float: left;">
               <label for="gender">성별</label>              
@@ -131,6 +138,7 @@
                 	성별을 선택해주세요.
               </div>
               </div>
+              
               <div class="col-md-6 mb-3" style="float: left; margin-left: 20px">
               <label for="birth">생년월일</label>              
               <input class="form-control" type="date" id="birth" name="birth" value="${ loginUser.birth }" required>
@@ -140,6 +148,7 @@
               </div>
             </div>                     
 
+		  <!-- 주소검색  -->
           <div class="col-md-10 mb-3">
             <label for="address">주소</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="주소검색을 해주세요." style="width: 100%" value="${ loginUser.address }" required>            
@@ -153,7 +162,7 @@
 		 </div>
 
 
-
+		  <!-- 상세주소 -->
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted" ></span></label>
             <input type="text" class="form-control" id="address2" name="addressDetail" placeholder="상세주소를 입력해주세요." value="${ loginUser.addressDetail }" required>
@@ -163,7 +172,7 @@
           </div>
 
 
-
+		   <!-- 일반전화, 휴대전화 -->
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
               <label for="password">일반전화</label>
@@ -179,7 +188,7 @@
             </div>
 
 
-
+		  <!-- 이메일 -->
 		  <div class="mb-3">
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="${ loginUser.email }" required>
@@ -189,6 +198,8 @@
             </div>
           </div>
           
+          
+          <!-- 선호도 -->
           <div class="mb-3">
             <label for="preference">선호도</label>                  
             <div style=" display: flex;">            	
@@ -198,29 +209,23 @@
             <div class="invalid-feedback" style="width: 40%; margin-left: 30px">
              	선택해주세요.
             </div>    
-            </div>
-           	         
-                        
+            </div>                            
           </div>
           
+          <!-- 저장, 취소 버튼  -->
           <div class="row">
 		   	<div class="col-md-6 mb-3">
-              <button id="modifyBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" >수정</button>             
+              <button id="modifyBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" >저장</button>             
             </div>
             <div class="col-md-6 mb-3">
-              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="$('#postForm').submit();" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+              <button id="cancelBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="history.back()" style="background: #3ac240; border-color: #3ac240" >취소</button>              
             </div>
           </div>               
           
         </form>
       </div>
     </div>
-    
-    <!-- 탈퇴 시 필요한 정보 -->
-    <form action="deleteMember.do" method="post" id="postForm">
-    	<input type="hidden" name="userId" value="${ loginUser.userId }">
-    </form>
-    
+        
     <footer class="my-3 text-center text-small">
       <p class="mb-1">&copy; 2022 Onsil</p>
     </footer>

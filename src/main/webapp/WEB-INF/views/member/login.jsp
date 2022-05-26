@@ -38,6 +38,7 @@
         <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="login">
+          	<!-- 뒤로가기 -->
 			<button type="button" onclick="history.back()" class="btn btn-lg btn-block btn-success" style="width: 100px; height: 30px; font-size: 15px; padding-top: 5px"> 뒤로가기</button>
             <h1>Login</h1>
             

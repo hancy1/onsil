@@ -51,4 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO MEMBER VALUES
 		(SEQ_USER_NO.NEXTVAL, #{userId}, #{userPwd}, #{userName}, #{birth}, #{gender}, #{address}, #{addressDetail}, #{tel}, #{phone}, #{email}, #{preference}, SYSDATE, NULL, 'Y')		
 	</insert>
+	
+	<!-- 마이페이지 수정 -->
+	<update id="updateMember" parameterType="Member">		
+		UPDATE MEMBER
+		SET USER_PWD=#{userPwd}, USER_NAME=#{userName}, GENDER=#{gender}, BIRTH=#{birth}, ADDRESS=#{address}, ADDRESS_DETAIL=#{addressDetail},
+		TEL=#{tel}, PHONE=#{phone}, EMAIL=#{email}
+		WHERE USER_ID=#{userId}
+	</update>
 </mapper>
