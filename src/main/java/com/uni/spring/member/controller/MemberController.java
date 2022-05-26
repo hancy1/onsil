@@ -138,6 +138,17 @@ public class MemberController {
 	@RequestMapping("updateMember.do")
 	public String updateMember(@ModelAttribute Member m, Model model) throws Exception {
 		
+		// 솔팅(salting)기법
+		// 평문 + 랜덤값(솔트값) --> 암호화
+		System.out.println("암호화전 : " + m.getUserPwd());
+		
+		// 암호화 작업
+		String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd());
+		
+		System.out.println("암호화후 : " + encPwd);
+		
+		m.setUserPwd(encPwd); // 암호화된 비밀번호를 Member 객체에 세팅
+		
 		Member userInfo = memberService.updateMember(m);
 		model.addAttribute("loginUser", userInfo);
 		

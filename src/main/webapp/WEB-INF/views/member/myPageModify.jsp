@@ -176,11 +176,11 @@
 		   <div class="row">
 		   	<div class="col-md-6 mb-3">
               <label for="password">일반전화</label>
-              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="${ loginUser.tel }">              
+              <input type="text" class="form-control" id="tel" name="tel" placeholder="" value="${ loginUser.tel }" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}">              
             </div>
             <div class="col-md-6 mb-3">
               <label for="passwordFeedback">휴대전화</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="${ loginUser.phone }" required>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="${ loginUser.phone }" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
               <div class="invalid-feedback">
                 	휴대전화를 입력해주세요.
               </div>
