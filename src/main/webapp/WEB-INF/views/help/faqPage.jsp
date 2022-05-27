@@ -39,6 +39,55 @@
 	      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	    }
+	    
+	    <!-- 아코디언 메뉴 style -->
+	    
+	    *{
+		  box-sizing: border-box; 
+		 }
+		  
+		.que:first-child{
+		    border-top: 1px solid black;
+		 }
+		  
+		.que{
+		  position: relative;
+		  padding: 17px 0;
+		  cursor: pointer;
+		  font-size: 14px;
+		  border-bottom: 1px solid #dddddd;
+		  
+		 }
+		  
+		.que::before{
+		  display: inline-block;
+		  content: 'Q';
+		  font-size: 14px;
+		  color: #006633;
+		  margin-right: 5px;
+		 }
+		
+		.que.on>span{
+		  font-weight: bold;
+		  color: #006633; 
+		 }
+		  
+		.anw {
+		  display: none;
+		    overflow: hidden;
+		  font-size: 14px;
+		  background-color: #f4f4f2;
+		  padding: 27px 0;
+		 }
+		  
+		.anw::before {
+		  display: inline-block;
+		  content: 'A';
+		  font-size: 14px;
+		  font-weight: bold;
+		  color: #666;
+		  margin-right: 5px;
+		  }
 	</style>
 </head>
 
@@ -51,7 +100,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 자주묻는질문</h2>
+			<h2>온실 :: 자주 묻는 질문</h2>
 		</div>		
 		  
 		<div class="container">
@@ -59,7 +108,7 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
+							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
 							<li class="breadcrumb-item active" aria-current="page">자주묻는질문</li>
@@ -76,35 +125,75 @@
  	<!-- 탈퇴 본문 -->
  	<div class="container">
 	 	<div class="input-form-backgroud row">
-	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 100px; margin-left: 0px; margin-bottom: 100px;">
-		 		<h4>탈퇴페이지</h4>
+	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
+		 		<h4>자주 묻는 질문</h4>
 		 		<br><br>	 		
-		 		<form action="deleteMember.do" method="post" id="postForm">
+		 		<form method="post" id="faqList">
+		 		
 		 		<div>
-		 			<p>
-		 				저희 온실(溫室)을 탈퇴하시면, 열심히 가꾸었던 나의 정원과 이제껏 기록해왔던 회원님의 일정들,<br>
-		 				우리 이웃들과 주고 받았던 이야기들. 그리고 구매내역 모두가 사라지게 됩니다.<br>
-		 				정말 탈퇴하시겠습니까?<br>
-		 				<br>
-		 				탈퇴를 원하신다면 현재 비밀번호를 입력해주세요.
-		 			</p>
+		 			
+		 			<div id="Accordion_wrap">
+		 				<c:forEach items="${ list }" var="f">
+					     <div class="que">
+					      <span>${ f.question }</span>
+					     </div>
+					     <div class="anw">
+					      <span>${ f.answer }</span>
+					     </div>
+					     </c:forEach>
+					      <!--  <div class="que">
+					      <span>This is second question.</span>
+					     </div>
+					     <div class="anw">
+					      <span>This is second answer.</span>
+					     </div>
+					      <div class="que">
+					      <span>This is third question.</span>
+					     </div>
+					     <div class="anw">
+					      <span>This is third answer.</span>
+					     </div> -->
+					</div>
+					
+					<br>
+					
+					<div id="pagingArea">
+		                <ul class="pagination">
+		                	<c:choose>
+		                		<c:when test="${ pi.currentPage ne 1 }">
+		                			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+		                		</c:when>
+		                		<c:otherwise>
+		                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+		                		</c:otherwise>
+		                	</c:choose>
+		                	
+		                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+		                    	<c:choose>
+			                		<c:when test="${ pi.currentPage ne p }">
+		                    			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ p }">${ p }</a></li>
+			                		</c:when>
+			                		<c:otherwise>
+			                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+			                		</c:otherwise>
+			                	</c:choose>
+		                    </c:forEach>
+		                    
+		                    
+		                    <c:choose>
+		                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+		                			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		                		</c:when>
+		                		<c:otherwise>
+		                			<li class="page-item disabled"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+		                		</c:otherwise>
+		                	</c:choose>
+		                </ul>
+		            </div>
+
 		 		</div>
 		 		
-		 		<!-- 비밀번호 입력 칸  -->
-		 		<div>
-		 			<table style="margin: auto; border-style: solid; border-color: #12D400; width: 200px;">
-		 				<tr>
-		 					<td style="width: 50px;"><i class="bi bi-key"></i></td>
-		 					<td><input type="password" id="password" name="inputPwd" style="border-style: none;" required></td>				 					
-		 				</tr>
-		 			</table>
-		 		</div>
-		 		<div id="pwdFeedback"></div>
-		 		<br>
 		 		
-				<div>
-			      <button id="deleteMemberBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="checkPwd();"  style="background: #3ac240; border-color: #3ac240">탈퇴</button>              
-			    </div>
 			    </form>   
 		    </div>
 	 	</div>
@@ -128,36 +217,13 @@
 	
 	
   <script>  
-  	function checkPwd(){ 		  		
-  		
-  		var inputPwd = $("#password").val(); 
-  		
-  		
-  			$.ajax({
-  	    		url:"checkPwd.do",
-  	    		type:"post",
-  	    		data:{inputPwd:inputPwd},
-  	    		success:function(result){
-  	    			if(result) {        				
-  	    				
-  	    				if(confirm("정말 탈퇴하시겠습니까?")){
-  	    					$('#postForm').submit();
-  	    				}else{
-  	    					alert("탈퇴를 취소하셨습니다.");
-  	    				}    				
-  	    			}else{
-  	    				alert("비밀번호가 일치하지 않습니다.");
-  	    			}
-  	    		},
-  	    		error:function(){
-  	    			console.log("비밀번호 체크 ajax 통신 실패")
-  	    		}
-  	    	});  		
-  	}
-  
-  
-	
-    
+  	
+	  $(".que").click(function() {
+		   $(this).next(".anw").stop().slideToggle(300);
+		  $(this).toggleClass('on').siblings().removeClass('on');
+		  $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		});
+	  
   </script>
   
 </body>
