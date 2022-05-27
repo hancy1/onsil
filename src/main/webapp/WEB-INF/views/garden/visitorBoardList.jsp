@@ -73,7 +73,11 @@
 	         								<td>${c.userNo}</td>	
 	         								<td>${c.content}</td>
 	         								<td>${c.enrollDate}</td>
-	         								<td>버튼자리</td>
+	         								<td>
+	         								<c:if test="${hostUser eq loginUser.userId || hostUser eq c.userNo}"> 
+											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											</c:if>
+											</td>
 	         								</tr>
 	         								</c:if>
 	         								</c:forEach>	
