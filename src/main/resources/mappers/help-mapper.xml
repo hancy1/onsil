@@ -24,6 +24,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="content" column="CONTENT"/>         
          <result property="status" column="STATUS"/>         
 	</resultMap>
+	
+	<!-- 문의사항 리절트맵 -->
+	<resultMap type="Inquiry" id="inquiryResultSet">   
+         <id property="inquiryNo" column="INQUIRY_NO"/>
+         <result property="category" column="CATEGORY_NAME"/>
+         <result property="count" column="COUNT"/>
+         <result property="title" column="TITLE"/>
+         <result property="writer" column="USER_NAME"/>
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="content" column="CONTENT"/>         
+         <result property="open" column="OPEN"/>         
+         <result property="status" column="STATUS"/>         
+	</resultMap>
       
 
 	<!-- 자주묻는질문 게시물 갯수 -->
@@ -45,19 +58,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 공지사항 게시물들 불러오기 -->
-	<select id="selectNoticeList" resultMap="noticeResultSet">
-		<!--  SELECT * 
-		FROM NOTICE
-		WHERE STATUS='Y'	
-		ORDER BY NOTICE_NO DESC	-->
-		
+	<select id="selectNoticeList" resultMap="noticeResultSet">		
 		SELECT A.NOTICE_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT 
 		FROM NOTICE A
 		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
         JOIN MEMBER C ON A.WRITER = C.USER_NO
 		WHERE A.STATUS='Y'
-		ORDER BY NOTICE_NO DESC
-		
+		ORDER BY NOTICE_NO DESC		
+	</select>
+	
+	<!-- 문의사항 게시물 갯수 -->
+	<select id="selectInquiryListCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY
+	</select>
+	
+	<!-- 문의사항 게시물들 불러오기 -->
+	<select id="selectInquiryList" resultMap="inquiryResultSet">		
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS
+		FROM INQUIRY A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		ORDER BY INQUIRY_NO DESC
 	</select>
 	
 </mapper>

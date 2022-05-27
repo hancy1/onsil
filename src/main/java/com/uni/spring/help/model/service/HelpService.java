@@ -3,6 +3,7 @@ package com.uni.spring.help.model.service;
 import java.util.ArrayList;
 
 import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 
@@ -12,8 +13,12 @@ public interface HelpService {
 
 	ArrayList<Faq> selectFaqList(PageInfo pi); // 자주묻는질문 게시물 가져오기
 
-	int selectNoticeList(); // 공지사항 게시물 갯수 구하기
+	int selectNoticeListCount(); // 공지사항 게시물 갯수 구하기
 
 	ArrayList<Notice> selectNoticeList(PageInfo pi); // 공지사항 게시물 가져오기
+
+	int selectInquiryListCount(); // 문의사항 게시물 갯수 구하기
+
+	ArrayList<Inquiry> selectInquiryList(PageInfo pi); // 문의사항 게시물 가져오기
 
 }

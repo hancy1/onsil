@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.uni.spring.help.model.dao.HelpDao;
 import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dao.MemberDao;
@@ -38,9 +39,9 @@ public class HelpServiceImpl implements HelpService {
 
 
 	@Override // 공지사항 게시물 갯수 구하기
-	public int selectNoticeList() {
+	public int selectNoticeListCount() {
 		
-		return HelpDao.selectNoticeList(sqlSession);
+		return HelpDao.selectNoticeListCount(sqlSession);
 	}
 
 
@@ -48,5 +49,19 @@ public class HelpServiceImpl implements HelpService {
 	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
 		
 		return HelpDao.selectNoticeList(sqlSession, pi);
+	}
+
+
+	@Override // 문의사항 게시물 갯수 구하기
+	public int selectInquiryListCount() {
+
+		return HelpDao.selectInquiryListCount(sqlSession);
+	}
+
+
+	@Override // 문의사항 게시물 가져오기
+	public ArrayList<Inquiry> selectInquiryList(PageInfo pi) {
+		
+		return HelpDao.selectInquiryList(sqlSession, pi);
 	}
 }
