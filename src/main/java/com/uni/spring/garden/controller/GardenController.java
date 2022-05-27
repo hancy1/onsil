@@ -65,9 +65,14 @@ public class GardenController {
 			//String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
 			String hostUser = (String) session.getAttribute("hostUser");
 			
+			System.out.println("hostUser 널 체크 전 " + hostUser);
+			
 			if(hostUser == null) {
 				hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+				session.setAttribute("hostUser", hostUser);
 			}
+			
+			System.out.println("hostUser 널 체크 후 " + hostUser);
 			
 			int listCount = gardenService.selectListCount(hostUser);
 

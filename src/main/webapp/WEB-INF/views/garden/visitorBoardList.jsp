@@ -45,22 +45,23 @@
 							<div class="table-responsive">
 								<h5>방명록</h5>
 								<br>
-								<table class="table table-striped">
-									<tr class="danger">
+								<table class="table">
+									<!-- <tr class="danger">
 										<th>작성자</th>
 										<th>내용</th>
 										<th>작성일</th>
 										<th></th>
 										
-									</tr>
+									</tr> -->
 									<c:if test="${ !board.isEmpty() }">
          								<c:forEach items="${board}" var="b">
-	         								<tr>
-	         								<td>${b.writer}</td>	
-	         								<td>${b.content}</td>
-	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-solid fa-pen"></i></button> 
-											<c:if test="${hostUser eq loginUser.userId || hostUser eq b.writer}"> 
+	         								<tr style="background-color: lightgray" >
+	         								<th><i class="fa-solid fa-comments"></i></th>
+	         								<th>${b.writer}</th>	
+	         								<th>${b.content}</th>
+	         								<th>${b.enrollDate}</th>
+											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-brands fa-replyd"></i></button> 
+											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
 											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
@@ -70,11 +71,12 @@
 	         								<c:forEach items="${comment}" var="c">
 	         								<c:if test="${ c.boardNo == b.boardNo}">
 	         								<tr>
-	         								<td>${c.userNo}</td>	
+	         								<td>댓글</td>	
+	         								<td>${c.userNo}</td>
 	         								<td>${c.content}</td>
 	         								<td>${c.enrollDate}</td>
 	         								<td>
-	         								<c:if test="${hostUser eq loginUser.userId || hostUser eq c.userNo}"> 
+	         								<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
 											</td>
@@ -87,7 +89,7 @@
          							</c:if>
          							
          							<c:if test="${ board.isEmpty() }">
-									<tr><td colspan="4" align="center">작성된 방명록이 없습니다.</td></tr>
+									<tr><td colspan="5" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
 								</table>
 		
