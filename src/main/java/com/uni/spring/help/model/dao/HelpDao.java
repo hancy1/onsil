@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 
 @Repository
@@ -25,6 +26,21 @@ public class HelpDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectFaqList", null, rowBounds);
+	}
+
+	// 공지사항 게시물 갯수 구하기 - 페이징 처리
+	public static int selectNoticeList(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("helpMapper.selectNoticeListCount");
+	}
+
+	// 공지사항 게시물 가져오기
+	public static ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectNoticeList", null, rowBounds);
 	}
 
 }

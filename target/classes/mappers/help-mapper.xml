@@ -4,12 +4,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="helpMapper">
 
+	<!-- 자주묻는질문 리절트맵 -->
 	<resultMap type="Faq" id="faqResultSet">   
          <id property="faqNo" column="FAQ_NO"/>
          <result property="category" column="CATEGORY"/>
          <result property="question" column="QUESTION"/>
          <result property="answer" column="ANSWER"/>
          <result property="createDate" column="CREATE_DATE"/>
+         <result property="status" column="STATUS"/>         
+	</resultMap>
+	
+	<!-- 공지사항 리절트맵 -->
+	<resultMap type="Notice" id="noticeResultSet">   
+         <id property="noticeNo" column="NOTICE_NO"/>
+         <result property="category" column="CATEGORY_NAME"/>
+         <result property="title" column="TITLE"/>
+         <result property="writer" column="USER_NAME"/>
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="content" column="CONTENT"/>         
          <result property="status" column="STATUS"/>         
 	</resultMap>
       
@@ -25,6 +37,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FAQ
 		WHERE STATUS='Y'	
 		ORDER BY FAQ_NO DESC	
+	</select>
+	
+	<!-- 공지사항 게시물 갯수 -->
+	<select id="selectNoticeListCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<!-- 공지사항 게시물들 불러오기 -->
+	<select id="selectNoticeList" resultMap="noticeResultSet">
+		<!--  SELECT * 
+		FROM NOTICE
+		WHERE STATUS='Y'	
+		ORDER BY NOTICE_NO DESC	-->
+		
+		SELECT A.NOTICE_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT 
+		FROM NOTICE A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+        JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		ORDER BY NOTICE_NO DESC
+		
 	</select>
 	
 </mapper>
