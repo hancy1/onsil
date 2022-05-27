@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 공지사항 </title>
+<title>온실 | 문의사항 </title>
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/favicon.ico">   
 		
@@ -58,7 +58,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 공지사항</h2>
+			<h2>온실 :: 문의사항</h2>
 		</div>		
 		  
 		<div class="container">
@@ -69,7 +69,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">공지사항</li>
+							<li class="breadcrumb-item active" aria-current="page">문의사항</li>
 						</ol>
 					</nav>
 				</div>
@@ -84,30 +84,32 @@
 	<div class="container">
 	 	<div class="input-form-backgroud row">
 	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
-		 		<h4>공지사항</h4>
+		 		<h4>문의사항</h4>
 		 		<br><br>	 		
 		 		
 		 		
 		 		<div>	
 		 		
-			 		<table id="NoticeList" class="table table-hover" align="center">
+			 		<table id="InquiryList" class="table table-hover" align="center">
 	                <thead>
 	                  <tr>
 	                    <th>글번호</th>
 	                    <th>카테고리</th>
 	                    <th>제목</th>
+	                    <th>조회수</th>
 	                    <th>작성자</th>	                    
 	                    <th>게시날짜</th>	                    
 	                  </tr>
 	                </thead>
 	                <tbody>
-	                	<c:forEach items="${ list }" var="n">
+	                	<c:forEach items="${ list }" var="i">
 		                    <tr>
-		                        <td>${ n.noticeNo }</td>
-		                        <td>${ n.category }</td>
-		                        <td>${ n.title }</td>
-		                        <td>${ n.writer }</td>		                        
-		                        <td>${ n.createDate }</td>		                        
+		                        <td>${ i.inquiryNo }</td>
+		                        <td>${ i.category }</td>
+		                        <td>${ i.title }</td>
+		                        <td>${ i.count }</td>
+		                        <td>${ i.writer }</td>
+		                        <td>${ i.createDate }</td>		                        
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -173,8 +175,8 @@
 
 	<script>
     	$(function(){
-    		$("#NoticeList tbody tr").click(function(){
-    			location.href="detailNotice.do?bno=" + $(this).children().eq(0).text();
+    		$("#InquiryList tbody tr").click(function(){
+    			location.href="detailInquiry.do?bno=" + $(this).children().eq(0).text();
     		});
     	});
     </script>

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 
@@ -29,7 +30,7 @@ public class HelpDao {
 	}
 
 	// 공지사항 게시물 갯수 구하기 - 페이징 처리
-	public static int selectNoticeList(SqlSessionTemplate sqlSession) {
+	public static int selectNoticeListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("helpMapper.selectNoticeListCount");
 	}
@@ -41,6 +42,21 @@ public class HelpDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectNoticeList", null, rowBounds);
+	}
+
+	// 문의사항 게시물 갯수 구하기 - 페이징 처리
+	public static int selectInquiryListCount(SqlSessionTemplate sqlSession) {
+
+		return sqlSession.selectOne("helpMapper.selectInquiryListCount");
+	}
+
+	// 문의사항 게시물 가져오기
+	public static ArrayList<Inquiry> selectInquiryList(SqlSessionTemplate sqlSession, PageInfo pi) {
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList", null, rowBounds);
 	}
 
 }
