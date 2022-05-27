@@ -25,6 +25,12 @@
 		
 		<typeAlias type="com.uni.spring.ticket.model.dto.Ticket" alias="Ticket"/>
 		
+		<typeAlias type="com.uni.spring.help.model.dto.Faq" alias="Faq"/>
+		<typeAlias type="com.uni.spring.help.model.dto.Notice" alias="Notice"/>
+		<typeAlias type="com.uni.spring.help.model.dto.Inquiry" alias="Inquiry"/>
+		<typeAlias type="com.uni.spring.help.model.dto.Answer" alias="Answer"/>
+		<typeAlias type="com.uni.spring.help.model.dto.Chat" alias="Chat"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -38,6 +44,8 @@
 		<mapper resource="/mappers/board-mapper.xml"/>	
 		
 		<mapper resource="/mappers/ticket-mapper.xml"/>	
+		
+		<mapper resource="/mappers/help-mapper.xml"/>	
 				
 	</mappers>
 	
