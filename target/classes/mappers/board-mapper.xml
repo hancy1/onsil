@@ -7,14 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="com.uni.spring.board.model.dto.Board" id="boardResultSet"> 
 		<id property="bNo" column="B_NO"/>
+         <result property="userNo" column="USER_NO"/>
          <result property="bCategoryNo" column="B_CATEGORY_NO"/>
          <result property="bTitle" column="B_TITLE"/>
          <result property="bContent" column="B_CONTENT"/>
-         <result property="userNo" column="BOARD_WRITER"/>
          <result property="bDate" column="B_DATE"/>
          <result property="bCount" column="B_COUNT"/>
-         <result property="originName" column="B_ORIGIN_NAME"/>
-         <result property="changeName" column="B_CHANGE_NAME"/>
+         <result property="bOriginName" column="B_ORIGIN_NAME"/>
+         <result property="bChangeName" column="B_CHANGE_NAME"/>
          <result property="bStatus" column="B_STATUS"/>
 	</resultMap>
 

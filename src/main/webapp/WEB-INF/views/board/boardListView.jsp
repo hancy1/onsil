@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
 <!DOCTYPE html>
 <html>
@@ -70,14 +70,13 @@
 					<tbody>
 	                	<c:forEach items="${ list }" var="b">
 		                    <tr>
-		                        <td>${ b.bNo }</td>
-		                        <td>${ b.bCategoryNo }</td>
-		                        <td>${ b.bTitle }</td>
-		                        <td>${ b.bContent }</td>
+		                        <td>${ b.BNo }</td>
+		                        <td>${ b.BCategoryNo }</td>
+		                        <td>${ b.BTitle }</td>
 		                        <td>${ b.userNo }</td>
-		                        <td>${ b.bDate }</td>
-		                        <td>${ b.bCount }</td>
-		                        <td>♥</td>
+		                        <td>${ b.BDate }</td>
+		                        <td>${ b.BCount }</td>
+		                        <td></td>
 		                    </tr>
 	                    </c:forEach>
 			        </tbody>
@@ -85,10 +84,10 @@
 				</table>
 				
 				<div class="single-widget-area">
-						<!-- <ol class="popular-tags d-flex flex-wrap">
-						<c:if test="${ !empty loginUser }"> -->
+						<ol class="popular-tags d-flex flex-wrap">
+						<c:if test="${ !empty loginUser }">
 	                	<li><a href="#">글쓰기</a></li>
-	                	<!-- </c:if> -->
+	                	</c:if>
 	                </ol>
                 </div>
                 </div>

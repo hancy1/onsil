@@ -37,6 +37,7 @@ public class BoardController {
 	      PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 5);
 	      
 	      ArrayList<Board> list = boardService.selectList(pi);
+	      System.out.println(list.get(0));	//확인
 	      
 	      model.addAttribute("list", list);
 	      model.addAttribute("pi", pi);
