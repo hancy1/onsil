@@ -25,4 +25,9 @@ public class TicketDao {
 	
 	}
 
+	public int insertTicket(SqlSessionTemplate sqlSession, Ticket t) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ticketMapper.insertTicket",t);
+	}
+
 }

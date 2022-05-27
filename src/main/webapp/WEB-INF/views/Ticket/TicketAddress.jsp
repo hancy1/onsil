@@ -217,6 +217,32 @@ input[id="sideCheck"]:checked+label {
 <title>주소</title>
 </head>
 <body>
+ <jsp:include page="../common/menubar.jsp"/>
+
+
+     <!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>위치보기</h2>
+		</div>
+    	<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#"><i
+									class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
+							<li class="breadcrumb-item active" aria-current="page">위치</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	
 	<input type="checkbox" id="sideCheck" style="display: none;">
@@ -247,7 +273,20 @@ input[id="sideCheck"]:checked+label {
 		<ul id="placesList"></ul>
         <div id="pagination"></div>
 	</div> -->
-	
+
+   <jsp:include page="../common/footer.jsp"/>
+    
+    <!-- ##### All Javascript Files ##### -->
+	<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="resources/js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap js -->
+	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="resources/js/plugins/plugins.js"></script>
+	<!-- Active js -->
+	<script src="resources/js/active.js"></script>	
 	
 	
 </body>

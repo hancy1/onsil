@@ -11,4 +11,6 @@ public interface TicketService {
 
 	ArrayList<Ticket> selectListCount(PageInfo pi);
 
+	void insertTicket(Ticket t);
+
 }
