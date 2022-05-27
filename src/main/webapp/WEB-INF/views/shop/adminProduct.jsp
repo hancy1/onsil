@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 판매제품 관리</title>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <style>
 	#boardList{
 	text-align: center;
