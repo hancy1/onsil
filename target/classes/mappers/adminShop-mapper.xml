@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 관리자 페이지 : 등록된 product 수  -->
-	<select id = "selectListCount1" resultType="_int">
+	<select id = "selectListCount" resultType="_int">
 
 	SELECT COUNT(*)
   	FROM PRODUCT
@@ -28,12 +28,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</select>
 
 	<!-- 관리자 페이지 : 등록된 제품들 전부 select해오기 -->
-	<select id="selectList1" parameterType="Product" resultMap="productResultSet">	
+	<select id="selectList" parameterType="Product" resultMap="productResultSet">	
 		 
 	  SELECT *
 	  FROM PRODUCT
 	    
 	</select>
 	
+	
+	
+	<!-- 관리자페이지: 제품 등록 -->
+	
+	
+	<insert id="insertProduct">
+	
+	INSERT INTO PRODUCT VALUES(#{proCode}, #{cateCode}, #{proName}, #{price}, #{detailOri},#{detailCha}, DEFAULT, DEFAULT, #{proContent})
+  
+  	
+  	</insert>
 
 </mapper>

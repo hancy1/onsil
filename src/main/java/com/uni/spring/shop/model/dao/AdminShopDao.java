@@ -14,14 +14,21 @@ public class AdminShopDao {
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("adminShopMapper.selectListCount1");
+		return sqlSession.selectOne("adminShopMapper.selectListCount");
 	}
 
 	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminShopMapper.selectList1", null, rowdounds);
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectList", null, rowdounds);
 	}
+
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		
+		return sqlSession.insert("adminShopMapper.insertProduct",p);
+	}
+
+
 
 }

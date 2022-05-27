@@ -114,7 +114,7 @@
                         <th colspan="2"><label for="content">상세페이지</label></th>
                     </tr>
                     <tr>
-                        <td colspan="2"><textarea class="summernote" id="summernote" name="content"></textarea></td>
+                        <td colspan="2"><textarea class="summernote" id="summernote" name="proContent"></textarea></td>
                     </tr>
                 </table>
                 <br>
