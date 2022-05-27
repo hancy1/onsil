@@ -31,6 +31,7 @@ T_CHANGE_NAME-->
 
 </resultMap>
 
+<!-- 티켓 페이지 - 등록된 티켓 수  -->
 <select id="selectListCount"  resultType="_int">
   
   SELECT COUNT(*)
@@ -39,6 +40,7 @@ T_CHANGE_NAME-->
   
   </select>
 
+<!--  등록된 티켓들 전부 select해오기 -->
   <select id="selectList" resultMap="ticketResultSet">
   
    SELECT *
@@ -47,4 +49,12 @@ T_CHANGE_NAME-->
    ORDER BY TICKET_NO DESC
   
   </select>
+  
+  <!-- 티켓등록 -->
+   <insert id="insertTicket">
+      
+         INSERT INTO TICKET
+         VALUES (SEQ_TICKET.NEXTVAL, #{ticketNo},#{ticketTitle}, #{writer},#{price},#{ticketPhone},#{ticketNotice}, #{originName},#{changeName},SYSDATE, DEFAULT)
+            
+      </insert>
 </mapper>

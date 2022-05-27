@@ -48,7 +48,7 @@
             <br>
 			
 			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
-            <form id="enrollForm" method="post" action="insertBoard.do" enctype="multipart/form-data">
+            <form id="enrollForm" method="post" action="insertTicket.do" enctype="multipart/form-data">
                 <table align="center">
                     <tr>
                         <th><label for="ticketNo">티켓번호</label></th>
