@@ -36,6 +36,7 @@ public class AdminShopDao {
 
 	public int deleteProduct(SqlSessionTemplate sqlSession, String proCode) {
 		// TODO Auto-generated method stub
+		System.out.println("다오 proCode넘어오는지?"+proCode);
 		return sqlSession.update("adminShopMapper.deleteProduct",proCode);
 	}
 

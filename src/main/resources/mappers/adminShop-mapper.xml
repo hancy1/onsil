@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	
   	
   	<!-- 관리자페이지: 제품 삭제 -->	
-  	<update id="deleteProduct" parameterType="_int">
+  	<update id="deleteProduct">
   
   		UPDATE PRODUCT SET PRO_STATUS='N' WHERE PRO_CODE=#{proCode}
     

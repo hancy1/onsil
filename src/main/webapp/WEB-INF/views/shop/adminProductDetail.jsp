@@ -81,7 +81,7 @@
 							<a href="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}"
 								download="${ p.detailOri }">${ p.detailOri }</a>
 					</c:if>
-					<c:if test="${ empty p.originName }">
+					<c:if test="${ empty p.detailOri }">
                         	첨부파일이 없습니다.
                     </c:if></td>
 				</tr>
