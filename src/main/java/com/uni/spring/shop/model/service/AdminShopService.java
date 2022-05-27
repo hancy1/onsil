@@ -11,4 +11,6 @@ public interface AdminShopService {
 
 	ArrayList<Product> selectList(ShopPageInfo pi);
 
+	void insertProduct(Product p);
+
 }
