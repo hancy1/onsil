@@ -59,13 +59,29 @@
 	         								<td>${b.writer}</td>	
 	         								<td>${b.content}</td>
 	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button> 
+											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-solid fa-pen"></i></button> 
+											<c:if test="${hostUser eq loginUser.userId || hostUser eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											</c:if>
 											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
 											</td>
-	         								</tr>			
+	         								</tr>
+	         								<c:if test="${ !comment.isEmpty() }">
+	         								<c:forEach items="${comment}" var="c">
+	         								<c:if test="${ c.boardNo == b.boardNo}">
+	         								<tr>
+	         								<td>${c.userNo}</td>	
+	         								<td>${c.content}</td>
+	         								<td>${c.enrollDate}</td>
+	         								<td>버튼자리</td>
+	         								</tr>
+	         								</c:if>
+	         								</c:forEach>	
+	         								</c:if>		
 	         							</c:forEach>
+	         							 
          							</c:if>
+         							
          							<c:if test="${ board.isEmpty() }">
 									<tr><td colspan="4" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
@@ -108,6 +124,16 @@
 	function visitGarden(userId){
 		
 		location.href = "gardenMain.do?hostUser=" + userId;
+		
+	}
+	
+	function insertComment(boardNo){
+		
+		var content = prompt("댓글입력 창입니다.");
+		console.log(content);
+		console.log(boardNo);
+	
+		location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
 		
 	}
 

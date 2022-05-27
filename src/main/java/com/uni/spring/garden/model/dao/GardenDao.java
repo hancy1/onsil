@@ -66,4 +66,23 @@ public class GardenDao {
 		return sqlSession.insert("gardenMapper.insertNeighbor", map);		
 	}
 
+	public int insertComment(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertComment", map);	
+	}
+
+	public int selectCommentCount(String hostUser, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectCommentCount", hostUser);
+	}
+
+	public ArrayList<Board> selectCommentList(String hostUser, PageInfo cPi, SqlSessionTemplate sqlSession) {
+		
+		int offset = (cPi.getCurrentPage() - 1) * cPi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, cPi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectCommentList", hostUser, rowBounds);
+	}
+
 }

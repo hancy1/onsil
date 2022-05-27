@@ -27,6 +27,12 @@ public interface GardenService {
 
 	void insertNeighbor(HashMap<String, String> map);
 
+	void insertComment(HashMap<String, String> map);
+
+	int selectCommentCount(String hostUser);
+
+	ArrayList<Board> selectCommentList(PageInfo cPi, String hostUser);
+
 
 	
 
