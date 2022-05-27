@@ -30,7 +30,7 @@
  	width:100%;
  	}
     #enrollForm>table *{
-     margin:5px;
+     margin:10px;
      }
 </style>
 

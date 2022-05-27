@@ -13,4 +13,8 @@ public interface AdminShopService {
 
 	void insertProduct(Product p);
 
+	Product selectProduct(String proCode);
+
+	void deleteProduct(String proCode);
+
 }
