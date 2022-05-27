@@ -21,8 +21,20 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 등록된 bean을 조회하는 범위 -->
 	<context:component-scan base-package="com.uni.spring" />
 	
+	<!-- 빈 등록 -->
+	<beans:bean id="commonExceptionHandler" class="com.uni.spring.common.CommonExceptionHandler" />
 	
+	<!-- 인터셉터 추가 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/gardenMain.do"/>
+			<mapping path="/visitorBoard.do"/>
+			<mapping path="/neighborList.do"/>
+			<beans:bean id="testInterceptor" class="com.uni.spring.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
