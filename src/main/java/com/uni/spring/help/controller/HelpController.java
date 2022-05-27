@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uni.spring.help.HelpPagination;
 import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.help.model.service.HelpService;
 import com.uni.spring.help.model.service.HelpServiceImpl;
-import com.uni.spring.member.model.service.MemberService;
-import com.uni.spring.member.model.service.MemberServiceImpl;
 
 @Controller
 public class HelpController {
@@ -41,5 +40,24 @@ public class HelpController {
 		model.addAttribute("pi", pi);		
 		
 		return "help/faqPage";
+	}
+	
+	
+	// 공지사항 페이지 이동	
+	@RequestMapping("noticeList.do")
+	public String selectNoticeList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectNoticeList();
+		System.out.println(listCount);
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Notice> list = helpService.selectNoticeList(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/noticeListView";
 	}
 }
