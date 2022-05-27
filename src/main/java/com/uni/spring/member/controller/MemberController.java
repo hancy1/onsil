@@ -60,8 +60,13 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("logout.do")
-	public String logout(SessionStatus status) {
+	public String logout(SessionStatus status, HttpSession session) {
 		status.setComplete();
+		
+		//by 채영 ---------------------------
+		session.removeAttribute("hostUser");
+		//----------------------------------	
+		
 		return "redirect:/";
 	}
 	

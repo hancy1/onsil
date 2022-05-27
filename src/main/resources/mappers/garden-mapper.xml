@@ -68,6 +68,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<!-- 방명록 댓글 -->
+	
+	<resultMap type="VComment" id="VCommentResultSet"> 
+		<id property="commentNo" column="COMMENT_NO"/>
+		<result property="boardNo" column="BOARD_NO"/>
+		<result property="userNo" column="USER_ID" />		
+		<result property="comment" column="COMMENT" />
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
+	
+	
+	
+	
+	<insert id="insertComment">
+	
+		INSERT INTO VISITOR_COMMENT VALUES
+		(SEQ_V_COMMENT_NO.NEXTVAL, #{boardNo}, #{userNo}, #{content}, DEFAULT, DEFAULT)
+
+	</insert>
+	
+	<select id="selectCommentCount" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM VISITOR_COMMENT
+		WHERE USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		AND STATUS = 'Y'
+	
+	</select>
+	
+	<select id="selectCommentList" resultMap="VCommentResultSet">
+	
+		SELECT *
+		FROM (
+		    SELECT A.COMMENT_NO, A.BOARD_NO, B.USER_ID, A.CONTENT, A.ENROLL_DATE, A.STATUS
+		    FROM VISITOR_COMMENT A
+		    JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		    WHERE A.USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		    AND A.STATUS='Y'
+		    ORDER BY A.BOARD_NO DESC)
+	
+	</select>
 	
 	
 	

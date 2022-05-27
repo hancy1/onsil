@@ -104,7 +104,7 @@
 	         								<td>${b.writer}</td>	
 	         								<td>${b.content}</td>
 	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button>
+											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick='deleteBoard("${b.boardNo}");'><i class="fa-solid fa-pen"></i></button>
 											<c:if test="${hostUser eq loginUser.userId || hostUser eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
