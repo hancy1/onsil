@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.ShopPagination;
@@ -120,4 +121,51 @@ public class AdminShopController {
 		}
 
 	
+		
+		
+		@RequestMapping("detailProduct.do")
+		public ModelAndView selectProduct(String proCode, ModelAndView mv) {
+			
+			System.out.println("컨트롤러 proCode : " + proCode);
+			Product p = aShopService.selectProduct(proCode);
+			
+			mv.addObject("p", p).setViewName("shop/adminProductDetail");
+			
+			return mv;
+		}
+		
+		
+		
+		
+		
+		//삭제(n으로 업데이트)		
+		@RequestMapping("deleteProduct.do")
+		public String deleteProduct(String proCode, String fileName, HttpServletRequest request ) {
+			
+			
+			aShopService.deleteProduct(proCode);
+			
+			if(!fileName.equals("")) {
+				deleteFile(fileName, request);
+			}
+			
+			return "redirect:adminProducts.do";
+		}
+		
+		
+		//파일지우기
+		private void deleteFile(String fileName, HttpServletRequest request) {
+			// TODO Auto-generated method stub
+			
+			
+			String resources = request.getSession().getServletContext().getRealPath("resources");		
+			String savePath = resources+"\\pro_upload_files\\";
+			
+			
+			File deleteFile = new File(savePath + fileName);
+			deleteFile.delete();
+			
+			
+		}
+		
 }

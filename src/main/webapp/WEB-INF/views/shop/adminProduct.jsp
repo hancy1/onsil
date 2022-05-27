@@ -61,6 +61,9 @@
       text-decoration: none;
     }
     
+    
+
+    
 </style>
 </head>
 <body>
@@ -209,7 +212,7 @@
     <script>
     	$(function(){
     		$("#productList tbody tr").click(function(){
-    			location.href="detailBoard.do?bno=" + $(this).children().eq(0).text();
+    			location.href="detailProduct.do?proCode=" + $(this).children().eq(0).text();
     		});
     	});
     </script>

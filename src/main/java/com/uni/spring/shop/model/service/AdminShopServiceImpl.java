@@ -46,4 +46,31 @@ public class AdminShopServiceImpl implements AdminShopService {
 		
 	}
 
+	@Override
+	public Product selectProduct(String proCode) {
+		// TODO Auto-generated method stub
+		
+		
+		Product p = null;	
+		p=aShopDao.selectProduct(sqlSession, proCode);
+		
+		
+		return p;
+	}
+
+	
+	
+	@Override
+	public void deleteProduct(String proCode) {
+		// TODO Auto-generated method stub
+		
+		int result = aShopDao.deleteProduct(sqlSession, proCode);
+		
+		if(result <0) {
+			throw new CommException("제품 판매중지 실패");
+		}
+		
+		
+	}
+
 }

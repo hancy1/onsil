@@ -29,6 +29,16 @@ public class AdminShopDao {
 		return sqlSession.insert("adminShopMapper.insertProduct",p);
 	}
 
+	public Product selectProduct(SqlSessionTemplate sqlSession, String proCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.selectProduct",proCode);
+	}
+
+	public int deleteProduct(SqlSessionTemplate sqlSession, String proCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminShopMapper.deleteProduct",proCode);
+	}
+
 
 
 }
