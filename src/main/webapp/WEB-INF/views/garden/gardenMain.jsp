@@ -30,7 +30,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>MY GARDEN</h2>
+			<h2>${ hostUser }님의 정원</h2><!-- 나중에 이름 수정 -->
 		</div>
 
 		<div class="container">
@@ -104,8 +104,10 @@
 	         								<td>${b.writer}</td>	
 	         								<td>${b.content}</td>
 	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button> 
+											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick=""><i class="fa-solid fa-pen"></i></button>
+											<c:if test="${hostUser eq loginUser.userId || hostUser eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											</c:if>
 											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
 											</td>
 	         								</tr>			

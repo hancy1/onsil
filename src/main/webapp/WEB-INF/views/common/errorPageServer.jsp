@@ -8,7 +8,16 @@
 </head>
 <body>
 	<jsp:include page="menubar.jsp"/>
-	
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>ERROR</h2>
+		</div>
+	</div>
+	<!-- ##### Breadcrumb Area End ##### -->
 	<br>
 	<div align="center">	
 		<br><br>
