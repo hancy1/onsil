@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
@@ -54,7 +55,7 @@ public class HelpDao {
 	public static ArrayList<Inquiry> selectInquiryList(SqlSessionTemplate sqlSession, PageInfo pi) {
 
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());				
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList", null, rowBounds);
 	}
@@ -68,7 +69,24 @@ public class HelpDao {
 	// 문의사항 디테일 뷰
 	public static Inquiry selectInquiry(SqlSessionTemplate sqlSession, int ino) {
 		
+		sqlSession.update("helpMapper.updateReplyCount", ino); // 댓글 수 업데이트
+		
 		return (Inquiry)sqlSession.selectOne("helpMapper.selectInquiry", ino);
 	}
 
+	// 문의사항 댓글리스트
+	public static ArrayList<Answer> selectReplyList(SqlSessionTemplate sqlSession, int ino) {
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectReplyList", ino);
+	}
+
+	// 문의사항 댓글작성
+	public static int insertReply(SqlSessionTemplate sqlSession, Answer a) {
+		
+		return sqlSession.insert("helpMapper.insertReply", a);
+	}
+
+	
+
+	
 }

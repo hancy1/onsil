@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.GsonBuilder;
 import com.uni.spring.help.HelpPagination;
+import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
@@ -101,11 +104,31 @@ public class HelpController {
 		
 		Inquiry i = helpService.selectInquiry(ino);
 		
-		mv.addObject("i", i).setViewName("help/inquiryDetailView");
+		mv.addObject("i", i).setViewName("help/inquiryDetailView");		
 		
-		return mv;
-		
+		return mv;		
 	}
 	
+	// 문의사항 댓글 리스트
+	@ResponseBody
+	@RequestMapping(value = "rlistInquiry.do", produces = "application/json; charset=utf-8")
+	public String selectReplyList(int ino) {
+		
+		ArrayList<Answer> list = helpService.selectReplyList(ino);
+		
+		System.out.println(list);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
+	}
+	
+	// 댓글 작성
+	@ResponseBody 
+	@RequestMapping(value = "rinsertInquiry.do")
+	public String insertReplyList(Answer a) {
+		
+		int result = helpService.insertReply(a);
+		
+		return String.valueOf(result);
+	}
 	
 }

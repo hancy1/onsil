@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uni.spring.common.exception.CommException;
 import com.uni.spring.help.model.dao.HelpDao;
+import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
@@ -79,4 +81,30 @@ public class HelpServiceImpl implements HelpService {
 		
 		return HelpDao.selectInquiry(sqlSession, ino);
 	}
+
+
+	@Override // 문의사항 댓글리스트
+	public ArrayList<Answer> selectReplyList(int ino) {
+
+		return HelpDao.selectReplyList(sqlSession, ino);
+	}
+
+
+	@Override // 문의사항 댓글작성
+	public int insertReply(Answer a) {
+		
+		int result = HelpDao.insertReply(sqlSession, a);
+		
+		if(result < 0) {
+			throw new CommException("댓글 추가 실패");
+		}
+		
+		return result;	
+	}
+
+
+	
+
+
+	
 }

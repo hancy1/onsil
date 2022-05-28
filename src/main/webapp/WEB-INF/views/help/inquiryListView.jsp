@@ -106,7 +106,7 @@
 		                    <tr>
 		                        <td>${ i.inquiryNo }</td>
 		                        <td>${ i.category }</td>
-		                        <td>${ i.title } &nbsp; [ 댓글수 ]</td>
+		                        <td>${ i.title } &nbsp; [ ${ i.replyCount } ]</td>
 		                        <td>${ i.count }</td>
 		                        <td>${ i.writer }</td>
 		                        <td>${ i.createDate }</td>		                        

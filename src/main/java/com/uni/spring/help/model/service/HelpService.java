@@ -2,6 +2,7 @@ package com.uni.spring.help.model.service;
 
 import java.util.ArrayList;
 
+import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.Notice;
@@ -24,5 +25,12 @@ public interface HelpService {
 	Notice selectNotice(int nno); // 공지사항 디테일 뷰
 
 	Inquiry selectInquiry(int ino); // 문의사항 디테일 뷰
+
+	ArrayList<Answer> selectReplyList(int ino); // 문의사항 댓글리스트
+
+	int insertReply(Answer a); // 문의사항 댓글작성
+	
+
+	
 
 }
