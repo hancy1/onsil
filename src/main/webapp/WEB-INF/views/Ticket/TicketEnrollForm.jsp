@@ -55,34 +55,32 @@
                         <td><input type="text" id="ticketNo" class="form-control" name="ticketNo" required></td>
                     </tr>
                     <tr>
-                        <th><label for="title">전시회명</label></th>
+                        <th><label for="ticketTitle">전시회명</label></th>
                         <td><input type="text" id="title" class="form-control" name="ticketTitle" required></td>
                     </tr>
                     <tr>
                         <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control" value="${ loginUser.userId }" name="writer" readonly></td>
+                        <td><input type="text" id="writer" class="form-control"  name="writer" required></td>
                     </tr>
                      <tr>
                         <th><label for="price">가격코드</label></th>
                         <td><input type="text" id="price" class="form-control" name="price" required></td>
                     </tr>
                     <tr>
-                        <th><label for="phone">전화번호</label></th>
-                        <td><input type="text" id="phone" class="form-control" name="phone" required></td>
+                        <th><label for="ticketPhone">전화번호</label></th>
+                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" required></td>
                     </tr>
-                    <tr>
-                        <th><label for="date">날짜</label></th>
-                        <td><input type="text" id="date" class="form-control" name="date" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="upfile">첨부파일</label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
-                    </tr>
+                  
+                   
                     <tr>
                         <th colspan="2"><label for="content">공지사항</label></th>
                     </tr>
                     <tr>
                         <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;"></textarea></th>
+                    </tr>
+                     <tr>
+                        <th><label for="upfile">첨부파일</label></th>
+                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
                     </tr>
                 </table>
                 <br>

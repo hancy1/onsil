@@ -24,7 +24,7 @@ T_CHANGE_NAME-->
          <result property="ticketTitle" column="TICKET_NAME"/>
          <result property="ticketNotice" column="TICKET_NOTICE"/>
          <result property="ticketLocation" column="TICKET_LOCATION"/>
-         <result property="Date" column="TICKET_DATE"/>
+         <result property="ticketDate" column="TICKET_DATE"/>
          <result property="status" column="TICKET_STATUS"/>
          <result property="originName" column="T_ORIGIN_NAME"/>
          <result property="changeName" column="T_CHANGE_NAME"/>
