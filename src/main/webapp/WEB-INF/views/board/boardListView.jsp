@@ -37,8 +37,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                            <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
                         </ol>
                     </nav>
                 </div>
@@ -55,38 +55,39 @@
                     <div class="row"> 
                 	
                 	<!-- 게시판 목록 -->                
-					<table class="table table-striped table-sm">
+					<table id="boardList" class="table table-hover">
 			        	<thead>
 			          		<tr>
-								<th width="100">글번호</th>
-								<th width="100">카테고리</th>
+								<th width="90">글번호</th>
+								<th width="110">카테고리</th>
 								<th width="300">글제목</th>
 								<th width="100">작성자</th>
-								<th width="150">작성일</th>
-								<th width="100">조회수</th>
+								<th width="130">작성일</th>
+								<th width="90">조회수</th>
 								<th width="100">좋아요</th>
 					        </tr>
 					    </thead>
-					<tbody>
-	                	<c:forEach items="${ list }" var="b">
-		                    <tr>
-		                        <td>${ b.BNo }</td>
-		                        <td>${ b.BCategoryNo }</td>
-		                        <td>${ b.BTitle }</td>
-		                        <td>${ b.userNo }</td>
-		                        <td>${ b.BDate }</td>
-		                        <td>${ b.BCount }</td>
-		                        <td></td>
-		                    </tr>
-	                    </c:forEach>
-			        </tbody>
+						<tbody>
+		                	<c:forEach items="${ list }" var="b">
+			                    <tr>
+			                        <td>${ b.BNo }</td>
+			                        <td>${ b.BCategoryNo }</td>
+			                        <td>${ b.BTitle }</td>
+			                        <td>${ b.userNo }</td>
+			                        <td>${ b.BDate }</td>
+			                        <td>${ b.BCount }</td>
+			                        <td></td>
+			                    </tr>
+		                    </c:forEach>
+				        </tbody>
+					</table>
 				<br><br>
-				</table>
-				
+								
+				<!-- 글쓰기 버튼 : 로그인 상태일시 글쓰기 버튼 보임 -->
 				<div class="single-widget-area">
-						<ol class="popular-tags d-flex flex-wrap">
+					<ol class="popular-tags d-flex flex-wrap">
 						<c:if test="${ !empty loginUser }">
-	                	<li><a href="#">글쓰기</a></li>
+	                	<li><a href="enrollBoard.do">글쓰기</a></li>
 	                	</c:if>
 	                </ol>
                 </div>
@@ -96,9 +97,34 @@
                         <div class="col-12">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+				                	<c:choose>
+				                		<c:when test="${ pi.currentPage ne 1 }">
+				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage-1 }">←</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="">←</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                	
+				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+				                    	<c:choose>
+					                		<c:when test="${ pi.currentPage ne p }">
+				                    			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ p }">${ p }</a></li>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+				                    </c:forEach>
+				                    				                    
+				                    <c:choose>
+				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
                                 </ul>
                             </nav>
                         </div>
@@ -107,7 +133,6 @@
                 
                 <div class="col-12 col-md-4">
                     <div class="post-sidebar-area">
-
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <form action="#" method="get" class="search-form">
@@ -177,12 +202,20 @@
                 </div>
             </div>
         </div>
-    </section>
-    
+    </section>    
     <!-- ##### Blog Area End ##### -->
 
     <jsp:include page="../common/footer.jsp" />
 
+	<!-- 테이블 클릭시 게시글 상세보기로 이동 -->
+    <script>
+    	$(function(){
+    		$("#boardList tbody tr").click(function(){
+    			location.href="detailBoard.do?bno=" + $(this).children().eq(0).text();
+    		});
+    	});
+    </script>
+    
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>

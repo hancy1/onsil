@@ -19,18 +19,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	
-	<!-- 파라미터 없음. 숫자만 출력하기 때문에 int로 함 -->
-	<select id="selectListCount" resultType="_int">
+	<select id="selectListCount" resultType="_int"><!-- 파라미터 없음. 숫자만 출력하기 때문에 int로 함 -->
 		SELECT COUNT(*)
 		FROM BOARD
 		WHERE B_STATUS='Y'
 	</select>
 	
+	<!-- 게시판 목록 -->
 	<select id="selectList" parameterType="Board" resultMap="boardResultSet">
 		SELECT *
 		FROM BOARD
 		WHERE B_STATUS='Y'
 		ORDER BY B_NO DESC
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseCount" parameterType="_int">
+		UPDATE BOARD
+		SET COUNT = COUNT + 1
+		WHERE B_NO=#{bno}
+		AND B_STATUS = 'Y' 
+	</update>
+
+	<!-- 게시글 선택 -->
+	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD
+		WHERE B_NO=#{bno}
+		AND B_STATUS = 'Y' 
 	</select>
 	
 </mapper>
