@@ -106,7 +106,7 @@
 		                    <tr>
 		                        <td>${ i.inquiryNo }</td>
 		                        <td>${ i.category }</td>
-		                        <td>${ i.title }</td>
+		                        <td>${ i.title } &nbsp; [ 댓글수 ]</td>
 		                        <td>${ i.count }</td>
 		                        <td>${ i.writer }</td>
 		                        <td>${ i.createDate }</td>		                        
@@ -122,17 +122,17 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="inquiryList.do?currentPage=${ pi.currentPage-1 }"><i class="bi bi-arrow-left"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                			<li class="page-item disabled"><a class="page-link" href=""><i class="bi bi-arrow-left"></i></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 	
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="inquiryList.do?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -143,10 +143,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="inquiryList.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="inquiryList.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>
@@ -176,7 +176,7 @@
 	<script>
     	$(function(){
     		$("#InquiryList tbody tr").click(function(){
-    			location.href="detailInquiry.do?bno=" + $(this).children().eq(0).text();
+    			location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
     		});
     	});
     </script>
