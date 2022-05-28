@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ShopPageInfo {
+	
 	private int currentPage;
 	private int listCount;
 	private int startPage;
