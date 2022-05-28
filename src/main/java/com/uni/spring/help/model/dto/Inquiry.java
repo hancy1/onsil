@@ -25,4 +25,5 @@ public class Inquiry {
 	private String content; // 내용
 	private String open; // 공개여부
 	private String status; // 상태
+	private String replyCount; // 댓글 갯수
 }

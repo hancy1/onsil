@@ -38,6 +38,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="content" column="CONTENT"/>         
          <result property="open" column="OPEN"/>         
          <result property="status" column="STATUS"/>         
+         <result property="replyCount" column="REPLYCOUNT"/>         
+	</resultMap>
+	
+	<!-- 문의사항 답변 리절트맵 -->
+	<resultMap type="Answer" id="answerResultSet">   
+         <id property="answerNo" column="ANSWER_NO"/>
+         <result property="writer" column="USER_NAME"/>
+         <result property="userId" column="USER_ID"/>
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="answer" column="ANSWER"/>           
 	</resultMap>
       
 
@@ -76,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 문의사항 게시물들 불러오기 -->
 	<select id="selectInquiryList" resultMap="inquiryResultSet">		
-		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS, A.REPLYCOUNT
 		FROM INQUIRY A
 		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
 		JOIN MEMBER C ON A.WRITER = C.USER_NO
@@ -94,15 +104,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND A.NOTICE_NO=#{nno}		
 	</select>
 	
+	<!-- 문의사항 디테일 뷰 - 댓글 수 업데이트 -->
+	<update id="updateReplyCount">
+		UPDATE INQUIRY
+		SET REPLYCOUNT = (
+							SELECT COUNT(*)
+							FROM ANSWER
+							WHERE REPER_NO=#{ino}
+		)
+		WHERE INQUIRY_NO=#{ino}
+	</update>
+	
+	
 	<!-- 문의사항 디테일뷰 -->
 	<select id="selectInquiry" resultMap="inquiryResultSet">		
-		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT, C.USER_ID, A.COUNT
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS, A.REPLYCOUNT, C.USER_ID
 		FROM INQUIRY A
 		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
         JOIN MEMBER C ON A.WRITER = C.USER_NO
 		WHERE A.STATUS='Y'
 		AND A.INQUIRY_NO=#{ino}		
+	</select>	
+	
+	<!-- 댓글리스트 -->
+	<select id="selectReplyList" parameterType="_int" resultMap="answerResultSet">
+	<![CDATA[
+		SELECT A.ANSWER_NO, A.ANSWER, B.USER_ID, B.USER_NAME, A.CREATE_DATE
+		FROM ANSWER A
+		JOIN MEMBER B ON A.WRITER = B.USER_NO
+		WHERE A.REPER_NO = #{ino} AND A.STATUS <> 'N'
+		ORDER BY A.ANSWER_NO DESC
+		]]>
 	</select>
 	
+	<!-- 댓글작성 -->
+	<insert id="insertReply" parameterType="Answer">		
+		INSERT INTO ANSWER VALUES
+		(SEQ_ANSWER_NO.NEXTVAL, #{reperNo}, #{writer}, DEFAULT, #{answer}, DEFAULT)	
+	</insert>
 	
 </mapper>

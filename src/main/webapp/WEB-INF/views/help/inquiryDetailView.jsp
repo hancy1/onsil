@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>온실 | 문의사항 </title>
+	
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/favicon.ico">   
 		
@@ -111,28 +112,30 @@
 				        <div class="innerOuter">				            
 				            <table id="contentArea" align="center" class="table">
 				                <tr>
-				                	<th width="100">제목</th>
-				                    <td colspan="3">${ i.title } [ ${ i.count } ]</td>
+				                	<th width="100" id="titletitle">제목</th>
+				                    <td colspan="10">${ i.title } [ ${ i.replyCount } ]</td>
 				                </tr>
 				                <tr>
 				                	<th>글번호</th>
-				                	<td>${ i.inquiryNo }</td>
+				                	<td colspan="2">${ i.inquiryNo }</td>
 				                	<th>카테고리</th>
-				                	<td>${ i.category }</td>				                    
+				                	<td colspan="2">${ i.category }</td>				                    
+				                	<th>조회수</th>
+				                	<td colspan="2">${ i.count }</td>				                    
 				                </tr>				                
 				                <tr>
 				                    <th>작성자</th>
-				                    <td>${ i.writer }</td>
+				                    <td colspan="3">${ i.writer }</td>
 				                    <th>작성일</th>
-				                    <td>${ i.createDate }</td>
+				                    <td colspan="3">${ i.createDate }</td>
 				                </tr>				                
 				                <tr>
-				                    <th>내용</th>
-				                    <td colspan="3"></td>
+				                    <th>내용</th>		
+				                    <td colspan="10"></td>		                    
 				                </tr>
 				                <tr>
-				                    <td colspan="4"><p style="height:150px">${ i.content }</p></td>
-				                </tr>
+				                    <td colspan="10"><p style="height:auto;">${ i.content }</p></td>
+				                </tr>				                
 				            </table>
 				            <br>
 					
@@ -146,7 +149,7 @@
 									<input type="hidden" name="nno" value="${ n.noticeNo }">									
 								</form>
 								
-								<script>
+								<script>							
 									function postFormSubmit(num){
 										var postForm = $("#postForm");
 										
@@ -189,7 +192,7 @@
 		                    </tr>
 		                </thead>
 		                <tbody>
-		                
+		                	
 		                </tbody>
 		            </table>		 		
 		 		<!-- 댓글 끝 -->
@@ -198,11 +201,12 @@
  				
 			</div>
 		</div>
-	</div>
+	</div>	
 	
-	<jsp:include page="../common/footer.jsp" />
-  
-  	<!-- ##### All Javascript Files ##### -->
+	
+	<jsp:include page="../common/footer.jsp" />  
+	
+	<!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 	<!-- Popper js -->
@@ -212,22 +216,25 @@
 	<!-- All Plugins js -->
 	<script src="resources/js/plugins/plugins.js"></script>
 	<!-- Active js -->
-	<script src="resources/js/active.js"></script>
+	<script src="resources/js/active.js"></script>  	
 
-	<script>
-	$(function(){
+	<script>		
+	
+	$(function(){	
+		
+		
 		selectReplyList();
 		
 		$("#addReply").click(function(){
-    		var bno = ${b.boardNo};
+    		var ino = ${i.inquiryNo};
 
 			if($("#replyContent").val().trim().length != 0){
 				
 				$.ajax({
-					url:"rinsertBoard.do",
+					url:"rinsertInquiry.do",
 					type:"post",
 					data:{replyContent:$("#replyContent").val(),
-						  refBoardNo:bno,
+						  refBoardNo:ino,
 						  replyWriter:"${loginUser.userId}"},
 					success:function(result){
 						if(result > 0){
@@ -248,13 +255,13 @@
 			
 		});
 	});
-
-		
-	function selectReplyList(){
-			var bno = ${b.boardNo};
+	
+	
+	function selectReplyList(){			
+			var ino = ${i.inquiryNo};
 			$.ajax({
-				url:"rlistBoard.do",
-				data:{bno:bno},
+				url:"rlistInquiry.do",
+				data:{ino:ino},
 				type:"get",
 				success:function(list){
 					$("#rcount").text(list.length);
@@ -262,17 +269,17 @@
 					var value="";
 					$.each(list, function(i, obj){
 						
-						if("${loginUser.userId}" == obj.replyWriter){
+						if("${loginUser.userId}" == obj.writer){
 							value += "<tr style='background:#EAFAF1'>";
 						}else{
 							value += "<tr>";
 						}
 						
-						value += "<th>" + obj.replyWriter + "</th>" + 
-									 "<td>" + obj.replyContent + "</td>" + 
+						value += "<th>" + obj.writer + "</th>" + 
+									 "<td>" + obj.answer + "</td>" + 
 									 "<td>" + obj.createDate + "</td>" +
-									 "<td> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.replyNo + ");'> 수정 </button> </td>" +
-									 "<td> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.replyNo + ");'> 삭제 </button> </td>" + 
+									 "<td> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
+									 "<td> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 
 							 "</tr>";
 					});
 					$("#replyArea tbody").html(value);
@@ -281,7 +288,8 @@
 				}
 			});
 		}
-     
+     	
+	
      function deleteReply(replyNo){
     	 var q = confirm("댓글을 삭제하시겠습니까?")
     	 
@@ -307,6 +315,8 @@
 	 	}
      }
      
+	
+	
      function updateReplyForm(replyNo){
 			var bno = ${b.boardNo};
 			$.ajax({
@@ -351,6 +361,8 @@
 			});
 		}
      
+	
+	
      function updateReply(replyNo){
     	     	 
     	 if($("#updateReplyContent").val().trim().length != 0) {
@@ -374,7 +386,7 @@
     		 alert("수정할 댓글을 입력하세요.");
     	 }
      }
-    </script>
+     </script>
 
 </body>
 </html>
