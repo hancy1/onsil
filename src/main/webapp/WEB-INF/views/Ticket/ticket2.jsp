@@ -105,8 +105,8 @@
 	                        <td>${ t.ticketNo }</td>
 	                        <td>${ t.ticketTitle }</td>
 	                        <td>${ t.writer }</td>
-	                        <td>${ t.phone }</td>
-	                        <td>${ t.createDate }</td>
+	                        <td>${ t.ticketPhone }</td>
+	                        <td>${ t.ticketDate }</td>
 	                        <c:if test="${ !empty t.originName }">
 	                        	<td>★</td>
 	                        </c:if>
