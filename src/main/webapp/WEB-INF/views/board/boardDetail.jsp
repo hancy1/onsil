@@ -58,7 +58,7 @@
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
-                                <h4 class="post-title">${ b.BNo }</h4>
+                                <h4 class="post-title">[카테고리 넣기${ b.BCategoryNo }] ${ b.BNo }</h4>
                                 <div class="post-meta mb-30">
                                     <a><i class="fa fa-clock-o" aria-hidden="true"></i>${ b.BDate }</a>
                                     <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${ b.userNo }</a>
@@ -74,7 +74,7 @@
                         <div class="post-tags-share d-flex justify-content-between align-items-center">
                             <!-- Tags -->
                             <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <li><span>Tag:</span></li>
+                                <li><span>카테고리? : </span></li>
                                 <li><a href="#">PLANTS</a></li>
                                 <li><a href="#">CACTUS</a></li>
                             </ol>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <!-- Comment Area Start -->
+                        <!-- 댓글 -->
                         <div class="comment_area clearfix">
                             <h4 class="headline">2 Comments</h4>
 
@@ -149,33 +149,22 @@
                             </ol>
                         </div>
                         
-                        <!-- Leave A Comment -->
+                        <!-- 댓글 작성폼 -->
                         <div class="leave-comment-area clearfix">
                             <div class="comment-form">
                                 <h4 class="headline">댓글 작성하기</h4>
 
                                 <div class="contact-form-area">
-                                    <!-- Comment Form -->
                                     <form id="enrollForm" action="#" method="post">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="title" placeholder="제목">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="writer" value="사용자 아이디 : ${ loginUser.userId }" name="boardWriter" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <input type="file" class="form-control" id="upfile" name="uploadFile">
+                                                	<h5 href="#"><i class="fa fa-user" aria-hidden="true"></i> ${ loginUser.userId }</h5>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" required name="boardContent" id="content" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
+                                                    <textarea class="form-control" name="boardContent" id="content" cols="30" rows="10" placeholder="댓글 내용을 작성해 주세요."  style="resize:none;"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -187,8 +176,9 @@
                             </div>
                         </div>
                     </div>
-                </div>    
-                <!-- Blog Sidebar Area -->
+                </div> 
+                   
+                <!-- 게시글 사이드바 -->
                 <div class="col-12 col-sm-9 col-md-4">
                     <div class="post-sidebar-area">
 
