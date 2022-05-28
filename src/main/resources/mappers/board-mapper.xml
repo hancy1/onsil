@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 조회수 증가 -->
 	<update id="increaseCount" parameterType="_int">
 		UPDATE BOARD
-		SET COUNT = COUNT + 1
+		SET B_COUNT = B_COUNT + 1
 		WHERE B_NO=#{bno}
 		AND B_STATUS = 'Y' 
 	</update>
