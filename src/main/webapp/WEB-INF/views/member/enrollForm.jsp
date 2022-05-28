@@ -48,6 +48,16 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			<h2>온실 :: 회원가입</h2>
+		</div>
+		
+		
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto" style="margin-top: 100px;">
