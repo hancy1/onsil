@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.help.HelpPagination;
 import com.uni.spring.help.model.dto.Faq;
@@ -61,6 +62,7 @@ public class HelpController {
 		
 		return "help/noticeListView";
 	}
+		
 	
 	// 문의사항 페이지 이동	
 	@RequestMapping("inquiryList.do")
@@ -79,4 +81,31 @@ public class HelpController {
 		
 		return "help/inquiryListView";
 	}
+	
+	
+	// 공지사항 디테일뷰
+	@RequestMapping("detailNotice.do")
+	public ModelAndView selectNotice(int nno, ModelAndView mv) {
+		
+		Notice n = helpService.selectNotice(nno);
+		
+		mv.addObject("n", n).setViewName("help/noticeDetailView");
+		
+		return mv;
+		
+	}
+	
+	// 문의사항 디테일뷰
+	@RequestMapping("detailInquiry.do")
+	public ModelAndView selectInquiry(int ino, ModelAndView mv) {
+		
+		Inquiry i = helpService.selectInquiry(ino);
+		
+		mv.addObject("i", i).setViewName("help/inquiryDetailView");
+		
+		return mv;
+		
+	}
+	
+	
 }

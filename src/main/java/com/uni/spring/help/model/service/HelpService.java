@@ -21,4 +21,8 @@ public interface HelpService {
 
 	ArrayList<Inquiry> selectInquiryList(PageInfo pi); // 문의사항 게시물 가져오기
 
+	Notice selectNotice(int nno); // 공지사항 디테일 뷰
+
+	Inquiry selectInquiry(int ino); // 문의사항 디테일 뷰
+
 }

@@ -64,4 +64,19 @@ public class HelpServiceImpl implements HelpService {
 		
 		return HelpDao.selectInquiryList(sqlSession, pi);
 	}
+
+
+	@Override // 공지사항 디테일 뷰
+	public Notice selectNotice(int nno) {
+		
+		return HelpDao.selectNotice(sqlSession, nno);
+		
+	}
+
+
+	@Override // 문의사항 디테일 뷰
+	public Inquiry selectInquiry(int ino) {
+		
+		return HelpDao.selectInquiry(sqlSession, ino);
+	}
 }

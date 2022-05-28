@@ -59,4 +59,16 @@ public class HelpDao {
 		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList", null, rowBounds);
 	}
 
+	// 공지사항 디테일 뷰
+	public static Notice selectNotice(SqlSessionTemplate sqlSession, int nno) {
+		
+		return (Notice)sqlSession.selectOne("helpMapper.selectNotice", nno);
+	}
+
+	// 문의사항 디테일 뷰
+	public static Inquiry selectInquiry(SqlSessionTemplate sqlSession, int ino) {
+		
+		return (Inquiry)sqlSession.selectOne("helpMapper.selectInquiry", ino);
+	}
+
 }

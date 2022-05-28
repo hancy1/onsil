@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="category" column="CATEGORY_NAME"/>
          <result property="title" column="TITLE"/>
          <result property="writer" column="USER_NAME"/>
+         <result property="userId" column="USER_ID"/>
          <result property="createDate" column="CREATE_DATE"/>
          <result property="content" column="CONTENT"/>         
          <result property="status" column="STATUS"/>         
@@ -32,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="count" column="COUNT"/>
          <result property="title" column="TITLE"/>
          <result property="writer" column="USER_NAME"/>
+         <result property="userId" column="USER_ID"/>
          <result property="createDate" column="CREATE_DATE"/>
          <result property="content" column="CONTENT"/>         
          <result property="open" column="OPEN"/>         
@@ -81,5 +83,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.STATUS='Y'
 		ORDER BY INQUIRY_NO DESC
 	</select>
+	
+	<!-- 공지사항 디테일뷰 -->
+	<select id="selectNotice" resultMap="noticeResultSet">		
+		SELECT A.NOTICE_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT, C.USER_ID
+		FROM NOTICE A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+        JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		AND A.NOTICE_NO=#{nno}		
+	</select>
+	
+	<!-- 문의사항 디테일뷰 -->
+	<select id="selectInquiry" resultMap="inquiryResultSet">		
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT, C.USER_ID, A.COUNT
+		FROM INQUIRY A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+        JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		AND A.INQUIRY_NO=#{ino}		
+	</select>
+	
 	
 </mapper>
