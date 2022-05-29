@@ -111,7 +111,7 @@ public class HelpController {
 	
 	// 문의사항 댓글 리스트
 	@ResponseBody
-	@RequestMapping(value = "rlistInquiry.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rlistAnswer.do", produces = "application/json; charset=utf-8")
 	public String selectReplyList(int ino) {
 		
 		ArrayList<Answer> list = helpService.selectReplyList(ino);
@@ -121,7 +121,7 @@ public class HelpController {
 		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
 	}
 	
-	// 댓글 작성
+	// 문의사항 댓글 작성
 	@ResponseBody 
 	@RequestMapping(value = "rinsertInquiry.do")
 	public String insertReplyList(Answer a) {
@@ -131,4 +131,23 @@ public class HelpController {
 		return String.valueOf(result);
 	}
 	
+	// 문의사항 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="deleteReply.do")
+	public String deleteReply(int answerNo) {
+		
+		int result = helpService.deleteReply(answerNo);
+		
+		return String.valueOf(result);
+	}
+	
+	// 문의사항 댓글 수정
+	@ResponseBody
+	@RequestMapping(value="updateReply.do")
+	public String updateReply(Answer a) {
+		
+		int result = helpService.updateReply(a);
+		
+		return String.valueOf(result);
+	}
 }

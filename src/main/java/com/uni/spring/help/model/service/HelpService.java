@@ -29,6 +29,10 @@ public interface HelpService {
 	ArrayList<Answer> selectReplyList(int ino); // 문의사항 댓글리스트
 
 	int insertReply(Answer a); // 문의사항 댓글작성
+
+	int deleteReply(int answerNo); // 문의사항 댓글삭제
+
+	int updateReply(Answer a); // 문의사항 댓글수정
 	
 
 	

@@ -103,6 +103,32 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 문의사항 댓글삭제
+	public int deleteReply(int answerNo) {
+		
+		int result = HelpDao.deleteReply(sqlSession, answerNo);
+		
+		if(result < 0) {
+			throw new CommException("댓글 삭제 실패");
+		}
+		
+		return result;
+	}
+
+
+	@Override // 문의사항 댓글 수정
+	public int updateReply(Answer a) {
+		
+		int result = HelpDao.updateReply(sqlSession, a);
+		
+		if(result < 0) {
+			throw new CommException("댓글 수정 실패");
+		}
+		
+		return result;
+	}
+
+
 	
 
 

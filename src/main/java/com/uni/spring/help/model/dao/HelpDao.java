@@ -77,6 +77,8 @@ public class HelpDao {
 	// 문의사항 댓글리스트
 	public static ArrayList<Answer> selectReplyList(SqlSessionTemplate sqlSession, int ino) {
 		
+		sqlSession.update("helpMapper.updateReplyCount", ino); // 댓글 수 업데이트
+		 
 		return (ArrayList)sqlSession.selectList("helpMapper.selectReplyList", ino);
 	}
 
@@ -85,6 +87,20 @@ public class HelpDao {
 		
 		return sqlSession.insert("helpMapper.insertReply", a);
 	}
+
+	// 문의사항 댓글삭제
+	public static int deleteReply(SqlSessionTemplate sqlSession, int answerNo) {
+		
+		return sqlSession.delete("helpMapper.deleteReply", answerNo);
+	}
+
+	// 문의사항 댓글수정
+	public static int updateReply(SqlSessionTemplate sqlSession, Answer a) {
+
+		return sqlSession.update("helpMapper.updateReply", a);
+	}
+
+	
 
 	
 

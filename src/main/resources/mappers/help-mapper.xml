@@ -126,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND A.INQUIRY_NO=#{ino}		
 	</select>	
 	
-	<!-- 댓글리스트 -->
+	<!-- 문의사항 댓글리스트 -->
 	<select id="selectReplyList" parameterType="_int" resultMap="answerResultSet">
 	<![CDATA[
 		SELECT A.ANSWER_NO, A.ANSWER, B.USER_ID, B.USER_NAME, A.CREATE_DATE
@@ -137,10 +137,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<!-- 댓글작성 -->
+	<!-- 문의사항 댓글작성 -->
 	<insert id="insertReply" parameterType="Answer">		
 		INSERT INTO ANSWER VALUES
-		(SEQ_ANSWER_NO.NEXTVAL, #{reperNo}, #{writer}, DEFAULT, #{answer}, DEFAULT)	
+		(SEQ_ANSWER_NO.NEXTVAL, #{reperNo}, #{userNo}, DEFAULT, #{answer}, DEFAULT)	
 	</insert>
 	
+	<!-- 문의사항 댓글삭제 -->
+	<delete id="deleteReply">
+		DELETE FROM ANSWER
+		WHERE ANSWER_NO = #{answerNo}
+	</delete>
+	
+	<!-- 댓글수정 -->
+	<update id="updateReply">
+		UPDATE ANSWER
+		SET ANSWER = #{answer}
+		WHERE ANSWER_NO = #{answerNo}
+	</update>
 </mapper>
