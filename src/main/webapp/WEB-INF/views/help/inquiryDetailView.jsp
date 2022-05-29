@@ -175,20 +175,20 @@
 		                <thead>
 		                    <tr>
 		                    	<c:if test="${ !empty loginUser }">
-			                        <th colspan="2" style="width:75%">
+			                        <th colspan="5" style="width:80%">
 			                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
 			                        </th>
 			                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
 		                        </c:if>
 		                        <c:if test="${ empty loginUser }">
-		                        	<th colspan="2" style="width:75%">
+		                        	<th colspan="5" style="width:80%">
 			                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
 			                        </th>
 			                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
 		                        </c:if>
 		                    </tr>
 		                    <tr>
-		                       <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
+		                       <td colspan="6">댓글 (<span id="rcount">0</span>) </td> 
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -218,175 +218,175 @@
 	<!-- Active js -->
 	<script src="resources/js/active.js"></script>  	
 
-	<script>		
-	
-	$(function(){	
+	<script>
+	selectReplyList();
 		
+	// 댓글리스트	
+	function selectReplyList(){
 		
-		selectReplyList();
+		var ino = ${ i.inquiryNo };
 		
-		$("#addReply").click(function(){
-    		var ino = ${i.inquiryNo};
-
-			if($("#replyContent").val().trim().length != 0){
+		$.ajax({
+			url:"rlistAnswer.do",
+			data:{ino:ino},
+			type:"get",
+			success:function(list){
+				$("#rcount").text(list.length);
 				
-				$.ajax({
-					url:"rinsertInquiry.do",
-					type:"post",
-					data:{replyContent:$("#replyContent").val(),
-						  refBoardNo:ino,
-						  replyWriter:"${loginUser.userId}"},
-					success:function(result){
-						if(result > 0){
-							$("#replyContent").val("");
-							selectReplyList();
-							
-						}else{
-							alert("댓글등록실패");
-						}
-					},error:function(){
-						console.log("댓글 작성 ajax 통신 실패");
-					}
-				});
+				var value = "";
 				
-			}else{
-				alert("댓글등록하셈");
-			}
-			
-		});
-	});
-	
-	
-	function selectReplyList(){			
-			var ino = ${i.inquiryNo};
-			$.ajax({
-				url:"rlistInquiry.do",
-				data:{ino:ino},
-				type:"get",
-				success:function(list){
-					$("#rcount").text(list.length);
-					
-					var value="";
-					$.each(list, function(i, obj){
-						
-						if("${loginUser.userId}" == obj.writer){
-							value += "<tr style='background:#EAFAF1'>";
-						}else{
-							value += "<tr>";
-						}
+				$.each(list, function(i, obj){
+					if("${loginUser.userId}" == obj.userId){
+						value += "<tr style='background:#EAFAF1'>";
 						
 						value += "<th>" + obj.writer + "</th>" + 
-									 "<td>" + obj.answer + "</td>" + 
-									 "<td>" + obj.createDate + "</td>" +
-									 "<td> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
-									 "<td> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 
+									 "<td colspan=2>" + obj.answer + "</td>" + 
+									 "<td colspan=2>" + obj.createDate + "</td>" +								 
+									 "<td colspan=1> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
+									 "<td colspan=1> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 
 							 "</tr>";
-					});
-					$("#replyArea tbody").html(value);
-				},error:function(){
-					console.log("댓글 리스트조회용 ajax 통신 실패");
-				}
-			});
-		}
-     	
-	
-     function deleteReply(replyNo){
-    	 var q = confirm("댓글을 삭제하시겠습니까?")
-    	 
-    	 if(q == true) {
-    	 
-    	 $.ajax({
-    		 url:"deleteReply.do",
-    		 data:{replyNo:replyNo},
-    		 type:"get",
-    		 success:function(result){
-    			 if(result > 0) {
-    				 $("#replyContent").val("");
-    				 selectReplyList();
-    			 }else {
-    				 alert("댓글삭제실패");
-    			 }
-    		 }, error:function(){
-    			 console.log("댓글 삭제 ajax 통신 실패");
-    		 }
-    	 })
-   	 }else {
-   		alert("삭제를 취소하셨습니다.")	 
-	 	}
-     }
-     
-	
-	
-     function updateReplyForm(replyNo){
-			var bno = ${b.boardNo};
-			$.ajax({
-				url:"rlistBoard.do",
-				data:{bno:bno},
-				type:"get",
-				success:function(list){
-					$("#rcount").text(list.length);
+					}else{
+						value += "<tr>";
+						value += "<th>" + obj.writer + "</th>" + 
+										 "<td colspan=2>" + obj.answer + "</td>" + 
+										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+										 "<td colspan=1></td>" +
+										 "<td colspan=1></td>" + 
+								 "</tr>";
+					}
 					
-					var value="";
-					$.each(list, function(i, obj){
-						
-						if("${loginUser.userId}" == obj.replyWriter){
-							value += "<tr style='background:#EAFAF1'>";
-						}else{
-							value += "<tr>";
-						}
-						
-						if(obj.replyNo == replyNo){
-							value += "<th>" + obj.replyWriter + "</th>" + 
-									 "<td><textarea id='updateReplyContent' placeholder=" + obj.replyContent + "></textarea></td>" + 
-									 "<td>" + obj.createDate + "</td>" +
-									 "<td> <button id='updateReply' class='button1' onclick='updateReply(" + obj.replyNo + ");'> 저장 </button> </td>" +
-									 "<td> <button id='deleteReply' class='button1' onclick='selectReplyList();'> 취소 </button> </td>" + 									 
-							 "</tr>";
-						}
-						
-						if(obj.replyNo != replyNo) {
-							value += "<th>" + obj.replyWriter + "</th>" + 
-									 "<td>" + obj.replyContent + "</td>" + 
-									 "<td>" + obj.createDate + "</td>" +
-									 "<td> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.replyNo + ");'> 수정 </button> </td>" +
-									 "<td> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.replyNo + ");'> 삭제 </button> </td>" + 									 
-							 "</tr>";
-						}
-						
-					});
-					$("#replyArea tbody").html(value);
+					
+				});
+				$("#replyArea tbody").html(value);
+			},error:function(){
+				console.log("댓글 리스트조회용 ajax 통신 실패");
+			}
+		});
+	}
+	
+	// 댓글 작성
+	$("#addReply").click(function(){
+		var ino = ${ i.inquiryNo };
+		
+		if($("#replyContent").val().trim().length != 0) {
+			$.ajax({
+				url:"rinsertInquiry.do",
+				type:"post",
+				data:{answer:$("#replyContent").val(),
+					reperNo:ino,
+					userNo:"${loginUser.userNo}"},
+				success:function(result){
+					if(result > 0) {
+						$("#replyContent").val("");
+						selectReplyList();
+					}else{
+						alert("댓글등록실패");
+					}
 				},error:function(){
-					console.log("댓글 리스트조회용 ajax 통신 실패");
+					console.log("댓글 작성 ajax 통신 실패");
 				}
 			});
+		}else{
+			alert("댓글을 등록하세요.");
 		}
-     
+	});
 	
+	// 댓글 삭제
+	function deleteReply(answerNo) {
+		var q = confirm("댓글을 삭제하시겠습니까?")
+		
+		if(q == true) {
+			$.ajax({
+				url:"deleteReply.do",
+				data:{answerNo:answerNo},
+				type:"get",
+				success:function(result){
+					if(result > 0) {
+						$("#replyContent").val("");
+						selectReplyList();
+					}else{
+						alert("댓글삭제실패");
+					}
+				}, error:function(){
+					console.log("댓글 삭제 ajax 통신 실패");
+				}
+			})
+		}else{
+			alert("댓글 삭제를 취소하셨습니다.");
+		}
+	}
 	
-     function updateReply(replyNo){
-    	     	 
-    	 if($("#updateReplyContent").val().trim().length != 0) {
-    		 $.ajax({
-    			 url:"updateReply.do",
-    			 type:"post",
-    			 data:{replyContent:$("#updateReplyContent").val(),
-    				   replyNo:replyNo},
-    			success:function(result){
-    				if(result > 0) {
+	// 댓글 수정 폼
+	function updateReplyForm(answerNo){
+		var ino = ${ i.inquiryNo };
+		
+		$.ajax({
+			url:"rlistAnswer.do",
+			data:{ino:ino},
+			type:"get",
+			success:function(list){
+				$("#rcount").text(list.length);
+				
+				var value="";
+				$.each(list, function(i, obj){
+					if("${loginUser.userId}" == obj.userId){
+						value += "<tr style='background:#EAFAF1'>";
+					}else{
+						value += "<tr>";
+					}
+					
+					if(obj.answerNo == answerNo){
+						value += "<th>" + obj.writer + "</th>" + 
+								 "<td colspan=2><textarea id='updateReplyContent' placeholder=" + obj.answer + "></textarea></td>" + 
+								 "<td colspan=2>" + obj.createDate + "</td>" +
+								 "<td colspan=1> <button id='updateReply' class='button1' onclick='updateReply(" + obj.answerNo + ");'> 저장 </button> </td>" +
+								 "<td colspan=1> <button id='deleteReply' class='button1' onclick='selectReplyList();'> 취소 </button> </td>" + 									 
+						 "</tr>";
+					}
+					
+					if(obj.answerNo != answerNo) {
+						value += "<th>" + obj.writer + "</th>" + 
+								 "<td colspan=2>" + obj.answer + "</td>" + 
+								 "<td colspan=2>" + obj.createDate + "</td>" +
+								 "<td colspan=1> <button id='updateReply' class='button1' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
+								 "<td colspan=1> <button id='deleteReply' class='button1' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 									 
+						 "</tr>";
+					}
+					
+				});
+				$("#replyArea tbody").html(value);
+			},error:function(){
+				console.log("댓글 수정폼용 ajax 통신 실패");
+			}
+		});
+	}
+	
+	// 댓글 수정
+	function updateReply(answerNo){		
+		
+		if($("#updateReplyContent").val().trim().length != 0){
+			$.ajax({
+				url:"updateReply.do",
+				type:"post",
+				data:{answer:$("#updateReplyContent").val(),
+					answerNo:answerNo,
+					userNo:"${loginUser.userNo}"},
+				success:function(result) {
+					if(result > 0) {
     					$("#updateReplyContent").val("");
     					selectReplyList();
     				}else{
     					alert("댓글수정실패");
     				}
-    			}, error:function(){
+				}, error:function(){
     				console.log("댓글 수정 ajax 통신 실패");
-    			}
-    		 });
-    	 }else{
-    		 alert("수정할 댓글을 입력하세요.");
-    	 }
-     }
-     </script>
+				}
+			});
+		}else{
+			alert("수정할 댓글을 입력하세요.");
+		}
+	}
+    </script>
 
 </body>
 </html>

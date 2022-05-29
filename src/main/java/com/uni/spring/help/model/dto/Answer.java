@@ -18,7 +18,8 @@ public class Answer {
 	private String answerNo; // 답변번호
 	private String reperNo; // 참조문의글번호
 	private String writer; // 작성자
-	private String userId; // 작성자
+	private String userId; // 작성자 아이디
+	private String userNo; // 작성자 번호
 	private Timestamp createDate; // 답변날짜
 	private String answer; // 답변
 	private String status; // 상태
