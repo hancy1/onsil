@@ -104,6 +104,9 @@ public class HelpController {
 		
 		Inquiry i = helpService.selectInquiry(ino);
 		
+		String content = i.getContent().replaceAll("\n", "<br>");
+		i.setContent(content);
+		
 		mv.addObject("i", i).setViewName("help/inquiryDetailView");		
 		
 		return mv;		
@@ -149,5 +152,42 @@ public class HelpController {
 		int result = helpService.updateReply(a);
 		
 		return String.valueOf(result);
+	}
+	
+	// 문의사항 글쓰기 폼으로 이동
+	@RequestMapping("enrollFormInquiry.do")
+	public String enrollFormInquiry() {
+		
+		return "help/inquiryEnrollForm";
+	}
+	
+	// 문의사항 글 작성
+	@RequestMapping("insertInquiry.do")
+	public String insertInquiry(Inquiry i) {
+		System.out.println("카테고리 : " + i.getCategory() + "제목 : " + i.getTitle() + "유저넘버 : " + i.getUserNo() + "내용 :" + i.getContent());
+		
+		helpService.insertInquiry(i);
+				
+		return "redirect:inquiryList.do";
+	}
+	
+	// 문의사항 글 수정 폼 이동
+	@RequestMapping("updateFormInquiry.do")
+	public ModelAndView updateFormInquiry(int ino, ModelAndView mv) {
+		
+		mv.addObject("i", helpService.selectInquiry(ino))
+		.setViewName("help/inquiryUpdateForm");
+		
+		return mv;
+	}
+	
+	// 문의사항 글 수정
+	@RequestMapping("updateInquiry.do")
+	public ModelAndView updateInquiry(Inquiry i, ModelAndView mv) {
+		
+		helpService.updateInquiry(i);
+		System.out.println("문의사항 글번호 : " + i.getInquiryNo());
+		mv.addObject("ino", Integer.parseInt(i.getInquiryNo())).setViewName("redirect:detailInquiry.do");
+		return mv;
 	}
 }

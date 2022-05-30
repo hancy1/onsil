@@ -129,6 +129,29 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 문의사항 글 작성
+	public void insertInquiry(Inquiry i) {
+		
+		int result = helpDao.insertInquiry(sqlSession, i);
+		
+		if(result < 0) {
+			throw new CommException("문의사항 글작성 추가 실패");
+		}
+		
+	}
+
+
+	@Override // 문의사항 글 수정
+	public void updateInquiry(Inquiry i) {
+		
+		int result = helpDao.updateInquiry(sqlSession, i);
+		
+		if(result < 0) {
+			throw new CommException("문의사항 글 수정 실패");
+		}
+	}
+
+
 	
 
 

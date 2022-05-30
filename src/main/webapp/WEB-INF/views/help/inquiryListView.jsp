@@ -45,6 +45,7 @@
 	
 	    #pagingArea{width:fit-content;margin:auto;}
 	    /* #pagingArea a{color:black} */
+		
 	</style>
 </head>
 
@@ -87,6 +88,11 @@
 		 		<h4>문의사항</h4>
 		 		<br><br>	 		
 		 		
+		 		<!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
+	            <c:if test="${ !empty loginUser }">
+	            	<a class="btn btn-secondary" style="float:right; font-size: 14px;" href="enrollFormInquiry.do">문의글작성</a>
+	            </c:if>
+		 		<br><br>
 		 		
 		 		<div>	
 		 		

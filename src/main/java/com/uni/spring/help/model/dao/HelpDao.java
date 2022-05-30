@@ -100,6 +100,18 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.updateReply", a);
 	}
 
+	// 문의사항 글 작성
+	public int insertInquiry(SqlSessionTemplate sqlSession, Inquiry i) {
+		
+		return sqlSession.insert("helpMapper.insertInquiry", i);
+	}
+
+	// 문의사항 글 수정
+	public int updateInquiry(SqlSessionTemplate sqlSession, Inquiry i) {
+
+		return sqlSession.update("helpMapper.updateInquiry", i);
+	}
+
 	
 
 	
