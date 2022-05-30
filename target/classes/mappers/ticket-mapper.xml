@@ -18,7 +18,7 @@ T_ORIGIN_NAME
 T_CHANGE_NAME-->
 
     <id property="ticketNo" column="TICKET_NO"/>
-         <result property="writer" column="USER_NO"/>
+         <result property="userNo" column="USER_NO"/>
          <result property="price" column="TICKET_CODE"/>
          <result property="ticketPhone" column="TICKET_PHONE"/>
          <result property="ticketTitle" column="TICKET_NAME"/>
@@ -54,7 +54,6 @@ T_CHANGE_NAME-->
    <insert id="insertTicket">
       
          INSERT INTO TICKET
-         VALUES (SEQ_TICKET.NEXTVAL, #{ticketNo},#{ticketTitle}, #{writer},#{price},#{ticketPhone},#{ticketNotice}, #{originName},#{changeName},SYSDATE, DEFAULT)
-            
+         VALUES (SEQ_TICKET.NEXTVAL, #{userNo},#{price},#{ticketPhone},#{ticketTitle},#{ticketNotice}, #{ticketLocation},SYSDATE,DEFAULT,#{originName},#{changeName})
       </insert>
 </mapper>
