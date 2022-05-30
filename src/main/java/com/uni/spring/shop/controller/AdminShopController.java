@@ -126,7 +126,7 @@ public class AdminShopController {
 		@RequestMapping("detailProduct.do")
 		public ModelAndView selectProduct(String proCode, ModelAndView mv) {
 			
-			System.out.println("컨트롤러 proCode : " + proCode);
+			//System.out.println("디테일 proCode : " + proCode);
 			Product p = aShopService.selectProduct(proCode);
 			
 			mv.addObject("p", p).setViewName("shop/adminProductDetail");
@@ -176,6 +176,46 @@ public class AdminShopController {
 			
 			mv.addObject("p", aShopService.selectProduct(proCode))
 			.setViewName("shop/adminProductUpdateForm");
+			
+			return mv;
+		}
+		
+		//수정
+		
+		@RequestMapping("updateProduct.do")
+		public ModelAndView updateProduct(Product p, ModelAndView mv, HttpServletRequest request,
+									@RequestParam(name = "reUploadFile", required = false) MultipartFile file ) {
+			
+			String orgChangeName = p.getDetailCha();			
+			
+			//새로 넘어온 파일이 있는(O) 경우
+			if(!file.getOriginalFilename().equals("")) {			
+				
+				
+				//새로넘어온 파일 O , 기존 파일도 O
+				//-->서버에 업로드 된 기존 파일 삭제해야됨!
+				if( orgChangeName!= null) {
+					
+					deleteFile(orgChangeName, request);
+				}			
+				
+				//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨! 있는경우는 삭제해주고 세팅!
+				String changeName = saveFile(file, request);
+			
+							
+				p.setDetailOri(file.getOriginalFilename());
+				p.setDetailCha(changeName);
+				
+			}		
+		
+			
+			aShopService.updateProduct(p);		
+			
+			
+			String proCode = p.getProCode();
+			System.out.println("디테일 수정 후 proCode : " + proCode);
+			
+			mv.addObject("proCode",proCode).setViewName("redirect:detailProduct.do");
 			
 			return mv;
 		}
