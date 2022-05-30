@@ -229,6 +229,10 @@ public class GardenController {
 		return "redirect:neighborList.do";
 	}
 	
+	@RequestMapping("adminPlant.do")
+	public String adminPlant(){
+		return "garden/adminPlant";
+	}
 	
 }
 

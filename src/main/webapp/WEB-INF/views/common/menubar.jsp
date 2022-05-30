@@ -193,7 +193,7 @@
 											<li><a href="#">신고된 게시글</a></li>
 											<li><a href="listTicket.do">티켓등록</a></li>
 											<li><a href="#">후기관리</a></li>
-											<li><a href="#">식물등록</a></li>
+											<li><a href="adminPlant.do">식물등록</a></li>
 										</ul>
 									</li> 
 									</c:if> 
