@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,76 +74,82 @@
     
     
 
+	<div class="container">
+		 	<div class="input-form-backgroud row">
+		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
+		
+				    <div class="content">
+				        <br><br>
+				        <div class="innerOuter">           
+							
+							<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
+				            <form id="enrollForm" method="post" action="insertProduct.do" enctype="multipart/form-data">
+				                <table align="center">
+				                    <tr>
+				                        <th><label for="proCode">판매상품코드</label></th>
+				                        <td><input type="text" id="proCode" class="form-control" name="proCode" required></td>
+				                    </tr>
+				                    <tr>
+				                        <th><label for="cateCode">카테고리(다시해야됨)</label></th>
+				                        <td>
+										<select name="cateCode">
+										    <option value="">카테선택</option>
+										    <option value="tree">나무</option>
+										    <option value="edible">식용식물</option>
+										    <option value="flower">꽃</option>
+										    <option value="ect">기타</option>
+										</select>
+										</td>
+				                    </tr>
+				                    <tr>
+				                        <th><label for="proName">판매상품명</label></th>
+				                        <td><input type="text" id="proName" class="form-control"  name="proName" required></td>
+				                    </tr>
+				                    <tr>
+				                        <th><label for="price">가격</label></th>
+				                        <td><input type="text" id="price" class="form-control" name="price" required></td>
+				                    </tr>
+				                    <tr>
+				                        <th><label for="upfile">대표이미지</label></th>
+				                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
+				                    </tr>
+				                    <tr>
+				                        <th colspan="2"><label for="content">상세페이지</label></th>
+				                    </tr>
+				                    <tr>
+				                        <td colspan="2"><textarea class="summernote" id="summernote" name="proContent"></textarea></td>
+				                    </tr>
+				                </table>
+				                <br>
+				
+								
+								<script>
+								$('.summernote').summernote({
+								  	placeholder: 'content',
+							        minHeight: 370,
+							        maxHeight: 150,
+							        focus: true, 
+							        lang : 'ko-KR'
+									});
+								</script>
+								
+								
+					
+								
+				                <div align="center">
+				                    <button type="submit" class="btn btn-outline-success">등록하기</button>
+				                   
+				                </div>
+				            </form>			            
+				            
+				        </div>
+				        <br><br>				   
+			    </div>
+			  </div>
+			</div>
+		</div>
 
-	
-    <div class="content">
-        <br><br>
-        <div class="innerOuter">
-           
-			
-			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
-            <form id="enrollForm" method="post" action="insertProduct.do" enctype="multipart/form-data">
-                <table align="center">
-                    <tr>
-                        <th><label for="proCode">판매상품코드</label></th>
-                        <td><input type="text" id="proCode" class="form-control" name="proCode" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="cateCode">카테고리(다시해야됨)</label></th>
-                        <td>
-						<select name="cateCode">
-						    <option value="">카테선택</option>
-						    <option value="tree">나무</option>
-						    <option value="edible">식용식물</option>
-						    <option value="flower">꽃</option>
-						    <option value="ect">기타</option>
-						</select>
-						</td>
-                    </tr>
-                    <tr>
-                        <th><label for="proName">판매상품명</label></th>
-                        <td><input type="text" id="proName" class="form-control"  name="proName" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="price">가격</label></th>
-                        <td><input type="text" id="price" class="form-control" name="price" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="upfile">대표이미지</label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
-                    </tr>
-                    <tr>
-                        <th colspan="2"><label for="content">상세페이지</label></th>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><textarea class="summernote" id="summernote" name="proContent"></textarea></td>
-                    </tr>
-                </table>
-                <br>
-
-				
-				<script>
-				$('.summernote').summernote({
-				  	placeholder: 'content',
-			        minHeight: 370,
-			        maxHeight: null,
-			        focus: true, 
-			        lang : 'ko-KR'
-					});
-				</script>
-				
-				
-	
-				
-                <div align="center">
-                    <button type="submit" class="btn btn-outline-success">등록하기</button>
-                   
-                </div>
-            </form>
-        </div>
-        <br><br>
-    </div>
-    
+		
 
     <jsp:include page="../common/footer.jsp"/>
     

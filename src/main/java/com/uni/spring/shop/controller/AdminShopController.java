@@ -168,4 +168,15 @@ public class AdminShopController {
 			
 		}
 		
+		
+		//수정폼연결
+		
+		@RequestMapping("updateFormProduct.do")
+		public ModelAndView updateFormProduct(String proCode, ModelAndView mv) {
+			
+			mv.addObject("p", aShopService.selectProduct(proCode))
+			.setViewName("shop/adminProductUpdateForm");
+			
+			return mv;
+		}
 }

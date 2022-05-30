@@ -52,77 +52,82 @@
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
     
-    
-    <div class="content">
-		<br>
-		<br>
-		<div class="innerOuter">			
-			<table id="contentArea" align="center" class="table">
-				<tr>
-					<th width="100">판매상품명</th>
-					<td colspan="3">${ p.proName }</td>
-				</tr>
-				<tr>
-					<th>판매카테고리</th>
-					<td>${ p.cateCode }</td>
-					<th>판매상품코드</th>
-					<td>${ p.proCode }</td>					
-				</tr>
-				<tr>
-					<th>판매가격</th>
-					<td>${ p.price }</td>
-					<th>현재재고</th>
-					<td>${ p.proAmount }</td>					
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td colspan="3">
-					<c:if test="${ !empty p.detailOri }">
-							<a href="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}"
-								download="${ p.detailOri }">${ p.detailOri }</a>
-					</c:if>
-					<c:if test="${ empty p.detailOri }">
-                        	첨부파일이 없습니다.
-                    </c:if></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td colspan="3"></td>
-				</tr>
-				<tr>
-					<td colspan="4"><p style="height: 150px">${ p.proContent }</p></td>
-				</tr>
-			</table>
-			<br>
-
+    <div class="container">
+	 	<div class="input-form-backgroud row">
+	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
+			    <div class="content">
+					<br>
+					<br>
+					<div class="innerOuter">			
+						<table id="contentArea" align="center" class="table">
+							<tr>
+								<th width="100">상품명</th>
+								<td colspan="3">${ p.proName }</td>
+							</tr>
+							<tr>
+								<th>카테고리</th>
+								<td>${ p.cateCode }</td>
+								<th>상품코드</th>
+								<td>${ p.proCode }</td>					
+							</tr>
+							<tr>
+								<th>판매가격</th>
+								<td>${ p.price }</td>
+								<th>현재재고</th>
+								<td>${ p.proAmount }</td>					
+							</tr>
+							<tr>
+								<th>첨부파일</th>
+								<td colspan="3">
+								<c:if test="${ !empty p.detailOri }">
+										<a href="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}"
+											download="${ p.detailOri }">${ p.detailOri }</a>
+								</c:if>
+								<c:if test="${ empty p.detailOri }">
+			                        	첨부파일이 없습니다.
+			                    </c:if></td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td colspan="3"></td>
+							</tr>
+							<tr>
+								<td colspan="4"><p style="height: 150px">${ p.proContent }</p></td>
+							</tr>
+						</table>
+						<br>
 			
-			<div align="center">
-				<button class="btn btn-primary" onclick="postFormSubmit(1);">제품수정</button>
-				<button class="btn btn-danger" onclick="postFormSubmit(2);">판매중지</button>
+						
+						<div align="center">
+							<button class="btn btn-outline-success" onclick="postFormSubmit(1);">제품수정</button>
+							<button class="btn btn-outline-danger" onclick="postFormSubmit(2);">판매중지</button>
+						</div>
+			
+						<form id="postForm" action="" method="post">
+						
+							<input type="hidden" name="proCode" value="${ p.proCode }">
+							<input type="hidden" name="fileName" value="${ p.detailCha }">
+						</form>
+						
+						<script>
+							function postFormSubmit(num){
+								var postForm = $("#postForm");
+								
+								if(num == 1){
+									postForm.attr("action", "updateFormProduct.do");
+								}else{
+									postForm.attr("action", "deleteProduct.do");
+								}
+								postForm.submit();
+							}
+						</script>
+						
+					</div>
+					<br>
+					<br>
+				</div>
 			</div>
-
-			<form id="postForm" action="" method="post">
-			
-				<input type="hidden" name="proCode" value="${ p.proCode }">
-				<input type="hidden" name="fileName" value="${ p.detailCha }">
-			</form>
-			
-			<script>
-				function postFormSubmit(num){
-					var postForm = $("#postForm");
-					
-					if(num == 1){
-						postForm.attr("action", "updateFormProduct.do");
-					}else{
-						postForm.attr("action", "deleteProduct.do");
-					}
-					postForm.submit();
-				}
-			</script>
-			
 		</div>
-		<br>
-		<br>
 	</div>
     
     
