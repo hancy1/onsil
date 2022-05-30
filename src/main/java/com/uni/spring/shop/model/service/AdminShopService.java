@@ -17,4 +17,6 @@ public interface AdminShopService {
 
 	void deleteProduct(String proCode);
 
+	void updateProduct(Product p);
+
 }

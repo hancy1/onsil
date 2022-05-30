@@ -91,9 +91,8 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
-									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
+							<li class="breadcrumb-item"><a href="index.jsp"><i
+									class="fa fa-home"></i> Home</a></li>							
 							<li class="breadcrumb-item active" aria-current="page">판매제품관리</li>
 						</ol>
 					</nav>

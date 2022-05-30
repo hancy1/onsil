@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,9 +58,9 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
+							<li class="breadcrumb-item"><a href="index.jsp"><i
 									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item"><a href="#">판매제품관리</a></li>
+							<li class="breadcrumb-item"><a href="adminProducts.do">판매제품관리</a></li>
 							<li class="breadcrumb-item active" aria-current="page">판매제품수정</li>
 						</ol>
 					</nav>
@@ -66,16 +70,14 @@
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
     
-    <div class="container">
+   <div class="container">
 	 	<div class="input-form-backgroud row">
-	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
-			    
+	 		<div class="input-form col-md-6 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 			    <div class="content">
 		        <br><br>
-		        <div class="innerOuter">		           
-		
+		       		           
 		            <form id="updateForm" method="post" action="updateProduct.do" enctype="multipart/form-data">
-		            	<input type="hidden" name="proCode" value="${ p.proCode }">
+		            	
 		                <table align="center">
 		                    <tr>
 		                        <th><label for="proCode">판매상품코드</label></th>       
@@ -83,14 +85,14 @@
 		                    </tr>
 		                    <tr>
 		                        <th><label for="writer">카테고리</label></th>
-		                        <td>
-		                        <select name="cateCode" id="cateCode">
+		                        <td>		                      
+		                        <select name="cateCode" id="cateCode" required>
 									<option value="">카테선택</option>
-									<option value="tree">나무</option>
-								    <option value="edible">식용식물</option>
-									<option value="flower">꽃</option>
-									<option value="ect">기타</option>
-								</select>
+							        <option id="tree" value="tree">나무</option>
+								    <option id="edible" value="edible">식용식물</option>
+									<option id="flower" value="flower">꽃</option>
+									<option id="ect" value="ect">기타</option>								
+									</select>								
 								</td>								
 		                    </tr>
 		                    <tr>
@@ -130,14 +132,26 @@
 							        focus: true, 
 							        lang : 'ko-KR'
 									});
-								</script>
+					    </script>
 		                
 		                <!-- 카테코드 value불러오기 -->
 		               <script>
 			
 						$(function() {
-							  $("#cateCode").val("<?=$cateCode?>");
-							});
+							
+							if("${p.cateCode}" === "tree"){
+								$("#tree").attr("selected",true);
+							}else if("${p.cateCode}" === "edible"){
+								$("#edible").attr("selected",true);
+							}else if("${p.cateCode}" === "flower"){
+								$("#flower").attr("selected",true);
+							}else{
+								$("#ect").attr("selected",true);
+							}
+							
+							
+							
+						});
 
 					   </script>
 		                
@@ -146,8 +160,8 @@
 		                <br>
 		
 		                <div align="center">
-		                    <button type="submit" class="btn btn-primary">수정하기</button>
-		                    <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">이전으로</button>
+		                    <button type="submit" class="btn btn-outline-success">수정하기</button>
+		                    <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 		                </div>
 		            </form>
 		        </div>
@@ -158,7 +172,7 @@
 			    
 			</div>
 		</div>
-	</div>
+	
     
     
     <jsp:include page="../common/footer.jsp"/>

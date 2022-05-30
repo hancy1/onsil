@@ -73,4 +73,15 @@ public class AdminShopServiceImpl implements AdminShopService {
 		
 	}
 
+	@Override
+	public void updateProduct(Product p) {
+		// TODO Auto-generated method stub
+
+		int result = aShopDao.updateProduct(sqlSession, p);
+		
+		if(result <0) {
+			throw new CommException("판매제품 수정 실패");
+		}
+	}
+
 }

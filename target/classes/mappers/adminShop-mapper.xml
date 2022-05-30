@@ -62,5 +62,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		UPDATE PRODUCT SET PRO_STATUS='N' WHERE PRO_CODE=#{proCode}
     
   	</update>
+  	
+  	
+  	<update id="updateProduct" parameterType="Product">
+  
+  
+	  UPDATE PRODUCT
+	  SET CATE_CODE=#{cateCode}, PRO_NAME=#{proName}, PRICE=#{price}, DETAIL_ORI=#{detailOri}, DETAIL_CHA=#{detailCha}, PRO_CONTENT=#{proContent}
+	  WHERE PRO_CODE=#{proCode}
+	  
+	  
+	</update>
 
 </mapper>

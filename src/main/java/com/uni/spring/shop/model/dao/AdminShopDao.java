@@ -40,6 +40,11 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.deleteProduct",proCode);
 	}
 
+	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminShopMapper.updateProduct",p);
+	}
+
 
 
 }
