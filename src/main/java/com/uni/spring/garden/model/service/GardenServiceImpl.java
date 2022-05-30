@@ -112,6 +112,34 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.selectCommentList(hostUser, cPi, sqlSession);
 	}
 
+	@Override
+	public void updateComment(HashMap<String, String> map) {
+		
+		int result =  gardenDao.updateComment(map, sqlSession);
+		if(result < 0) {
+			throw new CommException("댓글 수정 실패");
+		}
+		
+	}
+
+	@Override
+	public void deleteComment(String commentNo) {
+		int result =  gardenDao.deleteComment(commentNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("댓글 삭제 실패");
+		}
+		
+	}
+
+	@Override
+	public void updateBoard(HashMap<String, String> map) {
+		int result =  gardenDao.updateBoard(map, sqlSession);
+		if(result < 0) {
+			throw new CommException("방명록 수정 실패");
+		}
+		
+	}
+
 	
 
 	

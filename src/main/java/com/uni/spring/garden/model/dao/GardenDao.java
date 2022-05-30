@@ -85,4 +85,19 @@ public class GardenDao {
 		return (ArrayList)sqlSession.selectList("gardenMapper.selectCommentList", hostUser, rowBounds);
 	}
 
+	public int updateComment(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updateComment", map);	
+	}
+
+	public int deleteComment(String commentNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.deleteComment", commentNo);	
+	}
+
+	public int updateBoard(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updateBoard", map);
+	}
+
 }

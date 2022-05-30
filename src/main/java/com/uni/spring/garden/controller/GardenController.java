@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.GardenPagination;
@@ -20,6 +21,7 @@ import com.uni.spring.garden.model.dto.VisitorBoard;
 import com.uni.spring.garden.model.service.GardenService;
 import com.uni.spring.member.model.dto.Member;
 
+@SessionAttributes("msg")
 @Controller
 public class GardenController {
 
@@ -120,15 +122,75 @@ public class GardenController {
 	}
 	
 	@RequestMapping("deleteVBoard.do")
-	public String boardDelete(HttpSession session, String boardNo, Model model) {
+	public String boardDelete(String boardNo, Model model) {
 		
 		gardenService.deleteBoard(boardNo);
+		model.addAttribute("msg", "방명록을 삭제했습니다.");
+
+		return "redirect:visitorBoard.do";
+		
+	}
+	
+	
+	@RequestMapping("updateVBoard.do")
+	public String updateBoard(String boardNo, String content, Model model) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("boardNo", boardNo);
+		map.put("content", content);
+		
+		gardenService.updateBoard(map);
+		model.addAttribute("msg", "방명록을 수정했습니다.");
 
 		return "redirect:visitorBoard.do";
 		
 	}
 
+	//=========================================================================================
+	//댓글
+	@RequestMapping("insertComment.do")
+	public String insertComment(String content, String boardNo, HttpSession session) {
+		
+		System.out.println("content확인" + content);
+		System.out.println("boardNo확인" + boardNo);
+		
+		//작성자 회원번호 세션에서 가져오기
+		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userNo", userNo);
+		map.put("boardNo", boardNo);
+		map.put("content", content);
+		
+		gardenService.insertComment(map);
+		
+		return "redirect:visitorBoard.do";
+	}
 	
+	
+	@RequestMapping("updateComment.do")
+	public String updateComment(String commentNo, String content, Model model) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("commentNo", commentNo);
+		map.put("content", content);
+		
+		gardenService.updateComment(map);
+		model.addAttribute("msg", "댓글을 수정했습니다.");
+		
+		return "redirect:visitorBoard.do";
+	}
+	
+	@RequestMapping("deleteComment.do")
+	public String deleteComment(String commentNo, Model model) {
+		
+		gardenService.deleteComment(commentNo);
+		model.addAttribute("msg", "댓글을 삭제했습니다.");
+		
+		return "redirect:visitorBoard.do";		
+	}
+	
+	//=========================================================================================
 	//이웃관리
 	@RequestMapping("neighborList.do")
 	public String neighborList(HttpSession session, Model model) {
@@ -167,25 +229,6 @@ public class GardenController {
 		return "redirect:neighborList.do";
 	}
 	
-	@RequestMapping("insertComment.do")
-	public String insertComment(String content, String boardNo, HttpSession session) {
-		
-		System.out.println("content확인" + content);
-		System.out.println("boardNo확인" + boardNo);
-		
-		//작성자 회원번호 세션에서 가져오기
-		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("userNo", userNo);
-		map.put("boardNo", boardNo);
-		map.put("content", content);
-		
-		gardenService.insertComment(map);
-		
-		
-		
-		return "redirect:visitorBoard.do";
-	}
+	
 }
 
