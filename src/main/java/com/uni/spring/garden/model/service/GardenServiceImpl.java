@@ -13,6 +13,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dao.GardenDao;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
 
@@ -138,6 +139,18 @@ public class GardenServiceImpl implements GardenService{
 			throw new CommException("방명록 수정 실패");
 		}
 		
+	}
+
+	@Override
+	public int selectPlantListCount() {
+		
+		return gardenDao.selectPlantListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<PlantInfo> selectPlantList(PageInfo pi) {
+		
+		return gardenDao.selectPlantList(pi, sqlSession);
 	}
 
 	

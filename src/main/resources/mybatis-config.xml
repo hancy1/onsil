@@ -17,6 +17,8 @@
 		<typeAlias type="com.uni.spring.garden.model.dto.VisitorComment" alias="VComment"/>
 		<typeAlias type="com.uni.spring.garden.model.dto.DailyLog" alias="DailyLog"/>
 		<typeAlias type="com.uni.spring.garden.model.dto.Neighbor" alias="Neighbor"/>
+		<typeAlias type="com.uni.spring.garden.model.dto.PlantInfo" alias="PlantInfo"/>
+		
 
 		
 		<typeAlias type="com.uni.spring.shop.model.dto.Product" alias="Product"/>
