@@ -2,11 +2,14 @@ package com.uni.spring.board.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.board.BoardPagination;
@@ -38,7 +41,7 @@ public class BoardController {
 	    PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 5);
 	      
 	    ArrayList<Board> list = boardService.selectList(pi);
-	    //System.out.println(list.get(0));	//확인
+	    //System.out.println(list.get(0));	//게시판 목록 넘어오는지 확인
 	      
 	    model.addAttribute("list", list);
 	    model.addAttribute("pi", pi);
@@ -62,6 +65,14 @@ public class BoardController {
 	public String enrollForm() {
 		   
 		return "board/boardEnroll";
+	}
+	
+	// 게시글 작성하기
+	@RequestMapping("insertBoard.do")
+	public String insertBoard(Board b, HttpServletRequest request, @RequestParam(name="uploadFile", required = false) MultipartFile file) {
+		   
+		return "redirect:listBoard.do"; //글 작성하면 게시글 목록으로
+		   
 	}
 
 }
