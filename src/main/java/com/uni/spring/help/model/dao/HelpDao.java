@@ -112,6 +112,12 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.updateInquiry", i);
 	}
 
+	// 문의사항 글 삭제
+	public int deleteInquiry(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("helpMapper.deleteInquiry", ino);
+	}
+
 	
 
 	

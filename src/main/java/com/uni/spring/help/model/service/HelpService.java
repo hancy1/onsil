@@ -37,6 +37,8 @@ public interface HelpService {
 	void insertInquiry(Inquiry i); // 문의사항 글 작성
 
 	void updateInquiry(Inquiry i); // 문의사항 글 수정
+
+	void deleteInquiry(int ino); // 문의사항 글 삭제
 	
 
 	

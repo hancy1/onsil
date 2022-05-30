@@ -152,6 +152,18 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 문의사항 글 삭제
+	public void deleteInquiry(int ino) {
+			
+		int result = helpDao.deleteInquiry(sqlSession, ino);
+		
+		if(result < 0) {
+			throw new CommException("문의사항 글 삭제 실패");
+		}
+		
+	}
+
+
 	
 
 

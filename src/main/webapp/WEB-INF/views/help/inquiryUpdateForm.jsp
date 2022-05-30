@@ -186,6 +186,7 @@
 	<script src="resources/js/active.js"></script>  
 	
 	<script>
+	// 카테고리 선택됨 
 	$(function(){
     	
    		if("${i.category}" == "회원"){

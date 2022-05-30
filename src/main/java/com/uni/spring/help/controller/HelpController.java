@@ -190,4 +190,13 @@ public class HelpController {
 		mv.addObject("ino", Integer.parseInt(i.getInquiryNo())).setViewName("redirect:detailInquiry.do");
 		return mv;
 	}
+	
+	// 문의사항 글 삭제
+	@RequestMapping("deleteInquiry.do")
+	public String deleteInquiry(int ino) {
+		
+		helpService.deleteInquiry(ino);
+		
+		return "redirect:inquiryList.do";
+	}
 }
