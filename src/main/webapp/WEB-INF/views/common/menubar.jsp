@@ -145,9 +145,9 @@
 								<ul>									
 						            <li><a href="#">상품</a>
 										<ul class="dropdown">
-											<li><a href="listProducts.do">구매하기</a></li>
-											<li><a href="#">내 리뷰 보기</a></li>
-											<li><a href="#">내 주문 내역</a></li>											
+											<li><a href="listProducts.do">구매하기</a></li>											
+											<li><a href="myReviewList.do">내 리뷰 보기</a></li>
+											<li><a href="myOrderList.do">내 주문 내역</a></li>											
 										</ul>
 									</li>			
 									<li><a href="#">예약</a>
@@ -186,10 +186,11 @@
 											<li><a href="adminInquiry.do">문의관리</a></li>											
 											<li><a href="adminMember.do">회원관리</a></li>
 											<li><a href="adminProducts.do">판매제품관리</a></li>
-											<li><a href="adminFreebie.do">사은품관리</a></li>											
-											<li><a href="#">재고관리</a></li>
-											<li><a href="#">매출관리</a></li>
-											<li><a href="#">리뷰관리</a></li>
+											<li><a href="adminFreebieList.do">사은품관리</a></li>											
+											<li><a href="inventoryList.do">재고관리</a></li>
+											<li><a href="adminOrderList.do">주문관리</a></li>
+											<li><a href="salesList.do">매출관리</a></li>
+											<li><a href="adminReviewList.do">리뷰관리</a></li>
 											<li><a href="#">신고된 게시글</a></li>
 											<li><a href="listTicket.do">티켓등록</a></li>
 											<li><a href="#">후기관리</a></li>
