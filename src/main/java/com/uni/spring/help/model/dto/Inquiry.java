@@ -19,7 +19,7 @@ public class Inquiry {
 	private String category; // 카테고리
 	private String count; // 조회수
 	private String title; // 제목
-	private String writer; // 작성자
+	private String writer; // 작성자 이름.....
 	private String userId; // 작성자 아이디 
 	private String userNo; // 작성자 번호
 	private Date createDate; // 게시날짜

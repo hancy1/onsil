@@ -169,4 +169,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET TITLE = #{title}, CONTENT = #{content}, CATEGORY = #{category}
 		WHERE INQUIRY_NO = #{inquiryNo}
 	</update>
+	
+	<!-- 문의사항 글 삭제 -->
+	<delete id="deleteInquiry">
+		UPDATE INQUIRY
+		SET STATUS = 'N'
+		WHERE INQUIRY_NO = #{ino}
+	</delete>
 </mapper>

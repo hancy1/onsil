@@ -156,7 +156,12 @@
 										if(num == 1){
 											postForm.attr("action", "updateFormInquiry.do");
 										}else{
-											postForm.attr("action", "deleteInquiry.do");
+											if(confirm("글을 삭제하시겠습니까?")){
+												postForm.attr("action", "deleteInquiry.do");
+											}else{
+												alert("글 삭제를 취소하셨습니다.");
+												return;
+											}											
 										}
 										postForm.submit();
 									}
