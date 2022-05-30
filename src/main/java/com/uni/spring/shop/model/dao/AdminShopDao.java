@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -43,6 +44,19 @@ public class AdminShopDao {
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("adminShopMapper.updateProduct",p);
+	}
+
+	public int freebieListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.freebieListCount");
+	}
+
+	public ArrayList<Freebie> selectFreebieList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectFreebieList", null, rowdounds);
 	}
 
 

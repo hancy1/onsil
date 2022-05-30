@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.ShopPagination;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.AdminShopService;
@@ -29,6 +30,7 @@ public class AdminShopController {
 	public AdminShopService aShopService;
 	
 	
+	//제품리스트
 	@RequestMapping("adminProducts.do")
 	public String selectProductList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
 		
@@ -52,6 +54,7 @@ public class AdminShopController {
 	
 	
 	
+	//제품추가하는 폼 열기
 	@RequestMapping("adminEnrollFormProduct.do")
 	public String enrollFormProduct() {
 		
@@ -60,7 +63,7 @@ public class AdminShopController {
 	}
 	
 	
-	//게시판 글쓰기
+	//제품 insert
 		@RequestMapping("insertProduct.do")
 		public String insertProduct(Product p , HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
 			
@@ -122,7 +125,7 @@ public class AdminShopController {
 
 	
 		
-		
+		//제품 디테일페이지 연결
 		@RequestMapping("detailProduct.do")
 		public ModelAndView selectProduct(String proCode, ModelAndView mv) {
 			
@@ -138,7 +141,7 @@ public class AdminShopController {
 		
 		
 		
-		//삭제(n으로 업데이트)		
+		//제품 삭제(n으로 업데이트)		
 		@RequestMapping("deleteProduct.do")
 		public String deleteProduct(String proCode, String fileName, HttpServletRequest request ) {
 			
@@ -169,7 +172,7 @@ public class AdminShopController {
 		}
 		
 		
-		//수정폼연결
+		//제품 수정폼연결
 		
 		@RequestMapping("updateFormProduct.do")
 		public ModelAndView updateFormProduct(String proCode, ModelAndView mv) {
@@ -180,7 +183,7 @@ public class AdminShopController {
 			return mv;
 		}
 		
-		//수정
+		//제품 수정
 		
 		@RequestMapping("updateProduct.do")
 		public ModelAndView updateProduct(Product p, ModelAndView mv, HttpServletRequest request,
@@ -219,4 +222,28 @@ public class AdminShopController {
 			
 			return mv;
 		}
+		
+		
+		@RequestMapping("adminFreebieList.do")
+		public String adminFreebieList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
+			
+			
+			int listCount = aShopService.freebieListCount();
+			
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 5);
+			
+			ArrayList<Freebie> list = aShopService.selectFreebieList(pi);
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			
+			
+			
+			return "shop/adminFreebieList";
+		}
+		
+		
 }

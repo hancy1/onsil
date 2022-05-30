@@ -33,6 +33,8 @@
 		<typeAlias type="com.uni.spring.help.model.dto.Answer" alias="Answer"/>
 		<typeAlias type="com.uni.spring.help.model.dto.Chat" alias="Chat"/>
 		
+		<typeAlias type="com.uni.spring.shop.model.dto.Freebie" alias="Freebie"/>
+		
 	</typeAliases>
 	
 	<mappers>
