@@ -68,6 +68,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<update id="updateBoard">
+	
+		UPDATE VISITOR_BOARD
+		SET CONTENT = #{content}
+		WHERE BOARD_NO = #{boardNo}
+		
+	</update>
+	
 	<!-- 방명록 댓글 -->
 	
 	<resultMap type="VComment" id="VCommentResultSet"> 
@@ -78,10 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="enrollDate" column="ENROLL_DATE" />	
 		<result property="status" column="STATUS" />
 	</resultMap>
-	
-	
-	
-	
+
+	<!-- 댓글 -->
 	
 	<insert id="insertComment">
 	
@@ -126,6 +132,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    ORDER BY A.BOARD_NO DESC, A.ENROLL_DATE DESC   
 	
 	</select>
+	
+	<update id="updateComment">
+	
+		UPDATE VISITOR_COMMENT
+		SET CONTENT = #{content}, ENROLL_DATE = SYSDATE
+		WHERE COMMENT_NO = #{commentNo}
+		
+	</update>
+	
+	<update id="deleteComment">
+	
+		UPDATE VISITOR_COMMENT
+		SET STATUS = 'N'
+		WHERE COMMENT_NO = #{commentNo}
+		
+	</update>
 	
 	
 	

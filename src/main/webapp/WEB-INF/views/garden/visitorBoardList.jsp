@@ -9,6 +9,14 @@
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
+	
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
+	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
@@ -58,9 +66,17 @@
 	         								<tr style="background-color: lightgray" >
 	         								<th><i class="fa-solid fa-comments"></i></th>
 	         								<th>${b.writer}</th>	
-	         								<th>${b.content}</th>
+	         								<!-- <th>${b.content}</th> -->
+	         								<td class="${b.boardNo}defB def">${b.content}</td>
+	         								<td class="${b.boardNo}inputB input">
+	         								<div><form action="updateVBoard.do"><input type="text" name="content" value="${b.content}"/><input type="hidden" name="boardNo" value="${b.boardNo}">
+	         								<button class="btn btn-outline-success btn-sm" type="submit">수정</button></form>
+	         								<button class="btn btn-outline-success btn-sm" onclick='cancleUpdateB("${b.boardNo}");' >취소</button></div></td>
 	         								<th>${b.enrollDate}</th>
 											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-brands fa-replyd"></i></button> 
+											<c:if test="${loginUser.userId eq b.writer}">
+											<button class="btn btn-outline-success updateBoard" onclick='updateB("${b.boardNo}");' ><i class="fa-solid fa-pen"></i></button>
+											</c:if>
 											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
@@ -73,11 +89,18 @@
 	         								<tr>
 	         								<td>댓글</td>	
 	         								<td>${c.userNo}</td>
-	         								<td>${c.content}</td>
+	         								<td class="${c.commentNo}def def">${c.content}</td>
+	         								<td class="${c.commentNo}input input">
+	         								<div><form action="updateComment.do"><input type="text" name="content" value="${c.content}"/><input type="hidden" name="commentNo" value="${c.commentNo}">
+	         								<button class="btn btn-outline-success btn-sm" type="submit">수정</button></form>
+	         								<button class="btn btn-outline-success btn-sm" onclick='cancleUpdate("${c.commentNo}");' >취소</button></div></td>
 	         								<td>${c.enrollDate}</td>
-	         								<td>
-	         								<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
-											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+	         								<td>      								
+	         								<c:if test="${loginUser.userId eq c.userNo}"> 		
+	         								<button class="btn btn-outline-success modifyComment" onclick='update("${c.commentNo}");' ><i class="fa-solid fa-pen"></i></button>
+											</c:if>
+											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
+											<button class="btn btn-outline-success deleteComment" onclick='deleteComment("${c.commentNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
 											</td>
 	         								</tr>
@@ -111,7 +134,66 @@
 		</div>
 		</div>
 </section>
+
+<div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
+            
+	<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 <script>
+
+	$(document).ready(function(){
+		$('.def').show();
+		$('.input').hide();
+
+	})
 
 	//방명록 삭제하기
 	function deleteBoard(boardNo){
@@ -120,10 +202,27 @@
 		console.log(yn)
 		if(yn){
 			location.href="deleteVBoard.do?boardNo=" + boardNo;
-			alert("방명록을 삭제했습니다.")
 		}else{
 			alert("삭제를 취소했습니다.")
 		}
+	}
+	
+	function updateB(no){
+		
+		var tagDef = $('.' + no + 'defB')
+		var tag = $('.' + no + 'inputB')
+		console.log(tag)
+		
+		tagDef.hide();
+		tag.show();	
+	}
+	
+	function cancleUpdateB(no){
+		var tagDef = $('.' + no + 'defB')
+		var tag = $('.' + no + 'inputB')
+		
+		tagDef.show();
+		tag.hide();	
 	}
 	
 	//회원의 정원 방문하기
@@ -141,6 +240,37 @@
 	
 		location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
 		
+	}
+	
+	function update(no){
+		
+		var tagDef = $('.' + no + 'def')
+		var tag = $('.' + no + 'input')
+		console.log(tag)
+		
+		tagDef.hide();
+		tag.show();	
+	}
+	
+	
+	
+	function cancleUpdate(no){
+		var tagDef = $('.' + no + 'def')
+		var tag = $('.' + no + 'input')
+		
+		tagDef.show();
+		tag.hide();	
+	}
+	
+	function deleteComment(commentNo){
+	
+		var yn = confirm("댓글을 삭제하시겠습니까?")
+
+		if(yn){
+			location.href="deleteComment.do?commentNo=" + commentNo;
+		}else{
+			alert("삭제를 취소했습니다.")
+		}
 	}
 
 </script>
@@ -163,8 +293,7 @@
 	<script src="resources/js/scripts.js"></script>
 	
 	<!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->

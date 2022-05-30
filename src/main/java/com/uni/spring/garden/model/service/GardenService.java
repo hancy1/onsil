@@ -33,6 +33,12 @@ public interface GardenService {
 
 	ArrayList<Board> selectCommentList(PageInfo cPi, String hostUser);
 
+	void updateComment(HashMap<String, String> map);
+
+	void deleteComment(String commentNo);
+
+	void updateBoard(HashMap<String, String> map);
+
 
 	
 
