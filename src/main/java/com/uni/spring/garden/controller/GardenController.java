@@ -17,6 +17,7 @@ import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 import com.uni.spring.garden.model.service.GardenService;
 import com.uni.spring.member.model.dto.Member;
@@ -229,9 +230,27 @@ public class GardenController {
 		return "redirect:neighborList.do";
 	}
 	
+	////=========================================================================================
+	//식물등록 관리자페이지로 이동
 	@RequestMapping("adminPlant.do")
-	public String adminPlant(){
+	public String adminPlant(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, Model model){
+		
+		int listCount = gardenService.selectPlantListCount();
+		
+		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<PlantInfo> list = gardenService.selectPlantList(pi);
+		
+		System.out.println("list확인 " + list);
+		model.addAttribute("info", list);
+		model.addAttribute("pi", pi);
+	
 		return "garden/adminPlant";
+	}
+	
+	@RequestMapping("insertPlantForm.do")
+	public String insertPlantForm() {
+		return "garden/adminInsertPlantForm";
 	}
 	
 }

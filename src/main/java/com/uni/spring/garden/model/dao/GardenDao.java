@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
 @Repository
@@ -98,6 +99,20 @@ public class GardenDao {
 	public int updateBoard(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.update("gardenMapper.updateBoard", map);
+	}
+
+	public int selectPlantListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectPlantListCount");
+	}
+
+	public ArrayList<PlantInfo> selectPlantList(PageInfo pi, SqlSessionTemplate sqlSession) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantList", null, rowBounds);
 	}
 
 }

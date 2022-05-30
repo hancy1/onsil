@@ -73,14 +73,17 @@ th, td {
 											<td>${i.water}</td>
 											<td>${i.sun}</td>
 											<td>${i.status}</td>				
-											<td><button class="btn btn-outline-success deletePlant" onclick='deletePlant("${i.regNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
+											<td>
+											<button class="btn btn-outline-success updatePlant" onclick='updatePlant("${i.regNo}");' ><i class="fa-solid fa-eraser"></i></button>
+											<button class="btn btn-outline-success deletePlant" onclick='deletePlant("${i.regNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
 											</tr>
 										</c:forEach>
          							</c:if>
-         							<c:if test="${ list.isEmpty() }">
+         							<c:if test="${ info.isEmpty() }">
 									<tr><td colspan="7" align="center">추가된 식물이 없습니다.</td></tr>
 									</c:if>
 								</table>
+								<button class="btn btn-outline-success" type="button" onclick="location.href='insertPlantForm.do'"><i class="fa-solid fa-plus"></i></button>
 							</div>							
 						</div>
 					</div>
@@ -95,7 +98,55 @@ th, td {
 
 </script>
 		<!-- 페이징바 만들기 -->
-		
+		<div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
 	
 	
 	

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
 public interface GardenService {
@@ -38,6 +39,10 @@ public interface GardenService {
 	void deleteComment(String commentNo);
 
 	void updateBoard(HashMap<String, String> map);
+
+	int selectPlantListCount();
+
+	ArrayList<PlantInfo> selectPlantList(PageInfo pi);
 
 
 	
