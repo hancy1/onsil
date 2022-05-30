@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.AdminShopDao;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -82,6 +83,18 @@ public class AdminShopServiceImpl implements AdminShopService {
 		if(result <0) {
 			throw new CommException("판매제품 수정 실패");
 		}
+	}
+
+	@Override
+	public int freebieListCount() {
+		// TODO Auto-generated method stub
+		return aShopDao.freebieListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Freebie> selectFreebieList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return aShopDao.selectFreebieList(sqlSession,pi);
 	}
 
 }

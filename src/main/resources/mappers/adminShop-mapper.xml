@@ -74,4 +74,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  
 	</update>
 
+
+
+	<!-- 사은품 리절트맵 -->
+	
+	<resultMap type="Freebie" id="freebieResultSet"> 
+		<id property="freeNo" column="FREE_NO"/>		
+		<result property="freeName" column="FREE_NAME" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />	
+		<result property="freePoint" column="FREE_POINT" />
+		<result property="freeAmount" column="FREE_AMOUNT" />		
+		
+	</resultMap>
+	
+	
+	<!-- 관리자 페이지 : 등록된 사은품 수  -->
+	<select id = "freebieListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM FREEBIE
+  	
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 등록된 사은품 전부 select해오기 -->
+	<select id="selectFreebieList" parameterType="Freebie" resultMap="freebieResultSet">	
+		 
+	  SELECT *
+	  FROM FREEBIE
+	    
+	</select>
+
+
+	
 </mapper>
