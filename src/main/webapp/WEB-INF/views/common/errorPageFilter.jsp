@@ -23,7 +23,7 @@
 	<div align="center">	
 
 		<c:if test="${requestScope['javax.servlet.error.status_code'] == 404}">
-			<p>요청하신 페이지를 찾을 수 없습니다.</p>    
+			<p>요청하신 페이지를 찾을 수 없습니다.🤷‍♀️</p>    
 		</c:if>
 
 		
