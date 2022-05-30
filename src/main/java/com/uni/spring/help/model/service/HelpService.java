@@ -33,6 +33,10 @@ public interface HelpService {
 	int deleteReply(int answerNo); // 문의사항 댓글삭제
 
 	int updateReply(Answer a); // 문의사항 댓글수정
+
+	void insertInquiry(Inquiry i); // 문의사항 글 작성
+
+	void updateInquiry(Inquiry i); // 문의사항 글 수정
 	
 
 	

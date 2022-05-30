@@ -146,7 +146,7 @@
 					            </div>
 					            
 					            <form id="postForm" action="" method="post">
-									<input type="hidden" name="nno" value="${ n.noticeNo }">									
+									<input type="hidden" name="ino" value="${ i.inquiryNo }">									
 								</form>
 								
 								<script>							
@@ -154,9 +154,9 @@
 										var postForm = $("#postForm");
 										
 										if(num == 1){
-											postForm.attr("action", "updateFormBoard.do");
+											postForm.attr("action", "updateFormInquiry.do");
 										}else{
-											postForm.attr("action", "deleteBoard.do");
+											postForm.attr("action", "deleteInquiry.do");
 										}
 										postForm.submit();
 									}

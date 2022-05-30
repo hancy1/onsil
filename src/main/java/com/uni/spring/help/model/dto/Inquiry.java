@@ -21,6 +21,7 @@ public class Inquiry {
 	private String title; // 제목
 	private String writer; // 작성자
 	private String userId; // 작성자 아이디 
+	private String userNo; // 작성자 번호
 	private Date createDate; // 게시날짜
 	private String content; // 내용
 	private String open; // 공개여부
