@@ -17,7 +17,7 @@ public class Ticket {//티켓등록
 
 	
 	private String ticketNo;//티켓번호
-	private String writer;//작성자
+	private String userNo;//작성자
 	private String price;//가격코드
 	private String ticketPhone;//업체전화번호
 	private String ticketTitle;//전시회명
