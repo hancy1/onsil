@@ -1,6 +1,10 @@
 package com.uni.spring.board.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +20,7 @@ import com.uni.spring.board.BoardPagination;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.board.model.dto.PageInfo;
 import com.uni.spring.board.model.service.BoardService;
+import com.uni.spring.common.exception.CommException;
 
 @Controller
 public class BoardController {
@@ -70,9 +75,52 @@ public class BoardController {
 	// 게시글 작성하기
 	@RequestMapping("insertBoard.do")
 	public String insertBoard(Board b, HttpServletRequest request, @RequestParam(name="uploadFile", required = false) MultipartFile file) {
+		
+	   System.out.println(b);
+	   System.out.println(file.getOriginalFilename());		//안넘어오네...?
+	   
+	   if(!file.getOriginalFilename().equals("")) {			//전달받은 파일이 없으면 빈 문자열
+	   
+	   String changeName = saveFile(file, request);		//메소드 생성해 줌
+	   
+	   if(changeName != null) {
+	        b.setBOriginName(file.getOriginalFilename());
+	        b.setBChangeName(changeName);
+	     }
+	  } 
+	  
+	  boardService.insertBoard(b);   
+	  
+	  return "redirect:listBoard.do"; //글 작성하면 게시글 목록으로
 		   
-		return "redirect:listBoard.do"; //글 작성하면 게시글 목록으로
-		   
+	}
+
+	//전달받은 파일을 업로드 시킨 후 수정된 파일명 리턴하는 역할
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+
+		String resources = request.getSession().getServletContext().getRealPath("resources");	
+		System.out.println(resources);					//웹컨테이너에서의 resources 폴더 경로 추출
+   
+		String savePath = resources + "\\upload_files\\"; //uplaod_files 안에 넣겠다
+
+		String originName = file.getOriginalFilename();
+   
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //년 월 일시 분 초
+   
+		String ext = originName.substring(originName.lastIndexOf("."));
+		System.out.println(savePath);
+   
+		String changeName = currentTime + ext;
+   
+		try {	//transferTo : 메소드에서 인풋스트림 아웃품스트림을 사용하는데 그거를 알아서 닫아줘서 전처럼 close처리 안해도 됨
+			file.transferTo(new File(savePath + changeName));	
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new CommException("file Upload error");
+		}
+		return changeName;
 	}
 
 }

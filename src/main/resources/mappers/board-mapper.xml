@@ -27,8 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시판 목록 -->
 	<select id="selectList" parameterType="Board" resultMap="boardResultSet">
-		SELECT *
-		FROM BOARD
+		SELECT A.B_NO, C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_COUNT 
+		FROM BOARD A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
 		WHERE B_STATUS='Y'
 		ORDER BY B_NO DESC
 	</select>
@@ -43,10 +45,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 선택 -->
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
-		SELECT *
-		FROM BOARD
+		SELECT C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_CONTENT
+		FROM BOARD A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
 		WHERE B_NO=#{bno}
 		AND B_STATUS = 'Y' 
 	</select>
 	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD
+        VALUES
+        (SEQ_B_NO.NEXTVAL, #{userNo}, #{bCategoryNo}, #{bTitle}, #{bContent}, SYSDATE, DEFAULT, #{bOriginName},#{bChangeName}, DEFAULT)
+	</insert>
 </mapper>
