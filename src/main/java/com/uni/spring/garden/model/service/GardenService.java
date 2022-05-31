@@ -44,6 +44,10 @@ public interface GardenService {
 
 	ArrayList<PlantInfo> selectPlantList(PageInfo pi);
 
+	void insertPlant(PlantInfo info);
+
+	void deletePlant(String regNo);
+
 
 	
 

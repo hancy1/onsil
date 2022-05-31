@@ -94,7 +94,28 @@ th, td {
 </section>
 <script>
 
+	function deletePlant(regNo){
+		
+		var yn = confirm("정보를 삭제하시겠습니까?")
+		if(yn){
+			location.href = "deletePlant.do?regNo=" + regNo; 
+		}
+	}
 	
+	$(function searchPlant(search){
+		
+		$.ajax({
+			url:"adminPlant.do",
+			data:{search:search},
+			type:"post",
+			success:function(){
+
+			},error:function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
+	})
 
 </script>
 		<!-- 페이징바 만들기 -->

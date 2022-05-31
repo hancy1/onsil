@@ -115,4 +115,14 @@ public class GardenDao {
 		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantList", null, rowBounds);
 	}
 
+	public int insertPlant(PlantInfo info, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertPlant", info);
+	}
+
+	public int deletePlant(String regNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.delete("gardenMapper.deletePlant", regNo);
+	}
+
 }
