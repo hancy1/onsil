@@ -2,6 +2,8 @@ package com.uni.spring.help.model.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Inquiry;
@@ -39,6 +41,14 @@ public interface HelpService {
 	void updateInquiry(Inquiry i); // 문의사항 글 수정
 
 	void deleteInquiry(int ino); // 문의사항 글 삭제
+
+	int selectAdminFaqListCount(); // 관리자 - 자주묻는질문 게시물 갯수 구하기
+
+	ArrayList<Faq> selectAdminFaqList(PageInfo pi); // 관리자 - 자주묻는질문 게시물 가져오기
+
+	Faq selectAdminFaq(int fno); // 관리자 - 자주묻는질문 디테일뷰
+
+	void inserAdminFaq(Faq f); // 관리자 - 자주묻는질문 글작성
 	
 
 	

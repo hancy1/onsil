@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.help.model.dao.HelpDao;
@@ -171,6 +172,38 @@ public class HelpServiceImpl implements HelpService {
 			throw new CommException("문의사항 글 삭제 실패");
 		}
 		
+	}
+
+
+	@Override // 관리자 - 자주묻는질문 게시물 갯수 구하기
+	public int selectAdminFaqListCount() {
+		
+		return HelpDao.selectAdminFaqListCount(sqlSession);
+	}
+
+
+	@Override // 관리자 - 자주묻는질문 게시물 가져오기
+	public ArrayList<Faq> selectAdminFaqList(PageInfo pi) {
+
+		return HelpDao.selectAdminFaqList(sqlSession, pi);
+	}
+
+
+	@Override // 관리자 - 자주묻는질문 디테일뷰
+	public Faq selectAdminFaq(int fno) {
+		
+		return HelpDao.selectAdminFaq(sqlSession, fno);
+	}
+
+
+	@Override // 관리자 - 자주묻는질문 글작성
+	public void inserAdminFaq(Faq f) {
+		
+		int result = helpDao.inserAdminFaq(sqlSession, f);
+		
+		if(result < 0) {
+			throw new CommException("관리자 자주묻는질문 글작성 추가 실패");
+		}
 	}
 
 

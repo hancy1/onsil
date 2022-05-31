@@ -45,10 +45,10 @@
 		#contentArea *{margin:5px}
 		textarea {width:100%;
 				  height:80%;		
-				  resize:none;		
+				  resize:none;}	
 				  
 	 	.btn.btn-primary{background: #3ac240;
-						 border-color: #3ac240;} 
+					 border-color: #3ac240;} 
 		.btn.btn-primary:hover{background: white;
 					  		   border-color: #3ac240;
 					  	       color: #3ac240;} 
@@ -57,8 +57,7 @@
 					    border-color: #3ac240;
 					    color: #3ac240;}
 	    .btn.btn-danger:hover{background: #3ac240;
-							  border-color: #3ac240;}  
-		}		
+							  border-color: #3ac240;}
 				
 	</style>
 

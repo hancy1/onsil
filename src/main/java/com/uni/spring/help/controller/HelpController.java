@@ -35,12 +35,11 @@ public class HelpController {
 		
 		int listCount = helpService.selectFaqListCount();
 		System.out.println(listCount);
-		
-		
+				
 		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
 		
 		ArrayList<Faq> list = helpService.selectFaqList(pi); // 페이지 정보를 가지고 넘어가기
-		
+				
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);		
 		
@@ -104,7 +103,8 @@ public class HelpController {
 		
 		Inquiry i = helpService.selectInquiry(ino);
 		
-		String content = i.getContent().replaceAll("\n", "<br>");
+		String content = i.getContent().replaceAll("\n", "<br>"); // 줄바꿈
+		
 		i.setContent(content);
 		
 		mv.addObject("i", i).setViewName("help/inquiryDetailView");		
@@ -164,8 +164,7 @@ public class HelpController {
 	// 문의사항 글 작성
 	@RequestMapping("insertInquiry.do")
 	public String insertInquiry(Inquiry i) {
-		System.out.println("카테고리 : " + i.getCategory() + "제목 : " + i.getTitle() + "유저넘버 : " + i.getUserNo() + "내용 :" + i.getContent());
-		
+				
 		helpService.insertInquiry(i);
 				
 		return "redirect:inquiryList.do";
@@ -198,6 +197,57 @@ public class HelpController {
 		helpService.deleteInquiry(ino);
 		
 		return "redirect:inquiryList.do";
+	}
+	
+	// 관리자 - 자주묻는질문 페이지 이동	
+	@RequestMapping("adminFaq.do")
+	public String selectAdminFaqList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectAdminFaqListCount(); // 상태 Y,N 상관없이 다 구하기
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Faq> list = helpService.selectAdminFaqList(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/adminFaqListView";
+	}
+	
+	// 관리자 - 자주묻는질문 디테일뷰
+	@RequestMapping("adminFaqDetail.do")
+	public ModelAndView selectAdminFaq(int fno, ModelAndView mv) {
+		
+		Faq f = helpService.selectAdminFaq(fno);
+		
+		String content = f.getAnswer().replaceAll("\n", "<br>"); // 줄바꿈
+		
+		f.setAnswer(content);
+		
+		mv.addObject("f", f).setViewName("help/adminFaqDetailView");		
+		
+		return mv;		
+	}
+	
+	// 관리자 - 자주묻는질문 글작성폼으로 이동
+	@RequestMapping("enrollFormAdminFaq.do")	
+	public String enrollFormAdminFaq() {
+		
+		return "help/adminFaqEnrollForm";
+	}
+	
+	// 관리자 - 자주묻는질문 글작성
+	@RequestMapping("insertAdminFaq.do")
+	public String inserAdminFaq(Faq f) {
+				
+		String content = f.getAnswer().replaceAll("\n", "<br>"); // 줄바꿈
+		f.setAnswer(content);
+		
+		helpService.inserAdminFaq(f);
+				
+		return "redirect:adminFaq.do";
 	}
 	
 	

@@ -124,6 +124,33 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.deleteInquiry", ino);
 	}
 
+	// 관리자 - 자주묻는질문 게시물 갯수 구하기
+	public static int selectAdminFaqListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("helpMapper.selectAdminFaqListCount");
+	}
+
+	// 관리자 - 자주묻는질문 리스트
+	public static ArrayList<Faq> selectAdminFaqList(SqlSessionTemplate sqlSession, PageInfo pi) {
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminFaqList", null, rowBounds);
+	}
+
+	// 관리자 - 자주묻는질문 디테일뷰
+	public static Faq selectAdminFaq(SqlSessionTemplate sqlSession, int fno) {
+		
+		return (Faq)sqlSession.selectOne("helpMapper.selectAdminFaq", fno);
+	}
+
+	// 관리자 - 자주묻는질문 글작성
+	public int inserAdminFaq(SqlSessionTemplate sqlSession, Faq f) {
+
+		return sqlSession.insert("helpMapper.inserAdminFaq", f);
+	}
+
 	
 
 	
