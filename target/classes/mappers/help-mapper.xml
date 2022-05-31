@@ -14,6 +14,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="status" column="STATUS"/>         
 	</resultMap>
 	
+	<!-- 관리자 - 자주묻는질문 리절트맵 -->
+	<resultMap type="Faq" id="AdminFaqResultSet">   
+         <id property="faqNo" column="FAQ_NO"/>
+         <result property="category" column="CATEGORY"/>
+         <result property="question" column="QUESTION"/>
+         <result property="answer" column="ANSWER"/>
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="status" column="STATUS"/>         
+         <result property="categoryName" column="CATEGORY_NAME"/>         
+	</resultMap>
+	
 	<!-- 공지사항 리절트맵 -->
 	<resultMap type="Notice" id="noticeResultSet">   
          <id property="noticeNo" column="NOTICE_NO"/>
@@ -54,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 자주묻는질문 게시물 갯수 -->
 	<select id="selectFaqListCount" resultType="_int">
-		SELECT COUNT(*) FROM FAQ
+		SELECT COUNT(*) FROM FAQ WHERE STATUS = 'Y'
 	</select>
 	
 	<!-- 자주묻는질문 게시물들 불러오기 -->
@@ -67,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 공지사항 게시물 갯수 -->
 	<select id="selectNoticeListCount" resultType="_int">
-		SELECT COUNT(*) FROM NOTICE
+		SELECT COUNT(*) FROM NOTICE WHERE STATUS = 'Y'
 	</select>
 	
 	<!-- 공지사항 게시물들 불러오기 -->
@@ -82,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 문의사항 게시물 갯수 -->
 	<select id="selectInquiryListCount" resultType="_int">
-		SELECT COUNT(*) FROM INQUIRY
+		SELECT COUNT(*) FROM INQUIRY WHERE STATUS = 'Y'
 	</select>
 	
 	<!-- 문의사항 게시물들 불러오기 -->
@@ -183,4 +194,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS = 'N'
 		WHERE INQUIRY_NO = #{ino}
 	</delete>
+	
+	<!-- 관리자 - 자주묻는질문 게시물 갯수 -->
+	<select id="selectAdminFaqListCount" resultType="_int">
+		SELECT COUNT(*) FROM FAQ
+	</select>
+	
+	<!-- 관리자 - 자주묻는질문 게시물들 불러오기 -->
+	<select id="selectAdminFaqList" resultMap="AdminFaqResultSet">
+		SELECT A.FAQ_NO, A.CATEGORY, A.QUESTION, A.ANSWER, A.CREATE_DATE, A.STATUS, B.CATEGORY_NAME
+		FROM FAQ A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		ORDER BY A.FAQ_NO DESC
+	</select>
+	
+	<!-- 관리자 - 자주묻는질문  디테일뷰 -->
+	<select id="selectAdminFaq" resultMap="AdminFaqResultSet">		
+		SELECT A.FAQ_NO, A.CATEGORY, A.QUESTION, A.ANSWER, A.CREATE_DATE, A.STATUS, B.CATEGORY_NAME
+		FROM FAQ A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		WHERE A.FAQ_NO=#{fno}		
+	</select>
+	
+	<!-- 관리자 - 자주묻는질문  글 작성 -->
+	<insert id="inserAdminFaq">		
+		INSERT INTO FAQ VALUES
+		(SEQ_FAQ_NO.NEXTVAL, #{category}, #{question}, #{answer}, DEFAULT, DEFAULT)
+	</insert>
 </mapper>
