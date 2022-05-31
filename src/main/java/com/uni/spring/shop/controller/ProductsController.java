@@ -13,5 +13,15 @@ public class ProductsController {
 		
 		return "shop/shopMain";
 	}
+	
+	
+	
+		
+		
+	@RequestMapping("CartList.do")
+	public String selectCartList() {
+		
+		return "shop/cart";
+	}
 
 }
