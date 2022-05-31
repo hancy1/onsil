@@ -32,4 +32,8 @@ public interface AdminShopService {
 
 	void updateFreebie(Freebie f);
 
+	int selectReviewCount();
+
+	ArrayList<Product> selectReviewList(ShopPageInfo pi);
+
 }

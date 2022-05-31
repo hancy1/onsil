@@ -362,4 +362,29 @@ public class AdminShopController {
 		}
 
 		
+		
+		//리뷰 리스트
+		@RequestMapping("adminReviewList.do")
+		public String selectReviewList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
+			
+			
+			int listCount = aShopService.selectReviewCount();
+			
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<Product> list = aShopService.selectReviewList(pi);
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			
+			
+			
+			return "shop/adminProduct";
+		}
+		
+		
+		
 }
