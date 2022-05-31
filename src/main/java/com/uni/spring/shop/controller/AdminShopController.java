@@ -388,4 +388,18 @@ public class AdminShopController {
 		
 		
 		
+		//리뷰 삭제(n으로 업데이트)		
+		@RequestMapping("deleteAdminReview.do")
+		public String deleteAdminReview(int reviewNo, String fileName, HttpServletRequest request ) {
+			
+			System.out.println("컨트롤러로 리뷰넘버 넘어오니? "+reviewNo);
+			aShopService.deleteAdminReview(reviewNo);
+			
+			//if(!fileName.equals("")) {
+				//deleteFile(fileName, request);
+			//}
+			
+			return "redirect:adminReviewList.do";
+		}
+		
 }

@@ -27,6 +27,7 @@ public class ProReview {
 	CHANGE_NAME
 	REVIEW_DATE
 	REVIEW_COUNT
+	REVIEW_STATUS
 	*/
 	
 	private int reviewNo; //리뷰번호
@@ -38,7 +39,8 @@ public class ProReview {
 	private String originName;//첨부파일 원본명
 	private String changeName;//첨부파일 수정명
 	private Date reviewDate;//등록날짜
-	private int reviewCount; //조회수	
+	private int reviewCount; //조회수
+	private String reviewStatus; //리뷰상태
 	
 	
 }

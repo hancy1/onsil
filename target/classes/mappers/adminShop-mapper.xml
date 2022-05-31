@@ -155,30 +155,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="originName" column="ORIGIN_NAME" />
 		<result property="changeName" column="CHANGE_NAME" />
 		<result property="reviewDate" column="REVIEW_DATE" />
-		<result property="reviewCount" column="REVIEW_COUNT" />		
+		<result property="reviewCount" column="REVIEW_COUNT" />
+		<result property="reviewStatus" column="REVIEW_STATUS" />		
 		
 	</resultMap>
 	
 	
-	<!-- 관리자 페이지 : 등록된 사은품 수  -->
+	<!-- 관리자 페이지 : 등록된 리뷰 수  -->
 	<select id = "reviewListCount" resultType="_int">
 
 	SELECT COUNT(*)
   	FROM PRO_REVIEW
-  	
+  	WHERE REVIEW_STATUS='Y'
     
   	</select>
 
-	<!-- 관리자 페이지 : 등록된 사은품 전부 select해오기 -->
+	<!-- 관리자 페이지 : 등록된 리뷰 불러오기 -->
 	<select id="selectReviewList" parameterType="ProReview" resultMap="ProReviewResultSet">	
 		 
 	  SELECT *
 	  FROM PRO_REVIEW
+	  WHERE REVIEW_STATUS='Y'
 	    
 	</select>
 	
 	
-	
+	<!-- 관리자페이지: 리뷰 삭제 -->	
+  	<update id="deleteAdminReview">
+  
+  		UPDATE PRO_REVIEW SET REVIEW_STATUS='N' WHERE REVIEW_NO=#{reviewNo}
+    
+  	</update>
 	
 	
 </mapper>
