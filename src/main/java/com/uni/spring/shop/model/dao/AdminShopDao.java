@@ -69,6 +69,16 @@ public class AdminShopDao {
 		return sqlSession.selectOne("adminShopMapper.selectFreebie",freeNo);
 	}
 
+	public int deleteFreebie(SqlSessionTemplate sqlSession, int freeNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("adminShopMapper.deleteFreebie",freeNo);
+	}
+
+	public int updateFreebie(SqlSessionTemplate sqlSession, Freebie f) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminShopMapper.updateFreebie",f);
+	}
+
 
 
 }

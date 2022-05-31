@@ -127,8 +127,8 @@
             <table id="freebieList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                  	<th>사은품번호</th>
-                    <th>사은품사진</th>
+                  	<th width=50>No</th>
+                    <th width=60>사진</th>
                     <th>사은품명</th>
                     <th>포인트가격</th>
                     <th>현재수량</th>
@@ -139,7 +139,7 @@
 	                    <tr>
 	                    	<td>${ f.freeNo }</td>             
 	                    	<c:if test="${ !empty f.originName }">
-	                        	<td>😊</td>
+	                        	<td>&#127796;</td>
 	                        </c:if>
 	                        <c:if test="${ empty f.originName }">
 	                        	<td>&nbsp;</td>
