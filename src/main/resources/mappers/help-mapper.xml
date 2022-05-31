@@ -95,6 +95,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY INQUIRY_NO DESC
 	</select>
 	
+	<!-- 조회수 -->
+	<update id = "increaseCount" parameterType="_int">
+		UPDATE INQUIRY
+		SET COUNT = COUNT+1
+		WHERE INQUIRY_NO = #{ino} AND STATUS='Y'	
+	</update>
+	
 	<!-- 공지사항 디테일뷰 -->
 	<select id="selectNotice" resultMap="noticeResultSet">		
 		SELECT A.NOTICE_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT, C.USER_ID

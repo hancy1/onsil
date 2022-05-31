@@ -60,6 +60,12 @@ public class HelpDao {
 		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList", null, rowBounds);
 	}
 
+	// 문의사항 조회수 높이기
+	public static int increaseCount(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("helpMapper.increaseCount", ino);
+	}
+	
 	// 공지사항 디테일 뷰
 	public static Notice selectNotice(SqlSessionTemplate sqlSession, int nno) {
 		
@@ -117,6 +123,8 @@ public class HelpDao {
 		
 		return sqlSession.update("helpMapper.deleteInquiry", ino);
 	}
+
+	
 
 	
 
