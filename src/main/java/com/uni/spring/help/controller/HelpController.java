@@ -199,4 +199,6 @@ public class HelpController {
 		
 		return "redirect:inquiryList.do";
 	}
+	
+	
 }

@@ -79,7 +79,17 @@ public class HelpServiceImpl implements HelpService {
 	@Override // 문의사항 디테일 뷰
 	public Inquiry selectInquiry(int ino) {
 		
-		return HelpDao.selectInquiry(sqlSession, ino);
+		Inquiry i = null;
+		int result = HelpDao.increaseCount(sqlSession, ino); // 조회수 올리기
+		
+		if(result < 0) {
+			
+			throw new CommException("increaseCount 실패");
+		}else {
+			i = HelpDao.selectInquiry(sqlSession, ino);
+		}
+		
+		return i;
 	}
 
 
