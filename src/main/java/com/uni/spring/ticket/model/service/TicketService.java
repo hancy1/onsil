@@ -13,4 +13,6 @@ public interface TicketService {
 
 	void insertTicket(Ticket t);
 
+	Ticket selectTicket(int bno);
+
 }

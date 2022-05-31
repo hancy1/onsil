@@ -85,7 +85,7 @@
             <br>
             <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
             <c:if test="${ !empty loginUser }">
-            	<a class="btn btn-secondary" style="float:right" href="enrollTicket.do">글쓰기</a>
+            	<a class="btn btn-secondary" style="float:right" href="enrollTicket.do">티켓등록</a>
             </c:if>
             <br>
             <table id="ticketList" class="table table-hover" align="center">
@@ -104,7 +104,7 @@
 	                    <tr>
 	                        <td>${ t.ticketNo }</td>
 	                        <td>${ t.ticketTitle }</td>
-	                        <td>${ t.writer }</td>
+	                        <td>${ t.userNo }</td>
 	                        <td>${ t.ticketPhone }</td>
 	                        <td>${ t.ticketDate }</td>
 	                        <c:if test="${ !empty t.originName }">
@@ -133,7 +133,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -144,10 +144,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="listBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>
@@ -165,6 +165,7 @@
     	$(function(){
     		$("#ticketList tbody tr").click(function(){
     			location.href="detailTicket.do?bno=" + $(this).children().eq(0).text();
+    			console.log(bno,"번호");
     		});
     	});
     </script>
