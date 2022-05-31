@@ -221,4 +221,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO FAQ VALUES
 		(SEQ_FAQ_NO.NEXTVAL, #{category}, #{question}, #{answer}, DEFAULT, DEFAULT)
 	</insert>
+	
+	<!-- 관리자 - 자주묻는질문  글 삭제 -->
+	<delete id="deleteAdminFaq">
+		UPDATE FAQ
+		SET STATUS = 'N'
+		WHERE FAQ_NO = #{fno}
+	</delete>
+	
+	<!-- 관리자 - 자주묻는질문 글 수정 -->
+	<update id="updateAdminFaq">
+		UPDATE FAQ
+		SET QUESTION = #{question}, ANSWER = #{answer}, CATEGORY = #{category}, STATUS = #{status}
+		WHERE FAQ_NO = #{faqNo}
+	</update>
 </mapper>

@@ -128,7 +128,8 @@
 					                			<option id="point" name="category" value="5">포인트</option>
 					                			<option id="exchange" name="category" value="6">반품/교환</option>
 					                			<option id="etc" name="category" value="7">기타</option>
-					                		</select></td>				                    
+					                		</select>
+			                		</td>				                    
 				                	<th>조회수</th>
 				                	<td colspan="2">${ i.count }</td>				                    
 				                </tr>				                

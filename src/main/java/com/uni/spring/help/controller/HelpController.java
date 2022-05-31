@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -250,5 +251,38 @@ public class HelpController {
 		return "redirect:adminFaq.do";
 	}
 	
+	// 관리자 - 자주묻는질문 글 삭제
+	@RequestMapping("deleteAdminFaq.do")
+	public String deleteAdminFaq(int fno) {
+		
+		helpService.deleteAdminFaq(fno);
+		
+		return "redirect:adminFaq.do";
+	}
 	
+	// 관리자 - 자주묻는질문 글 수정 폼 이동
+	@RequestMapping("updateFormAdminFaq.do")
+	public ModelAndView updateFormAdminFaq(int fno, ModelAndView mv) {
+		
+		mv.addObject("f", helpService.selectAdminFaq(fno))
+		.setViewName("help/adminFaqUpdateForm");
+		
+		return mv;
+	}
+	
+	// 관리자 - 자주묻는질문 글 수정
+	@RequestMapping("updateAdminFaq.do")	
+	public String updateAdminFaq(Faq f, Model model) {
+				
+		helpService.updateAdminFaq(f);
+		
+		int fno = Integer.parseInt(f.getFaqNo());
+		
+		f = helpService.selectAdminFaq(fno);
+		
+		model.addAttribute("fno", fno);
+		model.addAttribute("f",f);
+				
+		return "help/adminFaqDetailView";
+	}
 }
