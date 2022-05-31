@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 자주묻는질문 관리</title>
+<title>ADMIN :: 공지사항</title>
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/favicon.ico">   
 		
@@ -43,7 +43,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 자주묻는질문 관리</h2>
+			<h2>온실 :: 공지사항 관리</h2>
 		</div>		
 		  
 		<div class="container">
@@ -54,7 +54,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">자주묻는질문 관리</li>
+							<li class="breadcrumb-item active" aria-current="page">공지사항 관리</li>
 						</ol>
 					</nav>
 				</div>
@@ -68,30 +68,28 @@
 	<div class="content">
         <br><br>
         <div class="innerOuter" style="padding:0% 10%;">
-            <h2>자주묻는질문 관리</h2>
+            <h2>공지사항 관리</h2>
             <br>            
-            	<a class="btn btn-secondary" style="float:right; font-size: 14px;" href="enrollFormAdminFaq.do">글쓰기</a>            
+            	<a class="btn btn-secondary" style="float:right; font-size: 14px;" href="enrollFormAdminNotice.do">글쓰기</a>            
          	<br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
                   <tr>
                     <th>글번호</th>
                     <th>카테고리</th>
-                    <th>질문</th>
-                    <th>답변</th>
+                    <th>제목</th>
                     <th>작성일</th>
-                    <th>상태</th>
+                    <th>상태</th>                    
                   </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${ list }" var="f">
+                	<c:forEach items="${ list }" var="n">
 	                    <tr>
-	                        <td>${ f.faqNo }</td>
-	                        <td>${ f.categoryName }</td>
-	                        <td>${ f.question }</td>
-	                        <td>${ f.answer }</td>
-	                        <td>${ f.createDate }</td>
-	                        <td>${ f.status }</td>	                        
+	                        <td>${ n.noticeNo }</td>
+	                        <td>${ n.categoryName }</td>
+	                        <td>${ n.title }</td>
+	                        <td>${ n.createDate }</td>
+	                        <td>${ n.status }</td>	                                                
 	                    </tr>
                     </c:forEach>
                 </tbody>
@@ -103,7 +101,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="adminFaq.do?currentPage=${ pi.currentPage-1 }"><i class="bi bi-arrow-left"></i></a></li>
+                			<li class="page-item"><a class="page-link" href="adminNotice.do?currentPage=${ pi.currentPage-1 }"><i class="bi bi-arrow-left"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href=""><i class="bi bi-arrow-left"></i></a></li>
@@ -113,7 +111,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="adminFaq.do?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="adminNotice.do?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -124,10 +122,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="adminFaq.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
+                			<li class="page-item"><a class="page-link" href="adminNotice.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="adminFaq.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
+                			<li class="page-item disabled"><a class="page-link" href="adminNotice.do?currentPage=${ pi.currentPage+1 }"><i class="bi bi-arrow-right"></i></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>
@@ -159,7 +157,7 @@
     <script>
     	$(function(){
     		$("#boardList tbody tr").click(function(){
-    			location.href="adminFaqDetail.do?fno=" + $(this).children().eq(0).text();
+    			location.href="adminNoticeDetail.do?nno=" + $(this).children().eq(0).text();
     		});
     	});
     </script>

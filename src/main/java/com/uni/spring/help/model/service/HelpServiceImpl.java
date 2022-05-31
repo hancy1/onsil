@@ -231,6 +231,61 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 관리자 - 공지사항 게시물 갯수 구하기
+	public int selectAdminNoticeListCount() {
+
+		return HelpDao.selectAdminNoticeListCount(sqlSession);
+	}
+
+
+	@Override // 관리자 - 공지사항 게시물 가져오기
+	public ArrayList<Notice> selectAdminNoticeList(PageInfo pi) {
+		
+		return HelpDao.selectAdminNoticeList(sqlSession, pi);
+	}
+
+
+	@Override // 관리자 - 공지사항 디테일 뷰
+	public Notice selectAdminNotice(int nno) {
+		
+		return HelpDao.selectAdminNotice(sqlSession, nno);
+	}
+
+
+	@Override // 관리자 - 공지사항 글작성
+	public void insertAdminNotice(Notice n) {
+		
+		int result = helpDao.insertAdminNotice(sqlSession, n);
+		
+		if(result < 0) {
+			throw new CommException("관리자 공지사항 글작성 추가 실패");
+		}
+	}
+
+
+	@Override // 관리자 - 공지사항 글 수정
+	public void updateAdminNotice(Notice n) {
+		
+		int result = helpDao.updateAdminNotice(sqlSession, n);
+		
+		if(result < 0) {
+			throw new CommException("관리자 공지사항 글 수정 실패");
+		}
+		
+	}
+
+	@Override // 관리자 - 공지사항 글 삭제
+	public void deleteAdminNotice(int nno) {
+		
+		int result = helpDao.deleteAdminNotice(sqlSession, nno);
+		
+		if(result < 0) {
+			throw new CommException("관리자 공지사항 글 삭제 실패");
+		}
+		
+	}
+
+
 	
 
 

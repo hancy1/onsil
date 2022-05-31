@@ -163,6 +163,45 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.updateAdminFaq", f);
 	}
 
+	// 관리자 - 공지사항 게시물 갯수 구하기
+	public static int selectAdminNoticeListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("helpMapper.selectAdminNoticeListCount");
+	}
+
+	// 관리자 - 공지사항 게시물 가져오기
+	public static ArrayList<Notice> selectAdminNoticeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminNoticeList", null, rowBounds);
+	}
+
+	// 관리자 - 공지사항 디테일 뷰
+	public static Notice selectAdminNotice(SqlSessionTemplate sqlSession, int nno) {
+		
+		return (Notice)sqlSession.selectOne("helpMapper.selectAdminNotice", nno);
+	}
+
+	// 관리자 - 공지사항 글작성
+	public int insertAdminNotice(SqlSessionTemplate sqlSession, Notice n) {
+		
+		return sqlSession.insert("helpMapper.insertAdminNotice", n);
+	}
+
+	// 관리자 - 공지사항 글수정
+	public int updateAdminNotice(SqlSessionTemplate sqlSession, Notice n) {
+		
+		return sqlSession.update("helpMapper.updateAdminNotice", n);
+	}
+
+	// 관리자 - 공지사항 글삭제
+	public int deleteAdminNotice(SqlSessionTemplate sqlSession, int nno) {
+		
+		return sqlSession.update("helpMapper.deleteAdminNotice", nno);
+	}
+
 	
 
 	
