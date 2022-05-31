@@ -142,15 +142,15 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public int selectPlantListCount() {
+	public int selectPlantListCount(String search) {
 		
-		return gardenDao.selectPlantListCount(sqlSession);
+		return gardenDao.selectPlantListCount(search, sqlSession);
 	}
 
 	@Override
-	public ArrayList<PlantInfo> selectPlantList(PageInfo pi) {
+	public ArrayList<PlantInfo> selectPlantList(PageInfo pi, String search) {
 		
-		return gardenDao.selectPlantList(pi, sqlSession);
+		return gardenDao.selectPlantList(pi, search, sqlSession);
 	}
 
 	@Override
@@ -166,6 +166,22 @@ public class GardenServiceImpl implements GardenService{
 	@Override
 	public void deletePlant(String regNo) {
 		int result =  gardenDao.deletePlant(regNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("식물정보 삭제 실패");
+		} 
+		
+	}
+
+	@Override
+	public PlantInfo selectPlantInfo(String regNo) {
+		
+		return gardenDao.selectPlantInfo(regNo, sqlSession);
+	}
+
+	@Override
+	public void updatePlantInfo(PlantInfo info) {
+		
+		int result =  gardenDao.updatePlantInfo(info, sqlSession);
 		if(result < 0) {
 			throw new CommException("식물정보 삭제 실패");
 		} 

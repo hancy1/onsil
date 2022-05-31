@@ -74,8 +74,9 @@ th, td {
 											<td>${i.sun}</td>
 											<td>${i.status}</td>				
 											<td>
-											<button class="btn btn-outline-success updatePlant" onclick='updatePlant("${i.regNo}");' ><i class="fa-solid fa-eraser"></i></button>
-											<button class="btn btn-outline-success deletePlant" onclick='deletePlant("${i.regNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
+											<button class="btn btn-outline-success updatePlant" onclick="location.href='updatePlantForm.do?regNo=' + '${i.regNo}'" ><i class="fa-solid fa-eraser"></i></button>
+											<button class="btn btn-outline-success deletePlant" onclick='deletePlant("${i.regNo}");' ><i class="fa-solid fa-trash-can"></i></button>
+											</td>
 											</tr>
 										</c:forEach>
          							</c:if>
@@ -89,8 +90,18 @@ th, td {
 					</div>
 				</div>
 			</div>
-		</div>
-		
+			<!-- ##### Single Widget Area ##### -->
+			<div class="col-4 col-md-4">
+                    <div class="post-sidebar-area">
+                        <div class="single-widget-area">
+                            <form action="adminPlant.do" method="get" class="search-form">
+                                <input type="search" name="search" id="widgetsearch" placeholder="Search...">
+                                <button type="submit"><i class="icon_search"></i></button>
+                            </form>
+                        </div>
+                     </div>
+            </div>
+		</div>		
 </section>
 <script>
 
@@ -102,20 +113,7 @@ th, td {
 		}
 	}
 	
-	$(function searchPlant(search){
-		
-		$.ajax({
-			url:"adminPlant.do",
-			data:{search:search},
-			type:"post",
-			success:function(){
-
-			},error:function(){
-				console.log("ajax 통신 실패");
-			}
-		});
-		
-	})
+	
 
 </script>
 		<!-- 페이징바 만들기 -->

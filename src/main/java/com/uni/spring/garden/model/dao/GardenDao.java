@@ -101,18 +101,18 @@ public class GardenDao {
 		return sqlSession.update("gardenMapper.updateBoard", map);
 	}
 
-	public int selectPlantListCount(SqlSessionTemplate sqlSession) {
+	public int selectPlantListCount(String search, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("gardenMapper.selectPlantListCount");
+		return sqlSession.selectOne("gardenMapper.selectPlantListCount",search);
 	}
 
-	public ArrayList<PlantInfo> selectPlantList(PageInfo pi, SqlSessionTemplate sqlSession) {
+	public ArrayList<PlantInfo> selectPlantList(PageInfo pi, String search, SqlSessionTemplate sqlSession) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantList", search, rowBounds);
 	}
 
 	public int insertPlant(PlantInfo info, SqlSessionTemplate sqlSession) {
@@ -123,6 +123,16 @@ public class GardenDao {
 	public int deletePlant(String regNo, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.delete("gardenMapper.deletePlant", regNo);
+	}
+
+	public PlantInfo selectPlantInfo(String regNo, SqlSessionTemplate sqlSession) {
+
+		return sqlSession.selectOne("gardenMapper.selectPlantInfo", regNo);
+	}
+
+	public int updatePlantInfo(PlantInfo info, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updatePlantInfo", info);
 	}
 
 }
