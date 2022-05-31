@@ -264,7 +264,13 @@ public class HelpController {
 	@RequestMapping("updateFormAdminFaq.do")
 	public ModelAndView updateFormAdminFaq(int fno, ModelAndView mv) {
 		
-		mv.addObject("f", helpService.selectAdminFaq(fno))
+		Faq f = helpService.selectAdminFaq(fno);
+		
+		String content = f.getAnswer().replaceAll("<br>", "\n"); // 줄바꿈
+		
+		f.setAnswer(content);
+		
+		mv.addObject("f", f)
 		.setViewName("help/adminFaqUpdateForm");
 		
 		return mv;
@@ -280,9 +286,108 @@ public class HelpController {
 		
 		f = helpService.selectAdminFaq(fno);
 		
+		String content = f.getAnswer().replaceAll("\n", "<br>"); // 줄바꿈
+		f.setAnswer(content);
+		
 		model.addAttribute("fno", fno);
 		model.addAttribute("f",f);
 				
 		return "help/adminFaqDetailView";
 	}
+	
+	// 관리자 - 공지사항 페이지 이동	
+	@RequestMapping("adminNotice.do")
+	public String selectAdminNoticeList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectAdminNoticeListCount(); // 상태 Y,N 상관없이 다 구하기
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Notice> list = helpService.selectAdminNoticeList(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/adminNoticeListView";
+	}
+	
+	// 관리자 - 공지사항 디테일 뷰
+	@RequestMapping("adminNoticeDetail.do")
+	public ModelAndView selectAdminNotice(int nno, ModelAndView mv) {
+		
+		Notice n = helpService.selectAdminNotice(nno);
+		
+		String content = n.getContent().replaceAll("\n", "<br>"); // 줄바꿈
+		
+		n.setContent(content);
+		
+		mv.addObject("n", n).setViewName("help/adminNoticeDetailView");		
+		
+		return mv;		
+	}
+	
+	// 관리자 - 공지사항 글작성폼으로 이동
+	@RequestMapping("enrollFormAdminNotice.do")
+	public String enrollFormAdminNotice() {
+		
+		return "help/adminNoticeEnrollForm";
+	}
+	
+	// 관리자 - 공지사항 글작성
+	@RequestMapping("insertAdminNotice.do")
+	public String insertAdminNotice(Notice n) {
+		
+		String content = n.getContent().replaceAll("\n", "<br>"); // 줄바꿈
+		n.setContent(content);
+		
+		helpService.insertAdminNotice(n);
+				
+		return "redirect:adminNotice.do";
+	}
+	
+	// 관리자 - 공지사항 수정 폼 이동
+	@RequestMapping("updateFormAdminNotice")
+	public ModelAndView updateFormAdminNotice(int nno, ModelAndView mv) {
+		
+		Notice n = helpService.selectAdminNotice(nno);
+		
+		String content = n.getContent().replaceAll("<br>", "\n"); // 줄바꿈
+		
+		n.setContent(content);
+		
+		mv.addObject("n", n)
+		.setViewName("help/adminNoticeUpdateForm");
+		
+		return mv;
+	}
+	
+	// 관리자 - 공지사항 글수정
+	@RequestMapping("updateAdminNotice.do")	
+	public String updateAdminNotice(Notice n, Model model) {
+				
+		helpService.updateAdminNotice(n);
+		
+		int nno = Integer.parseInt(n.getNoticeNo());
+		
+		n = helpService.selectAdminNotice(nno);
+		
+		String content = n.getContent().replaceAll("\n", "<br>"); // 줄바꿈
+		n.setContent(content);
+		
+		model.addAttribute("nno", nno);
+		model.addAttribute("n", n);
+				
+		return "help/adminNoticeDetailView";
+	}
+	
+	// 관리자 - 공지사항 글삭제
+	@RequestMapping("deleteAdminNotice.do")
+	public String deleteAdminNotice(int nno) {
+		
+		helpService.deleteAdminNotice(nno);
+		
+		return "redirect:adminNotice.do";
+	}
+	
 }

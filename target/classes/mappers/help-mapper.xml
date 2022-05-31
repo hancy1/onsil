@@ -37,6 +37,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="status" column="STATUS"/>         
 	</resultMap>
 	
+	<!-- 관리자 - 공지사항 리절트맵 -->
+	<resultMap type="Notice" id="AdminNoticeResultSet">   
+         <id property="noticeNo" column="NOTICE_NO"/>
+         <result property="category" column="CATEGORY"/>
+         <result property="categoryName" column="CATEGORY_NAME"/>
+         <result property="writer" column="WRITER"/>
+         <result property="userId" column="USER_ID"/>
+         <result property="title" column="TITLE"/>
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="content" column="CONTENT"/>         
+         <result property="status" column="STATUS"/>         
+	</resultMap>
+	
 	<!-- 문의사항 리절트맵 -->
 	<resultMap type="Inquiry" id="inquiryResultSet">   
          <id property="inquiryNo" column="INQUIRY_NO"/>
@@ -235,4 +248,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET QUESTION = #{question}, ANSWER = #{answer}, CATEGORY = #{category}, STATUS = #{status}
 		WHERE FAQ_NO = #{faqNo}
 	</update>
+	
+	<!-- 관리자 - 공지사항 게시물 갯수 -->
+	<select id="selectAdminNoticeListCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<!-- 관리자 - 공지사항 게시물들 불러오기 -->
+	<select id="selectAdminNoticeList" resultMap="AdminNoticeResultSet">
+		SELECT A.NOTICE_NO, A.CATEGORY, B.CATEGORY_NAME, A.WRITER, C.USER_ID, A.TITLE, A.CREATE_DATE, A.CONTENT, A.STATUS 
+		FROM NOTICE A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		JOIN MEMBER C ON A.WRITER = C.USER_NO
+		ORDER BY A.NOTICE_NO DESC	
+	</select>
+	
+	<!-- 관리자 - 공지사항 게시물 디테일뷰 -->
+	<select id="selectAdminNotice" resultMap="AdminNoticeResultSet">
+		SELECT A.NOTICE_NO, A.CATEGORY, B.CATEGORY_NAME, A.WRITER, C.USER_ID, A.TITLE, A.CREATE_DATE, A.CONTENT, A.STATUS 
+		FROM NOTICE A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.NOTICE_NO = #{nno}		
+	</select>
+	
+	<!-- 관리자 - 공지사항  글 작성 -->
+	<insert id="insertAdminNotice">		
+		INSERT INTO NOTICE VALUES
+		(SEQ_NOTICE_NO.NEXTVAL, #{category}, #{title}, #{writer}, DEFAULT, #{content}, DEFAULT)
+	</insert>
+	
+	<!-- 관리자 - 공지사항 글 수정 -->
+	<update id="updateAdminNotice">
+		UPDATE NOTICE
+		SET CATEGORY = #{category}, TITLE = #{title}, CONTENT = #{content}, STATUS = #{status}
+		WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<!-- 관리자 - 공지사항  글 삭제 -->
+	<delete id="deleteAdminNotice">
+		UPDATE NOTICE
+		SET STATUS = 'N'
+		WHERE NOTICE_NO = #{nno}
+	</delete>
 </mapper>

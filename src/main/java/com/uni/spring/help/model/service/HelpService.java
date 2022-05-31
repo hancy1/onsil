@@ -53,6 +53,18 @@ public interface HelpService {
 	void deleteAdminFaq(int fno); // 관리자 - 자주묻는질문 글 삭제
 
 	void updateAdminFaq(Faq f); // 관리자 - 자주묻는질문 글 수정
+
+	int selectAdminNoticeListCount(); // 관리자 - 공지사항 게시물 갯수 구하기
+
+	ArrayList<Notice> selectAdminNoticeList(PageInfo pi); // 관리자 - 공지사항 게시물 가져오기
+
+	Notice selectAdminNotice(int nno); // 관리자 - 공지사항 디테일 뷰
+
+	void insertAdminNotice(Notice n); // 관리자 - 공지사항 글작성
+
+	void updateAdminNotice(Notice n); // 관리자 - 공지사항 글수정
+
+	void deleteAdminNotice(int nno); // 관리자 - 공지사항 글삭제
 	
 
 	

@@ -17,6 +17,7 @@ public class Notice {
 
 	private String noticeNo; // 글번호
 	private String category; // 카테고리
+	private String categoryName; // 카테고리 이름
 	private String title; // 제목
 	private String writer; // 작성자
 	private String userId; // 작성자 아이디 - 버튼 클릭을 위한
