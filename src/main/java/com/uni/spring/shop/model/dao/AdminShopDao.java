@@ -59,6 +59,11 @@ public class AdminShopDao {
 		return (ArrayList)sqlSession.selectList("adminShopMapper.selectFreebieList", null, rowdounds);
 	}
 
+	public int insertFreebie(SqlSessionTemplate sqlSession, Freebie f) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("adminShopMapper.insertFreebie",f);
+	}
+
 
 
 }

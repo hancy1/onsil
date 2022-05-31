@@ -24,4 +24,6 @@ public interface AdminShopService {
 
 	ArrayList<Freebie> selectFreebieList(ShopPageInfo pi);
 
+	void insertFreebie(Freebie f);
+
 }

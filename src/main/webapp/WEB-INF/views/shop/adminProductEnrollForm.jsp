@@ -34,6 +34,53 @@
     #enrollForm>table *{
      margin:10px;
      }
+     
+    #pagingArea
+    width:fit-content;margin:auto;
+    }
+
+   
+    #searchForm{
+        width:80%;
+        margin:auto;
+    }
+    
+    #searchForm>*{
+        float:left;
+        margin:5px;
+    }
+    .select{
+    width:20%;
+    }    
+    .text{
+    width:53%;
+    }
+    .searchBtn{
+    Width:20%;
+    }
+    
+
+   .btn-grad {
+      background-image: linear-gradient(to right, #16A085 0%, #F4D03F  51%, #16A085  100%);
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+      Width:150px;
+      height:30px;
+    }
+
+    .btn-grad:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+    }     
 </style>
 
 
@@ -59,10 +106,8 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
-									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
-							<li class="breadcrumb-item"><a href="#">판매제품관리</a></li>							
+							<li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item"><a href="adminProducts.do">판매제품관리</a></li>							
 							<li class="breadcrumb-item active" aria-current="page">새제품등록</li>
 						</ol>
 					</nav>

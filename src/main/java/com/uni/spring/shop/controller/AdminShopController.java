@@ -83,7 +83,7 @@ public class AdminShopController {
 			
 			
 			aShopService.insertProduct(p);
-			System.out.println("등록될 글정보 :" + p);
+			System.out.println("등록될 제품 정보 :" + p);
 			
 			return "redirect:adminProducts.do";
 		}
@@ -245,5 +245,42 @@ public class AdminShopController {
 			return "shop/adminFreebieList";
 		}
 		
+		
+		
+		//사은품 추가하는 폼 열기
+		@RequestMapping("adminEnrollFormFreebie.do")
+		public String enrollFormFreebie() {
+			
+		  return "shop/adminFreebieEnrollForm";
+		
+		}
+		
+		
+		
+		//사은품 insert
+		@RequestMapping("insertFreebie.do")
+		public String insertFreebie(Freebie f , HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
+			
+			
+			//전달되는 파일이 없을 때 빈문자열이 넘어온다. 빈문자열이 아닐때(=파일이 있을때)
+			if(!file.getOriginalFilename().equals("")) {
+				String changeName = saveFile(file, request);
+				
+				
+				if(changeName != null) {
+				
+					f.setOriginName(file.getOriginalFilename());
+					f.setChangeName(changeName);
+				}				
+			}
+			
+			
+			aShopService.insertFreebie(f);
+			
+			
+			System.out.println("등록될 사은품 정보 :" + f);
+			
+			return "redirect:adminFreebieList.do";
+		}
 		
 }

@@ -41,7 +41,7 @@ public class AdminShopServiceImpl implements AdminShopService {
 		int result = aShopDao.insertProduct(sqlSession, p);
 		
 		if(result <0) {
-			throw new CommException("게시글 추가 실패");
+			throw new CommException("판매제품 추가 실패");
 		}
 		
 		
@@ -95,6 +95,18 @@ public class AdminShopServiceImpl implements AdminShopService {
 	public ArrayList<Freebie> selectFreebieList(ShopPageInfo pi) {
 		// TODO Auto-generated method stub
 		return aShopDao.selectFreebieList(sqlSession,pi);
+	}
+
+	@Override
+	public void insertFreebie(Freebie f) {
+		
+		int result = aShopDao.insertFreebie(sqlSession, f);
+		
+		if(result <0) {
+			throw new CommException("사은품 추가 실패");
+		}
+		
+		
 	}
 
 }
