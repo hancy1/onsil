@@ -233,13 +233,15 @@ public class GardenController {
 	////=========================================================================================
 	//식물등록 관리자페이지로 이동
 	@RequestMapping("adminPlant.do")
-	public String adminPlant(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, Model model){
+	public String adminPlant(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
+							@RequestParam(value="search" , required=false) String search,
+							Model model){
 		
-		int listCount = gardenService.selectPlantListCount();
+		int listCount = gardenService.selectPlantListCount(search);
 		
 		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
 		
-		ArrayList<PlantInfo> list = gardenService.selectPlantList(pi);
+		ArrayList<PlantInfo> list = gardenService.selectPlantList(pi, search);
 		
 		System.out.println("list확인 " + list);
 		model.addAttribute("info", list);
@@ -268,6 +270,24 @@ public class GardenController {
 		
 		gardenService.deletePlant(regNo);
 		model.addAttribute("msg", "식물정보를 삭제했습니다.");
+		return "redirect:adminPlant.do";
+	}
+	
+	@RequestMapping("updatePlantForm.do")
+	public String updatePlant(String regNo, Model model) {
+		
+		PlantInfo info = gardenService.selectPlantInfo(regNo);
+		System.out.println("info 확인 " + info);
+		model.addAttribute("info", info);
+		
+		return "garden/adminUpdatePlantForm";
+	}
+	
+	@RequestMapping("updatePlantInfo.do")
+	public String updatePlantInfo(Model model, PlantInfo info) {
+		
+		gardenService.updatePlantInfo(info);
+		model.addAttribute("msg", "식물정보를 수정했습니다.");
 		return "redirect:adminPlant.do";
 	}
 }

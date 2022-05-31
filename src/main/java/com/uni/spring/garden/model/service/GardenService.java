@@ -40,13 +40,17 @@ public interface GardenService {
 
 	void updateBoard(HashMap<String, String> map);
 
-	int selectPlantListCount();
+	int selectPlantListCount(String search);
 
-	ArrayList<PlantInfo> selectPlantList(PageInfo pi);
+	ArrayList<PlantInfo> selectPlantList(PageInfo pi, String search);
 
 	void insertPlant(PlantInfo info);
 
 	void deletePlant(String regNo);
+
+	PlantInfo selectPlantInfo(String regNo);
+
+	void updatePlantInfo(PlantInfo info);
 
 
 	

@@ -188,6 +188,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		SELECT COUNT(*)
 		FROM PLANT_INFO
+		WHERE 1=1
+		<if test="search != null">
+		AND PLANT_NAME LIKE '%' || #{search} || '%'
+		</if>
 		
 	</select>
 	
@@ -196,6 +200,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
 		FROM PLANT_INFO A
 		JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
+		WHERE 1=1
+		<if test="search != null">
+		AND PLANT_NAME LIKE '%' || #{search} || '%'
+		</if>
 		ORDER BY REG_NO
 	
 	</select>
@@ -213,4 +221,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE REG_NO = #{regNo}
 		
 	</delete>
+	
+	<select id="selectPlantInfo" resultMap="PlantInfoResultSet">
+		
+		SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
+		FROM PLANT_INFO A
+		JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
+        WHERE REG_NO = #{regNo}
+	
+	</select>
+	
+	<update id="updatePlantInfo">
+	
+		UPDATE PLANT_INFO
+		SET CATEGORY = #{category},
+			PLANT_NAME = #{plantName},
+			WATER = #{water},
+			SUN = #{sun},
+			STATUS = #{status}
+		WHERE REG_NO = #{regNo}
+		
+	</update>
 </mapper>
