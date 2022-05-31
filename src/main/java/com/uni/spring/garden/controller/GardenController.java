@@ -290,5 +290,10 @@ public class GardenController {
 		model.addAttribute("msg", "식물정보를 수정했습니다.");
 		return "redirect:adminPlant.do";
 	}
+	
+	@RequestMapping("dailyLog.do")
+	public String dailyLog() {
+		return "garden/dailyLog";
+	}
 }
 

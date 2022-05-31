@@ -161,8 +161,8 @@
 									<li><a href="gardenMain.do">정원관리</a>
 										<ul class="dropdown">
 											<li><a href="visitorBoard.do">방명록</a></li>
-											<li><a href="#">데일리로그</a>
-											<li><a href="#">내 식물 관리</a></li>
+											<li><a href="dailyLog.do">데일리로그</a>
+											<li><a href="myPlant.do">내 식물 관리</a></li>
 											<li><a href="neighborList.do">이웃관리</a></li>											
 										</ul>
 									</li>
