@@ -107,5 +107,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<!-- 관리자페이지: 제품 등록 -->	
+	<insert id="insertFreebie">	
+		INSERT INTO FREEBIE VALUES(#{freeNo}, #{freeName}, #{originName}, #{changeName}, #{freePoint},#{freeAmount})
+  
+  	</insert>
+
 	
 </mapper>
