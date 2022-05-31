@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.ticket.ticketPagination;
@@ -78,7 +79,7 @@ public class TicketController {
 		String resources = request.getSession().getServletContext().getRealPath("resources"); 
 		
 		System.out.println(resources);
-		String savePath =resources+"\\upload_files\\";
+		String savePath =resources+"\\T_upload_files\\";
 		
 		
 		
@@ -108,4 +109,14 @@ public class TicketController {
 	}
 	
 
+	@RequestMapping("detailTicket.do")
+	public ModelAndView selectBoard(int bno,ModelAndView mv) {
+		
+		Ticket t = ticketService.selectTicket(bno);
+		
+		mv.addObject("t",t).setViewName("Ticket/ticketDetailView");
+		
+		return mv;
+		
+	}
 }

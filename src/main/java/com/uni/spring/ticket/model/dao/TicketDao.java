@@ -30,4 +30,9 @@ public class TicketDao {
 		return sqlSession.insert("ticketMapper.insertTicket",t);
 	}
 
+	public Ticket selectTicket(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.selectTicket",bno);
+	}
+
 }

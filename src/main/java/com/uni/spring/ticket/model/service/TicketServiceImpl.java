@@ -39,8 +39,14 @@ public class TicketServiceImpl implements TicketService{
 		int result = ticketDao.insertTicket(sqlSession,t);
 		
 		 if(result < 0) {
-	         throw new CommException("게시글 추가 실패");
+	         throw new CommException("티켓등록 추가 실패");
 	      }
+	}
+
+	@Override
+	public Ticket selectTicket(int bno) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectTicket(sqlSession,bno);
 	}
 
 }

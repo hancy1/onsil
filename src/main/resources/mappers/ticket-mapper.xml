@@ -56,4 +56,14 @@ T_CHANGE_NAME-->
          INSERT INTO TICKET
          VALUES (SEQ_TICKET.NEXTVAL, #{userNo},#{price},#{ticketPhone},#{ticketTitle},#{ticketNotice}, #{ticketLocation},SYSDATE,DEFAULT,#{originName},#{changeName})
       </insert>
+      
+      <!-- 티켓 디테일페이지 조회 -->
+      <select id="selectTicket" parameterType = "_int" resultMap = "ticketResultSet">
+ 
+     SELECT *
+     FROM TICKET
+     WHERE TICKET_NO=#{ticketNo} AND TICKET_STATUS='Y'
+ 
+  </select>
+  
 </mapper>
