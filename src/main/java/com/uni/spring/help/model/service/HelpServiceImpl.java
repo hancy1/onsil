@@ -207,6 +207,30 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 관리자 - 자주묻는질문 글 삭제
+	public void deleteAdminFaq(int fno) {
+
+		int result = helpDao.deleteAdminFaq(sqlSession, fno);
+		
+		if(result < 0) {
+			throw new CommException("관리자 자주묻는질문 글 삭제 실패");
+		}
+		
+	}
+
+
+	@Override // 관리자 - 자주묻는질문 글 수정
+	public void updateAdminFaq(Faq f) {
+
+		int result = helpDao.updateAdminFaq(sqlSession, f);
+		
+		if(result < 0) {
+			throw new CommException("관리자 자주묻는질문 글 수정 실패");
+		}
+		
+	}
+
+
 	
 
 

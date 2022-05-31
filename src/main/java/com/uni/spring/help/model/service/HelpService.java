@@ -49,6 +49,10 @@ public interface HelpService {
 	Faq selectAdminFaq(int fno); // 관리자 - 자주묻는질문 디테일뷰
 
 	void inserAdminFaq(Faq f); // 관리자 - 자주묻는질문 글작성
+
+	void deleteAdminFaq(int fno); // 관리자 - 자주묻는질문 글 삭제
+
+	void updateAdminFaq(Faq f); // 관리자 - 자주묻는질문 글 수정
 	
 
 	

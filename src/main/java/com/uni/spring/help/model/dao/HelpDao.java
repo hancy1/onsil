@@ -151,6 +151,18 @@ public class HelpDao {
 		return sqlSession.insert("helpMapper.inserAdminFaq", f);
 	}
 
+	// 관리자 - 자주묻는질문 글 삭제
+	public int deleteAdminFaq(SqlSessionTemplate sqlSession, int fno) {
+
+		return sqlSession.update("helpMapper.deleteAdminFaq", fno);
+	}
+
+	// 관리자 - 자주묻는질문 글 수정
+	public int updateAdminFaq(SqlSessionTemplate sqlSession, Faq f) {
+
+		return sqlSession.update("helpMapper.updateAdminFaq", f);
+	}
+
 	
 
 	

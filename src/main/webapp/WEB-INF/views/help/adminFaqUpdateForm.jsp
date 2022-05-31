@@ -30,6 +30,18 @@
     .select{width:20%;}
     .text{width:53%;}
     .searchBtn{Width:20%;}
+    
+    .btn.btn-primary{background: #3ac240;
+					 border-color: #3ac240;} 
+	.btn.btn-primary:hover{background: white;
+				  		   border-color: #3ac240;
+				  	       color: #3ac240;} 
+				  	       
+	.btn.btn-danger{background: white;
+				    border-color: #3ac240;
+				    color: #3ac240;}
+    .btn.btn-danger:hover{background: #3ac240;
+						  border-color: #3ac240;}
 </style>
 
 </head>
@@ -67,37 +79,46 @@
 	<!-- 본문 -->
 	<div class="content">
         <br><br>
-        <div class="innerOuter">
-            <h2>게시글 수정하기</h2>
+        <div class="innerOuter" style="padding:0% 10%;">
+            <h2>자주묻는질문 수정하기</h2>
             <br>
 
-            <form id="updateForm" method="post" action="updateBoard.do" enctype="multipart/form-data">
-            	<input type="hidden" name="boardNo" value="${ b.boardNo }">
-                <table align="center">
+            <form id="updateForm" method="post" action="updateAdminFaq.do">
+            	<input type="hidden" name="faqNo" value="${ f.faqNo }">
+                <table align="center" style="width:100%;">
                     <tr>
-                        <th><label for="title">제목</label></th>
-                        <td><input type="text" id="title" class="form-control" name="boardTitle" value="${ b.boardTitle }" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control" value="${ b.boardWriter }" readonly></td>
-                    </tr>
-                    <tr>
-                        <th><label for="upfile">첨부파일</label></th>
+                        <th style="width:100px;"><label for="category">카테고리</label></th>
                         <td>
-                            <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
-                            <c:if test="${ !empty b.originName }">
-	                                                               현재 업로드된 파일 : ${ b.originName } <br>
-	                            <input type="hidden" name="changeName" value="${ b.changeName }">
-	                            <input type="hidden" name="originName" value="${ b.originName }">
-                            </c:if>
-                        </td>
+                        	<select name="category" required>
+	                			<option> </option>
+	                			<option id="mem" name="category" value="1">회원</option>
+	                			<option id="order" name="category" value="2">주문결제</option>
+	                			<option id="deliver" name="category" value="3">배송</option>
+	                			<option id="cancle" name="category" value="4">취소/환불</option>
+	                			<option id="point" name="category" value="5">포인트</option>
+	                			<option id="exchange" name="category" value="6">반품/교환</option>
+	                			<option id="etc" name="category" value="7">기타</option>
+	                		</select>
+                		</td>			
                     </tr>
                     <tr>
-                        <th colspan="2"><label for="content">내용</label></th>
+                    	<th>상태</th>
+                    	<td>
+                    		<select  name="status" required>                    			
+                    			<option id="Yes" name="status" value="Y">Y</option>
+                    			<option id="No" name="status" value="N">N</option>
+                    		</select>
+                    	</td>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;">${ b.boardContent }</textarea></th>
+                        <th><label for="question">질문</label></th>
+                        <td><input type="text" id="question" class="form-control" name="question" value="${ f.question }" required></td>
+                    </tr>                    
+                    <tr>
+                        <th colspan="2"><label for="answer">답변</label></th>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><textarea class="form-control" required name="answer" id="answer" rows="10" style="resize:none;">${ f.answer }</textarea></th>
                     </tr>
                 </table>
                 <br>
@@ -127,7 +148,36 @@
 	
 	
     <script>
+ 	// 카테고리 선택됨 
+	$(function(){
     	
+   		if("${f.category}" == "1"){
+   			$("#mem").attr("selected", true);
+   		}else if("${f.category}" == "2"){
+   			$("#order").attr("selected", true);
+   		}else if("${f.category}" == "3"){
+   			$("#deliver").attr("selected", true);
+   		}else if("${f.category}" == "4"){
+   			$("#cancle").attr("selected", true);
+   		}else if("${f.category}" == "5"){
+   			$("#point").attr("selected", true);
+   		}else if("${f.category}" == "6"){
+   			$("#exchange").attr("selected", true);
+   		}else{
+   			$("#etc").attr("selected", true);
+   		}
+   	});
+ 	
+ 	// 상태 선택됨
+ 	$(function(){
+ 		
+ 		if("${ f.status }" == 'Y') {
+ 			$("#Yes").attr("selected", true);
+ 		}else{
+ 			$("#No").attr("selected", true);
+ 		}
+ 	});
+ 	
     </script>
 
 </body>
