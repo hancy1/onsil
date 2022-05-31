@@ -135,8 +135,8 @@
 	                        <c:if test="${ empty r.originName }">
 	                        	<td>&nbsp;</td>
 	                        </c:if>
-	                        <td>${ r.orderDate }</td>	                        
-	                        <td><button id="deleteButton" >&#128163;&#128165;</button></td>	                        	                        
+	                        <td>${ r.reviewDate }</td>	                        
+	                        <td><button id="deleteButton" class="btn btn-outline-secondary btn-sm" >&#128163;&#128165;</button></td>	                        	                        
 	                    </tr>
                     </c:forEach>
                 </tbody>
@@ -204,7 +204,8 @@
     <script>
     	
 		$("#reviewList>tbody>tr>td>button").click(function(){ 
-			var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();		
+			var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();
+			
 			location.href="deleteAdminReview.do?reviewNo="+reviewNo;		
 		});	
 		

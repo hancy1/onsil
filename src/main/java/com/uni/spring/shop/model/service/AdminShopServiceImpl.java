@@ -157,5 +157,15 @@ public class AdminShopServiceImpl implements AdminShopService {
 		return aShopDao.selectReviewList(sqlSession,pi);
 	}
 
+	@Override
+	public void deleteAdminReview(int reviewNo) {
+		
+		int result = aShopDao.deleteAdminReview(sqlSession, reviewNo);
+		
+		if(result <0) {
+			throw new CommException("리뷰 삭제 실패");
+		}
+	}
+
 
 }

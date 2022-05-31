@@ -14,6 +14,8 @@ import com.uni.spring.shop.model.dto.ShopPageInfo;
 @Repository
 public class AdminShopDao {
 
+	
+	//제품영역
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("adminShopMapper.selectListCount");
@@ -47,6 +49,10 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.updateProduct",p);
 	}
 
+	
+	
+	
+	//사은품 영역	
 	public int freebieListCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("adminShopMapper.freebieListCount");
@@ -80,6 +86,8 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.updateFreebie",f);
 	}
 
+	
+	//리뷰영역
 	public int reviewListCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("adminShopMapper.reviewListCount");
@@ -91,6 +99,10 @@ public class AdminShopDao {
 		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminShopMapper.selectReviewList", null, rowdounds);
+	}
+
+	public int deleteAdminReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("adminShopMapper.deleteAdminReview",reviewNo);
 	}
 
 

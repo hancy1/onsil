@@ -43,6 +43,8 @@ public interface AdminShopService {
 
 	ArrayList<ProReview> selectReviewList(ShopPageInfo pi);
 
+	void deleteAdminReview(int reviewNo);
+
 	
 
 }
