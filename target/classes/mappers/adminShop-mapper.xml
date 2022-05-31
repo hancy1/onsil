@@ -64,6 +64,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</update>
   	
   	
+  	<!-- 관리자페이지 : 제품 수정 -->
+  	
   	<update id="updateProduct" parameterType="Product">
   
   
@@ -124,5 +126,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
  	</select>
 
+
+  	<!-- 관리자페이지: 사은품 삭제 -->	
+  	<delete id="deleteFreebie">  
+  		
+  		DELETE FROM FREEBIE WHERE FREE_NO=#{freeNo}
+    
+  	</delete>
+  	
+  	
+  	<!-- 관리자페이지 : 사은품 수정 -->  	
+  	<update id="updateFreebie" parameterType="Freebie">  
+  
+	  UPDATE FREEBIE
+	  SET FREE_NAME=#{freeName}, ORIGIN_NAME=#{originName}, CHANGE_NAME=#{changeName}, FREE_POINT=#{freePoint}, FREE_AMOUNT=#{freeAmount}
+	  WHERE FREE_NO=#{freeNo}	  
+	  
+	</update>
 	
 </mapper>

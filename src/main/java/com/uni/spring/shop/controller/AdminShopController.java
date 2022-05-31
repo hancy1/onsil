@@ -288,12 +288,78 @@ public class AdminShopController {
 		@RequestMapping("detailFreebie.do")
 		public ModelAndView selectFreebie(int freeNo, ModelAndView mv) {
 			
-			System.out.println("디테일 freeNo : " + freeNo);
+			//System.out.println("디테일 freeNo : " + freeNo);
 			Freebie f = aShopService.selectFreebie(freeNo);
 			
 			mv.addObject("f", f).setViewName("shop/adminFreebieDetail");
 			
 			return mv;
 		}
+		
+		
+		//사은품 삭제		
+		@RequestMapping("deleteFreebie.do")
+		public String deleteFreebie(int freeNo, String fileName, HttpServletRequest request ) {
+			
+			
+			aShopService.deleteFreebie(freeNo);
+			
+			if(!fileName.equals("")) {
+				deleteFile(fileName, request);
+			}
+			
+			return "redirect:adminFreebieList.do";
+		}
+		
+		
+		//사은품 수정폼연결
+		
+		@RequestMapping("updateFormFreebie.do")
+		public ModelAndView updateFormFreebie(int freeNo, ModelAndView mv) {
+			
+			mv.addObject("f", aShopService.selectFreebie(freeNo))
+			.setViewName("shop/adminFreebieUpdateForm");
+			
+			return mv;
+		}
+		
+		//사은품 수정
+		
+		@RequestMapping("updateFreebie.do")
+		public ModelAndView updateFreebie(Freebie f, ModelAndView mv, HttpServletRequest request,
+									@RequestParam(name = "reUploadFile", required = false) MultipartFile file ) {
+									
+			
+			String orgChangeName = f.getChangeName();
+			
+			//새로 넘어온 파일이 있는(O) 경우
+			if(!file.getOriginalFilename().equals("")) {			
+				
+				
+				//새로넘어온 파일 O , 기존 파일도 O
+				//-->서버에 업로드 된 기존 파일 삭제해야됨!
+				if( orgChangeName!= null) {
+					
+					deleteFile(orgChangeName, request);
+				}			
+				
+				//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨! 있는경우는 삭제해주고 세팅!
+				String changeName = saveFile(file, request);
+			
+										
+				f.setOriginName(file.getOriginalFilename());
+				f.setChangeName(changeName);
+			}		
+		
+			
+			aShopService.updateFreebie(f);		
+			
+			int freeNo = f.getFreeNo();
+			
+			mv.addObject("freeNo",freeNo).setViewName("redirect:detailFreebie.do");
+			
+			return mv;
+		}
+
 		
 }

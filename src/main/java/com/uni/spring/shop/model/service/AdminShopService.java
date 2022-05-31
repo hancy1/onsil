@@ -28,4 +28,8 @@ public interface AdminShopService {
 
 	Freebie selectFreebie(int freeNo);
 
+	void deleteFreebie(int freeNo);
+
+	void updateFreebie(Freebie f);
+
 }

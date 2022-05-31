@@ -60,15 +60,19 @@
 					<br>
 					<div class="innerOuter">			
 						<table id="contentArea" align="center" class="table">
+							
+							<tr>
+								<th>No</th>
+								<td colspan="3">${f.freeNo }</td>
+												
+							</tr>
+							
+							
 							<tr>
 								<th width="100">사은품명</th>
 								<td colspan="3">${ f.freeName }</td>
 							</tr>
-							<tr>
-								<th>사은품번호</th>
-								<td colspan="3">${f.freeNo }</td>
-												
-							</tr>
+							
 							<tr>
 								<th>포인트</th>
 								<td>${ f.freePoint }point</td>

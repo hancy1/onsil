@@ -118,4 +118,25 @@ public class AdminShopServiceImpl implements AdminShopService {
 		return f;
 	}
 
+	@Override
+	public void deleteFreebie(int freeNo) {
+		int result = aShopDao.deleteFreebie(sqlSession, freeNo);
+		
+		if(result <0) {
+			throw new CommException("사은품 삭제 실패");
+		}
+		
+	}
+
+	@Override
+	public void updateFreebie(Freebie f) {
+		
+		int result = aShopDao.updateFreebie(sqlSession, f);
+		
+		if(result <0) {
+			throw new CommException("사은품 수정 실패");
+		}
+		
+	}
+
 }
