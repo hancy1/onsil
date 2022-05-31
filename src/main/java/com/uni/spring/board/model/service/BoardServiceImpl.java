@@ -47,4 +47,15 @@ public class BoardServiceImpl implements BoardService {
 		
 		return b;
 	}
+
+	@Override
+	public void insertBoard(Board b) {
+		
+		int result = boardDao.insertBoard(sqlSession, b);
+		
+		if(result < 0) {
+			throw new CommException("게시글 추가 실패");
+		}
+		
+	}
 }
