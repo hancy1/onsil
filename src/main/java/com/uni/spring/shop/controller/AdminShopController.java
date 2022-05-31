@@ -283,4 +283,17 @@ public class AdminShopController {
 			return "redirect:adminFreebieList.do";
 		}
 		
+		
+		//사은품 디테일페이지 연결
+		@RequestMapping("detailFreebie.do")
+		public ModelAndView selectFreebie(int freeNo, ModelAndView mv) {
+			
+			System.out.println("디테일 freeNo : " + freeNo);
+			Freebie f = aShopService.selectFreebie(freeNo);
+			
+			mv.addObject("f", f).setViewName("shop/adminFreebieDetail");
+			
+			return mv;
+		}
+		
 }

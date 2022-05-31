@@ -109,9 +109,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 관리자페이지: 제품 등록 -->	
 	<insert id="insertFreebie">	
-		INSERT INTO FREEBIE VALUES(#{freeNo}, #{freeName}, #{originName}, #{changeName}, #{freePoint},#{freeAmount})
+		INSERT INTO FREEBIE VALUES(SEQ_FREE_NO.NEXTVAL, #{freeName}, #{originName}, #{changeName}, #{freePoint},#{freeAmount})
   
   	</insert>
+  	
+  	
+  	
+  	<!-- 관리자페이지: 사은품 디테일페이지 조회 -->	
+  	<select id = "selectFreebie" parameterType="Freebie" resultMap="freebieResultSet">
+
+	  SELECT *
+	  FROM FREEBIE 	  	  
+	  WHERE FREE_NO=#{freeNo}
+    
+ 	</select>
 
 	
 </mapper>

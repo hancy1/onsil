@@ -64,6 +64,11 @@ public class AdminShopDao {
 		return sqlSession.insert("adminShopMapper.insertFreebie",f);
 	}
 
+	public Freebie selectFreebie(SqlSessionTemplate sqlSession, int freeNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.selectFreebie",freeNo);
+	}
+
 
 
 }

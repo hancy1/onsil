@@ -26,4 +26,6 @@ public interface AdminShopService {
 
 	void insertFreebie(Freebie f);
 
+	Freebie selectFreebie(int freeNo);
+
 }
