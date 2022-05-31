@@ -196,6 +196,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
 		FROM PLANT_INFO A
 		JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
+		ORDER BY REG_NO
 	
 	</select>
+	
+	<insert id="insertPlant">
+	
+		INSERT INTO PLANT_INFO VALUES
+		(SEQ_REG_NO.NEXTVAL, #{category}, #{plantName}, #{water}, #{sun}, DEFAULT)
+	
+	</insert>
+	
+	<delete id="deletePlant">
+	
+		DELETE FROM PLANT_INFO
+		WHERE REG_NO = #{regNo}
+		
+	</delete>
 </mapper>

@@ -253,5 +253,22 @@ public class GardenController {
 		return "garden/adminInsertPlantForm";
 	}
 	
+	@RequestMapping("insertPlant.do")
+	public String insertPlant(Model model, PlantInfo info) {
+		
+		gardenService.insertPlant(info);
+		model.addAttribute("msg", "식물정보를 추가했습니다.");
+		
+		
+		return "redirect:adminPlant.do";
+	}
+	
+	@RequestMapping("deletePlant.do")
+	public String deletePlant(Model model, String regNo) {
+		
+		gardenService.deletePlant(regNo);
+		model.addAttribute("msg", "식물정보를 삭제했습니다.");
+		return "redirect:adminPlant.do";
+	}
 }
 

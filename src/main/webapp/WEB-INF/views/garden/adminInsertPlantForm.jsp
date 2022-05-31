@@ -62,6 +62,15 @@ textarea {width:100%;
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
+	
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
+	
+	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
@@ -102,10 +111,10 @@ textarea {width:100%;
 							<div class="content">
 					        <br><br>
 					        <div class="innerOuter">	
-					       	 <form id="enrollForm" method="post" action="#">			            
+					       	 <form id="enrollForm" method="post" action="insertPlant.do">			            
 					            <table id="contentArea" align="center" class="table">
 					                <tr>
-					                	<th width="100" id="selectCategory">카테고리</th>
+					                	<th id="selectCategory">카테고리</th>
 					                    <td><input type="radio" name="category" value="1" checked="checked">나무</td>
 					                    <td><input type="radio" name="category" value="2">꽃</td>
 					                    <td><input type="radio" name="category" value="3">식용재배</td>
