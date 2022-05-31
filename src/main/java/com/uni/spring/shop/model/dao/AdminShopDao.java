@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -77,6 +78,19 @@ public class AdminShopDao {
 	public int updateFreebie(SqlSessionTemplate sqlSession, Freebie f) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("adminShopMapper.updateFreebie",f);
+	}
+
+	public int reviewListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.reviewListCount");
+	}
+
+	public ArrayList<ProReview> selectReviewList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectReviewList", null, rowdounds);
 	}
 
 

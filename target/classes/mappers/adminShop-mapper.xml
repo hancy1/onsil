@@ -143,5 +143,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  WHERE FREE_NO=#{freeNo}	  
 	  
 	</update>
+	<!-- 사은품 리절트맵 -->
+	
+	<resultMap type="ProReview" id="ProReviewResultSet"> 
+		<id property="reviewNo" column="REVIEW_NO"/>		
+		<result property="reviewWriter" column="REVIEW_WRITER" />
+		<result property="proCode" column="PRO_CODE" />
+		<result property="reviewStar" column="REVIEW_STAR" />	
+		<result property="reviewTitle" column="REVIEW_TITLE" />
+		<result property="reviewContent" column="REVIEW_CONTENT" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
+		<result property="reviewDate" column="REVIEW_DATE" />
+		<result property="reviewCount" column="REVIEW_COUNT" />		
+		
+	</resultMap>
+	
+	
+	<!-- 관리자 페이지 : 등록된 사은품 수  -->
+	<select id = "reviewListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_REVIEW
+  	
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 등록된 사은품 전부 select해오기 -->
+	<select id="selectReviewList" parameterType="ProReview" resultMap="ProReviewResultSet">	
+		 
+	  SELECT *
+	  FROM PRO_REVIEW
+	    
+	</select>
+	
+	
+	
+	
 	
 </mapper>

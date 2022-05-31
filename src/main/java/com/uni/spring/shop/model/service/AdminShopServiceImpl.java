@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.AdminShopDao;
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -22,6 +23,8 @@ public class AdminShopServiceImpl implements AdminShopService {
 	@Autowired
 	private AdminShopDao aShopDao;
 	
+	
+	//판매제품영역
 	@Override
 	public int selectListCount() {
 		
@@ -85,6 +88,7 @@ public class AdminShopServiceImpl implements AdminShopService {
 		}
 	}
 
+	//사은품 영역
 	@Override
 	public int freebieListCount() {
 		// TODO Auto-generated method stub
@@ -139,16 +143,19 @@ public class AdminShopServiceImpl implements AdminShopService {
 		
 	}
 
+	
+	
+	//리뷰영역
 	@Override
-	public int selectReviewCount() {
+	public int reviewListCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return aShopDao.reviewListCount(sqlSession);
 	}
 
 	@Override
-	public ArrayList<Product> selectReviewList(ShopPageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ProReview> selectReviewList(ShopPageInfo pi) {
+		return aShopDao.selectReviewList(sqlSession,pi);
 	}
+
 
 }

@@ -37,7 +37,7 @@ public class ProReview {
 	private String reviewContent;//내용
 	private String originName;//첨부파일 원본명
 	private String changeName;//첨부파일 수정명
-	private Date orderDate;//등록날짜
+	private Date reviewDate;//등록날짜
 	private int reviewCount; //조회수	
 	
 	

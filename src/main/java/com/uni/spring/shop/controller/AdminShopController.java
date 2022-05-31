@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.AdminShopService;
@@ -368,12 +369,12 @@ public class AdminShopController {
 		public String selectReviewList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
 			
 			
-			int listCount = aShopService.selectReviewCount();
+			int listCount = aShopService.reviewListCount();
 			
 			
 			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
 			
-			ArrayList<Product> list = aShopService.selectReviewList(pi);
+			ArrayList<ProReview> list = aShopService.selectReviewList(pi);
 			
 			
 			model.addAttribute("list", list);
@@ -382,7 +383,7 @@ public class AdminShopController {
 			
 			
 			
-			return "shop/adminProduct";
+			return "shop/adminReviewList";
 		}
 		
 		
