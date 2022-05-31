@@ -109,4 +109,13 @@ public class AdminShopServiceImpl implements AdminShopService {
 		
 	}
 
+	@Override
+	public Freebie selectFreebie(int freeNo) {
+		Freebie f = null;	
+		f=aShopDao.selectFreebie(sqlSession, freeNo);
+		
+		
+		return f;
+	}
+
 }
