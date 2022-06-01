@@ -110,7 +110,7 @@
      	
         
         <div class="innerOuter" style="padding:5% 10%;">
-    	<h4> ${ sessionScope.loginUser.userName }님의 포인트는 point 입니다.</h4><br><br>
+    	<h4> ${ sessionScope.loginUser.userName }님의 현재 포인트는 <span style="color:red">${point.totalPoint } point </span> 입니다.</h4><br><br>
             <table id="myPointList" class="table table-hover" align="center">
                 <thead>
                   <tr>

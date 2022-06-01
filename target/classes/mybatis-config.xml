@@ -37,6 +37,7 @@
 		<typeAlias type="com.uni.spring.shop.model.dto.ProReview" alias="ProReview"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.Point" alias="Point"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.Cart" alias="Cart"/>
+		<typeAlias type="com.uni.spring.shop.model.dto.PointInfo" alias="PointInfo"/>
 		
 		
 	</typeAliases>
