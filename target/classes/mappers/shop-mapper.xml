@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-	<!-- My Point List : 내 포인트 조회해오기 -->
+	<!-- My Point List : 내 포인트 내역 조회해오기 -->
 	<select id="selectMyPoint" parameterType="Point" resultMap="PointResultSet">	
 		 
 	  SELECT *
@@ -25,5 +25,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    
 	</select>
 	
+	
+	<resultMap type="PointInfo" id="PointInfoResultSet"> 
+			
+		<id property="userNo" column="USER_NO"/>		
+		<result property="totalPoint" column="TOTAL_POINT" />	
+		
+		
+	</resultMap>
+	
+	
+	
+	<!-- My Point TOTAL : 토탈포인트 조회해오기 -->
+	<select id="selectPointTotal" parameterType="PointInfo" resultMap="PointInfoResultSet">	
+		 
+	  SELECT *
+	  FROM POINT_INFO
+	  WHERE USER_NO=#{userNo}
+	    
+	</select>
 
 </mapper>

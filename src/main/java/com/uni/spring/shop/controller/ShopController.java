@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Point;
+import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.ShopService;
@@ -51,7 +52,10 @@ public class ShopController {
 		ArrayList<Point> list = shopService.selectMyPoint(userNo);
 		
 		
+		PointInfo point = shopService.selectPointTotal(userNo);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("point", point);
 		
 		
 		return "shop/myPointList";
