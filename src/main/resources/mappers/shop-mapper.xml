@@ -4,7 +4,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="shopMapper">
 
+	<resultMap type="Point" id="PointResultSet"> 
 	
+		<id property="pointNum" column="POINT_NUM"/>		
+		<result property="userNo" column="USER_NO" />
+		<result property="pointVal" column="POINT_VAL" />
+		<result property="pointDate" column="POINT_DATE" />	
+		<result property="pointType" column="POINT_TYPE" />
+		
+		
+	</resultMap>
+	
+	
+	<!-- My Point List : 내 포인트 조회해오기 -->
+	<select id="selectMyPoint" parameterType="Point" resultMap="PointResultSet">	
+		 
+	  SELECT *
+	  FROM POINT
+	  WHERE USER_NO=#{userNo}
+	    
+	</select>
 	
 
 </mapper>
