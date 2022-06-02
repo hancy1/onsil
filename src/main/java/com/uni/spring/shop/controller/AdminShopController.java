@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
@@ -412,7 +414,7 @@ public class AdminShopController {
 			int listCount = aShopService.inventoryListCount();
 			
 			
-			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 20);
 			
 			ArrayList<ProStock> list = aShopService.selectInventoryList(pi);
 			
@@ -423,6 +425,34 @@ public class AdminShopController {
 			
 			
 			
-			return "shop/adminInventoryList";
+			return "shop/adminStockList";
 		}
+		
+		
+		//재고 추가하는 폼 열기
+		@RequestMapping("adminEnrollFormStock.do")
+		public String enrollFormInventory(Model model) {
+			
+			//제품코드 List불러와야됨
+			 ArrayList<Product> list = aShopService.selectpCodeList();
+			
+			 model.addAttribute("list", list);
+			 System.out.println("컨트롤러 : " + list);
+				
+			 return "shop/adminStockEnrollForm";
+		
+		}
+		
+		
+		//재고관리 insert(출고/입고)
+
+		@RequestMapping("insertInventory.do")
+		public String insertInventory(ProStock stock) {
+					
+			aShopService.insertInventory(stock);
+					
+			return "redirect:inventoryList.do";
+		}
+		
+		
 }

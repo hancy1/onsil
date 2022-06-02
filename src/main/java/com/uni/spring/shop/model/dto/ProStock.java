@@ -34,4 +34,5 @@ public class ProStock {
 	private int amount; 			//수량
 	//private Date stockDate;		//등록날짜
 	private Timestamp stockDate;	//등록날짜
+	private String proName;			//판매상품명
 }

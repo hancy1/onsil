@@ -135,10 +135,10 @@
 				                        <td><input type="text" id="proCode" class="form-control" name="proCode" required></td>
 				                    </tr>
 				                    <tr>
-				                        <th><label for="cateCode">카테고리(다시해야됨)</label></th>
+				                        <th><label for="cateCode">카테고리</label></th>
 				                        <td>
 										<select name="cateCode">
-										    <option value="">카테선택</option>
+										    <option value="">카테고리를 선택하세요.</option>
 										    <option value="tree">나무</option>
 										    <option value="edible">식용식물</option>
 										    <option value="flower">꽃</option>

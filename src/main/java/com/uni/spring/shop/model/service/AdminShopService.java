@@ -52,6 +52,10 @@ public interface AdminShopService {
 
 	ArrayList<ProStock> selectInventoryList(ShopPageInfo pi);
 
+	ArrayList<Product> selectpCodeList();
+
+	void insertInventory(ProStock stock);
+
 	
 
 	

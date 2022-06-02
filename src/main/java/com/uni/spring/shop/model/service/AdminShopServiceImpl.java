@@ -183,5 +183,21 @@ public class AdminShopServiceImpl implements AdminShopService {
 		return aShopDao.selectInventoryList(sqlSession,pi);
 	}
 
+	@Override
+	public ArrayList<Product> selectpCodeList() {
+		// TODO Auto-generated method stub
+		return aShopDao.selectpCodeList(sqlSession);
+	}
+
+	@Override
+	public void insertInventory(ProStock stock) {
+		// TODO Auto-generated method stub
+		int result = aShopDao.insertInventory(sqlSession, stock);
+		
+		if(result <0) {
+			throw new CommException("사은품 추가 실패");
+		}
+	}
+
 
 }
