@@ -15,4 +15,6 @@ public interface BoardService {
 
 	void insertBoard(Board b);
 
+	void deleteBoard(int bno);
+
 }

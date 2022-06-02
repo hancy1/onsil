@@ -91,7 +91,7 @@ public class BoardController {
 	  
 	  boardService.insertBoard(b);   
 	  
-	  return "redirect:listBoard.do"; //글 작성하면 게시글 목록으로
+	  return "redirect:boardList.do"; //글 작성하면 게시글 목록으로
 		   
 	}
 
@@ -101,7 +101,7 @@ public class BoardController {
 		String resources = request.getSession().getServletContext().getRealPath("resources");	
 		System.out.println(resources);					//웹컨테이너에서의 resources 폴더 경로 추출
    
-		String savePath = resources + "\\upload_files\\"; //uplaod_files 안에 넣겠다
+		String savePath = resources + "\\b_upload_files\\"; //b_uplaod_files 안에 넣음
 
 		String originName = file.getOriginalFilename();
    
@@ -120,7 +120,42 @@ public class BoardController {
 			e.printStackTrace();
 			throw new CommException("file Upload error");
 		}
+		
 		return changeName;
+	}
+	
+	// 게시글 삭제하기
+	@RequestMapping("deleteBoard.do")
+	public String deleteBoard(int bno, String fileName, HttpServletRequest request) {
+		   
+		boardService.deleteBoard(bno);
+		   
+		if(!fileName.equals("")) { //파일이 첨부됐다면?
+			deleteFile(fileName, request); //파일 지우기
+		}
+		   
+		return "redirect:boardList.do"; //삭제하면 게시글 목록으로 		   
+	}
+
+	private void deleteFile(String fileName, HttpServletRequest request) {
+
+		String resources = request.getSession().getServletContext().getRealPath("resources");	
+
+		String savePath = resources + "\\b_upload_files\\";
+		   
+		File deleteFile = new File(savePath + fileName);
+		
+		deleteFile.delete();	
+	}
+	
+	@RequestMapping("updateForm.do")		
+	public ModelAndView updateForm(int bno, ModelAndView mv) {
+								//새로 조회해야해서 bno만 가져옴 
+		
+		mv.addObject("b", boardService.selectBoard(bno))
+		.setViewName("board/boardUpdateForm");
+
+		return mv;
 	}
 
 }

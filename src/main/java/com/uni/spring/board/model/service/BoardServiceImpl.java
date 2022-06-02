@@ -58,4 +58,15 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 	}
+
+	@Override
+	public void deleteBoard(int bno) {
+
+		int result = boardDao.deleteBoard(sqlSession, bno);
+		
+		if(result < 0) { // 결과가 0보다 작으면 
+			throw new CommException("게시글 삭제 실패");
+		}
+		
+	}
 }

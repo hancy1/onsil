@@ -71,13 +71,7 @@
                         </div>
 
                         <!-- Post Tags & Share -->
-                        <div class="post-tags-share d-flex justify-content-between align-items-center">
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <li><span>카테고리? : </span></li>
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
-                            </ol>
+                        <div class="post-tags-share d-flex justify-content-between align-items-center">                            
                             <!-- Share -->
                             <div class="post-share">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -85,6 +79,30 @@
                                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </div>
+                            <!-- 수정, 삭제 버튼 -->
+                            <c:if test="${ loginUser.userId eq b.userNo }">
+                            <ol class="popular-tags d-flex align-items-center flex-wrap">
+                                <li><span></span></li>
+                                <li><a onclick="bSubmit(1);">수정하기</a></li>
+                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
+                            </ol>
+                            <form id="postForm" action="" method="post">
+								<input type="hidden" name="bno" value="${ b.bNo }">
+								<input type="hidden" name="fileName" value="${ b.bChangeName }"> 
+							</form>
+                            <script>
+								function bSubmit(num){
+									var postForm = $("#postForm");
+						
+									if(num == 1){
+										postForm.attr("action", "updateForm.do");
+									}else{
+										postForm.attr("action", "deleteBoard.do");
+									}
+									postForm.submit();
+								}
+							</script>
+                            </c:if>
                         </div>
 
                         <!-- 댓글 -->
