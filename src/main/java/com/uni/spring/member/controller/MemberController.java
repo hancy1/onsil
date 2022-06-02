@@ -1,5 +1,7 @@
 package com.uni.spring.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.uni.spring.help.HelpPagination;
+import com.uni.spring.help.model.dto.Faq;
+import com.uni.spring.help.model.dto.Notice;
+import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.member.model.service.MemberService;
 import com.uni.spring.member.model.service.MemberServiceImpl;
@@ -193,5 +200,31 @@ public class MemberController {
 		session.setAttribute("msg", "다음에 또 만나요!");
 		return "redirect:logout.do";		
 		
+	}
+	
+	// 관리자 - 회원관리
+	@RequestMapping("adminMember.do")
+	public String selectAdminMemberList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = memberService.selectAdminMemberListCount(); // 상태 Y,N 상관없이 다 구하기
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Member> list = memberService.selectAdminMemberList(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "member/adminMemberListView";
+	}
+	
+	// 관리자 - 회원관리 디테일 뷰
+	@RequestMapping("adminMemberDetail.do")
+	public ModelAndView selectAdminMember(int mno, ModelAndView mv) {
+						
+		mv.addObject("m", memberService.selectAdminMember(mno)).setViewName("member/adminMemberDetailView");		
+		
+		return mv;		
 	}
 }

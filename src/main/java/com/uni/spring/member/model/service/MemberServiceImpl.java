@@ -1,11 +1,15 @@
 package com.uni.spring.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.help.model.dao.HelpDao;
+import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dao.MemberDao;
 import com.uni.spring.member.model.dto.Member;
 
@@ -107,6 +111,27 @@ public class MemberServiceImpl implements MemberService {
 			throw new CommException("회원탈퇴실패");
 		}
 		
+	}
+
+
+	@Override // 관리자 - 회원관리 회원수구하기
+	public int selectAdminMemberListCount() {
+		
+		return MemberDao.selectAdminMemberListCount(sqlSession);
+	}
+
+
+	@Override // 관리자 - 회원관리 회원리스트 가져오기
+	public ArrayList<Member> selectAdminMemberList(PageInfo pi) {
+		
+		return MemberDao.selectAdminMemberList(sqlSession, pi);
+	}
+
+
+	@Override // 관리자 - 회원관리 디테일뷰
+	public Member selectAdminMember(int mno) {
+		
+		return MemberDao.selectAdminMember(sqlSession, mno);
 	}
 
 

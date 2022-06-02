@@ -1,7 +1,10 @@
 package com.uni.spring.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
 
 public interface MemberService {
@@ -17,6 +20,12 @@ public interface MemberService {
 	Member updateMember(Member m) throws Exception; // 회원정보수정
 
 	void deleteMember(String userId); // 탈퇴하기
+
+	int selectAdminMemberListCount(); // 관리자 - 회원관리 회원수 구하기
+
+	ArrayList<Member> selectAdminMemberList(PageInfo pi); // 관리자 - 회원관리 회원리스트 가져오기
+
+	Member selectAdminMember(int mno); // 관리자 - 회원관리 디테일뷰
 
 	
 }
