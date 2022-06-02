@@ -121,6 +121,16 @@ public class AdminShopDao {
 		return (ArrayList)sqlSession.selectList("adminShopMapper.selectInventoryList", null, rowdounds);
 	}
 
+	public ArrayList<Product> selectpCodeList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectpCodeList");
+	}
+
+	public int insertInventory(SqlSessionTemplate sqlSession, ProStock stock) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("adminShopMapper.insertInventory",stock);
+	}
+
 
 
 	

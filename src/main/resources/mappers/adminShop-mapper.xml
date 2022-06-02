@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- 관리자페이지: 제품 등록 -->	
+	<!-- 관리자페이지: 사은품 등록 -->	
 	<insert id="insertFreebie">	
 		INSERT INTO FREEBIE VALUES(SEQ_FREE_NO.NEXTVAL, #{freeName}, #{originName}, #{changeName}, #{freePoint},#{freeAmount})
   
@@ -196,7 +196,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="proCode" column="PRO_CODE" />
 		<result property="stockStatus" column="STOCK_STATUS" />
 		<result property="amount" column="AMOUNT" />	
-		<result property="stockDate" column="STOCK_DATE" />		
+		<result property="stockDate" column="STOCK_DATE" />
+		<result property="proName" column="PRO_NAME" />			
 		
 	</resultMap>
 	
@@ -213,11 +214,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 관리자 페이지 : 등록된 재고관리 불러오기 -->
 	<select id="selectInventoryList" parameterType="ProStock" resultMap="ProStockResultSet">	
 		 
-	  SELECT *
-	  FROM PRO_STOCK	  
+	  SELECT A.STOCK_NO, A.PRO_CODE, A.STOCK_STATUS, A.AMOUNT, a.stock_date, b.pro_name
+	  FROM PRO_STOCK A
+      JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE 
+      ORDER BY A.STOCK_NO
 	    
 	</select>
 	
+	
+	<!-- 관리자 페이지 : 등록된 제품코드 select해오기 -->
+	<select id="selectpCodeList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT	  
+	 
+	</select>
+	
+	
+	<!-- 관리자페이지: 재고 등록 -->	
+	<insert id="insertInventory">	
+	
+		INSERT INTO PRO_STOCK VALUES(SEQ_STOCK_NO.NEXTVAL, #{proCode}, #{stockStatus},#{amount} ,DEFAULT)
+  
+  	</insert>
 	
 	
 	
