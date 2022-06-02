@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>정원 | 데일리로그</title>
-<!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">
-
-<!-- Core Stylesheet -->
-<link rel="stylesheet" href="resources/style.css">
-
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -78,24 +73,33 @@
                     </div>
                 </div>
             </div> -->
-            
 			<div class="row">
-				<c:if test=" ${ !empty dailyLog }">
+				<c:if test="${!dailyLog.isEmpty()}">
+				<c:forEach items="${dailyLog}" var="log">
 				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img src="resources/img/bg-img/admin1.jpg" class="card-img-top"
+						<img src="resources/garden_upload_files/mos.jpg" class="card-img-top"
 							alt="...">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<a href="#" class="btn btn-primary">자세히 보기</a>
+							<h5 class="card-title">타이틀</h5>
+							<p>
+							<c:choose>
+								<c:when test="${fn:length(log.content)>14}">
+									<c:out value="${fn:substring(log.content,0,13)}"/>...
+								</c:when>
+								<c:otherwise>
+									<c:out value="${log.content}"/>
+								</c:otherwise>
+							</c:choose>
+							</p>
+							<a href="logDetail.do?logNo=${log.logNo}" class="btn btn-outline-success">자세히 보기</a>
 						</div>
 					</div>
 				</div>
+				</c:forEach>
 				</c:if>
-				<c:if test=" ${ empty dailyLog }">
-				<h3>작성된 데일리로그가 없습니다. 새 글을 작성해 일상을 공유해보세요. </h3>
+				<c:if test="${ dailyLog.isEmpty() }">
+				<h3 align="center">작성된 데일리로그가 없습니다. 새 글을 작성해 일상을 공유해보세요. </h3>
 				</c:if>
 
 			</div>

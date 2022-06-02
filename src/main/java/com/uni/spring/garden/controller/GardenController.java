@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.GardenPagination;
+import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -230,7 +231,7 @@ public class GardenController {
 		return "redirect:neighborList.do";
 	}
 	
-	////=========================================================================================
+	//=========================================================================================
 	//식물등록 관리자페이지로 이동
 	@RequestMapping("adminPlant.do")
 	public String adminPlant(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
@@ -291,9 +292,52 @@ public class GardenController {
 		return "redirect:adminPlant.do";
 	}
 	
+	//=========================================================================================
+	//데일리로그
 	@RequestMapping("dailyLog.do")
-	public String dailyLog() {
+	public String dailyLog(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
+							Model model, HttpSession session) {
+		
+		String hostUser = (String) session.getAttribute("hostUser");
+		
+		System.out.println("hostUser 널 체크 전 " + hostUser);
+		
+		if(hostUser == null) {
+			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+			session.setAttribute("hostUser", hostUser);
+		}
+		
+		System.out.println("hostUser 널 체크 후 " + hostUser);
+		
+		//페이징
+		int listCount = gardenService.selectLogCount(hostUser);
+		
+		System.out.println("listCount확인" + listCount);
+		
+		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<DailyLog> dailyLog = gardenService.selectLogList(hostUser, pi);
+		
+		System.out.println("list확인 " +  dailyLog);
+		
+		model.addAttribute("dailyLog", dailyLog);
+		model.addAttribute("pi", pi);
+		
 		return "garden/dailyLog";
 	}
+	
+	@RequestMapping("logDetail.do")
+	public String selectLog(String logNo, Model model) {
+		
+		System.out.println("logNo확인" + logNo);
+		
+		DailyLog log = gardenService.selectLog(logNo);
+		
+		model.addAttribute("log", log);
+		
+		return "garden/dailyLogDetailView";
+	}
+	
+	
 }
 
