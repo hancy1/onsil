@@ -54,7 +54,9 @@
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>${ t.userNo }</td>
+                    <td>${ t.userId }</td>
+                </tr>
+                <tr>    
                     <th>작성일</th>
                     <td>${ t.ticketDate }</td>
                 </tr>

@@ -161,11 +161,13 @@
         <br><br>
     </div>
     
+    <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+    
     <script>
     	$(function(){
     		$("#ticketList tbody tr").click(function(){
     			location.href="detailTicket.do?bno=" + $(this).children().eq(0).text();
-    			console.log(bno,"번호");
+    			
     		});
     	});
     </script>
@@ -174,7 +176,7 @@
     
     <!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->
