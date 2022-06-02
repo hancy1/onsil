@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -44,6 +45,14 @@ public interface AdminShopService {
 	ArrayList<ProReview> selectReviewList(ShopPageInfo pi);
 
 	void deleteAdminReview(int reviewNo);
+
+	
+	//재고
+	int inventoryListCount();
+
+	ArrayList<ProStock> selectInventoryList(ShopPageInfo pi);
+
+	
 
 	
 

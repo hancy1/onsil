@@ -10,6 +10,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.AdminShopDao;
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -165,6 +166,21 @@ public class AdminShopServiceImpl implements AdminShopService {
 		if(result <0) {
 			throw new CommException("리뷰 삭제 실패");
 		}
+	}
+
+	
+	//인벤토리(재고영역)
+	
+	@Override
+	public int inventoryListCount() {
+		// TODO Auto-generated method stub
+		return aShopDao.inventoryListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<ProStock> selectInventoryList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return aShopDao.selectInventoryList(sqlSession,pi);
 	}
 
 
