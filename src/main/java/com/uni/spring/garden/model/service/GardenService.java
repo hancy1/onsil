@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.uni.spring.board.model.dto.Board;
+import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -51,6 +52,12 @@ public interface GardenService {
 	PlantInfo selectPlantInfo(String regNo);
 
 	void updatePlantInfo(PlantInfo info);
+
+	int selectLogCount(String hostUser);
+
+	ArrayList<DailyLog> selectLogList(String hostUser, PageInfo pi);
+
+	DailyLog selectLog(String logNo);
 
 
 	

@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.board.model.dto.Board;
+import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -133,6 +134,25 @@ public class GardenDao {
 	public int updatePlantInfo(PlantInfo info, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.update("gardenMapper.updatePlantInfo", info);
+	}
+
+	public int selectLogCount(String hostUser, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectLogCount", hostUser);
+	}
+
+	public ArrayList<DailyLog> selectLogList(String hostUser, PageInfo pi, SqlSessionTemplate sqlSession) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectLogList", hostUser, rowBounds);
+	}
+
+	public DailyLog selectLog(String logNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectLog", logNo);
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dao.GardenDao;
+import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -186,6 +187,24 @@ public class GardenServiceImpl implements GardenService{
 			throw new CommException("식물정보 삭제 실패");
 		} 
 		
+	}
+
+	@Override
+	public int selectLogCount(String hostUser) {
+		
+		return gardenDao.selectLogCount(hostUser, sqlSession);
+	}
+
+	@Override
+	public ArrayList<DailyLog> selectLogList(String hostUser, PageInfo pi) {
+		
+		return gardenDao.selectLogList(hostUser, pi, sqlSession);
+	}
+
+	@Override
+	public DailyLog selectLog(String logNo) {
+		
+		return gardenDao.selectLog(logNo, sqlSession);
 	}
 
 	
