@@ -40,4 +40,9 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
+	public int deleteBoard(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.deleteBoard", bno);
+	}
+
 }

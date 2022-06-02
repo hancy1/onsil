@@ -57,6 +57,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD
         VALUES
-        (SEQ_B_NO.NEXTVAL, #{userNo}, #{bCategoryNo}, #{bTitle}, #{bContent}, SYSDATE, DEFAULT, #{bOriginName},#{bChangeName}, DEFAULT)
+        (SEQ_B_NO.NEXTVAL, #{userNo}, #{bCategoryNo}, #{bTitle}, #{bContent}, SYSDATE, DEFAULT, #{bOriginName}, #{bChangeName}, 'Y')
 	</insert>
+		
+	<!-- 게시글 삭제 -->	
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE BOARD
+		SET STATUS = 'N' 
+		WHERE B_NO=#{bno}	
+	</update>
 </mapper>
