@@ -20,6 +20,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="delDate" column="DEL_DATE" />	
 		<result property="status" column="STATUS" />	
 	</resultMap>
+	
+	<resultMap type="Member" id="AdminMemberResultSet"> 
+		<id property="userNo" column="USER_NO"/>		
+		<result property="userId" column="USER_ID" />		
+		<result property="userName" column="USER_NAME" />	
+		<result property="birth" column="BIRTH" />
+		<result property="gender" column="GENDER" />
+		<result property="address" column="ADDRESS" />
+		<result property="addressDetail" column="ADDRESS_DETAIL" />
+		<result property="tel" column="TEL" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />	
+		<result property="preference" column="PREFER_PLANTS" />	
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="delDate" column="DEL_DATE" />	
+		<result property="status" column="STATUS" />	
+	</resultMap>
 
 	<!-- 암호화 하기 전 로그인  
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">	
@@ -67,4 +84,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USER_ID=#{userId}
 	</update>
 	
+	<!-- 관리자 - 회원관리 회원수 구하기 -->
+	<select id="selectAdminMemberListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<!-- 관리자 - 회원관리 회원리스트 불러오기 -->
+	<select id="selectAdminMemberList" resultMap="AdminMemberResultSet">
+		SELECT A.USER_NO, A.USER_ID, A.USER_NAME, A.BIRTH, B.GENDER, A.ADDRESS, A.ADDRESS_DETAIL,
+    			A.TEL, A.PHONE, A.EMAIL, C.PREFER_PLANTS, A.ENROLL_DATE, A.DEL_DATE, A.STATUS
+		FROM MEMBER A
+		JOIN GENDER B ON A.GENDER = B.GEN_CODE
+		JOIN PREFERENCE C ON A.PREFERENCE = C.PREFER_CODE
+		ORDER BY A.USER_NO DESC
+	</select>
+	
+	<!-- 관리자 - 회원관리 디테일뷰 -->
+	<select id="selectAdminMember" resultMap="AdminMemberResultSet">
+		SELECT A.USER_NO, A.USER_ID, A.USER_NAME, A.BIRTH, B.GENDER, A.ADDRESS, A.ADDRESS_DETAIL,
+    			A.TEL, A.PHONE, A.EMAIL, C.PREFER_PLANTS, A.ENROLL_DATE, A.DEL_DATE, A.STATUS
+		FROM MEMBER A
+		JOIN GENDER B ON A.GENDER = B.GEN_CODE
+		JOIN PREFERENCE C ON A.PREFERENCE = C.PREFER_CODE
+		WHERE USER_NO = #{mno}
+	</select>
 </mapper>

@@ -1,8 +1,13 @@
 package com.uni.spring.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uni.spring.help.model.dto.Notice;
+import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
 
 @Repository
@@ -37,6 +42,27 @@ public class MemberDao {
 	public int deleteMember(SqlSessionTemplate sqlSession, String userId) {
 		
 		return sqlSession.update("memberMapper.deleteMember", userId);
+	}
+
+	// 관리자 - 회원관리 회원수구하기
+	public static int selectAdminMemberListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.selectAdminMemberListCount");
+	}
+
+	// 관리자 - 회원관리 회원리스트 가져오기
+	public static ArrayList<Member> selectAdminMemberList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAdminMemberList", null, rowBounds);
+	}
+
+	// 관리자 - 회원관리 디테일뷰
+	public static Member selectAdminMember(SqlSessionTemplate sqlSession, int mno) {
+		
+		return (Member)sqlSession.selectOne("memberMapper.selectAdminMember", mno);
 	}
 
 }
