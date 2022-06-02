@@ -155,4 +155,9 @@ public class GardenDao {
 		return sqlSession.selectOne("gardenMapper.selectLog", logNo);
 	}
 
+	public int insertDailyLog(DailyLog log, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertDailyLog", log);
+	}
+
 }

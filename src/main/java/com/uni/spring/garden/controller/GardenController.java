@@ -1,9 +1,14 @@
 package com.uni.spring.garden.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.uni.spring.board.model.dto.Board;
+import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.Neighbor;
@@ -338,6 +346,60 @@ public class GardenController {
 		return "garden/dailyLogDetailView";
 	}
 	
+	@RequestMapping("insertLogForm.do")
+	public String insertLogForm() {
+		return "garden/dailyLogInsertForm";
+	}
 	
+	@RequestMapping("insertDailyLog.do")
+	public String insertDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, HttpServletRequest request) {
+		
+		System.out.println("log 확인 " + log);
+		
+		//파일첨부하지 않으면 빈 문자열이 넘어옴
+		if(!file.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(file,request);
+			
+			if(changeName != null) {
+				log.setFileName(file.getOriginalFilename());
+				log.setServerName(changeName);
+			}
+		}
+		
+		System.out.println("log 확인 " + log);
+		gardenService.insertDailyLog(log);
+			
+		return "redirect:dailyLog.do";
+	}
+	
+	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		//경로찾기 . 웹컨테이너에서의 resources 폴더 경로 추출
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		System.out.println(resources);
+		
+		String savePath = resources + "\\garden_upload_files\\";
+		System.out.println("savePath 확인 " + savePath);
+		
+		String originName = file.getOriginalFilename();
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 년월일시분초 가져온다
+		
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ext;
+		
+		try {
+			file.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			// 파일 업로드 실패했을 때
+			e.printStackTrace();
+			throw new CommException("File Upload Error");
+		}
+		
+		return changeName;
+	}
 }
 
