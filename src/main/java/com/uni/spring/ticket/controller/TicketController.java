@@ -109,9 +109,11 @@ public class TicketController {
 	}
 	
 
+	//제품 디테일페이지 연결
 	@RequestMapping("detailTicket.do")
 	public ModelAndView selectBoard(int bno,ModelAndView mv) {
 		
+		System.out.println("디테일 ticketNo : " + bno);
 		Ticket t = ticketService.selectTicket(bno);
 		
 		mv.addObject("t",t).setViewName("Ticket/ticketDetailView");
