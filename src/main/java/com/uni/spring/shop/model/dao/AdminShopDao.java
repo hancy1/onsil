@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
@@ -105,6 +106,23 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.deleteAdminReview",reviewNo);
 	}
 
+	
+	//재고관리영역
+	public int inventoryListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.inventoryListCount");
+	}
+
+	public ArrayList<ProStock> selectInventoryList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectInventoryList", null, rowdounds);
+	}
 
 
+
+	
+	
 }

@@ -188,4 +188,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</update>
 	
 	
+	<!-- 재고관리 리절트맵 -->
+	
+	<resultMap type="ProStock" id="ProStockResultSet"> 
+	
+		<id property="stockNo" column="STOCK_NO"/>		
+		<result property="proCode" column="PRO_CODE" />
+		<result property="stockStatus" column="STOCK_STATUS" />
+		<result property="amount" column="AMOUNT" />	
+		<result property="stockDate" column="STOCK_DATE" />		
+		
+	</resultMap>
+	
+	
+	<!-- 관리자 페이지 : 등록된 재고관리 수  -->
+	<select id = "inventoryListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_STOCK
+  	
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 등록된 재고관리 불러오기 -->
+	<select id="selectInventoryList" parameterType="ProStock" resultMap="ProStockResultSet">	
+		 
+	  SELECT *
+	  FROM PRO_STOCK	  
+	    
+	</select>
+	
+	
+	
+	
 </mapper>

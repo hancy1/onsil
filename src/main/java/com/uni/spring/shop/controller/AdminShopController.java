@@ -20,6 +20,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.AdminShopService;
@@ -224,7 +225,7 @@ public class AdminShopController {
 			return mv;
 		}
 		
-		
+		//사은품 리스트
 		@RequestMapping("adminFreebieList.do")
 		public String adminFreebieList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
 			
@@ -402,4 +403,26 @@ public class AdminShopController {
 			return "redirect:adminReviewList.do";
 		}
 		
+		
+		//재고List
+		@RequestMapping("inventoryList.do")
+		public String selectInventoryList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
+			
+			
+			int listCount = aShopService.inventoryListCount();
+			
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<ProStock> list = aShopService.selectInventoryList(pi);
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			
+			
+			
+			return "shop/adminInventoryList";
+		}
 }
