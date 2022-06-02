@@ -54,6 +54,9 @@
 					<!-- Section Heading -->
 					<div class="section-heading text-center">
 						<h2>DAILY LOG</h2>
+						<c:if test="${ loginUser.userId eq hostUser }">
+						<button class="btn btn-outline-success" type="button" onclick="location.href='insertLogForm.do'">글쓰기</button>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -78,8 +81,14 @@
 				<c:forEach items="${dailyLog}" var="log">
 				<div class="col">
 					<div class="card" style="width: 18rem;">
+					<c:if test="${log.serverName != null}">
+						<img src="resources/garden_upload_files/${log.serverName}" class="card-img-top"
+							alt="...">
+					</c:if>
+					<c:if test="${log.serverName == null}">
 						<img src="resources/garden_upload_files/mos.jpg" class="card-img-top"
 							alt="...">
+					</c:if>
 						<div class="card-body">
 							<h5 class="card-title">타이틀</h5>
 							<p>

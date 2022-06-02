@@ -59,6 +59,8 @@ public interface GardenService {
 
 	DailyLog selectLog(String logNo);
 
+	void insertDailyLog(DailyLog log);
+
 
 	
 

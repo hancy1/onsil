@@ -207,6 +207,15 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.selectLog(logNo, sqlSession);
 	}
 
+	@Override
+	public void insertDailyLog(DailyLog log) {
+		
+		int result =  gardenDao.insertDailyLog(log, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 작성 실패");
+		} 
+	}
+
 	
 
 	

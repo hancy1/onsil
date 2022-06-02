@@ -135,7 +135,7 @@
 		</div>
 </section>
 
-<div id="pagingArea">
+		<div id="pagingArea">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">

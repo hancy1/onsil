@@ -281,4 +281,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
 	</select>
 	
+	<insert id="insertDailyLog">
+		
+		INSERT INTO DAILYLOG VALUES
+		(SEQ_LOG_NO.NEXTVAL, #{userNo}, #{fileName}, #{serverName}, #{content}, DEFAULT, DEFAULT)
+		
+	</insert>
+	
 </mapper>
