@@ -260,6 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM DAILYLOG
 		WHERE 1=1
 		AND USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		AND STATUS = 'Y'
 	
 	</select>
 	
@@ -269,6 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM DAILYLOG A
         JOIN MEMBER B USING(USER_NO)
         WHERE B.USER_ID = #{hostUser}
+        AND A.STATUS = 'Y'
         
 	</select>
 	
@@ -287,5 +289,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(SEQ_LOG_NO.NEXTVAL, #{userNo}, #{fileName}, #{serverName}, #{content}, DEFAULT, DEFAULT)
 		
 	</insert>
+	
+	<update id="updateDailylog">
+	
+		UPDATE DAILYLOG
+		SET CONTENT = #{content},
+			FILE_ORIGIN_NAME = #{fileName},
+			FILE_SERVER_NAME = #{serverName}
+		WHERE LOG_NO = #{logNo}
+		
+	</update>
+	
+	<delete id="deleteDailyLog">
+	
+		UPDATE DAILYLOG
+		SET STATUS = 'N'
+		WHERE LOG_NO = #{logNo}
+		 
+	</delete>
+	
+	<!-- 데일리로그 댓글 -->
+	<resultMap type="LogComment" id="LogCommentResultSet"> 
+		<id property="commentNo" column="COMMENT_NO"/>
+		<result property="logNo" column="LOG_NO"/>
+		<result property="userNo" column="USER_ID" />		
+		<result property="comment" column="COMMENT" />
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="status" column="STATUS" />	
+	</resultMap>
+	
+	<select id="selectLogCommentCount" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM LOG_COMMENT
+		WHERE LOG_NO = #{logNo}
+		AND STATUS = 'Y'
+	
+	</select>
+	
+	<select id="selectLogCommentList" resultMap="LogCommentResultSet">
+	
+		SELECT A.COMMENT_NO, A.LOG_NO, B.USER_ID, A.CONTENT, A.ENROLL_DATE, A.STATUS
+		FROM LOG_COMMENT A
+		JOIN MEMBER B USING (USER_NO)
+		WHERE LOG_NO = #{logNo}
+		AND A.STATUS = 'Y'
+		
+	</select>
 	
 </mapper>

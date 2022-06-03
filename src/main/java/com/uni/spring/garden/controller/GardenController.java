@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.DailyLog;
+import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -335,13 +335,24 @@ public class GardenController {
 	}
 	
 	@RequestMapping("logDetail.do")
-	public String selectLog(String logNo, Model model) {
+	public String selectLog(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
+							String logNo, Model model, HttpSession session) {
 		
 		System.out.println("logNo확인" + logNo);
 		
 		DailyLog log = gardenService.selectLog(logNo);
 		
+		int commentCount = gardenService.selectLogCommentCount(logNo);
+		
+		PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
+		
+		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(pi, logNo);
+		
+		System.out.println("comment 확인" + comment);
+		
 		model.addAttribute("log", log);
+		model.addAttribute("comment", comment);
+		model.addAttribute("pi", pi);
 		
 		return "garden/dailyLogDetailView";
 	}
@@ -373,6 +384,60 @@ public class GardenController {
 		return "redirect:dailyLog.do";
 	}
 	
+	@RequestMapping("updateDailyLog.do")
+	public String updateDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, HttpServletRequest request, Model model) {
+		
+		String orgChangeName = log.getServerName();
+		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
+				
+			String changeName = saveFile(file, request);
+			
+			log.setFileName(file.getOriginalFilename());
+			log.setServerName(changeName);
+			
+			if(orgChangeName != null) {//기존 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
+				deleteFile(orgChangeName, request);
+			}
+
+		}
+		
+		gardenService.updateDailylog(log);
+		
+		model.addAttribute("logNo", log.getLogNo());
+		model.addAttribute("msg", "데일리로그를 수정했습니다.");
+				
+		return "redirect:logDetail.do";
+	}
+	
+	@RequestMapping("deleteDailyLog.do")
+	public String deleteDailyLog(String logNo, String fileName, HttpServletRequest request, Model model) {
+		
+		gardenService.deleteDailyLog(logNo);
+		
+		if(!fileName.equals("")) {
+			//첨부된 파일이 있으면 파일도 삭제하기
+			deleteFile(fileName, request);
+		}
+		
+		model.addAttribute("msg", "데일리로그를 삭제했습니다.");
+		
+		return "redirect:dailyLog.do";
+	}
+	
+
+	//=========================================================================================
+	//댓글 
+	@RequestMapping("updateLog.do")
+	public String updateLog(String logNo, Model model) {
+		
+		DailyLog log = gardenService.selectLog(logNo);
+		model.addAttribute("log", log);
+	
+		return "garden/dailyLogUpdateForm";
+	}
+	
+	//=========================================================================================
+	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		
@@ -400,6 +465,18 @@ public class GardenController {
 		}
 		
 		return changeName;
+	}
+	
+	private void deleteFile(String fileName, HttpServletRequest request) {
+
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = resources + "\\upload_files\\";
+		
+		//경로의 파일을 가리킴
+		File deleteFile = new File(savePath + fileName);
+		deleteFile.delete();
+		
 	}
 }
 
