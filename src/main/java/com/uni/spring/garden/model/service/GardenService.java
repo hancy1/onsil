@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.DailyLog;
+import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -60,6 +61,14 @@ public interface GardenService {
 	DailyLog selectLog(String logNo);
 
 	void insertDailyLog(DailyLog log);
+
+	int selectLogCommentCount(String logNo);
+
+	ArrayList<DailyLogComment> selectLogCommentList(PageInfo pi, String logNo);
+
+	void updateDailylog(DailyLog log);
+
+	void deleteDailyLog(String logNo);
 
 
 	

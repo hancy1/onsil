@@ -12,6 +12,7 @@ import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dao.GardenDao;
 import com.uni.spring.garden.model.dto.DailyLog;
+import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -213,6 +214,36 @@ public class GardenServiceImpl implements GardenService{
 		int result =  gardenDao.insertDailyLog(log, sqlSession);
 		if(result < 0) {
 			throw new CommException("데일리로그 작성 실패");
+		} 
+	}
+
+	@Override
+	public int selectLogCommentCount(String logNo) {
+		
+		return gardenDao.selectLogCommentCount(logNo, sqlSession);
+	}
+
+	@Override
+	public ArrayList<DailyLogComment> selectLogCommentList(PageInfo pi, String logNo) {
+		
+		return gardenDao.selectLogCommentList(logNo, pi, sqlSession);
+	}
+
+	@Override
+	public void updateDailylog(DailyLog log) {
+		
+		int result =  gardenDao.updateDailylog(log, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 수정 실패");
+		} 
+	}
+
+	@Override
+	public void deleteDailyLog(String logNo) {
+		
+		int result =  gardenDao.deleteDailyLog(logNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 삭제 실패");
 		} 
 	}
 

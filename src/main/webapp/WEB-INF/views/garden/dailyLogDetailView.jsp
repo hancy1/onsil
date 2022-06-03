@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +62,7 @@
                                 </div>
                                 <div class="post-thumbnail mb-30">
                                 	<c:if test="${ log.serverName != null }">
-                                    <img src="resources/img/bg-img/35.jpg" alt="">
+                                    <img src="resources/garden_upload_files/${log.serverName}" alt="">
                                     </c:if>
                                 </div>
                                 <p>${log.content}</p>
@@ -75,7 +76,29 @@
                                     </div>
                                 </div> -->
                             </div>
+                            <c:if test="${ hostUser == loginUser.userId }">
+                            <a class="btn btn-outline-success btn-sm" href="updateLog.do?logNo=${log.logNo}"><i class="fa-solid fa-eraser"></i></a>
+                            <button class="btn btn-outline-success btn-sm" type="button" onclick='deleteLog();'><i class="fa-solid fa-trash-can"></i></button>
+                        	</c:if>
                         </div>
+                        <form id="postForm" action="deleteDailyLog.do" method="post">
+							<input type="hidden" name="logNo" value="${ log.logNo }">
+							<input type="hidden" name="fileName" value="${ log.fileName }"> 
+						</form>
+						<!-- jQuery-2.2.4 js -->
+						<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+                        <script>
+                        
+                        	function deleteLog(){
+                        		
+                        		var yn = confirm("데일리로그를 삭제하시겠습니까?")
+                        		var postForm = $("#postForm");
+                        		if(yn){
+                        			postForm.submit();
+                        		}
+                        	}
+                        
+                        </script>
 
 						<!-- 태그 부분과 공유하기 기능 버튼 -->
                         <!-- Post Tags & Share 
@@ -97,29 +120,43 @@
 
                         <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
-                            <h6 class="headline">2 Comments</h6>
-
+                            <h6 class="headline">${fn:length(comment)} Comments</h6>
                             <ol>
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
+                                	<c:if test="${ !comment.isEmpty()}">
+                                	<c:forEach items="${comment}" var="c">
                                     <div class="comment-wrapper d-flex">
                                         <!-- Comment Meta -->
-                                        
+                                        <div class="comment-author">
+                                            <img src="resources/img/bg-img/37.jpg" alt="">
+                                        </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <h5>Simona Halep</h5>
-                                                <span class="comment-date">09:00 AM,  20 Jun 2018</span>
+                                                <h5>${c.userNo}</h5>
+                                                <span class="comment-date">${c.enrollDate}</span>
                                             </div>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
+                                            <p>${c.content}</p>
                                             <a class="active" href="#">Reply</a>
                                         </div>
                                     </div>
+                                   </c:forEach>
+                                    </c:if>
+                                    <c:if test="${ comment.isEmpty()}">
+                                    	<div class="comment-wrapper d-flex">
+                                        <div class="comment-content">
+                                            <p>작성된 댓글이 없습니다</p>
+                                        </div>
+                                    	</div>
+                                    </c:if>
+                                    <!-- 
+                                    리댓 기능
                                     <ol class="children">
                                         <li class="single_comment_area">
                                             <div class="comment-wrapper d-flex">
                                                 
-                                                <!-- Comment Content -->
+                                                <!-- Comment Content 
                                                 <div class="comment-content">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <h5>Rafael Nadal</h5>
@@ -130,24 +167,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ol>
-                                </li>
-                                <li class="single_comment_area">
-                                    <div class="comment-wrapper d-flex">
-                                        <!-- Comment Meta -->
-                                        <div class="comment-author">
-                                            <img src="resources/img/bg-img/39.jpg" alt="">
-                                        </div>
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h5>Maria Sharapova</h5>
-                                                <span class="comment-date">02:20 PM,  20 Jun 2018</span>
-                                            </div>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
-                                            <a class="active" href="#">Reply</a>
-                                        </div>
-                                    </div>
+                                    </ol> -->
                                 </li>
                             </ol>
                         </div>
@@ -161,7 +181,7 @@
                                     <!-- Comment Form -->
                                     <form action="#" method="post">
                                         <div class="row">
-                                            <div class="col-12 col-md-6">
+                                            <!-- <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="contact-name" placeholder="Name">
                                                 </div>
@@ -170,7 +190,7 @@
                                                 <div class="form-group">
                                                     <input type="email" class="form-control" id="contact-email" placeholder="Email">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Comment"></textarea>
@@ -425,8 +445,7 @@
 	<script src="resources/js/scripts.js"></script>
 	
 	<!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->

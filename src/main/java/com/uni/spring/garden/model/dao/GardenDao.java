@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.DailyLog;
+import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -158,6 +159,30 @@ public class GardenDao {
 	public int insertDailyLog(DailyLog log, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.insert("gardenMapper.insertDailyLog", log);
+	}
+
+	public int selectLogCommentCount(String logNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectLogCommentCount", logNo);
+	}
+
+	public ArrayList<DailyLogComment> selectLogCommentList(String logNo, PageInfo pi, SqlSessionTemplate sqlSession) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectLogCommentList", logNo, rowBounds);
+	}
+
+	public int updateDailylog(DailyLog log, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updateDailylog", log);
+	}
+
+	public int deleteDailyLog(String logNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.delete("gardenMapper.deleteDailyLog", logNo);
 	}
 
 }
