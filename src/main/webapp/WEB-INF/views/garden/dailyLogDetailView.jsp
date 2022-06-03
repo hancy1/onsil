@@ -60,37 +60,40 @@
                                     <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>${log.enrollDate}</a>
                                 </div>
                                 <div class="post-thumbnail mb-30">
+                                	<c:if test="${ log.serverName != null }">
                                     <img src="resources/img/bg-img/35.jpg" alt="">
+                                    </c:if>
                                 </div>
                                 <p>${log.content}</p>
-                                <div class="row mb-30">
-                                    <div class="col-lg-7">
+                                <!-- <div class="row mb-30">
+                                    <div class="col-lg-12">
                                         <p>Nullam lectus elit, volutpat velo justo sit damet, tincidunt dapibus turpis. Vivamus idelit nec enim tristique blandit in sit down metunc. Maecenas accumsan nunc quis nisl porttitor varius sed luctus ligula. Aeneamana pellentesque enim eu magna vehicula suada.</p>
                                         <p>Quisque suscipit elit sit ametz pellentesque scelerisque. Integer actioner cursu quam, estina portitor cant. Vestibulum luctus libero urna gamora scelerisque laoret. Quisque nect facilisis neque. Integer vitaer dapibus purus, fames turpis egestas. Nullam vulputa nisl tempus luctus.</p>
                                     </div>
                                     <div class="col-lg-5">
                                         <img src="resources/img/bg-img/36.jpg" alt="">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
-                        <!-- Post Tags & Share -->
-                        <div class="post-tags-share d-flex justify-content-between align-items-center">
-                            <!-- Tags -->
+						<!-- 태그 부분과 공유하기 기능 버튼 -->
+                        <!-- Post Tags & Share 
+                        <div class="post-tags-share d-flex justify-content-between align-items-center">-->
+                            <!-- Tags 
                             <ol class="popular-tags d-flex align-items-center flex-wrap">
                                 <li><span>Tag:</span></li>
                                 <li><a href="#">PLANTS</a></li>
                                 <li><a href="#">CACTUS</a></li>
-                            </ol>
+                            </ol>-->
                             <!-- Share 
                             <div class="post-share">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </div>-->
-                        </div>
+                            </div>
+                        </div>-->
 
                         <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
