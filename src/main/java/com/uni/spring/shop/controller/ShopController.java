@@ -14,6 +14,7 @@ import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
+import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.ShopService;
@@ -60,5 +61,32 @@ public class ShopController {
 		
 		return "shop/myPointList";
 	}
+	
+	
+	
+	//마이 리뷰 List 연결
+	@RequestMapping("myReviewList.do")
+	public String selectMyReviewList(Model model, HttpSession session, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+				
+		String userNoS= ((Member) session.getAttribute("loginUser")).getUserNo();		
+		int userNo = Integer.parseInt(userNoS);
+		
+		int listCount = shopService.myReviewListCount(userNo);
+		
+		
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<ProReview> list = shopService.selectMyReviewList(pi,userNo);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		
+		
+		return "shop/myReviewList";
+	}
+	
+	
 
 }
