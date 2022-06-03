@@ -40,6 +40,7 @@
 		<typeAlias type="com.uni.spring.shop.model.dto.Cart" alias="Cart"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.PointInfo" alias="PointInfo"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.ProStock" alias="ProStock"/>
+		<typeAlias type="com.uni.spring.shop.model.dto.ProReview" alias="ProReview"/>
 		
 	</typeAliases>
 	

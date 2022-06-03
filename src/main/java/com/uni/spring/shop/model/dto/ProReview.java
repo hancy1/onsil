@@ -28,19 +28,27 @@ public class ProReview {
 	REVIEW_DATE
 	REVIEW_COUNT
 	REVIEW_STATUS
+	
+	
+	USER_ID
+	PRO_NAME
+	
 	*/
 	
-	private int reviewNo; //리뷰번호
-	private int reviewWriter; //작성자(유저번호)
-	private String proCode; //제품코드
-	private int reviewStar; //별점	
-	private String reviewTitle;//제목
-	private String reviewContent;//내용
-	private String originName;//첨부파일 원본명
-	private String changeName;//첨부파일 수정명
-	private Date reviewDate;//등록날짜
-	private int reviewCount; //조회수
-	private String reviewStatus; //리뷰상태
+	private int reviewNo; 			//리뷰번호
+	private int reviewWriter; 		//작성자(유저번호)
+	private String proCode;			//제품코드
+	private int reviewStar; 		//별점	
+	private String reviewTitle;		//제목
+	private String reviewContent;	//내용
+	private String originName;		//첨부파일 원본명
+	private String changeName;		//첨부파일 수정명
+	private Date reviewDate;		//등록날짜
+	private int reviewCount; 		//조회수
+	private String reviewStatus; 	//리뷰상태
 	
+	
+	private String userId; 			//유저아이디
+	private String proName; 		//제품명
 	
 }

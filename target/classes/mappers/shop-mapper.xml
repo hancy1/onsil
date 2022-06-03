@@ -44,5 +44,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  WHERE USER_NO=#{userNo}
 	    
 	</select>
+	
+	
+	
+	<resultMap type="ProReview" id="ProReviewResultSet"> 
+	
+		<id property="reviewNo" column="REVIEW_NO"/>		
+		<result property="reviewWriter" column="REVIEW_WRITER" />
+		<result property="proCode" column="PRO_CODE" />
+		<result property="reviewStar" column="REVIEW_STAR" />	
+		<result property="reviewTitle" column="REVIEW_TITLE" />
+		<result property="reviewContent" column="REVIEW_CONTENT" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
+		<result property="reviewDate" column="REVIEW_DATE" />
+		<result property="reviewCount" column="REVIEW_COUNT" />
+		<result property="reviewStatus" column="REVIEW_STATUS" />
+		
+		
+		<result property="userId" column="USER_ID" />
+		<result property="proName" column="PRO_NAME" />
+		
+		
+	</resultMap>
+	
+	
+	
+	<!-- 등록된 my 리뷰 수 -->
+	<select id = "myReviewListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_REVIEW
+  	WHERE REVIEW_STATUS='Y'
+	AND REVIEW_WRITER=#{userNo}
+  	
+    
+  	</select>
+
+	<!-- 등록된 my리뷰 select해오기 -->
+	<select id="selectMyReviewList" parameterType="ProReview" resultMap="ProReviewResultSet">	
+	  
+	  SELECT *
+	  FROM PRO_REVIEW A
+	  JOIN MEMBER B ON A.REVIEW_WRITER = B.USER_NO
+	  JOIN PRODUCT C ON A.PRO_CODE = C.PRO_CODE  
+	  WHERE REVIEW_STATUS='Y'
+	  AND REVIEW_WRITER=#{userNo}
+	    
+	</select>
+	
+	
+	
+	
 
 </mapper>
