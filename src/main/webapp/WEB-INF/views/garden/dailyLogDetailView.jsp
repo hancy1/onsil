@@ -77,7 +77,7 @@
                                 </div> -->
                             </div>
                             <c:if test="${ hostUser == loginUser.userId }">
-                            <a class="btn btn-outline-success btn-sm" href="updateLog.do?logNo=${log.logNo}"><i class="fa-solid fa-eraser"></i></a>
+                            <a class="btn btn-outline-success btn-sm" href="updateDailyLogForm.do?logNo=${log.logNo}"><i class="fa-solid fa-eraser"></i></a>
                             <button class="btn btn-outline-success btn-sm" type="button" onclick='deleteLog();'><i class="fa-solid fa-trash-can"></i></button>
                         	</c:if>
                         </div>
@@ -129,7 +129,9 @@
                                     <div class="comment-wrapper d-flex">
                                         <!-- Comment Meta -->
                                         <div class="comment-author">
-                                            <img src="resources/img/bg-img/37.jpg" alt="">
+                                            <!-- <img src="resources/img/bg-img/37.jpg" alt=""> -->
+                                            <i class="fa-solid fa-seedling"></i>
+                                            <i class="fa-solid fa-seedling"></i>
                                         </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
@@ -138,7 +140,11 @@
                                                 <span class="comment-date">${c.enrollDate}</span>
                                             </div>
                                             <p>${c.content}</p>
-                                            <a class="active" href="#">Reply</a>
+                                            <a class="active" href="#">Reply</a> |
+                                            <c:if test="${loginUser.userId == c.userNo }">
+                                            <a class="active" href="#">Modify</a> |
+                                            <a class="active" href="#">Delete</a>
+                                            </c:if>
                                         </div>
                                     </div>
                                    </c:forEach>
@@ -179,28 +185,16 @@
 
                                 <div class="contact-form-area">
                                     <!-- Comment Form -->
-                                    <form action="#" method="post">
                                         <div class="row">
-                                            <!-- <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="contact-name" placeholder="Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                                                </div>
-                                            </div> -->
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Comment"></textarea>
+                                                    <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn">Post Comment</button>
+                                                <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </div>    
                                 </div>
                             </div>
                         </div>
@@ -208,6 +202,40 @@
                     </div>
                 </div>
 
+<script>
+
+	function insertComment(){
+		
+		var content = $('#content').val();
+		var logNo = ${log.logNo};
+		
+		if($("#content").val().trim().length != 0){
+			
+			$.ajax({
+				url:"insertLogComment.do",
+				type:"post",
+				data:{content:content,
+					  logNo:logNo,
+					  userNo:"${loginUser.userNo}"},
+				success:function(result){
+					
+					if(result > 0){
+						$("#content").val("");
+						history.go(0);
+						//selectReplyList();		
+					}else{
+						alert("댓글등록실패");
+					}
+				},error:function(){
+					console.log("댓글 작성 ajax 통신 실패");
+				}
+			});
+			
+		}else{
+			alert("댓글을 입력해주세요.");
+		}
+	}
+</script>
                 <!-- Blog Sidebar Area -->
                 <div class="col-12 col-sm-9 col-md-4">
                     <div class="post-sidebar-area">                        

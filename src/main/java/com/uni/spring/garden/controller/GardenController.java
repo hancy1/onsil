@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -384,6 +385,15 @@ public class GardenController {
 		return "redirect:dailyLog.do";
 	}
 	
+	@RequestMapping("updateDailyLogForm.do")
+	public String updateDailyLogForm(String logNo, Model model) {
+		
+		DailyLog log = gardenService.selectLog(logNo);
+		model.addAttribute("log", log);
+	
+		return "garden/dailyLogUpdateForm";
+	}
+	
 	@RequestMapping("updateDailyLog.do")
 	public String updateDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, HttpServletRequest request, Model model) {
 		
@@ -427,13 +437,14 @@ public class GardenController {
 
 	//=========================================================================================
 	//댓글 
-	@RequestMapping("updateLog.do")
-	public String updateLog(String logNo, Model model) {
+
+	@ResponseBody
+	@RequestMapping(value = "insertLogComment.do", produces="application/json; charset=utf-8")
+	public int insertLogComment(DailyLogComment comment) {
 		
-		DailyLog log = gardenService.selectLog(logNo);
-		model.addAttribute("log", log);
-	
-		return "garden/dailyLogUpdateForm";
+		int result = gardenService.insertLogComment(comment);
+		
+		return result;
 	}
 	
 	//=========================================================================================

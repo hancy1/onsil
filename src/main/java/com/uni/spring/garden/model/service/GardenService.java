@@ -70,6 +70,8 @@ public interface GardenService {
 
 	void deleteDailyLog(String logNo);
 
+	int insertLogComment(DailyLogComment comment);
+
 
 	
 

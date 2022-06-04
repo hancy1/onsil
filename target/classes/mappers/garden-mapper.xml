@@ -334,7 +334,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN MEMBER B USING (USER_NO)
 		WHERE LOG_NO = #{logNo}
 		AND A.STATUS = 'Y'
+		ORDER BY A.LOG_NO DESC
 		
 	</select>
+	
+	<insert id="insertLogComment">
+	
+		INSERT INTO LOG_COMMENT VALUES
+		(SEQ_LOG_COMMENT_NO.NEXTVAL, #{logNo}, #{userNo}, #{content}, DEFAULT, DEFAULT)
+		
+	</insert>
 	
 </mapper>
