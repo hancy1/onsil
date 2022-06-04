@@ -58,7 +58,7 @@
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
-                                <h4 class="post-title">[카테고리 넣기${ b.BCategoryNo }] ${ b.BNo }</h4>
+                                <h4 class="post-title">[${ b.BCategoryNo }] ${ b.BTitle }</h4>
                                 <div class="post-meta mb-30">
                                     <a><i class="fa fa-clock-o" aria-hidden="true"></i>${ b.BDate }</a>
                                     <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${ b.userNo }</a>
@@ -80,15 +80,16 @@
                                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </div>
                             <!-- 수정, 삭제 버튼 -->
-                            <c:if test="${ loginUser.userId eq b.userNo }">
+                            <!-- <c:if test="${ loginUser.userId eq b.userNo }"> -->
                             <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <li><span></span></li>
-                                <li><a onclick="bSubmit(1);">수정하기</a></li>
-                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
+                                <li><a href="#">수정하기</a></li><!-- 왜... -->
+                                <li><a href="#">삭제하기</a></li>
+                                <!-- <li><a onclick="bSubmit(1);">수정하기</a></li>
+                                <li><a onclick="bSubmit(2);">삭제하기</a></li> -->
                             </ol>
-                            <form id="postForm" action="" method="post">
-								<input type="hidden" name="bno" value="${ b.bNo }">
-								<input type="hidden" name="fileName" value="${ b.bChangeName }"> 
+                            <!-- <form id="postForm" action="" method="post">
+								<input type="hidden" name="bno" value="${ b.BNo }">
+								<input type="hidden" name="fileName" value="${ b.BChangeName }"> 
 							</form>
                             <script>
 								function bSubmit(num){
@@ -102,68 +103,28 @@
 									postForm.submit();
 								}
 							</script>
-                            </c:if>
+                            </c:if> -->
                         </div>
 
                         <!-- 댓글 -->
-                        <div class="comment_area clearfix">
-                            <h4 class="headline">2 Comments</h4>
+                        <div class="comment_area clearfix" id="replyArea">
+                            <h4 class="headline">댓글수 [ <span id="rcount">0</span> ]</h4>
 
                             <ol>
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
                                     <div class="comment-wrapper d-flex">
-                                        <!-- Comment Meta -->
-                                        <div class="comment-author">
-                                            <img src="img/bg-img/37.jpg" alt="">
-                                        </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <h5>Simona Halep</h5>
-                                                <span class="comment-date">09:00 AM,  20 Jun 2018</span>
+                                                <h5>${ USER_NO }</h5>
+                                                <span class="comment-date">${ RE_DATE }</span>
                                             </div>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
-                                            <a class="active" href="#">Reply</a>
+                                            <p id="replyContent"></p>
+                                            <a class="active" href="#">삭제</a>
                                         </div>
                                     </div>
-                                    <ol class="children">
-                                        <li class="single_comment_area">
-                                            <div class="comment-wrapper d-flex">
-                                                <!-- Comment Meta -->
-                                                <div class="comment-author">
-                                                    <img src="img/bg-img/38.jpg" alt="">
-                                                </div>
-                                                <!-- Comment Content -->
-                                                <div class="comment-content">
-                                                    <div class="d-flex align-items-center justify-content-between">
-                                                        <h5>Rafael Nadal</h5>
-                                                        <span class="comment-date">09:30 AM,  20 Jun 2018</span>
-                                                    </div>
-                                                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
-                                                    <a class="active" href="#">Reply</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
-                                <li class="single_comment_area">
-                                    <div class="comment-wrapper d-flex">
-                                        <!-- Comment Meta -->
-                                        <div class="comment-author">
-                                            <img src="img/bg-img/39.jpg" alt="">
-                                        </div>
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h5>Maria Sharapova</h5>
-                                                <span class="comment-date">02:20 PM,  20 Jun 2018</span>
-                                            </div>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
-                                            <a class="active" href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                </li>                           
                             </ol>
                         </div>
                         
@@ -378,6 +339,72 @@
         </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
+    
+	<script>
+	 	$(function(){
+			selectReplyList();
+			
+			$("#addReply").click(function(){
+	    		var bno = ${b.BNo};
+	
+				if($("#replyContent").val().trim().length != 0){
+					
+					$.ajax({
+						url:"rinsertBoard.do",
+						type:"post",
+						data:{replyContent:$("#replyContent").val(),
+							  refBoardNo:bno,
+							  replyWriter:"${loginUser.userId}"},
+						success:function(result){
+							if(result > 0){
+								$("#replyContent").val("");
+								selectReplyList();
+								
+							}else{
+								alert("댓글 등록에 실패했습니다.");
+							}
+						},error:function(){
+							console.log("댓글 작성 ajax 통신 실패!");
+						}
+					});
+					
+				}else{
+					alert("댓글을 등록해주세요.");
+				}
+				
+			});
+		});
+	 	
+	 	function selectReplyList(){
+			var bno = ${b.BNo};
+			$.ajax({
+				url:"rlistBoard.do",
+				data:{bno:bno},
+				type:"get",
+				success:function(list){
+					$("#rcount").text(list.length);
+					
+					var value="";
+					$.each(list, function(i, obj){
+						
+						if("${loginUser.userId}" == obj.replyWriter){
+							value += "<ol style='background:#EAFAF1'>";
+						}else{
+							value += "<ol>";
+						}
+						
+						value += "<h5>" + obj.replyWriter + "</h5>" + 
+									 "<p>" + obj.replyContent + "</p>" + 
+									 "<span>" + obj.createDate + "</span>" +
+							 "</ol>";
+					});
+					$("#replyArea div").html(value);
+				},error:function(){
+					console.log("댓글 리스트 조회용 ajax 통신 실패!");
+				}
+			});
+		}   
+    </script>
     
     <jsp:include page="../common/footer.jsp" />
 

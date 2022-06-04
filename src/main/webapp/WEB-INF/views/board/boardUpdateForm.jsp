@@ -67,15 +67,15 @@
                         <!-- Leave A Comment -->
                         <div class="leave-comment-area clearfix">
                             <div class="comment-form">
-                                <h4 class="headline">게시글 작성하기</h4>
+                                <h4 class="headline">게시글 수정하기</h4>
 
                                 <div class="contact-form-area">
                                     <!-- Comment Form --><!-- 첨부파일 등록할꺼니깐 Multipart/form-data encType 지정하기 -->
-                                    <form id="enrollForm" action="insertBoard.do" method="post" enctype="multipart/form-data">
+                                    <form id="enrollForm" action="updateBoard.do" method="post" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="title" placeholder="제목">
+                                                    <input type="text" class="form-control" id="title" value="${ b.BTitle }">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
@@ -86,7 +86,7 @@
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                     <select name="category" class="form-control" id="category">
-                                                    	<option value="">카테고리 선택</option>
+                                                    	<option value="${ b.BCategoryNo }">카테고리 선택</option>
                                                     	<option value="info">정보</option>
                                                     	<option value="photo">사진</option>
                                                     	<option value="review">후기</option>
@@ -101,7 +101,7 @@
                                             </div> -->
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control summernote" required name="boardContent" id="content" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
+                                                    <textarea class="form-control summernote" required name="boardContent" id="content" cols="30" rows="10">${ b.BContent }</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
