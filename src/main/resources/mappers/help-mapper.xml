@@ -66,6 +66,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="replyCount" column="REPLYCOUNT"/>         
 	</resultMap>
 	
+	<!-- 관리자 - 문의사항 리절트맵 -->
+	<resultMap type="Inquiry" id="AdminInquiryResultSet">   
+         <id property="inquiryNo" column="INQUIRY_NO"/>
+         <result property="category" column="CATEGORY_NAME"/>
+         <result property="count" column="COUNT"/>
+         <result property="title" column="TITLE"/>
+         <result property="userNo" column="WRITER"/>
+         <result property="writer" column="USER_NAME"/>         
+         <result property="createDate" column="CREATE_DATE"/>
+         <result property="content" column="CONTENT"/>         
+         <result property="open" column="OPEN"/>         
+         <result property="status" column="STATUS"/>         
+         <result property="replyCount" column="REPLYCOUNT"/>         
+         <result property="answer_status" column="ANSWER_STATUS"/>         
+	</resultMap>
+	
 	<!-- 문의사항 답변 리절트맵 -->
 	<resultMap type="Answer" id="answerResultSet">   
          <id property="answerNo" column="ANSWER_NO"/>
@@ -74,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="createDate" column="CREATE_DATE"/>
          <result property="answer" column="ANSWER"/>           
 	</resultMap>
-      
+     
 
 	<!-- 자주묻는질문 게시물 갯수 -->
 	<select id="selectFaqListCount" resultType="_int">
@@ -291,4 +307,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS = 'N'
 		WHERE NOTICE_NO = #{nno}
 	</delete>
+	
+	<!-- 관리자 - 문의사항 게시물 갯수 -->
+	<select id="selectAdminInquiryListCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY
+	</select>
+	
+	<!-- 관리자 - 문의사항 게시물들 불러오기 -->
+	<select id="selectAdminInquiryList" resultMap="AdminInquiryResultSet">
+		SELECT A.INQUIRY_NO, C.CATEGORY_NAME, A.COUNT, A.TITLE, A.WRITER, B.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS,
+				A.REPLYCOUNT, A.ANSWER_STATUS
+		FROM INQUIRY A
+		JOIN MEMBER B ON A.WRITER = B.USER_NO
+		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
+		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
+	</select>
+	
+	<!-- 관리자 - 문의사항 디테일뷰 -->
+	<select id="selectAdminInquiry" resultMap="AdminInquiryResultSet">
+		SELECT A.INQUIRY_NO, C.CATEGORY_NAME, A.COUNT, A.TITLE, A.WRITER, B.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS,
+				A.REPLYCOUNT, A.ANSWER_STATUS
+		FROM INQUIRY A
+		JOIN MEMBER B ON A.WRITER = B.USER_NO
+		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
+		WHERE A.INQUIRY_NO=#{ino}
+	</select>
+	
+	<!-- 관리자 - 답변완료했는지 체크 -->
+	<update id="updateAnswerStatus">
+		<![CDATA[
+		UPDATE INQUIRY
+		SET ANSWER_STATUS = 'Y'
+		WHERE 0 < (
+		SELECT COUNT(*)
+		FROM ANSWER
+		WHERE WRITER=0
+		AND REPER_NO=#{ino})
+		AND INQUIRY_NO = #{ino}
+		]]>
+	</update>
 </mapper>

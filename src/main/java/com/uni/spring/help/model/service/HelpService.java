@@ -65,7 +65,12 @@ public interface HelpService {
 	void updateAdminNotice(Notice n); // 관리자 - 공지사항 글수정
 
 	void deleteAdminNotice(int nno); // 관리자 - 공지사항 글삭제
-	
+
+	int selectAdminInquiryListCount(); // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수
+
+	ArrayList<Inquiry> selectAdminInquiryList(PageInfo pi); // 관리자 - 문의사항 리스트뷰
+
+	Inquiry selectAdminInquiry(int ino); // 관리자 - 문의사항 디테일 뷰
 
 	
 

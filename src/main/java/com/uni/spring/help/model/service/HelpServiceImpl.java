@@ -97,6 +97,8 @@ public class HelpServiceImpl implements HelpService {
 	@Override // 문의사항 댓글리스트
 	public ArrayList<Answer> selectReplyList(int ino) {
 
+		HelpDao.updateAnswerStatus(sqlSession, ino); // 댓글답변업데이트
+		
 		return HelpDao.selectReplyList(sqlSession, ino);
 	}
 
@@ -283,6 +285,27 @@ public class HelpServiceImpl implements HelpService {
 			throw new CommException("관리자 공지사항 글 삭제 실패");
 		}
 		
+	}
+
+
+	@Override // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수
+	public int selectAdminInquiryListCount() {
+		
+		return HelpDao.selectAdminInquiryListCount(sqlSession);
+	}
+
+
+	@Override // 관리자 - 문의사항 리스트뷰
+	public ArrayList<Inquiry> selectAdminInquiryList(PageInfo pi) {
+		
+		return HelpDao.selectAdminInquiryList(sqlSession, pi);
+	}
+
+
+	@Override // 관리자 - 문의사항 디테일 뷰
+	public Inquiry selectAdminInquiry(int ino) {
+		
+		return HelpDao.selectAdminInquiry(sqlSession, ino);
 	}
 
 
