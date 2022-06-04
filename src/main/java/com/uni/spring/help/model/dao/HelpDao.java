@@ -202,6 +202,33 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.deleteAdminNotice", nno);
 	}
 
+	// 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수
+	public static int selectAdminInquiryListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("helpMapper.selectAdminInquiryListCount");
+	}
+
+	// 관리자 - 문의사항 리스트뷰
+	public static ArrayList<Inquiry> selectAdminInquiryList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList", null, rowBounds);
+	}
+
+	// 관리자 - 문의사항 디테일 뷰
+	public static Inquiry selectAdminInquiry(SqlSessionTemplate sqlSession, int ino) {
+		
+		return (Inquiry)sqlSession.selectOne("helpMapper.selectAdminInquiry", ino);
+	}
+
+	// 답변완료했는지체크
+	public static Object updateAnswerStatus(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("helpMapper.updateAnswerStatus", ino);
+	}
+
 	
 
 	

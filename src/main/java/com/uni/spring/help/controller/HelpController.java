@@ -118,7 +118,7 @@ public class HelpController {
 	@RequestMapping(value = "rlistAnswer.do", produces = "application/json; charset=utf-8")
 	public String selectReplyList(int ino) {
 		
-		ArrayList<Answer> list = helpService.selectReplyList(ino);
+		ArrayList<Answer> list = helpService.selectReplyList(ino);		
 		
 		System.out.println(list);
 		
@@ -390,4 +390,33 @@ public class HelpController {
 		return "redirect:adminNotice.do";
 	}
 	
+	// 관리자 - 문의사항 관리 리스트 뷰 
+	@RequestMapping("adminInquiry.do")
+	public String selectAdminInquiryList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectAdminInquiryListCount(); // 상태 Y,N 상관없이 다 구하기
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Inquiry> list = helpService.selectAdminInquiryList(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/adminInquiryListView";
+	}
+		
+	// 관리자 - 문의사항 디테일 뷰
+	@RequestMapping("adminInquiryDetail.do")
+	public ModelAndView selectAdminInquiry(int ino, ModelAndView mv) {
+						
+		Inquiry i = helpService.selectAdminInquiry(ino);
+		
+		i.setContent(i.getContent().replaceAll("\n", "<br>"));
+		
+		mv.addObject("i", i).setViewName("help/adminInquiryDetailView");		
+		
+		return mv;		
+	}
 }
