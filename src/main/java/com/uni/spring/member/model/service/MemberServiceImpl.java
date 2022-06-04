@@ -135,5 +135,30 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override // 관리자 - 회원관리 강퇴
+	public void deleteAdminMember(int mno) {
+		
+		int result = memberDao.deleteAdminMember(sqlSession, mno);
+		
+		if(result < 0) {
+			
+			throw new CommException("회원강퇴실패");
+		}
+		
+	}
+
+
+	@Override // 관리자 - 회원관리 복구
+	public void updateAdminMember(int mno) {
+		
+		int result = memberDao.updateAdminMember(sqlSession, mno);
+		
+		if(result < 0) {
+			throw new CommException("관리자 회원복구 실패");
+		}
+		
+	}
+
+
 	
 }

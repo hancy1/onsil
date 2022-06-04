@@ -108,4 +108,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN PREFERENCE C ON A.PREFERENCE = C.PREFER_CODE
 		WHERE USER_NO = #{mno}
 	</select>
+	
+	<!-- 관리자 - 강퇴하기 -->
+	<update id="deleteAdminMember" parameterType="_int">		
+		UPDATE MEMBER
+		SET STATUS='N', DEL_DATE=SYSDATE
+		WHERE USER_NO=#{mno}
+	</update>
+	
+	<!-- 관리자 - 회원복구하기 -->
+	<update id="updateAdminMember">		
+		UPDATE MEMBER
+		SET STATUS='Y', DEL_DATE=NULL
+		WHERE USER_NO=#{mno}
+	</update>
 </mapper>

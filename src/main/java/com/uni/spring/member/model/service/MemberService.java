@@ -27,5 +27,9 @@ public interface MemberService {
 
 	Member selectAdminMember(int mno); // 관리자 - 회원관리 디테일뷰
 
+	void deleteAdminMember(int mno); // 관리자 - 회원관리 강퇴
+
+	void updateAdminMember(int mno); // 관리자 - 회원관리 복구
+
 	
 }

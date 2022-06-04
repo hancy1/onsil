@@ -99,7 +99,9 @@
 	                        <td>${ m.enrollDate }</td>	                        
 	                        <td>${ m.delDate }</td>	                        
 	                        <td>${ m.status }</td>	                        
-	                        <td class="button"><button type="button" onclick="deleteMember();" class="btn btn-primary">회원삭제</button></td>	                        
+	                        <td class="button">
+	                        	<button type="button" class="btn btn-primary">회원삭제</button>
+	                        </td>	                        
 	                    </tr>
                     </c:forEach>
                 </tbody>
@@ -165,6 +167,7 @@
 	
 	
     <script>
+    	// 관리자 - 회원 디테일뷰
     	$(function(){
     		$("#boardList tbody tr td:not(.button)").click(function(){
     			location.href="adminMemberDetail.do?mno=" + $(this).parentsUntil().children().eq(0).text();
@@ -172,16 +175,14 @@
     	});
     	
     	// 회원강퇴
-    	function deleteMember(){
-    		
-    		if(confirm("회원님을 정말 삭제하시겠습니까?")){
-    			location.href="deleteAdminMember.do?mno=" + $("#boardList tbody tr").children().eq(0).text();
+    	$("#boardList tbody tr td button").click(function(){
+    		if(confirm("이 회원을 정말 삭제하시겠습니까?")){
+    			location.href="deleteAdminMember.do?mno=" + $(this).parentsUntil().eq(1).children().eq(0).text();
     		}else{
-    			alert("삭제를 취소하셨습니다.");
-    			return;
-    		};
+    			alert("회원 삭제를 취소하셨습니다.")
+    		}
     		
-    	};
+    	})
     </script>
 
 </body>

@@ -131,6 +131,7 @@
             <br>
 				
 	            <div align="center">	                
+	            	<button class="btn btn-primary" onclick="postFormSubmit(1);">회원복구</button>
 	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
 	            </div>
 	            
@@ -140,13 +141,23 @@
 				<script>
 					function postFormSubmit(num){
 						var postForm = $("#postForm");
-							
-							if(confirm("회원을 삭제하시겠습니까?")){
-								postForm.attr("action", "deleteAdminMember.do");
+						
+							if(num == 1) {
+								if(confirm("회원을 복구하시겠습니까?")){
+									postForm.attr("action", "updateAdminMember.do");
+								}else{
+									alert("회원 복구를 취소하셨습니다.");
+									return;
+								}
 							}else{
-								alert("회원 삭제를 취소하셨습니다.");
-								return;
-							}								
+								if(confirm("회원을 삭제하시겠습니까?")){
+									postForm.attr("action", "deleteAdminMember.do");
+								}else{
+									alert("회원 삭제를 취소하셨습니다.");
+									return;
+								}	
+							}						
+														
 						postForm.submit();
 					}
 				</script>
