@@ -43,7 +43,7 @@
 							<li class="breadcrumb-item"><a href="index.jsp"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="myReviewList.do">내가 쓴 리뷰</a></li>	
-							<li class="breadcrumb-item active" aria-current="page">사은품 디테일</li>
+							<li class="breadcrumb-item active" aria-current="page">리뷰 디테일</li>
 						</ol>
 					</nav>
 				</div>
@@ -86,7 +86,13 @@
 							
 							<tr>
 								<th width="100">별점</th>
-								<td colspan="3">${ r.reviewStar }</td>
+								<td colspan="3">							
+								
+								<c:forEach var="star" begin="1" end="${ r.reviewStar }">
+									<c:out value="⭐" />
+								</c:forEach>
+								
+								</td>
 												
 							</tr>
 							<tr>
@@ -129,10 +135,10 @@
 						
 						
 						
-						<!--  
+						  
 						<div align="center">
 							<button class="btn btn-outline-success" onclick="postFormSubmit(1);">수정</button>
-							<button class="btn btn-outline-danger" onclick="postFormSubmit(2);">삭제</button>
+							<button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 						</div>
 			
 						<form id="postForm" action="" method="post">
@@ -150,12 +156,10 @@
 								
 								if(num == 1){
 									postForm.attr("action", "updateFormReview.do");
-								}else{
-									postForm.attr("action", "deleteReview.do");
 								}
 								postForm.submit();
 							}
-						</script>-->
+						</script>
 						
 					</div>
 					<br>

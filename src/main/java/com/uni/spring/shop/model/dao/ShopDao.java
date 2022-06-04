@@ -50,6 +50,16 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.selectReview",reviewNo);
 	}
 
+	public int updateReview(SqlSessionTemplate sqlSession, ProReview r) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.updateReview",r);
+	}
+
+	public int deleteReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.deleteReview",reviewNo);
+	}
+
 
 
 }

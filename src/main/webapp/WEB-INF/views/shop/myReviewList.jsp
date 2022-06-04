@@ -124,7 +124,7 @@
                     <th>사진</th>
                     <th width=100>조회수</th>
                     <th>작성일자</th>
-                    <th>수정</th>
+                    
                     <th>삭제</th>                    
                   </tr>
                 </thead>
@@ -135,7 +135,7 @@
 	                    	<td>${ r.userId }</td>
 	                    	<td>${ r.proName }</td>
 	                    	<td>${ r.reviewStar }</td>
-	                    	<td>${ r.reviewTitle }</td>
+	                    	<td id="reviewTitle">${ r.reviewTitle }</td>
 	                        <c:if test="${ !empty r.originName }">
 	                        	<td>&#127796;</td>
 	                        </c:if>
@@ -144,14 +144,6 @@
 	                        </c:if>
 	                    	<td>${ r.reviewCount }</td>	                        
 	                        <td>${ r.reviewDate }</td>
-	                       	<td>
-	                       		<button id="updateButton" title="내 리뷰 수정"  class="btn btn-outline-secondary btn-sm" >	                       	
-	                       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-screwdriver" viewBox="0 0 16 16">
-  								<path d="M0 .995.995 0l3.064 2.19a.995.995 0 0 1 .417.809v.07c0 .264.105.517.291.704l5.677 5.676.909-.303a.995.995 0 0 1 1.018.24l3.338 3.339a.995.995 0 0 1 0 1.406L14.13 15.71a.995.995 0 0 1-1.406 0l-3.337-3.34a.995.995 0 0 1-.24-1.018l.302-.909-5.676-5.677a.995.995 0 0 0-.704-.291H3a.995.995 0 0 1-.81-.417L0 .995Zm11.293 9.595a.497.497 0 1 0-.703.703l2.984 2.984a.497.497 0 0 0 .703-.703l-2.984-2.984Z"/>
-								</svg>   
-	                       		</button>
-	                       	
-	                       	</td>
 	                       	<td>
 	                       		<button id="deleteButton" type="button" title="내 리뷰 삭제" class="btn btn-outline-secondary btn-sm">
 				                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -173,21 +165,12 @@
 			
 			
 				$(function(){
-		    		$("#myReviewList tbody tr").click(function(){
-		    			var reviewNo = $(this).children().eq(0).text();
+		    		$("#myReviewList>tbody>tr>#reviewTitle").click(function(){
+		    			var reviewNo = $(this).parentsUntil().eq(0).children().eq(0).text();
 		    			location.href="detailReview.do?reviewNo=" + reviewNo;
 		    		});
 		    	});
 			
-				
-    	
-				$("#myReviewList>tbody>tr>td>#updateButton").click(function(){ 
-					var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();
-					
-					location.href="updateFormReview.do?reviewNo="+reviewNo;		
-				});	
-				
-				
 				
 				$("#myReviewList>tbody>tr>td>#deleteButton").click(function(){ 
 					var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();

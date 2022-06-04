@@ -19,4 +19,8 @@ public interface ShopService {
 
 	ProReview selectReview(int reviewNo);
 
+	void updateReview(ProReview r);
+
+	void deleteReview(int reviewNo);
+
 }

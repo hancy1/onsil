@@ -78,4 +78,31 @@ public class ShopServiceImpl implements ShopService {
 		
 	}
 
+
+
+	@Override
+	public void updateReview(ProReview r) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.updateReview(sqlSession, r);
+		
+		if(result <0) {
+			throw new CommException("리뷰 수정 실패");
+		}
+		
+	}
+
+
+	//리뷰삭제
+	@Override
+	public void deleteReview(int reviewNo) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.deleteReview(sqlSession, reviewNo);
+		
+		if(result <0) {
+			throw new CommException("리뷰 삭제 실패");
+		}	
+	}
+
 }
