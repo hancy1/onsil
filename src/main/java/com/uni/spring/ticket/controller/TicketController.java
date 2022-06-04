@@ -113,12 +113,87 @@ public class TicketController {
 	@RequestMapping("detailTicket.do")
 	public ModelAndView selectBoard(int bno,ModelAndView mv) {
 		
-		System.out.println("디테일 ticketNo : " + bno);
+		//System.out.println("디테일 ticketNo : " + bno);
 		Ticket t = ticketService.selectTicket(bno);
 		
 		mv.addObject("t",t).setViewName("Ticket/ticketDetailView");
 		
 		return mv;
+		
+	}
+	
+	@RequestMapping("updateFormTicket.do")
+	public ModelAndView updateForm(int bno,ModelAndView mv) {
+		mv.addObject("t",ticketService.selectTicket(bno))
+		.setViewName("Ticket/ticketUpdateForm");
+		
+		return mv;
+	}
+	
+	@RequestMapping("updateTicket.do")
+	public ModelAndView updateBoard(Ticket t,ModelAndView mv,HttpServletRequest request,
+			                          @RequestParam(name = "reUploadFile",required=false)MultipartFile file) {
+										
+		/*
+		 * 1. 기존의 첨부파일 X, 새로 첨부된 파일 X 	
+		 * 	  --> originName : null, changeName : null
+		 * 
+		 * 2. 기존의 첨부파일 X, 새로 첨부된 파일 O		
+		 * 	  --> 서버에 업로드 후 
+		 * 	  --> originName : 새로첨부된파일원본명, changeName : 새로첨부된파일수정명
+		 * 
+		 * 3. 기존의 첨부파일 O, 새로 첨부된 파일 X		
+		 * 	  --> originName : 기존첨부파일원본명, changeName : 기존첨부파일수정명
+		 * 
+		 * 4. 기존의 첨부파일 O, 새로 첨부된 파일 O  
+		 * 	  --> 서버에 업로드 후	
+		 * 	  --> originName : 새로첨부된파일원본명, changeName : 새로첨부된파일수정명
+		 */
+		
+		String orgChangeName =t.getChangeName();
+		if(!file.getOriginalFilename().equals("")) {
+			/*if(b.getChangeName() != null) {
+				
+				deleteFile(orgChangeName,request);
+			}*/
+			
+			//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨!
+			String chageName = saveFile(file,request);
+			
+			t.setOriginName(file.getOriginalFilename());
+			t.setChangeName(chageName);
+		}
+		ticketService.updateTicket(t);
+		
+		if(orgChangeName != null) {//기존의 파일이 있는 경우 --- >서버에 업로드 된 기존 파일 삭제
+			deleteFile(orgChangeName,request);
+		}
+		mv.addObject("bno",t.getTicketNo()).setViewName("redirect:detailTicket.do");
+		return mv;
+	}
+
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		
+	String resources = request.getSession().getServletContext().getRealPath("resources");//웹 컨테이너 에서의 RESOURCES폴더까지의 경로
+		
+		
+		String savePath =resources+"\\T_upload_files\\";
+		
+		
+		File deleteFile = new File(savePath+fileName);
+		deleteFile.delete();
+		
+	}
+	
+	@RequestMapping("deleteTicket.do")
+	public String deleteBoard(int bno,String fileName,HttpServletRequest request) {
+		
+		ticketService.deleteTicket(bno);
+		
+		if(!fileName.equals("")) {
+			deleteFile(fileName,request);
+		}
+		return "redirect:listTicket.do";
 		
 	}
 }

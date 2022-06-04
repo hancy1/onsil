@@ -15,4 +15,8 @@ public interface TicketService {
 
 	Ticket selectTicket(int bno);
 
+	void deleteTicket(int bno);
+
+	void updateTicket(Ticket t);
+
 }

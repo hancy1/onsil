@@ -93,7 +93,7 @@
                   <tr>
                     <th>티켓번호</th>              
                     <th>전시회명</th>
-                    <th>작성자</th>
+                    <th>티켓구분번호</th>
                     <th>전화번호</th>
                     <th>작성일</th>
                     <th>첨부파일</th>
@@ -104,7 +104,7 @@
 	                    <tr>
 	                        <td>${ t.ticketNo }</td>
 	                        <td>${ t.ticketTitle }</td>
-	                        <td>${ t.userNo }</td>
+	                        <td>${ t.division }</td>
 	                        <td>${ t.ticketPhone }</td>
 	                        <td>${ t.ticketDate }</td>
 	                        <c:if test="${ !empty t.originName }">

@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#contentArea{width:100%}
-	#contentArea *{margin:5px}
+ 	#contentArea{
+ 	width:80%;
+ 	 margin:auto;
+ 	 }
+    #contentArea *{ margin:5px;}
 </style>
 </head>
 <body>
-      <jsp:include page="../common/menubar.jsp"/>
+    <jsp:include page="../common/menubar.jsp"/>
 
 
      <!-- ##### Breadcrumb Area Start ##### -->
@@ -38,41 +40,50 @@
 			</div>
 		</div>
 	</div>
-   
 
     <div class="content">
         <br><br>
-        <div class="innerOuter">
-            <h2>티켓 상세보기</h2>
+        <div class="innerOuter" align="center"><br>
+            <h2>티켓상세보기</h2>
             <br>
-            
-            <br><br>
-            <table id="contentArea" align="center" class="table">
-                <tr>
-                    <th width="100">티켓번호</th>
-                    <td colspan="3">${ t.ticketNo }</td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>${ t.userId }</td>
-                </tr>
-                <tr>    
-                    <th>작성일</th>
-                    <td>${ t.ticketDate }</td>
-                </tr>
-                 <tr>
-                        <th>전시회명</th>
-                        <td>${ t.ticketTitle }</td>
+			
+		
+                <table id="contentArea" align="center">
+                    <tr>
+                        <th><label for="ticketNo">티켓번호</label></th>
+                        <td><input type="text" id="ticketNo" class="form-control" name="ticketNo" value="${t.ticketNo}" required></td>
                     </tr>
                     <tr>
-                        <th>가격코드</th>
-                        <td>${ t.price }</td>
+                        <th><label for="division">티켓구분코드</label></th>
+                        <td><input type="text" id="division" class="form-control" name="division" value="${t.division}" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="ticketTitle">전시회명</label></th>
+                        <td><input type="text" id="title" class="form-control" name="ticketTitle" value="${t.ticketTitle}" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="writer">작성자</label></th>
+                        <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userId }" required></td>
                     </tr>
                      <tr>
-                        <th>전화번호</th>
-                        <td>${ t.ticketPhone }</td>
+                        <th><label for="price">가격코드</label></th>
+                        <td><input type="text" id="price" class="form-control" name="price"  value="${ t.price }" required></td>
                     </tr>
-                <tr>
+                    <tr>
+                        <th><label for="ticketPhone">전화번호</label></th>
+                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" value="${ t.ticketPhone }" required></td>
+                    </tr>
+                  
+                   
+                    <tr>
+                        <th colspan="2"><label for="content">공지사항</label></th>
+                    </tr>
+                    <tr>
+                      <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;">${ t.ticketNotice }</textarea></th>
+                    
+                     
+                    </tr>
+                      <tr>
                     <th>첨부파일</th>
                     <td colspan="3">
                     	<c:if test="${ !empty t.originName }">
@@ -83,20 +94,14 @@
                         </c:if>
                     </td>
                 </tr>
-                <tr>
-                    <th>공지사항</th>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><p style="height:150px">${ t.ticketNotice }</p></td>
-                </tr>
-            </table>
-            <br>
-	
-			<c:if test="${ loginUser.userNo eq t.userNo }">
+                </table>
+                <br>
+               
+               <c:if test="${ loginUser.userId eq t.userNo }">
 	            <div align="center">
 	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
 	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
+	                <button type="button" onclick="location.href='ticketAddress.do' " class="btn btn-primary">위치확인</button>
 	            </div>
 	            
 	            <form id="postForm" action="" method="post">
@@ -117,19 +122,13 @@
 				</script>
             </c:if>
             <br><br>
-
-        
-                    
-                </thead>
-                <tbody>
-                
-                </tbody>
-            </table>
+               
+            </form>
         </div>
         <br><br>
     </div>
-   
-      <jsp:include page="../common/footer.jsp"/>
+
+     <jsp:include page="../common/footer.jsp"/>
     
     <!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->
