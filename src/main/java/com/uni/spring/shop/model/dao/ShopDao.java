@@ -40,4 +40,16 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.selectMyReviewList", userNo, rowdounds);
 	}
 
+	public int increaseCountReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.increaseCountReview",reviewNo);
+	}
+
+	public ProReview selectReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectReview",reviewNo);
+	}
+
+
+
 }

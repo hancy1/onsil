@@ -94,7 +94,7 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.jsp"><i
-									class="fa fa-home"></i> Home</a></li>							
+									class="fa fa-home"></i> Home</a></li>													
 							<li class="breadcrumb-item active" aria-current="page">내가 쓴 리뷰</li>
 						</ol>
 					</nav>
@@ -117,9 +117,9 @@
                 <thead>
                   <tr>
                   	<th width=50>No</th>
-                  	<th width=100>작성자</th>
+                  	<th width=80>작성자</th>
                     <th>제품이름</th>
-                    <th>별점</th>
+                    <th width=60>별점</th>
                     <th>제목</th>
                     <th>사진</th>
                     <th width=100>조회수</th>
@@ -144,10 +144,17 @@
 	                        </c:if>
 	                    	<td>${ r.reviewCount }</td>	                        
 	                        <td>${ r.reviewDate }</td>
-	                       	<td><button id="updateButton" class="btn btn-outline-secondary btn-sm" >수정</button></td>
 	                       	<td>
-	                       		<button id="deleteButton" type="button" title="내 리뷰 삭제" class="btn btn-secondary">
-				                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+	                       		<button id="updateButton" title="내 리뷰 수정"  class="btn btn-outline-secondary btn-sm" >	                       	
+	                       		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-screwdriver" viewBox="0 0 16 16">
+  								<path d="M0 .995.995 0l3.064 2.19a.995.995 0 0 1 .417.809v.07c0 .264.105.517.291.704l5.677 5.676.909-.303a.995.995 0 0 1 1.018.24l3.338 3.339a.995.995 0 0 1 0 1.406L14.13 15.71a.995.995 0 0 1-1.406 0l-3.337-3.34a.995.995 0 0 1-.24-1.018l.302-.909-5.676-5.677a.995.995 0 0 0-.704-.291H3a.995.995 0 0 1-.81-.417L0 .995Zm11.293 9.595a.497.497 0 1 0-.703.703l2.984 2.984a.497.497 0 0 0 .703-.703l-2.984-2.984Z"/>
+								</svg>   
+	                       		</button>
+	                       	
+	                       	</td>
+	                       	<td>
+	                       		<button id="deleteButton" type="button" title="내 리뷰 삭제" class="btn btn-outline-secondary btn-sm">
+				                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 				 				<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
 								</svg>
 				              	</button> 
@@ -163,11 +170,21 @@
 			
 			
 			<script>
+			
+			
+				$(function(){
+		    		$("#myReviewList tbody tr").click(function(){
+		    			var reviewNo = $(this).children().eq(0).text();
+		    			location.href="detailReview.do?reviewNo=" + reviewNo;
+		    		});
+		    	});
+			
+				
     	
 				$("#myReviewList>tbody>tr>td>#updateButton").click(function(){ 
 					var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();
 					
-					location.href="updateReview.do?reviewNo="+reviewNo;		
+					location.href="updateFormReview.do?reviewNo="+reviewNo;		
 				});	
 				
 				

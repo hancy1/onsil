@@ -17,4 +17,6 @@ public interface ShopService {
 
 	ArrayList<ProReview> selectMyReviewList(ShopPageInfo pi, int userNo);
 
+	ProReview selectReview(int reviewNo);
+
 }

@@ -94,7 +94,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	 <update id = "increaseCountReview" parameterType="_int">
+    
+	  UPDATE PRO_REVIEW
+	  SET REVIEW_COUNT=REVIEW_COUNT+1
+	  WHERE REVIEW_NO=#{reviewNo}
+	  AND REVIEW_STATUS='Y'
+  
+  
+  	</update>  
 	
+	
+	 <select id = "selectReview" parameterType="ProReview" resultMap="ProReviewResultSet">
+
+	  SELECT *
+	  FROM PRO_REVIEW A
+	  JOIN MEMBER B ON A.REVIEW_WRITER = B.USER_NO
+	  JOIN PRODUCT C ON A.PRO_CODE = C.PRO_CODE 	  	  
+	  WHERE A.REVIEW_STATUS='Y'	  
+	  AND A.REVIEW_NO=#{reviewNo}
+    
+  	</select>
+  
 	
 
 </mapper>
