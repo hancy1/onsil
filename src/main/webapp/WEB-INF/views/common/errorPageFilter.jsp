@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>온실 - ERROR</title>
 </head>
 <body>
 	<jsp:include page="menubar.jsp"/>

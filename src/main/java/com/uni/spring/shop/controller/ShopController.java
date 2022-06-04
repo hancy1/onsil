@@ -1,7 +1,12 @@
 package com.uni.spring.shop.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uni.spring.common.exception.CommException;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
@@ -94,12 +101,138 @@ public class ShopController {
 	@RequestMapping("detailReview.do")
 	public ModelAndView selectReview(int reviewNo, ModelAndView mv) {
 		
-		System.out.println("디테일 reviewNo : " + reviewNo);
+		//System.out.println("디테일 reviewNo : " + reviewNo);
 		ProReview r = shopService.selectReview(reviewNo);
 		
 		mv.addObject("r", r).setViewName("shop/ReviewDetail");
 		
 		return mv;
 	}
+	
+	
+	//리뷰 수정 폼 연결
+	@RequestMapping("updateFormReview.do")
+	public ModelAndView updateFormReview(int reviewNo, ModelAndView mv) {
+		
+		//System.out.println("리뷰번호 넘어오니? " + reviewNo);
+		
+		mv.addObject("r", shopService.selectReview(reviewNo))
+		.setViewName("shop/reviewUpdateForm");
+		
+		return mv;
+	}
+	
+	
+	
+	//전달받은 파일을 업로드시키고 수정된 파일명 리턴함
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		
+		
+		String savePath = resources+"\\pro_upload_files\\";
+		System.out.println("파일저장 경로 : " + savePath);
+		
+		String originName = file.getOriginalFilename();
+		//업로드시간
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		
+		//확장자 잘라오기
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		//시스템파일명생성
+		String changeName = currentTime+ext;
+		
+		try {
+			file.transferTo(new File(savePath + changeName));
+			
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			throw new CommException("파일 업로드 에러");
+		}
+		
+		return changeName;
+	}
 
+	
+	
+	//파일지우기
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		
+		String resources = request.getSession().getServletContext().getRealPath("resources");		
+		String savePath = resources+"\\pro_upload_files\\";
+		
+		
+		File deleteFile = new File(savePath + fileName);
+		deleteFile.delete();
+		
+		
+	}
+	
+	
+	//리뷰 수정
+	
+	@RequestMapping("updateReview.do")
+	public ModelAndView updateReview(ProReview r, ModelAndView mv, HttpServletRequest request,
+								@RequestParam(name = "reUploadFile", required = false) MultipartFile file ) {
+		
+	
+		String orgChangeName = r.getChangeName();
+		
+		//새로 넘어온 파일이 있는(O) 경우
+		if(!file.getOriginalFilename().equals("")) {			
+			
+			
+			//새로넘어온 파일 O , 기존 파일도 O
+			//-->서버에 업로드 된 기존 파일 삭제해야됨!
+			if( orgChangeName!= null) {
+				
+				deleteFile(orgChangeName, request);
+			}			
+			
+			//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨! 있는경우는 삭제해주고 세팅!
+			String changeName = saveFile(file, request);
+		
+						
+			
+			r.setOriginName(file.getOriginalFilename());
+			r.setChangeName(changeName);
+		}		
+	
+		
+		shopService.updateReview(r);		
+		
+		
+		
+		int reviewNo = r.getReviewNo();
+		
+		
+		mv.addObject("reviewNo",reviewNo).setViewName("redirect:detailReview.do");
+		
+		return mv;
+	}
+	
+	
+	//리뷰 삭제(n으로 업데이트)		
+	@RequestMapping("deleteReview.do")
+	public String deleteReview(int reviewNo, String fileName, HttpServletRequest request, HttpSession session ) {
+		
+		System.out.println("삭제 시 컨트롤러 reviewNo : " + reviewNo);
+		
+		shopService.deleteReview(reviewNo);
+		
+		if(!fileName.equals("")) {
+			deleteFile(fileName, request);
+		}
+		
+		return "redirect:myReviewList.do";
+	}
+	
+	
 }
