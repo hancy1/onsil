@@ -247,6 +247,16 @@ public class GardenServiceImpl implements GardenService{
 		} 
 	}
 
+	@Override
+	public int insertLogComment(DailyLogComment comment) {
+		
+		int result =  gardenDao.insertLogComment(comment, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 댓글 작성 실패");
+		}
+		return result; 
+	}
+
 	
 
 	

@@ -185,4 +185,9 @@ public class GardenDao {
 		return sqlSession.delete("gardenMapper.deleteDailyLog", logNo);
 	}
 
+	public int insertLogComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertLogComment", comment);
+	}
+
 }
