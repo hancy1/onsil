@@ -447,6 +447,22 @@ public class GardenController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "insertLogReComment.do", produces="application/json; charset=utf-8")
+	public int insertLogReComment(DailyLogComment comment) {
+		
+		int result = gardenService.insertLogReComment(comment);
+		
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "deleteLogComment.do", produces="application/json; charset=utf-8")
+	public int deleteLogComment(String commentNo) {
+		return gardenService.deleteLogComment(commentNo);
+	}
+	
 	//=========================================================================================
 	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능

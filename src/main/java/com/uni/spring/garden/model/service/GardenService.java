@@ -72,6 +72,10 @@ public interface GardenService {
 
 	int insertLogComment(DailyLogComment comment);
 
+	int insertLogReComment(DailyLogComment comment);
+
+	int deleteLogComment(String commentNo);
+
 
 	
 

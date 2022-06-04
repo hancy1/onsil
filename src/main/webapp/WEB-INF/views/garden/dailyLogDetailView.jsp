@@ -124,8 +124,9 @@
                             <ol>
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
-                                	<c:if test="${ !comment.isEmpty()}">
+                                	<c:if test="${ !comment.isEmpty()}">                  	
                                 	<c:forEach items="${comment}" var="c">
+                                	<c:if test="${c.commentType == 0}">
                                     <div class="comment-wrapper d-flex">
                                         <!-- Comment Meta -->
                                         <div class="comment-author">
@@ -140,13 +141,39 @@
                                                 <span class="comment-date">${c.enrollDate}</span>
                                             </div>
                                             <p>${c.content}</p>
-                                            <a class="active" href="#">Reply</a> |
+                                            <a class="active" onclick="openInput(${c.commentNo});">Reply</a> |
                                             <c:if test="${loginUser.userId == c.userNo }">
                                             <a class="active" href="#">Modify</a> |
-                                            <a class="active" href="#">Delete</a>
+                                            <a class="active" onclick="deleteComment(${c.commentNo});">Delete</a>
+                                            <div class="reInput${c.commentNo}" style="display:none">
+	                                         <input type="text" id="reContent${c.commentNo}" name="content" placeholder="Comment">
+	                                            <button class="btn" type="button" onclick="insertReComment(${c.commentNo});">Reply</button>
+                                            	<button class="btn" type="button" onclick="closeInput(${c.commentNo});">Cancel</button></div>
                                             </c:if>
                                         </div>
                                     </div>
+                                    </c:if>
+                                    <c:if test="${c.commentType == 1}">
+                                    <ol class="children">
+                                        <li class="single_comment_area">
+                                            <div class="comment-wrapper d-flex">
+                                                <!-- Comment Meta -->
+                                                <div class="comment-author">
+                                                    <img src="resources/img/bg-img/38.jpg" alt="">
+                                                </div>
+                                                <!-- Comment Content -->
+                                                <div class="comment-content">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <h5>${c.userNo}</h5>
+                                                        <span class="comment-date">${c.enrollDate}</span>
+                                                    </div>
+                                                    <p>답글 : ${c.content}</p>
+                                                    <!--  <a class="active" href="#">Reply</a>-->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol> 
+                                    </c:if>
                                    </c:forEach>
                                     </c:if>
                                     <c:if test="${ comment.isEmpty()}">
@@ -156,24 +183,8 @@
                                         </div>
                                     	</div>
                                     </c:if>
-                                    <!-- 
-                                    리댓 기능
-                                    <ol class="children">
-                                        <li class="single_comment_area">
-                                            <div class="comment-wrapper d-flex">
-                                                
-                                                <!-- Comment Content 
-                                                <div class="comment-content">
-                                                    <div class="d-flex align-items-center justify-content-between">
-                                                        <h5>Rafael Nadal</h5>
-                                                        <span class="comment-date">09:30 AM,  20 Jun 2018</span>
-                                                    </div>
-                                                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetu adipisci velit, sed quia non numquam eius modi</p>
-                                                    <a class="active" href="#">Reply</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ol> -->
+                                   
+                                    
                                 </li>
                             </ol>
                         </div>
@@ -201,9 +212,71 @@
 
                     </div>
                 </div>
+                
+                <div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
 
 <script>
 
+	function openInput(commentNo){
+
+		var div = $('.reInput'+commentNo)
+		div.show();	
+	}
+	
+	function closeInput(commentNo){
+		var div = $('.reInput'+commentNo)
+		div.hide();
+	}
+	
+	//일반댓글 인서트하기
 	function insertComment(){
 		
 		var content = $('#content').val();
@@ -214,9 +287,12 @@
 			$.ajax({
 				url:"insertLogComment.do",
 				type:"post",
-				data:{content:content,
-					  logNo:logNo,
-					  userNo:"${loginUser.userNo}"},
+				data:{logNo:logNo,
+					  userNo:"${loginUser.userNo}",
+					  content:content,
+					  commentType:0
+				},
+					  
 				success:function(result){
 					
 					if(result > 0){
@@ -234,6 +310,71 @@
 		}else{
 			alert("댓글을 입력해주세요.");
 		}
+	}
+	
+	//답글 인서트하기
+	function insertReComment(commentNo){
+		
+		console.log(commentNo);
+		
+		var content = $('#reContent'+commentNo).val();
+		console.log(content);
+		
+		var logNo = ${log.logNo};
+		
+		if($('#reContent'+commentNo).val().trim().length != 0){
+			
+			$.ajax({
+				url:"insertLogReComment.do",
+				type:"post",
+				data:{logNo:logNo,
+					  commentGroup:commentNo,
+					  userNo:"${loginUser.userNo}",
+					  content:content,
+					  commentType:1
+				},
+					  
+				success:function(result){
+					
+					if(result > 0){
+						$('.reInput'+commentNo).hide();
+						history.go(0);
+							
+					}else{
+						alert("댓글등록실패");
+					}
+				},error:function(){
+					console.log("댓글 작성 ajax 통신 실패");
+				}
+			});
+			
+		}else{
+			alert("댓글을 입력해주세요.");
+		}
+	}
+	
+	function deleteComment(commentNo){
+		
+		var yn = confirm("해당 댓글을 삭제하시겠습니까?")
+		if(yn){
+			$.ajax({
+				url:"deleteLogComment.do",
+				type:"post",
+				data:{commentNo:commentNo},				
+				success:function(result){
+					
+					if(result > 0){	
+						history.go(0);
+							
+					}else{
+						alert("댓글삭제실패");
+					}
+				},error:function(){
+					console.log("댓글 삭제 ajax 통신 실패");
+				}
+			});
+		}
+		
 	}
 </script>
                 <!-- Blog Sidebar Area -->
