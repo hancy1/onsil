@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.ShopDao;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
@@ -51,6 +53,29 @@ public class ShopServiceImpl implements ShopService {
 	public ArrayList<ProReview> selectMyReviewList(ShopPageInfo pi, int userNo) {
 		// TODO Auto-generated method stub
 		return shopDao.selectMyReviewList(sqlSession,pi,userNo);
+	}
+
+
+
+	@Override
+	public ProReview selectReview(int reviewNo) {
+		// TODO Auto-generated method stub
+		
+		
+		ProReview r = null;
+		int result = shopDao.increaseCountReview(sqlSession, reviewNo);
+		
+		if(result<0) {
+			throw new CommException("리뷰 조횟수 불러오기 실패");			
+						
+		}else {
+			r=shopDao.selectReview(sqlSession, reviewNo);						
+		}		
+		
+		return r;
+		
+		
+		
 	}
 
 }

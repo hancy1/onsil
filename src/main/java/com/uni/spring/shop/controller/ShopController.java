@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.ShopPagination;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
@@ -88,5 +90,16 @@ public class ShopController {
 	}
 	
 	
+	//리뷰 디테일페이지	
+	@RequestMapping("detailReview.do")
+	public ModelAndView selectReview(int reviewNo, ModelAndView mv) {
+		
+		System.out.println("디테일 reviewNo : " + reviewNo);
+		ProReview r = shopService.selectReview(reviewNo);
+		
+		mv.addObject("r", r).setViewName("shop/ReviewDetail");
+		
+		return mv;
+	}
 
 }
