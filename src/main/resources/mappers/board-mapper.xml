@@ -66,4 +66,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS = 'N' 
 		WHERE B_NO=#{bno}	
 	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Board">
+	
+	</update>
+	
+	<!-- 댓글 목록 -->
+	<select  id="selectReplyList"></select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertReply"></insert>
 </mapper>

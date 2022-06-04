@@ -13,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.GsonBuilder;
 import com.uni.spring.board.BoardPagination;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.board.model.dto.PageInfo;
+import com.uni.spring.board.model.dto.Reply;
 import com.uni.spring.board.model.service.BoardService;
 import com.uni.spring.common.exception.CommException;
 
@@ -137,6 +140,7 @@ public class BoardController {
 		return "redirect:boardList.do"; //삭제하면 게시글 목록으로 		   
 	}
 
+	// 첨부파일 삭제
 	private void deleteFile(String fileName, HttpServletRequest request) {
 
 		String resources = request.getSession().getServletContext().getRealPath("resources");	
@@ -148,6 +152,7 @@ public class BoardController {
 		deleteFile.delete();	
 	}
 	
+	// 게시글 수정 폼
 	@RequestMapping("updateForm.do")		
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 								//새로 조회해야해서 bno만 가져옴 
@@ -156,6 +161,53 @@ public class BoardController {
 		.setViewName("board/boardUpdateForm");
 
 		return mv;
+	}
+
+	// 게시글 수정
+	@RequestMapping("updateBoard.do")
+	public ModelAndView updateBoard(Board b, ModelAndView mv, HttpServletRequest request,
+									@RequestParam(name = "reUploadFile", required = false) MultipartFile file) {
+
+		String orgchangeName = b.getBChangeName();
+		
+		if(!file.getOriginalFilename().equals("")) {	//새로 넘어온 파일이 있는 경우
+			
+			String changeName = saveFile(file, request); //file, request 정보를 넘겨서 changeName에 받아옴
+			
+			b.setBOriginName(file.getOriginalFilename());
+			b.setBChangeName(changeName);
+			
+			boardService.updateBoard(b);
+		
+			// 새로 넘어온 파일이 있을때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
+			if(orgchangeName != null) { // null은 새로운 파일도 있는데 기존의 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
+				deleteFile(orgchangeName, request);	// 값이 있으면 삭제함
+			}
+		}
+		
+		mv.addObject("bno", b.getBNo()).setViewName("redirect:detailBoard.do");
+		
+		return mv;
+	}
+	
+	// 댓글 (라이브러리 gson 추가)
+	@ResponseBody
+	@RequestMapping(value = "rlistBoard.do", produces = "application/json; charset=utf-8")
+	public String selectReplyList(int bno) {
+		
+		// select 먼저 해서 가져옴
+		ArrayList<Reply> list = boardService.selectReplyList(bno);
+		
+								//DateFormat 안하면 원하는대로 출력이 안됨?
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
+	}
+	
+	// 댓글 작성
+	@ResponseBody
+	@RequestMapping(value = "rinsertBoard.do", produces = "application/json; charset=utf-8")
+	public String insertReply(Reply r) {
+		int result = boardService.insertReply(r);
+		return String.valueOf(result);
 	}
 
 }

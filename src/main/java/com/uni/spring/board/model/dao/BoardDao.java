@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.board.model.dto.PageInfo;
+import com.uni.spring.board.model.dto.Reply;
 
 @Repository
 public class BoardDao {
@@ -43,6 +44,21 @@ public class BoardDao {
 	public int deleteBoard(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("boardMapper.deleteBoard", bno);
+	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return  (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", bno);
+	}			// 반환되는 타입으로 형변환
+
+	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("boardMapper.insertReply", r);
 	}
 
 }
