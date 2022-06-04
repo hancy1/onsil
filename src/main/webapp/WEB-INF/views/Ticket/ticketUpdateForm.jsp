@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
- 	#enrollForm>table{
- 	width:80%;
+	#updateForm>table{
+	width:80%;
  	 margin:auto;
- 	 }
-    #enrollForm>table *{ margin:5px;}
+	}
+    #updateForm>table *{ margin:5px;}
 </style>
 </head>
 <body>
-    <jsp:include page="../common/menubar.jsp"/>
+
+  <jsp:include page="../common/menubar.jsp"/>
 
 
      <!-- ##### Breadcrumb Area Start ##### -->
@@ -33,70 +35,78 @@
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
-							<li class="breadcrumb-item active" aria-current="page">티켓상세보기</li>
+							<li class="breadcrumb-item active" aria-current="page">티켓수정하기</li>
 						</ol>
 					</nav>
 				</div>
 			</div>
 		</div>
 	</div>
+ 
 
-    <div class="content">
+    <div class="content" align="center">
         <br><br>
-         <div class="innerOuter" align="center"><br>
-            <h2>티켓등록</h2>
+        <div class="innerOuter" align="center">
+            <h2>티켓수정하기</h2>
             <br>
-			
-			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
-            <form id="enrollForm" method="post" action="insertTicket.do" enctype="multipart/form-data">
+
+            <form id="updateForm" method="post" action="updateTicket.do" enctype="multipart/form-data">
+            	<input type="hidden" name="ticketNo" value="${ t.ticketNo }">
                 <table align="center">
-                   
                       <tr>
                         <th><label for="division">티켓구분코드</label></th>
-                        <td><input type="text" id="division" class="form-control" name="division" required></td>
+                        <td><input type="text" id="division" class="form-control" name="division" value="${t.division}" required></td>
                     </tr>
-                    <tr>
+                     <tr>
                         <th><label for="ticketTitle">전시회명</label></th>
-                        <td><input type="text" id="title" class="form-control" name="ticketTitle" required></td>
+                        <td><input type="text" id="title" class="form-control" name="ticketTitle" value="${t.ticketTitle}" required></td>
                     </tr>
-                   <tr>
+                     <tr>
                         <th><label for="writer">작성자</label></th>
                         <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userId }" required></td>
                     </tr>
-                     <tr>
+                      <tr>
                         <th><label for="price">가격코드</label></th>
-                        <td><input type="text" id="price" class="form-control" name="price" required></td>
+                        <td><input type="text" id="price" class="form-control" name="price"  value="${ t.price }" required></td>
                     </tr>
-                    <tr>
+                       <tr>
                         <th><label for="ticketPhone">전화번호</label></th>
-                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" required></td>
+                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" value="${ t.ticketPhone }" required></td>
                     </tr>
-                  
-                   
-                    <tr>
+                      <tr>
                         <th colspan="2"><label for="content">공지사항</label></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;"></textarea></th>
+                      <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;">${ t.ticketNotice }</textarea></th>
+                    
+                     
                     </tr>
-                     <tr>
+                    <tr>
                         <th><label for="upfile">첨부파일</label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
+                        <td>
+                            <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
+                            <c:if test="${ !empty t.originName }">
+	                                                               현재 업로드된 파일 : ${ t.originName } <br>
+	                            <input type="hidden" name="changeName" value="${ t.changeName }">
+	                            <input type="hidden" name="originName" value="${ t.originName }">
+                            </c:if>
+                        </td>
                     </tr>
+                   
+                   
                 </table>
                 <br>
-               
+
                 <div align="center">
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <button type="reset" class="btn btn-danger">취소하기</button>
-                   <button type="button" onclick="location.href='ticketAddress.do' " class="btn btn-primary">위치확인</button>
+                    <button type="submit" class="btn btn-primary">수정하기</button>
+                    <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">이전으로</button>
                 </div>
             </form>
         </div>
         <br><br>
     </div>
 
-     <jsp:include page="../common/footer.jsp"/>
+   <jsp:include page="../common/footer.jsp"/>
     
     <!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->

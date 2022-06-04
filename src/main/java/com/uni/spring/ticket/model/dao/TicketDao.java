@@ -35,4 +35,14 @@ public class TicketDao {
 		return sqlSession.selectOne("ticketMapper.selectTicket",bno);
 	}
 
+	public int deleteTicket(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ticketMapper.deleteTicket",bno);
+	}
+
+	public int updateTicket(SqlSessionTemplate sqlSession, Ticket t) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("ticketMapper.updateTicket",t);
+	}
+
 }

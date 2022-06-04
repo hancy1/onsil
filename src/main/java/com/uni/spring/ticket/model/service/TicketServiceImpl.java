@@ -49,4 +49,22 @@ public class TicketServiceImpl implements TicketService{
 		return ticketDao.selectTicket(sqlSession,bno);
 	}
 
+	@Override
+	public void deleteTicket(int bno) {
+		   int result = ticketDao.deleteTicket(sqlSession, bno);
+		      
+		      if(result < 0) {
+		         throw new CommException("티켓 삭제 실패");
+		      }
+	}
+
+	@Override
+	public void updateTicket(Ticket t) {
+		int result = ticketDao.updateTicket(sqlSession, t);
+	      
+	      if(result < 0) {
+	         throw new CommException("티켓수정 실패");
+	      }
+	}
+
 }
