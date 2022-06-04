@@ -65,4 +65,16 @@ public class MemberDao {
 		return (Member)sqlSession.selectOne("memberMapper.selectAdminMember", mno);
 	}
 
+	// 관리자 - 회원관리 회원강퇴
+	public int deleteAdminMember(SqlSessionTemplate sqlSession, int mno) {
+		
+		return sqlSession.update("memberMapper.deleteAdminMember", mno);
+	}
+
+	// 관리자 - 회원복구
+	public int updateAdminMember(SqlSessionTemplate sqlSession, int mno) {
+		
+		return sqlSession.update("memberMapper.updateAdminMember", mno);
+	}
+
 }

@@ -227,4 +227,23 @@ public class MemberController {
 		
 		return mv;		
 	}
+	
+	// 관리자 - 회원관리 강퇴
+	@RequestMapping("deleteAdminMember.do")
+	public String deleteAdminMember(int mno) {		
+		
+		memberService.deleteAdminMember(mno);
+		
+		return "redirect:adminMember.do";
+	}
+		
+	// 관리자 - 회원관리 복구
+	@RequestMapping("updateAdminMember.do")
+	public ModelAndView updateAdminMember(int mno, ModelAndView mv) {	
+		
+		memberService.updateAdminMember(mno);
+		
+		mv.addObject("mno", mno).setViewName("redirect:adminMemberDetail.do");
+		return mv;
+	}
 }
