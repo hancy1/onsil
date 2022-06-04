@@ -312,6 +312,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="LogComment" id="LogCommentResultSet"> 
 		<id property="commentNo" column="COMMENT_NO"/>
 		<result property="logNo" column="LOG_NO"/>
+		<result property="commentGroup" column="COMMENT_GROUP"/>
+		<result property="groupSeq" column="GROUP_SEQ"/>
+		<result property="commentType" column="COMMENT_TYPE"/>
 		<result property="userNo" column="USER_ID" />		
 		<result property="comment" column="COMMENT" />
 		<result property="enrollDate" column="ENROLL_DATE" />	
@@ -329,20 +332,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectLogCommentList" resultMap="LogCommentResultSet">
 	
-		SELECT A.COMMENT_NO, A.LOG_NO, B.USER_ID, A.CONTENT, A.ENROLL_DATE, A.STATUS
-		FROM LOG_COMMENT A
+		SELECT A.COMMENT_NO, A.LOG_NO, A.COMMENT_GROUP, A.GROUP_SEQ, A.COMMENT_TYPE, B.USER_ID, A.CONTENT, A.ENROLL_DATE, A.STATUS
+		FROM DAILYLOG_COMMENT A
 		JOIN MEMBER B USING (USER_NO)
 		WHERE LOG_NO = #{logNo}
 		AND A.STATUS = 'Y'
-		ORDER BY A.LOG_NO DESC
+		ORDER BY COMMENT_GROUP ASC, GROUP_SEQ ASC
 		
 	</select>
 	
 	<insert id="insertLogComment">
-	
-		INSERT INTO LOG_COMMENT VALUES
-		(SEQ_LOG_COMMENT_NO.NEXTVAL, #{logNo}, #{userNo}, #{content}, DEFAULT, DEFAULT)
+		
+		INSERT INTO DAILYLOG_COMMENT VALUES
+		(SEQ_LOG_COMMENT_NO.NEXTVAL, #{logNo}, 0, SEQ_DAILYLOG_COMMENT_SEQ.NEXTVAL, 0, #{userNo}, #{content}, DEFAULT, DEFAULT)
 		
 	</insert>
+	
+	<update id="updateCommentGroup">
+	
+		UPDATE DAILYLOG_COMMENT
+		SET COMMENT_GROUP = SEQ_LOG_COMMENT_NO.CURRVAL
+		WHERE COMMENT_GROUP = 0
+		
+	</update>
+	
+	<insert id="insertLogReComment">
+	
+		INSERT INTO DAILYLOG_COMMENT VALUES
+		(SEQ_LOG_COMMENT_NO.NEXTVAL, #{logNo}, #{commentGroup}, SEQ_DAILYLOG_COMMENT_SEQ.NEXTVAL, 1, #{userNo}, #{content}, DEFAULT, DEFAULT)
+		
+	</insert>
+	
+	<delete id="deleteLogComment">
+	
+		UPDATE DAILYLOG_COMMENT
+		SET STATUS = 'N'
+		WHERE COMMENT_NO = #{commentNo}
+		OR COMMENT_GROUP = #{commentNo}
+		
+	</delete>
 	
 </mapper>

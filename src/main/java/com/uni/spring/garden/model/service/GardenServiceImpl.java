@@ -257,6 +257,25 @@ public class GardenServiceImpl implements GardenService{
 		return result; 
 	}
 
+	@Override
+	public int insertLogReComment(DailyLogComment comment) {
+		int result =  gardenDao.insertLogReComment(comment, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 답글 작성 실패");
+		}
+		return result; 
+	}
+
+	@Override
+	public int deleteLogComment(String commentNo) {
+		
+		int result =  gardenDao.deleteLogComment(commentNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 댓글 삭제 실패");
+		}
+		return result; 
+	}
+
 	
 
 	

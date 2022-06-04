@@ -187,7 +187,19 @@ public class GardenDao {
 
 	public int insertLogComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.insert("gardenMapper.insertLogComment", comment);
+		sqlSession.insert("gardenMapper.insertLogComment", comment);
+		
+		return sqlSession.update("gardenMapper.updateCommentGroup", comment);
+	}
+
+	public int insertLogReComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertLogReComment", comment);
+	}
+
+	public int deleteLogComment(String commentNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.deleteLogComment", commentNo);
 	}
 
 }
