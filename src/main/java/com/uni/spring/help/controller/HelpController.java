@@ -406,6 +406,40 @@ public class HelpController {
 		
 		return "help/adminInquiryListView";
 	}
+	
+	// 관리자 - 문의사항 관리 리스트 뷰 - 답변 전 
+	@RequestMapping("adminInquiry2.do")
+	public String selectAdminInquiryList2(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectAdminInquiryListCount2(); 
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Inquiry> list = helpService.selectAdminInquiryList2(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/adminInquiryListView";
+	}
+	
+	// 관리자 - 문의사항 관리 리스트 뷰 - 답변완료
+	@RequestMapping("adminInquiry3.do")
+	public String selectAdminInquiryList3(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectAdminInquiryListCount3(); 
+		
+		
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Inquiry> list = helpService.selectAdminInquiryList3(pi); // 페이지 정보를 가지고 넘어가기
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/adminInquiryListView";
+	}
 		
 	// 관리자 - 문의사항 디테일 뷰
 	@RequestMapping("adminInquiryDetail.do")
@@ -416,6 +450,32 @@ public class HelpController {
 		i.setContent(i.getContent().replaceAll("\n", "<br>"));
 		
 		mv.addObject("i", i).setViewName("help/adminInquiryDetailView");		
+		
+		return mv;		
+	}
+	
+	// 관리자 - 문의사항 미리보기
+	@RequestMapping("adminInquiryPreview.do")
+	public ModelAndView adminInquiryPreview(int ino, ModelAndView mv) {
+						
+		Inquiry i = helpService.selectAdminInquiry(ino);
+		
+		i.setContent(i.getContent().replaceAll("\n", "<br>"));
+		
+		mv.addObject("i", i).setViewName("help/adminInquiryPreview");		
+		
+		return mv;		
+	}
+	
+	// 관리자 - 문의사항 답변쓰기
+	@RequestMapping("adminInquiryAnswer.do")
+	public ModelAndView adminInquiryAnswer(int ino, ModelAndView mv) {
+						
+		Inquiry i = helpService.selectAdminInquiry(ino);
+		
+		i.setContent(i.getContent().replaceAll("\n", "<br>"));
+		
+		mv.addObject("i", i).setViewName("help/adminInquiryAnswer");		
 		
 		return mv;		
 	}

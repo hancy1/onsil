@@ -309,6 +309,34 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
+	public int selectAdminInquiryListCount2() {
+
+		return HelpDao.selectAdminInquiryListCount2(sqlSession);
+	}
+
+
+	@Override // 관리자 - 문의사항 관리 리스트 뷰  - 답변 전
+	public ArrayList<Inquiry> selectAdminInquiryList2(PageInfo pi) {
+		
+		return HelpDao.selectAdminInquiryList2(sqlSession, pi);
+	}
+
+
+	@Override // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변완료
+	public int selectAdminInquiryListCount3() {
+		
+		return HelpDao.selectAdminInquiryListCount3(sqlSession);
+	}
+
+
+	@Override // 관리자 - 문의사항 관리 리스트 뷰  - 답변완료
+	public ArrayList<Inquiry> selectAdminInquiryList3(PageInfo pi) {
+		
+		return HelpDao.selectAdminInquiryList3(sqlSession, pi);
+	}
+
+
 	
 
 

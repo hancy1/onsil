@@ -36,6 +36,14 @@
 				    color: #3ac240;}
     .btn.btn-danger:hover{background: #3ac240;
 						  border-color: #3ac240;}
+						  
+  	.btn.view{background: white;
+			    border-color: #3ac240;
+			    color: #3ac240;}
+    .btn.view:hover{background: #3ac240;
+				  	border-color: #3ac240;
+				  	color:white;}
+				  	
 </style>
 
 </head>
@@ -78,6 +86,13 @@
             <br>            
             	         
          	<br><br>
+         	<div style="float: right;">
+         	<a href="adminInquiry.do">전체</a> &nbsp;&nbsp;
+         	<a href="adminInquiry2.do">답변전</a> &nbsp;&nbsp;
+         	<a href="adminInquiry3.do">답변완료</a> &nbsp;&nbsp;
+         	</div>
+         	<br><br>
+         	
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
                   <tr>
@@ -106,7 +121,7 @@
 	                        <td>${ i.replyCount }</td>	                        
 	                        <td>${ i.status }</td>	                        
 	                        <td>${ i.answer_status }</td>	                        
-	                        <td class="button"><button class="btn btn-danger">미리보기</button></td>	                        
+	                        <td class="button"><button class="btn view">미리보기</button></td>	                        
 	                        <td class="button"><button class="btn btn-danger">답변하기</button></td>	                        
 	                    </tr>
                     </c:forEach>
@@ -179,6 +194,14 @@
 			location.href="adminInquiryDetail.do?ino=" + $(this).parentsUntil().children().eq(0).text();
 		});
 	});
+ 	
+ 	$("#boardList>tbody>tr>td>.btn.view").click(function(){
+ 		window.open("http://localhost:8099/spring/adminInquiryPreview.do?ino="+$(this).parentsUntil().parentsUntil().children().eq(0).text(), "", "_blank");
+ 	});
+ 	
+ 	$("#boardList>tbody>tr>td>.btn.btn-danger").click(function(){
+ 		window.open("http://localhost:8099/spring/adminInquiryAnswer.do?ino="+$(this).parentsUntil().parentsUntil().children().eq(0).text(), "", "_blank");
+ 	});
     </script>
 
 </body>
