@@ -72,6 +72,14 @@ public interface HelpService {
 
 	Inquiry selectAdminInquiry(int ino); // 관리자 - 문의사항 디테일 뷰
 
+	int selectAdminInquiryListCount2(); // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
+
+	ArrayList<Inquiry> selectAdminInquiryList2(PageInfo pi); // 관리자 - 문의사항 관리 리스트 뷰  - 답변 전
+
+	int selectAdminInquiryListCount3(); // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변완료
+
+	ArrayList<Inquiry> selectAdminInquiryList3(PageInfo pi); // 관리자 - 문의사항 관리 리스트 뷰  - 답변완료
+
 	
 
 }

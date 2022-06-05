@@ -346,4 +346,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND INQUIRY_NO = #{ino}
 		]]>
 	</update>
+	
+	<!-- 관리자 - 문의사항 게시물 갯수 - 답변 전-->
+	<select id="selectAdminInquiryListCount2" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY
+		WHERE ANSWER_STATUS = 'N'
+	</select>
+	
+	<!-- 관리자 - 문의사항 게시물들 불러오기 - 답변 전-->
+	<select id="selectAdminInquiryList2" resultMap="AdminInquiryResultSet">
+		SELECT A.INQUIRY_NO, C.CATEGORY_NAME, A.COUNT, A.TITLE, A.WRITER, B.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS,
+				A.REPLYCOUNT, A.ANSWER_STATUS
+		FROM INQUIRY A
+		JOIN MEMBER B ON A.WRITER = B.USER_NO
+		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
+		WHERE ANSWER_STATUS = 'N'
+		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
+	</select>
+	
+	<!-- 관리자 - 문의사항 게시물 갯수 - 답변완료-->
+	<select id="selectAdminInquiryListCount3" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY
+		WHERE ANSWER_STATUS = 'Y'
+	</select>
+	
+	<!-- 관리자 - 문의사항 게시물들 불러오기 - 답변완료-->
+	<select id="selectAdminInquiryList3" resultMap="AdminInquiryResultSet">
+		SELECT A.INQUIRY_NO, C.CATEGORY_NAME, A.COUNT, A.TITLE, A.WRITER, B.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS,
+				A.REPLYCOUNT, A.ANSWER_STATUS
+		FROM INQUIRY A
+		JOIN MEMBER B ON A.WRITER = B.USER_NO
+		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
+		WHERE ANSWER_STATUS = 'Y'
+		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
+	</select>
 </mapper>

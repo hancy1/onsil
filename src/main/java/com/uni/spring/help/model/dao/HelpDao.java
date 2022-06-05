@@ -229,6 +229,36 @@ public class HelpDao {
 		return sqlSession.update("helpMapper.updateAnswerStatus", ino);
 	}
 
+	// 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
+	public static int selectAdminInquiryListCount2(SqlSessionTemplate sqlSession) {
+
+		return sqlSession.selectOne("helpMapper.selectAdminInquiryListCount2");
+	}
+
+	// 관리자 - 문의사항 관리 리스트 뷰  - 답변 전
+	public static ArrayList<Inquiry> selectAdminInquiryList2(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList2", null, rowBounds);
+	}
+
+	// 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변완료
+	public static int selectAdminInquiryListCount3(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("helpMapper.selectAdminInquiryListCount3");
+	}
+
+	// 관리자 - 문의사항 관리 리스트 뷰  - 답변완료
+	public static ArrayList<Inquiry> selectAdminInquiryList3(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList3", null, rowBounds);
+	}
+
 	
 
 	
