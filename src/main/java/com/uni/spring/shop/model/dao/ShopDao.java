@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 @Repository
@@ -58,6 +59,19 @@ public class ShopDao {
 	public int deleteReview(SqlSessionTemplate sqlSession, int reviewNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("shopMapper.deleteReview",reviewNo);
+	}
+
+	public int productListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.productListCount");
+	}
+
+	public ArrayList<Product> selectShopList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectShopList", null, rowdounds);
 	}
 
 

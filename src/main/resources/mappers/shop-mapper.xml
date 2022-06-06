@@ -139,5 +139,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE REVIEW_NO=#{reviewNo}
     
   	</update>
+  	
+  	
+  	
+  	
+  	
+  	
+  	<resultMap type="Product" id="productResultSet"> 
+		<id property="proCode" column="PRO_CODE"/>		
+		<result property="cateCode" column="CATE_CODE" />
+		<result property="proName" column="PRO_NAME" />
+		<result property="price" column="PRICE" />	
+		<result property="detailOri" column="DETAIL_ORI" />
+		<result property="detailCha" column="DETAIL_CHA" />
+		<result property="proAmount" column="PRO_AMOUNT" />
+		<result property="proStatus" column="PRO_STATUS" />
+		<result property="proContent" column="PRO_CONTENT" />
+		
+	</resultMap>
+	
+  	
+  	
+  	
+  	
+  	
+	<!-- 관리자 페이지 : 등록된 product 수  -->
+	<select id = "productListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	WHERE PRO_STATUS='Y'
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 등록된 제품들 전부 select해오기 -->
+	<select id="selectShopList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+	    
+	</select>
+	
+	
+
 
 </mapper>
