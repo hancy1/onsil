@@ -64,7 +64,7 @@ public interface GardenService {
 
 	int selectLogCommentCount(String logNo);
 
-	ArrayList<DailyLogComment> selectLogCommentList(PageInfo pi, String logNo);
+	ArrayList<DailyLogComment> selectLogCommentList(String logNo);
 
 	void updateDailylog(DailyLog log);
 
@@ -75,6 +75,8 @@ public interface GardenService {
 	int insertLogReComment(DailyLogComment comment);
 
 	int deleteLogComment(String commentNo);
+
+	int updateLogComment(DailyLogComment comment);
 
 
 	

@@ -166,13 +166,10 @@ public class GardenDao {
 		return sqlSession.selectOne("gardenMapper.selectLogCommentCount", logNo);
 	}
 
-	public ArrayList<DailyLogComment> selectLogCommentList(String logNo, PageInfo pi, SqlSessionTemplate sqlSession) {
+	public ArrayList<DailyLogComment> selectLogCommentList(String logNo, SqlSessionTemplate sqlSession) {
 		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("gardenMapper.selectLogCommentList", logNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectLogCommentList", logNo);
 	}
 
 	public int updateDailylog(DailyLog log, SqlSessionTemplate sqlSession) {
@@ -200,6 +197,11 @@ public class GardenDao {
 	public int deleteLogComment(String commentNo, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.update("gardenMapper.deleteLogComment", commentNo);
+	}
+
+	public int updateLogComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updateLogComment", comment);
 	}
 
 }

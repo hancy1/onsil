@@ -343,17 +343,17 @@ public class GardenController {
 		
 		DailyLog log = gardenService.selectLog(logNo);
 		
-		int commentCount = gardenService.selectLogCommentCount(logNo);
-		
-		PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
-		
-		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(pi, logNo);
-		
-		System.out.println("comment 확인" + comment);
+//		int commentCount = gardenService.selectLogCommentCount(logNo);
+//		
+//		PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
+//		
+//		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(pi, logNo);
+//		
+//		System.out.println("comment 확인" + comment);
 		
 		model.addAttribute("log", log);
-		model.addAttribute("comment", comment);
-		model.addAttribute("pi", pi);
+//		model.addAttribute("comment", comment);
+//		model.addAttribute("pi", pi);
 		
 		return "garden/dailyLogDetailView";
 	}
@@ -439,6 +439,22 @@ public class GardenController {
 	//댓글 
 
 	@ResponseBody
+	@RequestMapping(value = "selectCommentList.do", produces="application/json; charset=utf-8")
+	public ArrayList<DailyLogComment> selectLogCommentList(String logNo) {
+
+		//int commentCount = gardenService.selectLogCommentCount(logNo);
+		
+		//PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
+		
+		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(logNo);
+		
+		System.out.println("comment 확인" + comment);
+				
+		return comment;
+	}
+	
+	
+	@ResponseBody
 	@RequestMapping(value = "insertLogComment.do", produces="application/json; charset=utf-8")
 	public int insertLogComment(DailyLogComment comment) {
 		
@@ -461,6 +477,12 @@ public class GardenController {
 	@RequestMapping(value = "deleteLogComment.do", produces="application/json; charset=utf-8")
 	public int deleteLogComment(String commentNo) {
 		return gardenService.deleteLogComment(commentNo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "updateLogComment.do", produces="application/json; charset=utf-8")
+	public int updateLogComment(DailyLogComment comment) {
+		return gardenService.updateLogComment(comment);
 	}
 	
 	//=========================================================================================

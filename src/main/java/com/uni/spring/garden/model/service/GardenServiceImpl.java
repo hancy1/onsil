@@ -224,9 +224,9 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public ArrayList<DailyLogComment> selectLogCommentList(PageInfo pi, String logNo) {
+	public ArrayList<DailyLogComment> selectLogCommentList(String logNo) {
 		
-		return gardenDao.selectLogCommentList(logNo, pi, sqlSession);
+		return gardenDao.selectLogCommentList(logNo, sqlSession);
 	}
 
 	@Override
@@ -272,6 +272,15 @@ public class GardenServiceImpl implements GardenService{
 		int result =  gardenDao.deleteLogComment(commentNo, sqlSession);
 		if(result < 0) {
 			throw new CommException("데일리로그 댓글 삭제 실패");
+		}
+		return result; 
+	}
+
+	@Override
+	public int updateLogComment(DailyLogComment comment) {
+		int result =  gardenDao.updateLogComment(comment, sqlSession);
+		if(result < 0) {
+			throw new CommException("데일리로그 댓글 수정 실패");
 		}
 		return result; 
 	}
