@@ -117,17 +117,19 @@
 				                </tr>
 				                <tr>
 				                	<th>글번호</th>
-				                	<td colspan="2">${ i.inquiryNo }</td>
+				                	<td colspan="3">${ i.inquiryNo }</td>
 				                	<th>카테고리</th>
-				                	<td colspan="2">${ i.category }</td>				                    
+				                	<td colspan="3">${ i.category }</td>				                    
 				                	<th>조회수</th>
-				                	<td colspan="2">${ i.count }</td>				                    
+				                	<td>${ i.count }</td>				                    
 				                </tr>				                
 				                <tr>
 				                    <th>작성자</th>
 				                    <td colspan="3">${ i.writer }</td>
 				                    <th>작성일</th>
 				                    <td colspan="3">${ i.createDate }</td>
+				                    <th>글 공개여부</th>
+				                	<td>${ i.open }</td>   
 				                </tr>				                
 				                <tr>
 				                    <th>내용</th>		
@@ -206,7 +208,7 @@
  				
 			</div>
 		</div>
-	</div>	
+	</div>		
 	
 	
 	<jsp:include page="../common/footer.jsp" />  

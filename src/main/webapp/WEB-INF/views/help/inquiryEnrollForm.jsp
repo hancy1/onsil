@@ -96,7 +96,7 @@
 	<!-- 게시판 본문 -->
 		<div class="container">
 		 	<div class="input-form-backgroud row">
-		 		<div class="input-form col-md-12 mx-auto" style="margin-left: 0px; margin-bottom: 100px;">
+		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 			 		<h4>문의사항</h4>	 			 		
 			 		
 			 		<div>	
@@ -124,7 +124,14 @@
 					                			<option name="category" value="6">반품/교환</option>
 					                			<option name="category" value="7">기타</option>
 					                		</select>
-					                	</td>             				                    
+					                	</td>  
+					                	<th>글 공개여부</th>
+					                	<td>
+					                		<select name="open" required>					                			
+					                			<option name="open" value="Y">공개</option>
+					                			<option name="open" value="N">비공개</option>					                			
+					                		</select>
+					                	</td>           				                    
 					                </tr>				                
 					                <tr>
 					                    <th>작성자</th>

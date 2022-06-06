@@ -138,6 +138,13 @@
 				                    <td colspan="3">${ i.writer }</td>
 				                    <th>작성일</th>
 				                    <td colspan="3">${ i.createDate }</td>
+				                    <th>글 공개여부</th>
+					                	<td>
+					                		<select name="open" required>					                			
+					                			<option id="open" name="open" value="Y">공개</option>
+					                			<option id="closed"	name="open" value="N">비공개</option>					                			
+					                		</select>
+					                	</td>           
 				                </tr>				                
 				                <tr>
 				                    <th>내용</th>		
@@ -204,6 +211,16 @@
    			$("#exchange").attr("selected", true);
    		}else{
    			$("#etc").attr("selected", true);
+   		}
+   	});
+	
+	// 공개여부 선택됨 
+	$(function(){
+    	
+   		if("${i.open}" == "Y"){
+   			$("#open").attr("selected", true);
+   		}else{
+   			$("#closed").attr("selected", true);
    		}
    	});
 	

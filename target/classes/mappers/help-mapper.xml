@@ -64,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="open" column="OPEN"/>         
          <result property="status" column="STATUS"/>         
          <result property="replyCount" column="REPLYCOUNT"/>         
+         <result property="userId" column="USER_ID"/>         
 	</resultMap>
 	
 	<!-- 관리자 - 문의사항 리절트맵 -->
@@ -127,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 문의사항 게시물들 불러오기 -->
 	<select id="selectInquiryList" resultMap="inquiryResultSet">		
-		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS, A.REPLYCOUNT, C.USER_NO
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS, A.REPLYCOUNT, C.USER_NO, C.USER_ID
 		FROM INQUIRY A
 		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
 		JOIN MEMBER C ON A.WRITER = C.USER_NO
@@ -207,13 +208,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의사항 글 작성 -->
 	<insert id="insertInquiry">
 		INSERT INTO INQUIRY VALUES
-		(SEQ_INQUIRY_NO.NEXTVAL, #{category}, DEFAULT, #{title}, #{userNo}, DEFAULT, #{content}, DEFAULT, DEFAULT, DEFAULT)
+		(SEQ_INQUIRY_NO.NEXTVAL, #{category}, DEFAULT, #{title}, #{userNo}, DEFAULT, #{content}, #{open}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 	<!-- 문의사항 글 수정 -->
 	<update id="updateInquiry">
 		UPDATE INQUIRY
-		SET TITLE = #{title}, CONTENT = #{content}, CATEGORY = #{category}
+		SET TITLE = #{title}, CONTENT = #{content}, CATEGORY = #{category}, OPEN = #{open}
 		WHERE INQUIRY_NO = #{inquiryNo}
 	</update>
 	

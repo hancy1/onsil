@@ -70,7 +70,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">문의사항</li>
+							<li class="breadcrumb-item active" aria-current="page"><a href="/spring/inquiryList.do">문의사항</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -104,7 +104,9 @@
 	                    <th>제목</th>
 	                    <th>조회수</th>
 	                    <th>작성자</th>	                    
-	                    <th>게시날짜</th>	                    
+	                    <th>아이디</th>	                    
+	                    <th>게시날짜</th>
+	                    <th>공개여부</th>	                    
 	                  </tr>
 	                </thead>
 	                <tbody>
@@ -115,7 +117,9 @@
 		                        <td>${ i.title } &nbsp; [ ${ i.replyCount } ]</td>
 		                        <td>${ i.count }</td>
 		                        <td>${ i.writer }</td>
-		                        <td>${ i.createDate }</td>		                        
+		                        <td>${ i.userId }</td>
+		                        <td>${ i.createDate }</td>	
+		                        <td>${ i.open }</td>		                                               
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -181,8 +185,21 @@
 
 	<script>
     	$(function(){
-    		$("#InquiryList tbody tr").click(function(){
-    			location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    		$("#InquiryList tbody tr").click(function(){    		
+    			
+    			if($(this).children().eq(7).text() == 'Y') {
+    				location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    			}else{    				  			
+    				if("${loginUser.userId}" == $(this).children().eq(5).text()) {
+    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    				}else if("${loginUser.userId}" == 'admin'){
+    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    				}else{
+    					alert("이 게시글은 작성자와 관리자만 볼 수 있습니다.");
+    				}
+    			};
+    			
+    			
     		});
     	});
     </script>
