@@ -33,6 +33,8 @@ public class ProOrder {
 	ADDRESS_DETAIL
 	ORDER_STATUS
 	ORDER_DATE
+	
+	PRO_NAME
 	*/
 	
 	
@@ -50,6 +52,8 @@ public class ProOrder {
 	private String orderStatus;//오더상태 디폴트 Y	
 	private Date orderDate;//등록날짜
 
+	private String proName; //제품명
+	
 
 	
 }

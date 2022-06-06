@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
@@ -78,6 +79,11 @@ public class ShopDao {
 	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession, int userNo) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("shopMapper.selectCartList",userNo);
+	}
+
+	public ArrayList<ProOrder> selectOrderList(SqlSessionTemplate sqlSession, int userNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("shopMapper.selectOrderList",userNo);
 	}
 
 
