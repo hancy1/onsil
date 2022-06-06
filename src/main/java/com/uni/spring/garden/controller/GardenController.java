@@ -355,6 +355,12 @@ public class GardenController {
 //		model.addAttribute("comment", comment);
 //		model.addAttribute("pi", pi);
 		
+		String hostUser = (String) session.getAttribute("hostUser");
+		System.out.println("hostUser확인" + hostUser);
+		
+		ArrayList<DailyLog> list = gardenService.selectRecentLog(hostUser);
+		model.addAttribute("list", list);
+		
 		return "garden/dailyLogDetailView";
 	}
 	

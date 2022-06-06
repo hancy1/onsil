@@ -78,6 +78,8 @@ public interface GardenService {
 
 	int updateLogComment(DailyLogComment comment);
 
+	ArrayList<DailyLog> selectRecentLog(String hostUser);
+
 
 	
 

@@ -285,6 +285,12 @@ public class GardenServiceImpl implements GardenService{
 		return result; 
 	}
 
+	@Override
+	public ArrayList<DailyLog> selectRecentLog(String hostUser) {
+		
+		return gardenDao.selectRecentLog(hostUser, sqlSession);
+	}
+
 	
 
 	

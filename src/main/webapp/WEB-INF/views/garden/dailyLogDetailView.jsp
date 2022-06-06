@@ -98,27 +98,6 @@
                             </ol>
                         </div>
                         <!-- Comment Area End -->
-			
-            <!-- Leave A Comment -->
-            <div class="leave-comment-area clearfix">
-                <div class="comment-form">
-                    <h4 class="headline">Leave A Comment</h4>
-
-                    <div class="contact-form-area">
-                        <!-- Comment Form -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
-                                </div>
-                            </div>    
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 <script>
@@ -195,8 +174,18 @@
                                                                     "<span class='comment-date'>" + c.enrollDate + "</span>" +
                                                                 "</div>" + 
                                                                 "<p>답글 :" +  c.content + "</p>" +
+                                                                "<div class='modify" + c.commentNo + "' style='display:none'>" +	
+                    	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
+                    	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
+                    	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
+                    			                                "</div>";
                                                                 <!--  <a class="active" href="#">Reply</a>-->
-                                                            "</div>" + 
+                                                                
+                                                                if("${loginUser.userId}" == c.userNo){
+                    	                                            value += "<a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a> | " +
+                    			                                             "<a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>" }
+                                                                
+                                                            value += "</div>" + 
                                                         "</div>" + 
                                                     "</li>" + 
                                                 "</ol>"; } 	
@@ -312,6 +301,7 @@
 		}
 	}
 	
+	//댓글, 답글 삭제
 	function deleteComment(commentNo){
 		
 		var yn = confirm("해당 댓글을 삭제하시겠습니까?")
@@ -341,6 +331,7 @@
 		$(".modify"+commentNo).show();
 	}
 	
+	//댓글 답글 수정
 	function updateComment(commentNo){
 		
 		var content = $('#update'+commentNo).val();
@@ -369,180 +360,75 @@
 	}
 	
 </script>
-                <!-- Blog Sidebar Area -->
-                <div class="col-12 col-sm-9 col-md-4">
-                    <div class="post-sidebar-area">                        
+      <!-- Blog Sidebar Area -->
+      <div class="col-12 col-sm-9 col-md-4">
+          <div class="post-sidebar-area">
+         	 <div class="single-widget-area">
+                    			
+            <!-- Leave A Comment -->
+            <div class="leave-comment-area clearfix">
+                <div class="comment-form">
+                    <h4 class="headline">Leave A Comment</h4>
 
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Author Widget -->
-                            <div class="author-widget">
-                                <div class="author-thumb-name d-flex align-items-center">
-                                    <div class="author-thumb">
-                                        <img src="resources/img/bg-img/29.jpg" alt="">
-                                    </div>
-                                    <div class="author-name">
-                                        <h5>Alan Jackson</h5>
-                                        <p>Editor</p>
+                    <div class="contact-form-area">
+                        <!-- Comment Form -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
                                     </div>
                                 </div>
-                                <p>I’m the editor for houseplants &amp; garden design articles on social, and I like to put each of those articles in the topic.</p>
-                                <div class="social-info">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <div class="col-12">
+                                    <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
                                 </div>
-                            </div>
-                        </div>
-
+                            </div>    
+                    </div>
+                </div>
+            </div>
+              </div>
+                                            
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
                                 <h4>Recent post</h4>
                             </div>
-
+							
+							<c:if test="${ !list.isEmpty() }">
+							<c:forEach items="${list}" var="list">
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
                                 <div class="post-thumb">
-                                    <img src="resources/img/bg-img/30.jpg" alt="">
+                                	<c:if test="${list.serverName != null}">
+                                    	<img src="resources/garden_upload_files/${list.serverName}" alt="">
+                                    </c:if>
+                                    <c:if test="${list.serverName == null}">
+                                    	<img src="resources/garden_upload_files/noImage.png" alt="">
+                                    </c:if>
                                 </div>
                                 <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>New Harris Bugg design for Bridgewater</h6>
+                                    <a href="logDetail.do?logNo=${list.logNo}" class="post-title">
+                                        <c:choose>
+											<c:when test="${fn:length(list.content)>14}">
+												<c:out value="${fn:substring(list.content,0,13)}"/>...
+											</c:when>
+											<c:otherwise>
+												<c:out value="${list.content}"/>
+											</c:otherwise>
+										</c:choose>
                                     </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
+                                    <a href="#" class="post-date">${list.enrollDate}</a>
                                 </div>
                             </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="resources/img/bg-img/31.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>The designers will create a new kitchen garden</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="resources/img/bg-img/32.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>SGD Members win Best of Houzz Design Award</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="resources/img/bg-img/33.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>Tag Cloud</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">NEW PRODUCTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
-                                <li><a href="#">DESIGN</a></li>
-                                <li><a href="#">NEWS</a></li>
-                                <li><a href="#">TRENDING</a></li>
-                                <li><a href="#">VIDEO</a></li>
-                                <li><a href="#">GARDEN DESIGN</a></li>
-                            </ol>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>BEST SELLER</h4>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="resources/img/bg-img/4.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Cactus Flower</a>
-                                    <p>$10.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="resources/img/bg-img/5.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Tulip Flower</a>
-                                    <p>$11.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="resources/img/bg-img/34.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Recuerdos Plant</a>
-                                    <p>$9.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
+                            </c:forEach>
+                            </c:if>
+                            <c:if test="${ list.isEmpty() }">
+                            	<h6>작성된 데일리로그가 없습니다.</h6>
+                            </c:if>
+                            
+		                </div>
+		            </div>
+		        </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
     
