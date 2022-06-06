@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.ShopPagination;
+import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
@@ -62,7 +63,15 @@ public class ShopController {
 	
 	//장바구니 연결(DB아직)	
 	@RequestMapping("CartList.do")
-	public String selectCartList() {
+	public String selectCartList(Model model, HttpSession session) {
+		
+		String userNoS = ((Member) session.getAttribute("loginUser")).getUserNo();
+		int userNo = Integer.parseInt(userNoS);
+		
+		ArrayList<Cart> list = shopService.selectCartList(userNo);
+		
+		model.addAttribute("list", list);
+		
 		
 		return "shop/cart";
 	}

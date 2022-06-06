@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
@@ -72,6 +73,11 @@ public class ShopDao {
 		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("shopMapper.selectShopList", null, rowdounds);
+	}
+
+	public ArrayList<Cart> selectCartList(SqlSessionTemplate sqlSession, int userNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("shopMapper.selectCartList",userNo);
 	}
 
 

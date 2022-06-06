@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
     <link rel="icon" href="resources/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="resources/style.css">
 
 </head>
 
@@ -54,6 +54,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="cart-table clearfix">
+                    
+                    	
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
@@ -65,22 +67,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	<c:forEach items="${ list }" var="cart">
                                 <tr>
                                     <td class="cart_product_img">
-                                        <a href="#"><img src="resources/img/bg-img/34.jpg" alt="Product"></a>
-                                        <h5>(제품명)</h5>
+                                        <a href="#">
+                                        <img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${cart.detailCha}" alt="Product" >                                        
+                                        </a>
+                                        <h5>${ cart.proName }</h5>
                                     </td>
                                     <td class="qty">
                                         <div class="quantity">
                                             <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="99" name="quantity" value="1">
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="99" name="quantity" value="${cart.amount}">
                                             <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                         </div>
                                     </td>
-                                    <td class="price"><span>(가격)30,000원</span></td>
+                                    <td class="price"><span>${ cart.price }원</span></td>
                                     <td class="total_price"><span>(토탈)30,000원</span></td>
                                     <td class="action"><a href="#"><i class="icon_close"></i></a></td>
-                                </tr>
+                                </tr>                                
+                               </c:forEach> 
                             </tbody>
                         </table>
                     </div>

@@ -160,10 +160,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
   	
   	
-  	
-  	
-  	
-	<!-- 관리자 페이지 : 등록된 product 수  -->
+	<!--등록된 product 수 (판매중인것) -->
 	<select id = "productListCount" resultType="_int">
 
 	SELECT COUNT(*)
@@ -172,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 
-	<!-- 관리자 페이지 : 등록된 제품들 전부 select해오기 -->
+	<!--판매중인 제품 select해오기 -->
 	<select id="selectShopList" parameterType="Product" resultMap="productResultSet">	
 		 
 	  SELECT *
@@ -182,6 +179,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<resultMap type="Cart" id="cartResultSet"> 
+		<id property="cartNo" column="CART_NO"/>
+		<result property="userNo" column="USER_NO" />
+		<result property="proCode" column="PRO_CODE" />
+		<result property="amount" column="AMOUNT" />
+		
+		
+				
+		<result property="cateCode" column="CATE_CODE" />
+		<result property="proName" column="PRO_NAME" />
+		<result property="price" column="PRICE" />	
+		<result property="detailOri" column="DETAIL_ORI" />
+		<result property="detailCha" column="DETAIL_CHA" />
+		<result property="proAmount" column="PRO_AMOUNT" />
+		<result property="proStatus" column="PRO_STATUS" />
+		<result property="proContent" column="PRO_CONTENT" />
+		
+	</resultMap>
+	
+	
+	<!--  cart select해오기 -->
+	<select id = "selectCartList" parameterType="Cart" resultMap="cartResultSet">
+
+	  SELECT *
+	  FROM CART A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE 	  	  
+	  WHERE A.USER_NO=#{userNo}
+    
+  	</select>
 
 
 </mapper>
