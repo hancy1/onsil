@@ -180,6 +180,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	
+	
+	
 	<!-- 관리자페이지: 리뷰 삭제 -->	
   	<update id="deleteAdminReview">
   
@@ -237,6 +240,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO PRO_STOCK VALUES(SEQ_STOCK_NO.NEXTVAL, #{proCode}, #{stockStatus},#{amount} ,DEFAULT)
   
   	</insert>
+	
 	
 	
 	

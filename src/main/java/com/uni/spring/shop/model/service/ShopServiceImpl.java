@@ -11,6 +11,7 @@ import com.uni.spring.shop.model.dao.ShopDao;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 @Service
@@ -103,6 +104,22 @@ public class ShopServiceImpl implements ShopService {
 		if(result <0) {
 			throw new CommException("리뷰 삭제 실패");
 		}	
+	}
+
+
+
+	@Override
+	public int productListCount() {
+		// TODO Auto-generated method stub
+		return shopDao.productListCount(sqlSession);
+	}
+
+
+
+	@Override
+	public ArrayList<Product> selectShopList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectShopList(sqlSession,pi);
 	}
 
 }

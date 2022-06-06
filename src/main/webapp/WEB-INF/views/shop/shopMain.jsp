@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -221,240 +222,90 @@
 				<div class="col-12 col-md-8 col-lg-9">
 					<div class="shop-products-area">
 						<div class="row">
-
+							
+							
+							<c:forEach items="${ list }" var="p">
 							<!-- Single Product Area -->
 							<div class="col-12 col-sm-6 col-lg-4">
 								<div class="single-product-area mb-50">
 									<!-- Product Image -->
 									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/40.png"
-											alt=""></a>
-										<!-- Product Tag -->
-										<div class="product-tag">
-											<a href="#">Hot</a>
-										</div>
+									
+										<a href="shopDetails.do">
+										<img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
+										</a>
+										
 										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+											<a href="#" class="wishlist-btn">
+											<i class="icon_heart_alt"></i></a>
+											<a href="insertCart.do" class="add-to-cart-btn">Add to cart</a>
+											<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
 										</div>
+										
 									</div>
 									<!-- Product Info -->
 									<div class="product-info mt-15 text-center">
 										<a href="shop-details.html">
-											<p>Cactus Flower</p>
+											<p>${ p.proName }</p>
 										</a>
-										<h6>$10.99</h6>
+										<h6>${ p.price }원</h6>
 									</div>
 								</div>
 							</div>
 
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/41.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/42.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/43.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/44.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/45.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/46.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/47.png"
-											alt=""></a>
-										<!-- Product Tag -->
-										<div class="product-tag sale-tag">
-											<a href="#">Sale</a>
-										</div>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-
-							<!-- Single Product Area -->
-							<div class="col-12 col-sm-6 col-lg-4">
-								<div class="single-product-area mb-50">
-									<!-- Product Image -->
-									<div class="product-img">
-										<a href="shop-details.html"><img src="resources/img/bg-img/48.png"
-											alt=""></a>
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn"><i
-												class="icon_heart_alt"></i></a> <a href="cart.html"
-												class="add-to-cart-btn">Add to cart</a> <a href="#"
-												class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-									</div>
-									<!-- Product Info -->
-									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>Cactus Flower</p>
-										</a>
-										<h6>$10.99</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-
+							</c:forEach>
+							
 						<!-- Pagination -->
 						<nav aria-label="Page navigation">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#"><i
-										class="fa fa-angle-right"></i></a></li>
-							</ul>
+							<div id="pagingArea">
+				                <ul class="pagination">
+				                	<c:choose>
+				                		<c:when test="${ pi.currentPage ne 1 }">
+				                			<li class="page-item"><a class="page-link" href="listProducts.do?currentPage=${ pi.currentPage-1 }">
+				                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+				  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+											</svg></a>
+											</li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="">
+				                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+				  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+											</svg></a>
+											</li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                	
+				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+				                    	<c:choose>
+					                		<c:when test="${ pi.currentPage ne p }">
+				                    			<li class="page-item"><a class="page-link" href="listProducts.do?currentPage=${ p }">${ p }</a></li>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+				                    </c:forEach>
+				                    
+				                    
+				                    <c:choose>
+				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+				                			<li class="page-item"><a class="page-link" href="listProducts.do?currentPage=${ pi.currentPage+1 }">
+				                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+				  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+											</svg></a>
+											</li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="listProducts.do?currentPage=${ pi.currentPage+1 }">
+				                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+				  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+											</svg></a>
+											</li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                </ul>
+				            </div>
 						</nav>
 					</div>
 				</div>

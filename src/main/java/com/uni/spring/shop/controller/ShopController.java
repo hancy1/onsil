@@ -36,9 +36,25 @@ public class ShopController {
 	public ShopService shopService;
 	
 	
-	//메인페이지연결(DB아직)
+	//메인 숍 페이지연결(DB아직)
 	@RequestMapping("listProducts.do")
-	public String toMain() {
+	public String selectShopList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		
+		
+		int listCount = shopService.productListCount();
+		
+		
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.selectShopList(pi);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		
+		
 		
 		return "shop/shopMain";
 	}

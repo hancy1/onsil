@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 public interface ShopService {
@@ -22,5 +23,9 @@ public interface ShopService {
 	void updateReview(ProReview r);
 
 	void deleteReview(int reviewNo);
+
+	int productListCount();
+
+	ArrayList<Product> selectShopList(ShopPageInfo pi);
 
 }
