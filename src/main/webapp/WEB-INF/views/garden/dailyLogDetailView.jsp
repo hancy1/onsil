@@ -66,15 +66,6 @@
                                     </c:if>
                                 </div>
                                 <p>${log.content}</p>
-                                <!-- <div class="row mb-30">
-                                    <div class="col-lg-12">
-                                        <p>Nullam lectus elit, volutpat velo justo sit damet, tincidunt dapibus turpis. Vivamus idelit nec enim tristique blandit in sit down metunc. Maecenas accumsan nunc quis nisl porttitor varius sed luctus ligula. Aeneamana pellentesque enim eu magna vehicula suada.</p>
-                                        <p>Quisque suscipit elit sit ametz pellentesque scelerisque. Integer actioner cursu quam, estina portitor cant. Vestibulum luctus libero urna gamora scelerisque laoret. Quisque nect facilisis neque. Integer vitaer dapibus purus, fames turpis egestas. Nullam vulputa nisl tempus luctus.</p>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <img src="resources/img/bg-img/36.jpg" alt="">
-                                    </div>
-                                </div> -->
                             </div>
                             <c:if test="${ hostUser == loginUser.userId }">
                             <a class="btn btn-outline-success btn-sm" href="updateDailyLogForm.do?logNo=${log.logNo}"><i class="fa-solid fa-eraser"></i></a>
@@ -100,24 +91,6 @@
                         
                         </script>
 
-						<!-- 태그 부분과 공유하기 기능 버튼 -->
-                        <!-- Post Tags & Share 
-                        <div class="post-tags-share d-flex justify-content-between align-items-center">-->
-                            <!-- Tags 
-                            <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <li><span>Tag:</span></li>
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
-                            </ol>-->
-                            <!-- Share 
-                            <div class="post-share">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </div>
-                        </div>-->
-
                         <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
                             <h6 class="headline">${fn:length(comment)} Comments</h6>
@@ -141,9 +114,16 @@
                                                 <span class="comment-date">${c.enrollDate}</span>
                                             </div>
                                             <p>${c.content}</p>
+                                            <div id="modify${c.commentNo} modify">
+                                            	<form action="modifyComment.do">
+                                            		<input type="text" name="content" value="${c.content}">
+                                            		<input type="hidden" name="commentNo" value="${c.commentNo}">
+                                            		<button type="submit">수정</button>
+                                            	</form>
+                                            </div>
                                             <a class="active" onclick="openInput(${c.commentNo});">Reply</a> |
                                             <c:if test="${loginUser.userId == c.userNo }">
-                                            <a class="active" href="#">Modify</a> |
+                                            <a class="active" onclick="modifyComment(${c.commentNo});">Modify</a> |
                                             <a class="active" onclick="deleteComment(${c.commentNo});">Delete</a>
                                             <div class="reInput${c.commentNo}" style="display:none">
 	                                         <input type="text" id="reContent${c.commentNo}" name="content" placeholder="Comment">
@@ -188,32 +168,9 @@
                                 </li>
                             </ol>
                         </div>
-
-                        <!-- Leave A Comment -->
-                        <div class="leave-comment-area clearfix">
-                            <div class="comment-form">
-                                <h4 class="headline">Leave A Comment</h4>
-
-                                <div class="contact-form-area">
-                                    <!-- Comment Form -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
-                                            </div>
-                                        </div>    
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
-                <div id="pagingArea">
+              
+              <!-- pagingArea Start -->      
+              <div id="pagingArea">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
@@ -262,6 +219,37 @@
                 	</c:choose>
                 </ul>
             </div>
+            
+            <br>
+			<!-- pagingArea End -->
+			
+                        <!-- Leave A Comment -->
+                        <div class="leave-comment-area clearfix">
+                            <div class="comment-form">
+                                <h4 class="headline">Leave A Comment</h4>
+
+                                <div class="contact-form-area">
+                                    <!-- Comment Form -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
+                                            </div>
+                                        </div>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+
+                    </div>
+                </div>
+                
+                
 
 <script>
 
@@ -375,6 +363,11 @@
 			});
 		}
 		
+	}
+	
+	function modifyComment(commentNo){
+		
+		var div = modifyComment()
 	}
 </script>
                 <!-- Blog Sidebar Area -->
@@ -550,55 +543,7 @@
             </div>
         </div>
         
-        <div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
+        
     </section>
     <!-- ##### Blog Content Area End ##### -->
     
