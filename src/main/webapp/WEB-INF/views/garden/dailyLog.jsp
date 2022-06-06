@@ -104,7 +104,7 @@
 							<div>
 							<c:out value="${log.enrollDate}"></c:out>&nbsp;
 							<a href="logDetail.do?logNo=${log.logNo}" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></a></div>
-						</div>
+						</div>					
 					</div>
 				</div>
 				</c:forEach>

@@ -125,7 +125,7 @@
 					
 					if(comment.length != 0){			
 						if(c.commentType == 0){
-							console.log("체크2");
+							console.log("${loginUser.userId}" == "${hostUser}");
 							value +=  "<div class='comment-wrapper d-flex'>" +
 			                            <!-- Comment Meta -->
 			                            "<div class='comment-author'>" +
@@ -145,17 +145,22 @@
 	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
 	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
 			                                "</div>" +
-			                                "<a class='active' onclick='openInput(" + c.commentNo + ");'>Reply</a> | "; 
+			                                "<a class='active' onclick='openInput(" + c.commentNo + ");'>Reply</a>"; 
 			                                
 			                                if("${loginUser.userId}" == c.userNo){
-	                                            value += "<a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a> | " +
-			                                             "<a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>" +
-			                                             <!-- 답글 달기 -->
-			                                             "<div class='reInput" + c.commentNo +"' style='display:none'>" +
-				                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment'>" +
-				                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
-			                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
-				                                } 
+	                                            value += " | <a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a>";
+			                                }
+                                            if("${loginUser.userId}" == "${hostUser}"){
+                                            	value +=  " | <a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>"; 
+                                            }
+		                                            
+                                            if("${loginUser.userId}" == c.userNo){
+                                            <!-- 답글 달기 -->
+		                                             value += "<div class='reInput" + c.commentNo +"' style='display:none'>" +
+			                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment'>" +
+			                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
+		                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
+                                            }
                                         value += "</div></div>";
                                    }
 						

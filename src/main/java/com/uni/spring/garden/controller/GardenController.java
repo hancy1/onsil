@@ -492,6 +492,24 @@ public class GardenController {
 	}
 	
 	//=========================================================================================
+	//식물관리 캘린더 기능
+	@RequestMapping("myPlant.do")
+	public String myPlantMain(HttpSession session) {
+		String hostUser = (String) session.getAttribute("hostUser");
+		
+		System.out.println("hostUser 널 체크 전 " + hostUser);
+		
+		if(hostUser == null) {
+			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+			session.setAttribute("hostUser", hostUser);
+		}
+		
+		System.out.println("hostUser 널 체크 후 " + hostUser);
+		
+		return "garden/myPlantMain";
+	}
+	
+	//=========================================================================================
 	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
