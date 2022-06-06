@@ -122,6 +122,7 @@ public class TicketController {
 		
 	}
 	
+	//티켓 수정 연결
 	@RequestMapping("updateFormTicket.do")
 	public ModelAndView updateForm(int bno,ModelAndView mv) {
 		mv.addObject("t",ticketService.selectTicket(bno))
@@ -130,6 +131,7 @@ public class TicketController {
 		return mv;
 	}
 	
+	//티켓 수정
 	@RequestMapping("updateTicket.do")
 	public ModelAndView updateBoard(Ticket t,ModelAndView mv,HttpServletRequest request,
 			                          @RequestParam(name = "reUploadFile",required=false)MultipartFile file) {
@@ -172,6 +174,7 @@ public class TicketController {
 		return mv;
 	}
 
+	//티켓첨부파일 삭제
 	private void deleteFile(String fileName, HttpServletRequest request) {
 		
 	String resources = request.getSession().getServletContext().getRealPath("resources");//웹 컨테이너 에서의 RESOURCES폴더까지의 경로
@@ -185,6 +188,7 @@ public class TicketController {
 		
 	}
 	
+	//티켓삭제
 	@RequestMapping("deleteTicket.do")
 	public String deleteBoard(int bno,String fileName,HttpServletRequest request) {
 		

@@ -74,10 +74,11 @@ T_CHANGE_NAME-->
       WHERE TICKET_NO=#{ticketNo}     
 	</update> 
 	
-	<update id="updateTicket" >
+	<update id="updateTicket" parameterType="TICKET" >
 		
-      SET USER_NO= #{userNo},TICKET_CODE = #{price},TICKET_PHONE = #{ticketPhone},TICKET_NAME=#{ticketTitle},TICKET_NOTICE=#{ticketNotice},
-      TICKET_LOCATION=#{ticketLocation},TICKET_STATUS=#{status},T_ORIGIN_NAME=#{originName},T_CHANGE_NAME=#{changeName},DIVISION=#{division}
+	  UPDATE TICKET	 
+      SET TICKET_CODE = #{price},TICKET_PHONE = #{ticketPhone},TICKET_NAME=#{ticketTitle},TICKET_NOTICE=#{ticketNotice},
+      T_ORIGIN_NAME=#{originName},T_CHANGE_NAME=#{changeName},DIVISION=#{division}
 	 WHERE TICKET_NO=#{ticketNo}
 	</update>
   
