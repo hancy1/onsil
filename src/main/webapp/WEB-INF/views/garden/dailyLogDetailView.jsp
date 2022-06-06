@@ -93,166 +93,133 @@
 
                         <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
-                            <h6 class="headline">${fn:length(comment)} Comments</h6>
-                            <ol>
-                                <!-- Single Comment Area -->
-                                <li class="single_comment_area">
-                                	<c:if test="${ !comment.isEmpty()}">                  	
-                                	<c:forEach items="${comment}" var="c">
-                                	<c:if test="${c.commentType == 0}">
-                                    <div class="comment-wrapper d-flex">
-                                        <!-- Comment Meta -->
-                                        <div class="comment-author">
-                                            <!-- <img src="resources/img/bg-img/37.jpg" alt=""> -->
-                                            <i class="fa-solid fa-seedling"></i>
-                                            <i class="fa-solid fa-seedling"></i>
-                                        </div>
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h5>${c.userNo}</h5>
-                                                <span class="comment-date">${c.enrollDate}</span>
-                                            </div>
-                                            <p>${c.content}</p>
-                                            <div id="modify${c.commentNo} modify">
-                                            	<form action="modifyComment.do">
-                                            		<input type="text" name="content" value="${c.content}">
-                                            		<input type="hidden" name="commentNo" value="${c.commentNo}">
-                                            		<button type="submit">수정</button>
-                                            	</form>
-                                            </div>
-                                            <a class="active" onclick="openInput(${c.commentNo});">Reply</a> |
-                                            <c:if test="${loginUser.userId == c.userNo }">
-                                            <a class="active" onclick="modifyComment(${c.commentNo});">Modify</a> |
-                                            <a class="active" onclick="deleteComment(${c.commentNo});">Delete</a>
-                                            <div class="reInput${c.commentNo}" style="display:none">
-	                                         <input type="text" id="reContent${c.commentNo}" name="content" placeholder="Comment">
-	                                            <button class="btn" type="button" onclick="insertReComment(${c.commentNo});">Reply</button>
-                                            	<button class="btn" type="button" onclick="closeInput(${c.commentNo});">Cancel</button></div>
-                                            </c:if>
-                                        </div>
-                                    </div>
-                                    </c:if>
-                                    <c:if test="${c.commentType == 1}">
-                                    <ol class="children">
-                                        <li class="single_comment_area">
-                                            <div class="comment-wrapper d-flex">
-                                                <!-- Comment Meta -->
-                                                <div class="comment-author">
-                                                    <img src="resources/img/bg-img/38.jpg" alt="">
-                                                </div>
-                                                <!-- Comment Content -->
-                                                <div class="comment-content">
-                                                    <div class="d-flex align-items-center justify-content-between">
-                                                        <h5>${c.userNo}</h5>
-                                                        <span class="comment-date">${c.enrollDate}</span>
-                                                    </div>
-                                                    <p>답글 : ${c.content}</p>
-                                                    <!--  <a class="active" href="#">Reply</a>-->
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ol> 
-                                    </c:if>
-                                   </c:forEach>
-                                    </c:if>
-                                    <c:if test="${ comment.isEmpty()}">
-                                    	<div class="comment-wrapper d-flex">
-                                        <div class="comment-content">
-                                            <p>작성된 댓글이 없습니다</p>
-                                        </div>
-                                    	</div>
-                                    </c:if>
-                                   
-                                    
-                                </li>
+                            <h6 class="headlineCheck"></h6>  
+                            <ol>                               
                             </ol>
                         </div>
-              
-              <!-- pagingArea Start -->      
-              <div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            <br>
-			<!-- pagingArea End -->
+                        <!-- Comment Area End -->
 			
-                        <!-- Leave A Comment -->
-                        <div class="leave-comment-area clearfix">
-                            <div class="comment-form">
-                                <h4 class="headline">Leave A Comment</h4>
+            <!-- Leave A Comment -->
+            <div class="leave-comment-area clearfix">
+                <div class="comment-form">
+                    <h4 class="headline">Leave A Comment</h4>
 
-                                <div class="contact-form-area">
-                                    <!-- Comment Form -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
-                                            </div>
-                                        </div>    
+                    <div class="contact-form-area">
+                        <!-- Comment Form -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        
-
+                                <div class="col-12">
+                                    <button type="submit" class="btn alazea-btn comment-btn" onclick="insertComment();">댓글 남기기</button>
+                                </div>
+                            </div>    
                     </div>
                 </div>
-                
-                
-
+            </div>
+        </div>
+    </div>
 <script>
 
+	$(function(){
+		selectComment();
+	})
+	
+	function selectComment(){
+		
+		var logNo = ${log.logNo};
+		
+		$.ajax({
+			url:"selectCommentList.do",
+			data:{logNo:logNo},
+			type:"get",
+			success:function(comment){
+				
+				$(".headlineCheck").text(comment.length + "Comments");
+				
+				var value = "";
+				$.each(comment, function(i, c){
+				
+					value += "<li class='single_comment_area'>";
+					
+					if(comment.length != 0){			
+						if(c.commentType == 0){
+							console.log("체크2");
+							value +=  "<div class='comment-wrapper d-flex'>" +
+			                            <!-- Comment Meta -->
+			                            "<div class='comment-author'>" +
+			                                <!-- <img src="resources/img/bg-img/37.jpg" alt=""> --> 
+			                                "<i class='fa-solid fa-seedling'></i>" +
+			                                "<i class='fa-solid fa-seedling'></i>"  +
+			                            "</div>" +
+			                            <!-- Comment Content -->
+			                            "<div class='comment-content'>" +
+			                                "<div class='d-flex align-items-center justify-content-between'>" +
+			                                    "<h5>" + c.userNo + "</h5>" +
+			                                    "<span class='comment-date'>" + c.enrollDate + "</span>" +
+			                                "</div>" +
+			                                "<p>" + c.content + "</p>"+
+			                                "<div class='modify" + c.commentNo + "' style='display:none'>" +	
+	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
+	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
+	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
+			                                "</div>" +
+			                                "<a class='active' onclick='openInput(" + c.commentNo + ");'>Reply</a> | "; 
+			                                
+			                                if("${loginUser.userId}" == c.userNo){
+	                                            value += "<a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a> | " +
+			                                             "<a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>" +
+			                                             <!-- 답글 달기 -->
+			                                             "<div class='reInput" + c.commentNo +"' style='display:none'>" +
+				                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment'>" +
+				                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
+			                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
+				                                } 
+                                        value += "</div></div>";
+                                   }
+						
+								if(c.commentType == 1){
+									value += "<ol class='children'>" +
+                                                    "<li class='single_comment_area'>" + 
+                                                        "<div class='comment-wrapper d-flex'>" +
+                                                            <!-- Comment Meta -->
+                                                            "<div class='comment-author'>" + 
+                                                                "<img src='resources/img/bg-img/38.jpg' alt=''>" +
+                                                            "</div>" +
+                                                            <!-- Comment Content -->
+                                                            "<div class='comment-content'>" + 
+                                                                "<div class='d-flex align-items-center justify-content-between'>" + 
+                                                                    "<h5>" + c.userNo + "</h5>" +
+                                                                    "<span class='comment-date'>" + c.enrollDate + "</span>" +
+                                                                "</div>" + 
+                                                                "<p>답글 :" +  c.content + "</p>" +
+                                                                <!--  <a class="active" href="#">Reply</a>-->
+                                                            "</div>" + 
+                                                        "</div>" + 
+                                                    "</li>" + 
+                                                "</ol>"; } 	
+                                                }   
+						if(comment.length == 0){
+	                    	value += "<div class='comment-wrapper d-flex'>" +
+			                         "<div class='comment-content'>" + 
+			                         "<p>작성된 댓글이 없습니다</p>" + 
+			                         "</div>" + 
+			                    	 "</div>";
+	                    }
+                         value += "</li>";            	
+					})	
+				$(".comment_area ol").html(value);
+			},
+			error:function(){
+				console.log("댓글 리스트 조회용 ajax 통신 실패")
+			}
+			
+		})
+		
+		
+	}
 	function openInput(commentNo){
 
 		var div = $('.reInput'+commentNo)
@@ -261,6 +228,11 @@
 	
 	function closeInput(commentNo){
 		var div = $('.reInput'+commentNo)
+		div.hide();
+	}
+	
+	function closeModify(commentNo){
+		var div = $('.modify'+commentNo)
 		div.hide();
 	}
 	
@@ -285,8 +257,7 @@
 					
 					if(result > 0){
 						$("#content").val("");
-						history.go(0);
-						//selectReplyList();		
+						selectComment();		
 					}else{
 						alert("댓글등록실패");
 					}
@@ -326,7 +297,7 @@
 					
 					if(result > 0){
 						$('.reInput'+commentNo).hide();
-						history.go(0);
+						selectComment();
 							
 					}else{
 						alert("댓글등록실패");
@@ -352,7 +323,7 @@
 				success:function(result){
 					
 					if(result > 0){	
-						history.go(0);
+						selectComment();
 							
 					}else{
 						alert("댓글삭제실패");
@@ -367,8 +338,36 @@
 	
 	function modifyComment(commentNo){
 		
-		var div = modifyComment()
+		$(".modify"+commentNo).show();
 	}
+	
+	function updateComment(commentNo){
+		
+		var content = $('#update'+commentNo).val();
+		
+		$.ajax({
+			url:"updateLogComment.do",
+			type:"post",
+			data:{
+				commentNo:commentNo,
+				content:content
+			},				
+			success:function(result){
+				
+				if(result > 0){	
+					selectComment();
+						
+				}else{
+					alert("댓글수정실패");
+				}
+			},error:function(){
+				console.log("댓글 수정 ajax 통신 실패");
+			}
+		});
+		
+		
+	}
+	
 </script>
                 <!-- Blog Sidebar Area -->
                 <div class="col-12 col-sm-9 col-md-4">
