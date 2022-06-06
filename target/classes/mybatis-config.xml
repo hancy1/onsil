@@ -44,6 +44,8 @@
 		<typeAlias type="com.uni.spring.shop.model.dto.PointInfo" alias="PointInfo"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.ProStock" alias="ProStock"/>
 		<typeAlias type="com.uni.spring.shop.model.dto.ProReview" alias="ProReview"/>
+		<typeAlias type="com.uni.spring.shop.model.dto.ReviewLike" alias="ReviewLike"/>
+		<typeAlias type="com.uni.spring.shop.model.dto.ProOrder" alias="ProOrder"/>
 		
 	</typeAliases>
 	

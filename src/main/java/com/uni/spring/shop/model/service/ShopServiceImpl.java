@@ -11,6 +11,7 @@ import com.uni.spring.shop.model.dao.ShopDao;
 import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
@@ -129,6 +130,14 @@ public class ShopServiceImpl implements ShopService {
 	public ArrayList<Cart> selectCartList(int userNo) {
 		// TODO Auto-generated method stub
 		return  shopDao.selectCartList(sqlSession,userNo);
+	}
+
+
+
+	@Override
+	public ArrayList<ProOrder> selectOrderList(int userNo) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectOrderList(sqlSession,userNo);
 	}
 
 

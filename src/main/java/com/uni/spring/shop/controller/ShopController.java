@@ -24,6 +24,7 @@ import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
@@ -37,7 +38,7 @@ public class ShopController {
 	public ShopService shopService;
 	
 	
-	//메인 숍 페이지연결(DB아직)
+	//메인 숍 페이지연결 (DB완)
 	@RequestMapping("listProducts.do")
 	public String selectShopList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 		
@@ -61,7 +62,7 @@ public class ShopController {
 	}
 	
 	
-	//장바구니 연결(DB아직)	
+	//장바구니 연결  (DB완)
 	@RequestMapping("CartList.do")
 	public String selectCartList(Model model, HttpSession session) {
 		
@@ -257,6 +258,25 @@ public class ShopController {
 		}
 		
 		return "redirect:myReviewList.do";
+	}
+	
+	
+	
+	
+
+	//내 주문 List 연결
+	@RequestMapping("myOrderList.do")
+	public String selectOrderList(Model model, HttpSession session) {
+		
+		String userNoS = ((Member) session.getAttribute("loginUser")).getUserNo();
+		int userNo = Integer.parseInt(userNoS);
+		
+		ArrayList<ProOrder> list = shopService.selectOrderList(userNo);
+		
+		model.addAttribute("list", list);
+		
+		
+		return "shop/myOrderList";
 	}
 	
 	
