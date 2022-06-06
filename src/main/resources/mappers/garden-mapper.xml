@@ -271,6 +271,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN MEMBER B USING(USER_NO)
         WHERE B.USER_ID = #{hostUser}
         AND A.STATUS = 'Y'
+        ORDER BY A.LOG_NO DESC
         
 	</select>
 	
@@ -281,6 +282,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN MEMBER B USING(USER_NO)
         WHERE LOG_NO = #{logNo}
         
+	</select>
+	
+	<select id="selectRecentLog" resultMap="DailyLogResultSet">
+	
+		<![CDATA[
+		SELECT *
+		FROM (
+			SELECT A.LOG_NO, B.USER_ID, A.FILE_ORIGIN_NAME, A.FILE_SERVER_NAME, A.CONTENT, A.ENROLL_DATE, A.STATUS
+			FROM DAILYLOG A
+			JOIN MEMBER B USING(USER_NO)
+			WHERE B.USER_ID = #{hostUser}
+			AND A.STATUS = 'Y'
+			ORDER BY A.LOG_NO DESC)
+		WHERE ROWNUM <=4
+		]]>
+		
 	</select>
 	
 	<insert id="insertDailyLog">
@@ -300,13 +317,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
-	<delete id="deleteDailyLog">
+	<update id="deleteDailyLog">
 	
 		UPDATE DAILYLOG
 		SET STATUS = 'N'
 		WHERE LOG_NO = #{logNo}
 		 
-	</delete>
+	</update>
+	
+	<update id="deleteDailyLogComment">
+		
+		UPDATE DAILYLOG_COMMENT
+		SET STATUS = 'N'
+		WHERE LOG_NO = #{logNo}
+	
+	</update>
 	
 	<!-- 데일리로그 댓글 -->
 	<resultMap type="LogComment" id="LogCommentResultSet"> 

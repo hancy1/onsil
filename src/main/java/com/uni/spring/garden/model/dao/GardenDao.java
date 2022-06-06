@@ -168,7 +168,6 @@ public class GardenDao {
 
 	public ArrayList<DailyLogComment> selectLogCommentList(String logNo, SqlSessionTemplate sqlSession) {
 		
-		
 		return (ArrayList)sqlSession.selectList("gardenMapper.selectLogCommentList", logNo);
 	}
 
@@ -177,9 +176,12 @@ public class GardenDao {
 		return sqlSession.update("gardenMapper.updateDailylog", log);
 	}
 
-	public int deleteDailyLog(String logNo, SqlSessionTemplate sqlSession) {
+	public int deleteDailyLog(String logNo, SqlSessionTemplate sqlSession) {	
 		
-		return sqlSession.delete("gardenMapper.deleteDailyLog", logNo);
+		//해당 데일리로그를 삭제하면 로그에 달린 댓글도 상태를 N으로 업데이트한다.
+		sqlSession.update("gardenMapper.deleteDailyLogComment", logNo);
+		
+		return sqlSession.update("gardenMapper.deleteDailyLog", logNo);
 	}
 
 	public int insertLogComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
@@ -202,6 +204,11 @@ public class GardenDao {
 	public int updateLogComment(DailyLogComment comment, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.update("gardenMapper.updateLogComment", comment);
+	}
+
+	public ArrayList<DailyLog> selectRecentLog(String hostUser, SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectRecentLog", hostUser);
 	}
 
 }
