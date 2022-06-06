@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="reviewBoardmapper">
+
+
+<resultMap id="rbResultSet" type="REVIEWBOARD">
+
+<id column="RB_NO" property="rbNo"/>
+
+<result column="USER_NO" property="userNo"/>
+
+<result column="T_CATEGORY_NO" property="TCategoryNo"/>
+
+<result column="RB_TITLE" property="rbTitle"/>
+
+<result column="RB_CONTENT" property="rbContent"/>
+
+<result column="RB_COUNT" property="count"/>
+
+<result column="RB_DATE" property="date"/>
+
+<result column="RB_ORIGIN_NAME" property="originName"/>
+
+<result column="RB_CHANGE_NAME" property="changeName"/>
+
+<result column="RB_STATUS" property="status"/>
+
+</resultMap>
+
+<!-- 예약카테고리 - 후기게시판 등록 수 -->
+
+
+<select id="selectRBListCount" resultType="_int">
+SELECT COUNT(*)FROM REVIEWBOARD 
+WHERE RB_STATUS='Y'
+ </select>
+
+<!-- 후기게시판 전부 select해오기 -->
+
+
+<select id="selectList" resultMap="rbResultSet">
+SELECT *FROM REVIEWBOARD
+WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC 
+</select>
+
+</mapper>
