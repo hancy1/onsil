@@ -2,6 +2,7 @@ package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
 
+import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProReview;
@@ -27,5 +28,9 @@ public interface ShopService {
 	int productListCount();
 
 	ArrayList<Product> selectShopList(ShopPageInfo pi);
+
+	ArrayList<Cart> selectCartList(int userNo);
+
+	
 
 }
