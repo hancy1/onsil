@@ -103,10 +103,8 @@
 	                    <th>카테고리</th>
 	                    <th>제목</th>
 	                    <th>조회수</th>
-	                    <th>작성자</th>	                    
-	                    <th>아이디</th>	                    
-	                    <th>게시날짜</th>
-	                    <th>공개여부</th>	                    
+	                    <th>작성자</th>                                  
+	                    <th>게시날짜</th>	                    	                    
 	                  </tr>
 	                </thead>
 	                <tbody>
@@ -116,10 +114,10 @@
 		                        <td>${ i.category }</td>
 		                        <td>${ i.title } &nbsp; [ ${ i.replyCount } ]</td>
 		                        <td>${ i.count }</td>
-		                        <td>${ i.writer }</td>
-		                        <td>${ i.userId }</td>
+		                        <td>${ i.writer }</td>		                        
 		                        <td>${ i.createDate }</td>	
-		                        <td>${ i.open }</td>		                                               
+		                        <td><input type="hidden" name="open" value="${ i.userId }"></td>
+		                        <td><input type="hidden" name="open" value="${ i.open }"></td>		                                               
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -187,7 +185,7 @@
     	$(function(){
     		$("#InquiryList tbody tr").click(function(){    		
     			
-    			if($(this).children().eq(7).text() == 'Y') {
+    			/*if($(this).children().eq(7).text() == 'Y') {
     				location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
     			}else{    				  			
     				if("${loginUser.userId}" == $(this).children().eq(5).text()) {
@@ -197,8 +195,20 @@
     				}else{
     					alert("이 게시글은 작성자와 관리자만 볼 수 있습니다.");
     				}
-    			};
+    			};*/
+    			    			
     			
+    			if($(this).children().eq(7).find("input").val() == 'Y') {
+    				location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    			}else{    				  			
+    				if("${loginUser.userId}" == $(this).children().eq(6).find("input").val()) {
+    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    				}else if("${loginUser.userId}" == 'admin'){
+    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
+    				}else{
+    					alert("이 게시글은 작성자와 관리자만 볼 수 있습니다.");
+    				}
+    			};
     			
     		});
     	});
