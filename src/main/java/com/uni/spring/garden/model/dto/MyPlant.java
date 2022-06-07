@@ -1,6 +1,6 @@
 package com.uni.spring.garden.model.dto;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +20,8 @@ public class MyPlant {
 	private String nickname;
 	private String water;
 	private String sun;
-	private String fileOriginName;
-	private String fileServerName;
-	private Timestamp enrollDate;
+	private String fileName;
+	private String serverName;
+	private Date enrollDate;
 	private String status;
 }
