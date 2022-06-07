@@ -13,6 +13,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dao.GardenDao;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.DailyLogComment;
+import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -289,6 +290,27 @@ public class GardenServiceImpl implements GardenService{
 	public ArrayList<DailyLog> selectRecentLog(String hostUser) {
 		
 		return gardenDao.selectRecentLog(hostUser, sqlSession);
+	}
+
+	@Override
+	public int selectMyPlantCount(String hostUser) {
+		
+		return gardenDao.selectMyPlantCount(hostUser, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MyPlant> selectMyPlantList(String hostUser, PageInfo pi) {
+		
+		return gardenDao.selectMyPlantList(hostUser, pi, sqlSession);
+	}
+
+	@Override
+	public void insertMyPlant(MyPlant myPlant) {
+		int result =  gardenDao.insertMyPlant(myPlant, sqlSession);
+		if(result < 0) {
+			throw new CommException("내 식물 등록 실패");
+		}
+		
 	}
 
 	

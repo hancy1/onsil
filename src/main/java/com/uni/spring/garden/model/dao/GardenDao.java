@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.DailyLogComment;
+import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -209,6 +210,25 @@ public class GardenDao {
 	public ArrayList<DailyLog> selectRecentLog(String hostUser, SqlSessionTemplate sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("gardenMapper.selectRecentLog", hostUser);
+	}
+
+	public int selectMyPlantCount(String hostUser, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectMyPlantCount", hostUser);
+	}
+
+	public ArrayList<MyPlant> selectMyPlantList(String hostUser, PageInfo pi, SqlSessionTemplate sqlSession) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectMyPlantList", hostUser, rowBounds);
+	}
+
+	public int insertMyPlant(MyPlant myPlant, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertMyPlant", myPlant);
 	}
 
 }

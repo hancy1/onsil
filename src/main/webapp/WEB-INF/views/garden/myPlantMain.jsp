@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href='resources/fullcalendar-5.0.1/lib/main.css' rel='stylesheet' />
-<script src='resources/fullcalendar-5.0.1/lib/main.js'></script>
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
@@ -46,113 +44,107 @@
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
 	
-	<div class="container">
-		<div class="row">
-		<div class="col-9 my-3">
-			<div id="calendar">
+	<section id="aa-product-category">
+		<div class="container" align="center">
+			<div class="row my-5">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="aa-product-catg-content">
+
+						<div class="aa-product-catg-body">
+							<div class="table-responsive">
+								<h5>내 식물 관리</h5>
+								<br>
+								<table class="table">
+									 <!-- <tr class="danger">
+										<th></th>
+										<th>내용</th>
+										<th>작성일</th>
+										<th></th>
+									</tr>  -->
+									<c:if test="${ !empty myPlant }">
+         								<c:forEach items="${myPlant}" var="p">
+	         								<tr>
+	         								<td><img src="resources/garden_upload_files/${p.serverName}" alt="" width="130" height="130"></td>
+	         								<td>no.${p.plantNo}<br>
+	         								<i class="fa-solid fa-seedling"></i> : [${p.plantName}] ${p.nickname}<br>
+	         								<i class="fa-solid fa-droplet"></i> : ${p.water}<br>
+	         								<i class="fa-solid fa-sun"></i> : ${p.sun}
+	         								</td>	
+	         								<td><br><br>${p.enrollDate}</td>
+	         								<td><br><br><button class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button></td>
+	         								</tr>	
+	         							</c:forEach>							 
+         							</c:if>
+         							
+         							<c:if test="${ empty myPlant }">
+									<tr><td colspan="4" align="center">등록된 식물이 없습니다.</td></tr>
+									</c:if>
+								</table>
+	<div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+							</svg></a>
+							</li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>			
+            <br>
+            				<c:if test="${loginUser.userId == hostUser}">			
+							<p>
+							<a class="btn btn-outline-success" type="button" href="insertMyPlantForm.do">
+							    추가하기
+							</a>
+							</p>
+							</c:if>							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-3 my-3">
-			<div id="calendarList">
-			</div>
 		</div>
-		</div>
-	</div>
-	<script>
+</section>
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-    	    var calendarEl = document.getElementById('calendarList');
-
-    	    var calendar = new FullCalendar.Calendar(calendarEl, {
-
-    	      headerToolbar: {
-    	        left: 'prev,next today',
-    	        center: 'title',
-    	        right: 'listDay,listWeek'
-    	      },
-
-    	      // customize the button names,
-    	      // otherwise they'd all just say "list"
-    	      views: {
-    	        listDay: { buttonText: 'list day' },
-    	        listWeek: { buttonText: 'list week' }
-    	      },
-
-    	      initialView: 'listWeek',
-    	      initialDate: '2020-06-12',
-    	      navLinks: true, // can click day/week names to navigate views
-    	      editable: true,
-    	      dayMaxEvents: true, // allow "more" link when too many events
-    	      events: [
-    	        {
-    	          title: 'All Day Event',
-    	          start: '2020-06-01'
-    	        },
-    	        {
-    	          title: 'Long Event',
-    	          start: '2020-06-07',
-    	          end: '2020-06-10'
-    	        },
-    	        {
-    	          groupId: 999,
-    	          title: 'Repeating Event',
-    	          start: '2020-06-09T16:00:00'
-    	        },
-    	        {
-    	          groupId: 999,
-    	          title: 'Repeating Event',
-    	          start: '2020-06-16T16:00:00'
-    	        },
-    	        {
-    	          title: 'Conference',
-    	          start: '2020-06-11',
-    	          end: '2020-06-13'
-    	        },
-    	        {
-    	          title: 'Meeting',
-    	          start: '2020-06-12T10:30:00',
-    	          end: '2020-06-12T12:30:00'
-    	        },
-    	        {
-    	          title: 'Lunch',
-    	          start: '2020-06-12T12:00:00'
-    	        },
-    	        {
-    	          title: 'Meeting',
-    	          start: '2020-06-12T14:30:00'
-    	        },
-    	        {
-    	          title: 'Happy Hour',
-    	          start: '2020-06-12T17:30:00'
-    	        },
-    	        {
-    	          title: 'Dinner',
-    	          start: '2020-06-12T20:00:00'
-    	        },
-    	        {
-    	          title: 'Birthday Party',
-    	          start: '2020-06-13T07:00:00'
-    	        },
-    	        {
-    	          title: 'Click for Google',
-    	          url: 'http://google.com/',
-    	          start: '2020-06-28'
-    	        }
-    	      ]
-    	    });
-
-    	    calendar.render();
-    	  });
-</script>
-	
 	
 	
 	

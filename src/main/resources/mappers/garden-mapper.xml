@@ -405,4 +405,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<!-- 내식물관리 -->
+	<resultMap type="MyPlant" id="MyPlantResultSet"> 
+		<id property="plantNo" column="PLANT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="plantName" column="PLANT_NAME"/>
+		<result property="nickname" column="NICKNAME"/>
+		<result property="water" column="WATER"/>
+		<result property="sun" column="SUN" />		
+		<result property="fileName" column="FILE_ORIGIN_NAME" />
+		<result property="serverName" column="FILE_SERVER_NAME" />
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="status" column="STATUS" />	
+	</resultMap>
+	
+	
+	<select id="selectMyPlantCount" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM MYPLANT
+		WHERE USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		
+	</select>
+	
+	<select id="selectMyPlantList" resultMap="MyPlantResultSet">
+	
+		SELECT *
+		FROM MYPLANT
+		WHERE USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		AND STATUS = 'Y'
+		ORDER BY PLANT_NO
+		
+	</select>
+	
+	<insert id="insertMyPlant">
+	
+		INSERT INTO MYPLANT VALUES
+		(SEQ_PLANT_NO.NEXTVAL, #{userNo}, #{plantName}, #{nickname}, #{water}, #{sun}, #{fileName}, #{serverName}, #{enrollDate}, DEFAULT)
+		
+	</insert>
+	
 </mapper>

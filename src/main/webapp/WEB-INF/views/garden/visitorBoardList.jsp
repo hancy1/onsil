@@ -61,7 +61,7 @@
 										<th></th>
 										
 									</tr> -->
-									<c:if test="${ !board.isEmpty() }">
+									<c:if test="${ !empty board }">
          								<c:forEach items="${board}" var="b">
 	         								<tr style="background-color: lightgray" >
 	         								<th><i class="fa-solid fa-comments"></i></th>
@@ -111,7 +111,7 @@
 	         							 
          							</c:if>
          							
-         							<c:if test="${ board.isEmpty() }">
+         							<c:if test="${ empty board }">
 									<tr><td colspan="5" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
 								</table>

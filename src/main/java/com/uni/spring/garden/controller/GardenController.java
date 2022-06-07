@@ -25,6 +25,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.DailyLogComment;
+import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantInfo;
@@ -494,7 +495,8 @@ public class GardenController {
 	//=========================================================================================
 	//식물관리 캘린더 기능
 	@RequestMapping("myPlant.do")
-	public String myPlantMain(HttpSession session) {
+	public String myPlantMain(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
+								HttpSession session, Model model) {
 		String hostUser = (String) session.getAttribute("hostUser");
 		
 		System.out.println("hostUser 널 체크 전 " + hostUser);
@@ -506,7 +508,57 @@ public class GardenController {
 		
 		System.out.println("hostUser 널 체크 후 " + hostUser);
 		
+		int myPlantCount = gardenService.selectMyPlantCount(hostUser);
+		
+		PageInfo pi = GardenPagination.getPageInfo(myPlantCount, currentPage, 10, 5);
+		
+		ArrayList<MyPlant> myPlant = gardenService.selectMyPlantList(hostUser, pi);
+		System.out.println("myPlant 확인 : " + myPlant);
+		
+		model.addAttribute("myPlant", myPlant);
+		model.addAttribute("pi", pi);
+
 		return "garden/myPlantMain";
+	}
+	
+	@RequestMapping("insertMyPlantForm.do")
+	public String insertMyPlantForm(Model model) {
+		
+		//같은 메소드 사용위해 임의로 넣는 값
+		PageInfo pi = GardenPagination.getPageInfo(100, 1, 10, 10);
+		String search = null;
+		
+		ArrayList<PlantInfo> info = gardenService.selectPlantList(pi, search);
+ 		
+		System.out.println("info확인 " + info);
+		
+		model.addAttribute("info", info);
+		
+		return "garden/myPlantInsertForm";
+	}
+	
+	
+	@RequestMapping("insertMyPlant.do")
+	public String insertMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
+								MyPlant myPlant, HttpServletRequest request) {
+		
+		System.out.println("myPlant 확인 " + myPlant);
+		
+		//파일첨부하지 않으면 빈 문자열이 넘어옴
+		if(!file.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(file,request);
+			
+			if(changeName != null) {
+				myPlant.setFileName(file.getOriginalFilename());
+				myPlant.setServerName(changeName);
+			}
+		}
+		
+		System.out.println("myPlant 확인 " + myPlant);
+		gardenService.insertMyPlant(myPlant);
+			
+		return "redirect:myPlant.do";
 	}
 	
 	//=========================================================================================
