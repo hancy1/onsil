@@ -10,6 +10,7 @@ import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
@@ -88,6 +89,12 @@ public interface GardenService {
 	void insertMyPlant(MyPlant myPlant);
 
 	MyPlant selectMyPlant(String plantNo);
+
+	int selectGrowListCount(String plantNo);
+
+	ArrayList<PlantGrow> selectGrowList(String plantNo);
+
+	int deleteGrowList(String listNo);
 
 
 	

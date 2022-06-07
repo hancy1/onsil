@@ -14,6 +14,7 @@ import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
@@ -234,6 +235,21 @@ public class GardenDao {
 	public MyPlant selectMyPlant(String plantNo, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("gardenMapper.selectMyPlant", plantNo);
+	}
+
+	public int selectGrowListCount(String plantNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectGrowListCount", plantNo);
+	}
+
+	public ArrayList<PlantGrow> selectGrowList(String plantNo, SqlSessionTemplate sqlSession) {
+
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectGrowList", plantNo);
+	}
+
+	public int deleteGrowList(String listNo, SqlSessionTemplate sqlSession) {
+
+		return sqlSession.update("gardenMapper.deleteGrowList", listNo);
 	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.GsonBuilder;
 import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.GardenPagination;
@@ -28,6 +29,7 @@ import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 import com.uni.spring.garden.model.service.GardenService;
@@ -570,15 +572,39 @@ public class GardenController {
 	}
 	
 	@RequestMapping("myPlantDetail.do")
-	public String myPlantDetail(String plantNo, Model model) {
+	public String myPlantDetail(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
+								String plantNo, Model model) {
 		
 		MyPlant plant = gardenService.selectMyPlant(plantNo);
 		System.out.println("plant확인" + plant);
 		
+
+		
 		model.addAttribute("plant", plant);
+
 		
 		return "garden/myPlantDetailView";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "selectGrowList.do", produces="application/json; charset=utf-8")
+	public String selectGrowList(String plantNo){
+		
+		ArrayList<PlantGrow> growList = gardenService.selectGrowList(plantNo);
+		
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(growList);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "deleteGrowList.do", produces="application/json; charset=utf-8")
+	public int deleteGrowList(String listNo) {
+		
+		int result = gardenService.deleteGrowList(listNo);
+		
+		return result;
+	}
+	
 	
 	//=========================================================================================
 	//파일관련
