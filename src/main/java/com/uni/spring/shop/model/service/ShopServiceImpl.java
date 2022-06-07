@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +154,19 @@ public class ShopServiceImpl implements ShopService {
 		}	
 		
 		
+	}
+
+
+
+	@Override
+	public void insertCart(Map cartMap) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.insertCart(sqlSession, cartMap);
+		
+		if(result <0) {
+			throw new CommException("장바구니 추가 실패");
+		}
 	}
 
 

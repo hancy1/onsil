@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -89,6 +90,11 @@ public class ShopDao {
 	public int deleteCart(SqlSessionTemplate sqlSession, int cartNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("shopMapper.deleteCart",cartNo);
+	}
+
+	public int insertCart(SqlSessionTemplate sqlSession, Map cartMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shopMapper.insertCart", cartMap);
 	}
 
 
