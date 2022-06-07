@@ -63,19 +63,14 @@
        								<i class="fa-solid fa-sun"></i> : ${plant.sun}
        								</td>	
        								<td><br><br>${plant.enrollDate}</td>
-       								<td><br><br><button class="btn" type="button">수정</button><button class="btn" type="button">삭제</button></td>
+       								<td><br><br><button class="btn" type="button">수정</button> <button class="btn" type="button">삭제</button></td>
        				       			</tr>	
 								</table>
 								<br>
-								<table class="table">
-       								<tr><th>날짜</th><th>관리내역</th><th>비고</th></tr>
-       								<c:if test="${ !empty growList}">
-       								<tr><td></td><td></td><td></td></tr>
-       								</c:if>	
-       								<c:if test="${ empty growList}">
-       								<tr><td colspan="3" align="center">등록된 관리내역이 없습니다.</td></tr>
-       								</c:if>
+								<table class="table" id="growList">
+       							<!-- 관리내역 테이블 -->
 								</table>
+								<h6 style="color:gray" align="right">물주기는 <i class="fa-solid fa-droplet"></i>, 영양제는 <i class="fa-solid fa-prescription-bottle-medical"></i>, 분갈이는 <i class="fa-solid fa-seedling"></i>로 표시됩니다.</h6>
 						</div>
 					</div>
 				</div>
@@ -84,7 +79,97 @@
 		</div>
 </section>
 
-	
+<!-- jQuery-2.2.4 js -->
+<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+<script>
+
+	$(function(){
+		selectGrowList();
+	})
+
+	function selectGrowList(){
+		
+		var plantNo = ${plant.plantNo};
+		console.log(plantNo);
+		
+		$.ajax({
+			url:"selectGrowList.do",
+			data:{plantNo:plantNo},
+			type:"get",
+			success:function(growList){
+				console.log(growList);
+				var value = "";
+				
+				value += "<tr><th>날짜</th><th>관리내역</th><th>비고</th><th></th></tr>";
+				
+				$.each(growList, function(i, grow){
+					
+					if(growList.length != 0){
+						
+						value += "<tr><th>" + grow.enrollDate + "</th><th>"; 
+							 if(grow.water == 'Y'){
+								 value += "<i class='fa-solid fa-droplet'></i>&nbsp;&nbsp;";
+							 }
+							 if(grow.supplement == 'Y'){
+								 value += "<i class='fa-solid fa-prescription-bottle-medical'></i>&nbsp;&nbsp;";
+							 }
+							 if(grow.repotting == 'Y'){
+								 value += "<i class='fa-solid fa-seedling'></i>";
+							 }
+						value += "</th><th>" + grow.etc + "</th><th>" + 
+								 "<button class='btn' type='button' onclick='deleteGrowList(" + grow.listNo + ");'>" + 
+								 "<i class='fa-solid fa-xmark'></i></button></th></tr>";
+						
+					}			
+				});
+				
+				if(growList.length == 0){
+					value += "<tr><td colspan='4' align='center'>등록된 관리내역이 없습니다.</td></tr>"
+				}
+				$("#growList").html(value);
+				
+			},
+			error:function(){
+				console.log("식물 관리내역 리스트 조회용 ajax 통신 실패")
+			}
+		});
+		
+	}
+
+
+
+	function deleteGrowList(listNo){
+
+		var yn = confirm("관리내역을 삭제하시겠습니까?");
+		
+		if(yn){
+			
+			$.ajax({
+				url:"deleteGrowList.do",
+				data:{listNo:listNo},
+				type:"get",
+				success:function(result){
+					
+					if(result > 0){
+						alert("삭제되었습니다.")
+						selectGrowList();
+					}else{
+						alert("삭제 중 오류가 발생했습니다.")
+					}
+					
+				},
+				error:function(){
+					console.log("식물 관리내역 리스트 삭제용 ajax 통신 실패")
+					}
+				});
+			
+			
+			
+			
+		}
+		
+	}
+</script>	
 	
 	
 	
@@ -110,8 +195,7 @@
 	<script src="resources/js/scripts.js"></script>
 
 	<!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->

@@ -16,6 +16,7 @@ import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
 import com.uni.spring.garden.model.dto.Neighbor;
 import com.uni.spring.garden.model.dto.PageInfo;
+import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
 
@@ -317,6 +318,24 @@ public class GardenServiceImpl implements GardenService{
 	public MyPlant selectMyPlant(String plantNo) {
 		
 		return gardenDao.selectMyPlant(plantNo, sqlSession);
+	}
+
+	@Override
+	public int selectGrowListCount(String plantNo) {
+		
+		return gardenDao.selectGrowListCount(plantNo, sqlSession);
+	}
+
+	@Override
+	public ArrayList<PlantGrow> selectGrowList(String plantNo) {
+		
+		return gardenDao.selectGrowList(plantNo, sqlSession);
+	}
+
+	@Override
+	public int deleteGrowList(String listNo) {
+		
+		return gardenDao.deleteGrowList(listNo, sqlSession);
 	}
 
 	

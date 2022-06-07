@@ -419,6 +419,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS" />	
 	</resultMap>
 	
+	<resultMap type="PlantGrow" id="PlantGrowResultSet">
+		<id property="listNo" column="LIST_NO"/> 
+		<result property="plantNo" column="PLANT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="plantName" column="PLANT_NAME"/>
+		<result property="nickname" column="NICKNAME"/>
+		<result property="water" column="WATER"/>
+		<result property="supplement" column="SUPPLEMENT" />
+		<result property="repotting" column="REPOTTING" />			
+		<result property="etc" column="ETC" />
+		<result property="enrollDate" column="ENROLL_DATE" />	
+		<result property="status" column="STATUS" />	
+	</resultMap>
+	
 	
 	<select id="selectMyPlantCount" resultType="_int">
 	
@@ -450,7 +464,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM MYPLANT
 		WHERE PLANT_NO = #{plantNo}
+		AND STATUS = 'Y'
 	
 	</select>
+	
+	<select id="selectGrowListCount" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM PLANT_GROW
+		WHERE PLANT_NO = #{plantNo}
+	
+	</select>
+	
+	<select id="selectGrowList" resultMap="PlantGrowResultSet">
+	
+		SELECT *
+		FROM PLANT_GROW
+		WHERE PLANT_NO = #{plantNo}
+		AND STATUS = 'Y'
+		ORDER BY ENROLL_DATE DESC
+		
+	</select>
+	
+	<update id="deleteGrowList">
+	
+		UPDATE PLANT_GROW
+		SET STATUS = 'N'
+		WHERE LIST_NO = #{listNo}
+		
+	</update>
 	
 </mapper>
