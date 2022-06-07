@@ -238,7 +238,8 @@
 										<div class="product-meta d-flex">
 											<a href="#" class="wishlist-btn">
 											<i class="icon_heart_alt"></i></a>
-											<a href="insertCart.do" class="add-to-cart-btn">Add to cart</a>
+											<a href="#" class="add-to-cart-btn"><button type="button"  onclick="postFormSubmit(1);" id = "cartAdd_btn" class="btn btn-secondary btn-sm" >Add to cart</button></a>
+											
 											<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
 										</div>
 										
@@ -249,11 +250,35 @@
 											<p>${ p.proName }</p>
 										</a>
 										<h6>${ p.price }원</h6>
+										
 									</div>
 								</div>
 							</div>
+							
+                            <!-- 장바구니 추가 form -->
+							<form action="" id="postForm" method="post" class="cartAdd_form">
+								<input type="hidden" name="proCode" value="${p.proCode}">								
+								<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+								<input type="hidden" name="amount" value="1">
+							</form>		
 
 							</c:forEach>
+							
+							
+						<!-- 장바구니에 추가 -->	
+						<script>
+								
+							function postFormSubmit(num){
+								var postForm = $("#postForm");	
+					
+								if(num == 1){
+									postForm.attr("action", "insertCart.do");
+								}				
+								postForm.submit();
+							}
+					
+						</script>
+	
 							
 						<!-- Pagination -->
 						<nav aria-label="Page navigation">
@@ -313,7 +338,8 @@
 		</div>
 	</section>
 	<!-- ##### Shop Area End ##### -->
-
+	
+	
 
 	<jsp:include page="../common/footer.jsp" />
 	

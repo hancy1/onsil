@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,6 +28,7 @@ import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.ShopService;
@@ -296,5 +299,21 @@ public class ShopController {
 		return "redirect:CartList.do";
 	}
 	
+	
+	//장바구니추가
+	@RequestMapping("insertCart.do")
+	public String insertCart(String proCode, int userNo, int amount, HttpServletRequest request) {
+				
+		System.out.println("proCode 컨트롤러에 뭘로 가져오니? : " + proCode);
+		
+		Map cartMap = new HashMap<String, String>();
+		cartMap.put("proCode", proCode);
+		cartMap.put("userNo", userNo);
+		cartMap.put("amount", amount);
+		
+		shopService.insertCart(cartMap);
+				
+		return "redirect:CartList.do";
+	}
 	
 }

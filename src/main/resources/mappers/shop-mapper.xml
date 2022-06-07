@@ -252,6 +252,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 	
+	<!-- 카트에 인서트하기 -->
+	<insert id="insertCart">
+	
+		INSERT INTO CART VALUES
+		(SEQ_CART_NO.NEXTVAL, #{userNo},#{proCode},#{amount})
+		
+	</insert>
 	
 
 </mapper>

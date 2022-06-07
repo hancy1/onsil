@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.shop.model.dto.Point;
@@ -35,6 +36,10 @@ public interface ShopService {
 	ArrayList<ProOrder> selectOrderList(int userNo);
 
 	void deleteCart(int cartNo);
+
+	void insertCart(Map cartMap);
+
+
 
 	
 
