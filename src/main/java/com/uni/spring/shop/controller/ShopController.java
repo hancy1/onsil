@@ -78,6 +78,7 @@ public class ShopController {
 	}
 	
 	
+	
 	//마이 포인트 List 연결
 	@RequestMapping("myPointList.do")
 	public String selectMyPointList(Model model, HttpSession session ) {
@@ -277,6 +278,22 @@ public class ShopController {
 		
 		
 		return "shop/myOrderList";
+	}
+	
+	
+	//장바구니 삭제
+	
+	@RequestMapping("deleteCart.do")
+	public String deleteCart(int cartNo, HttpServletRequest request ) {
+		
+		
+		//int cartNo1 = Integer.parseInt(cartNo);
+		
+		System.out.println("컨트롤러 cartNo : " + cartNo);
+		shopService.deleteCart(cartNo);		
+	
+		
+		return "redirect:CartList.do";
 	}
 	
 	

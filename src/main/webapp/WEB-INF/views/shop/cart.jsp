@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,9 @@
     
     <!-- Title -->
     <title> 온실 - Gardening SHOP 장바구니 </title>
+    
+    <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Favicon -->
     <link rel="icon" href="resources/img/core-img/favicon.ico">
@@ -59,6 +63,7 @@
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
+                                	
                                     <th>제품</th>
                                     <th>수량</th>
                                     <th>가격</th>
@@ -68,30 +73,57 @@
                             </thead>
                             <tbody>
                             	<c:forEach items="${ list }" var="cart">
-                                <tr>
+                            	
+                                <tr>                                	
                                     <td class="cart_product_img">
                                         <a href="#">
                                         <img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${cart.detailCha}" alt="Product" >                                        
                                         </a>
-                                        <h5>${ cart.proName }</h5>
+                                        <h5>${ cart.proName }</h5>                                       
                                     </td>
                                     <td class="qty">
                                         <div class="quantity">
-                                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="99" name="quantity" value="${cart.amount}">
-                                            <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                            
+                                            <input type="number" class="qty-text" id="qty" name="amount" value="${cart.amount}">
+                                            
                                         </div>
                                     </td>
-                                    <td class="price"><span>${ cart.price }원</span></td>
-                                    <td class="total_price"><span>(토탈)30,000원</span></td>
-                                    <td class="action"><a href="#"><i class="icon_close"></i></a></td>
-                                </tr>                                
+                                    <td class="price">
+                                    
+                                    <span><fmt:formatNumber type="number" value="${ cart.price }"/>원</span></td>
+                                    <td class="total_price"><span><c:set var="sTotal" value="${cart.amount*cart.price }"/><fmt:formatNumber type="number" value="${sTotal}"/>원</span></td>
+                                    <td><button type="button"  onclick="postFormSubmit(1);" id = "delete_btn" class="btn btn-light btn-sm" ><i class="icon_close"></i></button></td>
+
+                                </tr>
+
+                                <!-- 삭제 form -->
+								<form action="" id="postForm" method="post" class="delete_form">
+									<input type="hidden" name="cartNo" value="${cart.cartNo}">
+									<!--  <input type="hidden" name="userNo" value="${cart.userNo}">-->
+								</form>	
+				                               
                                </c:forEach> 
+                               
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+				
+			<script>
+			
+	
+			function postFormSubmit(num){
+				var postForm = $("#postForm");	
+
+				if(num == 1){
+					postForm.attr("action", "deleteCart.do");
+				}				
+				postForm.submit();
+			}
+
+			</script>
+
 
             <div class="row">
 

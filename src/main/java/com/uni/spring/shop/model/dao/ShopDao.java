@@ -86,6 +86,11 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.selectOrderList",userNo);
 	}
 
+	public int deleteCart(SqlSessionTemplate sqlSession, int cartNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("shopMapper.deleteCart",cartNo);
+	}
+
 
 
 }
