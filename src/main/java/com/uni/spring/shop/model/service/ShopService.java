@@ -34,6 +34,8 @@ public interface ShopService {
 
 	ArrayList<ProOrder> selectOrderList(int userNo);
 
+	void deleteCart(int cartNo);
+
 	
 
 }

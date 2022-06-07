@@ -142,6 +142,21 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public void deleteCart(int cartNo) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.deleteCart(sqlSession, cartNo);
+		
+		if(result <0) {
+			throw new CommException("장바구니 삭제 실패");
+		}	
+		
+		
+	}
+
+
+
 
 
 }
