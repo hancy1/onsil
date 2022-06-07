@@ -172,8 +172,7 @@
 										<ul class="dropdown">
 											<li><a href="faqList.do">자주묻는질문</a></li>
 											<li><a href="noticeList.do">공지사항</a></li>
-											<li><a href="inquiryList.do">문의사항</a></li>
-											<li><a href="chat.do">1:1 채팅</a></li>
+											<li><a href="inquiryList.do">문의사항</a></li>											
 										</ul>
 									</li>
 									

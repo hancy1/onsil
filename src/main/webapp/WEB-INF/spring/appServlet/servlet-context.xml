@@ -34,6 +34,7 @@
 			<mapping path="/visitorBoard.do"/>
 			<mapping path="/neighborList.do"/>
 			<mapping path="/dailyLog.do"/>	
+			<mapping path="/inquiryList.do"/>	
 			<beans:bean id="testInterceptor" class="com.uni.spring.common.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
