@@ -81,11 +81,11 @@
     <div class="content">
         <br><br>
         <div class="innerOuter" style="padding:5% 10%;">
-            <h2>티켓등록</h2>
+            <h2>후기게시판</h2>
             <br>
             <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
             <c:if test="${ !empty loginUser }">
-            	<a class="btn btn-secondary" style="float:right" href="enrollRBoard.do">후기게시판</a>
+            	<a class="btn btn-secondary" style="float:right" href="enrollRBoard.do">글쓰기</a>
             </c:if>
             <br>
             <table id="RBList" class="table table-hover" align="center">
@@ -123,7 +123,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="listRBoard.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -133,7 +133,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="reviewBoard.do?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -144,10 +144,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="reviewBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="reviewBoard.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

@@ -38,4 +38,11 @@ public class ReviewBoardController {
 		return "Ticket/rboardListView";
 	}
 	
+	//후기글쓰기화면
+	@RequestMapping("enrollRBoard.do")
+	public String enrollForm() {
+		return "Ticket/rboardEnrollForm";
+		
+	}
+	
 }

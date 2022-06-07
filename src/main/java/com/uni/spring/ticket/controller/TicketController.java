@@ -28,7 +28,7 @@ public class TicketController {
 	@Autowired
 	public TicketService ticketService;
 	
-	
+	//티켓리스트화면
 	@RequestMapping("listTicket.do")
 	public String selectList(@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,Model model) {
 		
@@ -44,6 +44,7 @@ public class TicketController {
 		return "Ticket/ticket2";
 	}
 	
+	//티켓등록화면
 	@RequestMapping("enrollTicket.do")
 	public String enrollForm() {
 		return "Ticket/TicketEnrollForm";
@@ -56,6 +57,7 @@ public class TicketController {
 		
 	}
 	
+	//티켓등록하기
 	@RequestMapping("insertTicket.do")
 	public String insertTicket(Ticket t,HttpServletRequest request,@RequestParam(name="uploadFile",required=false)MultipartFile file) {
 		if(!file.getOriginalFilename().equals("")) {//전달받은 파일이 없으면 빈문자열
