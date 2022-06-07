@@ -27,7 +27,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
-            <h2>질문게시판</h2>
+            <h2>온실 :: 질문게시판</h2>
         </div>
 
         <div class="container">

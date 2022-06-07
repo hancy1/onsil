@@ -18,8 +18,8 @@ import lombok.ToString;
 public class Board {
 
 	private int bNo;
-	private int userNo;	
-	private int bCategoryNo;
+	private String userNo;	
+	private String bCategoryNo;
 	private String bTitle;
 	private String bContent;
 	private Date bDate;
