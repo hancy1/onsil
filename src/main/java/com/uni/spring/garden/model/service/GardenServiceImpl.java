@@ -313,6 +313,12 @@ public class GardenServiceImpl implements GardenService{
 		
 	}
 
+	@Override
+	public MyPlant selectMyPlant(String plantNo) {
+		
+		return gardenDao.selectMyPlant(plantNo, sqlSession);
+	}
+
 	
 
 	

@@ -71,7 +71,7 @@
 	         								<i class="fa-solid fa-sun"></i> : ${p.sun}
 	         								</td>	
 	         								<td><br><br>${p.enrollDate}</td>
-	         								<td><br><br><button class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button></td>
+	         								<td><br><br><a class="btn btn-outline-success" href="myPlantDetail.do?plantNo=${p.plantNo}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
 	         								</tr>	
 	         							</c:forEach>							 
          							</c:if>

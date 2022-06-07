@@ -56,7 +56,7 @@
                     <tr>
                     	<th><label for=plantName>식물 이름</label></th>
                     	<td><input type="text" name="plantName" id="plantName" required>
-                    	<select name="info">
+                    	<select id="info" onchange="selectInfo();">
                     		<option value="">식물 정보를 확인해보세요</option>
                     		<c:forEach items="${info}" var="info">
                     			<option value="${info.regNo}">${info.plantName}</option>
@@ -108,7 +108,44 @@
 	$(function(){
 		 //등록일을 오늘 날짜로
 		 document.getElementById('enrollDate').value = new Date().toISOString().substring(0, 10);	
+
+		 
 	});
+	
+	function selectInfo(){
+		
+		var select = document.getElementById('info')		
+		var regNo = select.options[select.selectedIndex].value;
+		
+		
+		$.ajax({
+			
+			url:"selectPlantInfo.do",
+			data:{regNo:regNo},
+			type:"get",
+			success:function(info){
+
+				document.getElementById('plantName').value = info.plantName;
+				document.getElementById('water').value = info.water;
+				document.getElementById('sun').value = info.sun;
+				
+			},
+			error:function(){
+				console.log("plantInfo ajax 통신 실패")
+			}
+			
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+	}
  
 	
 	    

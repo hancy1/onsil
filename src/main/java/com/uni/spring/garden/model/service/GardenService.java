@@ -87,6 +87,8 @@ public interface GardenService {
 
 	void insertMyPlant(MyPlant myPlant);
 
+	MyPlant selectMyPlant(String plantNo);
+
 
 	
 

@@ -445,4 +445,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 	
+	<select id="selectMyPlant" resultMap="MyPlantResultSet">
+	
+		SELECT *
+		FROM MYPLANT
+		WHERE PLANT_NO = #{plantNo}
+	
+	</select>
+	
 </mapper>

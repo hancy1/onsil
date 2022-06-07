@@ -231,4 +231,9 @@ public class GardenDao {
 		return sqlSession.insert("gardenMapper.insertMyPlant", myPlant);
 	}
 
+	public MyPlant selectMyPlant(String plantNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectMyPlant", plantNo);
+	}
+
 }
