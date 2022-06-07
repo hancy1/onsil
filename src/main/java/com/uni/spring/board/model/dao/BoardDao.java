@@ -22,6 +22,7 @@ public class BoardDao {
 		// TODO Auto-generated method stub		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		System.out.println("다오 글 목록" + offset + rowBounds);
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null, rowBounds);
 	}
@@ -33,6 +34,7 @@ public class BoardDao {
 
 	public Board selectBoard(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
+		System.out.println("다오 글 선택" + bno);
 		return sqlSession.selectOne("boardMapper.selectBoard", bno);
 	}
 

@@ -49,7 +49,7 @@ public class BoardController {
 	    PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 5);
 	      
 	    ArrayList<Board> list = boardService.selectList(pi);
-	    //System.out.println(list.get(0));	//게시판 목록 넘어오는지 확인
+	    System.out.println(list.get(0));	//게시판 목록 넘어오는지 확인
 	      
 	    model.addAttribute("list", list);
 	    model.addAttribute("pi", pi);

@@ -41,7 +41,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+                            <li class="breadcrumb-item active" aria-current="page">온실 :: 자유게시판</li>
                         </ol>
                     </nav>
                 </div>
