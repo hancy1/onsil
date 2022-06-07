@@ -560,6 +560,25 @@ public class GardenController {
 			
 		return "redirect:myPlant.do";
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "selectPlantInfo.do", produces="application/json; charset=utf-8")
+	public PlantInfo selectPlantInfo(String regNo) {
+		
+		PlantInfo info = gardenService.selectPlantInfo(regNo);
+		return info;
+	}
+	
+	@RequestMapping("myPlantDetail.do")
+	public String myPlantDetail(String plantNo, Model model) {
+		
+		MyPlant plant = gardenService.selectMyPlant(plantNo);
+		System.out.println("plant확인" + plant);
+		
+		model.addAttribute("plant", plant);
+		
+		return "garden/myPlantDetailView";
+	}
 	
 	//=========================================================================================
 	//파일관련
