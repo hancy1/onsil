@@ -309,7 +309,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE
 	  JOIN FREEBIE C ON A.FREE_NO = C.FREE_NO
 	  JOIN MEMBER D ON A.USER_NO = D.USER_NO	
-	  WHERE ORDER_STATUS = 'R'
+	  WHERE A.ORDER_STATUS = 'R'
 	  ORDER BY A.ORDER_NO
 	    
 	</select>
@@ -333,10 +333,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE
 	  JOIN FREEBIE C ON A.FREE_NO = C.FREE_NO
 	  JOIN MEMBER D ON A.USER_NO = D.USER_NO	
-	  WHERE ORDER_STATUS = 'N'
+	  WHERE A.ORDER_STATUS = 'N'
 	  ORDER BY A.ORDER_NO
 	    
 	</select>
 	
+	<!--주문 취소 승인하기 -->	
+  	<update id="cancelAdminOrder">
+  
+  		UPDATE PRO_ORDER
+  		SET ORDER_STATUS='N'
+  		WHERE ORDER_NO=#{orderNo}
+    
+  	</update>
 	
 </mapper>

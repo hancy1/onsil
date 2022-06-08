@@ -518,4 +518,19 @@ public class AdminShopController {
 			
 			return "shop/adminOrderList";
 		}
+		
+		
+		
+		
+		//주문취소(n으로 업데이트)		
+		@RequestMapping("cancelOrder.do")
+		public String cancelAdminOrder(int orderNo, HttpServletRequest request ) {
+			
+			System.out.println("컨트롤러로 오더넘버 넘어오니? "+orderNo);
+			aShopService.cancelAdminOrder(orderNo);
+		
+			
+			return "redirect:adminOrderListCancel.do";
+		}
+		
 }
