@@ -220,8 +220,8 @@
 					<!-- Search Form -->
 					<div class="search-form">
 						<form action="#" method="get">
-							<input type="search" name="search" id="search"
-								placeholder="Type keywords &amp; press enter...">
+							<input type="search" name="search" id="search" onsearch="myFunction()"
+								placeholder="궁금한 식물을 검색해보세요!">
 							<button type="submit" class="d-none"></button>
 						</form>
 						<!-- Close Icon -->
@@ -235,6 +235,11 @@
 	</header>
 	<!-- ##### Header Area End ##### -->
 	
+	<script>
+	function myFunction(){
+		window.open('https://terms.naver.com/search.naver?query='+$("#search").val()+'&searchType=&dicType=&subject=','네이버팝업','width=800, height=500, scrollbars=no');
+	}
+	</script>
 
 
 
