@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
@@ -75,6 +76,12 @@ public class MemberDao {
 	public int updateAdminMember(SqlSessionTemplate sqlSession, int mno) {
 		
 		return sqlSession.update("memberMapper.updateAdminMember", mno);
+	}
+
+	// 선호도에 맞는 식물정보 가져오기
+	public PlantInfo searchPlant(SqlSessionTemplate sqlSession, String preference) {
+		
+		return sqlSession.selectOne("memberMapper.searchPlant", preference);
 	}
 
 }
