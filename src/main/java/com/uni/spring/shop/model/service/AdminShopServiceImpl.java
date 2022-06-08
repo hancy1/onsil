@@ -237,5 +237,16 @@ public class AdminShopServiceImpl implements AdminShopService {
 		return aShopDao.selectOrderCancelList(sqlSession,pi);
 	}
 
+	@Override
+	public void cancelAdminOrder(int orderNo) {
+		// TODO Auto-generated method stub
+
+		int result = aShopDao.cancelAdminOrder(sqlSession, orderNo);
+		
+		if(result <0) {
+			throw new CommException("주문 취소 실패");
+		}
+	}
+
 
 }

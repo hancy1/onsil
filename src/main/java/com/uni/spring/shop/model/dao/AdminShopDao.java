@@ -182,6 +182,11 @@ public class AdminShopDao {
 		return (ArrayList)sqlSession.selectList("adminShopMapper.selectOrderCancelList", null, rowdounds);
 	}
 
+	public int cancelAdminOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminShopMapper.cancelAdminOrder",orderNo);
+	}
+
 
 
 

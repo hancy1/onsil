@@ -15,6 +15,8 @@
 		
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     
 <style>
 
@@ -80,8 +82,7 @@
       text-decoration: none;
     }
     
-    
-    
+
 
 </style>
 
@@ -143,7 +144,9 @@
                     <th>수취인명</th>                    
                     <th>연락처</th>
                     <th>주문날짜</th>
-                    <th>주문상태</th>                    
+                    <!--<th>세부내역</th>  -->
+                    <th>주문상태</th>
+                                        
                   </tr>
                 </thead>
                 
@@ -161,11 +164,12 @@
 	                        <td>${ o.orderName }</td>	                        
 	                        <td>${ o.orderPhone }</td>
 	                        <td>${ o.orderDate }</td>
-	                        <!-- 주문 상태별로 다른 버튼 -->
+	                        <!--<td><button class="btn btn-outline-success btn-sm" onclick="detailOrder()">자세히보기</button></td>  -->
+	                        <!-- 주문 상태별로 다른 버튼 표시 -->
 	                        <td>
 								<c:choose>
 									<c:when test="${o.orderStatus eq 'R'}">
-									<button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='cancelOrderOk.do'">취소승인</button>								
+									<button id="cancelBtn" type="button" class="btn btn-outline-danger btn-sm" onclick="cancelOk(${ o.orderNo })" >취소승인</button>								
 									</c:when>
 									
 									<c:when test="${o.orderStatus eq 'N'}">
@@ -184,24 +188,70 @@
 								</c:choose>
 							</td>
 	                    </tr>
+	                    
                     </c:forEach>
                 </tbody>
             </table>
             
-           	<script>
- 	
-			$(function(){
-				var orderNo = $(this).parentsUntil().children().eq(0).text();
-				$("#adminOrderList tbody tr td:not(.button)").click(function(){
-					location.href="adminOrderDetail.do?orderNo=" + orderNo
-				});
-			});
- 	
-
-    		</script>
+           <!--  
+           <div id="addressArea" aria-hidden="true">
+           		배송주소 : ${ o.address } ${ o.addressDetail }	                    	
+           </div>-->
             
-            <br>
+            <!-- 스크립트(자세히보기) -->
+            <script>
+            	
+	            function detailOrder() {
+	            	  var addressArea = document.getElementById("addressArea");
+	            	  if (addressArea.style.display === "none") {
+	            		  addressArea.style.display = "block";
+	            	  } else {
+	            		  addressArea.style.display = "none";
+	            	  }
+	            	};
+            
+	            	
+	            function cancelOk(orderNo){	            	
+	            	
+	                if (!confirm("해당 건을 취소 하시겠습니까? ")) {
+	                	
+	                	alert("취소를 보류합니다.");
+	                	
+	                } else {
+	                	
+	                	alert("해당건이 취소되었습니다. 회원에게 전달됩니다.");	                	
+	                	location.href="cancelOrder.do?orderNo=" + orderNo;
+	                	
+	                
+	                }
+	            	
+	            }
+	            
+	   
+            </script>
+            
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        ...
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Understood</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+ 
 
+ 
+            <br>
 
 			<!-- 페이징 -->
             <div id="pagingArea">

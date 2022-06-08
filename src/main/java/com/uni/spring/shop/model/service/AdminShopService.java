@@ -69,6 +69,8 @@ public interface AdminShopService {
 
 	ArrayList<ProOrder> selectOrderCancelList(ShopPageInfo pi);
 
+	void cancelAdminOrder(int orderNo);
+
 	
 
 	
