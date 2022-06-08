@@ -30,7 +30,7 @@ public class RBoard {
 	private String originName;//첨부파일원본명
 	private String changeName;//첨부파일수정명
 	private String status;//상태값
-	private String like;
+	
 	
 	
 }

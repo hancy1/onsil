@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 
 @Repository
@@ -23,6 +24,16 @@ public class ReviewBoardDao {
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("reviewBoardmapper.selectList",null,rowBounds);
 	
+	}
+
+	public int insertRBoard(SqlSessionTemplate sqlSession, RBoard rb) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("reviewBoardmapper.insertRBoard",rb);
+	}
+
+	public RBoard selectRBoard(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("reviewBoardmapper.selectRBoard",bno);
 	}
 
 }

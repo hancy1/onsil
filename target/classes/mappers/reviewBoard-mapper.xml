@@ -30,20 +30,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </resultMap>
 
-<!-- 예약카테고리 - 후기게시판 등록 수 -->
+     <!-- 예약카테고리 - 후기게시판 등록 수 -->
+     <select id="selectRBListCount" resultType="_int">
+     SELECT COUNT(*)FROM REVIEWBOARD 
+     WHERE RB_STATUS='Y'
+     </select>
 
-
-<select id="selectRBListCount" resultType="_int">
-SELECT COUNT(*)FROM REVIEWBOARD 
-WHERE RB_STATUS='Y'
- </select>
-
-<!-- 후기게시판 전부 select해오기 -->
-
-
-<select id="selectList" resultMap="rbResultSet">
-SELECT *FROM REVIEWBOARD
-WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC 
-</select>
+     <!-- 후기게시판 전부 select해오기 -->
+     <select id="selectList" resultMap="rbResultSet">
+     SELECT *FROM REVIEWBOARD
+     WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC 
+     </select>
+     
+     <!-- 후기게시판 등록 -->
+      <insert id="insertRBoard">
+      
+         INSERT INTO REVIEWBOARD
+         VALUES (SEQ_TICKET.NEXTVAL, #{userNo},#{TCategoryNo},#{rbTitle},#{rbContent},#{count},SYSDATE,#{originName},#{changeName},DEFAULT)
+      </insert>
+      
+       <!-- 후기게시판 디테일페이지 조회 -->
+      <select id="selectRBoard" parameterType = "_int" resultMap = "rbResultSet">
+ 
+     SELECT *
+     FROM REVIEWBOARD
+     WHERE RB_NO=#{rbNo} AND RB_STATUS='Y'
+ 
+  </select>
+  
 
 </mapper>

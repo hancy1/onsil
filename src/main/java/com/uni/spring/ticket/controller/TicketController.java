@@ -51,6 +51,7 @@ public class TicketController {
 		
 	}
 	
+	//주소검색
 	@RequestMapping("ticketAddress.do")
 	public String Address() {
 		return "Ticket/TicketAddress";
