@@ -61,7 +61,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>티켓등록</h2>
+			<h2>후기게시판</h2>
 		</div>
     	<div class="container">
 			<div class="row">
@@ -91,26 +91,26 @@
             <table id="RBList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                    <th>글번호</th>              
-                    <th>카테고리</th>
+                    <th>글번호</th>                            
                     <th>글제목</th>
                     <th>작성자</th>
+                    <th>작성일</th>
                     <th>조회수</th>
-                    <th>좋아요</th>
+                    <th>첨부파일</th>
                   </tr>
                 </thead>
                 <tbody>
                 	<c:forEach items="${ list }" var="r">
 	                    <tr>
-	                        <td>${ r.rbNo }</td>
-	                        <td>${ r.TCategoryNo }</td>
+	                        <td>${ r.rbNo }</td>              
 	                        <td>${ r.rbTitle }</td>
 	                        <td>${ r.userId }</td>
+	                        <td>${ r.date }</td>
 	                        <td>${ r.count }</td>
-	                        <c:if test="${ !empty r.like }">
-	                        	<td>❤</td>
+	                        <c:if test="${ !empty r.originName }">
+	                        	<td>★</td>
 	                        </c:if>
-	                        <c:if test="${ empty r.like }">
+	                        <c:if test="${ empty r.originName }">
 	                        	<td>&nbsp;</td>
 	                        </c:if>
 	                    </tr>

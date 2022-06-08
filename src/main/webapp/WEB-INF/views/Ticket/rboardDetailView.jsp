@@ -55,7 +55,7 @@
                    
                     <tr>
                         <th><label for="rbTitle">제목</label></th>
-                        <td><input type="text" id="rbTitle" class="form-control" name="rbTitle" required></td>
+                        <td><input type="text" id="rbTitle" class="form-control" name="rbTitle" value="${r.rbTitle}" required></td>
                     </tr>
                   
                     <tr>
@@ -77,29 +77,55 @@
                          
  
                     <tr>
-                        <th><label for="upfile">첨부파일</label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
+                         <th>첨부파일</th>
+                    <td colspan="3">
+                    	<c:if test="${ !empty r.originName }">
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/RB_upload_files/${r.changeName}" download="${ r.originName }">${ r.originName }</a>
+                        </c:if>
+                        <c:if test="${ empty r.originName }">
+                        	첨부파일이 없습니다.
+                        </c:if>
+                    </td>
                     </tr>
                     <tr>
                         <th colspan="2"><label for="content">내용</label></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="rbContent" id="content" rows="10" style="resize:none;"></textarea></th>
+                        <th colspan="2"><textarea class="form-control" required name="rbContent" id="content" rows="10" style="resize:none;">${ r.rbContent }</textarea></th>
                     </tr>
                 </table>
                 <br>
 
-                <div align="center">
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <button type="reset" class="btn btn-danger">취소하기</button>
-                 
-                </div>
+              <c:if test="${ loginUser.userId eq r.userNo }">
+	            <div align="center">
+	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
+	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
+	            </div>
+	            
+	            <form id="postForm" action="" method="post">
+					<input type="hidden" name="bno" value="${ r.rbNo }">
+					<input type="hidden" name="fileName" value="${ r.changeName }"> 
+				</form>
+				<script>
+					function postFormSubmit(num){
+						var postForm = $("#postForm");
+						
+						if(num == 1){
+							postForm.attr("action", "updateFormRBoard.do");
+						}else{
+							postForm.attr("action", "deleteRBoard.do");
+						}
+						postForm.submit();
+					}
+				</script>
+            </c:if>
+            <br><br>
+               
             </form>
         </div>
         <br><br>
     </div>
-    
-     
+
       
 
   <jsp:include page="../common/footer.jsp"/>

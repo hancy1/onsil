@@ -61,7 +61,7 @@
                     </tr>
                    <tr>
                         <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userId }" required></td>
+                        <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" required></td>
                     </tr>
                      <tr>
                         <th><label for="price">가격코드</label></th>
