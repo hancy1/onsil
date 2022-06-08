@@ -134,11 +134,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 선호도에 맞는 식물정보 가져오기 -->
 	<select id="searchPlant" resultMap="plantInfoResultSet">
-		SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
-		FROM PLANT_INFO A
-		JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
-		WHERE CATEGORY = #{preference}
-		ORDER BY dbms_random.value
+		select* from(
+					SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
+					FROM PLANT_INFO A
+					JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
+					WHERE CATEGORY = #{preference}
+					ORDER BY dbms_random.value
+		)
+		WHERE ROWNUM =1
 	</select>
 	
 </mapper>
