@@ -37,6 +37,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="delDate" column="DEL_DATE" />	
 		<result property="status" column="STATUS" />	
 	</resultMap>
+	
+	<resultMap type="PlantInfo" id="plantInfoResultSet"> 
+		<id property="regNo" column="REG_NO"/>		
+		<result property="category" column="PREFER_PLANTS" />		
+		<result property="plantName" column="PLANT_NAME" />	
+		<result property="water" column="WATER" />
+		<result property="sun" column="SUN" />
+		<result property="status" column="STATUS" />		
+	</resultMap>
 
 	<!-- 암호화 하기 전 로그인  
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">	
@@ -122,4 +131,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS='Y', DEL_DATE=NULL
 		WHERE USER_NO=#{mno}
 	</update>
+	
+	<!-- 선호도에 맞는 식물정보 가져오기 -->
+	<select id="searchPlant" resultMap="plantInfoResultSet">
+		SELECT A.REG_NO, B.PREFER_PLANTS, A.PLANT_NAME, A.WATER, A.SUN, A.STATUS
+		FROM PLANT_INFO A
+		JOIN PREFERENCE B ON A.CATEGORY = B.PREFER_CODE
+		WHERE CATEGORY = #{preference}
+		ORDER BY dbms_random.value
+	</select>
+	
 </mapper>

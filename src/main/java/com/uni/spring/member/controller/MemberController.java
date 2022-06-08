@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.HelpPagination;
 import com.uni.spring.help.model.dto.Faq;
 import com.uni.spring.help.model.dto.Notice;
@@ -109,7 +110,13 @@ public class MemberController {
 		m.setUserPwd(encPwd); // 암호화된 비밀번호를 Member 객체에 세팅
 		
 		memberService.insertMember(m); // 암호화 작업 한 비밀번호를 세팅한 객체를 보냄
-		session.setAttribute("msg", "회원가입 성공");
+		
+		// 선호도에 맞는 식물정보 가져오기
+		PlantInfo pi = memberService.searchPlant(m.getPreference());
+		
+		String msg = pi.getCategory() + "을(를) 좋아하는 " + m.getUserName() + "님에게 " + pi.getPlantName() + "을(를) 추천합니다!";
+		
+		session.setAttribute("msg", msg );
 		return "redirect:/";	
 		
 	}

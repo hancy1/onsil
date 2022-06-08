@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
 
@@ -30,6 +31,8 @@ public interface MemberService {
 	void deleteAdminMember(int mno); // 관리자 - 회원관리 강퇴
 
 	void updateAdminMember(int mno); // 관리자 - 회원관리 복구
+
+	PlantInfo searchPlant(String preference); // 선호도에 맞는 식물정보 가져오기
 
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.model.dao.HelpDao;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dao.MemberDao;
@@ -156,6 +157,14 @@ public class MemberServiceImpl implements MemberService {
 		if(result < 0) {
 			throw new CommException("관리자 회원복구 실패");
 		}
+		
+	}
+
+
+	@Override // 선호도에 맞는 식물정보 가져오기
+	public PlantInfo searchPlant(String preference) {
+		
+		return memberDao.searchPlant(sqlSession, preference);
 		
 	}
 
