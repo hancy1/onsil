@@ -102,6 +102,18 @@ public class ShopDao {
 		return sqlSession.insert("shopMapper.insertCart", cartMap);
 	}
 
+	public int cancelRequestOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.cancelRequestOrder",orderNo);
+	}
+
+	public int OkOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.OkOrder",orderNo);
+	}
+
+
+
 
 
 

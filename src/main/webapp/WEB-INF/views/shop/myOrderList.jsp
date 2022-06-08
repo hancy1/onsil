@@ -165,10 +165,9 @@
 							
 								
 							<c:when test="${o.orderStatus eq 'Y'}">
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(2);">구매확정</button>
-								<button class="btn btn-secondary btn-sm" onclick="postFormSubmit(3);">취소요청</button>								
+								<button class="btn btn btn-warning btn-sm" onclick="confirmationSubmit(${ o.orderNo });">구매확정</button>
+								<button class="btn btn-secondary btn-sm" onclick="cancelSubmit(${ o.orderNo });">취소요청</button>								
 							</c:when>
-							
 							
 							<c:otherwise>								
 								<button class="btn btn-danger btn-sm" onclick="postFormSubmit(3);" disabled>취소요청중...</button>									
@@ -195,6 +194,15 @@
 					location.href="detailOrder.do?orderNo=" + orderNo;	             
 	            };
 	            
+	            function confirmationSubmit(orderNo){
+	            	alert("감사합니다. 주문이 확정되었습니다. \n리뷰를 작성하시면 100point적립 🎁");
+	            	location.href="OrderOk.do?orderNo=" + orderNo;
+	            };
+	            
+	            function cancelSubmit(orderNo){
+	            	alert("판매자에게 주문 취소를 요청하였습니다. 1~2일 소요됩니다. ");
+	            	location.href="OrderCancelRequest.do?orderNo=" + orderNo;
+	            };
 	            
 		    </script>
 
