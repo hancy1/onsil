@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.AdminShopDao;
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
@@ -197,6 +198,43 @@ public class AdminShopServiceImpl implements AdminShopService {
 		if(result <0) {
 			throw new CommException("사은품 추가 실패");
 		}
+	}
+
+	@Override
+	public int orderListCountAll() {
+		// TODO Auto-generated method stub
+		return aShopDao.orderListCountAll(sqlSession);
+	}
+
+	@Override
+	public ArrayList<ProOrder> selectOrderList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return aShopDao.selectOrderList(sqlSession,pi);
+	}
+
+	
+	@Override
+	public int orderListCountRequest() {
+		// TODO Auto-generated method stub
+		return aShopDao.orderListCountRequest(sqlSession);
+	}
+
+	@Override
+	public ArrayList<ProOrder> selectOrderRequestList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return aShopDao.selectOrderRequestList(sqlSession,pi);
+	}
+
+	@Override
+	public int orderListCountCancel() {
+		// TODO Auto-generated method stub
+		return aShopDao.orderListCountCancel(sqlSession);
+	}
+
+	@Override
+	public ArrayList<ProOrder> selectOrderCancelList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return aShopDao.selectOrderCancelList(sqlSession,pi);
 	}
 
 

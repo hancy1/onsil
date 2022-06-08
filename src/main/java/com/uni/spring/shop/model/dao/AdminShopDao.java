@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
@@ -130,6 +131,58 @@ public class AdminShopDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("adminShopMapper.insertInventory",stock);
 	}
+
+	public int orderListCountAll(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.orderListCountAll");
+	}
+
+	
+	public ArrayList<ProOrder> selectOrderList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectOrderList", null, rowdounds);
+	}
+
+	
+	public int orderListCountRequest(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.orderListCountRequest");
+	}
+
+	
+	
+	public ArrayList<ProOrder> selectOrderRequestList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectOrderRequestList", null, rowdounds);
+	}
+	
+	
+	
+	public int orderListCountCancel(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("adminShopMapper.orderListCountCancel");
+	}
+
+
+
+	public ArrayList<ProOrder> selectOrderCancelList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectOrderCancelList", null, rowdounds);
+	}
+
+
 
 
 

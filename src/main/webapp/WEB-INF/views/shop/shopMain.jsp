@@ -257,7 +257,7 @@
 							
                             <!-- 장바구니 추가 form -->
 							<form action="" id="postForm" method="post" class="cartAdd_form">
-								<input type="hidden" name="proCode" value="${p.proCode}">								
+								<input id="proCode" type="hidden" name="proCode" value="${p.proCode}">								
 								<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 								<input type="hidden" name="amount" value="1">
 							</form>		
@@ -272,6 +272,7 @@
 								var postForm = $("#postForm");	
 					
 								if(num == 1){
+									
 									postForm.attr("action", "insertCart.do");
 								}				
 								postForm.submit();
