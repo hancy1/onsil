@@ -252,4 +252,17 @@ public class GardenDao {
 		return sqlSession.update("gardenMapper.deleteGrowList", listNo);
 	}
 
+	public int updateMyPlant(MyPlant plant, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updateMyPlant", plant);
+	}
+
+	public int deleteMyPlant(String plantNo, SqlSessionTemplate sqlSession) {
+		sqlSession.update("gardenMapper.deleteMyPlantGrow", plantNo);
+		
+		return sqlSession.update("gardenMapper.deleteMyPlant", plantNo);
+		
+		
+	}
+
 }

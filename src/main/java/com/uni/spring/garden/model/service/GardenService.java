@@ -96,6 +96,10 @@ public interface GardenService {
 
 	int deleteGrowList(String listNo);
 
+	void updateMyPlant(MyPlant plant);
+
+	int deleteMyPlant(String plantNo);
+
 
 	
 

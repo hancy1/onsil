@@ -494,4 +494,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<update id="updateMyPlant">
+	
+		UPDATE MYPLANT
+		SET PLANT_NAME = #{plantName}, NICKNAME = #{nickname}, WATER = #{water}, SUN = #{sun}, 
+			FILE_ORIGIN_NAME = #{fileName}, FILE_SERVER_NAME = #{serverName}, ENROLL_DATE = #{enrollDate}
+		WHERE PLANT_NO = #{plantNo}
+		
+	</update>
+	
+	<update id="deleteMyPlant">
+	
+		UPDATE MYPLANT
+		SET STATUS = 'N'
+		WHERE PLANT_NO = #{plantNo}
+	
+	</update>
+	
+	<update id="deleteMyPlantGrow">
+	
+		UPDATE PLANT_GROW
+		SET STATUS = 'N'
+		WHERE PLANT_NO = #{plantNo}
+	
+	</update>
+	
 </mapper>

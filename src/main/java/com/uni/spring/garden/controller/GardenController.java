@@ -445,7 +445,7 @@ public class GardenController {
 	
 
 	//=========================================================================================
-	//댓글 
+	//데일리로그 댓글 
 
 	@ResponseBody
 	@RequestMapping(value = "selectCommentList.do", produces="application/json; charset=utf-8")
@@ -572,16 +572,11 @@ public class GardenController {
 	}
 	
 	@RequestMapping("myPlantDetail.do")
-	public String myPlantDetail(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
-								String plantNo, Model model) {
+	public String myPlantDetail(String plantNo, Model model) {
 		
 		MyPlant plant = gardenService.selectMyPlant(plantNo);
 		System.out.println("plant확인" + plant);
-		
-
-		
 		model.addAttribute("plant", plant);
-
 		
 		return "garden/myPlantDetailView";
 	}
@@ -605,7 +600,52 @@ public class GardenController {
 		return result;
 	}
 	
+	@RequestMapping("updateMyPlantForm.do")
+	public String updateMyPlantForm(String plantNo, Model model) {
+		
+		MyPlant plant = gardenService.selectMyPlant(plantNo);
+		model.addAttribute("plant", plant);
+		
+		return "garden/myPlantUpdateForm";
+		
+	}
 	
+	@RequestMapping("updateMyPlant.do")
+	public String updateMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
+								MyPlant plant, HttpServletRequest request, Model model) {
+		
+		String orgChangeName = plant.getServerName();
+		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
+				
+			String changeName = saveFile(file, request);
+			
+			plant.setFileName(file.getOriginalFilename());
+			plant.setServerName(changeName);
+			
+			if(orgChangeName != null) {//기존 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
+				deleteFile(orgChangeName, request);
+			}
+		}
+		
+		gardenService.updateMyPlant(plant);
+		
+		model.addAttribute("plantNo", plant.getPlantNo());
+		
+		return "redirect:myPlantDetail.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "deleteMyPlant.do", produces="application/json; charset=utf-8")
+	public int deleteMyPlant(String plantNo, String fileName, HttpServletRequest request) {
+		
+		int result = gardenService.deleteMyPlant(plantNo);
+		
+		if(!fileName.equals("")) {
+			deleteFile(fileName, request);
+		}
+		
+		return result;
+	}
 	//=========================================================================================
 	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능
