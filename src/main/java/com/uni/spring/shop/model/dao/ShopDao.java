@@ -87,6 +87,11 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.selectOrderList",userNo);
 	}
 
+	public ArrayList<ProOrder> selectOrderCancelList(SqlSessionTemplate sqlSession, int userNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("shopMapper.selectOrderCancelList",userNo);
+	}
+	
 	public int deleteCart(SqlSessionTemplate sqlSession, int cartNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("shopMapper.deleteCart",cartNo);
@@ -96,6 +101,8 @@ public class ShopDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("shopMapper.insertCart", cartMap);
 	}
+
+
 
 
 

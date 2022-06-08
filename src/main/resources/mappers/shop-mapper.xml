@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  FROM PRO_REVIEW A
 	  JOIN MEMBER B ON A.REVIEW_WRITER = B.USER_NO
 	  JOIN PRODUCT C ON A.PRO_CODE = C.PRO_CODE  
-	  WHERE REVIEW_STATUS='Y'
+	  WHERE A.REVIEW_STATUS='Y'
 	  AND REVIEW_WRITER=#{userNo}
 	    
 	</select>
@@ -249,8 +249,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  FROM PRO_ORDER A	  
 	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE 	  	  
 	  WHERE A.USER_NO=#{userNo}
+	  AND A.ORDER_STATUS IN('C','Y','R')
     
   	</select>
+  	
+  	
+  	<!--  내 취소 주문 select해오기 -->
+	<select id = "selectOrderCancelList" parameterType="ProOrder" resultMap="ProOrderResultSet">
+
+	  SELECT  A.*, B.PRO_NAME
+	  FROM PRO_ORDER A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE 	  	  
+	  WHERE A.USER_NO=#{userNo}
+	  AND A.ORDER_STATUS = 'N'
+    
+  	</select>
+  	
+  	
 	
 	<!-- 카트에 인서트하기 -->
 	<insert id="insertCart">

@@ -142,6 +142,13 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 
+	@Override
+	public ArrayList<ProOrder> selectOrderCancelList(int userNo) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectOrderCancelList(sqlSession,userNo);
+	}
+	
+	
 
 	@Override
 	public void deleteCart(int cartNo) {
@@ -168,6 +175,10 @@ public class ShopServiceImpl implements ShopService {
 			throw new CommException("장바구니 추가 실패");
 		}
 	}
+
+
+
+
 
 
 

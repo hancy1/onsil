@@ -251,17 +251,26 @@ public class ShopController {
 	
 	//리뷰 삭제(n으로 업데이트)		
 	@RequestMapping("deleteReview.do")
-	public String deleteReview(int reviewNo, String fileName, HttpServletRequest request, HttpSession session ) {
+	public ModelAndView deleteReview(int reviewNo, String fileName, ModelAndView mv, HttpServletRequest request, HttpSession session ) {
 		
 		System.out.println("삭제 시 컨트롤러 reviewNo : " + reviewNo);
 		
 		shopService.deleteReview(reviewNo);
 		
-		if(!fileName.equals("")) {
-			deleteFile(fileName, request);
-		}
+		//if(!fileName.equals("")) {
+		//	deleteFile(fileName, request);
+		//}
 		
-		return "redirect:myReviewList.do";
+		
+		String userNoS= ((Member) session.getAttribute("loginUser")).getUserNo();		
+		int userNo = Integer.parseInt(userNoS);
+		
+		System.out.println("삭제 컨트롤러 유저번호.....: "+userNo);
+		
+		mv.addObject("userNo",userNo).setViewName("redirect:myReviewList.do");
+		
+		
+		return mv;
 	}
 	
 	
@@ -282,6 +291,24 @@ public class ShopController {
 		
 		return "shop/myOrderList";
 	}
+	
+	
+	//내 주문 취소 List 연결
+	@RequestMapping("myOrderCancelList.do")
+	public String selectOrderCancelList(Model model, HttpSession session) {
+		
+		String userNoS = ((Member) session.getAttribute("loginUser")).getUserNo();
+		int userNo = Integer.parseInt(userNoS);
+		
+		ArrayList<ProOrder> list = shopService.selectOrderCancelList(userNo);
+		
+		model.addAttribute("list", list);
+		
+		
+		return "shop/myOrderCancelList";
+	}
+	
+	
 	
 	
 	//장바구니 삭제

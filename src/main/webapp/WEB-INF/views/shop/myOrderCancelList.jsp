@@ -15,13 +15,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 <style>
-	#myOrderList{
+	#myOrderCancelList{
 	text-align: left;
-	background-color: #E1F5C4;
+	background-color: #FDEDE4;
 	width : 50%;	
 	}
 	
-    #myOrderList>tbody>tr>#orderDetail:hover{
+    #myOrderCancelList>tbody>tr>#orderDetail:hover{
     cursor:pointer;
     }
 
@@ -135,8 +135,8 @@
 	         	<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='myOrderCancelList.do'">취소내역</button>	             	
        </div>
         
-    	<h4 id="contentT" >내 주문 내역</h4><br><br>
-            <table id="myOrderList" class="table table-hover" align="center"> 
+    	<h4 id="contentT" >내 주문 취소 내역</h4><br><br>
+            <table id="myOrderCancelList" class="table table-hover" align="center"> 
                 
                 <c:forEach items="${ list }" var="o">
                 <tbody>                	
@@ -147,37 +147,14 @@
 	                   		<td>${ o.proName }</td>
 	                    </tr>
 	                    <tr>	                    
-	                    	<td id="orderDetail" >
-	                    	
-	                    	<button class="btn btn-outline-success btn-sm" onclick="detailOrder(${ o.orderNo });">주문상세보기>></button>
-	                    	
+	                    	<td id="orderDetail" >	                    	
+	                    	<button class="btn btn-outline-secondary btn-sm" onclick="detailOrder(${ o.orderNo });">주문상세보기>></button>	                    	
 	                    	</td>
 	                    </tr>
 	                      
 	                    <tr>
-	                    	<td>
-	                    	<c:choose>
-	                    	
-							<c:when test="${o.orderStatus eq 'C'}">
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(4);">리뷰작성</button>
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(2);" disabled>확정완료</button>																
-							</c:when>
-							
-								
-							<c:when test="${o.orderStatus eq 'Y'}">
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(2);">구매확정</button>
-								<button class="btn btn-secondary btn-sm" onclick="postFormSubmit(3);">취소요청</button>								
-							</c:when>
-							
-							
-							<c:otherwise>								
-								<button class="btn btn-danger btn-sm" onclick="postFormSubmit(3);" disabled>취소요청중...</button>									
-						    </c:otherwise>
-									
-							</c:choose>
-	                    	
-	                    	
-	                    	
+	                    	<td>	                    									
+							<button class="btn btn-danger btn-sm" disabled>취소완료</button>
 	                    	</td>
 	                    </tr>   
 	                    <tr style="background:#fff;">
@@ -197,13 +174,7 @@
 	            
 	            
 		    </script>
-
-			
-			
-            
-            <br clear="both"><br>
-            
-			
+            <br clear="both"><br>            
             <br><br>
         </div>
         <br><br>
