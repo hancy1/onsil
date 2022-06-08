@@ -178,6 +178,32 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public void cancelRequestOrder(int orderNo) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.cancelRequestOrder(sqlSession, orderNo);
+		
+		if(result <0) {
+			throw new CommException("취소 요청 실패");
+		}
+	}
+
+
+
+	@Override
+	public void OkOrder(int orderNo) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.OkOrder(sqlSession, orderNo);
+		
+		if(result <0) {
+			throw new CommException("주문 확정 실패");
+		}
+	}
+
+
+
 
 
 

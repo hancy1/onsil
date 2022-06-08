@@ -41,6 +41,10 @@ public interface ShopService {
 
 	ArrayList<ProOrder> selectOrderCancelList(int userNo);
 
+	void cancelRequestOrder(int orderNo);
+
+	void OkOrder(int orderNo);
+
 
 
 	

@@ -343,4 +343,28 @@ public class ShopController {
 		return "redirect:CartList.do";
 	}
 	
+	//주문 취소요청(R으로 업데이트!)		
+	@RequestMapping("OrderCancelRequest.do")
+	public String cancelRequestOrder(int orderNo, HttpServletRequest request ) {
+		
+		//System.out.println("컨트롤러로 오더넘버 넘어오니? "+orderNo);
+		shopService.cancelRequestOrder(orderNo);
+	
+		
+		return "redirect:myOrderList.do";
+	}
+	
+	
+	//주문최종확정 (C로 업데이트!)		
+	@RequestMapping("OrderOk.do")
+	public String OkOrder(int orderNo, HttpServletRequest request ) {
+		
+		//System.out.println("컨트롤러로 오더넘버 넘어오니? "+orderNo);
+		shopService.OkOrder(orderNo);
+	
+		
+		return "redirect:myOrderList.do";
+	}
+	
+	
 }

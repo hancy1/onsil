@@ -275,5 +275,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 	
+	
+	<!--관리자에게 주문 취소 요청하기 -->	
+  	<update id="cancelRequestOrder">
+  
+  		UPDATE PRO_ORDER
+  		SET ORDER_STATUS='R'
+  		WHERE ORDER_NO=#{orderNo}
+    
+  	</update>
+  	
+  	
+  	<!--주문 최종 확정하기 -->	
+  	<update id="OkOrder">
+  
+  		UPDATE PRO_ORDER
+  		SET ORDER_STATUS='C'
+  		WHERE ORDER_NO=#{orderNo}
+    
+  	</update>
 
 </mapper>
