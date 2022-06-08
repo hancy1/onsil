@@ -338,6 +338,26 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.deleteGrowList(listNo, sqlSession);
 	}
 
+	@Override
+	public void updateMyPlant(MyPlant plant) {
+
+		int result =  gardenDao.updateMyPlant(plant, sqlSession);
+		if(result < 0) {
+			throw new CommException("내 식물 수정 실패");
+		}
+		
+	}
+
+	@Override
+	public int deleteMyPlant(String plantNo) {
+		int result =  gardenDao.deleteMyPlant(plantNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("내 식물 삭제 실패");
+		}
+		return result;
+		
+	}
+
 	
 
 	
