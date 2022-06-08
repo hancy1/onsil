@@ -63,7 +63,8 @@
        								<i class="fa-solid fa-sun"></i> : ${plant.sun}
        								</td>	
        								<td><br><br>${plant.enrollDate}</td>
-       								<td><br><br><a class="btn" type="button" href="updateMyPlantForm.do?plantNo=${plant.plantNo}">수정</a> <button class="btn" type="button" onclick="deleteMyPlant();">삭제</button></td>
+       								<td><br><br><a class="btn btn-outline-success" type="button" href="updateMyPlantForm.do?plantNo=${plant.plantNo}">수정</a> 
+       											<button class="btn btn-outline-success" type="button" onclick="deleteMyPlant();">삭제</button></td>
        				       			</tr>	
 								</table>
 								<br>
@@ -82,6 +83,36 @@
 <!-- jQuery-2.2.4 js -->
 <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 <script>
+	function deleteMyPlant(){
+		
+		var yn = confirm("해당 식물을 삭제하시겠습니까? 삭제 시 관리내역도 함께 삭제됩니다.");
+		
+		if(yn){
+			
+			var plantNo = "${plant.plantNo}";
+			var fileName = "${plant.fileName}";
+			
+			$.ajax({
+				url:"deleteMyPlant.do",
+				data:{plantNo:plantNo,fileName:fileName},
+				type:"post",
+				success:function(result){
+					
+					if(result > 0){
+						alert("삭제되었습니다.")
+						location.href = "myPlant.do";
+					}else{
+						alert("삭제 중 오류가 발생했습니다.")
+					}
+					
+				},
+				error:function(){
+					console.log("내 식물 리스트 삭제용 ajax 통신 실패")
+					}
+				});
+			
+		}
+	}
 
 	$(function(){
 		selectGrowList();
@@ -116,7 +147,9 @@
 							 if(grow.repotting == 'Y'){
 								 value += "<i class='fa-solid fa-seedling'></i>";
 							 }
-						value += "</th><th>" + grow.etc + "</th><th>" + 
+						value += "</th><th>" + grow.etc + "</th><th>" +
+								 "<button class='btn' type='button' onclick='updateGrowList(" + grow.listNo + ");'>" + 
+								 "<i class='fa-solid fa-eraser'></i></button> " + 
 								 "<button class='btn' type='button' onclick='deleteGrowList(" + grow.listNo + ");'>" + 
 								 "<i class='fa-solid fa-xmark'></i></button></th></tr>";
 						
@@ -160,41 +193,6 @@
 					console.log("식물 관리내역 리스트 삭제용 ajax 통신 실패")
 					}
 				});
-		}
-	}
-	
-	function deleteMyPlant(){
-		
-		var yn = confirm("해당 식물을 삭제하시겠습니까? 삭제 시 관리내역도 함께 삭제됩니다.");
-		
-		if(yn){
-			//location.href = "deleteMyPlant.do?plantNo=" + ${plant.plantNo} + "&serverName=" + ${plant.serverName};
-			
-			var plantNo = "${plant.plantNo}";
-			var fileName = "${plant.fileName}";
-			
-			console.log(plantNo)
-			console.log(serverName)
-			
-			$.ajax({
-				url:"deleteMyPlant.do",
-				data:{plantNo:plantNo,fileName:fileName},
-				type:"post",
-				success:function(result){
-					
-					if(result > 0){
-						alert("삭제되었습니다.")
-						location.href = "myPlant.do";
-					}else{
-						alert("삭제 중 오류가 발생했습니다.")
-					}
-					
-				},
-				error:function(){
-					console.log("내 식물 리스트 삭제용 ajax 통신 실패")
-					}
-				});
-			
 		}
 	}
 </script>	

@@ -82,12 +82,15 @@
 				<div class="col">
 					<div class="card" style="width: 18rem;">
 					<c:if test="${log.serverName != null}">
-						<img src="resources/garden_upload_files/${log.serverName}" class="card-img-top"
-							alt="...">
+						<div class="embed-responsive embed-responsive-4by3">
+						<img src="resources/garden_upload_files/${log.serverName}" class="card-img-top embed-responsive-item" 
+							alt="..."></div>
 					</c:if>
 					<c:if test="${log.serverName == null}">
-						<img src="resources/garden_upload_files/mos.jpg" class="card-img-top"
+						<div class="embed-responsive embed-responsive-4by3">
+						<img src="resources/garden_upload_files/mos.jpg" class="card-img-top embed-responsive-item"
 							alt="...">
+						</div>
 					</c:if>
 						<div class="card-body">
 							<!-- <h5 class="card-title">타이틀</h5> -->
@@ -114,7 +117,7 @@
 				</c:if>
 			</div>
 		</div>
-		
+		<br>
 		<div id="pagingArea">
                 <ul class="pagination">
                 	<c:choose>
