@@ -17,10 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.help.HelpPagination;
 import com.uni.spring.help.model.dto.Inquiry;
+import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
@@ -455,4 +458,64 @@ public class AdminShopController {
 		}
 		
 		
+		
+		// 주문관리 페이지 
+		@RequestMapping("adminOrderList.do")
+		public String selectOrderList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+			
+			
+			
+			int listCount = aShopService.orderListCountAll();
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
+			
+			
+			ArrayList<ProOrder> list = aShopService.selectOrderList(pi); 
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);		
+			
+			return "shop/adminOrderList";
+		}
+		
+		
+		// 주문관리 페이지  : 취소요청건!
+		@RequestMapping("adminOrderListRequest.do")
+		public String selectOrderRequestList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+			
+			
+			
+			int listCount = aShopService.orderListCountRequest();
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
+			
+			
+			ArrayList<ProOrder> list = aShopService.selectOrderRequestList(pi); 
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);		
+			
+			return "shop/adminOrderList";
+		}
+		
+		
+		
+		// 주문관리 페이지 : 취소완료건
+		@RequestMapping("adminOrderListCancel.do")
+		public String selectOrderCancelList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+			
+			
+			
+			int listCount = aShopService.orderListCountCancel();
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
+			
+			
+			ArrayList<ProOrder> list = aShopService.selectOrderCancelList(pi); 
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);		
+			
+			return "shop/adminOrderList";
+		}
 }

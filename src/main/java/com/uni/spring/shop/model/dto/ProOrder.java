@@ -35,6 +35,8 @@ public class ProOrder {
 	ORDER_DATE
 	
 	PRO_NAME
+	FREE_NAME
+	USER_ID
 	*/
 	
 	
@@ -53,6 +55,8 @@ public class ProOrder {
 	private Date orderDate;//등록날짜
 
 	private String proName; //제품명
+	private String freeName; //사은품이름//사은품명
+	private String userId; //회원아이디
 	
 
 	

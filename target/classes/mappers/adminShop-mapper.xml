@@ -244,4 +244,99 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	<resultMap type="ProOrder" id="ProOrderResultSet"> 
+	
+		<id property="orderNo" column="ORDER_NO"/>		
+		<result property="cartNo" column="CART_NO" />
+		<result property="proCode" column="PRO_CODE" />
+		<result property="freeNo" column="FREE_NO" />	
+		<result property="userNo" column="USER_NO" />
+		<result property="payCode" column="PAY_CODE" />
+		<result property="amount" column="AMOUNT" />
+		<result property="orderName" column="ORDER_NAME" />
+		<result property="orderPhone" column="ORDER_PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="addressDetail" column="ADDRESS_DETAIL" />
+		<result property="orderStatus" column="ORDER_STATUS" />
+		<result property="orderDate" column="ORDER_DATE" />
+		
+		<result property="proName" column="PRO_NAME" />
+		<result property="freeName" column="FREE_NAME" />
+		<result property="userId" column="USER_ID" />
+		
+		
+	</resultMap>
+	
+	
+	<!-- 관리자 페이지 : 모든 주문 List 갯수  -->
+	<select id = "orderListCountAll" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_ORDER
+  	
+    
+  	</select>
+
+	<!-- 관리자 페이지 : 모든 주문 불러오기 -->
+	<select id="selectOrderList" parameterType="ProOrder" resultMap="ProOrderResultSet">	
+		 
+	  SELECT  A.*, B.PRO_NAME, C.FREE_NAME, D.USER_ID
+	  FROM PRO_ORDER A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE
+	  JOIN FREEBIE C ON A.FREE_NO = C.FREE_NO
+	  JOIN MEMBER D ON A.USER_NO = D.USER_NO	  	  
+	  ORDER BY A.ORDER_NO
+	    
+	</select>
+	
+	
+	<!-- 관리자 페이지 : 취소요청한 주문 List 갯수  -->
+	<select id = "orderListCountRequest" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_ORDER
+  	WHERE ORDER_STATUS = 'R'
+    
+  	</select>
+
+
+
+	<!-- 관리자 페이지 : 취소요청된 주문 불러오기 -->
+	<select id="selectOrderRequestList" parameterType="ProOrder" resultMap="ProOrderResultSet">	
+		 
+	  SELECT  A.*, B.PRO_NAME, C.FREE_NAME, D.USER_ID
+	  FROM PRO_ORDER A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE
+	  JOIN FREEBIE C ON A.FREE_NO = C.FREE_NO
+	  JOIN MEMBER D ON A.USER_NO = D.USER_NO	
+	  WHERE ORDER_STATUS = 'R'
+	  ORDER BY A.ORDER_NO
+	    
+	</select>
+	
+	
+	<!-- 관리자 페이지 : 취소된 주문 List 갯수  -->
+	<select id = "orderListCountCancel" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_ORDER
+  	WHERE ORDER_STATUS = 'N'
+    
+  	</select>
+
+
+	<!-- 관리자 페이지 : 취소요청된 주문 불러오기 -->
+	<select id="selectOrderCancelList" parameterType="ProOrder" resultMap="ProOrderResultSet">	
+	
+	  SELECT  A.*, B.PRO_NAME, C.FREE_NAME, D.USER_ID
+	  FROM PRO_ORDER A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE
+	  JOIN FREEBIE C ON A.FREE_NO = C.FREE_NO
+	  JOIN MEMBER D ON A.USER_NO = D.USER_NO	
+	  WHERE ORDER_STATUS = 'N'
+	  ORDER BY A.ORDER_NO
+	    
+	</select>
+	
+	
 </mapper>

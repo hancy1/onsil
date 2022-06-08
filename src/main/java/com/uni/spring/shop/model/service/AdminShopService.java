@@ -3,6 +3,7 @@ package com.uni.spring.shop.model.service;
 import java.util.ArrayList;
 
 import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
@@ -55,6 +56,18 @@ public interface AdminShopService {
 	ArrayList<Product> selectpCodeList();
 
 	void insertInventory(ProStock stock);
+
+	int orderListCountAll();
+
+	ArrayList<ProOrder> selectOrderList(ShopPageInfo pi);
+
+	int orderListCountRequest();
+
+	ArrayList<ProOrder> selectOrderRequestList(ShopPageInfo pi);
+
+	int orderListCountCancel();
+
+	ArrayList<ProOrder> selectOrderCancelList(ShopPageInfo pi);
 
 	
 
