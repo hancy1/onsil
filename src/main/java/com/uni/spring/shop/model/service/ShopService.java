@@ -39,6 +39,8 @@ public interface ShopService {
 
 	void insertCart(Map cartMap);
 
+	ArrayList<ProOrder> selectOrderCancelList(int userNo);
+
 
 
 	
