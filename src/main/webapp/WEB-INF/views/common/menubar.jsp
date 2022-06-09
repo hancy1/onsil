@@ -122,7 +122,7 @@
 						<!-- Nav Brand -->
 						<a href="index.jsp" class="nav-brand">
 						<!-- 로고 나중에 바꾸기! -->
-						<img src="resources/img/core-img/logo.png" alt=""></a>
+						<img src="resources/img/core-img/온실.png" alt="" style="width:120px; height:120px;"></a>
 
 						<!-- Navbar Toggler -->
 						<div class="classy-navbar-toggler">
@@ -141,7 +141,66 @@
 
 							<!-- Navbar Start -->
 							<div class="classynav">
+							<c:choose>
+								<c:when test="${ sessionScope.loginUser.userId eq 'admin'}">
 								<ul>									
+						            <li><a href="#" style="font-size: 15px;">상품</a>
+										<ul class="dropdown">
+											<li><a href="listProducts.do">구매하기</a></li>											
+											<li><a href="myReviewList.do">내 리뷰 보기</a></li>
+											<li><a href="myOrderList.do">내 주문 내역</a></li>
+											<li><a href="myPointList.do">내 포인트 보기</a></li>											
+										</ul>
+									</li>			
+									<li><a href="#" style="font-size: 15px; padding-right: 15px;">예약</a>
+									<ul class="dropdown">
+											<li><a href="fair.do">박람회</a></li>
+											<li><a href="exhibition.do">전시회</a></li>
+											<li><a href="reviewBoard.do">후기게시판</a></li>
+										</ul>
+									</li>
+									
+									<li><a href="gardenMain.do" style="font-size: 15px; padding-right: 15px;">정원관리</a>
+										<ul class="dropdown">
+											<li><a href="visitorBoard.do">방명록</a></li>
+											<li><a href="dailyLog.do">데일리로그</a>
+											<li><a href="myPlant.do">내 식물 관리</a></li>
+											<li><a href="neighborList.do">이웃관리</a></li>											
+										</ul>
+									</li>
+									<li><a href="boardList.do" style="font-size: 15px; padding-right: 15px;">자유게시판</a></li>
+									<li><a href="bQuestionList.do" style="font-size: 15px; padding-right: 15px;">질문게시판</a></li>
+									<li><a href="#" style="font-size: 15px; padding-right: 15px;">고객센터</a>
+										<ul class="dropdown">
+											<li><a href="faqList.do">자주묻는질문</a></li>
+											<li><a href="noticeList.do">공지사항</a></li>
+											<li><a href="inquiryList.do">문의사항</a></li>											
+										</ul>
+									</li>
+									
+									<li><a href="#" style="font-size: 15px;">관리자메뉴</a>
+										<ul class="dropdown">
+											<li><a href="adminFaq.do">FAQ관리</a></li>
+											<li><a href="adminNotice.do">공지관리</a></li>
+											<li><a href="adminInquiry.do">문의관리</a></li>											
+											<li><a href="adminMember.do">회원관리</a></li>
+											<li><a href="adminProducts.do">판매제품관리</a></li>
+											<li><a href="adminFreebieList.do">사은품관리</a></li>											
+											<li><a href="inventoryList.do">재고관리</a></li>
+											<li><a href="adminOrderList.do">주문관리</a></li>
+											<li><a href="salesList.do">매출관리</a></li>
+											<li><a href="adminReviewList.do">리뷰관리</a></li>
+											<li><a href="#">신고된 게시글</a></li>
+											<li><a href="listTicket.do">티켓등록</a></li>
+											<li><a href="#">후기관리</a></li>
+											<li><a href="adminPlant.do">식물등록</a></li>
+										</ul>
+									</li> 
+									</ul>
+									</c:when>
+									<c:otherwise>
+									
+									<ul>									
 						            <li><a href="#">상품</a>
 										<ul class="dropdown">
 											<li><a href="listProducts.do">구매하기</a></li>											
@@ -175,8 +234,10 @@
 											<li><a href="inquiryList.do">문의사항</a></li>											
 										</ul>
 									</li>
-									
-									<!-- 관리자메뉴. 관리자로 로그인했을 때만 보이게 설정 -->
+									</ul>
+									</c:otherwise>
+									</c:choose>
+									<!-- 관리자메뉴. 관리자로 로그인했을 때만 보이게 설정 								
 									<c:if test="${ sessionScope.loginUser.userId eq 'admin'}">
 									<li><a href="#">관리자메뉴</a>
 										<ul class="dropdown">
@@ -196,7 +257,7 @@
 											<li><a href="adminPlant.do">식물등록</a></li>
 										</ul>
 									</li> 
-									</c:if> 
+									</c:if> -->	
 											<!-- 
 											토글 예시를 위해 남겨뒀음											
 											<li><a href="blog.html">Blog</a>
@@ -205,7 +266,7 @@
 													<li><a href="single-post.html">Blog Details</a></li>
 												</ul></li> -->	
 										
-								</ul>
+								
 
 								<!-- Search Icon -->
 								<div id="searchIcon">
