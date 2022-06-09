@@ -8,7 +8,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
@@ -17,6 +16,7 @@ import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
+import com.uni.spring.garden.model.dto.VisitorComment;
 
 @Repository
 public class GardenDao {
@@ -35,7 +35,7 @@ public class GardenDao {
 	}
 
 	//방명록 화면에서 모든 방명록 구하는 쿼리
-	public ArrayList<Board> getBoardList(String hostUser, PageInfo pi, SqlSessionTemplate sqlSession) {
+	public ArrayList<VisitorBoard> getBoardList(String hostUser, PageInfo pi, SqlSessionTemplate sqlSession) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
@@ -81,7 +81,7 @@ public class GardenDao {
 		return sqlSession.selectOne("gardenMapper.selectCommentCount", hostUser);
 	}
 
-	public ArrayList<Board> selectCommentList(String hostUser, PageInfo cPi, SqlSessionTemplate sqlSession) {
+	public ArrayList<VisitorComment> selectCommentList(String hostUser, PageInfo cPi, SqlSessionTemplate sqlSession) {
 		
 		int offset = (cPi.getCurrentPage() - 1) * cPi.getBoardLimit();
 		

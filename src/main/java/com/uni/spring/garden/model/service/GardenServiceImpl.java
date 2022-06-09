@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dao.GardenDao;
 import com.uni.spring.garden.model.dto.DailyLog;
@@ -19,6 +18,7 @@ import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
+import com.uni.spring.garden.model.dto.VisitorComment;
 
 
 
@@ -46,7 +46,7 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public ArrayList<Board> selectList(PageInfo pi, String hostUser) {
+	public ArrayList<VisitorBoard> selectList(PageInfo pi, String hostUser) {
 		
 		return gardenDao.getBoardList(hostUser, pi, sqlSession);
 	}
@@ -112,7 +112,7 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public ArrayList<Board> selectCommentList(PageInfo cPi, String hostUser) {
+	public ArrayList<VisitorComment> selectCommentList(PageInfo cPi, String hostUser) {
 	
 		return gardenDao.selectCommentList(hostUser, cPi, sqlSession);
 	}

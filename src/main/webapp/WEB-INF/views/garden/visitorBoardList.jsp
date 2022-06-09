@@ -75,7 +75,7 @@
 	         								<th>${b.enrollDate}</th>
 											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-brands fa-replyd"></i></button> 
 											<c:if test="${loginUser.userId eq b.writer}">
-											<button class="btn btn-outline-success updateBoard" onclick='updateB("${b.boardNo}");' ><i class="fa-solid fa-pen"></i></button>
+											<button class="btn btn-outline-success updateBoard" onclick='updateB("${b.boardNo}");' ><i class="fa-solid fa-eraser"></i></button>
 											</c:if>
 											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
@@ -97,11 +97,12 @@
 	         								<td>${c.enrollDate}</td>
 	         								<td>      								
 	         								<c:if test="${loginUser.userId eq c.userNo}"> 		
-	         								<button class="btn btn-outline-success modifyComment" onclick='update("${c.commentNo}");' ><i class="fa-solid fa-pen"></i></button>
+	         								<button class="btn btn-outline-success modifyComment" onclick='update("${c.commentNo}");' ><i class="fa-solid fa-eraser"></i></button>
 											</c:if>
 											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
 											<button class="btn btn-outline-success deleteComment" onclick='deleteComment("${c.commentNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
+											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
 											</td>
 	         								</tr>
 	         								</c:if>
@@ -235,10 +236,19 @@
 	function insertComment(boardNo){
 		
 		var content = prompt("댓글입력 창입니다.");
-		console.log(content);
+		console.log(content.length);
 		console.log(boardNo);
+		
+		if(content == null || content.length < 0){
+			alert("내용을 입력해주세요.")
+		}else{
+			console.log(content.length);
+			console.log(content);
+			location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
+			
+		}
 	
-		location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
+		
 		
 	}
 	
