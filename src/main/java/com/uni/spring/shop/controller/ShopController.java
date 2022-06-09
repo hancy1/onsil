@@ -370,13 +370,10 @@ public class ShopController {
 	//리뷰 추가폼 연결
 	@RequestMapping("reviewEnrollForm.do")
 	public String enrollFormFreebie(int orderNo, Model model) {
-		
-		
-		
+				
 		model.addAttribute("orderNo", orderNo);
-		
-		
-	  return "shop/reviewEnrollForm";
+				
+		return "shop/reviewEnrollForm";
 	
 	}
 	
@@ -442,6 +439,16 @@ public class ShopController {
 		
 	}
 	
-	
+	//리뷰 디테일페이지	
+	@RequestMapping("detailOrder.do")
+	public ModelAndView selectOrder(int orderNo, ModelAndView mv) {
+		
+		
+		ProOrder o = shopService.selectOrder(orderNo);
+		
+		mv.addObject("o", o).setViewName("shop/myOrderDetail");
+		
+		return mv;
+	}
 
 }

@@ -141,24 +141,27 @@
                 <c:forEach items="${ list }" var="o">
                 <tbody>                	
 	                    <tr>
-	                   		<td>(주문 번호) ${ o.orderNo }</td>  
+	                   		<td colspan="4">${ o.proName }</td>	                   		
 	                    </tr>
-	                    <tr>
-	                   		<td>${ o.proName }</td>
+	                    
+	                    <tr>	                   		
+	                   		<td colspan="3">수량 : ${ o.amount }</td>
+	                   		<td>${ o.orderDate }</td> 
 	                    </tr>
+	                    
 	                    <tr>	                    
-	                    	<td id="orderDetail" >	                    	
+	                    	<td colspan="4" id="orderDetail" >	                    	
 	                    	<button class="btn btn-outline-secondary btn-sm" onclick="detailOrder(${ o.orderNo });">주문상세보기>></button>	                    	
 	                    	</td>
 	                    </tr>
 	                      
 	                    <tr>
-	                    	<td>	                    									
+	                    	<td colspan="4">	                    									
 							<button class="btn btn-danger btn-sm" disabled>취소완료</button>
 	                    	</td>
 	                    </tr>   
 	                    <tr style="background:#fff;">
-	                    <td> </td> 
+	                    <td colspan="4"> </td> 
 	                    </tr>                 
                 </tbody>                
                 </c:forEach>
