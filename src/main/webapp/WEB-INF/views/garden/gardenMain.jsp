@@ -12,6 +12,9 @@
 
     <!-- Title -->
     <title>온실 - 정원</title>
+    
+    <link href='resources/fullcalendar-5.0.1/lib/main.css' rel='stylesheet' />
+	<script src='resources/fullcalendar-5.0.1/lib/main.js'></script>
 
     <!-- Favicon -->
     <link rel="icon" href="resources/img/core-img/favicon.ico">
@@ -49,28 +52,9 @@
 		</div>
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
-	
-<!-- Preloader-->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="resources/img/core-img/leaf.png" alt="">
-        </div>
-    </div> 
     
     <!-- ##### Portfolio Area Start ##### -->
     <section class="alazea-portfolio-area portfolio-page section-padding-0-100">
-        <!-- <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading 
-                    <div class="section-heading text-center">
-                        <h2>정원</h2>
-                        <p>정원소개하기</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
         <div class="container">
             <div class="row">
@@ -85,6 +69,70 @@
                     </div>
                 </div>
             </div>
+            
+		<div class="row">
+			<div class="col-9 my-3">
+				<div id="calendar">
+				</div>
+			</div>
+			<div class="col-3 my-3">
+			
+			
+			</div>
+		</div>
+
+	<script>
+      
+      document.addEventListener('DOMContentLoaded', function () {
+          $(function () {
+              var request = $.ajax({
+            	  url : "selectGrowList.do",
+    			  method: "GET",
+    			  data : {hostUser:"${hostUser}"}
+              });
+
+              request.done(function (data) {
+                  console.log(data); // log 로 데이터 찍어주기.
+
+                  var calendarEl = document.getElementById('calendar');
+
+                  var calendar = new FullCalendar.Calendar(calendarEl, {
+                      initialDate: '2022-06-09',
+                      initialView: 'timeGridWeek',
+                      headerToolbar: {
+                          left: 'prev,next today',
+                          center: 'title',
+                          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                      },
+                      editable: true,
+                      droppable: true, // this allows things to be dropped onto the calendar
+                      drop: function (arg) {
+                          // is the "remove after drop" checkbox checked?
+                          if (document.getElementById('drop-remove').checked) {
+                              // if so, remove the element from the "Draggable Events" list
+                              arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                          }
+                      },
+                      /**
+                       * data 로 값이 넘어온다. log 값 전달.
+                       */
+                      events: data
+                  });
+
+                  calendar.render();
+              });
+
+              request.fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+              });
+          });
+
+      });
+      
+      </script>
+            
+            
+            
             
             <hr>
          	<!-- 방명록 -->
