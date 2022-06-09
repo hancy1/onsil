@@ -384,8 +384,8 @@ public class ShopController {
 	@RequestMapping("insertReview.do")
 	public String insertReview(ProReview r, int userNo, int orderNo, HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
 				
-		System.out.println("orderNo 컨트롤러에 뭘로 가져오니? : " + orderNo);
-		System.out.println("userNo 컨트롤러에 뭘로 가져오니? : " + userNo);
+		//System.out.println("orderNo 컨트롤러에 뭘로 가져오니? : " + orderNo);
+		//System.out.println("userNo 컨트롤러에 뭘로 가져오니? : " + userNo);
 				
 		//오더넘버로 proCode조회해오기
 		String proCode = shopService.selectProductCode(orderNo);		
@@ -401,19 +401,45 @@ public class ShopController {
 				
 				r.setOriginName(file.getOriginalFilename());
 				r.setChangeName(changeName);
-			}
-			
+			}			
 		}
+		
+		//가져온 값들 set
 		
 		r.setRefOderNo(orderNo);
 		r.setProCode(proCode);
 		r.setReviewWriter(userNo);
 		
-		System.out.println("ProReview 다 잘 가져왔니?- 파일명도?  : " + r);
+		//System.out.println("ProReview 다 잘 가져왔니?- 파일명도?  : " + r);
 		
 		shopService.insertReview(r);
-				
+		
+		
+		//리뷰 작성 시 100포인트적립 하는 메소드
+		insertPoint(userNo,100,"적립");
+		
+		
+		//오더 테이블에 리뷰 작성 여부 Y로 업데이트
+		shopService.updateOTableReviewOk(orderNo);
+		
 		return "redirect:myReviewList.do";
+	}
+
+	
+	//포인트 적립,사용 하는 메소드
+	private void insertPoint(int userNo, int pointVal, String pointType) {
+		// TODO Auto-generated method stub
+		
+		Point p = new Point();
+		
+		p.setUserNo(userNo);
+		p.setPointVal(pointVal);
+		p.setPointType(pointType);
+		
+		shopService.insertPoint(p);
+		
+		System.out.println("안내 : (유저번호)"+userNo+"님 에게 "+pointVal+"포인트 "+pointType+"완료!");
+		
 	}
 	
 	

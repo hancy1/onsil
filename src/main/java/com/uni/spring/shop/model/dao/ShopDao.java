@@ -122,6 +122,16 @@ public class ShopDao {
 		return sqlSession.insert("shopMapper.insertReview", r);
 	}
 
+	public int insertPoint(SqlSessionTemplate sqlSession, Point p) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shopMapper.insertPoint", p);
+	}
+
+	public int updateOTableReviewOk(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.updateOTableReviewOk",orderNo);
+	}
+
 
 
 

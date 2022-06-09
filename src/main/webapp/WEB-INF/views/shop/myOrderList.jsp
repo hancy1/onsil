@@ -168,7 +168,13 @@
 								<button class="btn btn btn-warning btn-sm" onclick="reviewForm(${ o.orderNo });">리뷰작성</button>
 								</c:if>
 								
-								<button class="btn btn btn-warning btn-sm"  disabled>확정완료</button>																
+								<button class="btn btn btn-warning btn-sm"  disabled>확정완료</button>	
+								
+							    <c:if test="${o.orderRInsert eq 'Y'}" >
+								<button class="btn btn btn-warning btn-sm" onclick="location.href='myReviewList.do'">리뷰확인</button>
+								</c:if>
+								
+																							
 							</c:when>
 							
 								
