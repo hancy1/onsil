@@ -269,6 +269,11 @@ public class GardenDao {
 		return sqlSession.selectList("gardenMapper.selectCalendar", hostUser);
 	}
 
+	public int insertPlantGrow(PlantGrow plant, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("gardenMapper.insertPlantGrow", plant);
+	}
+
 	
 		
 		

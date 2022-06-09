@@ -103,6 +103,8 @@ public interface GardenService {
 
 	List<PlantGrow> selectCalendar(String hostUser);
 
+	void insertPlantGrow(PlantGrow plant);
+
 
 	
 

@@ -365,6 +365,16 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.selectCalendar(hostUser, sqlSession);
 	}
 
+	@Override
+	public void insertPlantGrow(PlantGrow plant) {
+		
+		int result =  gardenDao.insertPlantGrow(plant, sqlSession);
+		if(result < 0) {
+			throw new CommException("내 식물 관리내역 등록 실패");
+		}
+		
+	}
+
 	
 
 	
