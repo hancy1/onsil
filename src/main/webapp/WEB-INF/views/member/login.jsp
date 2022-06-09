@@ -27,6 +27,12 @@
 	
   </head>
   <body>
+  	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
 
     <!-- Backgrounds -->
 
@@ -49,11 +55,11 @@
             <!-- Loging form -->
                   <form action="login.do" method="post">
                     <div class="form-group">
-                      <input class="form-control" id="id" name="userId" placeholder="Enter ID">
+                      <input class="form-control" id="id" name="userId" placeholder="Enter ID" required>
                       
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Password">
+                      <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Password" required>
                     </div>
 
                       <div class="form-check">
@@ -62,7 +68,7 @@
                       <label class="switch">
                       <input type="checkbox" id="checkId">
                       <span class="slider round"></span>
-                    </label>
+                      </label>
                       <label class="form-check-label" for="exampleCheck1">Remember me</label>
                       
                       <label class="forgot-password"><a href="#">Forgot Password?<a></label>

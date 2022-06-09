@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.model.dto.PlantInfo;
-import com.uni.spring.help.model.dao.HelpDao;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dao.MemberDao;
 import com.uni.spring.member.model.dto.Member;
@@ -78,8 +77,8 @@ public class MemberServiceImpl implements MemberService {
 		
 		// matches (평문, 암호화) --> true, false 반환
 		if(!bCryptPasswordEncoder.matches(m.getUserPwd(), loginUser.getUserPwd())) {
-			
-			throw new CommException("암호불일치");
+						
+			throw new CommException("아이디와 암호가 올바르지 않습니다.");
 		}		
 		
 		return loginUser;

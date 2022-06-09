@@ -12,6 +12,10 @@ public class CommonExceptionHandler {
 		
 		e.printStackTrace();
 		
+		if(e.getMessage().equals("아이디와 암호가 올바르지 않습니다.")) {
+			return new ModelAndView("member/login").addObject("msg",e.getMessage());
+		}
+		
 		return new ModelAndView("common/errorPage").addObject("msg",e.getMessage());
 	}
 	
