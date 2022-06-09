@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<!-- 리뷰 리절트 맵 -->
 	
 	<resultMap type="ProReview" id="ProReviewResultSet"> 
 	
@@ -60,13 +61,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reviewDate" column="REVIEW_DATE" />
 		<result property="reviewCount" column="REVIEW_COUNT" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />
-		
+		<result property="refOderNo" column="REF_ONO" />
 		
 		<result property="userId" column="USER_ID" />
 		<result property="proName" column="PRO_NAME" />
 		
 		
 	</resultMap>
+	
+	
+	
+	<!-- 리뷰등록(사용자) -->	
+	<insert id="insertReview">	
+	
+		INSERT INTO PRO_REVIEW
+		VALUES(SEQ_REVIEW_NO.NEXTVAL, #{reviewWriter}, #{proCode},#{reviewStar},#{reviewTitle},#{reviewContent},#{originName},#{changeName}, DEFAULT, DEFAULT,DEFAULT, #{refOderNo})
+  
+  	</insert>
+  	
+	
 	
 	
 	
@@ -93,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    
 	</select>
 	
-	
+	<!-- 리뷰갯수 체크 -->
 	 <update id = "increaseCountReview" parameterType="_int">
     
 	  UPDATE PRO_REVIEW
@@ -104,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   	</update>  
 	
-	
+	<!-- 리뷰 불러오기 -1개? -->
 	 <select id = "selectReview" parameterType="ProReview" resultMap="ProReviewResultSet">
 
 	  SELECT *
@@ -235,11 +248,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="addressDetail" column="ADDRESS_DETAIL" />
 		<result property="orderStatus" column="ORDER_STATUS" />
 		<result property="orderDate" column="ORDER_DATE" />
+		<result property="orderRInsert" column="ORDER_R_INSERT" />
 		
 		<result property="proName" column="PRO_NAME" />
 		
 		
 	</resultMap>
+	
+	
+	<!-- 오더넘버로 제품 코트 select해오기 -->
+	<select id="selectProductCode" resultType="string">	
+		 
+	  SELECT PRO_CODE
+	  FROM PRO_ORDER
+	  WHERE ORDER_NO=#{orderNo}
+	    
+	</select>
+	
 	
 		
 	<!--  내 주문 select해오기 -->
@@ -294,5 +319,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE ORDER_NO=#{orderNo}
     
   	</update>
+  	
+  	
+ 
+  	
 
 </mapper>

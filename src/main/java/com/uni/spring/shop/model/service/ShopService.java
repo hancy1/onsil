@@ -45,6 +45,10 @@ public interface ShopService {
 
 	void OkOrder(int orderNo);
 
+	String selectProductCode(int orderNo);
+
+	void insertReview(ProReview r);
+
 
 
 	

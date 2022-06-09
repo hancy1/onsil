@@ -367,4 +367,55 @@ public class ShopController {
 	}
 	
 	
+	//리뷰 추가폼 연결
+	@RequestMapping("reviewEnrollForm.do")
+	public String enrollFormFreebie(int orderNo, Model model) {
+		
+		
+		
+		model.addAttribute("orderNo", orderNo);
+		
+		
+	  return "shop/reviewEnrollForm";
+	
+	}
+	
+	//리뷰 추가	
+	@RequestMapping("insertReview.do")
+	public String insertReview(ProReview r, int userNo, int orderNo, HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
+				
+		System.out.println("orderNo 컨트롤러에 뭘로 가져오니? : " + orderNo);
+		System.out.println("userNo 컨트롤러에 뭘로 가져오니? : " + userNo);
+				
+		//오더넘버로 proCode조회해오기
+		String proCode = shopService.selectProductCode(orderNo);		
+		System.out.println("제대로 proCode가져왔니? : " + proCode);
+		
+		
+		//전달되는 파일이 없을 때 빈문자열이 넘어온다. 빈문자열이 아닐때(=파일이 있을때)
+		if(!file.getOriginalFilename().equals("")) {
+			String changeName = saveFile(file, request);
+			
+			
+			if(changeName != null) {			
+				
+				r.setOriginName(file.getOriginalFilename());
+				r.setChangeName(changeName);
+			}
+			
+		}
+		
+		r.setRefOderNo(orderNo);
+		r.setProCode(proCode);
+		r.setReviewWriter(userNo);
+		
+		System.out.println("ProReview 다 잘 가져왔니?- 파일명도?  : " + r);
+		
+		shopService.insertReview(r);
+				
+		return "redirect:myReviewList.do";
+	}
+	
+	
+
 }

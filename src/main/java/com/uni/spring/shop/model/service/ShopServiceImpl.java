@@ -204,6 +204,29 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public String selectProductCode(int orderNo) {
+		// TODO Auto-generated method stub
+		return shopDao.selectProductCode(sqlSession,orderNo);
+	}
+
+
+
+	@Override
+	public void insertReview(ProReview r) {
+		
+		int result = shopDao.insertReview(sqlSession, r);
+		
+		if(result <0) {
+			throw new CommException("장바구니 추가 실패");
+		}	
+	}
+
+
+
+
+
+
 
 
 
