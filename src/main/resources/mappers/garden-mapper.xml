@@ -529,4 +529,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<insert id="insertPlantGrow">
+	
+		INSERT INTO PLANT_GROW VALUES
+		(SEQ_LIST_NO.NEXTVAL, #{plantNo}, #{userNo}, 
+		(SELECT PLANT_NAME FROM MYPLANT WHERE PLANT_NO=#{plantNo}), (SELECT NICKNAME FROM MYPLANT WHERE PLANT_NO=#{plantNo}), 
+		#{water}, #{supplement}, #{repotting}, #{etc}, #{enrollDate}, DEFAULT)
+		
+	
+	</insert>
+	
 </mapper>

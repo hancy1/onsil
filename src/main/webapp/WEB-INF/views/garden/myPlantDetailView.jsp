@@ -195,6 +195,10 @@
 				});
 		}
 	}
+	
+	function updateGrowList(listNo){
+		
+	}
 </script>	
 	
 	

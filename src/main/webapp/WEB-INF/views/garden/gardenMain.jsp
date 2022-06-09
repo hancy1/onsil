@@ -71,28 +71,97 @@
             </div>
             
 		<div class="row">
-			<div class="col-10 my-3">
+			<div class="col-9 my-3">
 				<div id="calendar">
 				</div>
 			</div>
-			<div class="col-2 my-3">
-			
+			<div class="col-3 my-3">
 				<br>
-				<h6 align="center">관리내역</h6>
+				<div class="col">
+				<c:if test="${loginUser.userId eq hostUser}">
 				<hr>
+				<div id="insert">
+				<form id="enrollForm" method="post" action="insertPlantGrow.do" enctype="multipart/form-data">
+                <table align="center">                    
+                    <tr>
+                    	<td>
+                    		<select id="info" onchange="selectInfo();" name="plantNo">
+                    		<option value="">식물을 선택하세요</option>
+                    		<c:forEach items="${plant}" var="plant">
+                    			<option value="${plant.plantNo}">[${plant.plantName}]${plant.nickname}</option>
+                    		</c:forEach>
+                    		</select>
+                    		
+                    	</td>
+                    </tr>
+                    <tr>
+                    	<th><label for="water">물주기</label></th>
+                    	<td><input type=checkbox name="water" id="water"></td>
+                    </tr>
+                    <tr>
+                    	<th><label for="supplement">영양제</label></th>
+                    	<td><input type=checkbox name="supplement" id="supplement"></td>
+                    </tr>
+                    <tr>
+                    	<th><label for="repotting">분갈이</label></th>
+                    	<td><input type=checkbox name="repotting" id="repotting"></td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2"><textarea name="etc" cols="30" placeholder=" 비고사항"></textarea></td>
+                    </tr>
+                    <tr>
+                    	
+                    	<td>관리일 : <input type="date" name="enrollDate" id="enrollDate"></td>
+                    	<input type="hidden" name="userNo" value="${loginUser.userNo}">
+                    </tr>
+                </table>
+                <br>
+
+                <div align="center">
+                    <button type="submit" class="btn btn-success btn-sm">등록</button>
+                    <button type="reset" class="btn btn-success btn-sm">취소</button>
+                </div>
+            </form>	
+				</div>
+				</c:if>
+				<hr>
+				<h6 align="center">관리내역</h6>
 				<div id="plant">
+				</div>
 				</div>
 			</div>
 		</div>
 <!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
-	<script>
-	
-	
-	
-	
-	
+	<script>	
+function selectInfo(){
+		
+		var select = document.getElementById('info')		
+		var plantNo = select.options[select.selectedIndex].value;
+		
+		console.log(plantNo);
+		
+		/*$.ajax({
+			
+			url:"selectPlantInfo.do",
+			data:{regNo:regNo},
+			type:"get",
+			success:function(info){
+
+				document.getElementById('plantName').value = info.plantName;
+				document.getElementById('water').value = info.water;
+				document.getElementById('sun').value = info.sun;
+				
+			},
+			error:function(){
+				console.log("plantInfo ajax 통신 실패")
+			}
+		});	*/
+	}
 	$(function(){
+		
+		 //등록일을 오늘 날짜로
+		 document.getElementById('enrollDate').value = new Date().toISOString().substring(0, 10);
 		
 		var today = new Date();
 		
@@ -103,17 +172,19 @@
 	      headerToolbar: {
 	        left: 'prev,next today',
 	        center: 'title',
-	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	        right: 'dayGridMonth'
 	      },
 	      initialDate: today, // 초기 로딩 날짜.
-	      navLinks: true, // can click day/week names to navigate views
+	      //navLinks: true, // can click day/week names to navigate views
 	      selectable: true,
 	      selectMirror: true,
 	      // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 	      select: function(arg) {
 	    	  console.log(arg);
 
-	        var title = prompt('입력할 일정:');
+	    	  //window.open("insertPlantGrowForm.do", "관리내역 등록", "width=500 height=500");
+	    	  
+	        /*var title = prompt('입력할 일정:');
 	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
 	        if (title) {
 	          calendar.addEvent({
@@ -124,14 +195,10 @@
 	            backgroundColor:"yellow",
 	            textColor:"blue"
 	          })
-	        }
+	        }*/
 	        calendar.unselect()
 	      },
 	      eventMouseEnter: function(arg) {
-	    	  // 있는 일정 클릭시,
-	    	  /*console.log("#등록된 일정 클릭#");
-	    	  console.log(arg.event);
-	    	  console.log(arg.event.extendedProps.sourceId);*/
 	    	  
 	    	  var plantName = arg.event.title;
 	    	  var date = dateFormat(arg.event.start);
@@ -170,15 +237,6 @@
 	    	  		   
 	    	  
 	    	  div.innerHTML = value;
-	    	  
-	    	  
-	    	  
-	    	  
-	    	  
-	    	  
-	        /*if (confirm('Are you sure you want to delete this event?')) {
-	          arg.event.remove()
-	        }*/
 	      },
 	      editable: true,
 	      dayMaxEvents: true, // allow "more" link when too many events
@@ -209,26 +267,23 @@
 
 });
 
+	//날짜 포맷
 	function dateFormat(date) {
         let month = date.getMonth() + 1;
         let day = date.getDate();
         let hour = date.getHours();
         let minute = date.getMinutes();
-        let second = date.getSeconds();
+        //let second = date.getSeconds();
 
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
         hour = hour >= 10 ? hour : '0' + hour;
         minute = minute >= 10 ? minute : '0' + minute;
-        second = second >= 10 ? second : '0' + second;
+        //second = second >= 10 ? second : '0' + second;
 
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
 }
       </script>
-            
-            
-            
-            
             <hr>
          	<!-- 방명록 -->
          	<div class="row">

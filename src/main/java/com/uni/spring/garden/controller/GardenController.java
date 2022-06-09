@@ -67,7 +67,12 @@ public class GardenController {
 		//방명록의 댓글 가져오기
 		//ArrayList<>
 		
+		//같은 메소드 사용위해 임의로 넣는 값
+		PageInfo pi = GardenPagination.getPageInfo(100, 1, 10, 10);
+		ArrayList<MyPlant> plant = gardenService.selectMyPlantList(hostUser, pi);
+		
 		model.addAttribute("board", list);
+		model.addAttribute("plant", plant);
 		
 		return "garden/gardenMain";
 	}
@@ -656,31 +661,6 @@ public class GardenController {
 	//=========================================================================================
 	//캘린더 관련
 	
-//	@ResponseBody
-//	@RequestMapping("selectGrowList.do")
-//	public JSONArray selectCalendar(String hostUser) {
-//        List<PlantGrow> listAll = gardenService.selectCalendar(hostUser);
-// 
-//        JSONObject jsonObj = new JSONObject();
-//        JSONArray jsonArr = new JSONArray();
-// 
-//        HashMap<String, Object> hash = new HashMap<>();
-// 
-//        for (int i = 0; i < listAll.size(); i++) {
-//            hash.put("title", listAll.get(i).getPlantName());
-//            hash.put("start", listAll.get(i).getEnrollDate());
-//            hash.put("end", listAll.get(i).getEnrollDate());
-// 
-//            jsonObj = new JSONObject(hash);
-//            jsonArr.put(jsonObj);
-//        }
-//        
-//        System.out.println("jsonObj 확인 : " + jsonObj);
-//        System.out.println("jsonArr 확인 : " + jsonArr);
-//        
-//        return jsonArr;
-//    }
-	
 	@ResponseBody
 	@RequestMapping(value = "selectCalendar.do", produces="application/json; charset=utf-8")
 	public List<PlantGrow> monthPlan(String hostUser) {
@@ -691,8 +671,43 @@ public class GardenController {
 		return list;
 	}
 
-
-
+	@RequestMapping("insertPlantGrow.do")
+	public String insertPlantGrow(PlantGrow plant) {
+		
+		System.out.println("plant확인" + plant);
+		
+		//PlantGrow(listNo=null, plantNo=2, userNo=1, plantName=null, nickname=null, 
+		//water=on, supplement=null, repotting=null, etc=, enrollDate=2022-06-09, status=null)
+		
+		if(plant.getWater() != null) {
+			plant.setWater("Y");
+		}else {
+			plant.setWater("N");
+		}
+		
+		if(plant.getSupplement() != null) {
+			plant.setSupplement("Y");
+		}else {
+			plant.setSupplement("N");
+		}
+		
+		if(plant.getRepotting() != null) {
+			plant.setRepotting("Y");
+		}else {
+			plant.setRepotting("N");
+		}
+		
+		if(plant.getEtc().equals("")) {
+			plant.setEtc("비고사항이 없습니다.");
+		}
+		
+		System.out.println("plant확인" + plant);
+		
+		gardenService.insertPlantGrow(plant);
+		
+		return "redirect:gardenMain.do";
+	}
+	
 	
 	
 	

@@ -239,12 +239,14 @@
 		console.log(content.length);
 		console.log(boardNo);
 		
-		if(content == null || content.length < 0){
-			alert("내용을 입력해주세요.")
-		}else{
+		if(content){
 			console.log(content.length);
 			console.log(content);
 			location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
+			
+		}else{
+
+			alert("내용을 입력해주세요.")
 			
 		}
 	

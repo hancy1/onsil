@@ -133,24 +133,9 @@
 			error:function(){
 				console.log("plantInfo ajax 통신 실패")
 			}
-			
-			
-			
-		});
-		
-		
-		
-		
-		
-		
-		
-		
+		});	
 	}
- 
-	
-	    
-	
-	
+
 	</script>
 	
 	<!-- i태그 이미지 cdn -->
