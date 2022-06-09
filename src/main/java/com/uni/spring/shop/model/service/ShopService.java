@@ -53,6 +53,8 @@ public interface ShopService {
 
 	void updateOTableReviewOk(int orderNo);
 
+	ProOrder selectOrder(int orderNo);
+
 
 
 	

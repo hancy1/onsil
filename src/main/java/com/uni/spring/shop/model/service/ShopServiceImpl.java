@@ -249,6 +249,14 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ProOrder selectOrder(int orderNo) {
+		// TODO Auto-generated method stub
+		return shopDao.selectOrder(sqlSession,orderNo);
+	}
+
+
+
 
 
 

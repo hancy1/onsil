@@ -53,7 +53,7 @@ public class ProOrder {
 	private String address;//배송주소
 	private String addressDetail;//배송상세주소
 	private String orderStatus;//오더상태 디폴트 Y	
-	private Date orderDate;//등록날짜
+	private Date orderDate;//주문날짜
 	private String orderRInsert; //리뷰등록 여부 디폴트 N
 
 	private String proName; //제품명

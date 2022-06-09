@@ -132,6 +132,11 @@ public class ShopDao {
 		return sqlSession.update("shopMapper.updateOTableReviewOk",orderNo);
 	}
 
+	public ProOrder selectOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectOrder",orderNo);
+	}
+
 
 
 

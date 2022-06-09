@@ -20,9 +20,12 @@
 
 <style>
 	#myOrderList{
+	
 	text-align: left;
-	background-color: #E1F5C4;
-	width : 50%;	
+	background-color: #E9ECEF;
+	width : 50%;
+	
+	
 	}
 	
     #myOrderList>tbody>tr>#orderDetail:hover{
@@ -140,26 +143,28 @@
        </div>
         
     	<h4 id="contentT" >내 주문 내역</h4><br><br>
-            <table id="myOrderList" class="table table-hover" align="center"> 
+            <table id="myOrderList" align="center" class="table table-hover" > 
                 
                 <c:forEach items="${ list }" var="o">
-                <tbody>                	
+                <tbody>               	
+
 	                    <tr>
-	                   		<td>(주문 번호) ${ o.orderNo }</td>  
+	                   		<td colspan="4">${ o.proName }</td>	                   		
 	                    </tr>
-	                    <tr>
-	                   		<td>${ o.proName }</td>
+	                    
+	                    <tr>	                   		
+	                   		<td colspan="3">수량 : ${ o.amount }</td>
+	                   		<td>${ o.orderDate }</td> 
 	                    </tr>
+	                    
 	                    <tr>	                    
-	                    	<td id="orderDetail" >
-	                    	
-	                    	<button class="btn btn-outline-success btn-sm" onclick="detailOrder(${ o.orderNo });">주문상세보기>></button>
-	                    	
+	                    	<td colspan="4" id="orderDetail" >	                    	
+	                    	<button class="btn btn-outline-secondary btn-sm" onclick="detailOrder(${ o.orderNo });">주문상세보기>></button>	                    	
 	                    	</td>
 	                    </tr>
 	                      
 	                    <tr>
-	                    	<td>
+	                    	<td colspan="4">
 	                    	<c:choose>
 	                    	
 							<c:when test="${o.orderStatus eq 'C'}">
@@ -194,7 +199,7 @@
 	                    	</td>
 	                    </tr>   
 	                    <tr style="background:#fff;">
-	                    <td> </td> 
+	                    <td colspan="4"> </td> 
 	                    </tr>                 
                 </tbody>                
                 </c:forEach>
