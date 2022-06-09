@@ -539,4 +539,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</insert>
 	
+	<select id="selectPlantGrow" resultMap="PlantGrowResultSet">
+	
+		SELECT LIST_NO, PLANT_NO, PLANT_NAME, NICKNAME, WATER, SUPPLEMENT, REPOTTING, ETC, TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') ENROLL_DATE
+		FROM PLANT_GROW
+		WHERE LIST_NO = #{listNo}
+	
+	</select>
+	
+	<update id="updatePlantGrow">
+	
+		UPDATE PLANT_GROW
+		SET WATER = #{water}, SUPPLEMENT = #{supplement}, REPOTTING = #{repotting}, ETC = #{etc}, ENROLL_DATE = #{enrollDate}
+		WHERE LIST_NO = #{listNo}
+	
+	</update>
+	
 </mapper>

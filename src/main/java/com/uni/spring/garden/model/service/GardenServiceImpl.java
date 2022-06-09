@@ -375,6 +375,22 @@ public class GardenServiceImpl implements GardenService{
 		
 	}
 
+	@Override
+	public PlantGrow selectPlantGrow(String listNo) {
+		
+		return gardenDao.selectPlantGrow(listNo, sqlSession);
+	}
+
+	@Override
+	public void updatePlantGrow(PlantGrow plant) {
+		
+		int result =  gardenDao.updatePlantGrow(plant, sqlSession);
+		if(result < 0) {
+			throw new CommException("내 식물 관리내역 수정 실패");
+		}
+		
+	}
+
 	
 
 	

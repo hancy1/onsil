@@ -105,6 +105,10 @@ public interface GardenService {
 
 	void insertPlantGrow(PlantGrow plant);
 
+	PlantGrow selectPlantGrow(String listNo);
+
+	void updatePlantGrow(PlantGrow plant);
+
 
 	
 
