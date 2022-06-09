@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="bOriginName" column="B_ORIGIN_NAME"/>
          <result property="bChangeName" column="B_CHANGE_NAME"/>
          <result property="bStatus" column="B_STATUS"/>
+         <result property="userId" column="USER_ID"/>
+         <result property="bCategoryName" column="B_CATEGORY_NAME"/>
 	</resultMap>
 
 	<resultMap type="Reply" id="replyResultSet">
@@ -28,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
+	<!-- 게시글 카운트 -->
 	<select id="selectListCount" resultType="_int"><!-- 파라미터 없음. 숫자만 출력하기 때문에 int로 함 -->
 		SELECT COUNT(*)
 		FROM BOARD
@@ -64,9 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시글 작성 -->
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO BOARD
-        VALUES
-        (SEQ_B_NO.NEXTVAL, #{userNo}, #{bCategoryNo}, #{bTitle}, #{bContent}, SYSDATE, DEFAULT, #{bOriginName}, #{bChangeName}, 'Y')
+		INSERT INTO BOARD VALUES
+        (SEQ_B_NO.NEXTVAL, #{userNo}, #{BCategoryNo}, #{BTitle}, #{BContent}, SYSDATE, DEFAULT, #{BOriginName}, #{BChangeName}, DEFAULT)
 	</insert>
 		
 	<!-- 게시글 삭제 -->	

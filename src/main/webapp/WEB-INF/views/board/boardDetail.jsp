@@ -58,10 +58,10 @@
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
-                                <h4 class="post-title">[${ b.BCategoryNo }] ${ b.BTitle }</h4>
+                                <h4 class="post-title">[${ b.BCategoryName }] ${ b.BTitle }</h4>
                                 <div class="post-meta mb-30">
                                     <a><i class="fa fa-clock-o" aria-hidden="true"></i>${ b.BDate }</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${ b.userNo }</a>
+                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${ b.userId }</a>
                                 </div>
                                 <div class="post-thumbnail mb-30">
                                     <img src="img/bg-img/35.jpg" alt="">
@@ -80,15 +80,15 @@
                                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </div>
                             <!-- 수정, 삭제 버튼 -->
-                            <!-- <c:if test="${ loginUser.userId eq b.userNo }"> -->
+                            <c:if test="${ userNo == loginUser.userNo }">
                             <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <li><a href="#">수정하기</a></li><!-- 왜... -->
-                                <li><a href="#">삭제하기</a></li>
-                                <!-- <li><a onclick="bSubmit(1);">수정하기</a></li>
-                                <li><a onclick="bSubmit(2);">삭제하기</a></li> -->
+                                <!-- <li><a href="#">수정하기</a></li>왜...
+                                <li><a href="#">삭제하기</a></li> -->
+                                <li><a onclick="bSubmit(1);">수정하기</a></li>
+                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
                             </ol>
-                            <!-- <form id="postForm" action="" method="post">
-								<input type="hidden" name="bno" value="${ b.BNo }">
+                            <form id="postForm" action="" method="post">
+								<input type="hidden" name="bNo" value="${ b.BNo }">
 								<input type="hidden" name="fileName" value="${ b.BChangeName }"> 
 							</form>
                             <script>
@@ -103,7 +103,7 @@
 									postForm.submit();
 								}
 							</script>
-                            </c:if> -->
+                            </c:if>
                         </div>
 
                         <!-- 댓글 -->
@@ -138,7 +138,7 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                	<h5 href="#"><i class="fa fa-user" aria-hidden="true"></i> ${ loginUser.userId }</h5>
+                                                	<h5 href="rinsertBoard.do"><i class="fa fa-user" aria-hidden="true"></i> ${ loginUser.userId }</h5>
                                                 </div>
                                             </div>
                                             <div class="col-12">

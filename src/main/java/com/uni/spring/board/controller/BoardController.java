@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +33,7 @@ public class BoardController {
 	public BoardService boardService;
 	
 	// 게시판 목록
-	@RequestMapping("boardList.do")
+	@GetMapping("boardList.do")
 	public String selectList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 		// @RequestParam(value="currentPage") int currentPage --> 값이 넘어오지 않아서(값을 주입할 수 없기 때문에) 에러
 	    // @RequestParam(value="currentPage", required = false) int currentPage
@@ -77,7 +78,7 @@ public class BoardController {
 	
 	// 게시글 작성하기
 	@RequestMapping("insertBoard.do")
-	public String insertBoard(Board b, HttpServletRequest request, @RequestParam(name="uploadFile", required = false) MultipartFile file) {
+	public String insertBoard(@RequestParam(name="uploadFile", required = false) MultipartFile file, Board b, HttpServletRequest request) {
 		
 	   System.out.println(b);
 	   System.out.println(file.getOriginalFilename());		//안넘어오네...?

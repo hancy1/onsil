@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
 <!DOCTYPE html>
 <html>
@@ -20,14 +19,6 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	
-	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 
@@ -75,33 +66,34 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="title" placeholder="제목">
+                                                    <input type="text" class="form-control" name="bTitle" placeholder="제목을 입력해주세요.">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="writer" value="사용자 아이디 : ${ loginUser.userId }" name="boardWriter" readonly>
+                                                    <input type="hidden" class="form-control" value="${ loginUser.userNo }" name="userNo" readonly>
                                                 </div>
                                             </div>
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <select name="category" class="form-control" id="category">
+                                                    <select name="bCategoryNo" class="form-control">
                                                     	<option value="">카테고리 선택</option>
-                                                    	<option value="info">정보</option>
-                                                    	<option value="photo">사진</option>
-                                                    	<option value="review">후기</option>
-                                                    	<option value="ect">기타</option>
+                                                    	<option value="1">사진</option>
+                                                    	<option value="2">정보</option>
+                                                    	<option value="3">후기</option>
+                                                    	<!-- <option value="4">기타</option> -->
                                                     </select>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-12 col-md-6">
+                                            <br>
+                                            <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control" id="upfile" name="uploadFile">
+                                                    <input type="file" class="form-control" id="upfile" name="uploadFile" required>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control summernote" required name="boardContent" id="content" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
+                                                    <textarea class="form-control" required name="bContent" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -118,14 +110,6 @@
         </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
-    
-    <script>
-      $('.summernote').summernote({
-        placeholder: '내용을 작성해주세요',
-        tabsize: 2,
-        height: 100
-      });
-    </script>
     
     <jsp:include page="../common/footer.jsp" />
     
