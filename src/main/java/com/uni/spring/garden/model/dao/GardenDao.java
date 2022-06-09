@@ -274,6 +274,16 @@ public class GardenDao {
 		return sqlSession.insert("gardenMapper.insertPlantGrow", plant);
 	}
 
+	public PlantGrow selectPlantGrow(String listNo, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.selectPlantGrow", listNo);
+	}
+
+	public int updatePlantGrow(PlantGrow plant, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("gardenMapper.updatePlantGrow", plant);
+	}
+
 	
 		
 		

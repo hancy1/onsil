@@ -81,10 +81,10 @@
 				<c:if test="${loginUser.userId eq hostUser}">
 				<hr>
 				<div id="insert">
-				<form id="enrollForm" method="post" action="insertPlantGrow.do" enctype="multipart/form-data">
+				<form id="enrollForm" method="post" action="insertPlantGrow.do">
                 <table align="center">                    
                     <tr>
-                    	<td>
+                    	<td colspan="2">
                     		<select id="info" onchange="selectInfo();" name="plantNo">
                     		<option value="">식물을 선택하세요</option>
                     		<c:forEach items="${plant}" var="plant">

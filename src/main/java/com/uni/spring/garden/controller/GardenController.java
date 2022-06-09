@@ -12,8 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.uni.spring.common.exception.CommException;
@@ -625,6 +624,9 @@ public class GardenController {
 	public String updateMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
 								MyPlant plant, HttpServletRequest request, Model model) {
 		
+		System.out.println(plant);
+		System.out.println(file.getOriginalFilename());
+		
 		String orgChangeName = plant.getServerName();
 		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
 				
@@ -656,6 +658,44 @@ public class GardenController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("updatePlantGrowForm.do")
+	public String selectPlantGrow(String listNo, Model model){
+		
+		PlantGrow plant = gardenService.selectPlantGrow(listNo);	
+		
+		model.addAttribute("plant", plant);
+		
+		return "garden/plantGrowUpdateForm";
+		
+	}
+	
+	@RequestMapping("updatePlantGrow.do")
+	public String updatePlantGrow(PlantGrow plant, Model model) {
+		
+		if(plant.getWater() != null) {
+			plant.setWater("Y");
+		}else {
+			plant.setWater("N");
+		}
+		
+		if(plant.getSupplement() != null) {
+			plant.setSupplement("Y");
+		}else {
+			plant.setSupplement("N");
+		}
+		
+		if(plant.getRepotting() != null) {
+			plant.setRepotting("Y");
+		}else {
+			plant.setRepotting("N");
+		}
+
+		gardenService.updatePlantGrow(plant);
+		model.addAttribute("plantNo", plant.getPlantNo());
+
+		return "redirect:myPlantDetail.do";
 	}
 	
 	//=========================================================================================

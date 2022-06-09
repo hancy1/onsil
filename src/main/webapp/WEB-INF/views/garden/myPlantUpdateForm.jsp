@@ -73,6 +73,8 @@
                     	<th><label for="enrollDate">등록일</label></th>
                     	<td><input type="date" name="enrollDate" id="enrollDate" value="${plant.enrollDate}"></td>
                     	<input type="hidden" name="plantNo" value="${plant.plantNo}">
+                    	<input type="hidden" name="fileName" value="${plant.fileName}">
+                    	<input type="hidden" name="serverName" value="${plant.serverName}">
                     </tr>
                     <tr>
                     	<td colspan="2"><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile">

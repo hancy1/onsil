@@ -137,7 +137,7 @@
 					
 					if(growList.length != 0){
 						
-						value += "<tr><th>" + grow.enrollDate + "</th><th>"; 
+						value += "<tr><th class='def" + grow.listNo + "'>" + (grow.enrollDate).substr(0,16) + "</th><th class='def" + grow.listNo + "'>"; 
 							 if(grow.water == 'Y'){
 								 value += "<i class='fa-solid fa-droplet'></i>&nbsp;&nbsp;";
 							 }
@@ -147,7 +147,7 @@
 							 if(grow.repotting == 'Y'){
 								 value += "<i class='fa-solid fa-seedling'></i>";
 							 }
-						value += "</th><th>" + grow.etc + "</th><th>" +
+						value += "</th><th class='def" + grow.listNo + "'>" + grow.etc + "</th><th>" +
 								 "<button class='btn' type='button' onclick='updateGrowList(" + grow.listNo + ");'>" + 
 								 "<i class='fa-solid fa-eraser'></i></button> " + 
 								 "<button class='btn' type='button' onclick='deleteGrowList(" + grow.listNo + ");'>" + 
@@ -198,6 +198,9 @@
 	
 	function updateGrowList(listNo){
 		
+		console.log(listNo);
+
+		location.href = "updatePlantGrowForm.do?listNo=" + listNo;
 	}
 </script>	
 	
