@@ -2,6 +2,7 @@ package com.uni.spring.garden.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -261,8 +262,11 @@ public class GardenDao {
 		sqlSession.update("gardenMapper.deleteMyPlantGrow", plantNo);
 		
 		return sqlSession.update("gardenMapper.deleteMyPlant", plantNo);
+	}
+
+	public List<PlantGrow> selectCalendar(String hostUser, SqlSessionTemplate sqlSession) {
 		
-		
+		return sqlSession.selectList("gardenMapper.selectCalendar", hostUser);
 	}
 
 }

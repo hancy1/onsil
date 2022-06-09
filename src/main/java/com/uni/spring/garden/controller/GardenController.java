@@ -6,11 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -649,6 +652,31 @@ public class GardenController {
 		
 		return result;
 	}
+	
+	//=========================================================================================
+	//캘린더 관련
+	
+	@ResponseBody
+	@RequestMapping("selectGrowList.do")
+	public JSONArray selectCalendar(String hostUser) {
+        List<PlantGrow> listAll = gardenService.selectCalendar(hostUser);
+ 
+        JSONObject jsonObj = new JSONObject();
+        JSONArray jsonArr = new JSONArray();
+ 
+        HashMap<String, Object> hash = new HashMap<>();
+ 
+        for (int i = 0; i < listAll.size(); i++) {
+            hash.put("title", listAll.get(i).getPlantName());
+            hash.put("start", listAll.get(i).getEnrollDate());
+            hash.put("end", listAll.get(i).getEnrollDate());
+ 
+            jsonObj = new JSONObject(hash);
+            jsonArr.put(jsonObj);
+        }
+        
+        return jsonArr;
+    }
 	//=========================================================================================
 	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능

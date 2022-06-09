@@ -2,6 +2,7 @@ package com.uni.spring.garden.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.uni.spring.garden.model.dto.DailyLog;
@@ -99,6 +100,8 @@ public interface GardenService {
 	void updateMyPlant(MyPlant plant);
 
 	int deleteMyPlant(String plantNo);
+
+	List<PlantGrow> selectCalendar(String hostUser);
 
 
 	

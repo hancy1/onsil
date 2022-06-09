@@ -519,4 +519,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
+	<select id="selectCalendar" resultMap="PlantGrowResultSet">
+	
+		SELECT *
+		FROM PLANT_GROW
+		WHERE USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+	
+	</select>
+	
 </mapper>
