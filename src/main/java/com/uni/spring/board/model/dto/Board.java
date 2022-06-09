@@ -9,16 +9,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data // 게터,세터 생성자
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data // 롬복
 public class Board {
 
 	private int bNo;
-	private String userNo;	
+	private String userNo;
 	private String bCategoryNo;
 	private String bTitle;
 	private String bContent;
@@ -27,4 +22,6 @@ public class Board {
 	private String bOriginName;
 	private String bChangeName;
 	private String bStatus;
+	private String userId;	// 작성자 아이디 출력용
+	private String bCategoryName; // 카테고리명 출력용
 }

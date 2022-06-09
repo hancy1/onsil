@@ -18,7 +18,7 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/style.css">
     
     <!-- jQuery library 제이쿼리 라이브러리 추가 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -74,9 +74,9 @@
 		                	<c:forEach items="${ list }" var="b">
 			                    <tr>
 			                        <td>${ b.BNo }</td>
-			                        <td>${ b.BCategoryNo }</td>
+			                        <td>${ b.BCategoryName }</td>
 			                        <td>${ b.BTitle }</td>
-			                        <td>${ b.userNo }</td>
+			                        <td>${ b.userId }</td>
 			                        <td>${ b.BDate }</td>	<!-- <fmt:formatDate pattern="yy-MM-dd" value=""/> -->
 			                        <td>${ b.BCount }</td>
 			                        <td></td>
