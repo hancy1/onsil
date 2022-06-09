@@ -16,6 +16,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
+	<!-- 포인트 사용,적립 하는 쿼리 -->
+	
+	<insert id="insertPoint">
+	
+		INSERT INTO POINT VALUES
+		(SEQ_POINT_NUM.NEXTVAL, #{userNo},#{pointVal},DEFAULT,#{pointType})
+		
+	</insert>
+		
+	
+	
 	<!-- My Point List : 내 포인트 내역 조회해오기 -->
 	<select id="selectMyPoint" parameterType="Point" resultMap="PointResultSet">	
 		 
@@ -321,7 +332,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	</update>
   	
   	
- 
+   	<!--오더테이블에 리뷰작성여부 Y로 업데이트하기 -->	
+  	<update id="updateOTableReviewOk">
+  
+  		UPDATE PRO_ORDER
+  		SET ORDER_R_INSERT='Y'
+  		WHERE ORDER_NO=#{orderNo}
+    
+  	</update>
   	
 
 </mapper>

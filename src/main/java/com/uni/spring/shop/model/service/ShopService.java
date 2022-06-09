@@ -49,6 +49,10 @@ public interface ShopService {
 
 	void insertReview(ProReview r);
 
+	void insertPoint(Point p);
+
+	void updateOTableReviewOk(int orderNo);
+
 
 
 	

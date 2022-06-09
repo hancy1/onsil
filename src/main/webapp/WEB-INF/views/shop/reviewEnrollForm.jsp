@@ -166,7 +166,7 @@
 		                        <th><label for="upfile">리뷰이미지</label></th>
 		                        
 		                        <td colspan="3">
-		                        	<input type="file" id="upfile" class="form-control-file border" name="uploadFile" required>		                          
+		                        	<input type="file" id="upfile" class="form-control-file border" name="uploadFile">		                          
 		                        </td>
 		                    </tr>
 		 
@@ -177,7 +177,7 @@
 		                <br>
 		
 		                <div align="center">
-		                    <button type="submit" class="btn btn-outline-success">작성하기</button>
+		                    <button onclick="insertSubmit();" class="btn btn-outline-success">작성하기</button>
 		                    <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 		                </div>
 		            </form>
@@ -188,7 +188,15 @@
 			</div>
 		</div>
 		
+		<script>
+			function insertSubmit(){
+				
+				var enrollForm = $("#enrollForm");				
+				enrollForm.submit();
 
+				alert("100point 적립 완료!💐");
+			}
+		</script>
 
     
     

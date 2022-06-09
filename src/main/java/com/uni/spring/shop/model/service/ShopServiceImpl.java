@@ -224,6 +224,31 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public void insertPoint(Point p) {
+		// TODO Auto-generated method stub
+		int result = shopDao.insertPoint(sqlSession, p);
+		
+		if(result <0) {
+			throw new CommException("포인트자동 추가 실패");
+		}	
+	}
+
+
+	
+	//리뷰작성여부를 Y로 업데이트 
+	@Override
+	public void updateOTableReviewOk(int orderNo) {
+		// TODO Auto-generated method stub
+		int result = shopDao.updateOTableReviewOk(sqlSession, orderNo);
+		
+		if(result <0) {
+			throw new CommException("리뷰작성여부 업데이트 실패");
+		}
+	}
+
+
+
 
 
 
