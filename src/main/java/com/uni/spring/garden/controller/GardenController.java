@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.GsonBuilder;
-import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.garden.GardenPagination;
 import com.uni.spring.garden.model.dto.DailyLog;
@@ -32,6 +31,7 @@ import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
+import com.uni.spring.garden.model.dto.VisitorComment;
 import com.uni.spring.garden.model.service.GardenService;
 import com.uni.spring.member.model.dto.Member;
 
@@ -60,6 +60,9 @@ public class GardenController {
 		
 		//방문한 페이지의 방명록 3개 가져오기
 		ArrayList<VisitorBoard> list = gardenService.getBoardList(hostUser);
+		
+		//방명록의 댓글 가져오기
+		//ArrayList<>
 		
 		model.addAttribute("board", list);
 		
@@ -96,7 +99,7 @@ public class GardenController {
 			PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
 			
 			//hostUser의 게시물 가져오기
-			ArrayList<Board> list = gardenService.selectList(pi, hostUser);
+			ArrayList<VisitorBoard> list = gardenService.selectList(pi, hostUser);
 			
 			//hostUser 게시물에 달린 댓글 가져오기
 			int commentCount = gardenService.selectCommentCount(hostUser);
@@ -105,7 +108,7 @@ public class GardenController {
 			
 			PageInfo cPi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 5);
 			
-			ArrayList<Board> comment = gardenService.selectCommentList(cPi, hostUser);
+			ArrayList<VisitorComment> comment = gardenService.selectCommentList(cPi, hostUser);
 			
 			System.out.println("comment리스트 확인 " + comment);
 			 

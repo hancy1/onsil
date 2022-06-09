@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.uni.spring.board.model.dto.Board;
 import com.uni.spring.garden.model.dto.DailyLog;
 import com.uni.spring.garden.model.dto.DailyLogComment;
 import com.uni.spring.garden.model.dto.MyPlant;
@@ -13,6 +12,7 @@ import com.uni.spring.garden.model.dto.PageInfo;
 import com.uni.spring.garden.model.dto.PlantGrow;
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.garden.model.dto.VisitorBoard;
+import com.uni.spring.garden.model.dto.VisitorComment;
 
 public interface GardenService {
 
@@ -20,7 +20,7 @@ public interface GardenService {
 
 	int selectListCount(String hostUser);
 
-	ArrayList<Board> selectList(PageInfo pi, String hostUser);
+	ArrayList<VisitorBoard> selectList(PageInfo pi, String hostUser);
 
 	void insertBoard(Map map);
 
@@ -36,7 +36,7 @@ public interface GardenService {
 
 	int selectCommentCount(String hostUser);
 
-	ArrayList<Board> selectCommentList(PageInfo cPi, String hostUser);
+	ArrayList<VisitorComment> selectCommentList(PageInfo cPi, String hostUser);
 
 	void updateComment(HashMap<String, String> map);
 
