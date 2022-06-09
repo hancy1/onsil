@@ -14,6 +14,10 @@
 <!-- 부트스트랩아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/favicon.ico">  
+
+
 <style>
 	#myOrderList{
 	text-align: left;
@@ -159,8 +163,12 @@
 	                    	<c:choose>
 	                    	
 							<c:when test="${o.orderStatus eq 'C'}">
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(4);">리뷰작성</button>
-								<button class="btn btn btn-warning btn-sm" onclick="postFormSubmit(2);" disabled>확정완료</button>																
+							
+								<c:if test="${o.orderRInsert eq 'N'}" >
+								<button class="btn btn btn-warning btn-sm" onclick="reviewForm(${ o.orderNo });">리뷰작성</button>
+								</c:if>
+								
+								<button class="btn btn btn-warning btn-sm"  disabled>확정완료</button>																
 							</c:when>
 							
 								
@@ -170,7 +178,7 @@
 							</c:when>
 							
 							<c:otherwise>								
-								<button class="btn btn-danger btn-sm" onclick="postFormSubmit(3);" disabled>취소요청중...</button>									
+								<button class="btn btn-danger btn-sm" disabled>취소요청중...</button>									
 						    </c:otherwise>
 									
 							</c:choose>
@@ -195,7 +203,7 @@
 	            };
 	            
 	            function confirmationSubmit(orderNo){
-	            	alert("감사합니다. 주문이 확정되었습니다. \n리뷰를 작성하시면 100point적립 🎁");
+	            	alert("감사합니다. 주문이 확정되었습니다. \n리뷰를 작성하시면 100point적립! 🎁");
 	            	location.href="OrderOk.do?orderNo=" + orderNo;
 	            };
 	            
@@ -203,6 +211,10 @@
 	            	alert("판매자에게 주문 취소를 요청하였습니다. 1~2일 소요됩니다. ");
 	            	location.href="OrderCancelRequest.do?orderNo=" + orderNo;
 	            };
+	            
+	            function reviewForm(orderNo){
+	            	location.href="reviewEnrollForm.do?orderNo=" + orderNo;
+	            }
 	            
 		    </script>
 

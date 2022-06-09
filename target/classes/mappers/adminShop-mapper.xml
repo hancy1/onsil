@@ -143,7 +143,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  WHERE FREE_NO=#{freeNo}	  
 	  
 	</update>
-	<!-- 사은품 리절트맵 -->
+	
+	<!-- 리뷰 리절트맵 -->
 	
 	<resultMap type="ProReview" id="ProReviewResultSet"> 
 		<id property="reviewNo" column="REVIEW_NO"/>		
@@ -157,6 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reviewDate" column="REVIEW_DATE" />
 		<result property="reviewCount" column="REVIEW_COUNT" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />		
+		<result property="refOderNo" column="REF_ONO" />
 		
 	</resultMap>
 	
@@ -259,10 +261,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="addressDetail" column="ADDRESS_DETAIL" />
 		<result property="orderStatus" column="ORDER_STATUS" />
 		<result property="orderDate" column="ORDER_DATE" />
+		<result property="orderDate" column="ORDER_DATE" />
 		
 		<result property="proName" column="PRO_NAME" />
 		<result property="freeName" column="FREE_NAME" />
-		<result property="userId" column="USER_ID" />
+		<result property="orderRInsert" column="ORDER_R_INSERT" />
 		
 		
 	</resultMap>

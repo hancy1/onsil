@@ -28,7 +28,7 @@ public class ProReview {
 	REVIEW_DATE
 	REVIEW_COUNT
 	REVIEW_STATUS
-	
+	REF_ONO
 	
 	USER_ID
 	PRO_NAME
@@ -46,6 +46,8 @@ public class ProReview {
 	private Date reviewDate;		//등록날짜
 	private int reviewCount; 		//조회수
 	private String reviewStatus; 	//리뷰상태
+	private int refOderNo; 			//참조 오더 번호
+	
 	
 	
 	private String userId; 			//유저아이디

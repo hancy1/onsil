@@ -11,11 +11,10 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/favicon.ico">  
 
-<title>온실 - My Review 수정</title>
+<title>온실 - Review 작성</title>
 
 
 <style>
@@ -38,6 +37,7 @@
 	  padding:0 .2em;
 	  text-align:center;
 	  width:5em;
+	 
 	}
 	
 	.star-rating input {
@@ -71,8 +71,7 @@
 	  padding:2em;
 	}
      
-     
-     
+
      
 </style>
 
@@ -84,7 +83,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>Review 수정</h2>
+			<h2>Review 작성</h2>
 		</div>
 
 		<div class="container">
@@ -95,7 +94,7 @@
 							<li class="breadcrumb-item"><a href="index.jsp"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="myReviewList.do">내가 쓴 리뷰</a></li>
-							<li class="breadcrumb-item active" aria-current="page">리뷰 수정</li>
+							<li class="breadcrumb-item active" aria-current="page">리뷰 작성</li>
 						</ol>
 					</nav>
 				</div>
@@ -110,41 +109,27 @@
 			    <div class="content">
 		        <br><br>
 		       		           
-		            <form id="updateForm" method="post" action="updateReview.do" enctype="multipart/form-data">
+		            <form id="enrollForm" method="post" action="insertReview.do" enctype="multipart/form-data">
 		            	
+		            	<input type="hidden" name="orderNo" value="${ orderNo }">
+					    <input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+					    
 		                <table align="center">
-		                    <tr>
-		                        <th><label for="reviewNo">No</label></th>		                             
-		                       	<td colspan="3" width="1000"><input type="text" id="reviewNo" class="form-control" name="reviewNo" value="${ r.reviewNo }" readonly></td>
-		                    	
-		                    </tr>
 
-							<tr>	
-								<th width="100">작성자</th>
-								<td colspan="3"><input type="text" id="userId" class="form-control" name="userId" value="${ r.userId }" readonly></td>
-								
-							</tr>
-							
-							<tr>							
-								<th>제품명</th>
-								<td colspan="3"><input type="text" id="proName" class="form-control" name="proName" value="${ r.proName }" readonly></td>	
-							</tr>						
-							
-							<tr>
-		                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-		                       	<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		                    </tr>
+
+							<!-- 오더NO, 유저NO.. 히든으로 보내기 -->
 							
 							
-		                    <tr>
+		                    <tr>		                    
 		                        <th><label for="reviewTitle">제목</label></th>
-		                       	<td colspan="3"><input type="text" id="reviewTitle" class="form-control" name="reviewTitle" value="${ r.reviewTitle }" required></td>
+		                       	<td colspan="3"><input type="text" id="reviewTitle" class="form-control" name="reviewTitle" required></td>
 		                    </tr>
 		                    
 		                    
 		                    <tr>
-		                        <th><label for="reviewStar">별점</label></th>		                             
-		                       	<td colspan="3" id="radiotest">
+		                        <th><label for="reviewStar">별점</label></th>	
+		                        <td> &nbsp;&nbsp; &nbsp;&nbsp;</td>	                             
+		                       	<td colspan="2" id="radiotest">
 		                       	
 		                       	<div class="star-rating">
 								  <input type="radio" id="1-stars" name="reviewStar" value="5"/>
@@ -166,7 +151,7 @@
 		                    
 		                    <tr>
 		                        <th><label for="reviewContent">내용</label></th>		                              
-		                       	<td colspan="3" ><textarea  rows="10" id="reviewContent" class="form-control" name="reviewContent" required>${ r.reviewContent }</textarea></td>
+		                       	<td colspan="3" ><textarea  rows="10" id="reviewContent" class="form-control" name="reviewContent" required></textarea></td>
 		                    </tr>
 		                    
 		                    
@@ -181,13 +166,10 @@
 		                        <th><label for="upfile">리뷰이미지</label></th>
 		                        
 		                        <td colspan="3">
-		                            <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
-		                            <c:if test="${ !empty r.originName }"> 현재 업로드된 파일 : ${ r.originName } <br>
-			                            <input type="hidden" name="changeName" value="${ r.changeName }">
-			                            <input type="hidden" name="originName" value="${ r.originName }">
-		                            </c:if>
+		                        	<input type="file" id="upfile" class="form-control-file border" name="uploadFile" required>		                          
 		                        </td>
 		                    </tr>
+		 
 		                </table>
 
 		                
@@ -195,7 +177,7 @@
 		                <br>
 		
 		                <div align="center">
-		                    <button type="submit" class="btn btn-outline-success">수정하기</button>
+		                    <button type="submit" class="btn btn-outline-success">작성하기</button>
 		                    <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 		                </div>
 		            </form>
@@ -208,30 +190,6 @@
 		
 
 
-
-       <!-- 별점 value불러오기 -->
-       <script>
-			
-			$(function() {
-				
-				var reviewStar = ${r.reviewStar}
-				
-				
-				if(reviewStar === 1){
-					$("#5-stars").attr("checked",true);
-				}else if(reviewStar ===2){
-					$("#4-stars").attr("checked",true);
-				}else if(reviewStar ===3){
-					$("#3-stars").attr("checked",true);
-				}else if(reviewStar ===4){
-					$("#2-stars").attr("checked",true);
-				}else if(reviewStar ===5){
-					$("#1-stars").attr("checked",true);
-				}				
-				
-			});
-
- 		 </script>
     
     
     <jsp:include page="../common/footer.jsp"/>

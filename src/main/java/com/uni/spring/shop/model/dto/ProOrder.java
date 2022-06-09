@@ -33,6 +33,7 @@ public class ProOrder {
 	ADDRESS_DETAIL
 	ORDER_STATUS
 	ORDER_DATE
+	ORDER_R_INSERT
 	
 	PRO_NAME
 	FREE_NAME
@@ -53,6 +54,7 @@ public class ProOrder {
 	private String addressDetail;//배송상세주소
 	private String orderStatus;//오더상태 디폴트 Y	
 	private Date orderDate;//등록날짜
+	private String orderRInsert; //리뷰등록 여부 디폴트 N
 
 	private String proName; //제품명
 	private String freeName; //사은품이름//사은품명

@@ -112,6 +112,16 @@ public class ShopDao {
 		return sqlSession.update("shopMapper.OkOrder",orderNo);
 	}
 
+	public String selectProductCode(SqlSessionTemplate sqlSession, int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectProductCode",orderNo);
+	}
+
+	public int insertReview(SqlSessionTemplate sqlSession, ProReview r) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shopMapper.insertReview", r);
+	}
+
 
 
 
