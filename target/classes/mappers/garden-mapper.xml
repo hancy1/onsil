@@ -521,9 +521,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectCalendar" resultMap="PlantGrowResultSet">
 	
-		SELECT *
+		SELECT LIST_NO, PLANT_NO, USER_NO, PLANT_NAME, NICKNAME, WATER, SUPPLEMENT, REPOTTING, 
+			   ETC, TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD"T"HH24:MI:SS') ENROLL_DATE, STATUS
 		FROM PLANT_GROW
 		WHERE USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{hostUser})
+		AND STATUS = 'Y'
 	
 	</select>
 	

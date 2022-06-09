@@ -501,7 +501,7 @@ public class GardenController {
 	}
 	
 	//=========================================================================================
-	//식물관리 캘린더 기능
+	//식물관리 기능
 	@RequestMapping("myPlant.do")
 	public String myPlantMain(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
 								HttpSession session, Model model) {
@@ -656,27 +656,46 @@ public class GardenController {
 	//=========================================================================================
 	//캘린더 관련
 	
+//	@ResponseBody
+//	@RequestMapping("selectGrowList.do")
+//	public JSONArray selectCalendar(String hostUser) {
+//        List<PlantGrow> listAll = gardenService.selectCalendar(hostUser);
+// 
+//        JSONObject jsonObj = new JSONObject();
+//        JSONArray jsonArr = new JSONArray();
+// 
+//        HashMap<String, Object> hash = new HashMap<>();
+// 
+//        for (int i = 0; i < listAll.size(); i++) {
+//            hash.put("title", listAll.get(i).getPlantName());
+//            hash.put("start", listAll.get(i).getEnrollDate());
+//            hash.put("end", listAll.get(i).getEnrollDate());
+// 
+//            jsonObj = new JSONObject(hash);
+//            jsonArr.put(jsonObj);
+//        }
+//        
+//        System.out.println("jsonObj 확인 : " + jsonObj);
+//        System.out.println("jsonArr 확인 : " + jsonArr);
+//        
+//        return jsonArr;
+//    }
+	
 	@ResponseBody
-	@RequestMapping("selectGrowList.do")
-	public JSONArray selectCalendar(String hostUser) {
-        List<PlantGrow> listAll = gardenService.selectCalendar(hostUser);
- 
-        JSONObject jsonObj = new JSONObject();
-        JSONArray jsonArr = new JSONArray();
- 
-        HashMap<String, Object> hash = new HashMap<>();
- 
-        for (int i = 0; i < listAll.size(); i++) {
-            hash.put("title", listAll.get(i).getPlantName());
-            hash.put("start", listAll.get(i).getEnrollDate());
-            hash.put("end", listAll.get(i).getEnrollDate());
- 
-            jsonObj = new JSONObject(hash);
-            jsonArr.put(jsonObj);
-        }
-        
-        return jsonArr;
-    }
+	@RequestMapping(value = "selectCalendar.do", produces="application/json; charset=utf-8")
+	public List<PlantGrow> monthPlan(String hostUser) {
+		List<PlantGrow> list = gardenService.selectCalendar(hostUser);
+		
+		System.out.println(list);
+		
+		return list;
+	}
+
+
+
+	
+	
+	
 	//=========================================================================================
 	//파일관련
 	//전달받은 파일을 업로드시키고 수정된 파일명을 리턴하는 기능

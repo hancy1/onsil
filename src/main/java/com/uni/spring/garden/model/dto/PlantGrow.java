@@ -23,6 +23,6 @@ public class PlantGrow {
 	private String supplement;
 	private String repotting;
 	private String etc;
-	private Timestamp enrollDate;
+	private String enrollDate;
 	private String status;
 }

@@ -71,64 +71,159 @@
             </div>
             
 		<div class="row">
-			<div class="col-9 my-3">
+			<div class="col-10 my-3">
 				<div id="calendar">
 				</div>
 			</div>
-			<div class="col-3 my-3">
+			<div class="col-2 my-3">
 			
-			
+				<br>
+				<h6 align="center">관리내역</h6>
+				<hr>
+				<div id="plant">
+				</div>
 			</div>
 		</div>
-
+<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 	<script>
-      
-      document.addEventListener('DOMContentLoaded', function () {
-          $(function () {
-              var request = $.ajax({
-            	  url : "selectGrowList.do",
-    			  method: "GET",
-    			  data : {hostUser:"${hostUser}"}
-              });
+	
+	
+	
+	
+	
+	$(function(){
+		
+		var today = new Date();
+		
+		var calendarEl = document.getElementById('calendar');
+		// new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..})
+		
+	    var calendar = new FullCalendar.Calendar(calendarEl, {
+	      headerToolbar: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+	      },
+	      initialDate: today, // 초기 로딩 날짜.
+	      navLinks: true, // can click day/week names to navigate views
+	      selectable: true,
+	      selectMirror: true,
+	      // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
+	      select: function(arg) {
+	    	  console.log(arg);
 
-              request.done(function (data) {
-                  console.log(data); // log 로 데이터 찍어주기.
+	        var title = prompt('입력할 일정:');
+	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+	        if (title) {
+	          calendar.addEvent({
+	            title: title,
+	            start: arg.start,
+	            end: arg.end,
+	            allDay: arg.allDay,
+	            backgroundColor:"yellow",
+	            textColor:"blue"
+	          })
+	        }
+	        calendar.unselect()
+	      },
+	      eventMouseEnter: function(arg) {
+	    	  // 있는 일정 클릭시,
+	    	  /*console.log("#등록된 일정 클릭#");
+	    	  console.log(arg.event);
+	    	  console.log(arg.event.extendedProps.sourceId);*/
+	    	  
+	    	  var plantName = arg.event.title;
+	    	  var date = dateFormat(arg.event.start);
+	    	  var list = arg.event.extendedProps.sourceId;
+	    	  var div = document.getElementById('plant');
+	    	  var plantNo = list[4];
+	    	  
+	    	  var value = "";
+	    	 
+	    	  value += "<h6>" + plantName + "</h6>" + 
+	    	  		   "<h6>" + date + "</h6><br><h6>"  
+   	  		   if(list[0] == 'Y'){
+   	  			   value += "물주기 <i class='fa-solid fa-droplet'></i>";
+   	  		   }else{
+   	  			   value += "<br>";
+   	  		   }
+	    	   if(list[1] == 'Y'){
+  	  			   value += "<br>영양제 <i class='fa-solid fa-prescription-bottle-medical'></i><br>";
+  	  		   }else{
+  	  			   value += "<br>";
+  	  		   }
+	    	   if(list[2] == 'Y'){
+  	  			   value += "분갈이 <i class='fa-solid fa-seedling'></i><br>";
+  	  		   }else{
+  	  			   value += "";
+  	  		   }
 
-                  var calendarEl = document.getElementById('calendar');
+	    	   value += "</h6><br><h6>비고 : " ;
+	    	   
+	    	   if(list[3] != null){
+	    		   value += list[3];
+	    	   }else{
+	    		   value += "없음";
+	    	   }
+	    	   value += "</h6><br><a type='button' href='myPlantDetail.do?plantNo=" + plantNo +"'>자세히보기</a>";
+	    	  		   
+	    	  
+	    	  div.innerHTML = value;
+	    	  
+	    	  
+	    	  
+	    	  
+	    	  
+	    	  
+	        /*if (confirm('Are you sure you want to delete this event?')) {
+	          arg.event.remove()
+	        }*/
+	      },
+	      editable: true,
+	      dayMaxEvents: true, // allow "more" link when too many events
+	      events: 
+	    	  $.ajax({
+				  url: "selectCalendar.do",
+				  method: "GET",
+				  dataType: "json",
+				  data : {hostUser:"${hostUser}"},
+				  success : function(response){
+					  console.log(response);
+					  
+					console.log(response[0]['enrollDate'])
+					  for(i = 0; i < response.length; i++){
+						  calendar.addEvent({
+							  title: response[i]['nickname'],
+							  sourceId: [response[i]['water'], response[i]['supplement'], response[i]['repotting'], response[i]['etc'], response[i]['plantNo']],
+							  start: response[i]['enrollDate']
+						  })
+					  }
+				  }
+				})
+	      
+	      
+	  });
 
-                  var calendar = new FullCalendar.Calendar(calendarEl, {
-                      initialDate: '2022-06-09',
-                      initialView: 'timeGridWeek',
-                      headerToolbar: {
-                          left: 'prev,next today',
-                          center: 'title',
-                          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                      },
-                      editable: true,
-                      droppable: true, // this allows things to be dropped onto the calendar
-                      drop: function (arg) {
-                          // is the "remove after drop" checkbox checked?
-                          if (document.getElementById('drop-remove').checked) {
-                              // if so, remove the element from the "Draggable Events" list
-                              arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                          }
-                      },
-                      /**
-                       * data 로 값이 넘어온다. log 값 전달.
-                       */
-                      events: data
-                  });
+	    calendar.render();
 
-                  calendar.render();
-              });
+});
 
-              request.fail(function( jqXHR, textStatus ) {
-                  alert( "Request failed: " + textStatus );
-              });
-          });
+	function dateFormat(date) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
 
-      });
-      
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+        hour = hour >= 10 ? hour : '0' + hour;
+        minute = minute >= 10 ? minute : '0' + minute;
+        second = second >= 10 ? second : '0' + second;
+
+        return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+}
       </script>
             
             
@@ -315,8 +410,7 @@
 	<!-- Core theme JS-->
 	<script src="resources/js/scripts.js"></script>
     <!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->
