@@ -63,19 +63,6 @@
 		</div>
 
 		<div class="container">
-			<!-- <div class="row">
-                <div class="col-12">
-                    <div class="alazea-portfolio-filter">
-                        <div class="portfolio-filter">
-                            <button class="btn active" data-filter="*">All</button>
-                            <button class="btn" data-filter=".design">Coffee Design</button>
-                            <button class="btn" data-filter=".garden">Garden</button>
-                            <button class="btn" data-filter=".home-design">Home Design</button>
-                            <button class="btn" data-filter=".office-design">Office Design</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 			<div class="row">
 				<c:if test="${!dailyLog.isEmpty()}">
 				<c:forEach items="${dailyLog}" var="log">
@@ -105,7 +92,7 @@
 							</c:choose>
 							</p>
 							<div>
-							<c:out value="${log.enrollDate}"></c:out>&nbsp;
+							<c:out value="${fn:substring(log.enrollDate,0,16)}"></c:out>&nbsp;
 							<a href="logDetail.do?logNo=${log.logNo}" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></a></div>
 						</div>					
 					</div>

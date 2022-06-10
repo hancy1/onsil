@@ -59,19 +59,23 @@ public class GardenController {
 		
 		System.out.println("hostUser확인" + hostUser);
 				
-		
 		//방문한 페이지의 방명록 3개 가져오기
-		ArrayList<VisitorBoard> list = gardenService.getBoardList(hostUser);
+		ArrayList<VisitorBoard> board = gardenService.getBoardList(hostUser);
 		
 		//방명록의 댓글 가져오기
-		//ArrayList<>
+		ArrayList<VisitorComment> comment = gardenService.getCommentList(hostUser);
 		
 		//같은 메소드 사용위해 임의로 넣는 값
 		PageInfo pi = GardenPagination.getPageInfo(100, 1, 10, 10);
 		ArrayList<MyPlant> plant = gardenService.selectMyPlantList(hostUser, pi);
 		
-		model.addAttribute("board", list);
+		//데일리로그 가져오기
+		ArrayList<DailyLog> log = gardenService.selectRecentLog(hostUser);
+		
+		model.addAttribute("board", board);
+		model.addAttribute("comment", comment);
 		model.addAttribute("plant", plant);
+		model.addAttribute("log", log);
 		
 		return "garden/gardenMain";
 	}

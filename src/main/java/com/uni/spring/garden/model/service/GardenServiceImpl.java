@@ -391,6 +391,12 @@ public class GardenServiceImpl implements GardenService{
 		
 	}
 
+	@Override
+	public ArrayList<VisitorComment> getCommentList(String hostUser) {
+		
+		return gardenDao.getCommentList(hostUser, sqlSession);
+	}
+
 	
 
 	

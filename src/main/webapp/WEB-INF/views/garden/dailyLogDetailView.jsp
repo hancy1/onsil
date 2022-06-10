@@ -58,7 +58,7 @@
                                 <!-- <h4 class="post-title">Garden designers across the country forecast ideas shaping the gardening world in 2018</h4> -->
                                 <div class="post-meta mb-30">
                                 	<a href="#"><i class="fa fa-user" aria-hidden="true"></i>${log.userNo}</a>
-                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>${log.enrollDate}</a>
+                                    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>${fn:substring(log.enrollDate,0,16)}</a>
                                 </div>
                                 <div class="post-thumbnail mb-30">
                                 	<c:if test="${ log.serverName != null }">

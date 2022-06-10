@@ -109,6 +109,8 @@ public interface GardenService {
 
 	void updatePlantGrow(PlantGrow plant);
 
+	ArrayList<VisitorComment> getCommentList(String hostUser);
+
 
 	
 
