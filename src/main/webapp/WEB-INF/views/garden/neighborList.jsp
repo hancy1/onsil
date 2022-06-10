@@ -48,13 +48,13 @@ th, td {
 	<section id="aa-product-category">
 		<div class="container" align="center">
 			<div class="row my-5">
-				<div class="col-lg-8 col-md-8 col-sm-8">
+				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="aa-product-catg-content">
 						<div class="aa-product-catg-body">
-							<div class="table-responsive">
+							<div class="table-responsive"  align="center">
 								<h5>이웃관리</h5>
 								<br>
-								<table class="table table-striped" text-align="center">
+								<table class="table table-striped" >
 									<tr class="danger">
 										<td>유저아이디</td>
 										<td>정원 바로가기</td>
@@ -65,7 +65,7 @@ th, td {
 											<tr>
 											<td>${l.NUserNo}</td>
 											<td><button class="btn btn-outline-success visitGarden" onclick='visitGarden("${l.NUserNo}");'><i class="fa-solid fa-leaf"></i></button></td>
-											<td><button class="btn btn-outline-success deleteNeighbor" onclick='deleteNeighbor("${l.neighborNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
+											<td><button class="btn btn-outline-secondary deleteNeighbor" onclick='deleteNeighbor("${l.neighborNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
 											</tr>
 										</c:forEach>
          							</c:if>
@@ -73,16 +73,9 @@ th, td {
 									<tr><td colspan="3" align="center">추가된 이웃이 없습니다.</td></tr>
 									</c:if>
 								</table>
-								<p>
-							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-							    이웃추가하기
-							</button>
-							</p>
-							<div class="collapse" id="collapseExample">
-							  <div class="card card-body">
-							    <div><form action="insertNeighbor.do"><input type="text" name="nUserId"><input type="hidden" name="userNo" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit">추가하기</button></form></div>
-							  </div>
-							</div>							
+
+							    <div ><input type="text" id="nUserId" name="nUserId" placeholder="아이디를 입력해주세요" style="width:200px"> 
+							    &nbsp;<button type="button" class="btn btn-outline-success btn-sm" onclick="checkNeighbor();"><i class="fa-solid fa-user-plus"></i></button></div>
 						</div>
 					</div>
 				</div>
@@ -92,6 +85,42 @@ th, td {
 </section>
 <script>
 
+	function checkNeighbor(){
+		
+		var nUserId = $("#nUserId").val()
+		var userNo = ${loginUser.userNo};
+		console.log(userNo)
+		
+		$.ajax({
+			url:"checkNeighbor.do",
+			method:"post",
+			data:{nUserId:nUserId, userNo:userNo},
+			success:function(result){
+				if(result > 0){
+					alert("이미 이웃추가된 아이디입니다.")
+				}else{
+					$.ajax({
+						url:"checkMemberId.do",
+						method:"post",
+						data:{nUserId:nUserId},
+						success:function(result){
+							if(result == 0){
+								alert("없는 아이디입니다. 아이디를 다시 확인해주세요.")
+							}else{
+								location.href = "insertNeighbor.do?nUserId=" + nUserId + "&userNo=" + userNo;								
+							}
+						},
+						error:function(){
+							console.log("이웃 아이디 유무체크 ajax 통신 실패");
+						}
+					});
+				}
+			},
+			error:function(){
+				console.log("이웃 아이디 중복체크 ajax 통신 실패");
+			}
+		});
+	}
 	function visitGarden(nUserNo){
 		location.href = "gardenMain.do?hostUser=" + nUserNo;
 		//console.log(nUserNo)
@@ -101,7 +130,6 @@ th, td {
 		var yn = confirm("정말 삭제하시겠습니까?")
 		if(yn){
 			location.href = "deleteNeighbor.do?neighborNo=" + neighborNo;
-			alert("삭제되었습니다")
 		}
 	}
 

@@ -403,6 +403,18 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.selectPlantGrowAlert(userNo, sqlSession);
 	}
 
+	@Override
+	public int checkNeighbor(HashMap<String, String> map) {
+		
+		return gardenDao.checkNeighbor(map, sqlSession);
+	}
+
+	@Override
+	public int checkMemberId(String nUserId) {
+		
+		return gardenDao.checkMemberId(nUserId, sqlSession);
+	}
+
 	
 
 	
