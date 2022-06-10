@@ -111,6 +111,8 @@ public interface GardenService {
 
 	ArrayList<VisitorComment> getCommentList(String hostUser);
 
+	ArrayList<PlantGrow> selectPlantGrowAlert(String userNo);
+
 
 	
 

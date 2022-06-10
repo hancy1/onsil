@@ -12,7 +12,50 @@
 
 <!-- Core Stylesheet -->
 <link rel="stylesheet" href="resources/style.css">
+<script type="text/JavaScript">
 
+	if("${loginUser}"){
+	
+  function getCookie(name) {
+    var Found = false
+    var start, end
+    var i = 0
+
+    // cookie 문자열 전체를 검색
+    while(i <= document.cookie.length) {
+      start = i
+      end = start + name.length
+      // name과 동일한 문자가 있다면
+      if(document.cookie.substring(start, end) == name) {
+        Found = true
+        break
+      }
+      i++
+    }
+
+    // name 문자열을 cookie에서 찾았다면
+    if(Found == true) {
+      start = end + 1
+      end = document.cookie.indexOf(";", start)
+      // 마지막 부분이라는 것을 의미(마지막에는 ";"가 없다)
+      if(end < start)
+      end = document.cookie.length
+      // name에 해당하는 value값을 추출하여 리턴한다.
+      return document.cookie.substring(start, end)
+    }
+    // 찾지 못했다면
+    return ""
+  }
+
+  function openMsgBox() {
+    var eventCookie=getCookie("plantGrow_cook");  // 쿠키이름_cook 은 임의로 꼭 변경하세요.
+    if (eventCookie != "no")
+    window.open('growAlert.do','_blank','width=600,height=300,top=300,left=600');
+    //팝업창의 주소, 같은 도메인에 있어야 한다.
+  }
+  openMsgBox();
+	}
+</script>
 </head>
 
 <body>
