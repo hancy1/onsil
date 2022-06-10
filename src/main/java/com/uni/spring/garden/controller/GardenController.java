@@ -797,5 +797,17 @@ public class GardenController {
 		deleteFile.delete();
 		
 	}
+	
+	@RequestMapping("growAlert.do")
+	public String growAlert(Model model, HttpSession session) {
+		
+		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		ArrayList<PlantGrow> list = gardenService.selectPlantGrowAlert(userNo);
+		System.out.println("list확인 " + list);
+		
+		model.addAttribute("list",list);
+		
+		return "garden/growAlert";
+	}
 }
 

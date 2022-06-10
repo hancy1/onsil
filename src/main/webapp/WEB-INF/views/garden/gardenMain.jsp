@@ -85,13 +85,12 @@
                 <table align="center">                    
                     <tr>
                     	<td colspan="2">
-                    		<select id="info" name="plantNo">
-                    		<option value="">식물을 선택하세요</option>
+                    		<select id="info" name="plantNo" onchange="selectInfo();">
+                    		<option value="0">식물을 선택하세요</option>
                     		<c:forEach items="${plant}" var="plant">
                     			<option value="${plant.plantNo}">[${plant.plantName}]${plant.nickname}</option>
                     		</c:forEach>
-                    		</select>
-                    		
+                    		</select>	
                     	</td>
                     </tr>
                     <tr>
@@ -118,7 +117,7 @@
                 <br>
 
                 <div align="center">
-                    <button type="submit" class="btn btn-success btn-sm">등록</button>
+                    <button type="submit" class="btn btn-success btn-sm submitBtn" disabled>등록</button>
                     <button type="reset" class="btn btn-success btn-sm">취소</button>
                 </div>
             </form>	
@@ -135,8 +134,22 @@
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 	<script>	
 
-	$(function(){
+	function selectInfo(){
+		var select = document.getElementById('info')		
+		var plantNo = select.options[select.selectedIndex].value;
+		console.log(plantNo)
+
+		if(plantNo > 0){
+			$(".submitBtn").removeAttr("disabled");
+		}
 		
+		if(plantNo <= 0){
+			$(".submitBtn").attr("disabled", true);
+		}
+	}
+	
+	$(function(){
+
 		 //등록일을 오늘 날짜로
 		 document.getElementById('enrollDate').value = new Date().toISOString().substring(0, 10);
 		
@@ -243,10 +256,13 @@
         return date.getFullYear() + '-' + month + '-' + day + ' ' + hour + ':' + minute;
 }
       </script>
-            <hr>
+            
          	<!-- 방명록 -->
-         	<h6 style="color:gray" align="center">정원의 메인화면에서는 최근 3개의 방명록만 확인이 가능합니다. <br> 
+         	<c:if test="${ !empty board }">
+         	<hr>
+         	<h6 style="color:gray" align="center">정원의 메인화면에서는 최근 3개의 방명록만 확인이 가능합니다. <br>
          	더 많은 방명록은 <a href="visitorBoard.do" style="color:green">방명록 메뉴</a>에서 확인가능합니다.</h6>
+         	</c:if>
          	<div class="row">
          		<div class="col-12">
          			<table class="table">
@@ -276,20 +292,6 @@
 									<tr><td colspan="4" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
 								</table>
-							<!-- <p>
-							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-							    방명록 작성하기
-							</button>
-							</p>
-							<div class="collapse" id="collapseExample">
-							  <div class="card card-body">
-							    <div><form action="vBoardEnroll.do">
-								    <input type="text" name="content" style="width:300px">
-								    <input type="hidden" name="writer" value="${ loginUser.userNo }"/>
-								    <button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form>
-							    </div>
-							  </div>
-							</div> -->
          		</div>
          	</div>   
 			<hr>
@@ -319,10 +321,10 @@
                 </div>
                 </c:forEach>
                 </c:if>
-                <c:if test="${ empty log }">
-                <h6>작성된 데일리로그가 없습니다.</h6>
-                </c:if>
             </div>
+            <c:if test="${ empty log }">
+                <h6 style="color:gray" align="center">작성된 데일리로그가 없습니다.</h6>
+            </c:if>
         </div>
     </section>
     <!-- ##### Portfolio Area End ##### -->

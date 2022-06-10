@@ -397,6 +397,12 @@ public class GardenServiceImpl implements GardenService{
 		return gardenDao.getCommentList(hostUser, sqlSession);
 	}
 
+	@Override
+	public ArrayList<PlantGrow> selectPlantGrowAlert(String userNo) {
+
+		return gardenDao.selectPlantGrowAlert(userNo, sqlSession);
+	}
+
 	
 
 	

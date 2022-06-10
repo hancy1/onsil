@@ -572,4 +572,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
+	<select id="selectPlantGrowAlert" resultMap="PlantGrowResultSet">
+	
+		SELECT *
+		FROM PLANT_GROW
+		WHERE (PLANT_NO, LIST_NO, ENROLL_DATE) IN (SELECT PLANT_NO, MAX(LIST_NO) LIST_NO, MAX(ENROLL_DATE) ENROLL_DATE
+		                                           FROM PLANT_GROW
+		                                           WHERE STATUS = 'Y'
+		                                           AND USER_NO = #{userNo}
+		                                           GROUP BY PLANT_NO)
+	</select>
+	
 </mapper>

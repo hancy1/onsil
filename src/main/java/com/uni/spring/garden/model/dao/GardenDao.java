@@ -289,6 +289,11 @@ public class GardenDao {
 		return (ArrayList)sqlSession.selectList("gardenMapper.getCommentList", hostUser);
 	}
 
+	public ArrayList<PlantGrow> selectPlantGrowAlert(String userNo, SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantGrowAlert", userNo);
+	}
+
 	
 		
 		

@@ -99,10 +99,12 @@
 				</div>
 				</c:forEach>
 				</c:if>
+				</div>
+				<div align="center">
 				<c:if test="${ dailyLog.isEmpty() }">
-				<h3 align="center">작성된 데일리로그가 없습니다. 새 글을 작성해 일상을 공유해보세요. </h3>
+				<table ><tr><td>작성된 데일리로그가 없습니다. 새 글을 작성해 일상을 공유해보세요. </td></tr></table>
 				</c:if>
-			</div>
+				</div>
 		</div>
 		<br>
 		<div id="pagingArea">
