@@ -54,7 +54,7 @@
                 <table align="center">
                     <tr>
                         <th><label for="upfile"><i class="fa-solid fa-image"></i></label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile"></td>
+                        <td><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile" required></td>
                     </tr>
                     <tr>
                         <th colspan="2"><label for="content">내용</label></th>

@@ -65,12 +65,15 @@
                                     <img src="resources/garden_upload_files/${log.serverName}" alt="">
                                     </c:if>
                                 </div>
-                                <p>${log.content}</p>
+                                
                             </div>
                             <c:if test="${ hostUser == loginUser.userId }">
+                            <hr>
                             <a class="btn btn-outline-success btn-sm" href="updateDailyLogForm.do?logNo=${log.logNo}"><i class="fa-solid fa-eraser"></i></a>
                             <button class="btn btn-outline-success btn-sm" type="button" onclick='deleteLog();'><i class="fa-solid fa-trash-can"></i></button>
+                        	<hr>
                         	</c:if>
+                        	<p>${log.content}</p>
                         </div>
                         <form id="postForm" action="deleteDailyLog.do" method="post">
 							<input type="hidden" name="logNo" value="${ log.logNo }">
@@ -129,9 +132,7 @@
 							value +=  "<div class='comment-wrapper d-flex'>" +
 			                            <!-- Comment Meta -->
 			                            "<div class='comment-author'>" +
-			                                <!-- <img src="resources/img/bg-img/37.jpg" alt=""> --> 
-			                                "<i class='fa-solid fa-seedling'></i>" +
-			                                "<i class='fa-solid fa-seedling'></i>"  +
+			                                "<img src='https://cdn-icons-png.flaticon.com/512/1983/1983305.png' alt=''>" +  
 			                            "</div>" +
 			                            <!-- Comment Content -->
 			                            "<div class='comment-content'>" +
@@ -139,7 +140,7 @@
 			                                    "<h5>" + c.userNo + "</h5>" +
 			                                    "<span class='comment-date'>" + c.enrollDate + "</span>" +
 			                                "</div>" +
-			                                "<p>" + c.content + "</p>"+
+			                                "<p class='def" + c.commentNo + "'>" + c.content + "</p>"+
 			                                "<div class='modify" + c.commentNo + "' style='display:none'>" +	
 	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
 	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
@@ -170,7 +171,7 @@
                                                         "<div class='comment-wrapper d-flex'>" +
                                                             <!-- Comment Meta -->
                                                             "<div class='comment-author'>" + 
-                                                                "<img src='resources/img/bg-img/38.jpg' alt=''>" +
+                                                                "<img src='https://cdn-icons-png.flaticon.com/512/628/628338.png' alt=''>" +
                                                             "</div>" +
                                                             <!-- Comment Content -->
                                                             "<div class='comment-content'>" + 
@@ -178,7 +179,7 @@
                                                                     "<h5>" + c.userNo + "</h5>" +
                                                                     "<span class='comment-date'>" + c.enrollDate + "</span>" +
                                                                 "</div>" + 
-                                                                "<p>답글 :" +  c.content + "</p>" +
+                                                                "<p class='def" + c.commentNo + "'>답글 : " +  c.content + "</p>" +
                                                                 "<div class='modify" + c.commentNo + "' style='display:none'>" +	
                     	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
                     	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
@@ -217,18 +218,16 @@
 	function openInput(commentNo){
 
 		var div = $('.reInput'+commentNo)
-		div.show();	
+
+		div.show();
+		
 	}
 	
 	function closeInput(commentNo){
 		var div = $('.reInput'+commentNo)
 		div.hide();
 	}
-	
-	function closeModify(commentNo){
-		var div = $('.modify'+commentNo)
-		div.hide();
-	}
+
 	
 	//일반댓글 인서트하기
 	function insertComment(){
@@ -334,6 +333,18 @@
 	function modifyComment(commentNo){
 		
 		$(".modify"+commentNo).show();
+		
+		var def = $('.def'+commentNo)
+		def.hide();
+	}
+	
+	
+	function closeModify(commentNo){
+		var div = $('.modify'+commentNo)
+		div.hide();
+		
+		var def = $('.def'+commentNo)
+		def.show();
 	}
 	
 	//댓글 답글 수정

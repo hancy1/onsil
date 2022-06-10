@@ -44,6 +44,17 @@ public class GardenController {
 	@Autowired
 	public GardenService gardenService;
 	
+	@RequestMapping("growAlert.do")
+	public String growAlert(Model model, HttpSession session) {
+		
+		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
+		ArrayList<PlantGrow> list = gardenService.selectPlantGrowAlert(userNo);
+		System.out.println("list확인 " + list);
+		
+		model.addAttribute("list",list);
+		
+		return "garden/growAlert";
+	}
 	
 	@RequestMapping("gardenMain.do")
 		public String toMain(@RequestParam(value="hostUser", required=false)String hostUser, HttpSession session, Model model) {
@@ -92,7 +103,6 @@ public class GardenController {
 			//defaultValue : 넘어오는 값이 null인 경우에 해당 파라미터 기본 값을 지정함
 			
 			//방명록 주인 회원번호
-			//String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
 			String hostUser = (String) session.getAttribute("hostUser");
 			
 			System.out.println("hostUser 널 체크 전 " + hostUser);
@@ -131,7 +141,7 @@ public class GardenController {
 		}
 
 	@RequestMapping("vBoardEnroll.do")
-	public String boardEnroll(HttpSession session, String content, String writer, Model model) {
+	public String boardEnroll(HttpSession session, String content, String writer) {
 		
 		System.out.println("content" + content);
 		System.out.println("writer" + writer);
@@ -150,10 +160,10 @@ public class GardenController {
 	}
 	
 	@RequestMapping("deleteVBoard.do")
-	public String boardDelete(String boardNo, Model model) {
+	public String boardDelete(String boardNo, RedirectAttributes reAttr) {
 		
 		gardenService.deleteBoard(boardNo);
-		model.addAttribute("msg", "방명록을 삭제했습니다.");
+		reAttr.addFlashAttribute("msg", "방명록을 삭제했습니다.");
 
 		return "redirect:visitorBoard.do";
 		
@@ -161,21 +171,21 @@ public class GardenController {
 	
 	
 	@RequestMapping("updateVBoard.do")
-	public String updateBoard(String boardNo, String content, Model model) {
+	public String updateBoard(String boardNo, String content, RedirectAttributes reAttr) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("boardNo", boardNo);
 		map.put("content", content);
 		
 		gardenService.updateBoard(map);
-		model.addAttribute("msg", "방명록을 수정했습니다.");
+		reAttr.addFlashAttribute("msg", "방명록을 수정했습니다.");
 
 		return "redirect:visitorBoard.do";
 		
 	}
 
 	//=========================================================================================
-	//댓글
+	//방명록 댓글
 	@RequestMapping("insertComment.do")
 	public String insertComment(String content, String boardNo, HttpSession session) {
 		
@@ -197,23 +207,23 @@ public class GardenController {
 	
 	
 	@RequestMapping("updateComment.do")
-	public String updateComment(String commentNo, String content, Model model) {
+	public String updateComment(String commentNo, String content, RedirectAttributes reAttr) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("commentNo", commentNo);
 		map.put("content", content);
 		
 		gardenService.updateComment(map);
-		model.addAttribute("msg", "댓글을 수정했습니다.");
+		reAttr.addFlashAttribute("msg", "댓글을 수정했습니다.");
 		
 		return "redirect:visitorBoard.do";
 	}
 	
 	@RequestMapping("deleteComment.do")
-	public String deleteComment(String commentNo, Model model) {
+	public String deleteComment(String commentNo, RedirectAttributes reAttr) {
 		
 		gardenService.deleteComment(commentNo);
-		model.addAttribute("msg", "댓글을 삭제했습니다.");
+		reAttr.addFlashAttribute("msg", "댓글을 삭제했습니다.");
 		
 		return "redirect:visitorBoard.do";		
 	}
@@ -230,30 +240,55 @@ public class GardenController {
 		
 		model.addAttribute("list", list);
 		
-		System.out.println("list확인 " + list);
-		
 		return "garden/neighborList";	
 	}
 	
 	@RequestMapping("deleteNeighbor.do")
-	public String deleteNeighbor(String neighborNo) {
+	public String deleteNeighbor(String neighborNo, RedirectAttributes reAttr) {
 		
 		gardenService.deleteNeighbor(neighborNo);
+		reAttr.addFlashAttribute("msg", "이웃을 삭제했습니다.");
 		
 		return "redirect:neighborList.do";			
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "checkNeighbor.do", produces="application/json; charset=utf-8")
+	public int checkNeighbor(String nUserId, String userNo) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("nUserId", nUserId);
+		map.put("userNo", userNo);
+		
+		int result = gardenService.checkNeighbor(map);
+				
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "checkMemberId.do", produces="application/json; charset=utf-8")
+	public int checkMemberId(String nUserId) {
+		
+		int result = gardenService.checkMemberId(nUserId);
+				
+		return result;
+	}
+	
 	@RequestMapping("insertNeighbor.do")
-	public String insertNeighbor(String nUserId, String userNo) {
+	public String insertNeighbor(String nUserId, String userNo, RedirectAttributes reAttr) {
 		
 		System.out.println("nUserId" + nUserId);
 		System.out.println("userNo" + userNo);
+		
+		System.out.println("인서트이웃 확인 " + nUserId + userNo);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("nUserId", nUserId); //추가하고 싶은 이웃의 아이디
 		map.put("userNo", userNo); //로그인한 회원 번호		
 		
 		gardenService.insertNeighbor(map);
+		reAttr.addFlashAttribute("msg", "이웃을 추가했습니다.");
+		
 		return "redirect:neighborList.do";
 	}
 	
@@ -283,20 +318,19 @@ public class GardenController {
 	}
 	
 	@RequestMapping("insertPlant.do")
-	public String insertPlant(Model model, PlantInfo info) {
+	public String insertPlant(PlantInfo info, RedirectAttributes reAttr) {
 		
 		gardenService.insertPlant(info);
-		model.addAttribute("msg", "식물정보를 추가했습니다.");
-		
+		reAttr.addFlashAttribute("msg", "식물정보를 추가했습니다.");		
 		
 		return "redirect:adminPlant.do";
 	}
 	
 	@RequestMapping("deletePlant.do")
-	public String deletePlant(Model model, String regNo) {
+	public String deletePlant(String regNo, RedirectAttributes reAttr) {
 		
 		gardenService.deletePlant(regNo);
-		model.addAttribute("msg", "식물정보를 삭제했습니다.");
+		reAttr.addFlashAttribute("msg", "식물정보를 삭제했습니다.");
 		return "redirect:adminPlant.do";
 	}
 	
@@ -304,17 +338,17 @@ public class GardenController {
 	public String updatePlant(String regNo, Model model) {
 		
 		PlantInfo info = gardenService.selectPlantInfo(regNo);
-		System.out.println("info 확인 " + info);
+		
 		model.addAttribute("info", info);
 		
 		return "garden/adminUpdatePlantForm";
 	}
 	
 	@RequestMapping("updatePlantInfo.do")
-	public String updatePlantInfo(Model model, PlantInfo info) {
+	public String updatePlantInfo(PlantInfo info, RedirectAttributes reAttr) {
 		
 		gardenService.updatePlantInfo(info);
-		model.addAttribute("msg", "식물정보를 수정했습니다.");
+		reAttr.addFlashAttribute("msg", "식물정보를 수정했습니다.");
 		return "redirect:adminPlant.do";
 	}
 	
@@ -338,13 +372,9 @@ public class GardenController {
 		//페이징
 		int listCount = gardenService.selectLogCount(hostUser);
 		
-		System.out.println("listCount확인" + listCount);
-		
 		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<DailyLog> dailyLog = gardenService.selectLogList(hostUser, pi);
-		
-		System.out.println("list확인 " +  dailyLog);
 		
 		model.addAttribute("dailyLog", dailyLog);
 		model.addAttribute("pi", pi);
@@ -356,21 +386,9 @@ public class GardenController {
 	public String selectLog(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
 							String logNo, Model model, HttpSession session) {
 		
-		System.out.println("logNo확인" + logNo);
-		
 		DailyLog log = gardenService.selectLog(logNo);
-		
-//		int commentCount = gardenService.selectLogCommentCount(logNo);
-//		
-//		PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
-//		
-//		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(pi, logNo);
-//		
-//		System.out.println("comment 확인" + comment);
-		
+
 		model.addAttribute("log", log);
-//		model.addAttribute("comment", comment);
-//		model.addAttribute("pi", pi);
 		
 		String hostUser = (String) session.getAttribute("hostUser");
 		System.out.println("hostUser확인" + hostUser);
@@ -387,9 +405,8 @@ public class GardenController {
 	}
 	
 	@RequestMapping("insertDailyLog.do")
-	public String insertDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, HttpServletRequest request) {
-		
-		System.out.println("log 확인 " + log);
+	public String insertDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, 
+								HttpServletRequest request, RedirectAttributes reAttr) {
 		
 		//파일첨부하지 않으면 빈 문자열이 넘어옴
 		if(!file.getOriginalFilename().equals("")) {
@@ -402,8 +419,8 @@ public class GardenController {
 			}
 		}
 		
-		System.out.println("log 확인 " + log);
 		gardenService.insertDailyLog(log);
+		reAttr.addFlashAttribute("msg", "데일리로그를 작성했습니다.");
 			
 		return "redirect:dailyLog.do";
 	}
@@ -418,7 +435,8 @@ public class GardenController {
 	}
 	
 	@RequestMapping("updateDailyLog.do")
-	public String updateDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, HttpServletRequest request, Model model) {
+	public String updateDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, 
+								HttpServletRequest request, Model model, RedirectAttributes reAttr) {
 		
 		String orgChangeName = log.getServerName();
 		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
@@ -437,13 +455,13 @@ public class GardenController {
 		gardenService.updateDailylog(log);
 		
 		model.addAttribute("logNo", log.getLogNo());
-		model.addAttribute("msg", "데일리로그를 수정했습니다.");
+		reAttr.addFlashAttribute("msg", "데일리로그를 수정했습니다.");
 				
 		return "redirect:logDetail.do";
 	}
 	
 	@RequestMapping("deleteDailyLog.do")
-	public String deleteDailyLog(String logNo, String fileName, HttpServletRequest request, Model model) {
+	public String deleteDailyLog(String logNo, String fileName, HttpServletRequest request, RedirectAttributes reAttr) {
 		
 		gardenService.deleteDailyLog(logNo);
 		
@@ -452,7 +470,7 @@ public class GardenController {
 			deleteFile(fileName, request);
 		}
 		
-		model.addAttribute("msg", "데일리로그를 삭제했습니다.");
+		reAttr.addFlashAttribute("msg", "데일리로그를 삭제했습니다.");
 		
 		return "redirect:dailyLog.do";
 	}
@@ -464,14 +482,8 @@ public class GardenController {
 	@ResponseBody
 	@RequestMapping(value = "selectCommentList.do", produces="application/json; charset=utf-8")
 	public ArrayList<DailyLogComment> selectLogCommentList(String logNo) {
-
-		//int commentCount = gardenService.selectLogCommentCount(logNo);
-		
-		//PageInfo pi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 10);
 		
 		ArrayList<DailyLogComment> comment = gardenService.selectLogCommentList(logNo);
-		
-		System.out.println("comment 확인" + comment);
 				
 		return comment;
 	}
@@ -529,7 +541,6 @@ public class GardenController {
 		PageInfo pi = GardenPagination.getPageInfo(myPlantCount, currentPage, 10, 5);
 		
 		ArrayList<MyPlant> myPlant = gardenService.selectMyPlantList(hostUser, pi);
-		System.out.println("myPlant 확인 : " + myPlant);
 		
 		model.addAttribute("myPlant", myPlant);
 		model.addAttribute("pi", pi);
@@ -556,9 +567,7 @@ public class GardenController {
 	
 	@RequestMapping("insertMyPlant.do")
 	public String insertMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
-								MyPlant myPlant, HttpServletRequest request) {
-		
-		System.out.println("myPlant 확인 " + myPlant);
+								MyPlant myPlant, HttpServletRequest request, RedirectAttributes reAttr) {
 		
 		//파일첨부하지 않으면 빈 문자열이 넘어옴
 		if(!file.getOriginalFilename().equals("")) {
@@ -573,6 +582,7 @@ public class GardenController {
 		
 		System.out.println("myPlant 확인 " + myPlant);
 		gardenService.insertMyPlant(myPlant);
+		reAttr.addFlashAttribute("msg", "내 식물 목록에 추가했습니다.");
 			
 		return "redirect:myPlant.do";
 	}
@@ -589,7 +599,7 @@ public class GardenController {
 	public String myPlantDetail(String plantNo, Model model) {
 		
 		MyPlant plant = gardenService.selectMyPlant(plantNo);
-		System.out.println("plant확인" + plant);
+
 		model.addAttribute("plant", plant);
 		
 		return "garden/myPlantDetailView";
@@ -627,9 +637,6 @@ public class GardenController {
 	@RequestMapping("updateMyPlant.do")
 	public String updateMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
 								MyPlant plant, HttpServletRequest request, Model model) {
-		
-		System.out.println(plant);
-		System.out.println(file.getOriginalFilename());
 		
 		String orgChangeName = plant.getServerName();
 		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
@@ -718,11 +725,6 @@ public class GardenController {
 	@RequestMapping("insertPlantGrow.do")
 	public String insertPlantGrow(PlantGrow plant) {
 		
-		System.out.println("plant확인" + plant);
-		
-		//PlantGrow(listNo=null, plantNo=2, userNo=1, plantName=null, nickname=null, 
-		//water=on, supplement=null, repotting=null, etc=, enrollDate=2022-06-09, status=null)
-		
 		if(plant.getWater() != null) {
 			plant.setWater("Y");
 		}else {
@@ -745,15 +747,10 @@ public class GardenController {
 			plant.setEtc("비고사항이 없습니다.");
 		}
 		
-		System.out.println("plant확인" + plant);
-		
 		gardenService.insertPlantGrow(plant);
 		
 		return "redirect:gardenMain.do";
 	}
-	
-	
-	
 	
 	//=========================================================================================
 	//파일관련
@@ -797,17 +794,6 @@ public class GardenController {
 		deleteFile.delete();
 		
 	}
-	
-	@RequestMapping("growAlert.do")
-	public String growAlert(Model model, HttpSession session) {
-		
-		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
-		ArrayList<PlantGrow> list = gardenService.selectPlantGrowAlert(userNo);
-		System.out.println("list확인 " + list);
-		
-		model.addAttribute("list",list);
-		
-		return "garden/growAlert";
-	}
+
 }
 

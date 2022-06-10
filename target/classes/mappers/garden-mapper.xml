@@ -183,6 +183,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	<select id="checkNeighbor" resultType="_int">
+		
+		SELECT COUNT(*)
+		FROM NEIGHBOR
+		WHERE USER_NO = #{userNo} AND N_USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{nUserId})
+		AND STATUS = 'Y'
+	
+	</select>
+	
+	<select id="checkMemberId" resultType="_int">
+	
+		SELECT COUNT(*) 
+		FROM MEMBER 
+		WHERE USER_ID = #{nUserId}
+		
+	</select>
+	
 	<insert id="insertNeighbor">
 	
 		INSERT INTO NEIGHBOR VALUES

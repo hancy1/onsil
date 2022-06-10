@@ -113,6 +113,10 @@ public interface GardenService {
 
 	ArrayList<PlantGrow> selectPlantGrowAlert(String userNo);
 
+	int checkNeighbor(HashMap<String, String> map);
+
+	int checkMemberId(String nUserId);
+
 
 	
 

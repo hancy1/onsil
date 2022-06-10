@@ -53,6 +53,7 @@
 							<div class="table-responsive">
 								<h5>방명록</h5>
 								<br>
+								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px"><input type="hidden" name="writer" value="${ loginUser.userNo }"/> <button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
 								<table class="table">
 									<c:if test="${ !empty board }">
          								<c:forEach items="${board}" var="b">
@@ -113,18 +114,6 @@
 									<tr><td colspan="5" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
 								</table>
-		
-							<p>
-							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-							    방명록 작성하기
-							</button>
-							</p>
-							<div class="collapse" id="collapseExample">
-							  <div class="card card-body">
-							    <div><form action="vBoardEnroll.do"><input type="text" name="content"><input type="hidden" name="writer" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form></div>
-							  </div>
-							</div>
-							
 						</div>
 					</div>
 				</div>

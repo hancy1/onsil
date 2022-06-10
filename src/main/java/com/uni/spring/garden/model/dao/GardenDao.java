@@ -294,6 +294,16 @@ public class GardenDao {
 		return (ArrayList)sqlSession.selectList("gardenMapper.selectPlantGrowAlert", userNo);
 	}
 
+	public int checkNeighbor(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("gardenMapper.checkNeighbor", map);
+	}
+
+	public int checkMemberId(String nUserId, SqlSessionTemplate sqlSession) {
+	
+		return sqlSession.selectOne("gardenMapper.checkMemberId", nUserId);
+	}
+
 	
 		
 		
