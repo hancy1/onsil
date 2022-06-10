@@ -54,13 +54,6 @@
 								<h5>방명록</h5>
 								<br>
 								<table class="table">
-									<!-- <tr class="danger">
-										<th>작성자</th>
-										<th>내용</th>
-										<th>작성일</th>
-										<th></th>
-										
-									</tr> -->
 									<c:if test="${ !empty board }">
          								<c:forEach items="${board}" var="b">
 	         								<tr style="background-color: lightgray" >
@@ -80,7 +73,9 @@
 											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq b.writer}"> 
 											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
+											<c:if test="${b.writer ne loginUser.userId }">
 											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
+											</c:if>
 											</td>
 	         								</tr>
 	         								<c:if test="${ !comment.isEmpty() }">
@@ -102,7 +97,9 @@
 											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
 											<button class="btn btn-outline-success deleteComment" onclick='deleteComment("${c.commentNo}");' ><i class="fa-solid fa-trash-can"></i></button>
 											</c:if>
+											<c:if test="${c.userNo ne loginUser.userId }">
 											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
+											</c:if>
 											</td>
 	         								</tr>
 	         								</c:if>
@@ -236,36 +233,24 @@
 	function insertComment(boardNo){
 		
 		var content = prompt("댓글입력 창입니다.");
-		console.log(content.length);
-		console.log(boardNo);
 		
 		if(content){
-			console.log(content.length);
-			console.log(content);
 			location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
 			
 		}else{
-
 			alert("내용을 입력해주세요.")
-			
 		}
-	
-		
-		
 	}
 	
 	function update(no){
 		
 		var tagDef = $('.' + no + 'def')
 		var tag = $('.' + no + 'input')
-		console.log(tag)
 		
 		tagDef.hide();
 		tag.show();	
 	}
-	
-	
-	
+
 	function cancleUpdate(no){
 		var tagDef = $('.' + no + 'def')
 		var tag = $('.' + no + 'input')

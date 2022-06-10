@@ -284,6 +284,11 @@ public class GardenDao {
 		return sqlSession.update("gardenMapper.updatePlantGrow", plant);
 	}
 
+	public ArrayList<VisitorComment> getCommentList(String hostUser, SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("gardenMapper.getCommentList", hostUser);
+	}
+
 	
 		
 		

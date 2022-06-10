@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,6 @@
 
 </head>
 <body>
-
 	<jsp:include page="../common/menubar.jsp" />
 	
 	<!-- ##### Breadcrumb Area Start ##### -->
@@ -57,7 +57,7 @@
     <section class="alazea-portfolio-area portfolio-page section-padding-0-100">
 
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="alazea-portfolio-filter">
                         <div class="portfolio-filter">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
 		<div class="row">
 			<div class="col-9 my-3">
@@ -85,7 +85,7 @@
                 <table align="center">                    
                     <tr>
                     	<td colspan="2">
-                    		<select id="info" onchange="selectInfo();" name="plantNo">
+                    		<select id="info" name="plantNo">
                     		<option value="">식물을 선택하세요</option>
                     		<c:forEach items="${plant}" var="plant">
                     			<option value="${plant.plantNo}">[${plant.plantName}]${plant.nickname}</option>
@@ -134,30 +134,7 @@
 <!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 	<script>	
-function selectInfo(){
-		
-		var select = document.getElementById('info')		
-		var plantNo = select.options[select.selectedIndex].value;
-		
-		console.log(plantNo);
-		
-		/*$.ajax({
-			
-			url:"selectPlantInfo.do",
-			data:{regNo:regNo},
-			type:"get",
-			success:function(info){
 
-				document.getElementById('plantName').value = info.plantName;
-				document.getElementById('water').value = info.water;
-				document.getElementById('sun').value = info.sun;
-				
-			},
-			error:function(){
-				console.log("plantInfo ajax 통신 실패")
-			}
-		});	*/
-	}
 	$(function(){
 		
 		 //등록일을 오늘 날짜로
@@ -182,20 +159,6 @@ function selectInfo(){
 	      select: function(arg) {
 	    	  console.log(arg);
 
-	    	  //window.open("insertPlantGrowForm.do", "관리내역 등록", "width=500 height=500");
-	    	  
-	        /*var title = prompt('입력할 일정:');
-	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
-	        if (title) {
-	          calendar.addEvent({
-	            title: title,
-	            start: arg.start,
-	            end: arg.end,
-	            allDay: arg.allDay,
-	            backgroundColor:"yellow",
-	            textColor:"blue"
-	          })
-	        }*/
 	        calendar.unselect()
 	      },
 	      eventMouseEnter: function(arg) {
@@ -233,7 +196,7 @@ function selectInfo(){
 	    	   }else{
 	    		   value += "없음";
 	    	   }
-	    	   value += "</h6><br><a type='button' href='myPlantDetail.do?plantNo=" + plantNo +"'>자세히보기</a>";
+	    	   value += "</h6><br><a type='button' href='myPlantDetail.do?plantNo=" + plantNo +"' style='color:green'>[자세히보기]</a>";
 	    	  		   
 	    	  
 	    	  div.innerHTML = value;
@@ -258,14 +221,10 @@ function selectInfo(){
 						  })
 					  }
 				  }
-				})
-	      
-	      
-	  });
-
+				})  
+	  	});
 	    calendar.render();
-
-});
+	});
 
 	//날짜 포맷
 	function dateFormat(date) {
@@ -286,174 +245,87 @@ function selectInfo(){
       </script>
             <hr>
          	<!-- 방명록 -->
+         	<h6 style="color:gray" align="center">정원의 메인화면에서는 최근 3개의 방명록만 확인이 가능합니다. <br> 
+         	더 많은 방명록은 <a href="visitorBoard.do" style="color:green">방명록 메뉴</a>에서 확인가능합니다.</h6>
          	<div class="row">
          		<div class="col-12">
-         			<table class="table table-striped">
-									<tr class="danger">
-										<th>작성자</th>
-										<th>내용</th>
-										<th>작성일</th>
-										<th></th>
-										
-									</tr>
-									<c:if test="${ !board.isEmpty() }">
+         			<table class="table">
+									<c:if test="${ !empty board }">
          								<c:forEach items="${board}" var="b">
+	         								<tr style="background-color: lightgray" >
+	         								<th><i class="fa-solid fa-comments"></i></th>
+	         								<th><a href="gardenMain.do?hostUser=${b.writer}" style="color:green">${b.writer}</a></th>	
+	         								<th>${b.content}</th>
+	         								<th>${b.enrollDate}</th>
+	         								</tr>
+	         								<c:if test="${ !comment.isEmpty() }">
+	         								<c:forEach items="${comment}" var="c">
+	         								<c:if test="${ c.boardNo == b.boardNo}">
 	         								<tr>
-	         								<td>${b.writer}</td>	
-	         								<td>${b.content}</td>
-	         								<td>${b.enrollDate}</td>
-											<td><button class="btn btn-outline-success reply" data-bs-toggle="tooltip" title="댓글작성" onclick='deleteBoard("${b.boardNo}");'><i class="fa-solid fa-pen"></i></button>
-											<c:if test="${hostUser eq loginUser.userId || hostUser eq b.writer}"> 
-											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
-											</c:if>
-											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
-											</td>
-	         								</tr>			
-	         							</c:forEach>
+	         								<td>댓글</td>	
+	         								<td><a href="gardenMain.do?hostUser=${c.userNo}" style="color:green">${c.userNo}</a></td>
+	         								<td>${c.content}</td>						
+	         								<td>${c.enrollDate}</td>
+	         								</tr>
+	         								</c:if>
+	         								</c:forEach>	
+	         								</c:if>		
+	         							</c:forEach>	 
          							</c:if>
          							<c:if test="${ board.isEmpty() }">
 									<tr><td colspan="4" align="center">작성된 방명록이 없습니다.</td></tr>
 									</c:if>
 								</table>
-		
-							<p>
+							<!-- <p>
 							<button class="btn btn-outline-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 							    방명록 작성하기
 							</button>
 							</p>
 							<div class="collapse" id="collapseExample">
 							  <div class="card card-body">
-							    <div><form action="vBoardEnroll.do"><input type="text" name="content"><input type="hidden" name="writer" value="${ loginUser.userNo }"/><button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form></div>
+							    <div><form action="vBoardEnroll.do">
+								    <input type="text" name="content" style="width:300px">
+								    <input type="hidden" name="writer" value="${ loginUser.userNo }"/>
+								    <button class="btn btn-outline-success btn-sm" type="submit" >작성하기</button></form>
+							    </div>
 							  </div>
-							</div>
+							</div> -->
          		</div>
          	</div>   
- 
 			<hr>
-
             <div class="row alazea-portfolio">
-
+            	<c:if test="${ !empty log }">
+            	<c:forEach items="${log}" var="log">
                 <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design home-design">
+                <div class="col-12 col-sm-3 col-lg-3 single_portfolio_item design home-design">
                     <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/16.jpg);"></div>
+                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/garden_upload_files/${log.serverName});"></div>
                     <!-- Portfolio Hover Text -->
                     <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/16.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 1">
+                        <a href="logDetail.do?logNo=${log.logNo}" class="d-flex align-items-center justify-content-center" title="DailyLog">
                             <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
+                                <h3><c:choose>
+								<c:when test="${fn:length(log.content)>8}">
+									<c:out value="${fn:substring(log.content,0,7)}"/>...
+								</c:when>
+								<c:otherwise>
+									<c:out value="${log.content}"/>
+								</c:otherwise>
+							</c:choose></h3>
+                                <h5>${fn:substring(log.enrollDate,0,16)}</h5>
                             </div>
                         </a>
                     </div>
                 </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-6 single_portfolio_item garden">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/17.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/17.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 2">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden office-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/19.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/19.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 4">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item design office-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/20.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/20.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 5">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-3 single_portfolio_item garden">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/21.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/21.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 6">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Portfolio Area -->
-                <div class="col-12 col-sm-6 col-lg-6 single_portfolio_item home-design">
-                    <!-- Portfolio Thumbnail -->
-                    <div class="portfolio-thumbnail bg-img" style="background-image: url(resources/img/bg-img/22.jpg);"></div>
-                    <!-- Portfolio Hover Text -->
-                    <div class="portfolio-hover-overlay">
-                        <a href="resources/img/bg-img/22.jpg" class="portfolio-img d-flex align-items-center justify-content-center" title="Portfolio 7">
-                            <div class="port-hover-text">
-                                <h3>Minimal Flower Store</h3>
-                                <h5>Office Plants</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                
-
+                </c:forEach>
+                </c:if>
+                <c:if test="${ empty log }">
+                <h6>작성된 데일리로그가 없습니다.</h6>
+                </c:if>
             </div>
         </div>
     </section>
     <!-- ##### Portfolio Area End ##### -->
-    
-    <script>
-
-	//방명록 삭제하기
-	function deleteBoard(boardNo){
-		
-		var yn = confirm("방명록을 삭제하시겠습니까?")
-		console.log(yn)
-		if(yn){
-			location.href="deleteVBoard.do?boardNo=" + boardNo;
-			alert("방명록을 삭제했습니다.")
-		}else{
-			alert("삭제를 취소했습니다.")
-		}
-	}
-	
-	//회원의 정원 방문하기
-	function visitGarden(userId){
-		
-		location.href = "gardenMain.do?hostUser=" + userId;
-		
-	}
-
-</script>
-
     <jsp:include page="../common/footer.jsp" />
     
     
