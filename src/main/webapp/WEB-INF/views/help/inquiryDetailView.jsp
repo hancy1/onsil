@@ -73,7 +73,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/데이지.jpg);">
 			<h2>온실 :: 문의사항</h2>
 		</div>		
 		  
@@ -125,7 +125,7 @@
 				                </tr>				                
 				                <tr>
 				                    <th>작성자</th>
-				                    <td colspan="3">${ i.writer }</td>
+				                    <td colspan="3"><a href="gardenMain.do?hostUser=${i.writer}">${ i.writer }</a></td>
 				                    <th>작성일</th>
 				                    <td colspan="3">${ i.createDate }</td>
 				                    <th>글 공개여부</th>
