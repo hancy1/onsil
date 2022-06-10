@@ -30,6 +30,21 @@ public class HelpDao {
 		return (ArrayList)sqlSession.selectList("helpMapper.selectFaqList", null, rowBounds);
 	}
 
+	// 자주묻는질문 - 카테고리정렬 게시물 갯수
+	public static int selectFaqListCount(SqlSessionTemplate sqlSession, int code) {
+		
+		return sqlSession.selectOne("helpMapper.selectFaqListCount2", code);
+	}
+
+	// 자주묻는질문 - 카테고리정렬 게시물 가져오기
+	public static ArrayList<Faq> selectFaqList(SqlSessionTemplate sqlSession, PageInfo pi, int code) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectFaqList2", code, rowBounds);
+	}
+		
 	// 공지사항 게시물 갯수 구하기 - 페이징 처리
 	public static int selectNoticeListCount(SqlSessionTemplate sqlSession) {
 		
@@ -45,6 +60,21 @@ public class HelpDao {
 		return (ArrayList)sqlSession.selectList("helpMapper.selectNoticeList", null, rowBounds);
 	}
 
+	// 공지사항 카테고리별 게시물 갯수 구하기
+	public static int selectNoticeListCount(SqlSessionTemplate sqlSession, int code) {
+
+		return sqlSession.selectOne("helpMapper.selectNoticeListCount2", code);
+	}
+
+	// 공지사항 카테고리별 게시물 가져오기
+	public static ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, int code) {
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectNoticeList2", code, rowBounds);
+	}
+	
 	// 문의사항 게시물 갯수 구하기 - 페이징 처리
 	public static int selectInquiryListCount(SqlSessionTemplate sqlSession) {
 
@@ -60,6 +90,22 @@ public class HelpDao {
 		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList", null, rowBounds);
 	}
 
+	// 문의사항 카테고리별 게시물 갯수구하기
+	public static int selectInquiryListCount(SqlSessionTemplate sqlSession, int code) {
+
+		return sqlSession.selectOne("helpMapper.selectInquiryListCount2", code);
+	}
+
+	// 문의사항 카테고리별 게시물 가져오기
+	public static ArrayList<Inquiry> selectInquiryList(SqlSessionTemplate sqlSession, PageInfo pi, int code) {
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("helpMapper.selectInquiryList2", code, rowBounds);
+	}
+
+	
 	// 문의사항 조회수 높이기
 	public static int increaseCount(SqlSessionTemplate sqlSession, int ino) {
 		
@@ -258,6 +304,11 @@ public class HelpDao {
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList3", null, rowBounds);
 	}
+
+	
+	
+
+	
 
 	
 

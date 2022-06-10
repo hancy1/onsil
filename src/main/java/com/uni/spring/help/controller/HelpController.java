@@ -47,6 +47,23 @@ public class HelpController {
 		return "help/faqPage";
 	}
 	
+	// 자주묻는질문 페이지 이동 - 카테고리 별
+	@RequestMapping("faqCategory.do")
+	public String faqCategory(int code, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectFaqListCount(code);
+		System.out.println(listCount);
+				
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Faq> list = helpService.selectFaqList(pi, code); // 페이지 정보를 가지고 넘어가기
+				
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/faqPage";
+	}
+	
 	
 	// 공지사항 페이지 이동	
 	@RequestMapping("noticeList.do")
@@ -66,6 +83,22 @@ public class HelpController {
 		return "help/noticeListView";
 	}
 		
+	// 공지사항 페이지 이동 - 카테고리 별
+	@RequestMapping("noticeCategory.do")
+	public String noticeCategory(int code, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectNoticeListCount(code);
+		System.out.println(listCount);
+				
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Notice> list = helpService.selectNoticeList(pi, code); // 페이지 정보를 가지고 넘어가기
+				
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/noticeListView";
+	}
 	
 	// 문의사항 페이지 이동	
 	@RequestMapping("inquiryList.do")
@@ -85,6 +118,22 @@ public class HelpController {
 		return "help/inquiryListView";
 	}
 	
+	// 문의사항 페이지 이동 - 카테고리 별
+	@RequestMapping("inquiryCategory.do")
+	public String inquiryCategory(int code, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		int listCount = helpService.selectInquiryListCount(code);
+		System.out.println(listCount);
+				
+		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
+		
+		ArrayList<Inquiry> list = helpService.selectInquiryList(pi, code); // 페이지 정보를 가지고 넘어가기
+				
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);		
+		
+		return "help/inquiryListView";
+	}
 	
 	// 공지사항 디테일뷰
 	@RequestMapping("detailNotice.do")

@@ -46,6 +46,16 @@
 	    #pagingArea{width:fit-content;margin:auto;}
 	    /* #pagingArea a{color:black} */
 		
+		#category {
+			    margin-left:auto; 
+			    margin-right:auto;
+			}
+			
+		.category {
+			    border-collapse : collapse;
+			    border : 1px solid black;
+			    width:100px;
+			};
 	</style>
 </head>
 
@@ -58,7 +68,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/데이지.jpg);">
 			<h2>온실 :: 문의사항</h2>
 		</div>		
 		  
@@ -94,6 +104,22 @@
 	            </c:if>
 		 		<br><br>
 		 		
+				<table id="category" style="border: solid; text-align: center; width:800px; height: 60px;">
+		 			<tr>
+			 			<th class="category">전체</th>
+			 			<th class="category">회원</th>
+			 			<th class="category">주문결제</th>
+			 			<th class="category">배송</th>
+			 			<th class="category">취소/환불</th>
+			 			<th class="category">포인트</th>
+			 			<th class="category">반품/교환</th>
+			 			<th class="category">기타</th>
+		 			</tr>
+		 		</table>
+		 		
+		 		
+		 		<br><br>
+		 		
 		 		<div>	
 		 		
 			 		<table id="InquiryList" class="table table-hover" align="center">
@@ -114,7 +140,7 @@
 		                        <td>${ i.category }</td>
 		                        <td>${ i.title } &nbsp; [ ${ i.replyCount } ]</td>
 		                        <td>${ i.count }</td>
-		                        <td>${ i.writer }</td>		                        
+		                        <td><a href="gardenMain.do?hostUser=${i.writer}">${ i.writer }</a></td>		                        
 		                        <td>${ i.createDate }</td>	
 		                        <td><input type="hidden" name="open" value="${ i.userId }"></td>
 		                        <td><input type="hidden" name="open" value="${ i.open }"></td>		                                               
@@ -227,9 +253,39 @@
 	s1.setAttribute('crossorigin','*');
 	s0.parentNode.insertBefore(s1,s0);
 	})();
+	
+	
+	$(function(){
+  		$("#category tr th").click(function(){
+  			
+  			var category = $(this).text();
+  			
+  			switch(category) {
+  				case "전체" : location.href="noticeList.do";
+  				return;
+  				case "회원" : var code = 1;
+  				break;
+  				case "주문결제" : var code = 2;
+  				break;
+  				case "배송" : var code = 3;
+  				break;
+  				case "취소/환불" : var code = 4;
+  				break;
+  				case "포인트" : var code = 5;
+  				break;
+  				case "반품/교환" : var code = 6;
+  				break;
+  				case "기타" : var code = 7;
+  				break;
+  			}
+  			
+  			location.href="inquiryCategory.do?code=" + code;
+  			
+  		});
+  	});
 	</script>
 	<!--End of Tawk.to Script-->
 	
-	
+
 </body>
 </html>

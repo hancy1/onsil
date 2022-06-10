@@ -42,7 +42,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/튤립.jpg);">
 			<h2>온실 :: 자주묻는질문 관리</h2>
 		</div>		
 		  

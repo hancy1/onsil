@@ -16,13 +16,25 @@ public interface HelpService {
 
 	ArrayList<Faq> selectFaqList(PageInfo pi); // 자주묻는질문 게시물 가져오기
 
+	int selectFaqListCount(int code); // 자주묻는질문 카테고리별 게시물 갯수
+
+	ArrayList<Faq> selectFaqList(PageInfo pi, int code); // 자주묻는질문 카테고리별 정렬 가져오기
+	
 	int selectNoticeListCount(); // 공지사항 게시물 갯수 구하기
 
 	ArrayList<Notice> selectNoticeList(PageInfo pi); // 공지사항 게시물 가져오기
+	
+	int selectNoticeListCount(int code); // 공지사항 카테고리별 게시물 갯수 구하기
+
+	ArrayList<Notice> selectNoticeList(PageInfo pi, int code); // 공지사항 카테고리별 게시물 가져오기
 
 	int selectInquiryListCount(); // 문의사항 게시물 갯수 구하기
 
 	ArrayList<Inquiry> selectInquiryList(PageInfo pi); // 문의사항 게시물 가져오기
+	
+	int selectInquiryListCount(int code); // 문의사항 카테고리별 게시물 갯수 구하기
+
+	ArrayList<Inquiry> selectInquiryList(PageInfo pi, int code); // 문의사항 카테고리별 게시물 가져오기
 
 	Notice selectNotice(int nno); // 공지사항 디테일 뷰
 
@@ -80,6 +92,12 @@ public interface HelpService {
 
 	ArrayList<Inquiry> selectAdminInquiryList3(PageInfo pi); // 관리자 - 문의사항 관리 리스트 뷰  - 답변완료
 
+	
+
+	
+
+	
+ 
 	
 
 }

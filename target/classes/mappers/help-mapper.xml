@@ -105,7 +105,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STATUS='Y'	
 		ORDER BY FAQ_NO DESC	
 	</select>
+
+	<!-- 자주묻는질문 - 카테고리정렬 게시물 갯수 -->
+	<select id="selectFaqListCount2" resultType="_int">
+		SELECT COUNT(*) FROM FAQ JOIN INFO_CATEGORY ON FAQ.CATEGORY = INFO_CATEGORY.CATEGORY_CODE WHERE STATUS = 'Y' AND INFO_CATEGORY.CATEGORY_CODE = #{code}
+	</select>
 	
+	<!-- 자주묻는질문 - 카테고리정렬 게시물 가져오기 -->
+	<select id="selectFaqList2" resultMap="faqResultSet">
+		SELECT * 
+		FROM FAQ
+        JOIN INFO_CATEGORY ON FAQ.CATEGORY = INFO_CATEGORY.CATEGORY_CODE
+		WHERE STATUS='Y'	
+        AND INFO_CATEGORY.CATEGORY_CODE = #{code}
+		ORDER BY FAQ_NO DESC
+	</select>
+		
 	<!-- 공지사항 게시물 갯수 -->
 	<select id="selectNoticeListCount" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE WHERE STATUS = 'Y'
@@ -121,6 +136,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY NOTICE_NO DESC		
 	</select>
 	
+	<!-- 공지사항 - 카테고리정렬 게시물 갯수 -->
+	<select id="selectNoticeListCount2" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE JOIN INFO_CATEGORY ON NOTICE.CATEGORY = INFO_CATEGORY.CATEGORY_CODE WHERE STATUS = 'Y' AND INFO_CATEGORY.CATEGORY_CODE = #{code}
+	</select>
+	
+	<!-- 공지사항 - 카테고리정렬 게시물 가져오기 -->
+	<select id="selectNoticeList2" resultMap="noticeResultSet">
+		SELECT A.NOTICE_NO, B.CATEGORY_NAME, A.TITLE, C.USER_NAME, A.CREATE_DATE, A.CONTENT 
+		FROM NOTICE A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+        JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		AND B.CATEGORY_CODE = #{code}
+		ORDER BY NOTICE_NO DESC	
+	</select>
+	
 	<!-- 문의사항 게시물 갯수 -->
 	<select id="selectInquiryListCount" resultType="_int">
 		SELECT COUNT(*) FROM INQUIRY WHERE STATUS = 'Y'
@@ -133,6 +164,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
 		JOIN MEMBER C ON A.WRITER = C.USER_NO
 		WHERE A.STATUS='Y'
+		ORDER BY INQUIRY_NO DESC
+	</select>
+	
+	<!-- 문의사항 - 카테고리정렬 게시물 갯수 -->
+	<select id="selectInquiryListCount2" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY JOIN INFO_CATEGORY ON INQUIRY.CATEGORY = INFO_CATEGORY.CATEGORY_CODE WHERE STATUS = 'Y' AND INFO_CATEGORY.CATEGORY_CODE = #{code}
+	</select>
+	
+	<!-- 문의사항 - 카테고리정렬 게시물 가져오기 -->
+	<select id="selectInquiryList2" resultMap="inquiryResultSet">
+		SELECT A.INQUIRY_NO, B.CATEGORY_NAME, A.TITLE, A.COUNT, C.USER_NAME, A.CREATE_DATE, A.CONTENT, A.OPEN, A.STATUS, A.REPLYCOUNT, C.USER_NO, C.USER_ID
+		FROM INQUIRY A
+		JOIN INFO_CATEGORY B ON A.CATEGORY = B.CATEGORY_CODE
+		JOIN MEMBER C ON A.WRITER = C.USER_NO
+		WHERE A.STATUS='Y'
+		AND B.CATEGORY_CODE = #{code}
 		ORDER BY INQUIRY_NO DESC
 	</select>
 	
@@ -381,4 +428,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE ANSWER_STATUS = 'Y'
 		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
 	</select>
+	
+	
 </mapper>
