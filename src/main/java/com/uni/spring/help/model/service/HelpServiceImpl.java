@@ -40,6 +40,19 @@ public class HelpServiceImpl implements HelpService {
 		return HelpDao.selectFaqList(sqlSession, pi);
 	}
 
+	@Override // 자주묻는질문 - 카테고리정렬 게시물 갯수
+	public int selectFaqListCount(int code) {
+		
+		return HelpDao.selectFaqListCount(sqlSession, code);
+	}
+
+
+	@Override // 자주묻는질문 - 카테고리정렬 게시물 가져오기
+	public ArrayList<Faq> selectFaqList(PageInfo pi, int code) {
+		
+		return HelpDao.selectFaqList(sqlSession, pi, code);
+	}
+	
 
 	@Override // 공지사항 게시물 갯수 구하기
 	public int selectNoticeListCount() {
@@ -55,6 +68,19 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 
+	@Override // 공지사항 카테고리별 게시물 갯수 구하기
+	public int selectNoticeListCount(int code) {
+
+		return HelpDao.selectNoticeListCount(sqlSession, code);
+	}
+
+
+	@Override // 공지사항 카테고리별 게시물 가져오기
+	public ArrayList<Notice> selectNoticeList(PageInfo pi, int code) {
+
+		return HelpDao.selectNoticeList(sqlSession, pi, code);
+	}
+	
 	@Override // 문의사항 게시물 갯수 구하기
 	public int selectInquiryListCount() {
 
@@ -68,6 +94,18 @@ public class HelpServiceImpl implements HelpService {
 		return HelpDao.selectInquiryList(sqlSession, pi);
 	}
 
+	@Override // 문의사항 카테고리별 갯수구하기 
+	public int selectInquiryListCount(int code) {
+
+		return HelpDao.selectInquiryListCount(sqlSession, code);
+	}
+
+
+	@Override // 문의사항 카테고리별 게시물 가져오기
+	public ArrayList<Inquiry> selectInquiryList(PageInfo pi, int code) {
+
+		return HelpDao.selectInquiryList(sqlSession, pi, code);
+	}
 
 	@Override // 공지사항 디테일 뷰
 	public Notice selectNotice(int nno) {
@@ -335,6 +373,15 @@ public class HelpServiceImpl implements HelpService {
 		
 		return HelpDao.selectAdminInquiryList3(sqlSession, pi);
 	}
+
+
+	
+
+
+	
+
+
+	
 
 
 	

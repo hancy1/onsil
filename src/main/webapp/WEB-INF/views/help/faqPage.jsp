@@ -17,11 +17,11 @@
 		body {
 	      min-height: 100vh;
 	
-	      background: -webkit-gradient(linear, left bottom, right top, from(#79b07b), to(#5a8c5c));
-	      background: -webkit-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-	      background: -moz-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-	      background: -o-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-	      background: linear-gradient(to top right, #79b07b 0%, #5a8c5c 100%);
+	      background: -webkit-gradient(linear, left bottom, right top, from(#F3E669), to(#F3E669));
+	      background: -webkit-linear-gradient(bottom left, #F3E669 0%, #F3E669 100%);
+	      background: -moz-linear-gradient(bottom left, #F3E669 0%, #F3E669 100%);
+	      background: -o-linear-gradient(bottom left, #F3E669 0%, #F3E669 100%);
+	      background: linear-gradient(to top right, #F3E669 0%, #F3E669 100%);
 	    }
 	    
 	    .input-form {
@@ -88,6 +88,20 @@
 		  color: #666;
 		  margin-right: 5px;
 		  }
+		  
+		  table {
+			    margin-left:auto; 
+			    margin-right:auto;
+			}
+			
+		  table, td, th {
+			    border-collapse : collapse;
+			    border : 1px solid black;
+			    width:100px;
+			};
+			
+
+			  
 	</style>
 </head>
 
@@ -99,7 +113,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/튤립.jpg);">
 			<h2>온실 :: 자주 묻는 질문</h2>
 		</div>		
 		  
@@ -127,7 +141,24 @@
 	 	<div class="input-form-backgroud row">
 	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 		 		<h4>자주 묻는 질문</h4>
-		 		<br><br>	 		
+		 		<br><br>
+		 		
+		 		<table id="category" style="border: solid; text-align: center; width:800px; height: 60px;">
+		 			<tr>
+			 			<th>전체</th>
+			 			<th>회원</th>
+			 			<th>주문결제</th>
+			 			<th>배송</th>
+			 			<th>취소/환불</th>
+			 			<th>포인트</th>
+			 			<th>반품/교환</th>
+			 			<th>기타</th>
+		 			</tr>
+		 		</table>
+		 		
+		 		
+		 		<br><br>
+		 			 		
 		 		<form method="post" id="faqList">
 		 		
 		 		<div>
@@ -224,6 +255,36 @@
 		  $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
 	  
+	 
+  	$(function(){
+  		$("table tr th").click(function(){
+  			
+  			var category = $(this).text();
+  			
+  			switch(category) {
+  				case "전체" : location.href="faqList.do";
+  				return;
+  				case "회원" : var code = 1;
+  				break;
+  				case "주문결제" : var code = 2;
+  				break;
+  				case "배송" : var code = 3;
+  				break;
+  				case "취소/환불" : var code = 4;
+  				break;
+  				case "포인트" : var code = 5;
+  				break;
+  				case "반품/교환" : var code = 6;
+  				break;
+  				case "기타" : var code = 7;
+  				break;
+  			}
+  			
+  			location.href="faqCategory.do?code=" + code;
+  			
+  		});
+  	});
+  
   </script>
   
   
