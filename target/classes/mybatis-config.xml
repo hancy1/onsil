@@ -31,6 +31,7 @@
 		
 		<typeAlias type="com.uni.spring.ticket.model.dto.Ticket" alias="Ticket"/>
 		<typeAlias type="com.uni.spring.ticket.model.dto.RBoard" alias="REVIEWBOARD"/>
+		<typeAlias type="com.uni.spring.ticket.model.dto.RBLike" alias="RBLike" />
 		
 		<typeAlias type="com.uni.spring.help.model.dto.Faq" alias="Faq"/>
 		<typeAlias type="com.uni.spring.help.model.dto.Notice" alias="Notice"/>

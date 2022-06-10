@@ -3,6 +3,7 @@ package com.uni.spring.ticket.model.service;
 import java.util.ArrayList;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.RBLike;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 
@@ -15,6 +16,10 @@ public interface ReviewBoardService {
 	void insertRBoard(RBoard rb);
 
 	RBoard selectRBoard(int bno);
+
+	RBLike findHeart(int bno, int userNo);
+
+	int insertHeart(RBLike heart);
 
 	
 }

@@ -30,6 +30,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </resultMap>
 
+<resultMap type="RBLike" id="RBLikeResultSet">
+
+
+    <id property="rbLikeNo" column="RB_LIKE_NO"/>
+         <result property="rbNo" column="RB_NO"/>
+         <result property="userNo" column="USER_NO"/>
+         <result property="heart" column="HEART"/>
+        
+
+</resultMap>
+
      <!-- 예약카테고리 - 후기게시판 등록 수 -->
      <select id="selectRBListCount" resultType="_int">
      SELECT COUNT(*)FROM REVIEWBOARD 
@@ -58,5 +69,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
   </select>
   
+  <select id="findHeart" parameterType="java.util.HashMap" resultType="RBLike">
+	select * from RB_LIKE
+	 where RB_NO=#{rbNo} and USER_NO=#{userNo}
+</select>
+  
+   <!--
+ <select id="findHeart" parameterType="_int" resultType="RBLike">
+	select * from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo}
+</select>
+
+
+<insert id="insertHeart" >
+	insert into RB_LIKE(RB_NO, USER_NO, HEART)
+		values(#{rbNo}, #{userNo}, 1)
+</insert>
+
+ 
+<delete id="deleteHeart" parameterType="_int" >
+	delete from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo}
+</delete>--> 
 
 </mapper>

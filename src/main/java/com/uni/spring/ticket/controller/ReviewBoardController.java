@@ -11,14 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.RBLike;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 import com.uni.spring.ticket.model.service.ReviewBoardService;
@@ -108,16 +112,29 @@ public class ReviewBoardController {
 		
 		//후기게시판 디테일페이지 연결
 		@RequestMapping("detailRBoard.do")
-		public ModelAndView selectBoard(int bno,ModelAndView mv) {
+		public ModelAndView selectBoard(int bno,ModelAndView mv,@RequestParam(name="userNo") int userNo,Model model) {
 			
 		
 			RBoard rb = reviewBoard.selectRBoard(bno);
 			
 			mv.addObject("rb",rb).setViewName("Ticket/rboardDetailView");
 			
+			RBLike heart = new RBLike();
+			// 좋아요가 되있는지  게시글번호와 회원번호를 보냄.
+			heart = reviewBoard.findHeart(bno,userNo);
+			
+			// 찾은 정보를 heart로 담아서 보냄
+			model.addAttribute("heart",heart);
+			//((Model) mv).addAttribute("heart",heart);
+			
 			return mv;
 			
 		}
 		
-	
+		@RequestMapping(value="heart",method=RequestMethod.POST)
+		public @ResponseBody int heart(@ModelAttribute RBLike heart) {
+			int result = reviewBoard.insertHeart(heart);
+			return result;
+		}
+
 }
