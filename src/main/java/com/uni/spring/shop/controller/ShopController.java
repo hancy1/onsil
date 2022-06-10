@@ -64,6 +64,66 @@ public class ShopController {
 		return "shop/shopMain";
 	}
 	
+	//tree카테
+	@RequestMapping("treeListProducts.do")
+	public String selectShopTreeList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+				
+		int listCount = shopService.productTreeListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.selectShopTreeList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "shop/shopMain";
+	}
+	
+	//edible카테
+	@RequestMapping("edibleListProducts.do")
+	public String selectShopEdibleList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+				
+		int listCount = shopService.productEdibleListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.selectShopEdibleList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "shop/shopMain";
+	}
+	
+	//꽃카테
+	@RequestMapping("flowerListProducts.do")
+	public String selectShopFlowerList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+				
+		int listCount = shopService.productFlowerListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.selectShopFlowerList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "shop/shopMain";
+	}
+	
+	//기타카테
+	@RequestMapping("ectListProducts.do")
+	public String selectShopEctList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+				
+		int listCount = shopService.productEctListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.selectShopEctList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "shop/shopMain";
+	}
+	
 	
 	//장바구니 연결  (DB완)
 	@RequestMapping("CartList.do")

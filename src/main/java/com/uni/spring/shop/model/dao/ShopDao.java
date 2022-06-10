@@ -137,6 +137,58 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.selectOrder",orderNo);
 	}
 
+	public ArrayList<Product> selectShopTreeList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectShopTreeList", null, rowdounds);
+	}
+
+	public ArrayList<Product> selectShopEdibleList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectShopEdibleList", null, rowdounds);
+	}
+
+	public ArrayList<Product> selectShopFlowerList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectShopFlowerList", null, rowdounds);
+	}
+
+	public ArrayList<Product> selectShopEctList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectShopEctList", null, rowdounds);
+	}
+
+	public int productEctListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.productEctListCount");
+	}
+
+	public int productFlowerListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.productFlowerListCount");
+	}
+
+	public int productEdibleListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.productEdibleListCount");
+	}
+
+	public int productTreeListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.productTreeListCount");
+	}
+
 
 
 

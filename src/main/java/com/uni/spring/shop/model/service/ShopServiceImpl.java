@@ -257,6 +257,70 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ArrayList<Product> selectShopTreeList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectShopTreeList(sqlSession,pi);
+	}
+
+
+
+	@Override
+	public ArrayList<Product> selectShopEdibleList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectShopEdibleList(sqlSession,pi);
+	}
+
+
+
+	@Override
+	public ArrayList<Product> selectShopFlowerList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectShopFlowerList(sqlSession,pi);
+	}
+
+
+
+	@Override
+	public ArrayList<Product> selectShopEctList(ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectShopEctList(sqlSession,pi);
+	}
+
+
+
+	@Override
+	public int productEctListCount() {
+		// TODO Auto-generated method stub
+		return shopDao.productEctListCount(sqlSession);
+	}
+
+
+
+	@Override
+	public int productFlowerListCount() {
+		// TODO Auto-generated method stub
+		return shopDao.productFlowerListCount(sqlSession);
+	}
+
+
+
+	@Override
+	public int productEdibleListCount() {
+		// TODO Auto-generated method stub
+		return shopDao.productEdibleListCount(sqlSession);
+	}
+
+
+
+	@Override
+	public int productTreeListCount() {
+		// TODO Auto-generated method stub
+		return shopDao.productTreeListCount(sqlSession);
+	}
+
+
+
 
 
 

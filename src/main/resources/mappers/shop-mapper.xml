@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
   	
   	
-	<!--등록된 product 수 (판매중인것) -->
+	<!--등록된 product 수 (판매중인것) - 올 -->
 	<select id = "productListCount" resultType="_int">
 
 	SELECT COUNT(*)
@@ -194,12 +194,91 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 
-	<!--판매중인 제품 select해오기 -->
+	<!--판매중인 제품 select해오기 - 올 -->
 	<select id="selectShopList" parameterType="Product" resultMap="productResultSet">	
 		 
 	  SELECT *
 	  FROM PRODUCT
 	  WHERE PRO_STATUS='Y'
+	    
+	</select>
+	
+	<!--등록된 product 수 (판매중인것) - 트리 -->
+	<select id = "productTreeListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	WHERE PRO_STATUS='Y'
+  	AND CATE_CODE='tree'
+    
+  	</select>
+
+	<!--판매중인 제품 select해오기 - 트리 -->
+	<select id="selectShopTreeList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+	  AND CATE_CODE='tree'
+	    
+	</select>
+	
+	<!--등록된 product 수 (판매중인것) 식용 -->
+	<select id = "productEdibleListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	WHERE PRO_STATUS='Y'
+    AND CATE_CODE='edible'
+    
+  	</select>
+
+	<!--판매중인 제품 select해오기 식용 -->
+	<select id="selectShopEdibleList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+	  AND CATE_CODE='edible'
+	     
+	</select>
+	
+	<!--등록된 product 수 (판매중인것) 꽃 -->
+	<select id = "productFlowerListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	WHERE PRO_STATUS='Y'
+    AND CATE_CODE='flower'
+  	</select>
+
+	<!--판매중인 제품 select해오기 꽃 -->
+	<select id="selectShopFlowerList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+	  AND CATE_CODE='flower'
+	    
+	</select>
+	
+	<!--등록된 product 수 (판매중인것) 기타 -->
+	<select id = "productEctListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRODUCT
+  	WHERE PRO_STATUS='Y'
+    AND CATE_CODE='ect'
+    
+  	</select>
+
+	<!--판매중인 제품 select해오기 기타 -->
+	<select id="selectShopEctList" parameterType="Product" resultMap="productResultSet">	
+		 
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+	  AND CATE_CODE='ect'
 	    
 	</select>
 	

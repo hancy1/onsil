@@ -12,9 +12,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!-- jQuery library 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!-- jQuery library--> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <!-- Favicon -->
@@ -72,16 +71,53 @@
 						</div>
 						<!-- Search by Terms -->
 						<div class="search_by_terms">
-							 <form action="#" method="post" class="form-inline">
-                                <select class="custom-select widget-title">
-                                  <option selected>전체보기</option>
-                                  <option value="1">나무</option>
-                                  <option value="2">식용</option>
-                                  <option value="3">꽃</option>
-                                  <option value="4">기타(영양제,화분)</option>
+							 <!-- <form action="#" method="post" class="form-inline"> -->
+                                <select id="selectbox" name="selectbox" onchange="chageCateSelect()" class="custom-select widget-title">
+                                  <option value="1">전체보기</option>
+                                  <option value="2">나무</option>
+                                  <option value="3">식용</option>
+                                  <option value="4">꽃</option>
+                                  <option value="5">기타(영양제,화분)</option>
                                 </select>
+                            <!-- </form> --> 
+                            <script>
+								function chageCateSelect(){
+								    var selectCate = document.getElementById("selectbox");
+								     
+								    // select element에서 선택된 option의 value가 저장된다.
+								    var selectValue = selectCate.options[selectCate.selectedIndex].value;
+								 
+								    // select element에서 선택된 option의 text가 저장된다.
+								    var selectText = selectCate.options[selectCate.selectedIndex].text;
+								    								    
+								    var cate = $("#selectbox").val();
+								    
+								    console.log(selectValue);								    
+								    console.log(cate);
+								   
+								    
+								    switch(cate){
+								    
+								    case '1':
+								    	location.href="listProducts.do"
+								    	break;	
+								    case '2':
+								    	location.href="treeListProducts.do"
+								    	break;
+								    case '3':
+								    	location.href="edibleListProducts.do"
+								    	break;
+								    case '4':
+								    	location.href="flowerListProducts.do"
+								    	break;
+								    case '5':
+								    	location.href="ectListProducts.do"
+								    	break;
+								    }
+								    
+								}
+							</script>
 
-                            </form>
 						</div>
 					</div>
 				</div>
