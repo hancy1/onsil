@@ -55,6 +55,22 @@ public interface ShopService {
 
 	ProOrder selectOrder(int orderNo);
 
+	ArrayList<Product> selectShopTreeList(ShopPageInfo pi);
+
+	ArrayList<Product> selectShopEdibleList(ShopPageInfo pi);
+
+	ArrayList<Product> selectShopFlowerList(ShopPageInfo pi);
+
+	ArrayList<Product> selectShopEctList(ShopPageInfo pi);
+
+	int productEctListCount();
+
+	int productFlowerListCount();
+
+	int productEdibleListCount();
+
+	int productTreeListCount();
+
 
 
 	
