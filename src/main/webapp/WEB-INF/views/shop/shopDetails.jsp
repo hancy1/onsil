@@ -7,26 +7,16 @@
 
 <meta name="description" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-
-<!-- jQuery library--> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <!-- Core Stylesheet -->
 <link rel="stylesheet" href="resources/style.css">
 
-<!-- 스타일 -->
-
-<style>
-
-
-</style>
 
 <!-- Title -->
 <title>온실 - Gardening SHOP 상세페이지</title>
