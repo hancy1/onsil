@@ -321,6 +321,14 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public Product selectShop(String proCode) {
+		// TODO Auto-generated method stub
+		return shopDao.selectShop(sqlSession,proCode);
+	}
+
+
+
 
 
 
