@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 자유게시판</title>
+    <title>온실 :: 자유게시판</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -20,14 +20,6 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	
-	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 
@@ -72,40 +64,47 @@
                                 <div class="contact-form-area">
                                     <!-- Comment Form --><!-- 첨부파일 등록할꺼니깐 Multipart/form-data encType 지정하기 -->
                                     <form id="enrollForm" action="updateBoard.do" method="post" enctype="multipart/form-data">
+                                     	<input type="hidden" name="bno" value="${ b.BNo }">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="title" value="${ b.BTitle }">
+                                                    <input type="text" class="form-control" id="Btitle" value="${ b.BTitle }">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="writer" value="사용자 아이디 : ${ loginUser.userId }" name="boardWriter" readonly>
+                                                    <input type="hidden" class="form-control" value="사용자 아이디 : ${ loginUser.userNo }" name="userNo" readonly>
                                                 </div>
                                             </div>
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <select name="category" class="form-control" id="category">
-                                                    	<option value="${ b.BCategoryNo }">카테고리 선택</option>
-                                                    	<option value="info">정보</option>
-                                                    	<option value="photo">사진</option>
-                                                    	<option value="review">후기</option>
-                                                    	<option value="ect">기타</option>
+                                                    <select name="BCategoryNo"" class="form-control">
+                                                    	<option value="${ b.BCategoryNo }">${ b.BCategoryName }</option>
+                                                    	<option value="1">사진</option>
+                                                    	<option value="2">정보</option>
+                                                    	<option value="3">후기</option>
+                                                    	<option value="4">기타</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-12 col-md-6">
+                                            <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control" id="upfile" name="uploadFile">
-                                                </div>
-                                            </div> -->
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control summernote" required name="boardContent" id="content" cols="30" rows="10">${ b.BContent }</textarea>
+                                                    <input type="file" class="form-control" id="upfile" name="reUploadFile" value="${ b.BChangeName }">
+                                                    <c:if test="${ !empty b.BOriginName }">
+	                                                    현재 업로드된 파일 : ${ b.BOriginName } <br>
+							                            <input type="hidden" name="changeName" value="${ b.BChangeName }">
+							                            <input type="hidden" name="originName" value="${ b.BOriginName }">
+						                            </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn">작성하기</button>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" required name="BContent" cols="30" rows="10">${ b.BContent }</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn alazea-btn">수정하기</button>
+                                                <button type="button" class="btn alazea-btn" onclick="javascript:history.go(-1);">취소하기</button>
                                             </div>
                                         </div>
                                     </form>
@@ -118,14 +117,6 @@
         </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
-    
-    <script>
-      $('.summernote').summernote({
-        placeholder: '내용을 작성해주세요',
-        tabsize: 2,
-        height: 100
-      });
-    </script>
     
     <jsp:include page="../common/footer.jsp" />
     

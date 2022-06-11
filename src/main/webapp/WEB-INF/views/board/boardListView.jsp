@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 자유게시판</title>
+    <title>온실 :: 자유게시판</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -32,7 +32,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
-            <h2>자유게시판</h2>
+            <h2>온실 :: 자유게시판</h2>
         </div>
 
         <div class="container">
@@ -76,7 +76,7 @@
 			                        <td>${ b.BNo }</td>
 			                        <td>${ b.BCategoryName }</td>
 			                        <td>${ b.BTitle }</td>
-			                        <td>${ b.userId }</td>
+			                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userId }</a></td>
 			                        <td>${ b.BDate }</td>	<!-- <fmt:formatDate pattern="yy-MM-dd" value=""/> -->
 			                        <td>${ b.BCount }</td>
 			                        <td></td>
@@ -87,13 +87,13 @@
 				<br><br>
 								
 				<!-- 글쓰기 버튼 : 로그인 상태일시 글쓰기 버튼 보임 -->
-				<div class="single-widget-area">
-					<ol class="popular-tags d-flex flex-wrap">
-						<c:if test="${ !empty loginUser }">
-	                	<li><a href="enrollBoard.do">글쓰기</a></li>
-	                	</c:if>
-	                </ol>
-                </div>
+					<div class="single-widget-area">
+						<ol class="popular-tags d-flex flex-wrap">
+							<c:if test="${ !empty loginUser }">
+		                		<li><a href="enrollBoard.do">글쓰기</a></li>
+		                	</c:if>
+		                </ol>
+	                </div>
                 </div>
 		
                     <div class="row">
@@ -167,7 +167,7 @@
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>최근 게시물</h4>
+                                <h4>인기 게시글</h4>
                             </div>
 
                             <!-- Single Latest Posts -->

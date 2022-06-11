@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,10 +48,10 @@ public class BoardController {
 	      
 	    int listCount = boardService.selectListCount();
 	      
-	    PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 5);
+	    PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 번호 10개씩, 게시글 10개씩 출력
 	      
 	    ArrayList<Board> list = boardService.selectList(pi);
-	    System.out.println(list.get(0));	//게시판 목록 넘어오는지 확인
+	    //System.out.println(list.get(0));	게시판 목록 넘어오는지 확인
 	      
 	    model.addAttribute("list", list);
 	    model.addAttribute("pi", pi);
@@ -60,12 +61,13 @@ public class BoardController {
 	
 	// 게시판 상세보기
 	@RequestMapping("detailBoard.do")
-	public ModelAndView selectboard(int bno, ModelAndView mv) {
+	public ModelAndView selectboard(int bno, ModelAndView mv, Board b) {
 		   
-		Board b =  boardService.selectBoard(bno);
-		   
+		b = boardService.selectBoard(bno);
+		b.setBNo(bno);	// 객체에 글번호 + 게시글 정보 담기
+		
 		mv.addObject("b", b).setViewName("board/boardDetail");
-		   
+		System.out.println("상세보기 객체 확인용 : " + b);   
 		return mv;		   
 	}
 	
@@ -79,9 +81,8 @@ public class BoardController {
 	// 게시글 작성하기
 	@RequestMapping("insertBoard.do")
 	public String insertBoard(@RequestParam(name="uploadFile", required = false) MultipartFile file, Board b, HttpServletRequest request) {
-		
-	   System.out.println(b);
-	   System.out.println(file.getOriginalFilename());		//안넘어오네...?
+
+	   //System.out.println(file.getOriginalFilename());		저장한 파일 기존 이름
 	   
 	   if(!file.getOriginalFilename().equals("")) {			//전달받은 파일이 없으면 빈 문자열
 	   
@@ -133,6 +134,7 @@ public class BoardController {
 	public String deleteBoard(int bno, String fileName, HttpServletRequest request) {
 		   
 		boardService.deleteBoard(bno);
+		System.out.println("컨트롤러 삭제하기 글번호" + bno);
 		   
 		if(!fileName.equals("")) { //파일이 첨부됐다면?
 			deleteFile(fileName, request); //파일 지우기
@@ -157,9 +159,10 @@ public class BoardController {
 	@RequestMapping("updateForm.do")		
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 								//새로 조회해야해서 bno만 가져옴 
-		
+		System.out.println("수정하기 폼 전 " +bno);
 		mv.addObject("b", boardService.selectBoard(bno))
 		.setViewName("board/boardUpdateForm");
+		System.out.println("수정하기 폼 후 " +bno);
 
 		return mv;
 	}

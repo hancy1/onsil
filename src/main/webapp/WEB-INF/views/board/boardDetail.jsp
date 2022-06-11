@@ -12,13 +12,13 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 자유게시판</title>
+    <title>온실 :: 자유게시판</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/style.css">
 </head>
 <body>
 
@@ -58,14 +58,21 @@
                         <!-- Post Details Area -->
                         <div class="single-post-details-area">
                             <div class="post-content">
-                                <h4 class="post-title">[${ b.BCategoryName }] ${ b.BTitle }</h4>
+                                <h4 class="post-title">[ ${ b.BCategoryName } ] ${ b.BTitle }</h4>
                                 <div class="post-meta mb-30">
                                     <a><i class="fa fa-clock-o" aria-hidden="true"></i>${ b.BDate }</a>
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i>${ b.userId }</a>
+                                    <a href="gardenMain.do?hostUser=${ loginUser.userNo }"><i class="fa fa-user" aria-hidden="true"></i>${ b.userId }</a>
                                 </div>
+                                <div class="post-meta mb-30" align="right">
+									<a><i>좋아요♡</i></a>
+                                    <a><i>신고하기</i></a>
+                                </div>
+                                
                                 <div class="post-thumbnail mb-30">
-                                    <img src="img/bg-img/35.jpg" alt="">
-                                </div>
+	                                
+	                                    <img src="resources/b_upload_files/${ b.BChangeName }">
+	                                
+                                </div>                                
                                 <p>${ b.BContent }</p>
                             </div>
                         </div>
@@ -80,35 +87,36 @@
                                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </div>
                             <!-- 수정, 삭제 버튼 -->
-                            <c:if test="${ userNo == loginUser.userNo }">
-                            <ol class="popular-tags d-flex align-items-center flex-wrap">
-                                <!-- <li><a href="#">수정하기</a></li>왜...
-                                <li><a href="#">삭제하기</a></li> -->
-                                <li><a onclick="bSubmit(1);">수정하기</a></li>
-                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
-                            </ol>
-                            <form id="postForm" action="" method="post">
-								<input type="hidden" name="bNo" value="${ b.BNo }">
-								<input type="hidden" name="fileName" value="${ b.BChangeName }"> 
-							</form>
-                            <script>
-								function bSubmit(num){
-									var postForm = $("#postForm");
-						
-									if(num == 1){
-										postForm.attr("action", "updateForm.do");
-									}else{
-										postForm.attr("action", "deleteBoard.do");
+                            <div align="right">
+	                            <c:if test="${ loginUser.userId eq b.userId }">
+	                            <ol class="popular-tags d-flex align-items-center flex-wrap">
+	                                <li><a onclick="bSubmit(1);">수정하기</a></li>
+	                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
+	                            </ol>
+	                            <form id="postForm" action="" method="post">
+									<input type="hidden" name="bno" value="${ b.BNo }">
+									<input type="hidden" name="fileName" value="${ b.BChangeName }"> 
+								</form>
+	                            <script>
+									function bSubmit(num){
+										var postForm = $("#postForm");
+							
+										if(num == 1){
+											postForm.attr("action", "updateForm.do");
+										}else{
+											postForm.attr("action", "deleteBoard.do");
+											alert("삭제가 완료되었습니다.");
+										}
+										postForm.submit();
 									}
-									postForm.submit();
-								}
-							</script>
-                            </c:if>
+								</script>
+	                            </c:if>
+                            </div>
                         </div>
 
                         <!-- 댓글 -->
                         <div class="comment_area clearfix" id="replyArea">
-                            <h4 class="headline">댓글수 [ <span id="rcount">0</span> ]</h4>
+                            <h4 class="headline">댓글 [ <span id="rcount">0</span> ]</h4>
 
                             <ol>
                                 <!-- Single Comment Area -->
@@ -116,87 +124,52 @@
                                     <div class="comment-wrapper d-flex">
                                         <!-- Comment Content -->
                                         <div class="comment-content">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <h5>${ USER_NO }</h5>
-                                                <span class="comment-date">${ RE_DATE }</span>
-                                            </div>
-                                            <p id="replyContent"></p>
-                                            <a class="active" href="#">삭제</a>
+                                        	<table id="replyArea" class="table" align="center">
+								                <thead>
+								                    <tr>
+								                    	<c:if test="${ !empty loginUser }">
+									                        <th colspan="2" style="width:75%">
+									                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+									                        </th>
+									                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
+								                        </c:if>
+								                        <c:if test="${ empty loginUser }">
+								                        	<th colspan="2" style="width:75%">
+									                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인 후 이용해주세요.</textarea>
+									                        </th>
+									                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+								                        </c:if>
+								                    </tr>
+								                </thead>
+								                <tbody>
+								                
+								                </tbody>
+								            </table>
                                         </div>
                                     </div>
                                 </li>                           
                             </ol>
-                        </div>
-                        
-                        <!-- 댓글 작성폼 -->
-                        <div class="leave-comment-area clearfix">
-                            <div class="comment-form">
-                                <h4 class="headline">댓글 작성하기</h4>
-
-                                <div class="contact-form-area">
-                                    <form id="enrollForm" action="#" method="post">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                	<h5 href="rinsertBoard.do"><i class="fa fa-user" aria-hidden="true"></i> ${ loginUser.userId }</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="boardContent" id="content" cols="30" rows="10" placeholder="댓글 내용을 작성해 주세요."  style="resize:none;"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn alazea-btn">작성하기</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                      
                     </div>
                 </div> 
                    
                 <!-- 게시글 사이드바 -->
                 <div class="col-12 col-sm-9 col-md-4">
                     <div class="post-sidebar-area">
-
+                    
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <form action="#" method="get" class="search-form">
                                 <input type="search" name="search" id="widgetSearch" placeholder="Search...">
                                 <button type="submit"><i class="icon_search"></i></button>
                             </form>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Author Widget -->
-                            <div class="author-widget">
-                                <div class="author-thumb-name d-flex align-items-center">
-                                    <div class="author-thumb">
-                                        <img src="img/bg-img/29.jpg" alt="">
-                                    </div>
-                                    <div class="author-name">
-                                        <h5>Alan Jackson</h5>
-                                        <p>Editor</p>
-                                    </div>
-                                </div>
-                                <p>I’m the editor for houseplants &amp; garden design articles on social, and I like to put each of those articles in the topic.</p>
-                                <div class="social-info">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                      
 
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Recent post</h4>
+                                <h4>인기 게시글</h4>
                             </div>
 
                             <!-- Single Latest Posts -->
@@ -237,45 +210,13 @@
                                     <a href="#" class="post-date">20 Jun 2018</a>
                                 </div>
                             </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="img/bg-img/33.jpg" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
                             <div class="widget-title">
-                                <h4>Tag Cloud</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">PLANTS</a></li>
-                                <li><a href="#">NEW PRODUCTS</a></li>
-                                <li><a href="#">CACTUS</a></li>
-                                <li><a href="#">DESIGN</a></li>
-                                <li><a href="#">NEWS</a></li>
-                                <li><a href="#">TRENDING</a></li>
-                                <li><a href="#">VIDEO</a></li>
-                                <li><a href="#">GARDEN DESIGN</a></li>
-                            </ol>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>BEST SELLER</h4>
+                                <h4>최근 게시글</h4>
                             </div>
 
                             <!-- Single Best Seller Products -->
@@ -354,7 +295,7 @@
 						type:"post",
 						data:{replyContent:$("#replyContent").val(),
 							  refBoardNo:bno,
-							  replyWriter:"${loginUser.userId}"},
+							  replyWriter:"${ loginUser.userId }"},
 						success:function(result){
 							if(result > 0){
 								$("#replyContent").val("");
@@ -388,17 +329,17 @@
 					$.each(list, function(i, obj){
 						
 						if("${loginUser.userId}" == obj.replyWriter){
-							value += "<ol style='background:#EAFAF1'>";
+							value += "<tr style='background:#EAFAF1'>";
 						}else{
-							value += "<ol>";
+							value += "<tr>";
 						}
 						
-						value += "<h5>" + obj.replyWriter + "</h5>" + 
-									 "<p>" + obj.replyContent + "</p>" + 
-									 "<span>" + obj.createDate + "</span>" +
-							 "</ol>";
+						value += "<th>" + obj.replyWriter + "</th>" + 
+									 "<td>" + obj.replyContent + "</td>" + 
+									 "<td>" + obj.createDate + "</td>" +
+							 "</tr>";
 					});
-					$("#replyArea div").html(value);
+					$("#replyArea tbody").html(value);
 				},error:function(){
 					console.log("댓글 리스트 조회용 ajax 통신 실패!");
 				}

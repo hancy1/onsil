@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 선택 -->
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
-		SELECT C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_CONTENT
+		SELECT C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_CONTENT, A.B_CHANGE_NAME
 		FROM BOARD A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 삭제 -->	
 	<update id="deleteBoard" parameterType="_int">
 		UPDATE BOARD
-		SET STATUS = 'N' 
+		SET B_STATUS = 'N' 
 		WHERE B_NO=#{bno}	
 	</update>
 	
