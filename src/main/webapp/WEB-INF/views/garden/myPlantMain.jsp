@@ -5,19 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>온실 - Garden 내식물관리</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
-
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session" />
-	</c:if>
 
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
@@ -25,7 +18,6 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>${ hostUser }님의 정원</h2>
 		</div>
 
 		<div class="container">
@@ -33,11 +25,10 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<!-- 이 부분 나중에 수정..? -->
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item "><a href="gardenMain.do">정원 메인화면</a></li>
-							<li class="breadcrumb-item active" aria-current="page">내식물관리</li>
+							<li class="breadcrumb-item active" aria-current="page">내 식물 관리</li>
 						</ol>
 					</nav>
 				</div>
@@ -54,7 +45,6 @@
 
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
-								<h5>내 식물 관리</h5>
 								<br>
 								<table class="table">
 									 <!-- <tr class="danger">

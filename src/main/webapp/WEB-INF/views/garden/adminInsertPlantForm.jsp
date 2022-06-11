@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 | 식물 등록</title>
+<title>ADMIN :: 식물정보 등록</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 <style>
@@ -19,9 +19,6 @@ th, td {
 	font-weight: bold;
 }
 
-
-
-   
 .input-form {
   text-align:center;
   width: 680px;
@@ -45,18 +42,7 @@ th, td {
 textarea {width:100%;
 		  height:80%;		
 		  resize:none;		
-		  
-	.btn.btn-primary{background: #3ac240;
-				 border-color: #3ac240;} 
-.btn.btn-primary:hover{background: white;
-			  		   border-color: #3ac240;
-			  	       color: #3ac240;} 
-			  	       
-.btn.btn-danger{background: white;
-			    border-color: #3ac240;
-			    color: #3ac240;}
-   .btn.btn-danger:hover{background: #3ac240;
-					  border-color: #3ac240;}  
+ 
 }		
 		
 
@@ -72,14 +58,13 @@ textarea {width:100%;
 		<c:remove var="msg" scope="session"/>
 	</c:if>
 	
-	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>관리자 :: 식물등록</h2>
+			style="background-image: url(resources/img/bg-img/garden2.jpg);">
+			<h2>ADMIN :: 식물정보 등록</h2>
 		</div>
 
 		<div class="container">
@@ -87,11 +72,10 @@ textarea {width:100%;
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-						<!-- 이 부분 나중에 수정..? -->
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item "><a href="adminPlant.do">식물등록 메인화면</a></li>		
-							<li class="breadcrumb-item active" aria-current="page">식물등록</li>
+							<li class="breadcrumb-item "><a href="adminPlant.do">식물정보 관리</a></li>		
+							<li class="breadcrumb-item active" aria-current="page">식물정보 등록</li>
 						</ol>
 					</nav>
 				</div>
@@ -101,12 +85,12 @@ textarea {width:100%;
 	<!-- ##### Breadcrumb Area End ##### -->
 	
 	<section id="aa-product-category">
-		<div class="container" align="center">
+		<div class="container" >
 			<div class="row my-5">
-				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-9 col-md-9 col-sm-9" style="margin:auto">
 					<div class="aa-product-catg-content">
 						<div class="aa-product-catg-body">
-							<div class="table-responsive">
+							<div class="table-responsive" style="text-align:center">
 								<h5>식물등록</h5>
 								<br>
 								</div>	

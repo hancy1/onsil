@@ -5,27 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>온실 - Garden 내식물관리</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
 
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session" />
-	</c:if>
-
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>${ hostUser }님의 정원</h2>
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
+			<h2>${ hostUser }님의 식물정보</h2>
 		</div>
 
 		<div class="container">

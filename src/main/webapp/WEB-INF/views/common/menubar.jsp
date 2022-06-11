@@ -160,7 +160,7 @@
 										</ul>
 									</li>
 									
-									<li><a href="gardenMain.do" style="font-size: 15px; padding-right: 15px;">정원관리</a>
+									<li><a href="gardenMain.do" style="font-size: 15px; padding-right: 15px;">정원</a>
 										<ul class="dropdown">
 											<li><a href="visitorBoard.do">방명록</a></li>
 											<li><a href="dailyLog.do">데일리로그</a>
@@ -193,7 +193,7 @@
 											<li><a href="#">신고된 게시글</a></li>
 											<li><a href="listTicket.do">티켓등록</a></li>
 											<li><a href="#">후기관리</a></li>
-											<li><a href="adminPlant.do">식물등록</a></li>
+											<li><a href="adminPlant.do">식물정보관리</a></li>
 										</ul>
 									</li> 
 									</ul>

@@ -49,7 +49,6 @@ public class GardenController {
 		
 		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
 		ArrayList<PlantGrow> list = gardenService.selectPlantGrowAlert(userNo);
-		System.out.println("list확인 " + list);
 		
 		model.addAttribute("list",list);
 		
@@ -125,13 +124,9 @@ public class GardenController {
 			//hostUser 게시물에 달린 댓글 가져오기
 			int commentCount = gardenService.selectCommentCount(hostUser);
 			
-			System.out.println("commentCount 확인 " + commentCount);
-			
 			PageInfo cPi = GardenPagination.getPageInfo(commentCount, currentPage, 10, 5);
 			
 			ArrayList<VisitorComment> comment = gardenService.selectCommentList(cPi, hostUser);
-			
-			System.out.println("comment리스트 확인 " + comment);
 			 
 			model.addAttribute("board", list);
 			model.addAttribute("pi", pi);
@@ -142,10 +137,7 @@ public class GardenController {
 
 	@RequestMapping("vBoardEnroll.do")
 	public String boardEnroll(HttpSession session, String content, String writer) {
-		
-		System.out.println("content" + content);
-		System.out.println("writer" + writer);
-		//String hostUser = ((Member) session.getAttribute("loginUser")).getUserNo();
+
 		String hostUser = (String) session.getAttribute("hostUser");
 		
 		Map map = new HashMap<String, String>();
@@ -188,9 +180,6 @@ public class GardenController {
 	//방명록 댓글
 	@RequestMapping("insertComment.do")
 	public String insertComment(String content, String boardNo, HttpSession session) {
-		
-		System.out.println("content확인" + content);
-		System.out.println("boardNo확인" + boardNo);
 		
 		//작성자 회원번호 세션에서 가져오기
 		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
@@ -276,12 +265,7 @@ public class GardenController {
 	
 	@RequestMapping("insertNeighbor.do")
 	public String insertNeighbor(String nUserId, String userNo, RedirectAttributes reAttr) {
-		
-		System.out.println("nUserId" + nUserId);
-		System.out.println("userNo" + userNo);
-		
-		System.out.println("인서트이웃 확인 " + nUserId + userNo);
-		
+
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("nUserId", nUserId); //추가하고 싶은 이웃의 아이디
 		map.put("userNo", userNo); //로그인한 회원 번호		
@@ -293,7 +277,7 @@ public class GardenController {
 	}
 	
 	//=========================================================================================
-	//식물등록 관리자페이지로 이동
+	//관리자 식물정보 관리페이지로 이동
 	@RequestMapping("adminPlant.do")
 	public String adminPlant(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
 							@RequestParam(value="search" , required=false) String search,
@@ -556,8 +540,6 @@ public class GardenController {
 		String search = null;
 		
 		ArrayList<PlantInfo> info = gardenService.selectPlantList(pi, search);
- 		
-		System.out.println("info확인 " + info);
 		
 		model.addAttribute("info", info);
 		
@@ -579,8 +561,7 @@ public class GardenController {
 				myPlant.setServerName(changeName);
 			}
 		}
-		
-		System.out.println("myPlant 확인 " + myPlant);
+
 		gardenService.insertMyPlant(myPlant);
 		reAttr.addFlashAttribute("msg", "내 식물 목록에 추가했습니다.");
 			
@@ -717,8 +698,6 @@ public class GardenController {
 	public List<PlantGrow> monthPlan(String hostUser) {
 		List<PlantGrow> list = gardenService.selectCalendar(hostUser);
 		
-		System.out.println(list);
-		
 		return list;
 	}
 
@@ -759,10 +738,8 @@ public class GardenController {
 		
 		//경로찾기 . 웹컨테이너에서의 resources 폴더 경로 추출
 		String resources = request.getSession().getServletContext().getRealPath("resources");
-		System.out.println(resources);
 		
 		String savePath = resources + "\\garden_upload_files\\";
-		System.out.println("savePath 확인 " + savePath);
 		
 		String originName = file.getOriginalFilename();
 		

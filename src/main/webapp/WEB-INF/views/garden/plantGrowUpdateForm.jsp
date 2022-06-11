@@ -11,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 정원</title>
+    <title>온실 - Garden 내식물관리</title>
 
     <!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
@@ -29,8 +29,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>${ hostUser }님의 정원</h2><!-- 나중에 이름 수정 -->
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
 		</div>
 
 		<div class="container">
@@ -40,8 +39,8 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
-							<!-- <li class="breadcrumb-item "><a href="#">정원 메인화면</a></li> -->
-							<li class="breadcrumb-item active" aria-current="page">정원 메인화면</li>
+							<li class="breadcrumb-item "><a href="gardenMain.do">정원 메인화면</a></li>
+							<li class="breadcrumb-item active" aria-current="page">관리내역 수정</li>
 						</ol>
 					</nav>
 				</div>

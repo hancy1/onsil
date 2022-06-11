@@ -5,28 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>온실 - Garden 데일리로그</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 	
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session"/>
-	</c:if>
-	
-	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>관리자 :: 식물등록</h2>
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
 		</div>
 
 		<div class="container">
@@ -34,11 +25,11 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-						<!-- 이 부분 나중에 수정..? -->
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item "><a href="adminPlant.do">식물등록 메인화면</a></li>		
-							<li class="breadcrumb-item active" aria-current="page">식물등록</li>
+							<li class="breadcrumb-item "><a href="gardenMain.do">정원 메인</a></li>
+							<li class="breadcrumb-item "><a href="dailyLog.do">데일리로그 메인</a></li>
+							<li class="breadcrumb-item active" aria-current="page">데일리로그 작성</li>
 						</ol>
 					</nav>
 				</div>
@@ -62,7 +53,7 @@
                         <th colspan="2"><label for="content">내용</label></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="content" id="content" rows="10" style="resize:none;"></textarea></th>
+                        <th colspan="2"><textarea class="form-control" required name="content" id="content" rows="10" style="resize:none;" placeholder="하루의 일상을 기록해보세요"></textarea></th>
                     	<input type="hidden" name="userNo" value="${loginUser.userNo}"/>
                     </tr>
                 </table>

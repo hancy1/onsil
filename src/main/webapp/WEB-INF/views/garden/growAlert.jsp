@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>온실 - Garden 식물관리내역</title>
 
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
