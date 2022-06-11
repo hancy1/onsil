@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 판매제품 등록</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">

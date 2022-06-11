@@ -15,7 +15,8 @@
 
 
 <title>ADMIN :: 판매제품 수정</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 

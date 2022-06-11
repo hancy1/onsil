@@ -11,11 +11,11 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">  
+ 
 
 <title>온실 - Review 작성</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <style>
 

@@ -13,7 +13,8 @@
 
 
 <title>ADMIN :: 사은품 수정</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <style>
  	#enrollForm>table{

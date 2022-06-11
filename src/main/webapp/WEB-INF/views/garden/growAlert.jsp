@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
+
 <style>
   table {
     width: 100%;

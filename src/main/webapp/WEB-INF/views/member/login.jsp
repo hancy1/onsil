@@ -20,7 +20,7 @@
     <title>온실 | 로그인</title>
     
     <!-- Favicon -->
-	<link rel="icon" href="resources/img/core-img/favicon.ico">
+	<link rel="icon" href="resources/img/core-img/icon.png">
 	
 	<!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>

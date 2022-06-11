@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>정원 | 이웃관리</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 <style>
 
 th, td {

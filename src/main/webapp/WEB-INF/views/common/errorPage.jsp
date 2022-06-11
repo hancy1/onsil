@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>온실 - ERROR</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 </head>
 <body>
 	<jsp:include page="menubar.jsp"/>

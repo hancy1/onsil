@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>온실 | 자주묻는질문 </title>
 	<!-- Favicon -->
-	<link rel="icon" href="resources/img/core-img/favicon.ico">   
+	<link rel="icon" href="resources/img/core-img/icon.png">
 		
 	<!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />	

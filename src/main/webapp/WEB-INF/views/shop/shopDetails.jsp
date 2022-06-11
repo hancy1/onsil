@@ -11,9 +11,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-
 <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <!-- Core Stylesheet -->
 <link rel="stylesheet" href="resources/style.css">

@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>온실 - Review Detail</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <style>
 #contentArea {

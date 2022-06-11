@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 | 식물 등록</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 <style>
 
 th, td {
