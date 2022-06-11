@@ -146,10 +146,24 @@ public class ShopController {
 	@RequestMapping("detailShop.do")
 	public ModelAndView selectShop(String proCode, ModelAndView mv) {
 		
+		//하나의 제품 조회(상세페이지)
+		Product shop = shopService.selectShop(proCode);
 		
-		Product p = shopService.selectShop(proCode);
+		//해당하는 제품의 리뷰 리스트 조회
+		ArrayList<ProReview> list = shopService.selectProReviewList(proCode);
 		
-		mv.addObject("p", p).setViewName("shop/shopDetails");
+		//System.out.println("컨트롤러에서 리뷰리스트 잘 불러와졌니? " + list);
+		
+		//리뷰 개수 표시하기 위해서 리뷰 개수 조회
+		int rCount = shopService.proReviewListCount(proCode);
+		
+		System.out.println("리뷰갯수? " + rCount);
+		
+		mv.addObject("list", list);
+		mv.addObject("rCount", rCount);
+		mv.addObject("shop", shop).setViewName("shop/shopDetails");
+		
+		
 		
 		return mv;
 	}
@@ -517,7 +531,7 @@ public class ShopController {
 		
 	}
 	
-	//리뷰 디테일페이지	
+	//오더 디테일페이지	
 	@RequestMapping("detailOrder.do")
 	public ModelAndView selectOrder(int orderNo, ModelAndView mv) {
 		

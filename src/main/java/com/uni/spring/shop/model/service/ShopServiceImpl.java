@@ -329,6 +329,22 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ArrayList<ProReview> selectProReviewList(String proCode) {
+		// TODO Auto-generated method stub
+		return  shopDao.selectProReviewList(sqlSession,proCode);
+	}
+
+
+
+	@Override
+	public int proReviewListCount(String proCode) {
+		// TODO Auto-generated method stub
+		return shopDao.proReviewListCount(sqlSession, proCode);
+	}
+
+
+
 
 
 

@@ -73,6 +73,10 @@ public interface ShopService {
 
 	Product selectShop(String proCode);
 
+	ArrayList<ProReview> selectProReviewList(String proCode);
+
+	int proReviewListCount(String proCode);
+
 
 
 	

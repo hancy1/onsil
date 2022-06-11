@@ -13,6 +13,13 @@ import lombok.ToString;
 @ToString
 public class ProCategory {
 
+	
+	
+	/*
+	 CATE_CODE
+	 CATE_NAME
+	*/
+	
 	private String cateCode;//카테코드
 	private String cateName;//카테명
 }

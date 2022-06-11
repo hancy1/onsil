@@ -273,29 +273,30 @@
 										<div class="product-meta d-flex">
 											<a href="#" class="wishlist-btn">
 											<i class="icon_heart_alt"></i></a>
-											<a href="#" class="add-to-cart-btn"><button type="button"  onclick="postFormSubmit(1);" id = "cartAdd_btn" class="btn btn-secondary btn-sm" >Add to cart</button></a>
-											
+											<a href="#" class="add-to-cart-btn"><button type="button"  onclick="postFormSubmit(1);" id = "cartAdd_btn" class="btn btn-secondary btn-sm" >Add to cart</button></a>																						
 											<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
 										</div>
 										
 									</div>
 									<!-- Product Info -->
 									<div class="product-info mt-15 text-center">
-										<a onclick="detailPageOpen(${ p.proCode });" >
+										<a onClick="detailPage('${ p.proCode }');">
 											<h6>${ p.proName }</h6>
 										</a>
+										
+									        <!-- 장바구니 추가 form -->
+											<form action="" id="postForm" method="post" class="cartAdd_form">
+												<input id="proCode" type="hidden" name="proCode" value="${p.proCode}">								
+												<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+												<input type="hidden" name="amount" value="1">
+											</form>	
 										<h6>${ p.price }원</h6>
 										
 									</div>
 								</div>
 							</div>
 							
-                            <!-- 장바구니 추가 form -->
-							<form action="" id="postForm" method="post" class="cartAdd_form">
-								<input id="proCode" type="hidden" name="proCode" value="${p.proCode}">								
-								<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
-								<input type="hidden" name="amount" value="1">
-							</form>		
+	
 
 							</c:forEach>
 							
@@ -311,11 +312,11 @@
 									postForm.attr("action", "insertCart.do");
 								}				
 								postForm.submit();
-							}
+							};
 					
 							
 							
-							function detailPageOpen(proCode){
+							function detailPage(proCode){
 								
 								console.log(proCode);
 								location.href="detailShop.do?proCode=" + proCode;
