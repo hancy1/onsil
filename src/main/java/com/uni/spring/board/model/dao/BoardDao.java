@@ -34,7 +34,7 @@ public class BoardDao {
 
 	public Board selectBoard(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
-		//System.out.println("다오 글 선택" + bno);
+		//System.out.println("다오 글번호 선택" + bno);
 		return sqlSession.selectOne("boardMapper.selectBoard", bno);
 	}
 
@@ -45,6 +45,7 @@ public class BoardDao {
 
 	public int deleteBoard(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
+		//System.out.println("다오 글삭제 글번호 확인" + bno);
 		return sqlSession.update("boardMapper.deleteBoard", bno);
 	}
 

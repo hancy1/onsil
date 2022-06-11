@@ -11,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 자유게시판</title>
+    <title>온실 :: 자유게시판</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="bTitle" placeholder="제목을 입력해주세요.">
+                                                    <input type="text" class="form-control" name="BTitle" placeholder="제목을 입력해주세요.">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
@@ -76,12 +76,12 @@
                                             </div>
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <select name="bCategoryNo" class="form-control">
+                                                    <select name="BCategoryNo" class="form-control">
                                                     	<option value="">카테고리 선택</option>
                                                     	<option value="1">사진</option>
                                                     	<option value="2">정보</option>
                                                     	<option value="3">후기</option>
-                                                    	<!-- <option value="4">기타</option> -->
+                                                    	<option value="4">기타</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" required name="bContent" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
+                                                    <textarea class="form-control" required name="BContent" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
