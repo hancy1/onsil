@@ -1,5 +1,7 @@
 package com.uni.spring.shop.model.dto;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,17 @@ public class Product {
 		PRO_AMOUNT
 		PRO_STATUS
 		PRO_CONTENT
+		
+		
+		REVIEW_STAR
+		REVIEW_TITLE
+		REVIEW_DATE
+		REVIEW_COUNT
+		
+		CATE_NAME
+
+		
+		
 	*/
 	
 	private String proCode; //제품코드
@@ -35,5 +48,12 @@ public class Product {
 	private int proAmount; //재고
 	private String proStatus; //판매상태
 	private String proContent; //세부정보
+	
+	private int reviewStar; 		//별점	
+	private String reviewTitle;		//제목
+	private Date reviewDate;		//등록날짜
+	private int reviewCount; 		//조회수	
+	private String cateName;//카테명
+	
 
 }

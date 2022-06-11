@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 
-	<!-- 등록된 my리뷰 select해오기 -->
+	<!-- 등록된 my리뷰List select해오기 -->
 	<select id="selectMyReviewList" parameterType="ProReview" resultMap="ProReviewResultSet">	
 	  
 	  SELECT *
@@ -117,6 +117,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  AND REVIEW_WRITER=#{userNo}
 	    
 	</select>
+	
+	
+	<!-- 제품페이지에서 리뷰List 불러오기 -->
+	<select id="selectProReviewList" parameterType="ProReview" resultMap="ProReviewResultSet">	
+	  
+	  SELECT *
+	  FROM PRO_REVIEW	  
+	  WHERE REVIEW_STATUS='Y'
+	  AND PRO_CODE=#{proCode}
+	    
+	</select>
+	
+	
+	<!-- 같은 제품을 사고 쓴 리뷰의 총 개수 조회하기 -->
+	<select id = "proReviewListCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM PRO_REVIEW
+  	WHERE REVIEW_STATUS='Y'
+	AND PRO_CODE=#{proCode}
+  	
+    
+  	</select>
 	
 	<!-- 리뷰갯수 체크 -->
 	 <update id = "increaseCountReview" parameterType="_int">
@@ -169,7 +192,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	
   	
   	
-  	
+  	<!--  제품 리절트맵 -->
   	<resultMap type="Product" id="productResultSet"> 
 		<id property="proCode" column="PRO_CODE"/>		
 		<result property="cateCode" column="CATE_CODE" />
@@ -180,6 +203,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="proAmount" column="PRO_AMOUNT" />
 		<result property="proStatus" column="PRO_STATUS" />
 		<result property="proContent" column="PRO_CONTENT" />
+		
+		<result property="reviewStar" column="REVIEW_STAR" />
+		<result property="reviewTitle" column="REVIEW_TITLE" />
+		<result property="reviewDate" column="REVIEW_DATE" />
+		<result property="reviewCount" column="REVIEW_COUNT" />
+		<result property="cateName" column="CATE_NAME" />
 		
 	</resultMap>
 	
@@ -438,8 +467,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--숍 디테일페이지 조회 -->	
   	<select id = "selectShop" parameterType="Product" resultMap="productResultSet">
 
-	  SELECT *
-	  FROM PRODUCT 	  	  
+	  SELECT A.*, B.CATE_NAME
+	  FROM PRODUCT A	 
+	  JOIN PRO_CATEGORY B ON A.CATE_CODE = B.CATE_CODE	  	  
 	  WHERE PRO_CODE=#{proCode}
     
  	</select>

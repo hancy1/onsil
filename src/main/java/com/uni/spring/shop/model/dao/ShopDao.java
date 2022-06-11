@@ -194,6 +194,16 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.selectShop",proCode);
 	}
 
+	public ArrayList<ProReview> selectProReviewList(SqlSessionTemplate sqlSession, String proCode) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("shopMapper.selectProReviewList", proCode);
+	}
+
+	public int proReviewListCount(SqlSessionTemplate sqlSession, String proCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.proReviewListCount", proCode);
+	}
+
 
 
 

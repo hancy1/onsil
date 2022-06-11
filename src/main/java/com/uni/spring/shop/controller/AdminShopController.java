@@ -45,7 +45,7 @@ public class AdminShopController {
 		int listCount = aShopService.selectListCount();
 		
 		
-		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 5);
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Product> list = aShopService.selectList(pi);
 		
