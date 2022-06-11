@@ -215,6 +215,8 @@ input[id="sideCheck"]:checked+label {
 </script>
 
 <title>주소</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 </head>
 <body>
  <jsp:include page="../common/menubar.jsp"/>
