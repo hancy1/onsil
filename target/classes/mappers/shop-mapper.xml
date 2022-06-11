@@ -435,5 +435,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</update>
   	
+	<!--숍 디테일페이지 조회 -->	
+  	<select id = "selectShop" parameterType="Product" resultMap="productResultSet">
 
+	  SELECT *
+	  FROM PRODUCT 	  	  
+	  WHERE PRO_CODE=#{proCode}
+    
+ 	</select>
+ 	
+ 	
 </mapper>

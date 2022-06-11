@@ -141,6 +141,20 @@ public class ShopController {
 	}
 	
 	
+
+	//제품 디테일페이지 연결
+	@RequestMapping("detailShop.do")
+	public ModelAndView selectShop(String proCode, ModelAndView mv) {
+		
+		
+		Product p = shopService.selectShop(proCode);
+		
+		mv.addObject("p", p).setViewName("shop/shopDetails");
+		
+		return mv;
+	}
+	
+	
 	
 	//마이 포인트 List 연결
 	@RequestMapping("myPointList.do")
@@ -393,13 +407,17 @@ public class ShopController {
 				
 		System.out.println("proCode 컨트롤러에 뭘로 가져오니? : " + proCode);
 		
+		//이거 차트객체에 셋해주는걸로 바꾸기~~!!
+		
 		Map cartMap = new HashMap<String, String>();
 		cartMap.put("proCode", proCode);
 		cartMap.put("userNo", userNo);
 		cartMap.put("amount", amount);
 		
 		shopService.insertCart(cartMap);
-				
+		
+
+		
 		return "redirect:CartList.do";
 	}
 	

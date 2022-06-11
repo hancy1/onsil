@@ -8,8 +8,7 @@
 
 <meta name="description" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- jQuery library--> 
@@ -267,9 +266,9 @@
 									<!-- Product Image -->
 									<div class="product-img">
 									
-										<a href="shopDetails.do">
+										
 										<img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
-										</a>
+										
 										
 										<div class="product-meta d-flex">
 											<a href="#" class="wishlist-btn">
@@ -282,8 +281,8 @@
 									</div>
 									<!-- Product Info -->
 									<div class="product-info mt-15 text-center">
-										<a href="shop-details.html">
-											<p>${ p.proName }</p>
+										<a onclick="detailPageOpen(${ p.proCode });" >
+											<h6>${ p.proName }</h6>
 										</a>
 										<h6>${ p.price }원</h6>
 										
@@ -314,6 +313,17 @@
 								postForm.submit();
 							}
 					
+							
+							
+							function detailPageOpen(proCode){
+								
+								console.log(proCode);
+								location.href="detailShop.do?proCode=" + proCode;
+								
+							};
+							
+							
+							
 						</script>
 	
 							

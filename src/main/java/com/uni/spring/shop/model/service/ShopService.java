@@ -71,6 +71,8 @@ public interface ShopService {
 
 	int productTreeListCount();
 
+	Product selectShop(String proCode);
+
 
 
 	

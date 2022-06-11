@@ -189,6 +189,11 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.productTreeListCount");
 	}
 
+	public Product selectShop(SqlSessionTemplate sqlSession, String proCode) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectShop",proCode);
+	}
+
 
 
 
