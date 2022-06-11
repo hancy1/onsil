@@ -13,7 +13,7 @@
     <title>온실 - 질문게시판</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">

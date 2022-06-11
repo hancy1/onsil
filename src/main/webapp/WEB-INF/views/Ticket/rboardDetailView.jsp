@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 <title>Insert title here</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 
 <style>
  	#enrollForm>table{

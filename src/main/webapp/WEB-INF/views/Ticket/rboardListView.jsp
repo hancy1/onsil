@@ -6,6 +6,8 @@
 <head>
   <meta charset="UTF-8">
    <title>온실-후기게시판</title>
+   <!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 <style>
 	#boardList{text-align: center;}
     #boardList>tbody>tr:hover{cursor:pointer;}

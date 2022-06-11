@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png"> 
 <style>
 	#updateForm>table{
 	width:80%;
