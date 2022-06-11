@@ -6,26 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정원 | 데일리로그</title>
+<title>온실 - Garden 데일리로그</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session" />
-	</c:if>
-
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
 			<h2>${ hostUser }님의 정원</h2>
 		</div>
 
@@ -34,7 +27,6 @@
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<!-- 이 부분 나중에 수정..? -->
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item "><a href="gardenMain.do">정원 메인화면</a></li>
@@ -55,7 +47,6 @@
 				<div class="col-12">
 					<!-- Section Heading -->
 					<div class="section-heading text-center">
-						<h2>DAILY LOG</h2>
 						<c:if test="${ loginUser.userId eq hostUser }">
 						<button class="btn btn-outline-success" type="button" onclick="location.href='insertLogForm.do'">글쓰기</button>
 						</c:if>
@@ -70,17 +61,16 @@
 				<c:forEach items="${dailyLog}" var="log">
 				<div class="col">
 					<div class="card" style="width: 18rem;">
-					<c:if test="${log.serverName != null}">
 						<div class="embed-responsive embed-responsive-4by3">
 						<img src="resources/garden_upload_files/${log.serverName}" class="card-img-top embed-responsive-item" 
-							alt="..."></div>
-					</c:if>
+							alt="...">
+						</div>
 						<div class="card-body">
 							<!-- <h5 class="card-title">타이틀</h5> -->
 							<p>
 							<c:choose>
-								<c:when test="${fn:length(log.content)>14}">
-									<c:out value="${fn:substring(log.content,0,13)}"/>...
+								<c:when test="${fn:length(log.content)>28}">
+									<c:out value="${fn:substring(log.content,0,27)}"/>...
 								</c:when>
 								<c:otherwise>
 									<c:out value="${log.content}"/>

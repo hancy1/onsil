@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정원 | 이웃관리</title>
+<title>온실 - Garden 방명록</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 <style>
@@ -27,8 +27,8 @@ th, td {
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>${ loginUser.userId }님의 정원</h2><!-- 나중에 이름 수정 -->
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
+			<h2>${ loginUser.userId }님의 이웃</h2>
 		</div>
 
 		<div class="container">

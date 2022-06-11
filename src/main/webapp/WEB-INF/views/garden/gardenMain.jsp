@@ -32,7 +32,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
 			<h2>${ hostUser }님의 정원</h2><!-- 나중에 이름 수정 -->
 		</div>
 

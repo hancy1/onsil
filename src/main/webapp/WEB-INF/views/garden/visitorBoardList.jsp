@@ -5,27 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정원 | 방명록관리</title>
+<title>온실 - Garden 방명록</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
 	
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session"/>
-	</c:if>
-	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>${ hostUser }님의 정원</h2><!-- 나중에 이름 수정 -->
+			style="background-image: url(resources/img/bg-img/garden1.jpg);">
+			<h2>${ hostUser }님의 방명록</h2>
 		</div>
 
 		<div class="container">
@@ -53,9 +46,9 @@
 
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
-								<h5>방명록</h5>
 								<br>
-								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px"><input type="hidden" name="writer" value="${ loginUser.userNo }"/> <button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
+								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px"><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
+								&nbsp;<button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
 								<table class="table">
 									<c:if test="${ !empty board }">
          								<c:forEach items="${board}" var="b">

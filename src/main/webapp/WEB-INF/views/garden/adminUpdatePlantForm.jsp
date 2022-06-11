@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 | 식물 등록</title>
+<title>ADMIN :: 식물정보 업데이트</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 <style>
@@ -62,21 +62,13 @@ textarea {width:100%;
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
 	
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session"/>
-	</c:if>
-	
-	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>관리자 :: 식물정보 수정</h2>
+			<h2>ADMIN :: 식물정보 업데이트</h2>
 		</div>
 
 		<div class="container">
@@ -84,11 +76,10 @@ textarea {width:100%;
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-						<!-- 이 부분 나중에 수정..? -->
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item "><a href="adminPlant.do">식물등록 메인화면</a></li>		
-							<li class="breadcrumb-item active" aria-current="page">식물등록</li>
+							<li class="breadcrumb-item "><a href="adminPlant.do">식물정보 관리</a></li>		
+							<li class="breadcrumb-item active" aria-current="page">식물정보 업데이트</li>
 						</ol>
 					</nav>
 				</div>
@@ -99,7 +90,7 @@ textarea {width:100%;
 	<section id="aa-product-category">
 		<div class="container" align="center">
 			<div class="row my-5">
-				<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="col-lg-9 col-md-9 col-sm-9" style="margin:auto">
 					<div class="aa-product-catg-content">
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
