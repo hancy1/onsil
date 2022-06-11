@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 판매제품 디테일</title>
-
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <style>
 #contentArea {

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>정원 | 데일리로그</title>
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />

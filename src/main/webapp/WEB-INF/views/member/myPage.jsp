@@ -9,7 +9,7 @@
 <title>온실 | 마이페이지 </title>
 
 	<!-- Favicon -->
-	<link rel="icon" href="resources/img/core-img/favicon.ico">
+	<link rel="icon" href="resources/img/core-img/icon.png">
 	
    <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

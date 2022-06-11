@@ -18,8 +18,7 @@
 	<script src='resources/fullcalendar-5.0.1/lib/main.js'></script>
 
     <!-- Favicon -->
-    <link rel="icon" href="resources/img/core-img/favicon.ico">
-    <!--<link rel="icon" href="resources/img/core-img/icon.png">-->
+    <link rel="icon" href="resources/img/core-img/icon.png">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="resources/style.css">

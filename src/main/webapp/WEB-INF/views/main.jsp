@@ -8,7 +8,7 @@
 <title>온실</title>
 
 <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <!-- Core Stylesheet -->
 <link rel="stylesheet" href="resources/style.css">

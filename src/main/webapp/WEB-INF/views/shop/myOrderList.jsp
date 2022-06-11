@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/favicon.ico">  
+<link rel="icon" href="resources/img/core-img/icon.png">  
 
 
 <style>
