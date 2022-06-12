@@ -82,7 +82,7 @@
         <h4 class="mb-3" style="text-align: center;">회원정보수정</h4>
         
         <!-- 회원정보 수정 -->
-        <form id="modifyForm" action="updateMember.do" method="post" class="validation-form" novalidate>
+        <form id="modifyForm" action="updateMember.do" method="post" class="validation-form" novalidate onsubmit="return validation();">
           <div class="row">
           
           	<!-- 아이디  -->
@@ -245,6 +245,7 @@
 	<script src="resources/js/active.js"></script>
 	
   <script>
+  	// 모든 항복 기입 확인
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
 
@@ -299,15 +300,43 @@
     	
     }
     
+    
+	// 유효성 검사
+   function validation(){
+   	var pwdReg = /^[A-Za-z\d]{5,13}$/;
+   	if(!pwdReg.test($("#pwd").val())){
+   		$("#pwdValid").css("color", "red").text("비밀번호는 영어대소문자, 숫자  5 - 12 자리여야 합니다.");
+   		return false;
+   	}
+   	
+   	if($("#pwd").val() != $("#pwdCheck").val()) {  
+   		$("#pwdFeedback").css("color", "red").text("비밀번호가 일치하지 않습니다");
+   		return false;
+   	}
+   	
+   	var n_RegExp = /[가-힣]{2,}/;     	
+   	if(!n_RegExp.test($("#name").val())){
+   		$("#nameValid").css("color", "red").text("한글로 2글자 이상 입력해주세요.");
+   		return false;
+   	}
+   	
+   	var e_regex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
+   	if(!e_regex.test($("#email").val())){
+   		$("#emailValid").css("color", "red").html("올바른 이메일이 아닙니다.");
+   		return false;
+   	}
+   }
+    
+    
     // 비밀번호 정규식 
     $("#pwd").on("keyup", function(){
     	var pwdReg = /^[A-Za-z\d]{5,13}$/;
 	    if( !pwdReg.test($("#pwd").val())){
 	    	$("#pwdValid").css("color", "red").text("비밀번호는 영어대소문자, 숫자  5 - 12 자리여야 합니다.");
-	    	return false;
+	    	
 	    }else{
 	    	$("#pwdValid").text("");	
-	    	return true;
+	    	
 	    }
     })
     
@@ -315,10 +344,10 @@
     $("#pwdCheck").on("keyup", function(){
     	if($("#pwd").val() == $("#pwdCheck").val()) {  
     		$("#pwdFeedback").text("");
-    		return true;
+    		
     	}else{
     		$("#pwdFeedback").css("color", "red").text("비밀번호가 일치하지 않습니다");
-    		return false;
+    		
     	}
     })
     
@@ -331,6 +360,7 @@
                        $("#nameValid").html("");  
                     }else{
                         $("#nameValid").css("color", "red").text("한글로 2글자 이상 입력해주세요.");
+                       
                     }                    
                 })
                 
@@ -360,6 +390,7 @@
                        $("#emailValid").html("");  
                     }else{
                         $("#emailValid").css("color", "red").html("올바른 이메일이 아닙니다.");
+                        
                     }
                 })
                 
@@ -372,6 +403,7 @@
    			$("#Male").attr("selected", true);
    		}else{
    			$("#Nothing").attr("selected", true);
+   			return false;
    		}
    	});
   

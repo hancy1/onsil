@@ -14,7 +14,7 @@ import com.uni.spring.member.model.dto.Member;
 @Repository
 public class MemberDao {
 
-	// 암호화 전 로그인
+	// 암호화 로그인
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) { 
 		
 		Member m1 = sqlSession.selectOne("memberMapper.loginMember", m);
