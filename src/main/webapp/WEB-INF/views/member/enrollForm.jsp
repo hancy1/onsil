@@ -65,7 +65,7 @@
         
         
         <!-- 회원가입 -->
-        <form id="enrollForm" action="insertMember.do" method="post" class="validation-form" novalidate>
+        <form id="enrollForm" action="insertMember.do" method="post" class="validation-form" novalidate onsubmit="return validation();">
           <div class="row">
           
           	<!-- 아이디 & 중복확인 버튼 -->
@@ -237,21 +237,21 @@
 	<script src="resources/js/active.js"></script>
 	
   <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-    
+//모든 항복 기입 확인
+  window.addEventListener('load', () => { 
+		const forms = document.getElementsByClassName('validation-form'); 
+		Array.prototype.filter.call(forms, (form) => { 
+			form.addEventListener('submit', function (event) { 
+				if (form.checkValidity() === false) { 
+					event.preventDefault(); 
+					event.stopPropagation(); 
+					} 
+				form.classList.add('was-validated'); }
+			, false); 
+			}); 
+		}, 
+		false);
+       
     
     // 아이디 유효성 검사 & 중복확인 
    function idCheck(){
@@ -277,6 +277,7 @@
         				$("id").focus();
         			}else{
         				if(confirm("사용 가능한 아이디입니다. 사용하시겠습니까?")){
+        					$("#id").attr("readonly","true");
         					$("#enrollBtn").removeAttr("disabled");        					
         				}else{
         					$("#id").focus();
@@ -291,15 +292,41 @@
     	
     }
     
+    // 유효성 검사
+    function validation(){
+    	var pwdReg = /^[A-Za-z\d]{5,13}$/;
+    	if(!pwdReg.test($("#pwd").val())){
+    		$("#pwdValid").css("color", "red").text("비밀번호는 영어대소문자, 숫자  5 - 12 자리여야 합니다.");
+    		return false;
+    	}
+    	
+    	if($("#pwd").val() != $("#pwdCheck").val()) {  
+    		$("#pwdFeedback").css("color", "red").text("비밀번호가 일치하지 않습니다");
+    		return false;
+    	}
+    	
+    	var n_RegExp = /[가-힣]{2,}/;     	
+    	if(!n_RegExp.test($("#name").val())){
+    		$("#nameValid").css("color", "red").text("한글로 2글자 이상 입력해주세요.");
+    		return false;
+    	}
+    	
+    	var e_regex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
+    	if(!e_regex.test($("#email").val())){
+    		$("#emailValid").css("color", "red").html("올바른 이메일이 아닙니다.");
+    		return false;
+    	}
+    }
+    
     // 비밀번호 정규식 
     $("#pwd").on("keyup", function(){
     	var pwdReg = /^[A-Za-z\d]{5,13}$/;
 	    if( !pwdReg.test($("#pwd").val())){
 	    	$("#pwdValid").css("color", "red").text("비밀번호는 영어대소문자, 숫자  5 - 12 자리여야 합니다.");
-	    	return false;
+	    	
 	    }else{
 	    	$("#pwdValid").text("");	
-	    	return true;
+	    	
 	    }
     })
     
@@ -307,10 +334,10 @@
     $("#pwdCheck").on("keyup", function(){
     	if($("#pwd").val() == $("#pwdCheck").val()) {  
     		$("#pwdFeedback").text("");
-    		return true;
+    		
     	}else{
     		$("#pwdFeedback").css("color", "red").text("비밀번호가 일치하지 않습니다");
-    		return false;
+    		
     	}
     })
     
@@ -321,20 +348,14 @@
                     
                     if(result != null){
                        $("#nameValid").html("");  
+                       
                     }else{
                         $("#nameValid").css("color", "red").text("한글로 2글자 이상 입력해주세요.");
+                        
                     }                    
                 })
                 
-    // 주소 API 
-    function add(){    	
-    	new daum.Postcode({
-            oncomplete: function(data) {
-            	document.getElementById("address").value = data.address; 
-                document.getElementById("address2").focus();                
-            }
-        }).open();
-    }
+    
     
     // 전화번호 입력 자동 하이픈 & 유효성 검사
     $("#tel, #phone").on("keyup", function() { 
@@ -353,9 +374,23 @@
                        $("#emailValid").html("");  
                     }else{
                         $("#emailValid").css("color", "red").html("올바른 이메일이 아닙니다.");
+                        
                     }
                 })
-                
+        
+               
+    
+      
+ 	// 주소 API 
+    function add(){    	
+    	new daum.Postcode({
+            oncomplete: function(data) {
+            	document.getElementById("address").value = data.address; 
+                document.getElementById("address2").focus();                
+            }
+        }).open();
+    }
+ 
     // 칸 누르면 주소검색이 뜨도록
     $(function(){
     	$("#address").click(function(){
