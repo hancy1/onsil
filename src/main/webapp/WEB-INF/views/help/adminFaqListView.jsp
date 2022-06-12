@@ -54,7 +54,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">자주묻는질문 관리</li>
+							<li class="breadcrumb-item active" aria-current="page"><a href="adminFaq.do">자주묻는질문 관리</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -78,7 +78,7 @@
                     <th>글번호</th>
                     <th>카테고리</th>
                     <th>질문</th>
-                    <th>답변</th>
+                    <!-- <th>답변</th> -->
                     <th>작성일</th>
                     <th>상태</th>
                   </tr>
@@ -89,7 +89,7 @@
 	                        <td>${ f.faqNo }</td>
 	                        <td>${ f.categoryName }</td>
 	                        <td>${ f.question }</td>
-	                        <td>${ f.answer }</td>
+	                        <!-- <td>${ f.answer }</td> -->
 	                        <td>${ f.createDate }</td>
 	                        <td>${ f.status }</td>	                        
 	                    </tr>
