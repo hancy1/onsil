@@ -71,29 +71,29 @@ public class AdminShopController {
 	
 	
 	//제품 insert
-		@RequestMapping("insertProduct.do")
-		public String insertProduct(Product p , HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
+	@RequestMapping("insertProduct.do")
+	public String insertProduct(Product p , HttpServletRequest request, @RequestParam(name="uploadFile", required=false) MultipartFile file) {
+		
+		
+		//전달되는 파일이 없을 때 빈문자열이 넘어온다. 빈문자열이 아닐때(=파일이 있을때)
+		if(!file.getOriginalFilename().equals("")) {
+			String changeName = saveFile(file, request);
 			
 			
-			//전달되는 파일이 없을 때 빈문자열이 넘어온다. 빈문자열이 아닐때(=파일이 있을때)
-			if(!file.getOriginalFilename().equals("")) {
-				String changeName = saveFile(file, request);
-				
-				
-				if(changeName != null) {
-				
-					p.setDetailOri(file.getOriginalFilename());
-					p.setDetailCha(changeName);
-				}
-				
+			if(changeName != null) {
+			
+				p.setDetailOri(file.getOriginalFilename());
+				p.setDetailCha(changeName);
 			}
 			
-			
-			aShopService.insertProduct(p);
-			System.out.println("등록될 제품 정보 :" + p);
-			
-			return "redirect:adminProducts.do";
 		}
+		
+		
+		aShopService.insertProduct(p);
+		System.out.println("등록될 제품 정보 :" + p);
+		
+		return "redirect:adminProducts.do";
+	}
 
 		
 		//전달받은 파일을 업로드시키고 수정된 파일명 리턴함
@@ -209,12 +209,12 @@ public class AdminShopController {
 					deleteFile(orgChangeName, request);
 				}			
 				
-				//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨! 있는경우는 삭제해주고 세팅!
-				String changeName = saveFile(file, request);
+			//다시 세팅해주기! 기존파일 없는 경우도 세팅해야됨! 있는경우는 삭제해주고 세팅!
+			String changeName = saveFile(file, request);
 			
 							
-				p.setDetailOri(file.getOriginalFilename());
-				p.setDetailCha(changeName);
+			p.setDetailOri(file.getOriginalFilename());
+			p.setDetailCha(changeName);
 				
 			}		
 		
