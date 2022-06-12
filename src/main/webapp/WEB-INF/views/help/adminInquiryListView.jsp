@@ -68,7 +68,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">문의사항 관리</li>
+							<li class="breadcrumb-item active" aria-current="page"><a href="adminInquiry.do">문의사항 관리</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -85,7 +85,7 @@
             <h2>문의사항 관리</h2>
             <br>            
             	         
-         	<br><br>
+         	
          	<div style="float: right;">
          	<a href="adminInquiry.do">전체</a> &nbsp;&nbsp;
          	<a href="adminInquiry2.do">답변전</a> &nbsp;&nbsp;

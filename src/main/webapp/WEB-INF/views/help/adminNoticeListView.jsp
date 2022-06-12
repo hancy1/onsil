@@ -54,7 +54,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">공지사항 관리</li>
+							<li class="breadcrumb-item active" aria-current="page"><a href="adminNotice.do">공지사항 관리</a></li>
 						</ol>
 					</nav>
 				</div>

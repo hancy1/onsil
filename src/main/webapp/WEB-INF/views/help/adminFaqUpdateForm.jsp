@@ -66,7 +66,7 @@
 							<li class="breadcrumb-item"><a href="/spring"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">고객센터</a></li>
-							<li class="breadcrumb-item active" aria-current="page">자주묻는질문 관리</li>
+							<li class="breadcrumb-item active" aria-current="page"><a href="adminFaq.do">자주묻는질문 관리</a></li>
 						</ol>
 					</nav>
 				</div>
