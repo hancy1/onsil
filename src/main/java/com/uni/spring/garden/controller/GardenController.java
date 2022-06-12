@@ -59,6 +59,8 @@ public class GardenController {
 		public String toMain(@RequestParam(value="hostUser", required=false)String hostUser, HttpSession session, Model model) {
 		
 		System.out.println("hostUser 널 체크 전 확인" + hostUser);
+		System.out.println("세션에 있는 hostUser 확인 " + session.getAttribute("hostUser"));
+		
 		
 		//방명록 주인 회원번호
 		if(hostUser == null) {
@@ -66,6 +68,7 @@ public class GardenController {
 		}
 		//호스트 유저 값은 다른 곳에서도 쓰이니까 세션에 값을 저장
 		session.setAttribute("hostUser", hostUser);
+		System.out.println("세션에 있는 hostUser 확인 " + session.getAttribute("hostUser"));
 		
 		System.out.println("hostUser확인" + hostUser);
 				
@@ -222,10 +225,18 @@ public class GardenController {
 	@RequestMapping("neighborList.do")
 	public String neighborList(HttpSession session, Model model) {
 		
-		//로그인한 회원 번호
-		String userNo = ((Member) session.getAttribute("loginUser")).getUserNo();
+		String hostUser = (String) session.getAttribute("hostUser");
 		
-		ArrayList<Neighbor> list = gardenService.getNeighborList(userNo);
+		System.out.println("hostUser 널 체크 전 " + hostUser);
+		
+		if(hostUser == null) {
+			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
+			session.setAttribute("hostUser", hostUser);
+		}
+		
+		System.out.println("hostUser 널 체크 후 " + hostUser);
+		
+		ArrayList<Neighbor> list = gardenService.getNeighborList(hostUser);
 		
 		model.addAttribute("list", list);
 		
@@ -370,6 +381,8 @@ public class GardenController {
 	public String selectLog(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
 							String logNo, Model model, HttpSession session) {
 		
+		System.out.println("logNo확인" + logNo);
+		
 		DailyLog log = gardenService.selectLog(logNo);
 
 		model.addAttribute("log", log);
@@ -422,15 +435,21 @@ public class GardenController {
 	public String updateDailyLog(@RequestParam(name = "upfile", required=false)MultipartFile file, DailyLog log, 
 								HttpServletRequest request, Model model, RedirectAttributes reAttr) {
 		
+		System.out.println("log확인" + log);
+
+		System.out.println("file확인" + file.getOriginalFilename());
+		
 		String orgChangeName = log.getServerName();
 		if(!file.getOriginalFilename().equals("")) {//새로 넘어온 파일이 있는 경우
-				
+			
+			System.out.println("새로넘어온파일있으면");
 			String changeName = saveFile(file, request);
 			
 			log.setFileName(file.getOriginalFilename());
 			log.setServerName(changeName);
 			
 			if(orgChangeName != null) {//기존 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
+				System.out.println("새 파일있는데 기존파일있으면");
 				deleteFile(orgChangeName, request);
 			}
 
@@ -438,7 +457,11 @@ public class GardenController {
 		
 		gardenService.updateDailylog(log);
 		
-		model.addAttribute("logNo", log.getLogNo());
+		System.out.println("logNo확인 " + log.getLogNo());
+		
+		//model.addAttribute("logNo", log.getLogNo());
+		reAttr.addAttribute("logNo", log.getLogNo());
+		//reAttr.addFlashAttribute("logNo", log.getLogNo());
 		reAttr.addFlashAttribute("msg", "데일리로그를 수정했습니다.");
 				
 		return "redirect:logDetail.do";
@@ -551,15 +574,16 @@ public class GardenController {
 	public String insertMyPlant(@RequestParam(name = "upfile", required=false)MultipartFile file, 
 								MyPlant myPlant, HttpServletRequest request, RedirectAttributes reAttr) {
 		
-		//파일첨부하지 않으면 빈 문자열이 넘어옴
-		if(!file.getOriginalFilename().equals("")) {
-			
-			String changeName = saveFile(file,request);
-			
-			if(changeName != null) {
-				myPlant.setFileName(file.getOriginalFilename());
-				myPlant.setServerName(changeName);
-			}
+		//닉네임 지정을 하지 않으면 식물이름으로 저장되게 함
+		if(myPlant.getNickname().equals("")) {
+			myPlant.setNickname(myPlant.getPlantName());
+		}
+
+		String changeName = saveFile(file,request);
+		
+		if(changeName != null) {
+			myPlant.setFileName(file.getOriginalFilename());
+			myPlant.setServerName(changeName);
 		}
 
 		gardenService.insertMyPlant(myPlant);
@@ -630,6 +654,11 @@ public class GardenController {
 			if(orgChangeName != null) {//기존 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
 				deleteFile(orgChangeName, request);
 			}
+		}
+		
+		//닉네임 지정을 하지 않으면 식물이름으로 저장되게 함
+		if(plant.getNickname().equals("")) {
+			plant.setNickname(plant.getPlantName());
 		}
 		
 		gardenService.updateMyPlant(plant);
@@ -764,7 +793,7 @@ public class GardenController {
 
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		
-		String savePath = resources + "\\upload_files\\";
+		String savePath = resources + "\\garden_upload_files\\";
 		
 		//경로의 파일을 가리킴
 		File deleteFile = new File(savePath + fileName);

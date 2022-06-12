@@ -23,7 +23,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
@@ -33,6 +33,15 @@
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -47,7 +56,7 @@
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
 								<br>
-								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px"><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
+								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px" required><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
 								&nbsp;<button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
 								<table class="table">
 									<c:if test="${ !empty board }">
@@ -58,7 +67,7 @@
 	         								<!-- <th>${b.content}</th> -->
 	         								<td class="${b.boardNo}defB def">${b.content}</td>
 	         								<td class="${b.boardNo}inputB input">
-	         								<div><form action="updateVBoard.do"><input type="text" name="content" value="${b.content}"/><input type="hidden" name="boardNo" value="${b.boardNo}">
+	         								<div><form action="updateVBoard.do"><input type="text" name="content" value="${b.content}" style="width:200px" required/><input type="hidden" name="boardNo" value="${b.boardNo}">
 	         								<button class="btn btn-outline-success btn-sm" type="submit">수정</button></form>
 	         								<button class="btn btn-outline-success btn-sm" onclick='cancleUpdateB("${b.boardNo}");' >취소</button></div></td>
 	         								<th>${b.enrollDate}</th>

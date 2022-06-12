@@ -22,7 +22,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
@@ -32,6 +32,15 @@
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -57,15 +66,15 @@
                     </tr>
                     <tr>
                     	<th><label for="nickname">별명 등록</label></th>
-                    	<td><input type="text" name="nickname" id="nickname" placeholder=""></td>
+                    	<td><input type="text" name="nickname" id="nickname" style="width:300px" placeholder="미입력 시 식물 이름으로 저장됩니다."></td>
                     </tr>
                     <tr>
                     	<th><label for="water">관수량</label></th>
-                    	<td><input type="text" name="water" id="water" required  style="width:300px"></td>
+                    	<td><input type="text" name="water" id="water" required style="width:300px" placeholder="ex) 겉흙이 마를 때 물을 줌"></td>
                     </tr>
                     <tr>
                     	<th><label for="sun">일조량</label></th>
-                    	<td><input type="text" name="sun" id="sun" required  style="width:300px"></td>
+                    	<td><input type="text" name="sun" id="sun" required  style="width:300px" placeholder="ex) 직사광선을 피해 밝은 곳에 둠"></td>
                     </tr>
                     <tr>
                     	<th><label for="enrollDate">등록일</label></th>
@@ -73,14 +82,14 @@
                     	<input type="hidden" name="userNo" value="${loginUser.userNo}">
                     </tr>
                     <tr>
-                    	<td colspan="2"><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile"></td>
+                    	<td colspan="2"><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile" required></td>
                     </tr>
                 </table>
                 <br>
 
                 <div align="center">
                     <button type="submit" class="btn btn-success">등록하기</button>
-                    <button type="reset" class="btn btn-success">취소하기</button>
+                    <button type="reset" class="btn btn-success">초기화</button>
                 </div>
             </form>				            
 			<br><br>				            

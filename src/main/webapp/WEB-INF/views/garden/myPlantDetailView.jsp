@@ -23,7 +23,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<!-- 이 부분 나중에 수정..? -->
@@ -34,6 +34,15 @@
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -58,8 +67,9 @@
        								<i class="fa-solid fa-sun"></i> : ${plant.sun}
        								</td>	
        								<td><br><br>${plant.enrollDate}</td>
+       								<c:if test="${hostUser eq loginUser.userId}">
        								<td><br><br><a class="btn btn-outline-success" type="button" href="updateMyPlantForm.do?plantNo=${plant.plantNo}">수정</a> 
-       											<button class="btn btn-outline-success" type="button" onclick="deleteMyPlant();">삭제</button></td>
+       											<button class="btn btn-outline-success" type="button" onclick="deleteMyPlant();">삭제</button></td></c:if>
        				       			</tr>	
 								</table>
 								<br>
@@ -142,11 +152,16 @@
 							 if(grow.repotting == 'Y'){
 								 value += "<i class='fa-solid fa-seedling'></i>";
 							 }
-						value += "</th><th class='def" + grow.listNo + "'>" + grow.etc + "</th><th>" +
-								 "<button class='btn' type='button' onclick='updateGrowList(" + grow.listNo + ");'>" + 
-								 "<i class='fa-solid fa-eraser'></i></button> " + 
-								 "<button class='btn' type='button' onclick='deleteGrowList(" + grow.listNo + ");'>" + 
-								 "<i class='fa-solid fa-xmark'></i></button></th></tr>";
+						value += "</th><th class='def" + grow.listNo + "'>" + grow.etc + "</th>";
+						
+						if(${hostUser eq loginUser.userId}){
+							value += "<th><button class='btn' type='button' onclick='updateGrowList(" + grow.listNo + ");'>" + 
+									 "<i class='fa-solid fa-eraser'></i></button> " + 
+									 "<button class='btn' type='button' onclick='deleteGrowList(" + grow.listNo + ");'>" + 
+									 "<i class='fa-solid fa-xmark'></i></button></th>";
+						}
+						
+						value += "</tr>";
 						
 					}			
 				});
