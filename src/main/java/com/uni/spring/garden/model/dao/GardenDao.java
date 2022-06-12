@@ -57,9 +57,9 @@ public class GardenDao {
 		
 	}
 
-	public ArrayList<Neighbor> getNeighborList(String userNo, SqlSessionTemplate sqlSession) {
+	public ArrayList<Neighbor> getNeighborList(String hostUser, SqlSessionTemplate sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("gardenMapper.getNeighborList", userNo);
+		return (ArrayList)sqlSession.selectList("gardenMapper.getNeighborList", hostUser);
 
 	}
 

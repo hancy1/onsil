@@ -109,19 +109,19 @@ textarea {width:100%;
 					                <tr>					                	
 					                	<th>품종</th>
 					                	<td colspan="3">
-					                		<input type="text" name="plantName" class="form-control">
+					                		<input type="text" name="plantName" class="form-control" required>
 					                	</td>             				                    
 					                </tr>				                
 					                <tr>
 					                    <th>관수량</th>
 					                	<td colspan="3">
-					                		<input type="text" name="water" class="form-control">
+					                		<input type="text" name="water" class="form-control" required>
 					                	</td> 
 					                </tr>				                
 					                <tr>
 					                    <th>일조량</th>
 					                	<td colspan="3">
-					                		<input type="text" name="sun" class="form-control">
+					                		<input type="text" name="sun" class="form-control" required>
 					                	</td> 	                    
 					                </tr>			                
 					            </table>

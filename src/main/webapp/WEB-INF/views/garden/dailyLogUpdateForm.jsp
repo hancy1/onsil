@@ -22,7 +22,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
@@ -33,6 +33,15 @@
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -49,8 +58,8 @@
                         <td><input type="file" id="upfile" class="form-control-file border input-file-button" name="upfile"></td>
                         <c:if test="${ log.fileName != null }">
 	                            현재 업로드된 파일 : ${ log.fileName } <br>
-	                            <input type="hidden" name="changeName" value="${ log.serverName }">
-	                            <input type="hidden" name="originName" value="${ log.fileName }">
+	                            <input type="hidden" name="serverName" value="${ log.serverName }">
+	                            <input type="hidden" name="fileName" value="${ log.fileName }">
                          </c:if>
                     </tr>
                     <tr>

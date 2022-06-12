@@ -27,7 +27,7 @@ public interface GardenService {
 
 	void deleteBoard(String boardNo);
 
-	ArrayList<Neighbor> getNeighborList(String userNo);
+	ArrayList<Neighbor> getNeighborList(String hostUser);
 
 	void deleteNeighbor(String neighborNo);
 

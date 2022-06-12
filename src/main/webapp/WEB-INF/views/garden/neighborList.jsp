@@ -33,7 +33,7 @@ th, td {
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
@@ -43,6 +43,15 @@ th, td {
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -54,20 +63,23 @@ th, td {
 					<div class="aa-product-catg-content">
 						<div class="aa-product-catg-body">
 							<div class="table-responsive"  align="center">
-								<h5>이웃관리</h5>
 								<br>
 								<table class="table table-striped" >
 									<tr class="danger">
 										<td>유저아이디</td>
 										<td>정원 바로가기</td>
-										<td>이웃삭제</td>			
+										<c:if test="${hostUser eq loginUser.userId}">
+										<td>이웃삭제</td>
+										</c:if>		
 									</tr>
 									<c:if test="${ !list.isEmpty() }">
 										<c:forEach items="${list}" var="l">
 											<tr>
 											<td>${l.NUserNo}</td>
 											<td><button class="btn btn-outline-success visitGarden" onclick='visitGarden("${l.NUserNo}");'><i class="fa-solid fa-leaf"></i></button></td>
+											<c:if test="${hostUser eq loginUser.userId}">
 											<td><button class="btn btn-outline-secondary deleteNeighbor" onclick='deleteNeighbor("${l.neighborNo}");' ><i class="fa-solid fa-trash-can"></i></button></td>
+											</c:if>
 											</tr>
 										</c:forEach>
          							</c:if>
@@ -75,9 +87,10 @@ th, td {
 									<tr><td colspan="3" align="center">추가된 이웃이 없습니다.</td></tr>
 									</c:if>
 								</table>
-
-							    <div ><input type="text" id="nUserId" name="nUserId" placeholder="아이디를 입력해주세요" style="width:200px"> 
+								<c:if test="${hostUser eq loginUser.userId}">
+							    <div><input type="text" id="nUserId" name="nUserId" placeholder="아이디를 입력해주세요" style="width:200px"> 
 							    &nbsp;<button type="button" class="btn btn-outline-success btn-sm" onclick="checkNeighbor();"><i class="fa-solid fa-user-plus"></i></button></div>
+								</c:if>
 						</div>
 					</div>
 				</div>
@@ -92,6 +105,10 @@ th, td {
 		var nUserId = $("#nUserId").val()
 		var userNo = ${loginUser.userNo};
 		console.log(userNo)
+		
+		if(nUserId == "${loginUser.userId}"){
+			alert("본인 아이디는 이웃추가할 수 없습니다.");
+		}else{
 		
 		$.ajax({
 			url:"checkNeighbor.do",
@@ -122,6 +139,7 @@ th, td {
 				console.log("이웃 아이디 중복체크 ajax 통신 실패");
 			}
 		});
+		}
 	}
 	function visitGarden(nUserNo){
 		location.href = "gardenMain.do?hostUser=" + nUserNo;

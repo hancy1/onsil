@@ -23,7 +23,7 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#"><i
@@ -34,6 +34,15 @@
 						</ol>
 					</nav>
 				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
+						</ol>
+					</nav>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -136,8 +145,8 @@
 			                                "</div>" +
 			                                "<p class='def" + c.commentNo + "'>" + c.content + "</p>"+
 			                                "<div class='modify" + c.commentNo + "' style='display:none'>" +	
-	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
-	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
+	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "' style='width:300px'> " +
+	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button> " +
 	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
 			                                "</div>" +
 			                                "<a class='active' onclick='openInput(" + c.commentNo + ");'>Reply</a>"; 
@@ -152,7 +161,7 @@
                                             if("${loginUser.userId}" == c.userNo){
                                             <!-- 답글 달기 -->
 		                                             value += "<div class='reInput" + c.commentNo +"' style='display:none'>" +
-			                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment'>" +
+			                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment' style='width:300px'>" +
 			                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
 		                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
                                             }
@@ -175,7 +184,7 @@
                                                                 "</div>" + 
                                                                 "<p class='def" + c.commentNo + "'>답글 : " +  c.content + "</p>" +
                                                                 "<div class='modify" + c.commentNo + "' style='display:none'>" +	
-                    	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "'>" +
+                    	                                		"<input type='text' id='update" + c.commentNo + "' name='content' value='" + c.content + "' style='width:300px'>" +
                     	                                		"<button class='btn' type='button' onclick='updateComment(" + c.commentNo + ");'>수정</button>" +
                     	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
                     			                                "</div>";

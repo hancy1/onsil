@@ -74,9 +74,9 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public ArrayList<Neighbor> getNeighborList(String userNo) {
+	public ArrayList<Neighbor> getNeighborList(String hostUser) {
 		
-		return gardenDao.getNeighborList(userNo, sqlSession);
+		return gardenDao.getNeighborList(hostUser, sqlSession);
 	}
 
 	@Override

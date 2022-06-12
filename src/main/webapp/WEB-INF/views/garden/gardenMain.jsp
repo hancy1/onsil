@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>온실 - 정원</title>
+    <title>온실 - Garden</title>
     
     <link href='resources/fullcalendar-5.0.1/lib/main.css' rel='stylesheet' />
 	<script src='resources/fullcalendar-5.0.1/lib/main.js'></script>
@@ -38,16 +38,23 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-10">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
-									class="fa fa-home"></i> Home</a></li>
-							<!-- <li class="breadcrumb-item "><a href="#">정원 메인화면</a></li> -->
-							<li class="breadcrumb-item active" aria-current="page">정원 메인화면</li>
+							<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">정원 메인화면</li>		
+						</ol>
+					</nav>	
+				</div>
+				<c:if test="${hostUser ne loginUser.userId}">
+				<div class="col-2">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='gardenMain.do?hostUser=${loginUser.userId}'">내 정원 바로가기</button></li>
 						</ol>
 					</nav>
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -149,9 +156,11 @@
 	}
 	
 	$(function(){
-
-		 //등록일을 오늘 날짜로
-		 document.getElementById('enrollDate').value = new Date().toISOString().substring(0, 10);
+		
+		if(${hostUser eq loginUser.userId}){
+			//등록일을 오늘 날짜로
+			document.getElementById('enrollDate').value = new Date().toISOString().substring(0, 10);
+		}
 		
 		var today = new Date();
 		
