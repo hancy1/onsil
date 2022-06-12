@@ -265,19 +265,9 @@
 							<div class="col-12 col-sm-6 col-lg-4">
 								<div class="single-product-area mb-50">
 									<!-- Product Image -->
-									<div class="product-img">
-									
-										
-										<img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
-										
-										
-										<div class="product-meta d-flex">
-											<a href="#" class="wishlist-btn">
-											<i class="icon_heart_alt"></i></a>
-											<a href="#" class="add-to-cart-btn"><button type="button"  onclick="postFormSubmit(1);" id = "cartAdd_btn" class="btn btn-secondary btn-sm" >Add to cart</button></a>																						
-											<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-										</div>
-										
+									<div class="product-img">	
+										<img onClick="detailPage('${ p.proCode }');" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
+																				
 									</div>
 									<!-- Product Info -->
 									<div class="product-info mt-15 text-center">
@@ -302,14 +292,13 @@
 							</c:forEach>
 							
 							
-						<!-- 장바구니에 추가 -->	
+						<!-- 장바구니에 추가, 디테일 폼 -->	
 						<script>
 								
 							function postFormSubmit(num){
 								var postForm = $("#postForm");	
 					
-								if(num == 1){
-									
+								if(num == 1){									
 									postForm.attr("action", "insertCart.do");
 								}				
 								postForm.submit();

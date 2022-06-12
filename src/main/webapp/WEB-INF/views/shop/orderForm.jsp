@@ -1,0 +1,254 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
+<!-- 부트스트랩아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+<!-- Favicon -->
+<link rel="icon" href="resources/img/core-img/icon.png">
+
+<!-- Core Stylesheet -->
+<link rel="stylesheet" href="resources/style.css">
+
+<!-- 다음 주소입력 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Title -->
+<title>온실 - 주문하기 </title>
+</head>
+<body>
+	<jsp:include page="../common/menubar.jsp" />
+
+
+	<!-- ##### Breadcrumb Area Start ##### -->
+	<div class="breadcrumb-area">
+		<!-- Top Breadcrumb Area -->
+		<div
+			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+			style="background-image: url(resources/img/bg-img/24.jpg);">
+			<h2>ORDER</h2>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.jsp"><i
+									class="fa fa-home"></i> Home</a></li>
+							<li class="breadcrumb-item"><a href="listProducts.do">구매하기</a></li>
+							<li class="breadcrumb-item active" aria-current="page">주문하기</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ##### Breadcrumb Area End ##### -->
+	
+	
+	<!-- ##### Checkout Area Start ##### -->
+    <div class="checkout_area mb-100">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-lg-7">
+                    <div class="checkout_details_area clearfix">
+                        <h5>SHOP : Order 내역서</h5>
+                        <form action="orderPay.do" method="post">
+                        
+                        	<input type="hidden" name="proCode" value="${p.proCode }">
+                        	<input type="hidden" name="amount" value="${ amount }">
+							<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+                            <div class="row">
+                                
+                                 <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Single Checkbox -->
+                                        <div class="custom-control custom-checkbox d-flex align-items-center mr-30">
+                                            <div class="form-check">
+											  <input class="form-check-input" onclick="memberInfo();" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+											  <label class="form-check-label" for="flexRadioDefault1">
+											    회원 정보와 동일
+											  </label>
+											</div>
+											<div class="form-check">
+											  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+											  <label class="form-check-label" for="flexRadioDefault2">
+											    새 배송지
+											  </label>
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br> <br>        
+                                <div class="col-12 mb-4">
+                                    <label for="orderName">수취인명 *</label>
+                                    <input type="text" class="form-control" id="orderName" name="orderName" value="" required>
+                                </div>                                
+                                
+                                <div class="col-12 mb-4">
+                                    <label for="orderPhone">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="orderPhone" name="orderPhone" onkeyup="mobile_keyup(this)" maxlength='13' value="" required>
+                                </div>
+
+                                <div class="col-md-8 mb-4">
+                                    <label for="address">Address *</label>
+                                    <input type="text" class="form-control" id="address" value="" placeholder="주소를 검색하세요." required>                                    
+                                </div>
+                                
+                                <div class="col-md-4 mb-4" style="padding-top: 35px; ">
+                               		<label for="address"></label>
+                                	<button type="button" id="addressIn" onclick="add();" class="btn btn-outline-secondary ">주소 검색</button>
+                                </div>
+                                
+                                
+                                <div class="col-md-8 mb-4">
+                                    <label for="city">Address Detail *</label>
+                                    <input type="text" class="form-control" id="addressDetail" value="" placeholder="상세주소를 검색하세요." required>
+                                </div>
+                                
+                               <div class="col-md-3 mb-4">
+                                    
+                               </div>                                  
+                                
+                               <div class="col-md-4 mb-4">
+                                    <label for="order-notes">사은품을 선택하세요.</label>
+                                    <!-- 사은품 리스트로 체크박스랑 들어감 -->
+                                    <table align="center" class="table">
+										<c:forEach items="${ fList }" var="f"> 										
+										<tr>
+											<td><img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${f.changeName}" width="100"></td>											
+										</tr>
+										
+										<tr>
+											<td>${ f.freeName }</td>															
+										</tr>
+										
+										<tr>
+										  <td>${ f.freePoint }point</td>
+										</tr>
+										<tr>
+										  <td>
+										  	<input type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2"></label>
+                                           </td>
+										</tr>	
+										</c:forEach>
+									</table>
+                                    
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+				<script>
+				
+				//멤버정보 불러오기		
+				$('#flexRadioDefault1').click(function() {
+					  if($('#flexRadioDefault1').is(':checked')){ 
+					    //input where you put a value
+					    $('#orderName').val("${ m.userName }");
+					    $('#orderPhone').val("${ m.phone }");
+					    $('#address').val("${ m.address }");
+					    $('#addressDetail').val("${ m.addressDetail }");
+					  }                     
+				});
+				
+				//새로 정보 입력하기누르면 지워짐
+				$('#flexRadioDefault2').click(function() {
+					  if($('#flexRadioDefault2').is(':checked')){ 
+						//input where you put a value
+						  $('#orderName').val("");
+						  $('#orderPhone').val("");
+					      $('#address').val("");
+						  $('#addressDetail').val("");
+					  }					   	             
+				});
+				
+			    // 주소 API 
+			    function add(){    	
+			    	new daum.Postcode({
+			            oncomplete: function(data) {
+			            	document.getElementById("address").value = data.address; 
+			                document.getElementById("address2").focus();                
+			            }
+			        }).open();
+			    }
+			    
+			    
+			    // 폰번호입력할 때 자동하이픈			    
+				function mobile_keyup(obj){
+			    	
+				    var mobile_len=obj.value.length;
+				    console.log(mobile_len);
+				    
+				    if(event.keyCode==8){
+				        obj.value=obj.value.slice(0,mobile_len); 
+				        return 0; 
+				    }else if (mobile_len==3 || mobile_len==8){
+				        obj.value += '-';
+				    }
+				}
+
+				</script>
+                <div class="col-12 col-lg-4">
+                    <div class="checkout-content">
+                        <h5 class="title--">Your Order</h5>
+                        <div class="products">
+                            <div class="products-data">
+                                <h5>Products:</h5>
+                                <div class="single-products d-flex justify-content-between align-items-center">
+                                    <p>${ p.proName }</p>
+                                    <p>수량: ${ amount } </p>
+                                    <p><fmt:formatNumber type="number" value="${p.price}"/>원</p>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="order-total d-flex justify-content-between align-items-center">
+                            <h5>Order Total</h5>
+                            <h5><c:set var="oTotal" value="${amount*p.price }"/><fmt:formatNumber type="number" value="${oTotal}"/>원</h5>
+                        </div>
+                        <div class="checkout-btn mt-30">
+                            <a href="#" class="btn alazea-btn w-100">결제하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Checkout Area End ##### -->
+	
+
+	<jsp:include page="../common/footer.jsp" />
+
+	<!-- ##### All Javascript Files ##### -->
+	<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="resources/js/bootstrap/popper.min.js"></script>
+	<!-- Bootstrap js -->
+	<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+	<!-- All Plugins js -->
+	<script src="resources/js/plugins/plugins.js"></script>
+	<!-- Active js -->
+	<script src="resources/js/active.js"></script>
+
+</body>
+</html>

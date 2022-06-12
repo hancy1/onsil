@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.uni.spring.shop.model.dto.Cart;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
@@ -76,6 +77,8 @@ public interface ShopService {
 	ArrayList<ProReview> selectProReviewList(String proCode);
 
 	int proReviewListCount(String proCode);
+
+	ArrayList<Freebie> selectFreebieList();
 
 
 

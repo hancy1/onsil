@@ -146,10 +146,10 @@ public class ShopController {
 	@RequestMapping("detailShop.do")
 	public ModelAndView selectShop(String proCode, ModelAndView mv) {
 		
-		//하나의 제품 조회(상세페이지)
+		//하나의 제품 조회(상세페이지를 위해서)
 		Product shop = shopService.selectShop(proCode);
 		
-		//해당하는 제품의 리뷰 리스트 조회
+		//해당하는 제품의 "리뷰" 리스트 조회
 		ArrayList<ProReview> list = shopService.selectProReviewList(proCode);
 		
 		//System.out.println("컨트롤러에서 리뷰리스트 잘 불러와졌니? " + list);
@@ -541,6 +541,25 @@ public class ShopController {
 		mv.addObject("o", o).setViewName("shop/myOrderDetail");
 		
 		return mv;
+	}
+	
+	
+	//주문 Form 연결
+	@RequestMapping("orderForm.do")
+	public String formOrder(String proCode, int amount, Model model, HttpSession session) {
+		
+		Product p = shopService.selectShop(proCode);
+		Member m = (Member) session.getAttribute("loginUser");			
+		ArrayList<Freebie> fList = shopService.selectFreebieList();
+		
+
+		model.addAttribute("p", p);
+		model.addAttribute("m", m);
+		model.addAttribute("amount", amount);
+		model.addAttribute("fList", fList);
+				
+		return "shop/orderForm";
+	
 	}
 
 }
