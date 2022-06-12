@@ -102,7 +102,7 @@
 									<!-- Cart -->
 									<div class="cart">
 										<a href="CartList.do"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span>Cart <span class="cart-quantity">(1)</span></span></a>
+										<span>Cart <!--<span class="cart-quantity">(1)</span> --></span></a>
 									</div>
 								</c:if> 
 							</div>

@@ -93,24 +93,42 @@
 							</div>
 
 							<div class="cart--area d-flex flex-wrap align-items-center">
-								<!-- Add to Cart Form -->
-								<form class="cart clearfix d-flex align-items-center"
-									method="post">
+								<!-- Add to Cart Form / 주문 Form-->
+								
+								
+								<form class="cart clearfix d-flex align-items-center" id="enrollOrderCartForm" method="post" action="" >
+									<input type="hidden" name="proCode" value="${ shop.proCode }">
+									<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 									<div class="quantity">
 										<span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;">
 										<i class="fa fa-minus" aria-hidden="true"></i>
 										</span>
-										<input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+										<input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="amount" value="1">
 										
 										<span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;">
 										<i class="fa fa-plus" aria-hidden="true"></i>
 										</span>
 										
 									</div>
-									<button type="submit" name="addtocart" value="5" class="btn alazea-btn ml-15">Add to cart</button>
-									<button type="submit" name="addtocart" value="5" class="btn alazea-btn ml-15">바로구매</button>
+									<button type="button" name="addToCart" onclick="addFormSubmit(1);" value="5" class="btn alazea-btn ml-15">Add to cart</button>
+									<button type="button" name="addToOrder" onclick="addFormSubmit(2);" value="5" class="btn alazea-btn ml-15">바로구매</button>
 								</form>
-								
+								<!-- 오더폼과 인서트가트 두가지중 원하는 action을 하게 하는 JS -->
+							    <script>
+									function addFormSubmit(num){
+										var addForm = $("#enrollOrderCartForm");									
+										
+										if(num == 2){
+											addForm.attr("action", "orderForm.do");
+										}
+										
+										else if(num == 1){
+											addForm.attr("action", "insertCart.do");
+										}
+										
+										addForm.submit();
+									};
+								</script>								
 							</div>
 
 							<div class="products--meta">
@@ -198,8 +216,19 @@
 													<c:forEach var="star" begin="1" end="${ r.reviewStar }">
 														<c:out value="⭐" />
 													</c:forEach>
-													<span>${ r.reviewTitle }</span>
+													<!-- 제목누르면 리뷰 디테일로 이동함 -->
+													<span><a onclick="detailReview(${ r.reviewNo });" >${ r.reviewTitle }</a></span>
 												</div>
+												
+												<script>
+													function detailReview(reviewNo){
+														
+														location.href="detailReview.do?reviewNo="+ reviewNo;
+													}
+													
+												</script>
+												
+												
 												<div class="review-details">
 													<p>
 													 <i class="bi bi-eye"></i><a href="#">${ r.reviewCount }</a> <span>${ r.reviewDate }</span>

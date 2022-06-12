@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.shop.model.dao.ShopDao;
 import com.uni.spring.shop.model.dto.Cart;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
@@ -341,6 +342,14 @@ public class ShopServiceImpl implements ShopService {
 	public int proReviewListCount(String proCode) {
 		// TODO Auto-generated method stub
 		return shopDao.proReviewListCount(sqlSession, proCode);
+	}
+
+
+
+	@Override
+	public ArrayList<Freebie> selectFreebieList() {
+		// TODO Auto-generated method stub
+		return shopDao.selectFreebieList(sqlSession);
 	}
 
 

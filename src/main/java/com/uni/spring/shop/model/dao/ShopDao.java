@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.shop.model.dto.Cart;
+import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
@@ -202,6 +203,11 @@ public class ShopDao {
 	public int proReviewListCount(SqlSessionTemplate sqlSession, String proCode) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("shopMapper.proReviewListCount", proCode);
+	}
+
+	public ArrayList<Freebie> selectFreebieList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("shopMapper.selectFreebieUserList");
 	}
 
 
