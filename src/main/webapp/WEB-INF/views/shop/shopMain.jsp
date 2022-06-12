@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -290,7 +291,7 @@
 												<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 												<input type="hidden" name="amount" value="1">
 											</form>	
-										<h6>${ p.price }원</h6>
+										<h6><fmt:formatNumber type="number" value="${ p.price }"/>원</h6>
 										
 									</div>
 								</div>
