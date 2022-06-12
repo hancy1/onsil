@@ -51,13 +51,6 @@ textarea {width:100%;
 <body>	
 	<jsp:include page="../common/menubar.jsp" />
 	
-	<c:if test="${ !empty msg }">
-		<script>
-			alert("${msg}");
-		</script>
-		<c:remove var="msg" scope="session"/>
-	</c:if>
-	
 	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
