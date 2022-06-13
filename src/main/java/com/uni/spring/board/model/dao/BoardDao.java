@@ -51,7 +51,10 @@ public class BoardDao {
 
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("boardMapper.updateBoard", b);
+		
+		int a = sqlSession.update("boardMapper.updateBoard", b);
+		System.out.println("다오 : " + a);
+		return a;
 	}
 
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int bno) {

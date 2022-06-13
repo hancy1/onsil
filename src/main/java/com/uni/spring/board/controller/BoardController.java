@@ -95,7 +95,7 @@ public class BoardController {
 	  } 
 	  
 	  boardService.insertBoard(b);   
-	  
+	  //System.out.println("글 작성후 객체 생성 : " + b);
 	  return "redirect:boardList.do"; //글 작성하면 게시글 목록으로
 		   
 	}
@@ -155,24 +155,24 @@ public class BoardController {
 		deleteFile.delete();	
 	}
 	
-	// 게시글 수정 폼
+	// 게시글 수정 폼 이동
 	@RequestMapping("updateForm.do")		
-	public ModelAndView updateForm(int bno, ModelAndView mv) {
-								//새로 조회해야해서 bno만 가져옴 
-		System.out.println("수정하기 폼 전 " +bno);
-		mv.addObject("b", boardService.selectBoard(bno))
-		.setViewName("board/boardUpdateForm");
-		System.out.println("수정하기 폼 후 " +bno);
+	public String updateForm(int bno, Model model) {	// bno , model(값을 담아서 이동)
+								//새로 조회해야해서 bno만 가져옴 		
+		Board b = boardService.selectBoard(bno);
+		System.out.println("수정하기 폼 : " +bno);
 
-		return mv;
+		model.addAttribute("b", b); //객체 b를 model에 추가해서 넘김
+
+		return "board/boardUpdate";
 	}
 
 	// 게시글 수정
 	@RequestMapping("updateBoard.do")
-	public ModelAndView updateBoard(Board b, ModelAndView mv, HttpServletRequest request,
-									@RequestParam(name = "reUploadFile", required = false) MultipartFile file) {
-
-		String orgchangeName = b.getBChangeName();
+	public String updateBoard(Board b, HttpServletRequest request,
+							@RequestParam(name = "reUploadFile", required = false) MultipartFile file) {
+		System.out.println(b); //수정할 정보 넘어가는지 확인?
+		String orgchangeName = b.getBChangeName(); 
 		
 		if(!file.getOriginalFilename().equals("")) {	//새로 넘어온 파일이 있는 경우
 			
@@ -181,17 +181,22 @@ public class BoardController {
 			b.setBOriginName(file.getOriginalFilename());
 			b.setBChangeName(changeName);
 			
-			boardService.updateBoard(b);
+			System.out.println("잘 넘어왔는지 확인 : " + b);
+
 		
-			// 새로 넘어온 파일이 있을때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
+			// 새로 넘어온 파일이 있을 때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
 			if(orgchangeName != null) { // null은 새로운 파일도 있는데 기존의 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
 				deleteFile(orgchangeName, request);	// 값이 있으면 삭제함
 			}
 		}
 		
-		mv.addObject("bno", b.getBNo()).setViewName("redirect:detailBoard.do");
+		System.out.println(b);
+		//mv.addObject("bno", b.getBNo()).setViewName("");
+
+					boardService.updateBoard(b);
+					
 		
-		return mv;
+		return "redirect:boardList.do";
 	}
 	
 	// 댓글 (라이브러리 gson 추가)

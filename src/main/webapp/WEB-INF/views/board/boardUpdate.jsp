@@ -64,16 +64,16 @@
                                 <div class="contact-form-area">
                                     <!-- Comment Form --><!-- 첨부파일 등록할꺼니깐 Multipart/form-data encType 지정하기 -->
                                     <form id="enrollForm" action="updateBoard.do" method="post" enctype="multipart/form-data">
-                                     	<input type="hidden" name="bno" value="${ b.BNo }">
+                                     	<input type="hidden" name="bNo" value="${ b.BNo }">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="Btitle" value="${ b.BTitle }">
+                                                    <input type="text" class="form-control" name="BTitle" value="${ b.BTitle }">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="hidden" class="form-control" value="사용자 아이디 : ${ loginUser.userNo }" name="userNo" readonly>
+                                                    <input type="hidden" class="form-control" value="${ loginUser.userNo }" name="userNo" readonly>
                                                 </div>
                                             </div>
                                    			<div class="col-12 col-md-6">
@@ -92,8 +92,8 @@
                                                     <input type="file" class="form-control" id="upfile" name="reUploadFile" value="${ b.BChangeName }">
                                                     <c:if test="${ !empty b.BOriginName }">
 	                                                    현재 업로드된 파일 : ${ b.BOriginName } <br>
-							                            <input type="hidden" name="changeName" value="${ b.BChangeName }">
-							                            <input type="hidden" name="originName" value="${ b.BOriginName }">
+							                            <input type="hidden" name="BChangeName" value="${ b.BChangeName }">
+							                            <input type="hidden" name="BOriginName" value="${ b.BOriginName }">
 						                            </c:if>
                                                 </div>
                                             </div>
