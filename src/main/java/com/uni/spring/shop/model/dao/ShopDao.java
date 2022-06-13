@@ -210,6 +210,11 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.selectFreebieUserList");
 	}
 
+	public int insertOrder(SqlSessionTemplate sqlSession, ProOrder o) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shopMapper.insertOrder", o);
+	}
+
 
 
 

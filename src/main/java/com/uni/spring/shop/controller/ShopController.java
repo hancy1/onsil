@@ -561,5 +561,41 @@ public class ShopController {
 		return "shop/orderForm";
 	
 	}
+	
+	
+	//결제페이지 연결, 주문 insert
+	@RequestMapping("orderPay.do")
+	public String insertOrder (ProOrder o, String proCode, String address,String addressDetail, String orderPhone, String orderName,  Model model, HttpSession session, HttpServletRequest request) {
+		
+		Product p = shopService.selectShop(proCode);
+		Member m = (Member) session.getAttribute("loginUser");		
+		int userNo = Integer.parseInt(m.getUserNo());
+		
+		
+		
+		//System.out.println("컨트롤러 amount? " + amount);
+		
+		o.setAddress(address);
+		o.setAddressDetail(addressDetail);
+		o.setOrderPhone(orderPhone);
+		o.setOrderName(orderName);
+		o.setAmount(1);
+		o.setProCode(proCode);
+		o.setUserNo(userNo);
+		o.setFreeNo(3);		
+		
+		shopService.insertOrder(o);
+		
+		
+		model.addAttribute("p", p);
+		model.addAttribute("m", m);
+		
+		
+				
+		return "redirect:myOrderList.do";
+	
+	}
+	
+
 
 }

@@ -80,6 +80,8 @@ public interface ShopService {
 
 	ArrayList<Freebie> selectFreebieList();
 
+	void insertOrder(ProOrder o);
+
 
 
 	

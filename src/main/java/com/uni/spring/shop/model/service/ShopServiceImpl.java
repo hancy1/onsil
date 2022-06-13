@@ -354,6 +354,18 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public void insertOrder(ProOrder o) {
+		// TODO Auto-generated method stub
+		int result = shopDao.insertOrder(sqlSession, o);
+		
+		if(result <0) {
+			throw new CommException("주문 추가 실패");
+		}	
+	}
+
+
+
 
 
 
