@@ -135,7 +135,8 @@ public class HelpServiceImpl implements HelpService {
 	@Override // 문의사항 댓글리스트
 	public ArrayList<Answer> selectReplyList(int ino) {
 
-		HelpDao.updateAnswerStatus(sqlSession, ino); // 댓글답변업데이트
+		HelpDao.updateAnswerStatus(sqlSession, ino); // 댓글답변업데이트 Y로 변경
+		HelpDao.updateAnswerStatus2(sqlSession, ino); // 댓글답변업데이트 N로 변경
 		
 		return HelpDao.selectReplyList(sqlSession, ino);
 	}

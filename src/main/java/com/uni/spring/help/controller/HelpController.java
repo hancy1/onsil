@@ -40,7 +40,8 @@ public class HelpController {
 		PageInfo pi = HelpPagination.getPageInfo(listCount, currentPage, 10, 5); // 페이지 갯수 : 10 개, 한 페이지에 게시물 갯수 : 5개
 		
 		ArrayList<Faq> list = helpService.selectFaqList(pi); // 페이지 정보를 가지고 넘어가기
-				
+						
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);		
 		

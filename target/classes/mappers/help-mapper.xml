@@ -367,7 +367,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				A.REPLYCOUNT, A.ANSWER_STATUS
 		FROM INQUIRY A
 		JOIN MEMBER B ON A.WRITER = B.USER_NO
-		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
+		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE		
 		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
 	</select>
 	
@@ -381,12 +381,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.INQUIRY_NO=#{ino}
 	</select>
 	
-	<!-- 관리자 - 답변완료했는지 체크 -->
+	<!-- 관리자 - 답변완료했는지 체크 Y 로 변경 -->
 	<update id="updateAnswerStatus">
 		<![CDATA[
 		UPDATE INQUIRY
 		SET ANSWER_STATUS = 'Y'
 		WHERE 0 < (
+		SELECT COUNT(*)
+		FROM ANSWER
+		WHERE WRITER=0
+		AND REPER_NO=#{ino})
+		AND INQUIRY_NO = #{ino}
+		]]>
+	</update>
+	
+	<!-- 관리자 - 답변완료했는지 체크 N 으로 변경 -->
+	<update id="updateAnswerStatus2">
+		<![CDATA[
+		UPDATE INQUIRY
+		SET ANSWER_STATUS = 'N'
+		WHERE 0 = (
 		SELECT COUNT(*)
 		FROM ANSWER
 		WHERE WRITER=0
