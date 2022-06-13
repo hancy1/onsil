@@ -268,6 +268,12 @@ public class HelpDao {
 		
 		return (Inquiry)sqlSession.selectOne("helpMapper.selectAdminInquiry", ino);
 	}
+	
+	// 관리자 - 문의사항 글 삭제
+	public int deleteAdminInquiry(SqlSessionTemplate sqlSession, int ino) {
+
+		return sqlSession.update("helpMapper.deleteAdminInquiry", ino);
+	}
 
 	// 답변완료했는지체크 Y 로 변경
 	public static Object updateAnswerStatus(SqlSessionTemplate sqlSession, int ino) {
@@ -311,6 +317,8 @@ public class HelpDao {
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList3", null, rowBounds);
 	}
+
+	
 
 	
 

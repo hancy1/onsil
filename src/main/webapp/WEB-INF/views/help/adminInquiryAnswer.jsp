@@ -88,7 +88,12 @@
 	
     <script>
     selectReplyList();
-	
+    
+ 	// 새로고침
+    function refreshList(){
+		location.reload();
+	}
+ 
 	// 댓글리스트	
 	function selectReplyList(){
 		
@@ -147,6 +152,7 @@
 					if(result > 0) {
 						$("#replyContent").val("");
 						selectReplyList();
+						refreshList();
 					}else{
 						alert("댓글등록실패");
 					}
@@ -172,6 +178,7 @@
 					if(result > 0) {
 						$("#replyContent").val("");
 						selectReplyList();
+						refreshList();
 					}else{
 						alert("댓글삭제실패");
 					}
