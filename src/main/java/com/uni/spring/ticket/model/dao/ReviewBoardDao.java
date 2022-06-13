@@ -27,6 +27,11 @@ public class ReviewBoardDao {
 		return (ArrayList)sqlSession.selectList("reviewBoardmapper.selectList",null,rowBounds);
 	
 	}
+	
+	public int increaseCount(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("reviewBoardmapper.increaseCount", bno);
+	}
 
 	public int insertRBoard(SqlSessionTemplate sqlSession, RBoard rb) {
 		// TODO Auto-generated method stub
