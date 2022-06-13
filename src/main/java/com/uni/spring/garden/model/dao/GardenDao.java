@@ -65,7 +65,7 @@ public class GardenDao {
 
 	public int deleteNeighbor(String neighborNo, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.update("gardenMapper.deleteNeighbor", neighborNo);
+		return sqlSession.delete("gardenMapper.deleteNeighbor", neighborNo);
 	}
 
 	public int insertNeighbor(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
