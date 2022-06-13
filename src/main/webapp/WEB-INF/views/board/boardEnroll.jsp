@@ -63,6 +63,7 @@
                                 <div class="contact-form-area">
                                     <!-- Comment Form --><!-- 첨부파일 등록할꺼니깐 Multipart/form-data encType 지정하기 -->
                                     <form id="enrollForm" action="insertBoard.do" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="bno" value="${ b.BNo }">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">

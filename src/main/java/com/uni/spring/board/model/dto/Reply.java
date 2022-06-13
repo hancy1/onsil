@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data // 게터,세터 생성자
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data 
 public class Reply {
 
 	private int replyNo;
@@ -23,5 +18,6 @@ public class Reply {
 	private String reContent;
 	private Timestamp reDate;
 	private String reStatus;
+	private String userId; //아이디 출력용
 	
 }

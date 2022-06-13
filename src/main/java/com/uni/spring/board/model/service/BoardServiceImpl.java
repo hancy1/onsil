@@ -75,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
 	public void updateBoard(Board b) {
 		
 		int result = boardDao.updateBoard(sqlSession, b);
+		System.out.println(result);
 		
 		if(result < 0) { // 0보다 작으면
 			throw new CommException("게시글 수정 실패");

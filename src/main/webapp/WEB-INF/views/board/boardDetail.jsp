@@ -65,17 +65,42 @@
                                 </div>
                                 <div class="post-meta mb-30" align="right">
 									<a><i>좋아요♡</i></a>
-                                    <a><i>신고하기</i></a>
+                                    <a><i><button id="reportBtn" class="mt-2">신고하기</button></i></a>
+                                    	<!-- 사용자 신고 Modal
+										<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+														<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">X</span>
+														</button>
+													</div>
+													<form method="post" action="${pageContext.request.contextPath}/report.do">
+														<div class="modal-body">
+															<input type="hidden" name="reportTarget" value="${b.userNo}">
+															<!-- 텍스트 작성 or 체크박스 생성... 
+															<p class="mb-2"><input type="text" name="reportTitle" placeholder="신고 제목" onfocus="this.placeholder=''" onblur="this.placeholder='신고 제목'" maxlength="20" required></p>
+															<p><textarea name="reportContent" style="width: 466px; height: 150px; word-wrap: break-word;" placeholder="신고 사유" onfocus="this.placeholder=''" onblur="this.placeholder='신고 사유'" maxlength="200" required></textarea></p>
+														</div>
+														<div class="modal-footer">
+															<button type="submit" class="btn" id="modalY">제출</button>
+															<button class="btn" type="button" data-dismiss="modal">취소</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div> -->
                                 </div>
                                 
-                                <div class="post-thumbnail mb-30">
-	                                
-	                                    <img src="resources/b_upload_files/${ b.BChangeName }">
-	                                
+                                <div class="post-thumbnail mb-30">	                                
+	                                    <img src="resources/b_upload_files/${ b.BChangeName }">	                                
                                 </div>                                
                                 <p>${ b.BContent }</p>
                             </div>
                         </div>
+                        
+
 
                         <!-- Post Tags & Share -->
                         <div class="post-tags-share d-flex justify-content-between align-items-center">                            
@@ -281,6 +306,13 @@
     </section>
     <!-- ##### Blog Content Area End ##### -->
     
+    <script>
+		$('#reportBtn').click(function(e){
+			e.preventDefault();
+			$('#reportModal').modal("show");
+		});
+	</script>
+    
 	<script>
 	 	$(function(){
 			selectReplyList();
@@ -293,9 +325,9 @@
 					$.ajax({
 						url:"rinsertBoard.do",
 						type:"post",
-						data:{replyContent:$("#replyContent").val(),
-							  refBoardNo:bno,
-							  replyWriter:"${ loginUser.userId }"},
+						data:{reContent:$("#replyContent").val(),
+								{bNo:bno},
+								userNo:"${ loginUser.userNo }"},
 						success:function(result){
 							if(result > 0){
 								$("#replyContent").val("");

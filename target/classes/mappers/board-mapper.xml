@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="boardMapper">
 
-	<resultMap type="com.uni.spring.board.model.dto.Board" id="boardResultSet"> 
+	<resultMap type="Board" id="boardResultSet"> 
 		<id property="bNo" column="B_NO"/>
          <result property="userNo" column="USER_NO"/>
          <result property="bCategoryNo" column="B_CATEGORY_NO"/>
@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       	<result property="reContent" column="RE_CONTENT"/>
       	<result property="reDate" column="RE_DATE"/>
       	<result property="reStatus" column="RE_STATUS"/>
+      	<result property="userId" column="USER_ID"/>
 	</resultMap>
 	
 	
@@ -57,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 선택 -->
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
-		SELECT C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_CONTENT, A.B_CHANGE_NAME
+		SELECT A.*, C.B_CATEGORY_NAME, B.USER_ID
 		FROM BOARD A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
@@ -81,14 +82,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD
-		SET B_TITLE=#{bTitle}, B_CONTENT=#{bContent}, B_ORIGIN_NAME=#{bOriginName}, B_CHANGE_NAME=#{bChangeName}
-		WHERE B_NO=#{bno}	
+		SET B_CATEGORY_NO=#{BCategoryNo}, B_TITLE=#{BTitle}, B_CONTENT=#{BContent}, B_ORIGIN_NAME=#{BOriginName}, B_CHANGE_NAME=#{BChangeName}
+		WHERE B_NO=#{bNo}	
 	</update>
 	
 	<!-- 댓글 목록 -->
 	<select  id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
-		SELECT RE_NO, USER_NO, RE_CONTENT, RE_DATE
-		FROM REPLY
+		SELECT A.*, B.USER_ID
+		FROM REPLY A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		WHERE B_NO=#{bno}
 		AND RE_STATUS='Y'
 		ORDER BY RE_NO DESC
