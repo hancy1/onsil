@@ -28,7 +28,7 @@ th, td {
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/garden1.jpg);">
-			<h2>${ loginUser.userId }님의 이웃</h2>
+			<h2>${ hostUser }님의 이웃</h2>
 		</div>
 
 		<div class="container">

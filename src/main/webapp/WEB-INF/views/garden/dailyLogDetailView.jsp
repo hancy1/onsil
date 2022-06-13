@@ -122,7 +122,7 @@
 			type:"get",
 			success:function(comment){
 				
-				$(".headlineCheck").text(comment.length + "Comments");
+				$(".headlineCheck").text(comment.length + " Comments");
 				
 				var value = "";
 				$.each(comment, function(i, c){
@@ -154,17 +154,17 @@
 			                                if("${loginUser.userId}" == c.userNo){
 	                                            value += " | <a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a>";
 			                                }
-                                            if("${loginUser.userId}" == "${hostUser}"){
+			                                if("${loginUser.userId}" == "${hostUser}" || "${loginUser.userId}" == c.userNo){
                                             	value +=  " | <a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>"; 
                                             }
 		                                            
-                                            if("${loginUser.userId}" == c.userNo){
+                                            
                                             <!-- 답글 달기 -->
-		                                             value += "<div class='reInput" + c.commentNo +"' style='display:none'>" +
-			                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment' style='width:300px'>" +
-			                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
-		                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
-                                            }
+                                             value += "<div class='reInput" + c.commentNo +"' style='display:none'>" +
+	                                         "<input type='text' id='reContent" + c.commentNo + "' name='content' placeholder='Comment' style='width:300px'>" +
+	                                         "<button class='btn' type='button' onclick='insertReComment(" + c.commentNo + ");'>Reply</button>" +
+                                             "<button class='btn' type='button' onclick='closeInput(" + c.commentNo + ");'>Cancel</button></div>";
+                                            
                                         value += "</div></div>";
                                    }
 						
@@ -189,10 +189,12 @@
                     	                                		"<button class='btn' type='button' onclick='closeModify(" + c.commentNo + ");'>닫기</button>" +
                     			                                "</div>";
                                                                 <!--  <a class="active" href="#">Reply</a>-->
-                                                                
+                                                                //작성자만 수정할 수 있게
                                                                 if("${loginUser.userId}" == c.userNo){
-                    	                                            value += "<a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a> | " +
-                    			                                             "<a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>" }
+                    	                                            value += "<a class='active' onclick='modifyComment(" + c.commentNo +");'>Modify</a>";}
+                                                                //작성자, 정원주인이 삭제할 수 있게
+                                                                if("${loginUser.userId}" == "${hostUser}" || "${loginUser.userId}" == c.userNo){
+                    			                                    value += " <a class='active' onclick='deleteComment(" + c.commentNo +");'>Delete</a>"; }
                                                                 
                                                             value += "</div>" + 
                                                         "</div>" + 
