@@ -25,7 +25,7 @@ public interface GardenService {
 
 	void insertBoard(Map map);
 
-	void deleteBoard(String boardNo);
+	int deleteBoard(String boardNo);
 
 	ArrayList<Neighbor> getNeighborList(String hostUser);
 
@@ -33,17 +33,17 @@ public interface GardenService {
 
 	void insertNeighbor(HashMap<String, String> map);
 
-	void insertComment(HashMap<String, String> map);
+	int insertComment(HashMap<String, String> map);
 
 	int selectCommentCount(String hostUser);
 
 	ArrayList<VisitorComment> selectCommentList(PageInfo cPi, String hostUser);
 
-	void updateComment(HashMap<String, String> map);
+	int updateComment(HashMap<String, String> map);
 
-	void deleteComment(String commentNo);
+	int deleteComment(String commentNo);
 
-	void updateBoard(HashMap<String, String> map);
+	int updateBoard(HashMap<String, String> map);
 
 	int selectPlantListCount(String search);
 

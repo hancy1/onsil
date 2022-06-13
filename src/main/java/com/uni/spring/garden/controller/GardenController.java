@@ -116,7 +116,7 @@ public class GardenController {
 			
 			System.out.println("hostUser 널 체크 후 " + hostUser);
 			
-			int listCount = gardenService.selectListCount(hostUser);
+			/*int listCount = gardenService.selectListCount(hostUser);
 
 			//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
 			PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -133,10 +133,36 @@ public class GardenController {
 			 
 			model.addAttribute("board", list);
 			model.addAttribute("pi", pi);
-			model.addAttribute("comment", comment);
+			model.addAttribute("comment", comment);*/
 
 			return "garden/visitorBoardList";
 		}
+	
+	@ResponseBody
+	@RequestMapping(value="selectVBoard.do", produces="application/json; charset=utf-8")
+	public Map<String, Object> selectVBoard(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
+											String hostUser, Model model) {
+		
+		int listCount = gardenService.selectListCount(hostUser);
+
+		//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
+		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		model.addAttribute("pi", pi);
+		
+		//hostUser의 게시물 가져오기
+		ArrayList<VisitorBoard> list = gardenService.selectList(pi, hostUser);
+		
+		//hostUser의 댓글 가져오기
+		ArrayList<VisitorComment> comment = gardenService.selectCommentList(pi, hostUser);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("comment", comment);
+		
+		return map;
+	}
+	
 
 	@RequestMapping("vBoardEnroll.do")
 	public String boardEnroll(HttpSession session, String content, String writer) {
@@ -154,35 +180,36 @@ public class GardenController {
 		
 	}
 	
-	@RequestMapping("deleteVBoard.do")
-	public String boardDelete(String boardNo, RedirectAttributes reAttr) {
+	@ResponseBody
+	@RequestMapping(value="deleteVBoard.do", produces="application/json; charset=utf-8")
+	public int boardDelete(String boardNo, RedirectAttributes reAttr) {
 		
-		gardenService.deleteBoard(boardNo);
-		reAttr.addFlashAttribute("msg", "방명록을 삭제했습니다.");
+		int result = gardenService.deleteBoard(boardNo);
+		
 
-		return "redirect:visitorBoard.do";
+		return result;
 		
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping("updateVBoard.do")
-	public String updateBoard(String boardNo, String content, RedirectAttributes reAttr) {
+	public int updateBoard(String boardNo, String content) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("boardNo", boardNo);
 		map.put("content", content);
 		
-		gardenService.updateBoard(map);
-		reAttr.addFlashAttribute("msg", "방명록을 수정했습니다.");
+		int result = gardenService.updateBoard(map);
 
-		return "redirect:visitorBoard.do";
+		return result;
 		
 	}
 
 	//=========================================================================================
 	//방명록 댓글
+	@ResponseBody
 	@RequestMapping("insertComment.do")
-	public String insertComment(String content, String boardNo, HttpSession session) {
+	public int insertComment(String content, String boardNo, HttpSession session) {
 		
 		//작성자 회원번호 세션에서 가져오기
 		String userNo = ((Member)session.getAttribute("loginUser")).getUserNo();
@@ -192,32 +219,32 @@ public class GardenController {
 		map.put("boardNo", boardNo);
 		map.put("content", content);
 		
-		gardenService.insertComment(map);
+		int result = gardenService.insertComment(map);
 		
-		return "redirect:visitorBoard.do";
+		return result;
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping("updateComment.do")
-	public String updateComment(String commentNo, String content, RedirectAttributes reAttr) {
+	public int updateComment(String commentNo, String content) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("commentNo", commentNo);
 		map.put("content", content);
 		
-		gardenService.updateComment(map);
-		reAttr.addFlashAttribute("msg", "댓글을 수정했습니다.");
+		int result = gardenService.updateComment(map);
 		
-		return "redirect:visitorBoard.do";
+		
+		return result;
 	}
 	
+	@ResponseBody
 	@RequestMapping("deleteComment.do")
-	public String deleteComment(String commentNo, RedirectAttributes reAttr) {
+	public int deleteComment(String commentNo) {
 		
-		gardenService.deleteComment(commentNo);
-		reAttr.addFlashAttribute("msg", "댓글을 삭제했습니다.");
+		int result = gardenService.deleteComment(commentNo);
 		
-		return "redirect:visitorBoard.do";		
+		return result;	
 	}
 	
 	//=========================================================================================

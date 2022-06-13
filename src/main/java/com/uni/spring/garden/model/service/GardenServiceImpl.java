@@ -64,12 +64,14 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public void deleteBoard(String boardNo) {
+	public int deleteBoard(String boardNo) {
 		int result = gardenDao.deleteBoard(boardNo, sqlSession);	
 		
 		if(result < 0) {
 			throw new CommException("방명록 삭제 실패");
 		}
+		
+		return result;
 		
 	}
 
@@ -98,12 +100,13 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public void insertComment(HashMap<String, String> map) {
+	public int insertComment(HashMap<String, String> map) {
 
 		int result =  gardenDao.insertComment(map, sqlSession);
 		if(result < 0) {
 			throw new CommException("댓글 작성 실패");
 		}
+		return result;
 		
 	}
 
@@ -119,30 +122,34 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public void updateComment(HashMap<String, String> map) {
+	public int updateComment(HashMap<String, String> map) {
 		
 		int result =  gardenDao.updateComment(map, sqlSession);
 		if(result < 0) {
 			throw new CommException("댓글 수정 실패");
 		}
 		
-	}
-
-	@Override
-	public void deleteComment(String commentNo) {
-		int result =  gardenDao.deleteComment(commentNo, sqlSession);
-		if(result < 0) {
-			throw new CommException("댓글 삭제 실패");
-		}
+		return result;
 		
 	}
 
 	@Override
-	public void updateBoard(HashMap<String, String> map) {
+	public int deleteComment(String commentNo) {
+		int result =  gardenDao.deleteComment(commentNo, sqlSession);
+		if(result < 0) {
+			throw new CommException("댓글 삭제 실패");
+		}
+		return result;
+		
+	}
+
+	@Override
+	public int updateBoard(HashMap<String, String> map) {
 		int result =  gardenDao.updateBoard(map, sqlSession);
 		if(result < 0) {
 			throw new CommException("방명록 수정 실패");
 		}
+		return result;
 		
 	}
 

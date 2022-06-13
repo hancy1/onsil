@@ -56,76 +56,17 @@
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
 								<br>
-								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:200px" required><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
+								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:400px" required maxlength='250'><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
 								&nbsp;<button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
 								<table class="table">
-									<c:if test="${ !empty board }">
-         								<c:forEach items="${board}" var="b">
-	         								<tr style="background-color: lightgray" >
-	         								<th><i class="fa-solid fa-comments"></i></th>
-	         								<th>${b.writer}</th>	
-	         								<!-- <th>${b.content}</th> -->
-	         								<td class="${b.boardNo}defB def">${b.content}</td>
-	         								<td class="${b.boardNo}inputB input">
-	         								<div><form action="updateVBoard.do"><input type="text" name="content" value="${b.content}" style="width:200px" required/><input type="hidden" name="boardNo" value="${b.boardNo}">
-	         								<button class="btn btn-outline-success btn-sm" type="submit">수정</button></form>
-	         								<button class="btn btn-outline-success btn-sm" onclick='cancleUpdateB("${b.boardNo}");' >취소</button></div></td>
-	         								<th>${b.enrollDate}</th>
-											<td><button class="btn btn-outline-success reply"onclick='insertComment("${b.boardNo}");'  data-bs-toggle="tooltip" title="댓글작성" ><i class="fa-brands fa-replyd"></i></button> 
-											<c:if test="${loginUser.userId eq b.writer}">
-											<button class="btn btn-outline-success updateBoard" onclick='updateB("${b.boardNo}");' ><i class="fa-solid fa-eraser"></i></button>
-											</c:if>
-											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq b.writer}"> 
-											<button class="btn btn-outline-success deleteBoard" onclick='deleteBoard("${b.boardNo}");' ><i class="fa-solid fa-trash-can"></i></button>
-											</c:if>
-											<c:if test="${b.writer ne loginUser.userId }">
-											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
-											</c:if>
-											</td>
-	         								</tr>
-	         								<c:if test="${ !comment.isEmpty() }">
-	         								<c:forEach items="${comment}" var="c">
-	         								<c:if test="${ c.boardNo == b.boardNo}">
-	         								<tr>
-	         								<td>댓글</td>	
-	         								<td>${c.userNo}</td>
-	         								<td class="${c.commentNo}def def">${c.content}</td>
-	         								<td class="${c.commentNo}input input">
-	         								<div><form action="updateComment.do"><input type="text" name="content" value="${c.content}"/><input type="hidden" name="commentNo" value="${c.commentNo}">
-	         								<button class="btn btn-outline-success btn-sm" type="submit">수정</button></form>
-	         								<button class="btn btn-outline-success btn-sm" onclick='cancleUpdate("${c.commentNo}");' >취소</button></div></td>
-	         								<td>${c.enrollDate}</td>
-	         								<td>      								
-	         								<c:if test="${loginUser.userId eq c.userNo}"> 		
-	         								<button class="btn btn-outline-success modifyComment" onclick='update("${c.commentNo}");' ><i class="fa-solid fa-eraser"></i></button>
-											</c:if>
-											<c:if test="${hostUser eq loginUser.userId || loginUser.userId eq c.userNo}"> 
-											<button class="btn btn-outline-success deleteComment" onclick='deleteComment("${c.commentNo}");' ><i class="fa-solid fa-trash-can"></i></button>
-											</c:if>
-											<c:if test="${c.userNo ne loginUser.userId }">
-											<button class="btn btn-outline-success visitGarden" onclick='visitGarden("${b.writer}");' data-bs-toggle="tooltip" title="정원방문" ><i class="fa-solid fa-leaf"></i></button>
-											</c:if>
-											</td>
-	         								</tr>
-	         								</c:if>
-	         								</c:forEach>	
-	         								</c:if>		
-	         							</c:forEach>
-	         							 
-         							</c:if>
-         							
-         							<c:if test="${ empty board }">
-									<tr><td colspan="5" align="center">작성된 방명록이 없습니다.</td></tr>
-									</c:if>
+									<!-- ajax구현 -->
 								</table>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		</div>
-</section>
 
+
+		<!-- 페이지 -->
 		<div id="pagingArea">
                 <ul class="pagination">
                 	<c:choose>
@@ -175,24 +116,134 @@
                 	</c:choose>
                 </ul>
             </div>
-            
+            <!-- 페이지 -->			
+            </div>
+			</div>            
+         </div>
+</section>
 	<!-- jQuery-2.2.4 js -->
 	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 <script>
 
 	$(document).ready(function(){
-		$('.def').show();
-		$('.input').hide();
-
+		
+		selectVBoard();
 	})
 
+	function selectVBoard(){
+		
+		var hostUser = "${hostUser}";
+		var currentPage = "${p.currentPage}";
+		
+		$.ajax({
+			url:"selectVBoard.do",
+			data:{hostUser:hostUser, currentPage:currentPage},
+			type:"get",
+			success:function(map){
+				
+				console.log(map);
+				console.log(map.list[0].writer);
+				
+				var value = "";
+				$.each(map.list, function(i, b){
+
+					if(map.list.length > 0){
+
+									
+					value += "<tr style='background-color: lightgray'>" + 
+							 "<th><img src='https://cdn-icons-png.flaticon.com/512/3598/3598055.png' alt='' style='width:40px;height:40px'></th>" +
+							 "<td id='" + b.boardNo + "userId'>" + b.writer + "</td>" +
+							 "<td class='" + b.boardNo + "defB def'>" + b.content + "</td>" +
+							 "<td class='" + b.boardNo + "inputB input' style='display:none'>" + 
+							 "<div><input type='text' name='content' id='bContent' value='" + b.content + "' style='width:200px' required/>" + 
+							 "<button class='btn btn-outline-success btn-sm' type='bytton' onclick='updateBoardContent(" + b.boardNo + ");'>수정</button>" + 
+							 "<button class='btn btn-outline-success btn-sm' onclick='cancleUpdateB(" + b.boardNo + ");' >취소</button></div></td>" + 
+							 "<th>" + b.enrollDate + "</th>" +
+							 "<td><button class='btn btn-outline-success reply' onclick='insertComment(" + b.boardNo + ");'><i class='fa-brands fa-replyd'></i></button>";
+
+					if("${loginUser.userId}" == b.writer){
+						value += "<button class='btn btn-outline-success updateBoard' onclick='updateB(" + b.boardNo + ");'><i class='fa-solid fa-eraser'></i></button>";
+					}
+					if("${loginUser.userId}" == "${hostUser}" || "${loginUser.userId}" == b.writer){
+						value += "<button class='btn btn-outline-success deleteBoard' onclick='deleteBoard(" + b.boardNo + ");' ><i class='fa-solid fa-trash-can'></i></button>";
+					}
+					if("${loginUser.userId}" == b.writer){
+						value += "<button class='btn btn-outline-success visitGarden' onclick='visitGarden(" + b.boardNo + ");'><i class='fa-solid fa-leaf'></i></button>";
+					}
+					
+					value += "</td></tr>";
+					
+					
+					$.each(map.comment, function(i, c){
+						if(c.boardNo == b.boardNo){
+							value += "<tr><td></td>" + 
+									 "<td id='" + c.commentNo + "userId'>" + c.userNo + "</td>" +
+									 "<td class='" + c.commentNo +"def def'>" + c.content + "</td>" + 
+									 "<td class='" + c.commentNo +"input input' style='display:none'>" +  
+									 "<div><input type='text' name='content' id='cContent' value='" + c.content +"'/>" + 
+									 "<button class='btn btn-outline-success btn-sm' type='submit' onclick='updateCommentContent(" + c.commentNo + ");'>수정</button>" + 
+									 "<button class='btn btn-outline-success btn-sm' onclick='cancleUpdate(" + c.commentNo + ");' >취소</button></div></td>" + 
+									 "<td>" + c.enrollDate + "</td><td>";
+									 
+							if("${loginUser.userId}" == c.userNo){		
+								value += "<button class='btn btn-outline-success modifyComment' onclick='update(" + c.commentNo + ");' ><i class='fa-solid fa-eraser'></i></button>";
+							}
+							if("${loginUser.userId}" == "${hostUser}" || "${loginUser.userId}" == c.userNo){
+								value += "<button class='btn btn-outline-success deleteComment' onclick='deleteComment(" + c.commentNo +");' ><i class='fa-solid fa-trash-can'></i></button>";
+							}
+							if("${loginUser.userId}" != c.userNo){
+								value += "<button class='btn btn-outline-success visitGarden' onclick='visitGarden(" + c.commentNo +");'><i class='fa-solid fa-leaf'></i></button>";
+							}
+							value += "</td></tr>";
+						}
+					})
+					
+					
+					}else{
+						value += "<tr><td colspan='5' align='center'>작성된 방명록이 없습니다.</td></tr>";
+					}
+				})
+				
+				
+				$(".table").html(value);
+				
+				//-----------------------
+				//페이지 처리
+			
+				
+			},
+			error:function(){
+				console.log("방명록 조회용 ajax 통신 실패")
+			}	
+		});
+		
+		
+	}
+	
 	//방명록 삭제하기
 	function deleteBoard(boardNo){
 		
 		var yn = confirm("방명록을 삭제하시겠습니까?")
 		console.log(yn)
 		if(yn){
-			location.href="deleteVBoard.do?boardNo=" + boardNo;
+			
+			$.ajax({
+				url:"deleteVBoard.do",
+				data:{boardNo:boardNo},
+				type:"get",
+				success:function(result){
+					if(result>0){
+						selectVBoard();
+						alert("삭제되었습니다.");
+					}else{
+						alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+					}
+					
+				},
+				error:function(){
+					console.log("방명록 삭제용 ajax 통신 실패")
+				}
+			})
 		}else{
 			alert("삭제를 취소했습니다.")
 		}
@@ -209,6 +260,8 @@
 	}
 	
 	function cancleUpdateB(no){
+		
+		console.log(no);
 		var tagDef = $('.' + no + 'defB')
 		var tag = $('.' + no + 'inputB')
 		
@@ -216,8 +269,32 @@
 		tag.hide();	
 	}
 	
+	function updateBoardContent(boardNo){
+		var content = $('#bContent').val();
+		console.log(content);
+		
+		$.ajax({
+			url:"updateVBoard.do",
+			data:{boardNo:boardNo,content:content},
+			type:"post",
+			success:function(result){
+				if(result>0){
+					selectVBoard();
+				}else{
+					alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+				}
+			},
+			error:function(){
+				console.log("방명록 수정용 ajax 통신 실패")
+			}
+		})
+		
+	}
+	
 	//회원의 정원 방문하기
-	function visitGarden(userId){
+	function visitGarden(no){
+		
+		var userId = $('#' + no + 'userId')[0].innerHTML;
 		
 		location.href = "gardenMain.do?hostUser=" + userId;
 		
@@ -228,8 +305,22 @@
 		var content = prompt("댓글입력 창입니다.");
 		
 		if(content){
-			location.href = "insertComment.do?content=" + content + "&boardNo=" + boardNo;
 			
+			$.ajax({
+				url:"insertComment.do",
+				data:{boardNo:boardNo,content:content},
+				type:"get",
+				success:function(result){
+					if(result>0){
+						selectVBoard();
+					}else{
+						alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+					}
+				},
+				error:function(){
+					console.log("댓글 작성용 ajax 통신 실패")
+				}
+			})	
 		}else{
 			alert("내용을 입력해주세요.")
 		}
@@ -252,26 +343,58 @@
 		tag.hide();	
 	}
 	
+	function updateCommentContent(commentNo){
+		
+		var content = $('#cContent').val();
+		console.log(content);
+		
+		$.ajax({
+			url:"updateComment.do",
+			data:{commentNo:commentNo,content:content},
+			type:"post",
+			success:function(result){
+				if(result>0){
+					selectVBoard();
+				}else{
+					alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+				}
+			},
+			error:function(){
+				console.log("방명록 댓글 수정용 ajax 통신 실패")
+			}
+		})
+	}
+	
 	function deleteComment(commentNo){
 	
 		var yn = confirm("댓글을 삭제하시겠습니까?")
 
 		if(yn){
-			location.href="deleteComment.do?commentNo=" + commentNo;
+			
+			$.ajax({
+				url:"deleteComment.do",
+				data:{commentNo:commentNo},
+				type:"get",
+				success:function(result){
+					if(result>0){
+						selectVBoard();
+						alert("삭제되었습니다.");
+					}else{
+						alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+					}
+					
+				},
+				error:function(){
+					console.log("방명록 댓글 삭제용 ajax 통신 실패")
+				}
+			})
 		}else{
 			alert("삭제를 취소했습니다.")
 		}
 	}
 
 </script>
-		<!-- 페이징바 만들기 -->
-		
-	
-	
-	
-	
-	
-	
+
 	<jsp:include page="../common/footer.jsp" />
 	
 	<!-- i태그 이미지 cdn -->
