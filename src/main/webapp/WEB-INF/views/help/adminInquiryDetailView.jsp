@@ -321,12 +321,13 @@
 					}
 					
 					if(obj.answerNo != answerNo) {
+						value += "<tr>";
 						value += "<th>" + obj.writer + "</th>" + 
-								 "<td colspan=2>" + obj.answer + "</td>" + 
-								 "<td colspan=2>" + obj.createDate + "</td>" +
-								 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
-								 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 									 
-						 "</tr>";
+										 "<td colspan=2>" + obj.answer + "</td>" + 
+										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+										 "<td colspan=1></td>" +
+										 "<td colspan=1></td>" + 
+								 "</tr>";
 					}
 					
 				});
