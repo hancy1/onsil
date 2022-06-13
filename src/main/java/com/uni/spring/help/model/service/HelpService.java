@@ -83,6 +83,8 @@ public interface HelpService {
 	ArrayList<Inquiry> selectAdminInquiryList(PageInfo pi); // 관리자 - 문의사항 리스트뷰
 
 	Inquiry selectAdminInquiry(int ino); // 관리자 - 문의사항 디테일 뷰
+	
+	void deleteAdminInquiry(int ino); // 관리자 - 문의사항 글 삭제
 
 	int selectAdminInquiryListCount2(); // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
 
@@ -91,6 +93,8 @@ public interface HelpService {
 	int selectAdminInquiryListCount3(); // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변완료
 
 	ArrayList<Inquiry> selectAdminInquiryList3(PageInfo pi); // 관리자 - 문의사항 관리 리스트 뷰  - 답변완료
+
+	
 
 	
 

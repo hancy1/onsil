@@ -347,6 +347,16 @@ public class HelpServiceImpl implements HelpService {
 		return HelpDao.selectAdminInquiry(sqlSession, ino);
 	}
 
+	@Override // 관리자 - 문의사항 글 삭제
+	public void deleteAdminInquiry(int ino) {
+		
+		int result = helpDao.deleteAdminInquiry(sqlSession, ino);
+		
+		if(result < 0) {
+			throw new CommException("관리자 문의사항 글 삭제 실패");
+		}
+		
+	}
 
 	@Override // 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
 	public int selectAdminInquiryListCount2() {
@@ -374,6 +384,9 @@ public class HelpServiceImpl implements HelpService {
 		
 		return HelpDao.selectAdminInquiryList3(sqlSession, pi);
 	}
+
+
+	
 
 
 	

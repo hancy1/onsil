@@ -504,6 +504,15 @@ public class HelpController {
 		return mv;		
 	}
 	
+	// 관리자 - 문의사항 글 삭제
+	@RequestMapping("deleteAdminInquiry.do")
+	public String deleteAdminInquiry(int ino) {
+		
+		helpService.deleteAdminInquiry(ino);
+		
+		return "redirect:adminInquiry.do";
+	}
+	
 	// 관리자 - 문의사항 미리보기
 	@RequestMapping("adminInquiryPreview.do")
 	public ModelAndView adminInquiryPreview(int ino, ModelAndView mv) {

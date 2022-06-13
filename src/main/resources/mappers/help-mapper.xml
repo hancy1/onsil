@@ -358,7 +358,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 관리자 - 문의사항 게시물 갯수 -->
 	<select id="selectAdminInquiryListCount" resultType="_int">
-		SELECT COUNT(*) FROM INQUIRY
+		SELECT COUNT(*) FROM INQUIRY WHERE STATUS = 'Y'
 	</select>
 	
 	<!-- 관리자 - 문의사항 게시물들 불러오기 -->
@@ -368,6 +368,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM INQUIRY A
 		JOIN MEMBER B ON A.WRITER = B.USER_NO
 		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE		
+		WHERE A.STATUS = 'Y'
 		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
 	</select>
 	
@@ -380,6 +381,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
 		WHERE A.INQUIRY_NO=#{ino}
 	</select>
+	
+	<!-- 문의사항 글 삭제 -->
+	<delete id="deleteAdminInquiry">
+		UPDATE INQUIRY
+		SET STATUS = 'N'
+		WHERE INQUIRY_NO = #{ino}
+	</delete>
 	
 	<!-- 관리자 - 답변완료했는지 체크 Y 로 변경 -->
 	<update id="updateAnswerStatus">
@@ -413,6 +421,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAdminInquiryListCount2" resultType="_int">
 		SELECT COUNT(*) FROM INQUIRY
 		WHERE ANSWER_STATUS = 'N'
+		AND STATUS = 'Y'
+		
 	</select>
 	
 	<!-- 관리자 - 문의사항 게시물들 불러오기 - 답변 전-->
@@ -423,6 +433,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN MEMBER B ON A.WRITER = B.USER_NO
 		JOIN INFO_CATEGORY C ON A.CATEGORY = C.CATEGORY_CODE
 		WHERE ANSWER_STATUS = 'N'
+		AND A.STATUS = 'Y'
 		ORDER BY A.STATUS DESC, A.INQUIRY_NO DESC
 	</select>
 	
@@ -430,6 +441,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAdminInquiryListCount3" resultType="_int">
 		SELECT COUNT(*) FROM INQUIRY
 		WHERE ANSWER_STATUS = 'Y'
+		AND STATUS = 'Y'
 	</select>
 	
 	<!-- 관리자 - 문의사항 게시물들 불러오기 - 답변완료-->

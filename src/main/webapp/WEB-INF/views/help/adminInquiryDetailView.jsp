@@ -116,7 +116,29 @@
                 </tr>
             </table>
             <br>
-				
+            
+            <div align="center">	                
+	                <button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button>
+	            </div>
+	            
+	            <form id="postForm" action="" method="post">
+					<input type="hidden" name="ino" value="${ i.inquiryNo }">					
+				</form>
+				<script>
+					function postFormSubmit(){
+						var postForm = $("#postForm");
+												
+							if(confirm("글을 삭제하시겠습니까?")){
+								postForm.attr("action", "deleteAdminInquiry.do");
+							}else{
+								alert("글 삭제를 취소하셨습니다.");
+								return;
+							}											
+						
+						postForm.submit();
+					}
+				</script>
+				<br>
             <!-- 댓글 -->
            	<table id="replyArea" class="table" align="center">
 	                <thead>
@@ -167,6 +189,11 @@
 	
     <script>
     selectReplyList();
+    
+    // 새로고침
+    function refreshList(){
+		location.reload();
+	}
 	
 	// 댓글리스트	
 	function selectReplyList(){
@@ -226,6 +253,7 @@
 					if(result > 0) {
 						$("#replyContent").val("");
 						selectReplyList();
+						refreshList();
 					}else{
 						alert("댓글등록실패");
 					}
@@ -251,6 +279,7 @@
 					if(result > 0) {
 						$("#replyContent").val("");
 						selectReplyList();
+						refreshList();
 					}else{
 						alert("댓글삭제실패");
 					}
