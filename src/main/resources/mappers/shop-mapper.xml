@@ -426,6 +426,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 	
+	<!-- 리뷰등록(사용자) -->	
+	<insert id="insertOrder">	
+	
+		INSERT INTO PRO_ORDER
+		VALUES(SEQ_ORDER_NO.NEXTVAL, NULL, #{proCode},#{freeNo},#{userNo},#{payCode},#{amount},#{orderName},#{orderPhone},#{address},#{addressDetail}, DEFAULT, DEFAULT,DEFAULT)
+  
+  	</insert>
+	
+	
 	
 	<!-- 카트에 인서트하기 -->
 	<insert id="insertCart">

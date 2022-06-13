@@ -25,9 +25,14 @@
 <!-- 다음 주소입력 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+<!-- 아임포트 API -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <!-- Title -->
 <title>온실 - 주문하기 </title>
@@ -70,7 +75,7 @@
                 <div class="col-12 col-lg-7">
                     <div class="checkout_details_area clearfix">
                         <h5>SHOP : Order 내역서</h5>
-                        <form action="orderPay.do" method="post">
+                        <form action="" method="post" id="orderForm">
                         
                         	<input type="hidden" name="proCode" value="${p.proCode }">
                         	<input type="hidden" name="amount" value="${ amount }">
@@ -109,7 +114,7 @@
 
                                 <div class="col-md-8 mb-4">
                                     <label for="address">Address *</label>
-                                    <input type="text" class="form-control" id="address" value="" placeholder="주소를 검색하세요." required>                                    
+                                    <input type="text" class="form-control" id="address" name="address" value="" placeholder="주소를 검색하세요." required>                                    
                                 </div>
                                 
                                 <div class="col-md-4 mb-4" style="padding-top: 35px; ">
@@ -120,7 +125,7 @@
                                 
                                 <div class="col-md-8 mb-4">
                                     <label for="city">Address Detail *</label>
-                                    <input type="text" class="form-control" id="addressDetail" value="" placeholder="상세주소를 검색하세요." required>
+                                    <input type="text" class="form-control" id="addressDetail" name="addressDetail" value="" placeholder="상세주소를 검색하세요." required>
                                 </div>
                                 
                                <div class="col-md-3 mb-4">
@@ -150,10 +155,8 @@
                                            </td>
 										</tr>	
 										</c:forEach>
-									</table>
-                                    
+									</table>                                    
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -226,7 +229,8 @@
                             <h5><c:set var="oTotal" value="${amount*p.price }"/><fmt:formatNumber type="number" value="${oTotal}"/>원</h5>
                         </div>
                         <div class="checkout-btn mt-30">
-                            <a href="#" class="btn alazea-btn w-100">결제하기</a>
+                            <a id="check_module" class="btn alazea-btn w-100">결제하기</a>
+							                           
                         </div>
                     </div>
                 </div>
@@ -234,8 +238,80 @@
         </div>
     </div>
     <!-- ##### Checkout Area End ##### -->
-	
-
+    
+    <script>
+	  
+ 		$("#check_module").click(function () {
+				  var IMP = window.IMP; // 생략가능        
+				  IMP.init('imp62250320');         
+				  // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용        
+				  // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드        
+				  IMP.request_pay({
+					  pg: 'kakao', 
+				  // version 1.1.0부터 지원.    
+				  /*
+				  'kakao':카카오페이,
+				  html5_inicis':이니시스(웹표준결제)                    
+				  'nice':나이스페이                    
+				  'jtnet':제이티넷                    
+				  'uplus':LG유플러스                    
+				  'danal':다날                    
+				  'payco':페이코                    
+				  'syrup':시럽페이                    
+				  'paypal':페이팔
+				  */
+				  pay_method: 'card',
+				  /*                 
+				  'samsung':삼성페이,                 
+				  'card':신용카드,
+				  'trans':실시간계좌이체,
+				  'vbank':가상계좌,
+				  'phone':휴대폰소액결제
+				  */            
+				  merchant_uid: 'merchant_' + new Date().getTime(),
+				  
+				  name: '주문명 : ${ p.proName }',
+				  //결제창에서 보여질 이름
+				  amount: 10,
+				  //가격             
+				  buyer_email: 'iamport@siot.do',
+				  buyer_name: ${ sessionScope.loginUser.userNo },
+				  buyer_tel: '${ o.orderPhone }',
+				  buyer_addr: '${ o.address }',
+				  buyer_postcode: '123-456',
+				  m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+				  
+				  /*
+				  모바일 결제시,
+				  결제가 끝나고 랜딩되는 URL을 지정
+				  (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+				  */        
+				  }, function (rsp) {
+					  console.log(rsp);
+					  if (rsp.success) {
+						  var msg = '결제가 완료되었습니다.';
+						  msg += '고유ID : ' + rsp.imp_uid;
+						  msg += '상점 거래ID : ' + rsp.merchant_uid;
+						  msg += '결제 금액 : ' + rsp.paid_amount;
+						  msg += '카드 승인번호 : ' + rsp.apply_num;
+						  
+						  var postForm = $("#orderForm");
+						  postForm.attr("action", "orderPay.do");
+						  postForm.submit();
+						  
+					 }  else {
+						    var msg = '결제에 실패하였습니다.';
+						    msg += '에러내용 : ' + rsp.error_msg;
+					}            
+					  alert(msg);
+					  });    
+			});
+				  
+	</script>
+    
+    
+    
+	  
 	<jsp:include page="../common/footer.jsp" />
 
 	<!-- ##### All Javascript Files ##### -->
