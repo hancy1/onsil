@@ -269,10 +269,17 @@ public class HelpDao {
 		return (Inquiry)sqlSession.selectOne("helpMapper.selectAdminInquiry", ino);
 	}
 
-	// 답변완료했는지체크
+	// 답변완료했는지체크 Y 로 변경
 	public static Object updateAnswerStatus(SqlSessionTemplate sqlSession, int ino) {
 		
 		return sqlSession.update("helpMapper.updateAnswerStatus", ino);
+	}
+	
+	// 답변완료했는지체크 N 로 변경
+	public static Object updateAnswerStatus2(SqlSessionTemplate sqlSession, int ino) {
+		
+		return sqlSession.update("helpMapper.updateAnswerStatus2", ino);
+		
 	}
 
 	// 관리자 - 문의사항 관리 리스트 뷰 게시물 갯수 - 답변 전
@@ -304,6 +311,8 @@ public class HelpDao {
 		
 		return (ArrayList)sqlSession.selectList("helpMapper.selectAdminInquiryList3", null, rowBounds);
 	}
+
+	
 
 	
 	
