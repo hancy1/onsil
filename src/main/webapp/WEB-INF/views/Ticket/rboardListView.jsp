@@ -168,6 +168,8 @@
     <script>
     	$(function(){
     		$("#RBList tbody tr").click(function(){
+    			
+    		
     			location.href="detailRBoard.do?bno=" + $(this).children().eq(0).text();
     			
     		});

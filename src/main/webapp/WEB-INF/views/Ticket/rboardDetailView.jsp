@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <title>Insert title here</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png"> 
@@ -155,7 +155,7 @@
             $(".heart").on("click", function () {
                 var that = $(".heart");
     	    $.ajax({
-    	    	url :'/reviewBoard/heart',
+    	    	url :'detailRBoard.do',
     	        type :'POST',
     	        data : {'rbNo':${bno},'userNo':${loginUser.userNo}},
     	    	success : function(data){
@@ -165,12 +165,9 @@
     	        	} else {
     	        		  $("#heart").prop("class", 'bi-heart');
     	        	}
-                 	}
+                 	
     	    });
-            });
-
-        });
-
+    	    }
     </script>
 				
 				<script>
