@@ -131,7 +131,7 @@
 					
 					if(comment.length != 0){			
 						if(c.commentType == 0){
-							console.log("${loginUser.userId}" == "${hostUser}");
+							
 							value +=  "<div class='comment-wrapper d-flex'>" +
 			                            <!-- Comment Meta -->
 			                            "<div class='comment-author'>" +
