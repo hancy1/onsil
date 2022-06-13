@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
@@ -112,10 +114,12 @@ public class ReviewBoardController {
 		
 		//후기게시판 디테일페이지 연결
 		@RequestMapping("detailRBoard.do")
-		public ModelAndView selectBoard(int bno,ModelAndView mv,@RequestParam(name="userNo") int userNo,Model model) {
+		public ModelAndView selectBoard(int bno,ModelAndView mv,HttpSession session ,Model model) {
 			
 		
 			RBoard rb = reviewBoard.selectRBoard(bno);
+			
+			int userNo = Integer.parseInt(((Member)session.getAttribute("loginUser")).getUserNo());
 			
 			mv.addObject("rb",rb).setViewName("Ticket/rboardDetailView");
 			

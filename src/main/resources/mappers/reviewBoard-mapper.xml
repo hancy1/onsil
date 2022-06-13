@@ -12,6 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <result column="USER_NO" property="userNo"/>
 
+<result column="USER_ID" property="userId"/>
+
 <result column="T_CATEGORY_NO" property="TCategoryNo"/>
 
 <result column="RB_TITLE" property="rbTitle"/>
@@ -48,10 +50,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      </select>
 
      <!-- 후기게시판 전부 select해오기 -->
-     <select id="selectList" resultMap="rbResultSet">
-     SELECT *FROM REVIEWBOARD
-     WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC 
+    <select id="selectList" resultMap="rbResultSet">
+     SELECT A.*, B.USER_ID
+   FROM REVIEWBOARD A
+   JOIN MEMBER B ON A.USER_NO  =  B.USER_NO
+     WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC  
      </select>
+     
      
      <!-- 후기게시판 등록 -->
       <insert id="insertRBoard">
