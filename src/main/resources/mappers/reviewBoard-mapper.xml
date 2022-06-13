@@ -69,6 +69,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
   </select>
   
+  <!-- 조회수 증가 -->
+	<update id="increaseCount" parameterType="_int">
+		UPDATE REVIEWBOARD
+		SET RB_COUNT = RB_COUNT + 1
+		WHERE RB_NO=#{rbNo}
+		AND RB_STATUS = 'Y' 
+	</update>
+  
   <select id="findHeart" parameterType="java.util.HashMap" resultType="RBLike">
 	select * from RB_LIKE
 	 where RB_NO=#{rbNo} and USER_NO=#{userNo}
