@@ -71,6 +71,8 @@ public interface AdminShopService {
 
 	void cancelAdminOrder(int orderNo);
 
+	ProOrder selectSalesList();
+
 	
 
 	

@@ -102,9 +102,7 @@
 							
 							<form id="enrollForm" action="insertInventory.do" method="post" class="validation-form" novalidate>
 				            
-				                <table align="center">
-				              		
-				              		
+				                <table align="center">				              		
 				              		<tr>
 				                        <th><label for="stockStatus">구분</label></th>
 				                        <td>  
@@ -137,14 +135,12 @@
 				                        <th><label for="proName">제품명</label></th>
 				                        <td id="nameArea"><input type="text" id="proName" class="form-control"  value="" name="proName" placeholder="제품명" ></td>
 				                    </tr>
-				                    
-				                    
+				                    				                    
 				                    <tr>
 				                        <th><label for="amountNow">현재수량</label></th>
-				                        <td><input type="number" id="amountNow" class="form-control" name="amountNow"></td>
+				                        <td><input type="number" id="amountNow" class="form-control" name="amountNow" placeholder="현재수량입니다."></td>
 				                    </tr>
 				                    
-
 				                    <tr>
 				                        <th><label for="amount">등록수량</label></th>
 				                        <td><input type="number" id="amount" class="form-control" name="amount" required></td>
@@ -153,9 +149,6 @@
 				                </table>
 				                <br>
 				
-									
-					
-								
 				                <div align="center">
 				                    <button type="submit" class="btn btn-outline-success">등록하기</button>
 				                   
@@ -200,9 +193,6 @@
 			
 			});
 			
-		
-	
-	
 	</script>
 		
 

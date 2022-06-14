@@ -543,4 +543,26 @@ public class AdminShopController {
 			Product pInfo = aShopService.selectProduct(proCode);
 			return pInfo;
 		}
+		
+
+		// 주문관리 페이지 
+		@RequestMapping("salesList.do")
+		public String selectSalesList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+			
+			
+			
+			int listCount = aShopService.orderListCountAll();
+			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
+			
+			
+			ArrayList<ProOrder> list = aShopService.selectOrderList(pi); 
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);		
+			
+			return "shop/adminSalesList";
+		}
+
+		
 }
