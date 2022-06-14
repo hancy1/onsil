@@ -215,6 +215,11 @@ public class ShopDao {
 		return sqlSession.insert("shopMapper.insertOrder", o);
 	}
 
+	public ArrayList<Product> selectBestSeller(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectBestSeller");
+	}
+
 
 
 
