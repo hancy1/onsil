@@ -143,8 +143,6 @@ public class GardenController {
 	public Map<String, Object> selectVBoard(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
 											String hostUser, Model model) {
 		
-		
-		System.out.println("currentPage " + currentPage);
 		int listCount = gardenService.selectListCount(hostUser);
 
 		//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
@@ -327,12 +325,29 @@ public class GardenController {
 		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<PlantInfo> list = gardenService.selectPlantList(pi, search);
-		
-		System.out.println("list확인 " + list);
+
 		model.addAttribute("info", list);
 		model.addAttribute("pi", pi);
 	
 		return "garden/adminPlant";
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectInfoList.do")
+	public Map<String, Object> selectInfoList(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage,
+											  @RequestParam(value="search" , required=false) String search) {
+
+		int listCount = gardenService.selectPlantListCount(search);
+		
+		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<PlantInfo> list = gardenService.selectPlantList(pi, search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pi", pi);
+		map.put("info", list);
+		
+		return map;
 	}
 	
 	@RequestMapping("insertPlantForm.do")
@@ -349,12 +364,13 @@ public class GardenController {
 		return "redirect:adminPlant.do";
 	}
 	
+	@ResponseBody
 	@RequestMapping("deletePlant.do")
-	public String deletePlant(String regNo, RedirectAttributes reAttr) {
+	public int deletePlant(String regNo) {
 		
-		gardenService.deletePlant(regNo);
-		reAttr.addFlashAttribute("msg", "식물정보를 삭제했습니다.");
-		return "redirect:adminPlant.do";
+		int result = gardenService.deletePlant(regNo);
+
+		return result;
 	}
 	
 	@RequestMapping("updatePlantForm.do")

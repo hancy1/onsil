@@ -177,11 +177,13 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public void deletePlant(String regNo) {
+	public int deletePlant(String regNo) {
 		int result =  gardenDao.deletePlant(regNo, sqlSession);
 		if(result < 0) {
 			throw new CommException("식물정보 삭제 실패");
 		} 
+		
+		return result;
 		
 	}
 
