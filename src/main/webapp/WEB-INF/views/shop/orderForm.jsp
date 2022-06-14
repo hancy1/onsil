@@ -28,8 +28,6 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-
 <!-- 아임포트 API -->
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -270,9 +268,9 @@
 				  */            
 				  merchant_uid: 'merchant_' + new Date().getTime(),
 				  
-				  name: '주문명 : ${ p.proName }',
+				  name: '${ p.proName }',
 				  //결제창에서 보여질 이름
-				  amount: 10,
+				  amount: ${oTotal},
 				  //가격             
 				  buyer_email: 'iamport@siot.do',
 				  buyer_name: ${ sessionScope.loginUser.userNo },
@@ -304,7 +302,8 @@
 						    msg += '에러내용 : ' + rsp.error_msg;
 					}            
 					  alert(msg);
-					  });    
+					  }); 
+				  				  
 			});
 				  
 	</script>

@@ -13,7 +13,6 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 
-
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 
@@ -24,9 +23,20 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
 <!-- Title -->
-<title>온실 - 결제 </title>
+<title>온실 - 결제완료 </title>
+
+<style type="text/css">
+
+	#content{	
+	
+	background-color: #E9ECEF;	
+	border-radius: 30px 10px;
+	
+	}
+
+</style>
+
 </head>
 <body>
 
@@ -39,7 +49,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/24.jpg);">
-			<h2>ORDER</h2>
+			<h2>ORDER RESULT</h2>
 		</div>
 
 		<div class="container">
@@ -59,8 +69,23 @@
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
 	
-	<h5>결제완료</h5>
 
+	<div class="container">	  
+	  <div class="row" id="content">
+	  
+	    <div class="col"></div>
+	    <div class="col">
+	    	<br>
+	      	<span style = " font-size:1.5em; color: green;">주문/결제가 완료 되었습니다.</span><br><br>	        	
+        	${ sessionScope.loginUser.userName }님에게 ${ point }point가 적립되었습니다. <br>
+        	이용해주셔서 감사합니다.<br><br>	        	
+        	<a href="myOrderList.do">내 주문 확인하러 가기🚶‍♀️</a><br><br>
+	    </div>
+	    <div class="col"></div>
+	    
+	  </div>
+	</div>
+	<br><br><br><br>
 	<jsp:include page="../common/footer.jsp" />
 	
 	<!-- ##### All Javascript Files ##### -->

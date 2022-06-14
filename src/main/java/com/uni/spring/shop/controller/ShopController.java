@@ -28,7 +28,6 @@ import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
-import com.uni.spring.shop.model.dto.ProStock;
 import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.ShopService;
@@ -565,37 +564,39 @@ public class ShopController {
 	
 	//결제페이지 연결, 주문 insert
 	@RequestMapping("orderPay.do")
-	public String insertOrder (ProOrder o, String proCode, String address,String addressDetail, String orderPhone, String orderName,  Model model, HttpSession session, HttpServletRequest request) {
+	public String insertOrder (ProOrder o, String proCode, String address,String addressDetail,
+							   String orderPhone, String orderName, int amount,
+							   Model model, HttpSession session) {
 		
 		Product p = shopService.selectShop(proCode);
 		Member m = (Member) session.getAttribute("loginUser");		
 		int userNo = Integer.parseInt(m.getUserNo());
 		
 		
+		//토탈가격이랑 포인트 가격 계산
+		int price = p.getPrice();
+		int totalPrice = amount*price;
+		int point = (int) (totalPrice * 0.1);
 		
-		//System.out.println("컨트롤러 amount? " + amount);
-		
+	
 		o.setAddress(address);
 		o.setAddressDetail(addressDetail);
 		o.setOrderPhone(orderPhone);
 		o.setOrderName(orderName);
-		o.setAmount(1);
+		o.setAmount(amount);
 		o.setProCode(proCode);
 		o.setUserNo(userNo);
 		o.setFreeNo(3);		
+		o.setPayCode("card");
 		
 		shopService.insertOrder(o);
+		insertPoint(userNo, point, "적립");
 		
-		
-		model.addAttribute("p", p);
-		model.addAttribute("m", m);
-		
-		
+		model.addAttribute("point", point);
 				
-		return "redirect:myOrderList.do";
+		return "shop/orderResult";
 	
 	}
 	
-
 
 }
