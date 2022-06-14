@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.HelpPagination;
 import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.help.model.dto.PageInfo;
@@ -533,4 +535,12 @@ public class AdminShopController {
 			return "redirect:adminOrderListCancel.do";
 		}
 		
+		
+		@ResponseBody
+		@RequestMapping(value = "selectProductInfo.do", produces="application/json; charset=utf-8")
+		public Product selectProductInfo(String proCode) {
+			
+			Product pInfo = aShopService.selectProduct(proCode);
+			return pInfo;
+		}
 }
