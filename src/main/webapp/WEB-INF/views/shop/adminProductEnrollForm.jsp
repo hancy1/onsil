@@ -10,22 +10,16 @@
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 
-
-
 <!-- 썸머노트 라이트 버젼 include summernote-ko-KR -->
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-
-
 
 
 <style>
@@ -36,10 +30,11 @@
      margin:10px;
      }
      
-    #pagingArea
-    width:fit-content;margin:auto;
+    #pagingArea{
+     width:fit-content;margin:auto;
+    
     }
-
+   
    
     #searchForm{
         width:80%;
@@ -123,8 +118,7 @@
 	<div class="container">
 		 	<div class="input-form-backgroud row">
 		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
-		
-				    <div class="content">
+					<div class="content">
 				        <br><br>
 				        <div class="innerOuter">           
 							

@@ -187,6 +187,11 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.cancelAdminOrder",orderNo);
 	}
 
+	public ProOrder selectSalesList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

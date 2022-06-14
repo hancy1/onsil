@@ -248,5 +248,11 @@ public class AdminShopServiceImpl implements AdminShopService {
 		}
 	}
 
+	@Override
+	public ProOrder selectSalesList() {
+		// TODO Auto-generated method stub
+		return aShopDao.selectSalesList(sqlSession);
+	}
+
 
 }

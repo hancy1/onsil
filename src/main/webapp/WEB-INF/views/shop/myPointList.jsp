@@ -13,10 +13,10 @@
 
 
 <style>
-	#boardList{
+	#myPointList{
 	text-align: center;
 	}
-    #boardList>tbody>tr:hover{
+    #myPointList>tbody>tr:hover{
     cursor:pointer;
     }
 
