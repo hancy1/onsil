@@ -172,18 +172,7 @@
 					      <span>${ f.answer }</span>
 					     </div>
 					     </c:forEach>
-					      <!--  <div class="que">
-					      <span>This is second question.</span>
-					     </div>
-					     <div class="anw">
-					      <span>This is second answer.</span>
-					     </div>
-					      <div class="que">
-					      <span>This is third question.</span>
-					     </div>
-					     <div class="anw">
-					      <span>This is third answer.</span>
-					     </div> -->
+					      
 					</div>
 					
 					<br>
@@ -262,22 +251,30 @@
   			var category = $(this).text();
   			
   			switch(category) {
-  				case "전체" : location.href="faqList.do";
-  				return;
-  				case "회원" : var code = 1;
-  				break;
-  				case "주문결제" : var code = 2;
-  				break;
-  				case "배송" : var code = 3;
-  				break;
-  				case "취소/환불" : var code = 4;
-  				break;
-  				case "포인트" : var code = 5;
-  				break;
-  				case "반품/교환" : var code = 6;
-  				break;
-  				case "기타" : var code = 7;
-  				break;
+  				case "전체" : 
+		  					location.href="faqList.do";
+							return;
+  				case "회원" : 
+		  					var code = 1;
+		  					break;
+  				case "주문결제" : 
+		  					var code = 2;
+		  					break;
+  				case "배송" : 
+		  					var code = 3;
+		  					break;
+  				case "취소/환불" : 
+		  					var code = 4;
+		  					break;
+  				case "포인트" : 
+		  					var code = 5;
+		  					break;
+  				case "반품/교환" : 
+		  					var code = 6;
+		  					break;
+  				case "기타" : 
+		  					var code = 7;
+		  					break;
   			}
   			
   			location.href="faqCategory.do?code=" + code;
