@@ -23,7 +23,7 @@ public interface GardenService {
 
 	ArrayList<VisitorBoard> selectList(PageInfo pi, String hostUser);
 
-	void insertBoard(Map map);
+	int insertBoard(Map map);
 
 	int deleteBoard(String boardNo);
 

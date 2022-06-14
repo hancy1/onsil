@@ -53,13 +53,14 @@ public class GardenServiceImpl implements GardenService{
 	}
 
 	@Override
-	public void insertBoard(Map map) {
+	public int insertBoard(Map map) {
 		
 		int result = gardenDao.insertBoard(map, sqlSession);
 		
 		if(result < 0) {
 			throw new CommException("방명록 작성 실패");
 		}
+		return result;
 		
 	}
 
