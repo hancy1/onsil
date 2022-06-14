@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 마이페이지 </title>
+<title>온실 - 마이페이지 </title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
@@ -22,11 +22,11 @@
     body {
       min-height: 100vh;
 
-      background: -webkit-gradient(linear, left bottom, right top, from(#79b07b), to(#5a8c5c));
-      background: -webkit-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: -moz-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: -o-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: linear-gradient(to top right, #79b07b 0%, #5a8c5c 100%);
+   	  background: -webkit-gradient(linear, left bottom, right top, from(#FBDB5D), to(#FBDB5D));
+      background: -webkit-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: -moz-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: -o-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: linear-gradient(to top right, #FBDB5D 0%, #FBDB5D 100%);
     }
 
     .input-form {
@@ -42,6 +42,9 @@
       -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+      
+      
+      
     }
         
   </style>
@@ -55,28 +58,11 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 마이페이지</h2>
+			style="background-image: url(resources/img/bg-img/springflowers.jpg);">
+			<h2>MY PAGE</h2>
 		</div>
 
-		<!--  
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
-									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
-							<li class="breadcrumb-item active" aria-current="page">판매제품관리</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-	<!-- ##### Breadcrumb Area End ##### -->
+		
 
   <div class="container" style="padding-top: 0px">
     <div class="input-form-backgroud row">
@@ -194,10 +180,10 @@
            <!-- 수정, 탈퇴 버튼 -->        
            <div class="row">
 		   	<div class="col-md-6 mb-3">
-              <button id="modifyBtn" onclick="location.href='/spring/myPageModify.do'" class="btn btn-primary btn-lg btn-block" type="button" style="background: #3ac240; border-color: #3ac240" >수정</button>             
+              <button id="modifyBtn" onclick="location.href='/spring/myPageModify.do'" class="btn btn-primary btn-lg btn-block" type="button" style="background: #FBDB5D; border-color: #FBDB5D" >수정</button>             
             </div>
             <div class="col-md-6 mb-3">
-              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='/spring/leavePage.do'" style="background: #3ac240; border-color: #3ac240" >탈퇴</button>              
+              <button id="deleteMember" class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='/spring/leavePage.do'" style="background: #FBDB5D; border-color: #FBDB5D" >탈퇴</button>              
             </div>
           </div>                 
           
