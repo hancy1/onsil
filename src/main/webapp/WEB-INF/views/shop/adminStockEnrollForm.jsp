@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 재고 등록</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -118,7 +120,7 @@
 				                        <th><label for="proCode">제품코드</label></th>
 				                        <td>
 				                        
-				                        	<select id="proCode" name="proCode" class="form-select" required>
+				                        	<select id="proCodeSelect" name="proCode" class="form-select" required>
 				                        	
 				                        		<option value="">선택하세요.</option>
 				                        		
@@ -133,12 +135,19 @@
 	
 				                    <tr>
 				                        <th><label for="proName">제품명</label></th>
-				                        <td id="nameArea"><input type="text" id="proName" class="form-control"  name="proName" value="제품명" readonly></td>
+				                        <td id="nameArea"><input type="text" id="proName" class="form-control"  value="" name="proName" placeholder="제품명" ></td>
 				                    </tr>
+				                    
+				                    
+				                    <tr>
+				                        <th><label for="amountNow">현재수량</label></th>
+				                        <td><input type="number" id="amountNow" class="form-control" name="amountNow"></td>
+				                    </tr>
+				                    
 
 				                    <tr>
-				                        <th><label for="amount">수량</label></th>
-				                        <td><input type="text" id="amount" class="form-control" name="amount" required></td>
+				                        <th><label for="amount">등록수량</label></th>
+				                        <td><input type="number" id="amount" class="form-control" name="amount" required></td>
 				                    </tr>
 				          
 				                </table>
@@ -160,6 +169,41 @@
 			</div>
 		</div>
 	
+	<script>
+	
+			//제품명,현재수량 불러옴
+			
+			$('#proCodeSelect').change(function() {
+				
+				var proCode = $('#proCodeSelect').val();
+				
+				
+				$.ajax({
+					
+					url:"selectProductInfo.do",
+					data:{proCode:proCode},
+					type:"get",
+					success:function(pInfo){
+						
+						$('#proName').val(pInfo.proName);
+						$('#amountNow').val(pInfo.proAmount);
+						
+						$('#proName').prop('readonly', true);
+						$('#amountNow').prop('readonly', true);
+						
+					
+					},
+					error:function(){
+						console.log("제품정보 불러오기 ajax 실패")
+					}
+				});	
+			
+			});
+			
+		
+	
+	
+	</script>
 		
 
     <jsp:include page="../common/footer.jsp"/>
