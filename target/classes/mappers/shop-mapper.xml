@@ -507,6 +507,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    
 	</select>
 	
+	<select id="selectBestSeller" resultMap="productResultSet">
+	
+	<![CDATA[
+	SELECT PRO_CODE, PRO_NAME, PRICE, DETAIL_CHA
+	FROM PRODUCT
+	WHERE PRO_CODE IN (SELECT A.PRO_CODE
+	                    FROM (SELECT PRO_CODE, COUNT(PRO_CODE) COUNT
+	                            FROM PRO_ORDER
+	                            GROUP BY PRO_CODE
+	                            ORDER BY COUNT DESC) A
+	                    WHERE ROWNUM <= 2)
+	]]>
+	
+	</select>
 	
  	
 </mapper>

@@ -82,6 +82,8 @@ public interface ShopService {
 
 	void insertOrder(ProOrder o);
 
+	ArrayList<Product> selectBestSeller();
+
 
 
 	

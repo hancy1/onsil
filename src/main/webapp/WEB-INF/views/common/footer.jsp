@@ -68,34 +68,17 @@
 
 					<!-- Single Footer Widget -->
 					<div class="col-12 col-sm-6 col-lg-3">
-						<div class="single-footer-widget">
+						<div class="single-footer-widget bestSeller">
 							<div class="widget-title">
 								<h5>BEST SELLER</h5>
 							</div>
 
 							<!-- Single Best Seller Products -->
-							<div class="single-best-seller-product d-flex align-items-center">
-								<div class="product-thumbnail">
-									<a href="shop-details.html"><img
-										src="resources/img/bg-img/4.jpg" alt=""></a>
-								</div>
-								<div class="product-info">
-									<a href="shop-details.html">Cactus Flower</a>
-									<p>$10.99</p>
-								</div>
-							</div>
-
-							<!-- Single Best Seller Products -->
-							<div class="single-best-seller-product d-flex align-items-center">
-								<div class="product-thumbnail">
-									<a href="shop-details.html"><img
-										src="resources/img/bg-img/5.jpg" alt=""></a>
-								</div>
-								<div class="product-info">
-									<a href="shop-details.html">Tulip Flower</a>
-									<p>$11.99</p>
-								</div>
-							</div>
+							
+							<!-- ajax 구현 -->
+							
+							
+							
 						</div>
 					</div>
 
@@ -125,6 +108,7 @@
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -171,6 +155,50 @@
 		</div>
 	</footer>
 	<!-- ##### Footer Area End ##### -->
+	
+	<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<script>
+	
+		$(function(){
+			selectBestSeller();
+		})
+		
+		function selectBestSeller(){
+			var div = $('.bestSeller');
+			
+			var value = "";
+			value += "<div class='widget-title'><h5>BEST SELLER</h5></div>";
+			
+			$.ajax({
+				
+				url:"selectBestSeller.do",
+				type:"post",
+				success:function(list){
+					console.log(list);
+					
+					$.each(list, function(i, l){
+						console.log(l.detailCha);
+						
+						value += "<div class='single-best-seller-product d-flex align-items-center'>" + 
+								 "<div class='product-thumbnail'>" + 
+								 "<a href='detailShop.do?proCode="+ l.proCode +"'><img src='resources/pro_upload_files/"+ l.detailCha +"' alt=''></a></div>" + 
+								 "<div class='product-info'>" + 
+								 "<a href=detailShop.do?proCode="+ l.proCode + "'>" + l.proName +"</a>" + 
+								 "<p>"+ l.price +"</p>" + 
+								 "</div></div>";	 
+								 
+					})
+					div.html(value);
+				},
+				error:function(){
+					console.log("베스트셀러 조회용 ajax 통신 실패")
+				}
+			
+			})
+			
+		}
+	</script>
 
 
 </body>

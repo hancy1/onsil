@@ -366,6 +366,14 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ArrayList<Product> selectBestSeller() {
+		
+		return shopDao.selectBestSeller(sqlSession);
+	}
+
+
+
 
 
 
