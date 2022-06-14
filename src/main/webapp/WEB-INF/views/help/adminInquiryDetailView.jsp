@@ -112,7 +112,7 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">${ i.content }</p></td>
+                    <td colspan="4"><p style="height:auto;">${ i.content }</p></td>
                 </tr>
             </table>
             <br>

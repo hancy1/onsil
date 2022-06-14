@@ -142,6 +142,10 @@ public class HelpController {
 		
 		Notice n = helpService.selectNotice(nno);
 		
+		String content = n.getContent().replaceAll("\n", "<br>");
+		
+		n.setContent(content);
+		
 		mv.addObject("n", n).setViewName("help/noticeDetailView");
 		
 		return mv;

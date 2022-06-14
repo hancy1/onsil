@@ -131,7 +131,7 @@
 				                    <td colspan="3"></td>
 				                </tr>
 				                <tr>
-				                    <td colspan="4"><p style="height:150px">${ n.content }</p></td>
+				                    <td colspan="4"><p style="height:auto;">${ n.content }</p></td>
 				                </tr>
 				            </table>
 				            <br>
@@ -151,9 +151,14 @@
 										var postForm = $("#postForm");
 										
 										if(num == 1){
-											postForm.attr("action", "updateFormBoard.do");
+											postForm.attr("action", "updateFormAdminNotice.do");
 										}else{
-											postForm.attr("action", "deleteBoard.do");
+											if(confirm("글을 삭제하시겠습니까?")){
+												postForm.attr("action", "deleteAdminNotice.do");
+											}else{
+												alert("글 삭제를 취소하셨습니다.");
+												return;
+											}											
 										}
 										postForm.submit();
 									}

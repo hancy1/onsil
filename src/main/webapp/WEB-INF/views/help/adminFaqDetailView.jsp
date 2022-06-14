@@ -106,7 +106,7 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">${ f.answer }</p></td>
+                    <td colspan="4"><p style="height:auto;">${ f.answer }</p></td>
                 </tr>
             </table>
             <br>
