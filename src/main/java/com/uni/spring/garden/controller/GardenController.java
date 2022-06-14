@@ -116,7 +116,7 @@ public class GardenController {
 			
 			System.out.println("hostUser 널 체크 후 " + hostUser);
 			
-			/*int listCount = gardenService.selectListCount(hostUser);
+			int listCount = gardenService.selectListCount(hostUser);
 
 			//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
 			PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -133,7 +133,7 @@ public class GardenController {
 			 
 			model.addAttribute("board", list);
 			model.addAttribute("pi", pi);
-			model.addAttribute("comment", comment);*/
+			model.addAttribute("comment", comment);
 
 			return "garden/visitorBoardList";
 		}
@@ -143,12 +143,12 @@ public class GardenController {
 	public Map<String, Object> selectVBoard(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, 
 											String hostUser, Model model) {
 		
+		
+		System.out.println("currentPage " + currentPage);
 		int listCount = gardenService.selectListCount(hostUser);
 
 		//PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit)
 		PageInfo pi = GardenPagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		model.addAttribute("pi", pi);
 		
 		//hostUser의 게시물 가져오기
 		ArrayList<VisitorBoard> list = gardenService.selectList(pi, hostUser);
@@ -157,15 +157,16 @@ public class GardenController {
 		ArrayList<VisitorComment> comment = gardenService.selectCommentList(pi, hostUser);
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pi", pi);
 		map.put("list", list);
 		map.put("comment", comment);
 		
 		return map;
 	}
 	
-
+	@ResponseBody
 	@RequestMapping("vBoardEnroll.do")
-	public String boardEnroll(HttpSession session, String content, String writer) {
+	public int boardEnroll(HttpSession session, String content, String writer) {
 
 		String hostUser = (String) session.getAttribute("hostUser");
 		
@@ -174,9 +175,9 @@ public class GardenController {
 		map.put("writer", writer);
 		map.put("hostUser", hostUser);
 		
-		gardenService.insertBoard(map);
+		int result = gardenService.insertBoard(map);
 
-		return "redirect:visitorBoard.do";
+		return result;
 		
 	}
 	

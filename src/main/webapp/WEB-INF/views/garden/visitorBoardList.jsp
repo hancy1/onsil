@@ -56,8 +56,8 @@
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
 								<br>
-								<form action="vBoardEnroll.do"><div class="row my-3" style="margin:auto"><input type="text" name="content" placeholder="방명록을 작성해주세요" style="width:400px" required maxlength='250'><input type="hidden" name="writer" value="${ loginUser.userNo }"/> 
-								&nbsp;<button class="btn btn-outline-success btn-sm" type="submit">작성</button></div></form>
+								<div class="row my-3" style="margin:auto"><input type="text" id="insertContent" name="content" placeholder="방명록을 작성해주세요" style="width:400px" required maxlength='250'>
+								&nbsp;<button class="btn btn-outline-success btn-sm" type="button" onclick="insertContent();">작성</button></div>
 								<table class="table">
 									<!-- ajax구현 -->
 								</table>
@@ -69,54 +69,10 @@
 		<!-- 페이지 -->
 		<div id="pagingArea">
                 <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
-                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-							</svg></a>
-							</li>
-                		</c:otherwise>
-                	</c:choose>
+                	<!-- ajax 구현 -->
                 </ul>
             </div>
-            <!-- 페이지 -->			
+        <!-- 페이지 -->			
             </div>
 			</div>            
          </div>
@@ -133,16 +89,15 @@
 	function selectVBoard(){
 		
 		var hostUser = "${hostUser}";
-		var currentPage = "${p.currentPage}";
+		var currentPage = "${pi.currentPage}";
 		
 		$.ajax({
 			url:"selectVBoard.do",
 			data:{hostUser:hostUser, currentPage:currentPage},
 			type:"get",
 			success:function(map){
-				
-				console.log(map);
-				console.log(map.list[0].writer);
+
+				console.log("currentPage" + map.pi.currentPage);
 				
 				var value = "";
 				$.each(map.list, function(i, b){
@@ -206,10 +161,47 @@
 				
 				
 				$(".table").html(value);
-				
+			
 				//-----------------------
 				//페이지 처리
-			
+
+				var page = "";
+
+					if(map.pi.currentPage != 1){
+						page += "<li class='page-item'><a class='page-link' href='visitorBoard.do?currentPage=" + map.pi.currentPage-1 + "'>" + 
+								"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-left' viewBox='0 0 16 16'>" + 
+								"<path fill-rule='evenodd' d='M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z'/>" + 
+								"</svg></a></li>";
+					}else{
+						page += "<li class='page-item disabled'><a class='page-link' href=''>" + 
+								"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-left' viewBox='0 0 16 16'>" + 
+								"<path fill-rule='evenodd' d='M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z'/>" + 
+								"</svg></a></li>";
+					}
+					
+					for(var p = map.pi.startPage; p <= map.pi.endPage; p++){
+						if(map.pi.currentPage != p){
+							page += "<li class='page-item'><a class='page-link' href='visitorBoard.do?currentPage=" + p + "'>"+ p +"</a></li>";
+						}else{
+							page += "<li class='page-item disabled'><a class='page-link' href=''>" + p + "</a></li>";
+						}
+					}
+					
+					if(map.pi.currentPage != map.pi.maxPage){
+						page += "<li class='page-item'><a class='page-link' href='visitorBoard.do?currentPage="+ (map.pi.currentPage)+1 +"'>" + 
+						"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-right' viewBox='0 0 16 16'>" + 
+						"<path fill-rule='evenodd' d='M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z'/>" + 
+						"</svg></a></li>";
+					}else{
+						page += "<li class='page-item disabled'><a class='page-link' href='visitorBoard.do?currentPage="+ (map.pi.currentPage)+1 +"'>" + 
+						"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-right' viewBox='0 0 16 16'>" + 
+						"<path fill-rule='evenodd' d='M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z'/>" + 
+						"</svg></a></li>";	
+					}
+				
+				
+				
+				$(".pagination").html(page);
 				
 			},
 			error:function(){
@@ -218,6 +210,31 @@
 		});
 		
 		
+	}
+	
+	function insertContent(){
+		
+		var content = $('#insertContent').val();
+		var writer = ${loginUser.userNo};
+		console.log(writer);
+		
+		$.ajax({
+			url:"vBoardEnroll.do",
+			data:{content:content, writer:writer},
+			type:"post",
+			success:function(result){
+				if(result>0){
+					selectVBoard();
+				}else{
+					alert("오류가 발생했습니다. 관리자에게 문의하세요.")
+				}
+				
+			},
+			error:function(){
+				console.log("방명록 작성용 ajax 통신 실패")
+			}
+		})
+	
 	}
 	
 	//방명록 삭제하기
