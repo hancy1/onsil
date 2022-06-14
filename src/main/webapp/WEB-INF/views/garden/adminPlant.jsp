@@ -57,38 +57,18 @@ th, td {
 						<div class="aa-product-catg-body">
 							<div class="table-responsive">
 								<br>
-					            <div style="float:left" class="my-2"><h6>등록된 식물 정보 : ${fn:length(info)}</h6></div>
-								<div style="float:right" class="my-2"><button class="btn btn-outline-success btn-sm" type="button" onclick="location.href='insertPlantForm.do'">식물정보 추가 <i class="fa-solid fa-plus"></i></button></div>
+					            <div style="float:left" class="my-2"><h6 id="infoLength"></h6></div>
+								<div style="float:right" class="my-2">
+								<button class="btn btn-outline-success btn-sm" type="button" onclick="location.href='insertPlantForm.do'">식물정보 추가 <i class="fa-solid fa-plus"></i></button>
+								</div>
+								<div style="float:right" class="my-2"> 
+								<button class="btn btn-outline-secondary btn-sm" onclick="selectInfoList();">전체</button> &nbsp;&nbsp;
+					         	<button class="btn btn-outline-secondary btn-sm" onclick="selectInfoList('Y');">상태 Y</button> &nbsp;&nbsp;
+					         	<button class="btn btn-outline-secondary btn-sm" onclick="selectInfoList('N');">상태 N</button> &nbsp;&nbsp;
+					         	</div>	
 								<br>
 								<table class="table table-striped" text-align="center">
-									<tr class="danger">
-										<td>등록번호</td>
-										<td>카테고리</td>
-										<td>품종</td>
-										<td>관수량</td>
-										<td>일조량</td>
-										<td>상태</td>
-										<td></td>		
-									</tr>
-									<c:if test="${ !info.isEmpty() }">
-										<c:forEach items="${info}" var="i">
-											<tr>
-											<td width="10%">no.${i.regNo}</td>
-											<td width="10%">${i.category}</td>
-											<td width="10%">${i.plantName}</td>
-											<td>${i.water}</td>
-											<td>${i.sun}</td>
-											<td width="10%">${i.status}</td>				
-											<td width="10%">
-											<button class="btn btn-outline-success updatePlant" onclick="location.href='updatePlantForm.do?regNo=' + '${i.regNo}'" ><i class="fa-solid fa-eraser"></i></button>
-											<button class="btn btn-outline-success deletePlant" onclick='deletePlant("${i.regNo}");' ><i class="fa-solid fa-trash-can"></i></button>
-											</td>
-											</tr>
-										</c:forEach>
-         							</c:if>
-         							<c:if test="${ info.isEmpty() }">
-									<tr><td colspan="7" align="center">추가된 식물이 없습니다.</td></tr>
-									</c:if>
+									<!-- ajax 구현 -->
 								</table>
 							</div>							
 						</div>
@@ -96,10 +76,8 @@ th, td {
 						<div class="col-4 col-md-4">
 		                    <div class="post-sidebar-area">
 		                        <div class="single-widget-area">
-		                            <form action="adminPlant.do" method="get" class="search-form">
-		                                <input type="search" name="search" id="widgetsearch" placeholder="품종 검색">
-		                                <button type="submit"><i class="icon_search"></i></button>
-		                            </form>
+	                                <input type="search" name="search" id="widgetsearch" placeholder="품종 검색">
+	                                <button class="btn" type="button" onclick="searchInfo();"><i class="icon_search"></i></button>
 		                        </div>
 		                     </div>
 			            </div>	
@@ -109,7 +87,7 @@ th, td {
 		                <ul class="pagination">
 		                	<c:choose>
 		                		<c:when test="${ pi.currentPage ne 1 }">
-		                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage-1 }">
+		                			<li class="page-item"><a class="page-link" href="adminPlant.do?currentPage=${ pi.currentPage-1 }">
 		                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
 		  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
 									</svg></a>
@@ -127,7 +105,7 @@ th, td {
 		                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 		                    	<c:choose>
 			                		<c:when test="${ pi.currentPage ne p }">
-		                    			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ p }">${ p }</a></li>
+		                    			<li class="page-item"><a class="page-link" href="adminPlant.do?currentPage=${ p }">${ p }</a></li>
 			                		</c:when>
 			                		<c:otherwise>
 			                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -137,14 +115,14 @@ th, td {
 		                    
 		                    <c:choose>
 		                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-		                			<li class="page-item"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+		                			<li class="page-item"><a class="page-link" href="adminPlant.do?currentPage=${ pi.currentPage+1 }">
 		                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 		  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
 									</svg></a>
 									</li>
 		                		</c:when>
 		                		<c:otherwise>
-		                			<li class="page-item disabled"><a class="page-link" href="visitorBoard.do?currentPage=${ pi.currentPage+1 }">
+		                			<li class="page-item disabled"><a class="page-link" href="adminPlant.do?currentPage=${ pi.currentPage+1 }">
 		                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 		  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
 									</svg></a>
@@ -157,17 +135,87 @@ th, td {
 			</div>
 		</div>		
 </section>
+<!-- jQuery-2.2.4 js -->
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 <script>
 
-	function deletePlant(regNo){
+	$(function(){
+		selectInfoList();
+	})
+	
+	function selectInfoList(search){
 		
-		var yn = confirm("정보를 삭제하시겠습니까?")
-		if(yn){
-			location.href = "deletePlant.do?regNo=" + regNo; 
-		}
+		console.log(search)
+	
+		var currentPage = "${pi.currentPage}";
+			
+		$.ajax({
+			url:"selectInfoList.do",
+			data:{currentPage:currentPage, search:search},
+			type:"post",
+			success:function(map){
+				
+				var value = "<tr class='danger'><td>등록번호</td><td>카테고리</td><td>품종</td><td>관수량</td><td>일조량</td><td>상태</td><td></td></tr>";
+				
+				$.each(map.info, function(i, i){
+					
+					$("#infoLength").html("등록된 식물 정보 : " + map.info.length);
+
+					if(map.info.length > 0){
+						
+							value += "<tr>"+
+									 "<td width='10%'>no." + i.regNo + "</td>" +
+									 "<td width='10%'>" + i.category + "</td>" + 
+									 "<td width='10%'>" + i.plantName + "</td>" +
+									 "<td>" + i.water + "</td>" +
+									 "<td>" + i.sun + "</td>" + 
+									 "<td width='10%'>" + i.status + "</td>" +
+									 "<td width='10%'>" + 
+									 "<button class='btn btn-outline-success updatePlant' onclick='location.href='updatePlantForm.do?regNo="+ i.regNo +"'><i class='fa-solid fa-eraser'></i></button>" +
+									 "<button class='btn btn-outline-success deletePlant' onclick='deletePlant(" + i.regNo + ");' ><i class='fa-solid fa-trash-can'></i></button>" +
+									 "</td></tr>";
+					}else{
+						value += "<tr><td colspan='7' align='center'>등록된 식물정보가 없습니다.</td></tr>";
+					}
+				})
+				$(".table").html(value);
+			},
+			error:function(){
+				console.log("관리자 식물정보 조회용 ajax 통신 실패")
+			}
+		})
 	}
 	
+	function searchInfo(){
+		
+		var search = $('#widgetsearch').val();
+
+		selectInfoList(search);
+		
+	}
 	
+	function deletePlant(regNo){
+		
+		var yn = confirm("정보를 삭제하시겠습니까?");
+		if(yn){
+			
+			$.ajax({
+				url:"deletePlant.do",
+				data:{regNo:regNo},
+				type:"post",
+				success:function(result){
+					if(result > 0){
+						alert("정상적으로 삭제되었습니다.");
+						selectInfoList();
+					}		
+				},
+				error:function(){
+					console.log("관리자 식물정보 삭제용 ajax 통신 실패");
+				}
+	
+			})
+		}
+	}
 
 </script>
 	
@@ -182,8 +230,7 @@ th, td {
 	<script src="resources/js/scripts.js"></script>
 	
 	<!-- ##### All Javascript Files ##### -->
-	<!-- jQuery-2.2.4 js -->
-	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
 	<!-- Bootstrap js -->

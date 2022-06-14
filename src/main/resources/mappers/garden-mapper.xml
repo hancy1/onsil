@@ -224,6 +224,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="search != null">
 		AND PLANT_NAME LIKE '%' || #{search} || '%'
 		</if>
+		<if test="search != null">
+		OR STATUS = #{search}
+		</if>	
 		
 	</select>
 	
@@ -236,6 +239,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="search != null">
 		AND PLANT_NAME LIKE '%' || #{search} || '%'
 		</if>
+		<if test="search != null">
+		OR STATUS = #{search}
+		</if>	
 		ORDER BY REG_NO
 	
 	</select>

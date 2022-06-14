@@ -51,7 +51,7 @@ public interface GardenService {
 
 	void insertPlant(PlantInfo info);
 
-	void deletePlant(String regNo);
+	int deletePlant(String regNo);
 
 	PlantInfo selectPlantInfo(String regNo);
 
