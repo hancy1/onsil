@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 자주묻는질문 </title>
+<title>온실 - 자주묻는질문 </title>
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
 		
@@ -114,7 +114,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/튤립.jpg);">
-			<h2>온실 :: 자주 묻는 질문</h2>
+			<h2>자주 묻는 질문</h2>
 		</div>		
 		  
 		<div class="container">

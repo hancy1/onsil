@@ -49,7 +49,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/데이지.jpg);">
-			<h2>온실 :: 문의사항 관리</h2>
+			<h2>ADMIN :: 문의사항</h2>
 		</div>		
 		  
 		<div class="container">

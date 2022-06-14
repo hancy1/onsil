@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 회원가입</title>
+<title>온실 - 회원정보수정</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
@@ -20,11 +20,11 @@
     body {
       min-height: 100vh;
 
-      background: -webkit-gradient(linear, left bottom, right top, from(#79b07b), to(#5a8c5c));
-      background: -webkit-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: -moz-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: -o-linear-gradient(bottom left, #79b07b 0%, #5a8c5c 100%);
-      background: linear-gradient(to top right, #79b07b 0%, #5a8c5c 100%);
+      background: -webkit-gradient(linear, left bottom, right top, from(#FBDB5D), to(#FBDB5D));
+      background: -webkit-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: -moz-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: -o-linear-gradient(bottom left, #FBDB5D 0%, #FBDB5D 100%);
+      background: linear-gradient(to top right, #FBDB5D 0%, #FBDB5D 100%);
     }
 
     .input-form {
@@ -53,27 +53,10 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 회원정보수정</h2>
+			style="background-image: url(resources/img/bg-img/rapeseeds.jpg);">
+			<h2>회원정보수정</h2>
 		</div>
-
-		<!--  
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#"><i
-									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item"><a href="#">관리자페이지</a></li>
-							<li class="breadcrumb-item active" aria-current="page">판매제품관리</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
+		
 	<!-- ##### Breadcrumb Area End ##### -->
 	
   <div class="container">
@@ -151,13 +134,15 @@
 		  <!-- 주소검색  -->
           <div class="col-md-10 mb-3">
             <label for="address">주소</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="주소검색을 해주세요." style="width: 100%" value="${ loginUser.address }" required>            
+            <input type="text" class="form-control" id="address" name="address" placeholder="주소검색을 해주세요." style="width: 100%" 
+            	value="${ loginUser.address }" required>            
             <div class="invalid-feedback">
              	 주소를 입력해주세요.
             </div>
           </div>
           <div class="col-md-2 mb-3" style="padding-top: 30px; ">
-          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
+          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; 
+          		background: #FBDB3C; color: white; border: 0; outline: none;">주소검색</button>
           </div>
 		 </div>
 
@@ -215,10 +200,10 @@
           <!-- 저장, 취소 버튼  -->
           <div class="row">
 		   	<div class="col-md-6 mb-3">
-              <button id="modifyBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #3ac240; border-color: #3ac240" >저장</button>             
+              <button id="modifyBtn" class="btn btn-primary btn-lg btn-block" type="submit" style="background: #FBDB5D; border-color: #FBDB5D" >저장</button>             
             </div>
             <div class="col-md-6 mb-3">
-              <button id="cancelBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="history.back()" style="background: #3ac240; border-color: #3ac240" >취소</button>              
+              <button id="cancelBtn" class="btn btn-primary btn-lg btn-block" type="button" onclick="history.back()" style="background: #FBDB5D; border-color: #FBDB5D" >취소</button>              
             </div>
           </div>               
           

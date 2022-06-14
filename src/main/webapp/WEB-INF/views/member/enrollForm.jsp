@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>온실 | 회원가입</title>
+<title>온실 - 회원가입</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
@@ -53,8 +53,8 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>온실 :: 회원가입</h2>
+			style="background-image: url(resources/img/bg-img/cat.jpg);">
+			<h2>회원가입</h2>
 		</div>
 		
 		
