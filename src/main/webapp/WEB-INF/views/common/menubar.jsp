@@ -122,7 +122,7 @@
 						<!-- Nav Brand -->
 						<a href="index.jsp" class="nav-brand">
 						<!-- 로고 나중에 바꾸기! -->
-						<img src="resources/img/core-img/온실.png" alt="" style="width:120px; height:120px;"></a>
+						<img src="resources/img/core-img/온실2.png" alt="" style="width:120px;"></a>
 
 						<!-- Navbar Toggler -->
 						<div class="classy-navbar-toggler">
