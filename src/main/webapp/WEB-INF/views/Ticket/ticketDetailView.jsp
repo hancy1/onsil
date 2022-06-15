@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png"> 
+
 <style>
  	#contentArea{
  	width:80%;
@@ -76,7 +78,10 @@
                         <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" value="${ t.ticketPhone }" readonly></td>
                     </tr>
                   
-                   
+                     <tr>
+                        <th><label for="ticketLocation">위치</label></th>
+                        <td><input type="text" id="ticketLocation" class="form-control" name="ticketLocation" readonly></td>
+                    </tr>
                     <tr>
                         <th colspan="2"><label for="content">공지사항</label></th>
                     </tr>

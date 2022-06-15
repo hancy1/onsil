@@ -92,12 +92,14 @@ T_CHANGE_NAME-->
     
   	</select>
 
-	<!--판매중인 제품 select해오기 - 올 -->
+	<!--등록된 전시회 수를 select해오기  -->
 	<select id="selectExhibitionList" parameterType="TICKET" resultMap="ticketResultSet">	
 		 
 	  SELECT *
 	  FROM TICKET
 	  WHERE TICKET_STATUS='Y'
+  	  AND DIVISION='EXHIBITION'
+    
 	    
 	</select>
   
