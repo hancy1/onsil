@@ -523,4 +523,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
  	
+   <!-- 리뷰 [도움됐어요] 테이블 리절트맵 -->
+	
+	<resultMap type="ReviewLike" id="ReviewLikeResultSet"> 
+		
+		<id property="likeNo" column="LIKE_NO"/>		
+		<result property="reviewNo" column="REVIEW_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="likeStatus" column="LIKE_STATUS" />	
+	
+	</resultMap>
+ 	
+ 	<!-- select하기 회원의 도움됐어요 여부 등 -->
+ 	
+ 	<select id="selectLike" parameterType="ReviewLike" resultMap="ReviewLikeResultSet">
+ 	
+ 	  SELECT *
+	  FROM REVIEW_LIKE
+	  WHERE USER_NO=#{userNo}
+	  AND REVIEW_NO=#{reviewNo}	 
+ 	
+ 	</select>
+ 	
+	<select id="findLike" parameterType="ReviewLike" resultMap="ReviewLikeResultSet">
+	
+	  SELECT *
+	  FROM REVIEW_LIKE
+	  WHERE USER_NO=#{userNo}
+	  AND REVIEW_NO=#{reviewNo}
+		
+	</select>
+
+
+	<insert id="insertLike">
+	
+		INSERT INTO REVIEW_LIKE VALUES
+		(SEQ_REVIEW_LIKE_NO.NEXTVAL, #{reviewNo},#{userNo},1)		
+		
+	</insert>
+
+
+	<delete id="deleteHeart">
+		DELETE FROM REVIEW_LIKE
+		WHERE USER_NO=#{userNo}
+		AND REVIEW_NO=#{reviewNo}	
+	</delete>
+ 	
+ 	
+ 	
 </mapper>

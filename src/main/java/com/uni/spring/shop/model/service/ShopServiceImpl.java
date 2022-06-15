@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,6 +17,7 @@ import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
+import com.uni.spring.shop.model.dto.ReviewLike;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 @Service
@@ -370,6 +372,43 @@ public class ShopServiceImpl implements ShopService {
 	public ArrayList<Product> selectBestSeller() {
 		
 		return shopDao.selectBestSeller(sqlSession);
+	}
+
+
+
+	@Override
+	public ReviewLike selectLike(int reviewNo, int userNo) {
+		// TODO Auto-generated method stub
+		
+		
+		Map map = new HashMap<String, String>();
+		map.put("reviewNo", reviewNo);
+		map.put("userNo", userNo);
+		
+		return shopDao.selectLike(sqlSession, map);
+	}
+
+
+
+	@Override
+	public int insertLike(ReviewLike rLike) {
+		
+	    // 좋아요가 DB에 저장이 되는것이 없으면 0이 그대로 리턴으로 넘어감
+		int result = 0;
+		// 좋아요가 이미 있는지 확인하는 코드
+		ReviewLike find = shopDao.findLike(sqlSession, rLike);
+		
+		// find가 null이면 좋아요가 없는 상태이므로 정보 저장
+		// find가 null이 아니면 좋아요가 있는 상태이므로 정보 삭제
+		if(find==null) {
+			// insert의 리턴값은 DB에 성공적으로 insert된 갯수를 보내므로 result가 1이 됨
+			result = shopDao.insertLike(sqlSession, rLike);
+		} else {
+			shopDao.deleteLike(sqlSession, rLike);
+		}
+		
+	    // 0 or 1이 담겨져서 @Controller에 보냄.
+		return result;
 	}
 
 
