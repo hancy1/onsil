@@ -190,7 +190,7 @@
 											<li><a href="adminOrderList.do">주문관리</a></li>
 											<li><a href="salesList.do">매출관리</a></li>
 											<li><a href="adminReviewList.do">리뷰관리</a></li>
-											<li><a href="#">신고된 게시글</a></li>
+											<li><a href="adminBList.do">신고된 게시글</a></li>
 											<li><a href="listTicket.do">티켓등록</a></li>
 											<li><a href="#">후기관리</a></li>
 											<li><a href="adminPlant.do">식물정보관리</a></li>
