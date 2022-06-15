@@ -77,7 +77,7 @@
                                             </div>
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <select name="BCategoryNo" class="form-control">
+                                                    <select name="BCategoryNo" class="form-control" required>
                                                     	<option value="">카테고리 선택</option>
                                                     	<option value="1">사진</option>
                                                     	<option value="2">정보</option>
@@ -89,12 +89,12 @@
                                             <br>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control" id="upfile" name="uploadFile" required>
+                                                    <input type="file" class="form-control" id="upfile" name="uploadFile">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" required name="BContent" cols="30" rows="10" placeholder="내용을 작성해 주세요."></textarea>
+                                                    <textarea class="form-control" name="BContent" cols="30" rows="10" placeholder="내용을 작성해 주세요." required></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">

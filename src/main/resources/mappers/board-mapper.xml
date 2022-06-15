@@ -16,18 +16,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="bOriginName" column="B_ORIGIN_NAME"/>
          <result property="bChangeName" column="B_CHANGE_NAME"/>
          <result property="bStatus" column="B_STATUS"/>
-         <result property="userId" column="USER_ID"/>
+         <result property="userName" column="USER_NAME"/>
          <result property="bCategoryName" column="B_CATEGORY_NAME"/>
 	</resultMap>
 
 	<resultMap type="Reply" id="replyResultSet">
-		<id property="replyNo" column="RE_NO"/>
+		<id property="reNo" column="RE_NO"/>
       	<result property="userNo" column="USER_NO"/>
       	<result property="bNo" column="B_NO"/>
       	<result property="reContent" column="RE_CONTENT"/>
       	<result property="reDate" column="RE_DATE"/>
       	<result property="reStatus" column="RE_STATUS"/>
-      	<result property="userId" column="USER_ID"/>
+      	<result property="userName" column="USER_NAME"/>
 	</resultMap>
 	
 	
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시판 목록 -->
 	<select id="selectList" parameterType="Board" resultMap="boardResultSet">
-		SELECT A.B_NO, C.B_CATEGORY_NAME, A.B_TITLE, B.USER_ID, A.B_DATE, A.B_COUNT 
+		SELECT A.B_NO, C.B_CATEGORY_NAME, A.B_TITLE, B.USER_NAME, A.B_DATE, A.B_COUNT 
 		FROM BOARD A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 선택 -->
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
-		SELECT A.*, C.B_CATEGORY_NAME, B.USER_ID
+		SELECT A.*, C.B_CATEGORY_NAME, B.USER_NAME
 		FROM BOARD A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 댓글 목록 -->
 	<select  id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
-		SELECT A.*, B.USER_ID
+		SELECT A.*, B.USER_NAME
 		FROM REPLY A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		WHERE B_NO=#{bno}
@@ -97,7 +97,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 댓글 작성 -->
-	<insert id="insertReply">
-	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{userNo}, #{BNo}, #{ReContent}, SYSDATE, DEFAULT, #{UserName})
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply" parameterType="_int">
+		UPDATE Reply
+		SET RE_STATUS = 'N' 
+		WHERE RE_NO=#{reNo}	
+	</update>
 </mapper>

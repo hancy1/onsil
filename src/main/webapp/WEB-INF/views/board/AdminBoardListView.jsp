@@ -31,7 +31,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
-            <h2>온실 :: 자유게시판</h2>
+            <h2>온실 :: 신고된 게시글</h2>
         </div>
 
         <div class="container">
@@ -40,7 +40,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+                            <li class="breadcrumb-item active" aria-current="page">신고된 게시글</li>
                         </ol>
                     </nav>
                 </div>
@@ -61,12 +61,11 @@
 			        	<thead>
 			          		<tr>
 								<th width="90">글번호</th>
-								<th width="110">카테고리</th>
+								<th width="200">신고사유</th>
 								<th width="300">글제목</th>
 								<th width="100">작성자</th>
 								<th width="130">작성일</th>
-								<th width="90">조회수</th>
-								<th width="100">좋아요</th>
+								<th width="50">삭제하기</th>
 					        </tr>
 					    </thead>
 						<tbody>
@@ -77,24 +76,14 @@
 			                        <td>${ b.BTitle }</td>
 			                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userName }</a></td>
 			                        <td>${ b.BDate }</td>
-			                        <td>${ b.BCount }</td>
-			                        <td></td>
+			                        <td><a href="#">-</a></td>
 			                    </tr>
 		                    </c:forEach>
 				        </tbody>
 					</table>
-				<br><br>
-								
-				<!-- 글쓰기 버튼 : 로그인 상태일시 글쓰기 버튼 보임 -->
-					<div class="single-widget-area">
-						<ol class="popular-tags d-flex flex-wrap">
-							<c:if test="${ !empty loginUser }">
-		                		<li><a href="enrollBoard.do">글쓰기</a></li>
-		                	</c:if>
-		                </ol>
-	                </div>
+				<br><br>								
                 </div>
-		
+                	<!-- 페이징 처리 -->		
                     <div class="row">
                         <div class="col-12">
                             <nav aria-label="Page navigation">
@@ -131,73 +120,7 @@
                             </nav>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-12 col-md-4">
-                    <div class="post-sidebar-area">
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <form action="#" method="get" class="search-form">
-                                <input type="search" name="search" id="widgetsearch" placeholder="Search...">
-                                <button type="submit"><i class="icon_search"></i></button>
-                            </form>
-                        </div>
-                        
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>카테고리</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">정보</a></li>
-                                <li><a href="#">사진</a></li>
-                                <li><a href="#">후기</a></li>
-                                <li><a href="#">기타</a></li>
-                            </ol>
-                        </div>
-                        
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>인기 게시글</h4>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>New Harris Bugg design for Bridgewater</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>SGD Members win Best of Houzz Design Award</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+                </div>                                                      
             </div>
         </div>
     </section>    

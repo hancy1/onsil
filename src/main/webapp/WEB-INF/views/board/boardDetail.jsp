@@ -15,10 +15,63 @@
     <title>온실 :: 자유게시판</title>
 
     <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/icon.png"> 
+	<link rel="icon" href="resources/img/core-img/icon.png"> 
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/style.css">
+    
+    <!-- jQuery library 제이쿼리 라이브러리 추가!!!!!!!!!!!!!! -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- 모달창 -->
+    <style>
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+
+      /* 숨기기 */
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .show {
+      opacity: 1;
+      z-index: 1000;
+      transition: all 0.5s;
+    }
+
+    .window {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+      /* 모달창 크기 */
+      width: 400px;
+      height: 350px;
+
+      /* 초기에 약간 아래에 배치 */
+      transform: translate(-50%, 20%);
+    }
+
+    .show .popup {
+      transform: translate(-50%, -50%);
+      transition: all 0.5s;
+    }
+  </style>
 </head>
 <body>
 
@@ -28,7 +81,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
-            <h2>온실 :: 자유게시판</h2>
+            <h2>자유게시판</h2>
         </div>
 
         <div class="container">
@@ -61,46 +114,49 @@
                                 <h4 class="post-title">[ ${ b.BCategoryName } ] ${ b.BTitle }</h4>
                                 <div class="post-meta mb-30">
                                     <a><i class="fa fa-clock-o" aria-hidden="true"></i>${ b.BDate }</a>
-                                    <a href="gardenMain.do?hostUser=${ loginUser.userNo }"><i class="fa fa-user" aria-hidden="true"></i>${ b.userId }</a>
-                                </div>
-                                <div class="post-meta mb-30" align="right">
-									<a><i>좋아요♡</i></a>
-                                    <a><i><button id="reportBtn" class="mt-2">신고하기</button></i></a>
-                                    	<!-- 사용자 신고 Modal
-										<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
-														<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">X</span>
-														</button>
-													</div>
-													<form method="post" action="${pageContext.request.contextPath}/report.do">
-														<div class="modal-body">
-															<input type="hidden" name="reportTarget" value="${b.userNo}">
-															<!-- 텍스트 작성 or 체크박스 생성... 
-															<p class="mb-2"><input type="text" name="reportTitle" placeholder="신고 제목" onfocus="this.placeholder=''" onblur="this.placeholder='신고 제목'" maxlength="20" required></p>
-															<p><textarea name="reportContent" style="width: 466px; height: 150px; word-wrap: break-word;" placeholder="신고 사유" onfocus="this.placeholder=''" onblur="this.placeholder='신고 사유'" maxlength="200" required></textarea></p>
-														</div>
-														<div class="modal-footer">
-															<button type="submit" class="btn" id="modalY">제출</button>
-															<button class="btn" type="button" data-dismiss="modal">취소</button>
-														</div>
-													</form>
-												</div>
+                                    <a href="gardenMain.do?hostUser=${ loginUser.userNo }"><i class="fa fa-user" aria-hidden="true"></i>${ b.userName }</a>
+                                        <div class="post-meta mb-30" align="right">
+											<a>좋아요♡</a>
+											<a><i>/</i></a>
+		                                    <a id="show">신고하기</a>
+		                                    <!-- 모달 창 -->
+											<div class="background">
+											  <div class="window">
+											    <div class="popup">
+											    	<br>
+											    	<form action="bReport.do" method="get">
+												    	<h3 style="color: #2C3539">신고하기</h3>
+												    	<hr>												    	
+												        <ol style="color: #7BCCB5">
+													        <li><input type="radio" name="bReport" value="1"> 1. 욕설, 비방, 차별, 혐오 </li>
+													        <li><input type="radio" name="bReport" value="2"> 2. 홍보, 영리 목적 </li>
+													        <li><input type="radio" name="bReport" value="3"> 3. 음란, 청소년 유해 </li>
+													        <li><input type="radio" name="bReport" value="4"> 4. 개인정보 노출, 유포, 거래 </li>
+													        <li><input type="radio" name="bReport" value="5"> 5. 도배, 스팸 </li>
+													        <li><input type="radio" name="bReport" value="6"> 6. 기타 </li>
+												        </ol>
+												        <br><br>
+												        <button type="submit">신고</button>	
+												      	<button id="close" >취소</button>
+											      	</form>									    
+											      </div>
+											  </div>
 											</div>
-										</div> -->
+		                                </div>                                
                                 </div>
                                 
-                                <div class="post-thumbnail mb-30">	                                
-	                                    <img src="resources/b_upload_files/${ b.BChangeName }">	                                
+                                <!-- 게시글 사진과 내용 -->
+                                <div class="post-thumbnail mb-30">
+                                	<c:if test="${ !empty b.BChangeName }">	                                
+	                                    <img src="resources/b_upload_files/${ b.BChangeName }">
+	                                </c:if>
+	                                <c:if test="${ empty b.BChangeName }">	                                
+	                                </c:if>	                                
                                 </div>                                
                                 <p>${ b.BContent }</p>
                             </div>
                         </div>
                         
-
 
                         <!-- Post Tags & Share -->
                         <div class="post-tags-share d-flex justify-content-between align-items-center">                            
@@ -113,7 +169,7 @@
                             </div>
                             <!-- 수정, 삭제 버튼 -->
                             <div align="right">
-	                            <c:if test="${ loginUser.userId eq b.userId }">
+	                            <c:if test="${ loginUser.userNo eq b.userNo }">
 	                            <ol class="popular-tags d-flex align-items-center flex-wrap">
 	                                <li><a onclick="bSubmit(1);">수정하기</a></li>
 	                                <li><a onclick="bSubmit(2);">삭제하기</a></li>
@@ -142,7 +198,6 @@
                         <!-- 댓글 -->
                         <div class="comment_area clearfix" id="replyArea">
                             <h4 class="headline">댓글 [ <span id="rcount">0</span> ]</h4>
-
                             <ol>
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
@@ -154,7 +209,7 @@
 								                    <tr>
 								                    	<c:if test="${ !empty loginUser }">
 									                        <th colspan="2" style="width:75%">
-									                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+									                            <textarea class="form-control" id="reContent" rows="2" style="resize:none; width:100%"></textarea>
 									                        </th>
 									                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
 								                        </c:if>
@@ -166,9 +221,7 @@
 								                        </c:if>
 								                    </tr>
 								                </thead>
-								                <tbody>
-								                
-								                </tbody>
+								                <tbody></tbody>
 								            </table>
                                         </div>
                                     </div>
@@ -200,7 +253,7 @@
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
                                 <div class="post-thumb">
-                                    <img src="img/bg-img/30.jpg" alt="">
+                                    <img src="" alt="">
                                 </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
@@ -213,7 +266,7 @@
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
                                 <div class="post-thumb">
-                                    <img src="img/bg-img/31.jpg" alt="">
+                                    <img src="" alt="">
                                 </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
@@ -226,7 +279,7 @@
                             <!-- Single Latest Posts -->
                             <div class="single-latest-post d-flex align-items-center">
                                 <div class="post-thumb">
-                                    <img src="img/bg-img/32.jpg" alt="">
+                                    <img src="" alt="">
                                 </div>
                                 <div class="post-content">
                                     <a href="#" class="post-title">
@@ -247,7 +300,7 @@
                             <!-- Single Best Seller Products -->
                             <div class="single-best-seller-product d-flex align-items-center">
                                 <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/4.jpg" alt=""></a>
+                                    <a href="shop-details.html"><img src="" alt=""></a>
                                 </div>
                                 <div class="product-info">
                                     <a href="shop-details.html">Cactus Flower</a>
@@ -265,7 +318,7 @@
                             <!-- Single Best Seller Products -->
                             <div class="single-best-seller-product d-flex align-items-center">
                                 <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/5.jpg" alt=""></a>
+                                    <a href="shop-details.html"><img src="" alt=""></a>
                                 </div>
                                 <div class="product-info">
                                     <a href="shop-details.html">Tulip Flower</a>
@@ -283,7 +336,7 @@
                             <!-- Single Best Seller Products -->
                             <div class="single-best-seller-product d-flex align-items-center">
                                 <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="img/bg-img/34.jpg" alt=""></a>
+                                    <a href="shop-details.html"><img src="" alt=""></a>
                                 </div>
                                 <div class="product-info">
                                     <a href="shop-details.html">Recuerdos Plant</a>
@@ -305,32 +358,39 @@
         </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
-    
-    <script>
-		$('#reportBtn').click(function(e){
-			e.preventDefault();
-			$('#reportModal').modal("show");
-		});
+	<script>
+		function show() {
+		  document.querySelector(".background").className = "background show";
+		}
+		
+		function close() {
+		  document.querySelector(".background").className = "background";
+		  return;
+		}
+		
+		document.querySelector("#show").addEventListener("click", show);
+		document.querySelector("#close").addEventListener("click", close);
 	</script>
     
+    
 	<script>
+		// 댓글 작성
 	 	$(function(){
 			selectReplyList();
 			
 			$("#addReply").click(function(){
-	    		var bno = ${b.BNo};
 	
-				if($("#replyContent").val().trim().length != 0){
+				if($("#reContent").val().trim().length != 0){
 					
 					$.ajax({
 						url:"rinsertBoard.do",
 						type:"post",
-						data:{reContent:$("#replyContent").val(),
-								{bNo:bno},
+						data:{reContent:$("#reContent").val(),
+								bno:"${b.BNo}",
 								userNo:"${ loginUser.userNo }"},
 						success:function(result){
 							if(result > 0){
-								$("#replyContent").val("");
+								$("#reContent").val("");
 								selectReplyList();
 								
 							}else{
@@ -348,8 +408,11 @@
 			});
 		});
 	 	
+		//댓글 목록 생성
 	 	function selectReplyList(){
-			var bno = ${b.BNo};
+	 		
+	 		var bno = ${b.BNo};
+	 		
 			$.ajax({
 				url:"rlistBoard.do",
 				data:{bno:bno},
@@ -360,15 +423,16 @@
 					var value="";
 					$.each(list, function(i, obj){
 						
-						if("${loginUser.userId}" == obj.replyWriter){
+						if("${loginUser.userNo}" == obj.userName){
 							value += "<tr style='background:#EAFAF1'>";
 						}else{
 							value += "<tr>";
 						}
 						
-						value += "<th>" + obj.replyWriter + "</th>" + 
-									 "<td>" + obj.replyContent + "</td>" + 
-									 "<td>" + obj.createDate + "</td>" +
+						value += "<th>" + obj.userName + "</th>" + 
+								"<td>" + obj.reContent + "</td>" + 
+								"<td>" + obj.reDate + "</td>" +
+								"<td><button class='btn btn-danger' onclick='deleteReply(" + obj.reNo + ");'>삭제</button></td>" + 
 							 "</tr>";
 					});
 					$("#replyArea tbody").html(value);
@@ -376,7 +440,30 @@
 					console.log("댓글 리스트 조회용 ajax 통신 실패!");
 				}
 			});
-		}   
+		}
+		
+		// 댓글 삭제...
+	 	function deleteReply() {
+			
+			if(){
+				$.ajax({
+					url:"rdeleteBoard.do",
+					type:"post",
+					data:{reNo:reNo},				
+					success:function(result){
+						
+						if(result > 0){	
+							selectReplyList();
+							alert("댓글이 삭제되었습니다.");	
+						}else{
+							alert("댓글 삭제 실패!");
+						}
+					},error:function(){
+						console.log("댓글 삭제 ajax 통신 실패!");
+					}
+				});
+			}
+		}
     </script>
     
     <jsp:include page="../common/footer.jsp" />

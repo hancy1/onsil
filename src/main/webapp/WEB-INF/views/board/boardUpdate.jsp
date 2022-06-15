@@ -78,7 +78,7 @@
                                             </div>
                                    			<div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <select name="BCategoryNo"" class="form-control">
+                                                    <select name="BCategoryNo"" class="form-control" required>
                                                     	<option value="${ b.BCategoryNo }">${ b.BCategoryName }</option>
                                                     	<option value="1">사진</option>
                                                     	<option value="2">정보</option>
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" required name="BContent" cols="30" rows="10">${ b.BContent }</textarea>
+                                                    <textarea class="form-control" name="BContent" cols="30" rows="10" required>${ b.BContent }</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
