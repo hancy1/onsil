@@ -45,4 +45,16 @@ public class TicketDao {
 		return sqlSession.delete("ticketMapper.updateTicket",t);
 	}
 
+	public int exhibitionListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.exhibitionListCount");
+	}
+
+	public ArrayList<Ticket> selectExhibitionList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ticketMapper.selectExhibitionList", null,rowBounds);
+	}
+
 }

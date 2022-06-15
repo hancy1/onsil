@@ -19,4 +19,8 @@ public interface TicketService {
 
 	void updateTicket(Ticket t);
 
+	int exhibitionListCount();
+
+	ArrayList<Ticket> selectExhibitionList(PageInfo pi);
+
 }

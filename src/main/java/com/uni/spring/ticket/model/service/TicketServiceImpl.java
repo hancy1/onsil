@@ -67,4 +67,17 @@ public class TicketServiceImpl implements TicketService{
 	      }
 	}
 
+	//전시회
+	@Override
+	public int exhibitionListCount() {
+		// TODO Auto-generated method stub
+		return ticketDao.exhibitionListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Ticket> selectExhibitionList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectExhibitionList(sqlSession,pi);
+	}
+
 }

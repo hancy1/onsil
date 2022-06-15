@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
+
+
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.Ticket;
@@ -203,4 +205,28 @@ public class TicketController {
 		return "redirect:listTicket.do";
 		
 	}
+	
+	
+	// 전시회 페이지연결 
+		@RequestMapping("exhibition.do")
+		public String selectShopList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+			
+			
+			
+			int listCount = ticketService.exhibitionListCount();
+			
+			
+			PageInfo pi = ticketPagination.getPageInfo(listCount, currentPage, 10, 5);
+			
+			ArrayList<Ticket> list = ticketService.selectExhibitionList(pi);
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			
+			
+			
+			return "Ticket/ExhibitionMain";
+		}
 }

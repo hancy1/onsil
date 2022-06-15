@@ -26,7 +26,7 @@ public class Ticket {//티켓등록
 	private Date ticketDate;//날짜
 	private String status;//상태값
 	private String originName;//첨부파일원본이름
-	private String changeName;//첨부파일 수저이름
+	private String changeName;//첨부파일 수정이름
 	private String userId;//작성자 아이디
 	private String division;//티켓구분
 	

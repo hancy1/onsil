@@ -53,27 +53,27 @@
                 <table id="contentArea" align="center">
                     <tr>
                         <th><label for="ticketNo">티켓번호</label></th>
-                        <td><input type="text" id="ticketNo" class="form-control" name="ticketNo" value="${t.ticketNo}" required></td>
+                        <td><input type="text" id="ticketNo" class="form-control" name="ticketNo" value="${t.ticketNo}" readonly></td>
                     </tr>
                     <tr>
                         <th><label for="division">티켓구분코드</label></th>
-                        <td><input type="text" id="division" class="form-control" name="division" value="${t.division}" required></td>
+                        <td><input type="text" id="division" class="form-control" name="division" value="${t.division}" readonly></td>
                     </tr>
                     <tr>
                         <th><label for="ticketTitle">전시회명</label></th>
-                        <td><input type="text" id="title" class="form-control" name="ticketTitle" value="${t.ticketTitle}" required></td>
+                        <td><input type="text" id="title" class="form-control" name="ticketTitle" value="${t.ticketTitle}" readonly></td>
                     </tr>
                     <tr>
                         <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userId }" required></td>
+                        <td><input type="text" id="writer" class="form-control"  name="userNo" value="${ loginUser.userId }" readonly></td>
                     </tr>
                      <tr>
                         <th><label for="price">가격코드</label></th>
-                        <td><input type="text" id="price" class="form-control" name="price"  value="${ t.price }" required></td>
+                        <td><input type="text" id="price" class="form-control" name="price"  value="${ t.price }" readonly></td>
                     </tr>
                     <tr>
                         <th><label for="ticketPhone">전화번호</label></th>
-                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" value="${ t.ticketPhone }" required></td>
+                        <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" value="${ t.ticketPhone }" readonly></td>
                     </tr>
                   
                    
@@ -81,7 +81,7 @@
                         <th colspan="2"><label for="content">공지사항</label></th>
                     </tr>
                     <tr>
-                      <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;">${ t.ticketNotice }</textarea></th>
+                      <th colspan="2"><textarea class="form-control" required name="ticketNotice" id="content" rows="10" style="resize:none;"readonly>${ t.ticketNotice }</textarea></th>
                     
                      
                     </tr>
@@ -89,7 +89,7 @@
                     <th>첨부파일</th>
                     <td colspan="3">
                     	<c:if test="${ !empty t.originName }">
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" download="${ t.originName }">${ t.originName }</a>
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" download="${ t.originName }"readonly>${ t.originName }</a>
                         </c:if>
                         <c:if test="${ empty t.originName }">
                         	첨부파일이 없습니다.
