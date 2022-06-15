@@ -53,8 +53,6 @@
     <section class="alazea-blog-area mb-100">
         <div class="container">
             <div class="row">
-            	<div class="col-12 col-md-8">
-                    <div class="row"> 
                 	
                 	<!-- 게시판 목록 -->                
 					<table id="boardList" class="table table-hover">
@@ -65,7 +63,7 @@
 								<th width="300">글제목</th>
 								<th width="100">작성자</th>
 								<th width="130">작성일</th>
-								<th width="50">삭제하기</th>
+								<th width="60">삭제</th>
 					        </tr>
 					    </thead>
 						<tbody>
@@ -82,8 +80,9 @@
 				        </tbody>
 					</table>
 				<br><br>								
-                </div>
-                	<!-- 페이징 처리 -->		
+
+                	<!-- 페이징 처리 -->
+                	<div align="center">		
                     <div class="row">
                         <div class="col-12">
                             <nav aria-label="Page navigation">
@@ -118,7 +117,7 @@
 				                	</c:choose>
                                 </ul>
                             </nav>
-                        </div>
+                    	</div>
                     </div>
                 </div>                                                      
             </div>

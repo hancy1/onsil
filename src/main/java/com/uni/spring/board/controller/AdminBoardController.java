@@ -38,7 +38,7 @@ public class AdminBoardController {
 	@GetMapping("adminBList.do")									// 파라미터 값 필수 아님
 	public String selectList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 	      
-	    return "board/adminBListView";
+	    return "board/adminBoardListView";
 	}
 	
 	// 신고된 게시글 상태값 변경
