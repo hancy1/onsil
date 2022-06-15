@@ -14,6 +14,7 @@ import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
+import com.uni.spring.shop.model.dto.ReviewLike;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 @Repository
@@ -218,6 +219,26 @@ public class ShopDao {
 	public ArrayList<Product> selectBestSeller(SqlSessionTemplate sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("shopMapper.selectBestSeller");
+	}
+
+	public ReviewLike selectLike(SqlSessionTemplate sqlSession, Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectLike", map);
+	}
+
+	public ReviewLike findLike(SqlSessionTemplate sqlSession, ReviewLike rLike) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.findLike", rLike);
+	}
+
+	public int insertLike(SqlSessionTemplate sqlSession, ReviewLike rLike) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shopMapper.insertLike", rLike);
+	}
+
+	public void deleteLike(SqlSessionTemplate sqlSession, ReviewLike rLike) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("shopMapper.deleteHeart",rLike);
 	}
 
 

@@ -6,8 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>온실 - Review Detail</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
+
+<!-- 부트스트랩아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 <style>
 #contentArea {
@@ -131,8 +139,60 @@
 			                    </c:if></td>
 							</tr>							
 					
+							<tr>								
+								<td colspan="4"></td>											
+							</tr>
+							
 						</table>
+						<p>((구현예정)명)에게 도움이 됐습니다.</p>						
+
+						<button type="button" id="likeBtn" class="btn btn-outline-secondary btn-sm">도움이 돼요 </button>
+						
 						<br>
+						
+						<!-- 도움 됐어요 기능을 위한 ajax -->
+						<script type="text/javascript">
+						
+							 $(document).ready(function () {
+								
+								// 좋아요가 있는지 확인한 값을 likeStatus에 저장
+							        var likeStatus = ${goodHelp.likeStatus}
+							        // likeStatus이 1이면 좋아요가 이미 되있는것이므로 버튼을 비활성화 시킴
+							        if(likeStatus>0) {
+							            console.log(likeStatus);
+							            $("#likeBtn").prop("disabled", true);
+							           
+							        }
+							        else {
+							            console.log(likeStatus);
+
+							        }
+
+								// 좋아요 버튼을 클릭 시 실행되는 코드
+							        $("#likeBtn").on("click", function () {
+							            var that = $("#likeBtn");
+								    $.ajax({
+								    	url :'insertLike.do',
+								        type :'POST',
+								        data : {
+								        		'reviewNo':${r.reviewNo },
+								        		'userNo':${ sessionScope.loginUser.userNo }
+								        	   },
+								    	success : function(data){
+								    		that.prop('name',data);
+								        	if(data==1) {
+								        		 $("#likeBtn").prop("disabled", true);
+								        	} else {
+							                    
+								        	}
+							             	}
+								    });
+							        });
+							    });
+						
+						</script>
+						
+						
 						
 						
 						

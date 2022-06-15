@@ -10,6 +10,7 @@ import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
+import com.uni.spring.shop.model.dto.ReviewLike;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 
 public interface ShopService {
@@ -83,6 +84,10 @@ public interface ShopService {
 	void insertOrder(ProOrder o);
 
 	ArrayList<Product> selectBestSeller();
+
+	ReviewLike selectLike(int reviewNo, int userNo);
+
+	int insertLike(ReviewLike rLike);
 
 
 

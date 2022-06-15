@@ -248,6 +248,8 @@ public class AdminShopServiceImpl implements AdminShopService {
 		}
 	}
 
+	
+	//매출List
 	@Override
 	public ProOrder selectSalesList() {
 		// TODO Auto-generated method stub

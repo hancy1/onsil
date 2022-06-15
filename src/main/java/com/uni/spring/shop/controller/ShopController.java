@@ -30,6 +30,7 @@ import com.uni.spring.shop.model.dto.PointInfo;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.Product;
+import com.uni.spring.shop.model.dto.ReviewLike;
 import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.shop.model.service.ShopService;
 
@@ -217,12 +218,24 @@ public class ShopController {
 	
 	//리뷰 디테일페이지	
 	@RequestMapping("detailReview.do")
-	public ModelAndView selectReview(int reviewNo, ModelAndView mv) {
+	public ModelAndView selectReview(int reviewNo, ModelAndView mv, HttpSession session) {
 		
-		//System.out.println("디테일 reviewNo : " + reviewNo);
+		//리뷰 불러오기
 		ProReview r = shopService.selectReview(reviewNo);
 		
+		//로그인 멤버 정보 불러오기
+		String userNoS= ((Member) session.getAttribute("loginUser")).getUserNo();		
+		int userNo = Integer.parseInt(userNoS);
+		
+		//도움됐어요 기능		
+		ReviewLike goodHelp = new ReviewLike();
+		
+		goodHelp = shopService.selectLike(reviewNo,userNo);
+		
+		
+		mv.addObject("goodHelp", goodHelp);
 		mv.addObject("r", r).setViewName("shop/ReviewDetail");
+		
 		
 		return mv;
 	}
@@ -607,6 +620,15 @@ public class ShopController {
 		System.out.println(list);
 		
 		return list;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "insertLike.do", produces="application/json; charset=utf-8")
+	public int insertLike (ReviewLike rLike) {
+		
+		int result = shopService.insertLike(rLike);
+		return result;
 	}
 	
 

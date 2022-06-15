@@ -18,13 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
-import com.uni.spring.garden.model.dto.PlantInfo;
-import com.uni.spring.help.HelpPagination;
-import com.uni.spring.help.model.dto.Inquiry;
-import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.shop.ShopPagination;
 import com.uni.spring.shop.model.dto.Freebie;
-import com.uni.spring.shop.model.dto.Point;
 import com.uni.spring.shop.model.dto.ProOrder;
 import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.shop.model.dto.ProStock;
