@@ -144,33 +144,59 @@
 							</tr>
 							
 						</table>
-						<p>((구현예정)명)에게 도움이 됐습니다.</p>						
+						<p><span class="likeCountArea"></span>명에게 도움이 됐습니다.</p>						
 
-						<button type="button" id="likeBtn" class="btn btn-outline-secondary btn-sm">도움이 돼요 </button>
+						<!--<button type="button" id="likeBtn" class="btn btn-outline-secondary btn-sm">도움이 돼요 </button>  -->
 						
+						<a class="text-dark good" style="text-decoration-line: none;">
+						<img id="good" src="resources/img/core-img/hand-thumbs-up.svg">
+						도움이 돼요
+						</a>
 						<br>
 						
 						<!-- 도움 됐어요 기능을 위한 ajax -->
-						<script type="text/javascript">
+						<script>
 						
 							 $(document).ready(function () {
+								 
+								 
+									//도움됐어요 카운팅하는 함수
+									 function likeCount() {
+											
+											$.ajax({
+												url: "likeCount.do",
+								                type: "POST",
+								                data: {
+								                	'reviewNo':${r.reviewNo },
+									        		
+								                },
+								                success: function (count) {
+								                	$(".likeCountArea").html(count);
+								                },
+											})
+									    };
+									    likeCount();  
 								
-								// 좋아요가 있는지 확인한 값을 likeStatus에 저장
+								// 도움됐어요가 있는지 확인한 값을 likeStatus에 저장
 							        var likeStatus = ${goodHelp.likeStatus}
-							        // likeStatus이 1이면 좋아요가 이미 되있는것이므로 버튼을 비활성화 시킴
+							        console.log(likeStatus);
+							        // likeStatus이 1이면 좋아요가 이미 되있는것이므로 꽉 채운 엄지척 이미지 띄우기
 							        if(likeStatus>0) {
 							            console.log(likeStatus);
-							            $("#likeBtn").prop("disabled", true);
+							            $("#good").prop("src", "resources/img/core-img/hand-thumbs-up-fill.svg");
+							            $(".good").prop('name',likeStatus)
 							           
-							        }
+							        }//도움됐어요 데이터가 없을때는 빈 엄지척 이미지 띄우기
 							        else {
 							            console.log(likeStatus);
+							            $("#good").prop("src", "resources/img/core-img/hand-thumbs-up.svg");
+							            $(".good").prop('name',likeStatus)
 
 							        }
 
-								// 좋아요 버튼을 클릭 시 실행되는 코드
-							        $("#likeBtn").on("click", function () {
-							            var that = $("#likeBtn");
+								// 도움됐어요 a태그, 이미지 클릭 시 실행되는 코드
+							        $(".good").on("click", function () {
+							            var that = $(".good");
 								    $.ajax({
 								    	url :'insertLike.do',
 								        type :'POST',
@@ -181,20 +207,25 @@
 								    	success : function(data){
 								    		that.prop('name',data);
 								        	if(data==1) {
-								        		 $("#likeBtn").prop("disabled", true);
+								        		 $('#good').prop("src","resources/img/core-img/hand-thumbs-up-fill.svg");
+								        		 likeCount();
 								        	} else {
-							                    
+								        		  $('#good').prop("src","resources/img/core-img/hand-thumbs-up.svg");
+								        		  likeCount();
 								        	}
 							             	}
-								    });
-							        });
+								        	  
+								   		 });
+							        });								
+							
+								
 							    });
-						
+							 
+							
+							 
+
 						</script>
-						
-						
-						
-						
+		
 						
 						  
 						<div align="center">

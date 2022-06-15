@@ -232,6 +232,7 @@ public class ShopController {
 		
 		goodHelp = shopService.selectLike(reviewNo,userNo);
 		
+		System.out.println("컨트롤러 리뷰라이크 DTO조회 " + goodHelp);
 		
 		mv.addObject("goodHelp", goodHelp);
 		mv.addObject("r", r).setViewName("shop/ReviewDetail");
@@ -629,6 +630,15 @@ public class ShopController {
 		
 		int result = shopService.insertLike(rLike);
 		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "likeCount.do", produces="application/json; charset=utf-8")
+	public int likeCount (int reviewNo) {
+		
+		int count = shopService.likeCount(reviewNo);
+		return count;
 	}
 	
 

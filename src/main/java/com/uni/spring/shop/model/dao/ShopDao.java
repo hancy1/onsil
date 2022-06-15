@@ -241,6 +241,11 @@ public class ShopDao {
 		sqlSession.delete("shopMapper.deleteHeart",rLike);
 	}
 
+	public int likeCount(SqlSessionTemplate sqlSession, int reviewNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.likeCount", reviewNo);
+	}
+
 
 
 
