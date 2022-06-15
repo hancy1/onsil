@@ -74,6 +74,10 @@
                         <td><input type="text" id="ticketPhone" class="form-control" name="ticketPhone" required></td>
                     </tr>
                   
+                   <tr>
+                        <th><label for="ticketLocation">위치</label></th>
+                        <td><input type="text" id="ticketLocation" class="form-control" name="ticketLocation" required></td>
+                    </tr>
                    
                     <tr>
                         <th colspan="2"><label for="content">공지사항</label></th>
