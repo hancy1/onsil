@@ -534,8 +534,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</resultMap>
  	
- 	<!-- select하기 회원의 도움됐어요 여부 등 -->
- 	
+ 	<!-- select하기 로그인된 회원의 도움됐어요눌렀는지 여부 --> 	
  	<select id="selectLike" parameterType="ReviewLike" resultMap="ReviewLikeResultSet">
  	
  	  SELECT *
@@ -545,6 +544,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	</select>
  	
+ 	<!-- 해당회원이 도움됐어요 했는지 찾아보기(검증) 두번누르면 안돼 -->
 	<select id="findLike" parameterType="ReviewLike" resultMap="ReviewLikeResultSet">
 	
 	  SELECT *
@@ -554,7 +554,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 
-
+	<!--도움됐어요 안누른 상태에선 도움됐어요 insert -->
 	<insert id="insertLike">
 	
 		INSERT INTO REVIEW_LIKE VALUES
@@ -562,13 +562,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 
-
+	<!-- 도움됐어요 누른상태인데 또 누르면 데이터 삭제됨 !(도움됐어요 취소)-->
 	<delete id="deleteHeart">
-		DELETE FROM REVIEW_LIKE
+		DELETE
+		FROM REVIEW_LIKE
 		WHERE USER_NO=#{userNo}
 		AND REVIEW_NO=#{reviewNo}	
 	</delete>
  	
  	
+ 	<!-- 도움됐어요 갯수 카운팅 --> 	
+	<select id ="likeCount" resultType="_int">
+
+	SELECT COUNT(*)
+  	FROM REVIEW_LIKE
+  	WHERE REVIEW_NO=#{reviewNo}
+   
+    
+  	</select>
  	
 </mapper>

@@ -413,6 +413,15 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public int likeCount(int reviewNo) {
+		// TODO Auto-generated method stub
+		
+		return shopDao.likeCount(sqlSession, reviewNo);
+	}
+
+
+
 
 
 

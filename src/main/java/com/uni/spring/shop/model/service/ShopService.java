@@ -89,6 +89,10 @@ public interface ShopService {
 
 	int insertLike(ReviewLike rLike);
 
+	int likeCount(int reviewNo);
+
+	
+
 
 
 	
