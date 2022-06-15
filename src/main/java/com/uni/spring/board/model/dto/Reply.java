@@ -12,12 +12,12 @@ import lombok.ToString;
 @Data 
 public class Reply {
 
-	private int replyNo;
+	private int reNo;
 	private String userNo;
 	private int bNo;
 	private String reContent;
 	private Timestamp reDate;
 	private String reStatus;
-	private String userId; //아이디 출력용
+	private String userName; // 작성자 이름 출력용
 	
 }

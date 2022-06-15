@@ -160,7 +160,7 @@ public class BoardController {
 	public String updateForm(int bno, Model model) {	// bno , model(값을 담아서 이동)
 								//새로 조회해야해서 bno만 가져옴 		
 		Board b = boardService.selectBoard(bno);
-		System.out.println("수정하기 폼 : " +bno);
+		// System.out.println("수정하기 폼 : "+ bno);
 
 		model.addAttribute("b", b); //객체 b를 model에 추가해서 넘김
 
@@ -171,7 +171,7 @@ public class BoardController {
 	@RequestMapping("updateBoard.do")
 	public String updateBoard(Board b, HttpServletRequest request,
 							@RequestParam(name = "reUploadFile", required = false) MultipartFile file) {
-		System.out.println(b); //수정할 정보 넘어가는지 확인?
+		//System.out.println(b); //수정할 정보 넘어가는지 확인
 		String orgchangeName = b.getBChangeName(); 
 		
 		if(!file.getOriginalFilename().equals("")) {	//새로 넘어온 파일이 있는 경우
@@ -181,22 +181,18 @@ public class BoardController {
 			b.setBOriginName(file.getOriginalFilename());
 			b.setBChangeName(changeName);
 			
-			System.out.println("잘 넘어왔는지 확인 : " + b);
+			System.out.println("정보 잘 넘어왔는지 확인 : " + b);
 
-		
 			// 새로 넘어온 파일이 있을 때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
 			if(orgchangeName != null) { // null은 새로운 파일도 있는데 기존의 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
 				deleteFile(orgchangeName, request);	// 값이 있으면 삭제함
 			}
-		}
-		
-		System.out.println(b);
-		//mv.addObject("bno", b.getBNo()).setViewName("");
+		}		
+		//System.out.println(b);
 
-					boardService.updateBoard(b);
-					
-		
-		return "redirect:boardList.do";
+		boardService.updateBoard(b);
+							
+		return "redirect:detailBoard.do";
 	}
 	
 	// 댓글 (라이브러리 gson 추가)
@@ -207,16 +203,27 @@ public class BoardController {
 		// select 먼저 해서 가져옴
 		ArrayList<Reply> list = boardService.selectReplyList(bno);
 		
-								//DateFormat 안하면 원하는대로 출력이 안됨?
-		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
+								//DateFormat 설정안하면 원하는대로 출력 안됨
+		return new GsonBuilder().setDateFormat("yy-MM-dd HH:mm").create().toJson(list);
 	}
 	
 	// 댓글 작성
 	@ResponseBody
 	@RequestMapping(value = "rinsertBoard.do", produces = "application/json; charset=utf-8")
 	public String insertReply(Reply r) {
+		
 		int result = boardService.insertReply(r);
 		return String.valueOf(result);
+	}
+
+	// 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "rdeleteBoard.do", produces = "application/json; charset=utf-8")
+	public String deleteReply(int reno) {
+		
+		//int result = boardService.deleteReply(reno);
+		
+		return null;
 	}
 
 }

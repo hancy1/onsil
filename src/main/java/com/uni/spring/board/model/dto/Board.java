@@ -22,6 +22,6 @@ public class Board {
 	private String bOriginName;
 	private String bChangeName;
 	private String bStatus;
-	private String userId;	// 작성자 아이디 출력용
+	private String userName;	// 작성자 이름 출력용
 	private String bCategoryName; // 카테고리명 출력용
 }
