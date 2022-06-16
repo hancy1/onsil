@@ -143,7 +143,7 @@ th, td {
 	}
 	function visitGarden(nUserNo){
 		location.href = "gardenMain.do?hostUser=" + nUserNo;
-		//console.log(nUserNo)
+
 	}
 	
 	function deleteNeighbor(neighborNo){

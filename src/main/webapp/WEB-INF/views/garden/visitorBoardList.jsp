@@ -146,14 +146,13 @@
 				$.each(map.list, function(i, b){
 
 					if(map.list.length > 0){
-
 									
 					value += "<tr style='background-color: lightgray'>" + 
 							 "<th><img src='https://cdn-icons-png.flaticon.com/512/3598/3598055.png' alt='' style='width:40px;height:40px'></th>" +
 							 "<td id='" + b.boardNo + "userId'>" + b.writer + "</td>" +
 							 "<td class='" + b.boardNo + "defB def'>" + b.content + "</td>" +
 							 "<td class='" + b.boardNo + "inputB input' style='display:none'>" + 
-							 "<div><input type='text' name='content' id='bContent' value='" + b.content + "' style='width:200px' required/>" + 
+							 "<div><input type='text' name='content' id='bContent"+ b.boardNo +"' value='" + b.content + "' style='width:300px' required/>" + 
 							 "<button class='btn btn-outline-success btn-sm' type='bytton' onclick='updateBoardContent(" + b.boardNo + ");'>수정</button>" + 
 							 "<button class='btn btn-outline-success btn-sm' onclick='cancleUpdateB(" + b.boardNo + ");' >취소</button></div></td>" + 
 							 "<th>" + b.enrollDate + "</th>" +
@@ -178,7 +177,7 @@
 									 "<td id='" + c.commentNo + "userId'>" + c.userNo + "</td>" +
 									 "<td class='" + c.commentNo +"def def'>" + c.content + "</td>" + 
 									 "<td class='" + c.commentNo +"input input' style='display:none'>" +  
-									 "<div><input type='text' name='content' id='cContent' value='" + c.content +"'/>" + 
+									 "<div><input type='text' name='content' id='cContent"+ c.commentNo +"' value='" + c.content +"' style='width:300px'/>" + 
 									 "<button class='btn btn-outline-success btn-sm' type='submit' onclick='updateCommentContent(" + c.commentNo + ");'>수정</button>" + 
 									 "<button class='btn btn-outline-success btn-sm' onclick='cancleUpdate(" + c.commentNo + ");' >취소</button></div></td>" + 
 									 "<td>" + c.enrollDate + "</td><td>";
@@ -276,8 +275,7 @@
 			error:function(){
 				console.log("방명록 작성용 ajax 통신 실패")
 			}
-		})
-	
+		})	
 	}
 	
 	//방명록 삭제하기
@@ -330,7 +328,7 @@
 	}
 	
 	function updateBoardContent(boardNo){
-		var content = $('#bContent').val();
+		var content = $('#bContent'+boardNo).val();
 		console.log(content);
 		
 		$.ajax({
@@ -405,7 +403,7 @@
 	
 	function updateCommentContent(commentNo){
 		
-		var content = $('#cContent').val();
+		var content = $('#cContent'+commentNo).val();
 		console.log(content);
 		
 		$.ajax({

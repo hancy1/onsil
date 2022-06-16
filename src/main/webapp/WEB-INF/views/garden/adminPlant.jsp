@@ -171,7 +171,7 @@ th, td {
 									 "<td>" + i.sun + "</td>" + 
 									 "<td width='10%'>" + i.status + "</td>" +
 									 "<td width='10%'>" + 
-									 "<button class='btn btn-outline-success updatePlant' onclick='location.href='updatePlantForm.do?regNo="+ i.regNo +"'><i class='fa-solid fa-eraser'></i></button>" +
+									 "<button class='btn btn-outline-success updatePlant' onclick='updatePlantForm(" + i.regNo + ");' ><i class='fa-solid fa-eraser'></i></button>" +
 									 "<button class='btn btn-outline-success deletePlant' onclick='deletePlant(" + i.regNo + ");' ><i class='fa-solid fa-trash-can'></i></button>" +
 									 "</td></tr>";
 					}else{
@@ -183,7 +183,7 @@ th, td {
 			error:function(){
 				console.log("관리자 식물정보 조회용 ajax 통신 실패")
 			}
-		})
+		});
 	}
 	
 	function searchInfo(){
@@ -192,6 +192,10 @@ th, td {
 
 		selectInfoList(search);
 		
+	}
+	
+	function updatePlantForm(regNo){
+		location.href='updatePlantForm.do?regNo=' + regNo;
 	}
 	
 	function deletePlant(regNo){

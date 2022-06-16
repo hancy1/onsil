@@ -272,10 +272,7 @@
 	//답글 인서트하기
 	function insertReComment(commentNo){
 		
-		console.log(commentNo);
-		
 		var content = $('#reContent'+commentNo).val();
-		console.log(content);
 		
 		var logNo = ${log.logNo};
 		

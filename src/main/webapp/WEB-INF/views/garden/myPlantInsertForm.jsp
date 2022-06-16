@@ -66,15 +66,15 @@
                     </tr>
                     <tr>
                     	<th><label for="nickname">별명 등록</label></th>
-                    	<td><input type="text" name="nickname" id="nickname" style="width:300px" placeholder="미입력 시 식물 이름으로 저장됩니다."></td>
+                    	<td><input type="text" name="nickname" id="nickname" style="width:400px" placeholder="미입력 시 식물 이름으로 저장됩니다."></td>
                     </tr>
                     <tr>
                     	<th><label for="water">관수량</label></th>
-                    	<td><input type="text" name="water" id="water" required style="width:300px" placeholder="ex) 겉흙이 마를 때 물을 줌"></td>
+                    	<td><input type="text" name="water" id="water" required style="width:400px" placeholder="ex) 겉흙이 마를 때 물을 줌"></td>
                     </tr>
                     <tr>
                     	<th><label for="sun">일조량</label></th>
-                    	<td><input type="text" name="sun" id="sun" required  style="width:300px" placeholder="ex) 직사광선을 피해 밝은 곳에 둠"></td>
+                    	<td><input type="text" name="sun" id="sun" required  style="width:400px" placeholder="ex) 직사광선을 피해 밝은 곳에 둠"></td>
                     </tr>
                     <tr>
                     	<th><label for="enrollDate">등록일</label></th>

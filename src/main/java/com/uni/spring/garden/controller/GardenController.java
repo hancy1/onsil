@@ -58,10 +58,6 @@ public class GardenController {
 	@RequestMapping("gardenMain.do")
 		public String toMain(@RequestParam(value="hostUser", required=false)String hostUser, HttpSession session, Model model) {
 		
-		System.out.println("hostUser 널 체크 전 확인" + hostUser);
-		System.out.println("세션에 있는 hostUser 확인 " + session.getAttribute("hostUser"));
-		
-		
 		//방명록 주인 회원번호
 		if(hostUser == null) {
 			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
@@ -95,14 +91,14 @@ public class GardenController {
 	
 	@RequestMapping("visitorBoard.do")
 	public String visitorBoardList(@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage, Model model, HttpSession session){
-			//@RequestParam(value="currentPage") int currentPage --> 값이 넘어오지 않아서 에러가 발생
+			/*@RequestParam(value="currentPage") int currentPage --> 값이 넘어오지 않아서 에러가 발생
 			
-			//@RequestParam(value="currentPage" , required=false) int currentPage --> 
-			//required : 해당 파라미터가 필수인지 여부를 나타냄 (true:필수)
-			//required=false : 값이 필수가 아니다. 그래서 null이 들어올 수 있는데 null은 기본형 int에 들어갈 수 없어서 에러가 발생
+			@RequestParam(value="currentPage" , required=false) int currentPage --> 
+			required : 해당 파라미터가 필수인지 여부를 나타냄 (true:필수)
+			required=false : 값이 필수가 아니다. 그래서 null이 들어올 수 있는데 null은 기본형 int에 들어갈 수 없어서 에러가 발생
 			
-			//@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage -->
-			//defaultValue : 넘어오는 값이 null인 경우에 해당 파라미터 기본 값을 지정함
+			@RequestParam(value="currentPage" , required=false, defaultValue="1") int currentPage -->
+			defaultValue : 넘어오는 값이 null인 경우에 해당 파라미터 기본 값을 지정함*/
 			
 			//방명록 주인 회원번호
 			String hostUser = (String) session.getAttribute("hostUser");
@@ -253,14 +249,10 @@ public class GardenController {
 		
 		String hostUser = (String) session.getAttribute("hostUser");
 		
-		System.out.println("hostUser 널 체크 전 " + hostUser);
-		
 		if(hostUser == null) {
 			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
 			session.setAttribute("hostUser", hostUser);
 		}
-		
-		System.out.println("hostUser 널 체크 후 " + hostUser);
 		
 		ArrayList<Neighbor> list = gardenService.getNeighborList(hostUser);
 		
@@ -399,14 +391,10 @@ public class GardenController {
 		
 		String hostUser = (String) session.getAttribute("hostUser");
 		
-		System.out.println("hostUser 널 체크 전 " + hostUser);
-		
 		if(hostUser == null) {
 			hostUser = ((Member) session.getAttribute("loginUser")).getUserId();
 			session.setAttribute("hostUser", hostUser);
 		}
-		
-		System.out.println("hostUser 널 체크 후 " + hostUser);
 		
 		//페이징
 		int listCount = gardenService.selectLogCount(hostUser);
@@ -432,7 +420,6 @@ public class GardenController {
 		model.addAttribute("log", log);
 		
 		String hostUser = (String) session.getAttribute("hostUser");
-		System.out.println("hostUser확인" + hostUser);
 		
 		ArrayList<DailyLog> list = gardenService.selectRecentLog(hostUser);
 		model.addAttribute("list", list);
@@ -501,11 +488,8 @@ public class GardenController {
 		
 		gardenService.updateDailylog(log);
 		
-		System.out.println("logNo확인 " + log.getLogNo());
-		
-		//model.addAttribute("logNo", log.getLogNo());
 		reAttr.addAttribute("logNo", log.getLogNo());
-		//reAttr.addFlashAttribute("logNo", log.getLogNo());
+		
 		reAttr.addFlashAttribute("msg", "데일리로그를 수정했습니다.");
 				
 		return "redirect:logDetail.do";
