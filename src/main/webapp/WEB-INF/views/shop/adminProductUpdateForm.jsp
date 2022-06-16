@@ -2,36 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-<title>ADMIN :: 판매제품 수정</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 부트스트랩 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 
-
-
 <!-- 썸머노트 라이트 버젼 include summernote-ko-KR -->
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 
 
+<title>ADMIN :: 판매제품 수정</title>
 
 <style>
  	#enrollForm>table{
@@ -151,31 +147,21 @@
 							}
 							
 							
-							
 						});
 
-					   </script>
-		                
-		                
-		                
-		                <br>
-		
-		                <div align="center">
-		                    <button type="submit" class="btn btn-outline-success">수정하기</button>
-		                    <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
-		                </div>
+					   </script>		                
+		               <br>
+		               <div align="center">
+		                   <button type="submit" class="btn btn-outline-success">수정하기</button>
+		                   <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
+		               </div>
 		            </form>
 		        </div>
 		        <br><br>
-		    </div>
-			    
-			    
-			    
+		    </div>			
 			</div>
 		</div>
 	
-    
-    
     <jsp:include page="../common/footer.jsp"/>
     
     <!-- ##### All Javascript Files ##### -->

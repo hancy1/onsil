@@ -6,25 +6,40 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 판매제품 관리</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- 부트스트랩아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
 
 <style>
-	#boardList{
-	text-align: center;
+	#productList{
+	text-align: left;
+	width:80%;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	margin-left: 40px;
+	
 	}
-    #boardList>tbody>tr:hover{
+    #productList>tbody>tr:hover{
     cursor:pointer;
     }
 
     #pagingArea{
-    width:fit-content;margin:auto;
-    }
-
+    width:fit-content;
    
+    }
+	
+	#insertBtn{
+	
+	margin-right : 10%;
+	}
+
     #searchForm{
         width:80%;
         margin:auto;
@@ -105,30 +120,22 @@
     
     
 	<!-- 제품테이블 -->
-    <div class="content">
+    <div class="content" align="center">
         <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-        
-         	
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">
             <!--  <a class="btn btn-success" style="float:right" href="enrollFormProduct.do">새제품등록</a>-->
             
             <!-- 제품등록버튼 -->     
-            <nav aria-label="Page navigation" style="float:right">
-			<ul class="pagination">
-				<li class="page-item"><a title="새 제품등록" class="page-link" href="adminEnrollFormProduct.do"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-plus" viewBox="0 0 16 16">
-				  <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-				  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-				  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-				</svg></a></li>						
-			</ul>
+            <nav aria-label="btn navigation" style="float:right" id="insertBtn">			
+			<a title="새 제품등록" class="page-link" href="adminEnrollFormProduct.do"><i class="bi bi-clipboard-plus"></i> 새 제품 추가</a>
 			</nav>
             
-            <br><br><br>
+            <br><br>
          
             <table id="productList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                    <th>제품코드</th>
+                    <th width="150">제품코드</th>
                     <th>구분</th>
                     <th>제품명</th>
                     <th>현재재고</th>
@@ -145,7 +152,7 @@
 	                        <td>${ p.proAmount }</td>
 	                        <td>${ p.proStatus }</td>
 	                        <c:if test="${ !empty p.detailOri }">
-	                        	<td>😊</td>
+	                        	<td>🪴</td>
 	                        </c:if>
 	                        <c:if test="${ empty p.detailOri }">
 	                        	<td>&nbsp;</td>
@@ -208,7 +215,6 @@
            
             <br clear="both"><br>
             
-			
             <br><br>
         </div>
         <br><br>

@@ -30,8 +30,6 @@
 
 </head>
 <body>
-
-
 	<jsp:include page="../common/menubar.jsp"/>
     
     
@@ -43,7 +41,7 @@
 			style="background-image: url(resources/img/bg-img/24.jpg);">
 			<h2>Review Detail</h2>
 		</div>
-
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -72,71 +70,68 @@
 							
 							<tr>
 								<th>No</th>
-								<td colspan="3">${r.reviewNo }</td>
-												
+								<td colspan="3">${r.reviewNo }</td>												
 							</tr>
-							
-							
+														
 							<tr>	
 								<th width="100">작성자</th>
 								<td width="200">${ r.userId }님</td>
 								<th>제품명</th>
 								<td>${ r.proName }</td>	
 							</tr>
-							
-							
+														
 							<tr>	
 								<th width="100">조회수</th>
 								<td width="200">${ r.reviewCount }</td>
 								<th>등록일</th>
 								<td>${ r.reviewDate }</td>	
 							</tr>
-							
-							
+														
 							<tr>
 								<th width="100">별점</th>
-								<td colspan="3">							
 								
+								<td colspan="3">
 								<c:forEach var="star" begin="1" end="${ r.reviewStar }">
 									<c:out value="⭐" />
-								</c:forEach>
-								
-								</td>
-												
+								</c:forEach>								
+								</td>												
 							</tr>
+							
 							<tr>
 								<th width="100">제목</th>
-								<td colspan="3">${ r.reviewTitle }</td>
-												
+								<td colspan="3">${ r.reviewTitle }</td>												
 							</tr>
+							
 							<tr>
 								<th>리뷰 <br>이미지</th>
+								
 								<td colspan="3">
-								<c:if test="${ !empty r.originName }">							
-											
+								<c:if test="${ !empty r.originName }">	
 										<img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${r.changeName}" width="300">	
-								</c:if>
+								</c:if>								
 								<c:if test="${ empty r.originName }">
 			                        	이미지가 없습니다.
-			                    </c:if></td>
+			                    </c:if>
+			                    </td>
 							</tr>
 							
 							<tr>
 								<th width="100">내용</th>
-								<td colspan="3">${ r.reviewContent }</td>
-												
+								<td colspan="3">${ r.reviewContent }</td>												
 							</tr>
+							
 							<tr>
 								<th>이미지 <br>파일</th>
 								<td colspan="3">
 								<c:if test="${ !empty r.originName }">
 										<a href="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${r.changeName}"
-											download="${ r.originName }">${ r.originName }</a>
-																						
+											download="${ r.originName }">${ r.originName }</a>																						
 								</c:if>
+								
 								<c:if test="${ empty r.originName }">
 			                        	이미지가 없습니다.
-			                    </c:if></td>
+			                    </c:if>
+			                    </td>
 							</tr>							
 					
 							<tr>								
@@ -159,7 +154,6 @@
 						
 							 $(document).ready(function () {
 								 
-								 
 									//도움됐어요 카운팅하는 함수
 									 function likeCount() {
 											
@@ -167,8 +161,7 @@
 												url: "likeCount.do",
 								                type: "POST",
 								                data: {
-								                	'reviewNo':${r.reviewNo },
-									        		
+								                	'reviewNo':${r.reviewNo },									        		
 								                },
 								                success: function (count) {
 								                	$(".likeCountArea").html(count);
@@ -220,10 +213,7 @@
 							
 								
 							    });
-							 
-							
-							 
-
+						
 						</script>
 		
 						
@@ -241,18 +231,15 @@
 						
 						<script>
 							function postFormSubmit(num){
-								var postForm = $("#postForm");
-								
+								var postForm = $("#postForm");								
 								//"updateFormReview.do?reviewNo="+reviewNo;
-								
-								
+																
 								if(num == 1){
 									postForm.attr("action", "updateFormReview.do");
 								}
 								postForm.submit();
 							}
-						</script>
-						
+						</script>						
 					</div>
 					<br>
 					<br>
@@ -260,8 +247,7 @@
 			</div>
 		</div>
 	</div>
-    
-    
+        
     <jsp:include page="../common/footer.jsp"/>
     
     <!-- ##### All Javascript Files ##### -->

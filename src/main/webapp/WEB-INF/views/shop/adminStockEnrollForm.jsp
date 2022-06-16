@@ -17,7 +17,7 @@
 
 <style>
  	#enrollForm>table{
- 	width:100%;
+ 	width:50%;
  	}
     #enrollForm>table *{
      margin:10px;
@@ -91,7 +91,7 @@
     
     
 
-	<div class="container">
+	<div class="container" align="center">
 		 	<div class="input-form-backgroud row">
 		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 		

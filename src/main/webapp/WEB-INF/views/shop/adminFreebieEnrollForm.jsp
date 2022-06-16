@@ -7,22 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 사은품 등록</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
 <style>
  	#enrollForm>table{
- 	width:100%;
+ 	width:50%;
  	}
     #enrollForm>table *{
      margin:10px;
      }
 </style>
-
-
 
 
 </head>
@@ -59,7 +58,7 @@
     
     
 
-	<div class="container">
+	<div class="container" align="center">
 		 	<div class="input-form-backgroud row">
 		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 		

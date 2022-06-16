@@ -37,20 +37,15 @@ public class AdminShopController {
 	//제품리스트
 	@RequestMapping("adminProducts.do")
 	public String selectProductList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
-		
-		
+				
 		int listCount = aShopService.selectListCount();
-		
-		
-		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);
-		
+				
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);		
 		ArrayList<Product> list = aShopService.selectList(pi);
 		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		
-		
 		
 		
 		return "shop/adminProduct";
@@ -87,7 +82,7 @@ public class AdminShopController {
 		
 		
 		aShopService.insertProduct(p);
-		System.out.println("등록될 제품 정보 :" + p);
+		//System.out.println("등록될 제품 정보 :" + p);
 		
 		return "redirect:adminProducts.do";
 	}
@@ -242,8 +237,6 @@ public class AdminShopController {
 			
 			model.addAttribute("list", list);
 			model.addAttribute("pi", pi);
-			
-			
 			
 			
 			return "shop/adminFreebieList";
