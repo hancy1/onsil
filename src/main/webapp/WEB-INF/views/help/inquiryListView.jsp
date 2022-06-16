@@ -211,20 +211,7 @@
 	
 	<script>
     	$(function(){
-    		$("#InquiryList tbody tr").click(function(){    		
-    			
-    			/*if($(this).children().eq(7).text() == 'Y') {
-    				location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
-    			}else{    				  			
-    				if("${loginUser.userId}" == $(this).children().eq(5).text()) {
-    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
-    				}else if("${loginUser.userId}" == 'admin'){
-    					location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
-    				}else{
-    					alert("이 게시글은 작성자와 관리자만 볼 수 있습니다.");
-    				}
-    			};*/
-    			    			
+    		$("#InquiryList tbody tr").click(function(){        			    			
     			
     			if($(this).children().eq(7).find("input").val() == 'Y') {
     				location.href="detailInquiry.do?ino=" + $(this).children().eq(0).text();
@@ -244,6 +231,7 @@
 
 	<!--Start of Tawk.to Script-->
 	<script type="text/javascript">
+	
 	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 	(function(){
 	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];

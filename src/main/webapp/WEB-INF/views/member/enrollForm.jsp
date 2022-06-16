@@ -9,12 +9,12 @@
 	<!-- Favicon -->
 	<link rel="icon" href="resources/img/core-img/icon.png">
 	
-   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
 	<!-- 다음 지도api -->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   
   <style>
     body {
@@ -77,7 +77,8 @@
               </div>              
             </div>
              <div class="col-md-6 mb-3" style="padding-top: 30px;">
-              <button type="button" onclick="idCheck();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">
+              <button type="button" onclick="idCheck();" style="height: 35px; width: 80px; border-radius: 5px; 
+              		background: #3ac240; border-color: #3ac240; color: white">
               	중복확인
               </button>
             </div>
@@ -145,7 +146,8 @@
             </div>
           </div>
           <div class="col-md-2 mb-3" style="padding-top: 30px; ">
-          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
+          	<button type="button" id="searchAdd" onclick="add();" style="height: 35px; width: 80px; border-radius: 5px; 
+       				background: #3ac240; border-color: #3ac240; color: white">주소검색</button>
           </div>
 		 </div>
 
@@ -237,20 +239,20 @@
 	<script src="resources/js/active.js"></script>
 	
   <script>
-//모든 항복 기입 확인
-  window.addEventListener('load', () => { 
-		const forms = document.getElementsByClassName('validation-form'); 
-		Array.prototype.filter.call(forms, (form) => { 
-			form.addEventListener('submit', function (event) { 
-				if (form.checkValidity() === false) { 
-					event.preventDefault(); 
-					event.stopPropagation(); 
-					} 
-				form.classList.add('was-validated'); }
-			, false); 
-			}); 
-		}, 
-		false);
+	//모든 항복 기입 확인
+	  window.addEventListener('load', () => { 
+			const forms = document.getElementsByClassName('validation-form'); 
+			Array.prototype.filter.call(forms, (form) => { 
+				form.addEventListener('submit', function (event) { 
+					if (form.checkValidity() === false) { 
+						event.preventDefault(); 
+						event.stopPropagation(); 
+						} 
+					form.classList.add('was-validated'); }
+				, false); 
+				}); 
+			}, 
+			false);
        
     
     // 아이디 유효성 검사 & 중복확인 
@@ -360,7 +362,9 @@
     // 전화번호 입력 자동 하이픈 & 유효성 검사
     $("#tel, #phone").on("keyup", function() { 
 
-		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+		$(this).val( $(this).val().replace(/[^0-9]/g, "")
+				.replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3")
+				.replace("--", "-") ); 
 		
 	});    
     
@@ -382,8 +386,9 @@
     
       
  	// 주소 API 
-    function add(){    	
-    	new daum.Postcode({
+    function add(){    	    	
+    	new daum.Postcode({    		
+    		
             oncomplete: function(data) {
             	document.getElementById("address").value = data.address; 
                 document.getElementById("address2").focus();                

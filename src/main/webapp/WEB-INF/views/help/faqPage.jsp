@@ -239,8 +239,8 @@
   <script>  
   	
 	  $(".que").click(function() {
-		   $(this).next(".anw").stop().slideToggle(300);
-		  $(this).toggleClass('on').siblings().removeClass('on');
+		   $(this).next(".anw").stop().slideToggle(300); // slideToggle() : 보이지 않는 요소는 아래로 서서히 나타나게, 보이는 요소는 위쪽으로 사라지도록 한다.
+		  $(this).toggleClass('on').siblings().removeClass('on'); // toggleClass() : 해당 요소가 있으면 제거, 없으면 부여 | siblings() : 선택요소 제외한 형제 요소를 모두 찾는다.
 		  $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
 	  
