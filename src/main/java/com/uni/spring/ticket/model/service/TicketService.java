@@ -29,4 +29,6 @@ public interface TicketService {
 
 	ArrayList<Ticket> selectFairList(PageInfo pi);
 
+	Ticket selectFair(int ticketNo);
+
 }

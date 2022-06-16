@@ -39,7 +39,7 @@
 
 
 <!-- Title -->
-<title>온실 - 전시회</title>
+<title>온실 - 박람회</title>
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp" />
@@ -50,7 +50,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/24.jpg);">
-			<h2 class="display-3">전시회</h2>
+			<h2>박람회</h2>
 		</div>
 
 		<div class="container">
@@ -61,15 +61,14 @@
 							<li class="breadcrumb-item"><a
 								href="${ pageContext.servletContext.contextPath }"><i
 									class="fa fa-home"></i> Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">전시회</li>
+							<li class="breadcrumb-item active" aria-current="page">박람회</li>
 						</ol>
 					</nav>
 				</div>
 			</div>
 		</div>
 	</div>
-	 
-        <div class="container">
+		   <div class="container">
             <div class="row">
                 <div class="col-lg-3">
 <a class="product-img" href="resources/T_upload_files/${t.changeName}" title="Exhibition Image">
@@ -101,7 +100,6 @@
 		</div>
 	</div>
 
-	
 
 <!-- ##### Shop Area End ##### -->
 	

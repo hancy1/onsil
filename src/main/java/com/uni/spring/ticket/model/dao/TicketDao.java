@@ -74,4 +74,10 @@ public class TicketDao {
 		return (ArrayList)sqlSession.selectList("ticketMapper.selectFairList", null,rowBounds);
 	}
 
+	public Ticket selectFair(SqlSessionTemplate sqlSession, int ticketNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.selectFair",ticketNo);
+
+	}
+
 }

@@ -268,6 +268,17 @@ public class TicketController {
 					return "Ticket/FairMain";
 				}
 				
-			
+				//티켓 디테일페이지 연결
+				@RequestMapping("detailFair.do")
+				public ModelAndView selectFair(int ticketNo,ModelAndView mv) {
+					
+					
+					Ticket t = ticketService.selectFair(ticketNo);
+					
+					mv.addObject("t",t).setViewName("Ticket/FairDetail");
+					
+					return mv;
+					
+				}	
 		
 }

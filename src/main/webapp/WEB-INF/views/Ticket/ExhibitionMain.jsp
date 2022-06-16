@@ -198,34 +198,29 @@
 					</div>
 				</div>
 
-				<!-- exhibition Area -->
-				<div class="col-12 col-md-4 col-lg-3">
-					<div class="shop-exhibition-area">
+				
+			<!-- All Products Area -->
+				<div class="col-12 col-md-8 col-lg-9">
+					<div class="shop-products-area">
 						<div class="row">
 							
 							
-						     <c:forEach items="${ list }" var="t">
-                     <!-- Single exhibition Area -->
-                   <div class="col-12 col-sm-6 col-lg-4">
-                        <div class="single-exhibition-area mb-50">
-                           <!-- exhibition Image -->
-                           <div class="exhibition-img">   
-                              <img class="card-img-top" onClick="detailPage('${ t.ticketNo }');" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" >
-                                                            
-                           </div>
-                           <!-- Info -->
-                           <div class="card-body">
-                              <a class="btn btn-primary" onClick="detailPage('${ t.ticketNo }');">
-                                 <h6>${ t.ticketTitle }</h6>
-                              </a>
-            </div>
-          </div>
-
- 
-                              
-							
-								
-									        <!-- 예약하기 추가 form -->
+							<c:forEach items="${ list }" var="t">
+							<!-- Single Product Area -->
+							<div class="col-12 col-sm-6 col-lg-4">
+								<div class="single-product-area mb-50">
+									<!-- Product Image -->
+									<div class="product-img">	
+										<img onClick="detailPage('${ t.ticketNo }');" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" >
+																				
+									</div>
+									<!-- Product Info -->
+									<div class="product-info mt-15 text-center">
+										<a onClick="detailPage('${ t.ticketNo }');">
+											<h6>${ t.ticketTitle }</h6>
+										</a>
+										
+									       
 											<form action="" id="postForm" method="post" class="reservation_form">
 												<input id="ticketNo" type="hidden" name="ticketNo" value="${t.ticketNo}">								
 												<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
@@ -236,47 +231,13 @@
 									</div>
 								</div>
 							</div>
-							      
+							
 	
 
 							</c:forEach>
-							  <div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-           
 							
 							
-						<!-- 예약 추가, 디테일 폼 -->	
+						
 						<script>
 								
 							function postFormSubmit(num){
@@ -292,22 +253,72 @@
 							
 							function detailPage(ticketNo){
 								
-								console.log(ticketNo);
+								
 								location.href="detailExhibition.do?ticketNo=" + ticketNo;
 								
 							};
 							
 							
 							
-						</script>
-							
-	
+						</script>						
 					</div>
 				</div>
 			</div>
+			
+									
+			<!-- Pagination -->
+			<nav aria-label="Page navigation">
+				<div id="pagingArea" class="row">
+	                <ul class="pagination">
+	                	<c:choose>
+	                		<c:when test="${ pi.currentPage ne 1 }">
+	                			<li class="page-item"><a class="page-link" href="exhibition.do?currentPage=${ pi.currentPage-1 }">
+	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+	  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+								</svg></a>
+								</li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">
+	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+	  							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+								</svg></a>
+								</li>
+	                		</c:otherwise>
+	                	</c:choose>
+	                	
+	                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+	                    	<c:choose>
+		                		<c:when test="${ pi.currentPage ne p }">
+	                    			<li class="page-item"><a class="page-link" href="exhibition.do?currentPage=${ p }">${ p }</a></li>
+		                		</c:when>
+		                		<c:otherwise>
+		                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+		                		</c:otherwise>
+		                	</c:choose>
+	                    </c:forEach>
+	                    
+	                    
+	                    <c:choose>
+	                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+	                			<li class="page-item"><a class="page-link" href="exhibition.do?currentPage=${ pi.currentPage+1 }">
+	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+	  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+								</svg></a>
+								</li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="exhibition.do?currentPage=${ pi.currentPage+1 }">
+	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+	  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+								</svg></a>
+								</li>
+	                		</c:otherwise>
+	                	</c:choose>
+	                </ul>
+	            </div>
+			</nav>
 		</div>
-		
-		
 	</section>
 	<!-- ##### Shop Area End ##### -->
 	
