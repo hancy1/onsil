@@ -25,7 +25,25 @@
 
 <!-- Title -->
 <title>온실 - 전시회</title>
+<style>
+.product-title {
+    text-align:center;
+    display:table;
+    border:1px solid #cecece;
+    width:280px;
+    height:250px;
+}
 
+.product-img-div {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.exhibition-img {
+   width:180px;
+   height:180px;
+}
+</style>
 
 </head>
 <body>
@@ -38,7 +56,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/24.jpg);">
-			<h2>전시회</h2>
+			<h2>박람회</h2>
 		</div>
 
 		<div class="container">
@@ -180,7 +198,8 @@
 					</div>
 				</div>
 
-				<!-- All Products Area -->
+				
+			<!-- All Products Area -->
 				<div class="col-12 col-md-8 col-lg-9">
 					<div class="shop-products-area">
 						<div class="row">
@@ -201,12 +220,13 @@
 											<h6>${ t.ticketTitle }</h6>
 										</a>
 										
-										
+									       
 											<form action="" id="postForm" method="post" class="reservation_form">
 												<input id="ticketNo" type="hidden" name="ticketNo" value="${t.ticketNo}">								
 												<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 												<input type="hidden" name="amount" value="1">
 											</form>	
+										
 										
 									</div>
 								</div>
@@ -233,7 +253,7 @@
 							
 							function detailPage(ticketNo){
 								
-							
+								
 								location.href="detailFair.do?ticketNo=" + ticketNo;
 								
 							};
@@ -281,14 +301,14 @@
 	                    
 	                    <c:choose>
 	                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-	                			<li class="page-item"><a class="page-link" href="listProducts.do?currentPage=${ pi.currentPage+1 }">
+	                			<li class="page-item"><a class="page-link" href="exhibition.do?currentPage=${ pi.currentPage+1 }">
 	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 	  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
 								</svg></a>
 								</li>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="listProducts.do?currentPage=${ pi.currentPage+1 }">
+	                			<li class="page-item disabled"><a class="page-link" href="exhibition.do?currentPage=${ pi.currentPage+1 }">
 	                			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 	  							<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
 								</svg></a>
