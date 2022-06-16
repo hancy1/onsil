@@ -57,4 +57,9 @@ public class TicketDao {
 		return (ArrayList)sqlSession.selectList("ticketMapper.selectExhibitionList", null,rowBounds);
 	}
 
+	public Ticket selectExhibition(SqlSessionTemplate sqlSession, int ticketNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.selectExhibition",ticketNo);
+	}
+
 }

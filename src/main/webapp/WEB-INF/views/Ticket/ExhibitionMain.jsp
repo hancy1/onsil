@@ -40,8 +40,8 @@
 }
 
 .exhibition-img {
-    max-width:180px;
-    max-height:180px;
+   width:180px;
+   height:180px;
 }
 </style>
 
@@ -199,26 +199,32 @@
 				</div>
 
 				<!-- exhibition Area -->
-				<div class="col-12 col-md-8 col-lg-9">
+				<div class="col-12 col-md-4 col-lg-3">
 					<div class="shop-exhibition-area">
 						<div class="row">
 							
 							
-							<c:forEach items="${ list }" var="t">
-							<!-- Single exhibition Area -->
-							<div class="col-md-4">
-								<div class="single-exhibition-area mb-50">
-									<!-- exhibition Image -->
-									<div class="exhibition-img">	
-										<img onClick="detailPage('${ t.ticketNo }');" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" >
-																				
-									</div>
-									<!-- Product Info -->
-									<div class="exhibition-info mt-15 text-center">
-										<a onClick="detailPage('${ t.ticketNo }');">
-											<h6>${ t.ticketTitle }</h6>
-										</a>
-										
+						     <c:forEach items="${ list }" var="t">
+                     <!-- Single exhibition Area -->
+                   <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-exhibition-area mb-50">
+                           <!-- exhibition Image -->
+                           <div class="exhibition-img">   
+                              <img class="card-img-top" onClick="detailPage('${ t.ticketNo }');" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" >
+                                                            
+                           </div>
+                           <!-- Info -->
+                           <div class="card-body">
+                              <a class="btn btn-primary" onClick="detailPage('${ t.ticketNo }');">
+                                 <h6>${ t.ticketTitle }</h6>
+                              </a>
+            </div>
+          </div>
+
+ 
+                              
+							
+								
 									        <!-- 예약하기 추가 form -->
 											<form action="" id="postForm" method="post" class="reservation_form">
 												<input id="ticketNo" type="hidden" name="ticketNo" value="${t.ticketNo}">								
@@ -230,10 +236,44 @@
 									</div>
 								</div>
 							</div>
-							
+							      
 	
 
 							</c:forEach>
+							  <div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="listTicket.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
+           
 							
 							
 						<!-- 예약 추가, 디테일 폼 -->	

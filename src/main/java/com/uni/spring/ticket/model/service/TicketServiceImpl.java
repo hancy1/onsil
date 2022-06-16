@@ -80,4 +80,10 @@ public class TicketServiceImpl implements TicketService{
 		return ticketDao.selectExhibitionList(sqlSession,pi);
 	}
 
+	@Override
+	public Ticket selectExhibition(int ticketNo) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectExhibition(sqlSession,ticketNo);
+	}
+
 }

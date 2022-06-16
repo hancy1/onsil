@@ -23,4 +23,6 @@ public interface TicketService {
 
 	ArrayList<Ticket> selectExhibitionList(PageInfo pi);
 
+	Ticket selectExhibition(int ticketNo);
+
 }

@@ -104,7 +104,7 @@
                 </table>
                 <br>
                
-               <c:if test="${ loginUser.userId eq t.userNo }">
+              
 	            <div align="center">
 	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
 	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
@@ -127,7 +127,7 @@
 						postForm.submit();
 					}
 				</script>
-            </c:if>
+           
             <br><br>
                
             </form>
