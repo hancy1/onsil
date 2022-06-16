@@ -196,11 +196,13 @@
 	});
  	
  	$("#boardList>tbody>tr>td>.btn.view").click(function(){
- 		window.open("http://localhost:8099/spring/adminInquiryPreview.do?ino="+$(this).parentsUntil().parentsUntil().children().eq(0).text(), "", "_blank");
+ 		window.open("http://localhost:8099/spring/adminInquiryPreview.do?ino="+$(this).parentsUntil()
+ 				.parentsUntil().children().eq(0).text(), "", "_blank");
  	});
  	
  	$("#boardList>tbody>tr>td>.btn.btn-danger").click(function(){
- 		window.open("http://localhost:8099/spring/adminInquiryAnswer.do?ino="+$(this).parentsUntil().parentsUntil().children().eq(0).text(), "", "_blank");
+ 		window.open("http://localhost:8099/spring/adminInquiryAnswer.do?ino="+$(this).parentsUntil()
+ 				.parentsUntil().children().eq(0).text(), "", "_blank");
  	});
     </script>
 

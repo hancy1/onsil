@@ -50,7 +50,7 @@
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/admin1.jpg);">
+			style="background-image: url(resources/img/bg-img/rainbow.jpg);">
 			<h2>탈퇴</h2>
 		</div>
  
@@ -135,11 +135,7 @@
   	    			console.log("비밀번호 체크 ajax 통신 실패")
   	    		}
   	    	});  		
-  	}
-  
-  
-	
-    
+  	}    
   </script>
   
 </body>

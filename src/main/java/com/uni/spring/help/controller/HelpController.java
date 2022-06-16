@@ -121,7 +121,8 @@ public class HelpController {
 	
 	// 문의사항 페이지 이동 - 카테고리 별
 	@RequestMapping("inquiryCategory.do")
-	public String inquiryCategory(int code, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+	public String inquiryCategory(int code, @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, 
+									Model model) {
 		
 		int listCount = helpService.selectInquiryListCount(code);
 		System.out.println(listCount);

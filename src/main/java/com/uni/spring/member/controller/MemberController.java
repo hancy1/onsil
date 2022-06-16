@@ -19,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.garden.model.dto.PlantInfo;
 import com.uni.spring.help.HelpPagination;
-import com.uni.spring.help.model.dto.Faq;
-import com.uni.spring.help.model.dto.Notice;
 import com.uni.spring.help.model.dto.PageInfo;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.member.model.service.MemberService;
@@ -130,7 +128,7 @@ public class MemberController {
 			
 				System.out.println("ID : " + m.getUserId());
 				System.out.println("PWD : " + m.getUserPwd());
-				String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd()); // 원래 비밀번호를 암호화 하여 encPwd 에 담는다.
+				String encPwd = bCryptPasswordEncoder.encode(m.getUserPwd()); // 입력받은 비밀번호를 암호화 하여 encPwd 에 담는다.
 				System.out.println("암호화 후 : " + encPwd);
 				
 				loginUser = memberService.loginMember(bCryptPasswordEncoder, m);
