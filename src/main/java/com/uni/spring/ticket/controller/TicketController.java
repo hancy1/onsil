@@ -207,9 +207,11 @@ public class TicketController {
 	}
 	
 	
+	
+	
 	// 전시회 페이지연결 
 		@RequestMapping("exhibition.do")
-		public String selectShopList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		public String selectExhibitionList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 			
 			
 			
@@ -242,6 +244,30 @@ public class TicketController {
 			return mv;
 			
 		}
+		
+		//박람회 페이지연결 
+				@RequestMapping("fair.do")
+				public String selectFairList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+					
+					
+					
+					int listCount = ticketService.selectFairListCount();
+					
+					
+					PageInfo pi = ticketPagination.getPageInfo(listCount, currentPage, 10, 5);
+					
+					ArrayList<Ticket> list = ticketService.selectFairList(pi);
+					
+					
+					model.addAttribute("list", list);
+					model.addAttribute("pi", pi);
+					
+					
+					
+					
+					return "Ticket/FairMain";
+				}
+				
 			
 		
 }

@@ -113,5 +113,25 @@ T_CHANGE_NAME-->
  
   </select>
   
-  
+  <!--등록된 전시회 수 -->
+	<select id = "selectFairListCount" resultType="_int">
+
+	 SELECT COUNT(*)
+  	FROM TICKET
+  	WHERE TICKET_STATUS='Y'
+  	AND DIVISION='FAIR'
+    
+  	</select>
+
+	<!--등록된 전시회 수를 select해오기  -->
+	<select id="selectFairList" parameterType="TICKET" resultMap="ticketResultSet">	
+		 
+	  SELECT *
+	  FROM TICKET
+	  WHERE TICKET_STATUS='Y'
+  	  AND DIVISION='FAIR'
+    
+	    
+	</select>
+	
 </mapper>
