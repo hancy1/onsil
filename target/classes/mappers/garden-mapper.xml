@@ -185,7 +185,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		SELECT COUNT(*)
 		FROM NEIGHBOR
-		WHERE USER_NO = #{userNo} AND N_USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{nUserId})
+		WHERE USER_NO = #{userNo} AND 
+		N_USER_NO = (SELECT USER_NO FROM MEMBER WHERE USER_ID = #{nUserId})
 		
 	
 	</select>
