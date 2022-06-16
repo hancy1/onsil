@@ -618,8 +618,7 @@ public class ShopController {
 	public ArrayList<Product> selectBestSeller() {
 
 		ArrayList<Product> list = shopService.selectBestSeller();
-		System.out.println(list);
-		
+				
 		return list;
 	}
 	

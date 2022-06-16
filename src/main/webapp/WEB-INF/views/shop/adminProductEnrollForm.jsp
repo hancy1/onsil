@@ -6,13 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>ADMIN :: 판매제품 등록</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 부트스트랩 -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 
@@ -24,20 +29,15 @@
 
 <style>
  	#enrollForm>table{
- 	width:100%;
+ 	width:60%;
  	}
     #enrollForm>table *{
-     margin:10px;
+     /*margin:10px;*/
      }
      
-    #pagingArea{
-     width:fit-content;margin:auto;
-    
-    }
-   
    
     #searchForm{
-        width:80%;
+        width:100%;
         margin:auto;
     }
     
@@ -49,7 +49,7 @@
     width:20%;
     }    
     .text{
-    width:53%;
+    width:100%;
     }
     .searchBtn{
     Width:20%;
@@ -78,15 +78,10 @@
       text-decoration: none;
     }     
 </style>
-
-
-
-
 </head>
 <body>
     
-    <jsp:include page="../common/menubar.jsp"/>
-    
+    <jsp:include page="../common/menubar.jsp"/>    
     
     <!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
@@ -115,7 +110,7 @@
     
     
 
-	<div class="container">
+	<div class="container" align="center">
 		 	<div class="input-form-backgroud row">
 		 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 					<div class="content">
@@ -129,6 +124,7 @@
 				                        <th><label for="proCode">판매상품코드</label></th>
 				                        <td><input type="text" id="proCode" class="form-control" name="proCode" required></td>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <th><label for="cateCode">카테고리</label></th>
 				                        <td>
@@ -141,21 +137,26 @@
 										</select>
 										</td>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <th><label for="proName">판매상품명</label></th>
 				                        <td><input type="text" id="proName" class="form-control"  name="proName" required></td>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <th><label for="price">가격</label></th>
 				                        <td><input type="text" id="price" class="form-control" name="price" required></td>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <th><label for="upfile">대표이미지</label></th>
 				                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <th colspan="2"><label for="content">상세페이지</label></th>
 				                    </tr>
+				                    
 				                    <tr>
 				                        <td colspan="2"><textarea class="summernote" id="summernote" name="proContent"></textarea></td>
 				                    </tr>
@@ -165,21 +166,18 @@
 								
 								<script>
 								$('.summernote').summernote({
-								  	placeholder: 'content',
+								  	placeholder: '내용을 입력하세요.',
 							        minHeight: 370,
 							        maxHeight: 150,
 							        focus: true, 
 							        lang : 'ko-KR'
 									});
 								</script>
-								
-								
-					
-								
+																
 				                <div align="center">
-				                    <button type="submit" class="btn btn-outline-success">등록하기</button>
-				                   
+				                    <button type="submit" class="btn btn-outline-success">등록하기</button>				                   
 				                </div>
+				                
 				            </form>			            
 				            
 				        </div>
@@ -188,8 +186,6 @@
 			  </div>
 			</div>
 		</div>
-
-		
 
     <jsp:include page="../common/footer.jsp"/>
     

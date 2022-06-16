@@ -19,7 +19,7 @@
 <style>
 
 	#salesList{
-	text-align: center;
+	text-align: left;
 	}
     #salesList>tbody>tr:hover{
     cursor:pointer;
@@ -104,13 +104,13 @@
    <!-- 월별 조회하는 버튼들.. -->
     
 	<!-- 매출관리 테이블 -->
-    <div class="content">
-        <div class="innerOuter" style="padding:5% 10%;">    	
+    <div class="content" align="center">
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">    	
             <table id="salesList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                  	<th width=50>주문번호</th><!-- 누르면 오더디테일로 이동하게? 구현 -->
-                  	<th>제품명</th>
+                  	<th width=100>주문No</th><!-- 누르면 오더디테일로 이동하게? 구현 -->
+                  	<th width=350>제품명</th>
                     <th>수량</th>
                     <th>날짜</th>
                     <th>금액</th>

@@ -6,17 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>ADMIN :: 리뷰 관리</title>
+
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <style>
-	#boardList{
-	text-align: center;
+	#reviewList{
+	text-align: left;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	margin-left: 40px;
 	}
-    #boardList>tbody>tr:hover{
+	
+    #reviewList>tbody>tr:hover{
     cursor:pointer;
     }
 
@@ -107,7 +113,7 @@
 	<!-- 리뷰 테이블 -->
     <div class="content">
         <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">
     
             <table id="reviewList" class="table table-hover" align="center">
                 <thead>

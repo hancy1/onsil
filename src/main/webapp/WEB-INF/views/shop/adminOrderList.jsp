@@ -20,7 +20,8 @@
 <style>
 
 	#adminOrderList{
-	text-align: center;
+	text-align: left;
+	
 	}
     #adminOrderList>tbody>tr:hover{
     cursor:pointer;
@@ -120,7 +121,7 @@
 	<!-- 본문 -->
 	<div class="content">
         <br><br>
-        <div class="innerOuter" style="padding:0% 10%;">           
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">           
          	<div id=cateArea>
 	         	<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='adminOrderList.do'">전체</button>
 	         	<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='adminOrderListRequest.do'">취소요청</button>
