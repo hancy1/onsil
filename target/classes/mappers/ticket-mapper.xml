@@ -102,5 +102,16 @@ T_CHANGE_NAME-->
     
 	    
 	</select>
+	
+	
+	  <!-- 티켓 디테일페이지 조회 -->
+      <select id="selectExhibition" parameterType = "_int" resultMap = "ticketResultSet">
+ 
+     SELECT *
+     FROM TICKET
+     WHERE TICKET_NO=#{ticketNo} AND TICKET_STATUS='Y'
+ 
+  </select>
+  
   
 </mapper>

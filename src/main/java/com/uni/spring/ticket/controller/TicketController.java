@@ -229,4 +229,19 @@ public class TicketController {
 			
 			return "Ticket/ExhibitionMain";
 		}
+		
+		//티켓 디테일페이지 연결
+		@RequestMapping("detailExhibition.do")
+		public ModelAndView selectExhibition(int ticketNo,ModelAndView mv) {
+			
+			
+			Ticket t = ticketService.selectExhibition(ticketNo);
+			
+			mv.addObject("t",t).setViewName("Ticket/ExhibitionDetail");
+			
+			return mv;
+			
+		}
+			
+		
 }
