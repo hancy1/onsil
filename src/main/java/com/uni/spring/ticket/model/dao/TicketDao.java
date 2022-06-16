@@ -62,4 +62,16 @@ public class TicketDao {
 		return sqlSession.selectOne("ticketMapper.selectExhibition",ticketNo);
 	}
 
+	public int selectFairListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.selectFairListCount");
+	}
+
+	public ArrayList<Ticket> selectFairList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ticketMapper.selectFairList", null,rowBounds);
+	}
+
 }

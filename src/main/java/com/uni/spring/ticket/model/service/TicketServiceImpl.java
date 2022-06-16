@@ -86,4 +86,16 @@ public class TicketServiceImpl implements TicketService{
 		return ticketDao.selectExhibition(sqlSession,ticketNo);
 	}
 
+	@Override
+	public int selectFairListCount() {
+		// TODO Auto-generated method stub
+		return ticketDao.selectFairListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Ticket> selectFairList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectFairList(sqlSession,pi);
+	}
+
 }
