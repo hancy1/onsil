@@ -214,15 +214,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
   	
-  	
-	<!--등록된 product 수 (판매중인것) - 올 -->
-	<select id = "productListCount" resultType="_int">
-
-	SELECT COUNT(*)
-  	FROM PRODUCT
-  	WHERE PRO_STATUS='Y'
-    
-  	</select>
 
 	<!--판매중인 제품 select해오기 - 올 -->
 	<select id="selectShopList" parameterType="Product" resultMap="productResultSet">	
@@ -235,11 +226,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--등록된 product 수 (판매중인것) - 트리 -->
 	<select id = "productTreeListCount" resultType="_int">
-
-	SELECT COUNT(*)
-  	FROM PRODUCT
-  	WHERE PRO_STATUS='Y'
-  	AND CATE_CODE='tree'
+	
+		SELECT COUNT(*)
+	  	FROM PRODUCT
+	  	WHERE PRO_STATUS='Y'
+	  	AND CATE_CODE='tree'
     
   	</select>
 
@@ -256,10 +247,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--등록된 product 수 (판매중인것) 식용 -->
 	<select id = "productEdibleListCount" resultType="_int">
 
-	SELECT COUNT(*)
-  	FROM PRODUCT
-  	WHERE PRO_STATUS='Y'
-    AND CATE_CODE='edible'
+		SELECT COUNT(*)
+	  	FROM PRODUCT
+	  	WHERE PRO_STATUS='Y'
+	    AND CATE_CODE='edible'
     
   	</select>
 
@@ -276,10 +267,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--등록된 product 수 (판매중인것) 꽃 -->
 	<select id = "productFlowerListCount" resultType="_int">
 
-	SELECT COUNT(*)
-  	FROM PRODUCT
-  	WHERE PRO_STATUS='Y'
-    AND CATE_CODE='flower'
+		SELECT COUNT(*)
+	  	FROM PRODUCT
+	  	WHERE PRO_STATUS='Y'
+	    AND CATE_CODE='flower'
   	</select>
 
 	<!--판매중인 제품 select해오기 꽃 -->
@@ -295,11 +286,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--등록된 product 수 (판매중인것) 기타 -->
 	<select id = "productEctListCount" resultType="_int">
 
-	SELECT COUNT(*)
-  	FROM PRODUCT
-  	WHERE PRO_STATUS='Y'
-    AND CATE_CODE='ect'
-    
+		SELECT COUNT(*)
+	  	FROM PRODUCT
+	  	WHERE PRO_STATUS='Y'
+	    AND CATE_CODE='ect'
+	    
   	</select>
 
 	<!--판매중인 제품 select해오기 기타 -->
@@ -509,16 +500,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectBestSeller" resultMap="productResultSet">
 	
-	<![CDATA[
-	SELECT PRO_CODE, PRO_NAME, PRICE, DETAIL_CHA
-	FROM PRODUCT
-	WHERE PRO_CODE IN (SELECT A.PRO_CODE
-	                    FROM (SELECT PRO_CODE, COUNT(PRO_CODE) COUNT
-	                            FROM PRO_ORDER
-	                            GROUP BY PRO_CODE
-	                            ORDER BY COUNT DESC) A
-	                    WHERE ROWNUM <= 2)
-	]]>
+		<![CDATA[
+		SELECT PRO_CODE, PRO_NAME, PRICE, DETAIL_CHA
+		FROM PRODUCT
+		WHERE PRO_CODE IN (SELECT A.PRO_CODE
+		                    FROM (SELECT PRO_CODE, COUNT(PRO_CODE) COUNT
+		                            FROM PRO_ORDER
+		                            GROUP BY PRO_CODE
+		                            ORDER BY COUNT DESC) A
+		                    WHERE ROWNUM <= 2)
+		]]>
 	
 	</select>
 	
@@ -574,11 +565,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<!-- 도움됐어요 갯수 카운팅 --> 	
 	<select id ="likeCount" resultType="_int">
 
-	SELECT COUNT(*)
-  	FROM REVIEW_LIKE
-  	WHERE REVIEW_NO=#{reviewNo}
+		SELECT COUNT(*)
+	  	FROM REVIEW_LIKE
+	  	WHERE REVIEW_NO=#{reviewNo}
    
     
   	</select>
+  	
+  	
+  	<!-- 검색하는 sql:서치키워드 있을때 LIKE해서 같은거 찾아오기 -->
+  	<sql id="productNameWhere" >				
+				
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<![CDATA[			
+			AND PRO_NAME LIKE '%'||#{searchKeyword}||'%'			
+			]]>	
+		</if>
+		
+	</sql>
+	
+	<!-- List불러오기 -->
+	<select id="getSearchList" parameterType="Product" resultMap="productResultSet" >
+		
+		<![CDATA[			
+			SELECT *
+			FROM PRODUCT		
+			WHERE 1=1
+		]]>
+		<include refid="productNameWhere"/>		
+		
+	</select>
+	
+	  	
+	<!--등록된 product 수 (판매중인것) - 모든 제품인데 서치키워드 있을때만 조건 주기! -->
+	<select id = "productListCount" resultType="_int">
+
+		SELECT COUNT(*)
+	  	FROM PRODUCT
+	  	WHERE 1=1
+	  	AND PRO_STATUS='Y'	  	 
+		<include refid="productNameWhere"/>
+    	
+    	
+  	</select>
+	
  	
 </mapper>

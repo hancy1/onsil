@@ -39,21 +39,24 @@ public class Product {
 		
 	*/
 	
-	private String proCode; //제품코드
-	private String cateCode; //카테코드
-	private String proName; //제품네임
-	private int price; //가격
-	private String detailOri; //제품사진원본명
-	private String detailCha; //제품사진수정명
-	private int proAmount; //재고
-	private String proStatus; //판매상태
-	private String proContent; //세부정보
+	private String proCode; 			//제품코드
+	private String cateCode; 			//카테코드
+	private String proName; 			//제품네임
+	private int price; 					//가격
+	private String detailOri; 			//제품사진원본명
+	private String detailCha; 			//제품사진수정명
+	private int proAmount; 				//재고
+	private String proStatus; 			//판매상태
+	private String proContent; 			//세부정보
 	
-	private int reviewStar; 		//별점	
-	private String reviewTitle;		//제목
-	private Date reviewDate;		//등록날짜
-	private int reviewCount; 		//조회수	
-	private String cateName;//카테명
+	private int reviewStar; 			//별점	
+	private String reviewTitle;			//제목
+	private Date reviewDate;			//등록날짜
+	private int reviewCount; 			//조회수	
+	private String cateName;			//카테명
 	
+	
+	
+	private String searchKeyword;		//검색기능용
 
 }
