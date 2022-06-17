@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.ticket.model.dao.TicketDao;
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.Reservation;
 import com.uni.spring.ticket.model.dto.Ticket;
 
 @Service
@@ -102,6 +103,12 @@ public class TicketServiceImpl implements TicketService{
 	public Ticket selectFair(int ticketNo) {
 		// TODO Auto-generated method stub
 		return ticketDao.selectFair(sqlSession,ticketNo);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectReservation(int userNo) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectReservation(sqlSession,userNo);
 	}
 
 }

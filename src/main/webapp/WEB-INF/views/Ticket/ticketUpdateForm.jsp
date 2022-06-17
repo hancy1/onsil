@@ -52,7 +52,7 @@
             <h2>티켓수정하기</h2>
             <br>
 
-            <form id="updateForm" method="post" action="updateTicket.do" enctype="multipart/form-data">
+            <form id="updateForm" method="post" action="updateRBoard.do" enctype="multipart/form-data">
             	<input type="hidden" name="ticketNo" value="${ t.ticketNo }">
                 <table align="center">
                       <tr>

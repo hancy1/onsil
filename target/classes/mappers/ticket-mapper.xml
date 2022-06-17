@@ -143,4 +143,31 @@ T_CHANGE_NAME-->
  
   </select>
   
+  <!-- 예약 리절트맵 -->
+	<resultMap type="Reservation" id="reservationResultSet"> 
+		<id property="rNo" column="RESERVATION_NO"/>
+		<result property="ticketNo" column="TICKET_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="payCode" column="PAY_CODE" />
+		
+		
+				
+		<result property="tCode" column="TICKET_CODE" />
+		<result property="count" column="RESERVATION_COUNT" />
+		<result property="price" column="PRICE" />	
+		<result property="status" column="RESERVATION_STATUS" />
+		
+		
+	</resultMap>
+	
+
+	<select id = "selectReservation" parameterType="Reservation" resultMap="reservationResultSet">
+
+	  SELECT *
+	  FROM RESERVATION A	  
+	  JOIN TICKET B ON A.TICKET_CODE = B.TICKET_CODE 	  	  
+	  WHERE A.USER_NO=#{userNo}
+    
+  	</select>
+  
 </mapper>

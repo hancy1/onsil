@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.GsonBuilder;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
+import com.uni.spring.ticket.model.dto.RBReply;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 import com.uni.spring.ticket.model.service.ReviewBoardService;
@@ -135,10 +137,36 @@ public class ReviewBoardController {
 			
 		}
 		
+		
+		//게시판 수정 연결
+		@RequestMapping("updateFormRBoard.do")
+		public ModelAndView updateForm(int bno,ModelAndView mv) {
+			mv.addObject("rb",reviewBoard.selectRborad(bno))
+			.setViewName("Ticket/rboardUpdateForm");
+			
+			return mv;
+		}
+		
+		
+		
 		@RequestMapping(value="heart",method=RequestMethod.POST)
 		public @ResponseBody int heart(@ModelAttribute RBLike heart) {
 			int result = reviewBoard.insertHeart(heart);
 			return result;
 		}
+		
+		//후기게시판 댓글 리스트
+		@ResponseBody
+		@RequestMapping(value="rblist.do", produces = "application/json; charset=utf-8")
+		public String selectReplyList(int bno){
+			
+			ArrayList<RBReply>list = reviewBoard.selectReplyList(bno);
+			
+			System.out.println(list);
+			
+			return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create().toJson(list);
+		}
+		
+		
 
 }

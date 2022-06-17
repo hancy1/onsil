@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,21 @@
 <link rel="icon" href="resources/img/core-img/icon.png"> 
 
 <style>
+
+  
+
+   #contentArea{width:80%}
+		#contentArea *{margin:5px}
+		textarea {width:100%;
+				  height:80%;		
+				  resize:none;		  
+		}
+		
+	#replyArea{
+	width:80%;
+ 	 margin:auto;
+	
+	}	
  	#enrollForm>table{
  	width:80%;
  	 margin:auto;
@@ -71,54 +86,46 @@
 	
             <br>
 			
-			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
-            <form id="enrollForm" method="post" action="inserRBoard.do" enctype="multipart/form-data">
-                <table align="center">
-                   
-                    <tr>
-                        <th><label for="rbTitle">제목</label></th>
-                        <td><input type="text" id="rbTitle" class="form-control" name="rbTitle" value="${rb.rbTitle}" required></td>
-                    </tr>
-                  
-                    <tr>
-                        <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control"  name="userId" value="${ loginUser.userId }" required></td>
-                        <td><input type="hidden" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" required></td>
+		   	<div class="content">
+				        <br><br>
+				        <div class="innerOuter">				            
+				            <table id="contentArea" align="center" class="table">
+				                <tr>
+				                	<th width="100" id="rbTitle">제목</th>
+				                    <td colspan="10"> ${rb.rbTitle} [ ${ rb.count } ]</td>
+				                </tr>
+				                <tr>
+				                	<th>글번호</th>
+				                	<td colspan="3">${ rb.rbNo }</td>
+				                	<th>카테고리</th>
+				                	<td colspan="3">${ rb.TCategoryNo }</td>				                    
+				                				                    
+				                </tr>				                
+				                <tr>
+				                    <th>작성자</th>
+				                     <td>${ loginUser.userId }</td>
                         
-                    </tr>
-                    <div class="col-12 col-md-6">
-                           <div class="form-group">
-                           <select name="category" class="form-control" id="category">
-                               <option name="">카테고리 선택</option>
-                               <option value="Fair">전시회후기</option>
-                               <option value="prohibit">박람회후기</option>
-                              
-                               </select>
-                                 </div>
-                            </div>
-                         
- 
-                    <tr>
-                         <th>첨부파일</th>
-                    <td colspan="3">
-                    	<c:if test="${ !empty rb.originName }">
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/RB_upload_files/${r.changeName}" download="${ rb.originName }">${ rb.originName }</a>
-                        </c:if>
-                        <c:if test="${ empty rb.originName }">
-                        	첨부파일이 없습니다.
-                        </c:if>
-                    </td>
-                    </tr>
-                    <tr>
-                        <th colspan="2"><label for="content">내용</label></th>
-                    </tr>
-                    <tr>
-                        <th colspan="2"><textarea class="form-control" required name="rbContent" id="content" rows="10" style="resize:none;">${ rb.rbContent }</textarea></th>
-                    </tr>
-                </table>
-                <br>
+                                    <td><input type="hidden" id="writer" class="form-control"  name="userId" value="${ loginUser.userId }" ></td>
+                                    <td><input type="hidden" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" ></td>
+                        
+				                    <th>작성일</th>
+				                    <td colspan="3">${ rb.date }</td>
+				                       
+				                </tr>
+				              		                
+				              <tr>
+				              <th>내용</th>		
+				              <td colspan="10"></td>		                    
+				              </tr>
+				              <tr>
+				              <td colspan="10"><p style="height:auto;">${ rb.rbContent }</p></td>
+				              </tr>			                
+				     </table>
+				            <br>
+					
+    
 
-              <c:if test="${ loginUser.userId eq r.userNo }">
+              <c:if test="${ loginUser.userNo eq rb.userNo }">
 	            <div align="center">
 	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
 	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
@@ -129,8 +136,36 @@
 					<input type="hidden" name="fileName" value="${ rb.changeName }"> 
 					
 				</form>
+				</div>
+				</div>
+				<br>
+			    <table id="replyArea" class="table" align="center">
+                <thead>
+                    <tr>
+                    	<c:if test="${ !empty loginUser }">
+	                        <th colspan="2" style="width:75%">
+	                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+	                        </th>
+	                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
+                        </c:if>
+                        <c:if test="${ empty loginUser }">
+                        	<th colspan="2" style="width:75%">
+	                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+	                        </th>
+	                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+                        </c:if>
+                    </tr>
+                    <tr>
+                       <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
+                    </tr>	
 				
-			 <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+				
+				
+				
+				
+				
+				
+<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 								
   <script>
 
@@ -185,67 +220,47 @@
             </c:if>
             <br><br>
                
-           <table id="replyArea" class="table" align="center">
-                <thead>
-                    <tr>
-                    	<c:if test="${ !empty loginUser }">
-	                        <th colspan="2" style="width:75%">
-	                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
-	                        </th>
-	                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
-                        </c:if>
-                        <c:if test="${ empty loginUser }">
-                        	<th colspan="2" style="width:75%">
-	                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
-	                        </th>
-	                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
-                        </c:if>
-                    </tr>
-                    <tr>
-                       <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
-                    </tr>
+       
                     
-          <script>
- 	$(function(){
-		selectReplyList();
+    
+	<script>
+	selectReplyList();
 		
-		$("#addReply").click(function(){
-    		var bno = ${b.boardNo};
-
-			if($("#replyContent").val().trim().length != 0){
-				
-				$.ajax({
-					url:"rinsertBoard.do",
-					type:"post",
-					data:{replyContent:$("#replyContent").val(),
-						  refBoardNo:bno,
-						  replyWriter:"${loginUser.userId}"},
-					success:function(result){
-						if(result > 0){
-							$("#replyContent").val("");
-							selectReplyList();
-function selectReplyList(){
-		var bno = ${b.boardNo};
+	// 댓글리스트	
+	function selectReplyList(){
+		
+		var bno = ${ rb.rbNo };
+		
 		$.ajax({
-			url:"rlistBoard.do",
+			url:"rblist.do",
 			data:{bno:bno},
 			type:"get",
 			success:function(list){
 				$("#rcount").text(list.length);
 				
-				var value="";
-				$.each(list, function(i, obj){
-					
-					if("${loginUser.userId}" == obj.replyWriter){
+				var value = "";
+				
+				$.each(list, function(rb, obj){
+					if("${loginUser.userId}" == obj.userId){
 						value += "<tr style='background:#EAFAF1'>";
+						
+						value += "<th>" + obj.writer + "</th>" + 
+									 "<td colspan=2>" + obj.answer + "</td>" + 
+									 "<td colspan=2>" + obj.createDate + "</td>" +								 
+									 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
+									 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 
+							 "</tr>";
 					}else{
 						value += "<tr>";
+						value += "<th>" + obj.writer + "</th>" + 
+										 "<td colspan=2>" + obj.answer + "</td>" + 
+										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+										 "<td colspan=1></td>" +
+										 "<td colspan=1></td>" + 
+								 "</tr>";
 					}
 					
-					value += "<th>" + obj.replyWriter + "</th>" + 
-								 "<td>" + obj.replyContent + "</td>" + 
-								 "<td>" + obj.createDate + "</td>" +
-						 "</tr>";
+					
 				});
 				$("#replyArea tbody").html(value);
 			},error:function(){
@@ -253,9 +268,130 @@ function selectReplyList(){
 			}
 		});
 	}
-     
-     
-     
+	
+	// 댓글 작성
+	$("#addReply").click(function(){
+		var bno = ${ rb.rbNo };
+		
+		if($("#replyContent").val().trim().length != 0) {
+			$.ajax({
+				url:"rbinsert.do",
+				type:"post",
+				data:{answer:$("#replyContent").val(),
+					reperNo:ino,
+					userNo:"${loginUser.userNo}"},
+				success:function(result){
+					if(result > 0) {
+						$("#replyContent").val("");
+						selectReplyList();
+					}else{
+						alert("댓글등록실패");
+					}
+				},error:function(){
+					console.log("댓글 작성 ajax 통신 실패");
+				}
+			});
+		}else{
+			alert("댓글을 등록하세요.");
+		}
+	});
+	
+	// 댓글 삭제
+	function deleteReply(answerNo) {
+		var q = confirm("댓글을 삭제하시겠습니까?")
+		
+		if(q == true) {
+			$.ajax({
+				url:"deleteReply.do",
+				data:{answerNo:answerNo},
+				type:"get",
+				success:function(result){
+					if(result > 0) {
+						$("#replyContent").val("");
+						selectReplyList();
+					}else{
+						alert("댓글삭제실패");
+					}
+				}, error:function(){
+					console.log("댓글 삭제 ajax 통신 실패");
+				}
+			})
+		}else{
+			alert("댓글 삭제를 취소하셨습니다.");
+		}
+	}
+	
+	// 댓글 수정 폼
+	function updateReplyForm(answerNo){
+		var bno = ${ rb.rbNo };
+		
+		$.ajax({
+			url:"rblist.do",
+			data:{bno:bno},
+			type:"get",
+			success:function(list){
+				$("#rcount").text(list.length);
+				
+				var value="";
+				$.each(list, function(i, obj){
+					if("${loginUser.userId}" == obj.userId){
+						value += "<tr style='background:#EAFAF1'>";
+					}else{
+						value += "<tr>";
+					}
+					
+					if(obj.answerNo == answerNo){
+						value += "<th>" + obj.writer + "</th>" + 
+								 "<td colspan=2><textarea id='updateReplyContent' placeholder=" + obj.answer + "></textarea></td>" + 
+								 "<td colspan=2>" + obj.createDate + "</td>" +
+								 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReply(" + obj.answerNo + ");'> 저장 </button> </td>" +
+								 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='selectReplyList();'> 취소 </button> </td>" + 									 
+						 "</tr>";
+					}
+					
+					if(obj.answerNo != answerNo) {						
+						value += "<tr>";
+						value += "<th>" + obj.writer + "</th>" + 
+										 "<td colspan=2>" + obj.answer + "</td>" + 
+										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+										 "<td colspan=1></td>" +
+										 "<td colspan=1></td>" + 
+								 "</tr>";
+					}
+					
+				});
+				$("#replyArea tbody").html(value);
+			},error:function(){
+				console.log("댓글 수정폼용 ajax 통신 실패");
+			}
+		});
+	}
+	
+	// 댓글 수정
+	function updateReply(answerNo){		
+		
+		if($("#updateReplyContent").val().trim().length != 0){
+			$.ajax({
+				url:"updateReply.do",
+				type:"post",
+				data:{answer:$("#updateReplyContent").val(),
+					answerNo:answerNo,
+					userNo:"${loginUser.userNo}"},
+				success:function(result) {
+					if(result > 0) {
+    					$("#updateReplyContent").val("");
+    					selectReplyList();
+    				}else{
+    					alert("댓글수정실패");
+    				}
+				}, error:function(){
+    				console.log("댓글 수정 ajax 통신 실패");
+				}
+			});
+		}else{
+			alert("수정할 댓글을 입력하세요.");
+		}
+	}
     </script>
                     
                 </thead>

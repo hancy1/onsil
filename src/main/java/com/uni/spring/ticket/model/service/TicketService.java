@@ -3,6 +3,7 @@ package com.uni.spring.ticket.model.service;
 import java.util.ArrayList;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.Reservation;
 import com.uni.spring.ticket.model.dto.Ticket;
 
 public interface TicketService {
@@ -30,5 +31,7 @@ public interface TicketService {
 	ArrayList<Ticket> selectFairList(PageInfo pi);
 
 	Ticket selectFair(int ticketNo);
+
+	ArrayList<Reservation> selectReservation(int userNo);
 
 }

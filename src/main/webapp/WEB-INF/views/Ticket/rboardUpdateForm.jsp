@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,13 +53,14 @@
             <h2>후기게시판</h2>
             <br>
 			
+			  <form id="updateForm" method="post" action="updateTicket.do" enctype="multipart/form-data">
+            	<input type="hidden" name="rbNo" value="${ rb.rbNo }">
 			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
-            <form id="enrollForm" method="post" action="inserRBoard.do" enctype="multipart/form-data">
                 <table align="center">
                    
                     <tr>
                         <th><label for="rbTitle">제목</label></th>
-                        <td><input type="text" id="rbTitle" class="form-control" name="rbTitle" required></td>
+                        <td><input type="text" id="rbTitle" class="form-control" name="rbTitle" value="${ rb.rbTitle }"  required></td>
                     </tr>
                   
                     <tr>
@@ -68,7 +71,7 @@
                     </tr>
                     <div class="col-12 col-md-6">
                            <div class="form-group">
-                           <select name="category" class="form-control" id="category" required>
+                           <select name="category" class="form-control" id="category" value="${ rb.TCategoryNo }" required>
                                <option name="">카테고리 선택</option>
                                <option value="Fair">전시회후기</option>
                                <option value="exhibition">박람회후기</option>
@@ -78,23 +81,29 @@
                             </div>
                          
  
-                    <tr>
+                     <tr>
                         <th><label for="upfile">첨부파일</label></th>
-                        <td><input type="file" id="upfile" class="form-control-file border" name="uploadFile"></td>
+                        <td>
+                            <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
+                            <c:if test="${ !empty rb.originName }">
+	                                                               현재 업로드된 파일 : ${ rb.originName } <br>
+	                            <input type="hidden" name="changeName" value="${ rb.changeName }">
+	                            <input type="hidden" name="originName" value="${ rb.originName }">
+                            </c:if>
+                        </td>
                     </tr>
                     <tr>
                         <th colspan="2"><label for="content">내용</label></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="rbContent" id="content" rows="10" style="resize:none;"></textarea></th>
+                        <th colspan="2"><textarea class="form-control" value="${ rb.rbContent }" required name="rbContent" id="content" rows="10" style="resize:none; ">${ rb.rbContent }</textarea></th>
                     </tr>
                 </table>
                 <br>
 
-                <div align="center">
-                    <button type="submit" class="btn btn-primary">등록하기</button>
-                    <button type="reset" class="btn btn-danger">취소하기</button>
-                 
+                 <div align="center">
+                    <button type="submit" class="btn btn-primary">수정완료</button>
+                    <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">이전으로</button>
                 </div>
             </form>
         </div>

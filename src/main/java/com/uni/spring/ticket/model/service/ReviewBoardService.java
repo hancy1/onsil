@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
+import com.uni.spring.ticket.model.dto.RBReply;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 
@@ -21,5 +22,13 @@ public interface ReviewBoardService {
 
 	int insertHeart(RBLike heart);
 
+	ArrayList<RBReply> selectReplyList(int bno);
+
+
+	Object selectRborad(int bno);
+
+	
+
+	
 	
 }
