@@ -1,59 +1,66 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>Insert title here</title>
 <!-- Favicon -->
-<link rel="icon" href="resources/img/core-img/icon.png"> 
+<link rel="icon" href="resources/img/core-img/icon.png">
 
 <style>
+#contentArea {
+	width: 80%
+}
 
-  
+#contentArea * {
+	margin: 5px
+}
 
-   #contentArea{width:80%}
-		#contentArea *{margin:5px}
-		textarea {width:100%;
-				  height:80%;		
-				  resize:none;		  
-		}
-		
-	#replyArea{
-	width:80%;
- 	 margin:auto;
-	
-	}	
- 	#enrollForm>table{
- 	width:80%;
- 	 margin:auto;
- 	 }
-    #enrollForm>table *{ margin:5px;}
-      .bi-heart{
-            font-size: 30px;
-            line-height: 30px;
-            color:crimson;
-        }
+textarea {
+	width: 100%;
+	height: 80%;
+	resize: none;
+}
 
-        .bi-heart-fill{
-            font-size: 30px;
-            line-height: 30px;
-            color:crimson;
-        }
+#replyArea {
+	width: 80%;
+	margin: auto;
+}
 
-        
-    
+#enrollForm>table {
+	width: 80%;
+	margin: auto;
+}
+
+#enrollForm>table * {
+	margin: 5px;
+}
+
+.bi-heart {
+	font-size: 30px;
+	line-height: 30px;
+	color: crimson;
+}
+
+.bi-heart-fill {
+	font-size: 30px;
+	line-height: 30px;
+	color: crimson;
+}
 </style>
 </head>
 <body>
- <jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../common/menubar.jsp" />
 
 
-     <!-- ##### Breadcrumb Area Start ##### -->
+	<!-- ##### Breadcrumb Area Start ##### -->
 	<div class="breadcrumb-area">
 		<!-- Top Breadcrumb Area -->
 		<div
@@ -61,7 +68,7 @@
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
 			<h2>후기게시판</h2>
 		</div>
-    	<div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<nav aria-label="breadcrumb">
@@ -76,98 +83,131 @@
 			</div>
 		</div>
 	</div>
-<div class="content">
-        <br><br>
-         <div class="innerOuter" align="center"><br>
-            <h2>후기게시판</h2>
-             
-	<i id="heart" class="bi bi-heart"></i>
-    
-	
-            <br>
-			
-		   	<div class="content">
-				        <br><br>
-				        <div class="innerOuter">				            
-				            <table id="contentArea" align="center" class="table">
-				                <tr>
-				                	<th width="100" id="rbTitle">제목</th>
-				                    <td colspan="10"> ${rb.rbTitle} [ ${ rb.count } ]</td>
-				                </tr>
-				                <tr>
-				                	<th>글번호</th>
-				                	<td colspan="3">${ rb.rbNo }</td>
-				                	<th>카테고리</th>
-				                	<td colspan="3">${ rb.TCategoryNo }</td>				                    
-				                				                    
-				                </tr>				                
-				                <tr>
-				                    <th>작성자</th>
-				                     <td>${ loginUser.userId }</td>
-                        
-                                    <td><input type="hidden" id="writer" class="form-control"  name="userId" value="${ loginUser.userId }" ></td>
-                                    <td><input type="hidden" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" ></td>
-                        
-				                    <th>작성일</th>
-				                    <td colspan="3">${ rb.date }</td>
-				                       
-				                </tr>
-				              		                
-				              <tr>
-				              <th>내용</th>		
-				              <td colspan="10"></td>		                    
-				              </tr>
-				              <tr>
-				              <td colspan="10"><p style="height:auto;">${ rb.rbContent }</p></td>
-				              </tr>			                
-				     </table>
-				            <br>
-					
-    
+	<div class="content">
+		<br> <br>
+		<div class="innerOuter" align="center">
+			<br>
+			<h2>후기게시판</h2>
 
-              <c:if test="${ loginUser.userNo eq rb.userNo }">
-	            <div align="center">
-	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
-	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
-	            </div>
-	            
-	            <form id="postForm" action="" method="post">
-					<input type="hidden" name="bno" value="${ rb.rbNo }">
-					<input type="hidden" name="fileName" value="${ rb.changeName }"> 
-					
-				</form>
+			<i id="heart" class="bi bi-heart"></i> <br>
+
+			<div class="content">
+				<br> <br>
+				<div class="innerOuter">
+					<table id="contentArea" align="center" class="table">
+						<tr>
+							<th width="100" id="rbTitle">제목</th>
+							<td colspan="10">${rb.rbTitle}[${ rb.count }]</td>
+						</tr>
+						<tr>
+							<th>글번호</th>
+							<td colspan="3">${ rb.rbNo }</td>
+							<th>카테고리</th>
+							<td colspan="3">${ rb.TCategoryNo }</td>
+
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${ loginUser.userId }</td>
+
+							<td><input type="hidden" id="writer" class="form-control"
+								name="userId" value="${ loginUser.userId }"></td>
+							<td><input type="hidden" id="writer" class="form-control"
+								name="userNo" value="${ loginUser.userNo }"></td>
+
+							<th>작성일</th>
+							<td colspan="3">${ rb.date }</td>
+
+						</tr>
+
+						<tr>
+							<th>내용</th>
+							<td colspan="10"></td>
+						</tr>
+						<tr>
+							<td colspan="10"><p style="height: auto;">${ rb.rbContent }</p></td>
+						</tr>
+						<tr>
+							<th>첨부파일</th>
+							<td colspan="3"><c:if test="${ !empty t.originName }">
+									<a
+										href="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}"
+										download="${ t.originName }" readonly>${ t.originName }</a>
+								</c:if> <c:if test="${ empty t.originName }">
+                        	첨부파일이 없습니다.
+                           </c:if></td>
+						</tr>
+					</table>
+					<br>
+
+
+
+                    <br> 
+					<c:if test="${ loginUser.userNo eq rb.userNo }">
+						<div align="center">
+							<button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
+							<button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
+						</div>
+
+						<form id="postForm" action="" method="post">
+							<input type="hidden" name="bno" value="${ rb.rbNo }"> <input
+								type="hidden" name="fileName" value="${ rb.changeName }">
+
+						</form>
+						<script>
+					    function postFormSubmit(num){
+						var postForm = $("#postForm");
+						
+						if(num == 1){
+							postForm.attr("action", "updateFormRBoard.do");
+						}else{
+							postForm.attr("action", "deleteRBoard.do");
+						}
+						postForm.submit();
+					    }
+				       </script>
+					   </c:if>
+					<br><br>
 				</div>
-				</div>
-				<br>
-			    <table id="replyArea" class="table" align="center">
-                <thead>
-                    <tr>
-                    	<c:if test="${ !empty loginUser }">
-	                        <th colspan="2" style="width:75%">
-	                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
-	                        </th>
-	                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
-                        </c:if>
-                        <c:if test="${ empty loginUser }">
-                        	<th colspan="2" style="width:75%">
-	                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
-	                        </th>
-	                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
-                        </c:if>
-                    </tr>
-                    <tr>
-                       <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
-                    </tr>	
-				
-				
-				
-				
-				
-				
-				
-<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
-								
-  <script>
+			</div>
+			<!-- 댓글 -->
+            		<br><br>
+
+		            <table id="replyArea" class="table" align="center">
+		                <thead>
+		                    <tr>
+		                    	<c:if test="${ !empty loginUser }">
+			                        <th colspan="5" style="width:80%">
+			                            <textarea class="form-control" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+			                        </th>
+			                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
+		                        </c:if>
+		                        <c:if test="${ empty loginUser }">
+		                        	<th colspan="5" style="width:80%">
+			                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+			                        </th>
+			                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+		                        </c:if>
+		                    </tr>
+		                    <tr>
+		                       <td colspan="6">댓글 (<span id="rcount">0</span>) </td> 
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                	
+		                </tbody>
+		            </table>	
+
+  </div>
+  </div>
+
+
+
+
+
+					<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+
+					<script>
 
   $(document).ready(function () {
 		
@@ -204,25 +244,12 @@
     	    });
     	    }
     </script>
+
 				
-				<script>
-					function postFormSubmit(num){
-						var postForm = $("#postForm");
-						
-						if(num == 1){
-							postForm.attr("action", "updateFormRBoard.do");
-						}else{
-							postForm.attr("action", "deleteRBoard.do");
-						}
-						postForm.submit();
-					}
-				</script>
-            </c:if>
-            <br><br>
-               
-       
-                    
-    
+
+
+
+
 	<script>
 	selectReplyList();
 		
@@ -278,7 +305,7 @@
 				url:"rbinsert.do",
 				type:"post",
 				data:{answer:$("#replyContent").val(),
-					reperNo:ino,
+					reperNo:bno,
 					userNo:"${loginUser.userNo}"},
 				success:function(result){
 					if(result > 0) {
@@ -393,19 +420,19 @@
 		}
 	}
     </script>
-                    
-                </thead>
-                <tbody>
-                
-                </tbody>
-            </table>
-        </div>
-        <br><br>
-    </div>
 
-  <jsp:include page="../common/footer.jsp"/>
-    
-    <!-- ##### All Javascript Files ##### -->
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+		<br> <br>
+	</div>
+
+	<jsp:include page="../common/footer.jsp" />
+
+	<!-- ##### All Javascript Files ##### -->
 	<!-- jQuery-2.2.4 js -->
 	<!-- Popper js -->
 	<script src="resources/js/bootstrap/popper.min.js"></script>
