@@ -11,14 +11,7 @@
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png"> 
 
-<style>
- 	#enrollForm>table{
- 	width:80%;
- 	 margin:auto;
- 	 }
-    #enrollForm>table *{ margin:5px;}
-    
-</style>
+
 </head>
 <body>
  <jsp:include page="../common/menubar.jsp"/>
@@ -53,7 +46,7 @@
             <h2>후기게시판</h2>
             <br>
 			
-			  <form id="updateForm" method="post" action="updateTicket.do" enctype="multipart/form-data">
+			  <form id="updateForm" method="post" action="updateRBoard.do" enctype="multipart/form-data">
             	<input type="hidden" name="rbNo" value="${ rb.rbNo }">
 			<!-- 첨부파일도 등록할꺼니깐 Multipart/form-data encType 지정!! -->
                 <table align="center">
@@ -69,16 +62,15 @@
                         <td><input type="hidden" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" readonly></td>
                         
                     </tr>
-                    <div class="col-12 col-md-6">
-                           <div class="form-group">
-                           <select name="category" class="form-control" id="category" value="${ rb.TCategoryNo }" required>
-                               <option name="">카테고리 선택</option>
-                               <option value="Fair">전시회후기</option>
-                               <option value="exhibition">박람회후기</option>
-                              
-                               </select>
-                                 </div>
-                            </div>
+                	<th>카테고리</th>
+				      <td colspan="2">	                			
+				      <select name="TCategoryNo" class="form-control"  required>
+                             
+                     <option></option>
+                     <option value="1">전시회후기</option>
+                     <option value="2">박람회후기</option>
+                    </select>
+			       </td>				     
                          
  
                      <tr>

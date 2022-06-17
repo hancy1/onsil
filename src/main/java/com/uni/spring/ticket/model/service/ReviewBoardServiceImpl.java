@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
+import com.uni.spring.help.model.dao.HelpDao;
+import com.uni.spring.help.model.dto.Inquiry;
 import com.uni.spring.ticket.model.dao.ReviewBoardDao;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
@@ -27,6 +29,8 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	@Autowired
 	private ReviewBoardDao rbDao;
 
+	
+	//후기게시글 갯수 
 	@Override
 	public int selectRBListCount() {
 		// TODO Auto-generated method stub
@@ -39,6 +43,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		return rbDao.selectList(sqlSession,pi);
 	}
 
+	//후기게시판 글쓰기
 	@Override
 	public void insertRBoard(RBoard rb) {
 	
@@ -49,11 +54,22 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	      }
 	}
 
+	//후기게시판 상세보기
 	@Override
 	public RBoard selectRBoard(int bno) {
 		// TODO Auto-generated method stub
-		return rbDao.selectRBoard(sqlSession,bno);
+		RBoard r = null;
+		int result = rbDao.increaseCount(sqlSession, bno); // 조회수 올리기
+	    if(result < 0) {
+			
+			throw new CommException("increaseCount 실패");
+		}else {
+			r = rbDao.selectRBoard(sqlSession,bno);
+		}
+		
+		return r;
 	}
+	
 
 	@Override
 	public RBLike findHeart(int bno, int userNo) {
@@ -91,12 +107,49 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		return rbDao.selectReplyList(sqlSession,bno);
 	}
 
+	//후기게시판 수정하기 선택
 	@Override
 	public Object selectRborad(int bno) {
 		// TODO Auto-generated method stub
 		return rbDao.selectRborad(sqlSession,bno);
 	}
 
+	//게시글 수정하기
+	@Override
+	public void updateRBoard(RBoard rb) {
+		
+		int result=rbDao.updateBRboard(sqlSession, rb);
+	    if(result < 0) {
+	         throw new CommException("게시글 수정 실패");
+	      }
+	      
+}
+
+	//게시글 삭제하기
+	@Override
+	public void deleteRBoard(int bno) {
+		  
+		int result = rbDao.deleteRBoard(sqlSession, bno);
+		      
+		      if(result < 0) {
+		         throw new CommException("게시글 삭제 실패");
+		      }
+		      
+	}
+
+	//후기게시판 댓글 등록
+	@Override
+	public int insertReply(RBReply r) {
+	
+		int result = rbDao.insertReply(sqlSession, r);
+		
+		if(result < 0) {
+			throw new CommException("댓글 추가 실패");
+		}
+		
+		return result;	
+	}
+	
 	
 
 	

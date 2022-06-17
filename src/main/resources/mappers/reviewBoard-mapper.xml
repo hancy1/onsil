@@ -6,126 +6,142 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="reviewBoardmapper">
 
 
-<resultMap id="rbResultSet" type="REVIEWBOARD">
+	<resultMap id="rbResultSet" type="REVIEWBOARD">
 
-<id column="RB_NO" property="rbNo"/>
+		<id column="RB_NO" property="rbNo" />
 
-<result column="USER_NO" property="userNo"/>
+		<result column="USER_NO" property="userNo" />
 
-<result column="USER_ID" property="userId"/>
+		<result column="USER_ID" property="userId" />
 
-<result column="T_CATEGORY_NO" property="TCategoryNo"/>
+		<result column="T_CATEGORY_NO" property="TCategoryNo" />
 
-<result column="RB_TITLE" property="rbTitle"/>
+		<result column="RB_TITLE" property="rbTitle" />
 
-<result column="RB_CONTENT" property="rbContent"/>
+		<result column="RB_CONTENT" property="rbContent" />
 
-<result column="RB_COUNT" property="count"/>
+		<result column="RB_COUNT" property="count" />
 
-<result column="RB_DATE" property="date"/>
+		<result column="RB_DATE" property="date" />
 
-<result column="RB_ORIGIN_NAME" property="originName"/>
+		<result column="RB_ORIGIN_NAME" property="originName" />
 
-<result column="RB_CHANGE_NAME" property="changeName"/>
+		<result column="RB_CHANGE_NAME" property="changeName" />
 
-<result column="RB_STATUS" property="status"/>
+		<result column="RB_STATUS" property="status" />
 
-</resultMap>
+	</resultMap>
 
-<resultMap type="RBLike" id="RBLikeResultSet">
+	<resultMap type="RBLike" id="RBLikeResultSet">
 
 
-    <id property="rbLikeNo" column="RB_LIKE_NO"/>
-         <result property="rbNo" column="RB_NO"/>
-         <result property="userNo" column="USER_NO"/>
-         <result property="heart" column="HEART"/>
-        
+		<id property="rbLikeNo" column="RB_LIKE_NO" />
+		<result property="rbNo" column="RB_NO" />
+		<result property="userNo" column="USER_NO" />
+		<result property="heart" column="HEART" />
 
-</resultMap>
 
-     <!-- 예약카테고리 - 후기게시판 등록 수 -->
-     <select id="selectRBListCount" resultType="_int">
-     SELECT COUNT(*)FROM REVIEWBOARD 
-     WHERE RB_STATUS='Y'
-     </select>
+	</resultMap>
 
-     <!-- 후기게시판 전부 select해오기 -->
-    <select id="selectList" resultMap="rbResultSet">
-     SELECT A.*, B.USER_ID
-   FROM REVIEWBOARD A
-   JOIN MEMBER B ON A.USER_NO  =  B.USER_NO
-     WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC  
-     </select>
-     
-     
-     <!-- 후기게시판 등록 -->
-      <insert id="insertRBoard">
-      
-         INSERT INTO REVIEWBOARD
-         VALUES (SEQ_TICKET.NEXTVAL, #{userNo},#{TCategoryNo},#{rbTitle},#{rbContent},#{count},SYSDATE,#{originName},#{changeName},DEFAULT)
-      </insert>
-      
-       <!-- 후기게시판 디테일페이지 조회 -->
-      <select id="selectRBoard" parameterType = "_int" resultMap = "rbResultSet">
- 
-     SELECT *
-     FROM REVIEWBOARD
-     WHERE RB_NO=#{rbNo} AND RB_STATUS='Y'
- 
-  </select>
-  
-  <!-- 조회수 증가 -->
+	<!-- 예약카테고리 - 후기게시판 등록 수 -->
+	<select id="selectRBListCount" resultType="_int">
+		SELECT COUNT(*)FROM REVIEWBOARD
+		WHERE RB_STATUS='Y'
+	</select>
+
+	<!-- 후기게시판 전부 select해오기 -->
+	<select id="selectList" resultMap="rbResultSet">
+		SELECT A.*, B.USER_ID
+		FROM REVIEWBOARD A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		WHERE RB_STATUS = 'Y'ORDER BY RB_NO DESC
+	</select>
+
+
+	<!-- 후기게시판 등록 -->
+	<insert id="insertRBoard">
+
+		INSERT INTO REVIEWBOARD
+		VALUES (SEQ_TICKET.NEXTVAL,
+		#{userNo},#{TCategoryNo},#{rbTitle},#{rbContent},#{count},SYSDATE,#{originName},#{changeName},DEFAULT)
+	</insert>
+
+	<!-- 후기게시판 디테일페이지 조회 -->
+	<select id="selectRBoard" parameterType="_int"
+		resultMap="rbResultSet">
+
+		SELECT A.*, B.T_CATEGORY_NAME
+		FROM REVIEWBOARD A
+		JOIN T_CATEGORY B ON A.T_CATEGORY_NO = B.T_CATEGORY_NO
+		WHERE RB_NO=#{rbNo} AND RB_STATUS='Y'
+
+
+	</select>
+
+	<!-- 조회수 증가 -->
 	<update id="increaseCount" parameterType="_int">
 		UPDATE REVIEWBOARD
-		SET RB_COUNT = RB_COUNT + 1
+		SET
+		RB_COUNT = RB_COUNT + 1
 		WHERE RB_NO=#{rbNo}
-		AND RB_STATUS = 'Y' 
+		AND RB_STATUS = 'Y'
 	</update>
-  
-  <select id="findHeart" parameterType="java.util.HashMap" resultType="RBLike">
-	select * from RB_LIKE
-	 where RB_NO=#{rbNo} and USER_NO=#{userNo}
-</select>
 
-  <!-- 티켓 디테일페이지 조회 -->
-      <select id="selectRborad" parameterType = "_int" resultMap = "rbResultSet">
- 
-     SELECT *
-     FROM REVIEWBOARD
-     WHERE RB_NO=#{rbNo} AND RB_STATUS='Y'
- 
-  </select>
-  
-   <!--
- <select id="findHeart" parameterType="_int" resultType="RBLike">
-	select * from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo}
-</select>
+	<select id="findHeart" parameterType="java.util.HashMap"
+		resultType="RBLike">
+		select * from RB_LIKE
+		where RB_NO=#{rbNo} and USER_NO=#{userNo}
+	</select>
 
 
-<insert id="insertHeart" >
-	insert into RB_LIKE(RB_NO, USER_NO, HEART)
-		values(#{rbNo}, #{userNo}, 1)
-</insert>
+	<select id="selectRborad" parameterType="_int"
+		resultMap="rbResultSet">
 
- 
-<delete id="deleteHeart" parameterType="_int" >
-	delete from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo}
-</delete>--> 
+		SELECT *
+		FROM REVIEWBOARD
+		WHERE RB_NO=#{rbNo} AND RB_STATUS='Y'
 
+	</select>
 
-<resultMap type="RBReply" id="replyResultSet">
-		<id property="reNo" column="RB_REPLY_NO"/>
-      	<result property="rbNo" column="RB_NO"/>
-      	<result property="userNo" column="USER_NO"/>
-      
-      	<result property="reContent" column="RB_REPLY_CONTENT"/>
-      	<result property="reDate" column="RB_REPLY_DATE"/>
-      	<result property="status" column="RE_STATUS"/>
-      	
-	</resultMap>
+	<!-- 후기게시판 수정하기 -->
+
+	<update id="updateBRboard">
+
+		UPDATE REVIEWBOARD
+		SET T_CATEGORY_NO=#{TCategoryNo},RB_TITLE= #{rbTitle},
+		RB_CONTENT =#{rbContent},RB_ORIGIN_NAME =#{originName},RB_CHANGE_NAME=#{changeName}
+		WHERE RB_NO=#{rbNo}
+	</update>
+
+	<!-- 게시글 삭제하기 -->
 	
-	<!--  댓글리스트 -->
-	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+	<update id="deleteRBoard" parameterType="_int">
+		 UPDATE REVIEWBOARD
+      SET RB_STATUS = 'N' 
+      WHERE RB_NO=#{rbNo}     
+	</update> 
+
+	<!-- <select id="findHeart" parameterType="_int" resultType="RBLike"> select 
+		* from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo} </select> <insert 
+		id="insertHeart" > insert into RB_LIKE(RB_NO, USER_NO, HEART) values(#{rbNo}, 
+		#{userNo}, 1) </insert> <delete id="deleteHeart" parameterType="_int" > delete 
+		from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo} </delete> -->
+
+
+	<resultMap type="RBReply" id="replyResultSet">
+		<id property="reNo" column="RB_REPLY_NO" />
+		<result property="rbNo" column="RB_NO" />
+		<result property="userNo" column="USER_NO" />
+
+		<result property="reContent" column="RB_REPLY_CONTENT" />
+		<result property="reDate" column="RB_REPLY_DATE" />
+		<result property="status" column="RE_STATUS" />
+
+	</resultMap>
+
+	<!-- 댓글리스트 -->
+	<select id="selectReplyList" parameterType="_int"
+		resultMap="replyResultSet">
 	<![CDATA[
 		SELECT A.RB_REPLY_NO, A.RB_REPLY_CONTENT, B.USER_ID, B.USER_NAME, A.CREATE_DATE
 		FROM RB_REPLY A
@@ -134,11 +150,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY A.RB_REPLY_NO DESC
 		]]>
 	</select>
-	
-<!-- 댓글 작성 -->
+
+	<!-- 댓글 작성 -->
 	<insert id="insertReply" parameterType="RBReply">
-		INSERT INTO RBReply
-		VALUES(SEQ_RB_REPLY.NEXTVAL, #{rbNo}, #{userNo}, #{reContent}, SYSDATE, DEFAULT)
+		INSERT INTO RB_REPLY
+		VALUES(SEQ_RB_REPLY.NEXTVAL, #{rbNo}, #{userNo}, #{reContent},SYSDATE, DEFAULT)
 	</insert>
 
 </mapper>

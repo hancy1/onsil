@@ -68,10 +68,12 @@
                     </tr>
                     <div class="col-12 col-md-6">
                            <div class="form-group">
-                           <select name="category" class="form-control" id="category" required>
-                               <option name="">카테고리 선택</option>
-                               <option value="Fair">전시회후기</option>
-                               <option value="exhibition">박람회후기</option>
+                           <label for="TCategoryNo">카테고리</label>
+                           <select name="TCategoryNo" class="form-control"  required>
+                             
+                               <option></option>
+                               <option value="1">전시회후기</option>
+                               <option value="2">박람회후기</option>
                               
                                </select>
                                  </div>

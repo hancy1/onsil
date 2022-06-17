@@ -27,6 +27,12 @@ public interface ReviewBoardService {
 
 	Object selectRborad(int bno);
 
+	void updateRBoard(RBoard rb);
+
+	void deleteRBoard(int bno);
+
+	int insertReply(RBReply r);
+
 	
 
 	

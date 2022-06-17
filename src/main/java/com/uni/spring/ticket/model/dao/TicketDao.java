@@ -41,6 +41,7 @@ public class TicketDao {
 		return sqlSession.update("ticketMapper.deleteTicket",bno);
 	}
 
+	//수정하기
 	public int updateTicket(SqlSessionTemplate sqlSession, Ticket t) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("ticketMapper.updateTicket",t);

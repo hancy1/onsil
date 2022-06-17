@@ -74,6 +74,7 @@ T_CHANGE_NAME-->
       WHERE TICKET_NO=#{ticketNo}     
 	</update> 
 	
+	<!-- 티켓수정하기 -->
 	<update id="updateTicket" parameterType="TICKET" >
 		
 	  UPDATE TICKET	 
