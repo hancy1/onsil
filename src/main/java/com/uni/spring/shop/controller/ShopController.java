@@ -65,6 +65,32 @@ public class ShopController {
 		return "shop/shopMain";
 	}
 	
+	//검색 페이지연결
+	@RequestMapping("productSearch.do")
+	public String searchShopList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
+								 Model model, String searchKeyword) {
+		
+		
+		
+		int listCount = shopService.productListCount();
+		
+		
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.searchShopList(pi,searchKeyword);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		
+		
+		
+		return "shop/shopMain";
+	}
+	
+	
+	
 	//tree카테
 	@RequestMapping("treeListProducts.do")
 	public String selectShopTreeList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {

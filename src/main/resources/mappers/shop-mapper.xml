@@ -584,8 +584,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</sql>
 	
-	<!-- List불러오기 -->
-	<select id="getSearchList" parameterType="Product" resultMap="productResultSet" >
+	<!-- 서치List불러오기 -->
+	<select id="searchShopList" parameterType="Product" resultMap="productResultSet" >
 		
 		<![CDATA[			
 			SELECT *

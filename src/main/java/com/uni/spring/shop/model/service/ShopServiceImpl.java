@@ -422,6 +422,14 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ArrayList<Product> searchShopList(ShopPageInfo pi, String searchKeyword) {
+		// TODO Auto-generated method stub
+		return  shopDao.searchShopList(sqlSession,pi,searchKeyword);
+	}
+
+
+
 
 
 

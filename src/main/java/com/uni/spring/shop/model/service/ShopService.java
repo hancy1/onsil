@@ -91,6 +91,8 @@ public interface ShopService {
 
 	int likeCount(int reviewNo);
 
+	ArrayList<Product> searchShopList(ShopPageInfo pi, String searchKeyword);
+
 	
 
 

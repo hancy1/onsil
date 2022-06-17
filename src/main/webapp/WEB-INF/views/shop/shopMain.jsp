@@ -36,7 +36,7 @@
 
 
 	input {
-	  width: 300px;
+	  width: 200px;
 	  height: 32px;
 	  font-size: 15px;
 	  border: 0;
@@ -176,12 +176,14 @@
 
 						<!-- Shop Widget -->
 						<div class="shop-widget sort-by mb-50">
-						
+							<!-- 검색기능 -->
 						  	<h4 class="widget-title">Shop Search</h4>
 							<div class="widget-desc">
 								 <div class="d-flex align-items-center">
-									<input type="search" name="search" id="shopSearch" placeholder="Search..." >
-		                         	<button class="btn btn-secondary btn-sm" id="shopSearchBtn" type="button" onclick="searchInfo();"><i class="icon_search"></i></button>
+								 	<form action="productSearch.do" method="post">
+									<input type="search" name="searchKeyword" id="shopSearch" placeholder="Search..." >
+		                         	<button class="btn btn-secondary btn-sm" id="shopSearchBtn" type="submit"><i class="icon_search"></i></button>
+								 	</form>
 								 </div>							 
 							</div>
 							<br>
