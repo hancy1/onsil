@@ -145,7 +145,7 @@
 				                    
 				                    <tr>
 				                        <th><label for="price">가격</label></th>
-				                        <td><input type="text" id="price" class="form-control" name="price" required></td>
+				                        <td><input type="number" id="price" class="form-control" name="price" required></td>
 				                    </tr>
 				                    
 				                    <tr>

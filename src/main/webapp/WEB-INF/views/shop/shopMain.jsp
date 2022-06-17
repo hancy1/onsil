@@ -28,13 +28,29 @@
 
 <style type="text/css">
 
-#pagingArea{
+	#pagingArea{
+	
+	align:center;
+	
+	}
 
-align:center;
 
-}
+	input {
+	  width: 300px;
+	  height: 32px;
+	  font-size: 15px;
+	  border: 0;
+	  border-radius: 15px;
+	  outline: none;	  
+	  background-color: rgb(233, 233, 233);
+	  padding-left: 10px;
+	}
 
 
+	#shopSearchBtn{
+	
+	 border-radius: 13px;
+	}
 </style>
 
 </head>
@@ -47,7 +63,7 @@ align:center;
 		<!-- Top Breadcrumb Area -->
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-			style="background-image: url(resources/img/bg-img/24.jpg);">
+			style="background-image: url(resources/img/bg-img/shopMain2.jpg);">
 			<h2>Shop</h2>
 		</div>
 
@@ -160,6 +176,15 @@ align:center;
 
 						<!-- Shop Widget -->
 						<div class="shop-widget sort-by mb-50">
+						
+						  	<h4 class="widget-title">Shop Search</h4>
+							<div class="widget-desc">
+								 <div class="d-flex align-items-center">
+									<input type="search" name="search" id="shopSearch" placeholder="Search..." >
+		                         	<button class="btn btn-secondary btn-sm" id="shopSearchBtn" type="button" onclick="searchInfo();"><i class="icon_search"></i></button>
+								 </div>							 
+							</div>
+							<br>
 							<h4 class="widget-title">Sort by</h4>
 							<div class="widget-desc">
 								<!-- Single Checkbox -->
@@ -204,15 +229,14 @@ align:center;
 
 						<!-- Shop Widget -->
 						<div class="shop-widget best-seller mb-50">
+						
 							<h4 class="widget-title">Best Seller</h4>
 							<div class="widget-desc">
 
 								<!-- Single Best Seller Products -->
-								<div
-									class="single-best-seller-product d-flex align-items-center">
+								<div class="single-best-seller-product d-flex align-items-center">
 									<div class="product-thumbnail">
-										<a href="shop-details.html"><img src="resources/img/bg-img/4.jpg"
-											alt=""></a>
+										<a href="shop-details.html"><img src="resources/img/bg-img/4.jpg" alt=""></a>
 									</div>
 									<div class="product-info">
 										<a href="shop-details.html">Cactus Flower</a>
@@ -244,8 +268,7 @@ align:center;
 								</div>
 
 								<!-- Single Best Seller Products -->
-								<div
-									class="single-best-seller-product d-flex align-items-center">
+								<div class="single-best-seller-product d-flex align-items-center">
 									<div class="product-thumbnail">
 										<a href="shop-details.html"><img src="resources/img/bg-img/34.jpg"
 											alt=""></a>
@@ -271,19 +294,18 @@ align:center;
 					<div class="shop-products-area">
 						<div class="row">
 							
-							
 							<c:forEach items="${ list }" var="p">
 							<!-- Single Product Area -->
 							<div class="col-12 col-sm-6 col-lg-4">
 								<div class="single-product-area mb-50">
 									<!-- Product Image -->
 									<div class="product-img">	
-										<img onClick="detailPage('${ p.proCode }');" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
+										<img style="max-width: 100%; height: auto;" onclick="detailPage('${ p.proCode }');" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
 																				
 									</div>
 									<!-- Product Info -->
 									<div class="product-info mt-15 text-center">
-										<a onClick="detailPage('${ p.proCode }');">
+										<a onclick="detailPage('${ p.proCode }');">
 											<h6>${ p.proName }</h6>
 										</a>
 										
