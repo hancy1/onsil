@@ -68,6 +68,7 @@
 			</div>
 		</div>
 	</div>
+		  
 		   <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -82,11 +83,13 @@
 				${ t.division }</span>
 				<p> <b>주소</b> : ${ t.ticketLocation }
 				<p> <b>전화번호</b> : ${ t.ticketPhone }
-				<p> <b>가격</b> :${ t.price }
+				
 			    <p> <b>소개</b> :${ t.ticketNotice }
 				<p> <a href="reservation.do" class="btn btn-info"> 예약 &raquo;</a>
-					<a href= "exhibition.do" class="btn btn-secondary">상품
+					<a href= "exhibition.do" class="btn btn-secondary">티켓
 					 목록 &raquo;</a>
+				<button type="button" onclick="location.href='ticketAddress.do' " class="btn btn-primary">위치확인</button>
+					 
 			</div>
 	
 			

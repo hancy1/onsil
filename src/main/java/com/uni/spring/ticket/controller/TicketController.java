@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
-
-
+import com.uni.spring.member.model.dto.Member;
+import com.uni.spring.shop.model.dto.Cart;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.Reservation;
 import com.uni.spring.ticket.model.dto.Ticket;
 import com.uni.spring.ticket.model.service.TicketService;
 
@@ -280,5 +282,20 @@ public class TicketController {
 					return mv;
 					
 				}	
+				
+				//예약
+				@RequestMapping("reservation.do")
+				public String selectReservation(Model model, HttpSession session) {
+					
+					int userNo = Integer.parseInt(((Member)session.getAttribute("loginUser")).getUserNo());
+
+					
+					ArrayList<Reservation> list = ticketService.selectReservation(userNo);
+					
+					model.addAttribute("list", list);
+					
+					
+					return "Ticket/reservation";
+				}
 		
 }

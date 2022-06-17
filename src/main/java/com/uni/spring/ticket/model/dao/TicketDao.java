@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
+import com.uni.spring.ticket.model.dto.Reservation;
 import com.uni.spring.ticket.model.dto.Ticket;
 
 @Repository
@@ -78,6 +79,11 @@ public class TicketDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("ticketMapper.selectFair",ticketNo);
 
+	}
+
+	public ArrayList<Reservation> selectReservation(SqlSessionTemplate sqlSession, int userNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ticketMapper.selectReservation",userNo);
 	}
 
 }

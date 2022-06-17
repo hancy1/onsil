@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
+import com.uni.spring.ticket.model.dto.RBReply;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 
@@ -63,6 +64,23 @@ public class ReviewBoardDao {
 		
 		sqlSession.delete("reviewBoardmapper.deleteHeart",heart);
 		
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, RBReply r) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("reviewBoardmapper.insertReply",r);
+	}
+
+	public ArrayList<RBReply> selectReplyList(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		sqlSession.update("reviewBoardmapper.updateReplyCount", bno); // 댓글 수 업데이트
+		 
+		return (ArrayList)sqlSession.selectList("reviewBoardmapper.selectReplyList", bno);
+	}
+
+	public Object selectRborad(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("reviewBoardmapper.selectRborad",bno);
 	}
 
 }

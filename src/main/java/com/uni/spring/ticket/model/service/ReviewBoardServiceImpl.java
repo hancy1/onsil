@@ -12,6 +12,7 @@ import com.uni.spring.common.exception.CommException;
 import com.uni.spring.ticket.model.dao.ReviewBoardDao;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
+import com.uni.spring.ticket.model.dto.RBReply;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
 
@@ -82,6 +83,23 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	    	// 0 or 1이 담겨져서 @Controller에 보냄.
 		return result;
 	}
+
+	
+	@Override
+	public ArrayList<RBReply> selectReplyList(int bno) {
+		// TODO Auto-generated method stub
+		return rbDao.selectReplyList(sqlSession,bno);
+	}
+
+	@Override
+	public Object selectRborad(int bno) {
+		// TODO Auto-generated method stub
+		return rbDao.selectRborad(sqlSession,bno);
+	}
+
+	
+
+	
 	
 	
 }
