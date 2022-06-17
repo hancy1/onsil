@@ -181,7 +181,7 @@
 							<div class="widget-desc">
 								 <div class="d-flex align-items-center">
 								 	<form action="productSearch.do" method="post">
-									<input type="search" name="searchKeyword" id="shopSearch" placeholder="Search..." >
+									<input type="search" name="searchKeyword" id="shopSearch" placeholder="Search..." value="${searchKeyword}">
 		                         	<button class="btn btn-secondary btn-sm" id="shopSearchBtn" type="submit"><i class="icon_search"></i></button>
 								 	</form>
 								 </div>							 

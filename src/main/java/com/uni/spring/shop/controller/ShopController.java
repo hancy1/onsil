@@ -82,7 +82,7 @@ public class ShopController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		
+		model.addAttribute("searchKeyword",searchKeyword );
 		
 		
 		
