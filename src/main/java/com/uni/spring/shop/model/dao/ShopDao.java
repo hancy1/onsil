@@ -246,6 +246,15 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.likeCount", reviewNo);
 	}
 
+	public ArrayList<Product> searchShopList(SqlSessionTemplate sqlSession, ShopPageInfo pi, String searchKeyword) {
+		// TODO Auto-generated method stub
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.searchShopList", searchKeyword, rowdounds);
+	}
+
 
 
 
