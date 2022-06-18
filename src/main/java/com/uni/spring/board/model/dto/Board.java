@@ -22,6 +22,10 @@ public class Board {
 	private String bOriginName;
 	private String bChangeName;
 	private String bStatus;
-	private String userName;	// 작성자 이름 출력용
-	private String bCategoryName; // 카테고리명 출력용
+	private String adbCategoryNo;	// 신고된 카테고리 번호
+	
+	private String userName;		// 작성자 이름 출력용
+	private String bCategoryName;	// 카테고리명 출력용
+	private String adbCategoryName;	// 신고된 카테고리명 출력용
+	
 }

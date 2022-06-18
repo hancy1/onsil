@@ -6,9 +6,8 @@ public class BoardPagination {
 	
 	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		
-		// * maxPage : 총 페이지 수
-		
-		int maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		// * maxPage : 총 페이지 수		
+		int maxPage = (int)Math.ceil((double)listCount / boardLimit);
 		
 		// * startPage : 현재 페이지에 보여지는 페이징 바의 시작 수
 		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -20,7 +19,8 @@ public class BoardPagination {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo( currentPage,listCount, startPage, endPage, maxPage, pageLimit, boardLimit);
+		PageInfo pi = new PageInfo(currentPage, listCount, startPage, endPage, maxPage, pageLimit, boardLimit);
+		
 		return pi;
 		
 	}

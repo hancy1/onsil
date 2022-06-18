@@ -16,8 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          <result property="bOriginName" column="B_ORIGIN_NAME"/>
          <result property="bChangeName" column="B_CHANGE_NAME"/>
          <result property="bStatus" column="B_STATUS"/>
+         <result property="adbCategoryNo" column="ADB_CATEGORY_NO"/>
+         <!-- 화면 출력용 -->
          <result property="userName" column="USER_NAME"/>
          <result property="bCategoryName" column="B_CATEGORY_NAME"/>
+         <result property="adbCategoryName" column="ADB_CATEGORY_NAME"/>
 	</resultMap>
 
 	<resultMap type="Reply" id="replyResultSet">
@@ -102,10 +105,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(SEQ_RNO.NEXTVAL, #{userNo}, #{BNo}, #{ReContent}, SYSDATE, DEFAULT, #{UserName})
 	</insert>
 	
-	<!-- 댓글 삭제 -->
-	<update id="deleteReply" parameterType="_int">
-		UPDATE Reply
-		SET RE_STATUS = 'N' 
-		WHERE RE_NO=#{reNo}	
+	<!-- 게시글 신고 -->
+	<update id="bReportBoard" parameterType="_int">
+		UPDATE BOARD
+		SET B_STATUS = 'R' 
+		WHERE B_NO=#{bno}
 	</update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.uni.spring.board.model.dto;
 
 public class PageInfo {
+	
 	private int currentPage;
 	private int listCount;
 
