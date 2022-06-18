@@ -110,7 +110,7 @@
 										</span>
 										
 									</div>
-									<button type="button" name="addToCart" onclick="addFormSubmit(1);" value="5" class="btn alazea-btn ml-15">Add to cart</button>
+									<button type="button" name="addToCart" onclick="addFormSubmit(1);" value="5" class="btn alazea-btn ml-15">❤️찜하기</button>
 									<button type="button" name="addToOrder" onclick="addFormSubmit(2);" value="5" class="btn alazea-btn ml-15">바로구매</button>
 								</form>
 								<!-- 오더폼과 인서트가트 두가지중 원하는 action을 하게 하는 JS -->

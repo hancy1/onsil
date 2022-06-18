@@ -684,22 +684,22 @@ public class ShopController {
 	
 	@ResponseBody
 	@RequestMapping(value = "buyFreebie.do", produces="application/json; charset=utf-8")
-	public int buyFreebie (int freeNo,HttpSession session) {
+	public Freebie buyFreebie (int freeNo,HttpSession session) {
 		
 		//userNo가져오기(세션에서)
 		Member m = (Member) session.getAttribute("loginUser");		
 		int userNo = Integer.parseInt(m.getUserNo());
 		
-		//사은품넘버로 사은품객체 조회하여 포인트가격 담기		
+		//사은품넘버로 사은품객체 조회하기	
 		Freebie f = shopService.selectFreebie(freeNo);
 		
-		int pointVal = f.getFreePoint();
-		
-		
+		//포인스 사용값 받기
+		int pointVal = f.getFreePoint();	
 		//포인트 사용 하는 메소드
 		insertPoint(userNo,pointVal,"사용");
 		
-		return pointVal;
+		
+		return f;
 	}
 
 }
