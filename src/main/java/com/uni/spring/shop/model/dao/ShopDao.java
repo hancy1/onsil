@@ -255,6 +255,11 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.searchShopList", searchKeyword, rowdounds);
 	}
 
+	public Freebie selectFreebie(SqlSessionTemplate sqlSession, int freeNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shopMapper.selectFreebie", freeNo);
+	}
+
 
 
 

@@ -71,19 +71,14 @@ public class ShopController {
 								 Model model, String searchKeyword) {
 		
 		
-		
 		int listCount = shopService.productListCount();
-		
-		
 		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
 		
 		ArrayList<Product> list = shopService.searchShopList(pi,searchKeyword);
-		
-		
+				
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		model.addAttribute("searchKeyword",searchKeyword );
-		
 		
 		
 		return "shop/shopMain";
@@ -590,8 +585,8 @@ public class ShopController {
 		
 		Product p = shopService.selectShop(proCode);
 		Member m = (Member) session.getAttribute("loginUser");			
-		ArrayList<Freebie> fList = shopService.selectFreebieList();
 		
+		ArrayList<Freebie> fList = shopService.selectFreebieList();
 
 		model.addAttribute("p", p);
 		model.addAttribute("m", m);
@@ -606,13 +601,14 @@ public class ShopController {
 	//결제페이지 연결, 주문 insert
 	@RequestMapping("orderPay.do")
 	public String insertOrder (ProOrder o, String proCode, String address,String addressDetail,
-							   String orderPhone, String orderName, int amount,
+							   String orderPhone, String orderName, int amount, int freeNo,
 							   Model model, HttpSession session) {
 		
 		Product p = shopService.selectShop(proCode);
 		Member m = (Member) session.getAttribute("loginUser");		
 		int userNo = Integer.parseInt(m.getUserNo());
 		
+		System.out.println("컨트롤러에서 freeNo제대로 받아지나?" + freeNo);
 		
 		//토탈가격이랑 포인트 가격 계산
 		int price = p.getPrice();
@@ -627,7 +623,7 @@ public class ShopController {
 		o.setAmount(amount);
 		o.setProCode(proCode);
 		o.setUserNo(userNo);
-		o.setFreeNo(3);		
+		o.setFreeNo(freeNo);		
 		o.setPayCode("card");
 		
 		shopService.insertOrder(o);
@@ -666,5 +662,43 @@ public class ShopController {
 		return count;
 	}
 	
+	
+	//사은품숍 연결 
+	@RequestMapping("listFreebie.do")
+	public String selectFreebieList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		
+		
+		int listCount = shopService.productListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Freebie> fList = shopService.selectFreebieList();
+		
+		model.addAttribute("fList", fList);
+		model.addAttribute("pi", pi);
+		
+		
+		return "shop/pointshop";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "buyFreebie.do", produces="application/json; charset=utf-8")
+	public int buyFreebie (int freeNo,HttpSession session) {
+		
+		//userNo가져오기(세션에서)
+		Member m = (Member) session.getAttribute("loginUser");		
+		int userNo = Integer.parseInt(m.getUserNo());
+		
+		//사은품넘버로 사은품객체 조회하여 포인트가격 담기		
+		Freebie f = shopService.selectFreebie(freeNo);
+		
+		int pointVal = f.getFreePoint();
+		
+		
+		//포인트 사용 하는 메소드
+		insertPoint(userNo,pointVal,"사용");
+		
+		return pointVal;
+	}
 
 }

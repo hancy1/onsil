@@ -93,6 +93,8 @@ public interface ShopService {
 
 	ArrayList<Product> searchShopList(ShopPageInfo pi, String searchKeyword);
 
+	Freebie selectFreebie(int freeNo);
+
 	
 
 
