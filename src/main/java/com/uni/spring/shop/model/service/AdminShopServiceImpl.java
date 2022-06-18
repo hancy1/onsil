@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -248,13 +249,20 @@ public class AdminShopServiceImpl implements AdminShopService {
 		}
 	}
 
-	
-	//매출List
 	@Override
-	public ProOrder selectSalesList() {
+	public ArrayList<ProOrder> selectSalesList() {
 		// TODO Auto-generated method stub
 		return aShopDao.selectSalesList(sqlSession);
 	}
+
+	@Override
+	public ArrayList<ProOrder> searchDateSalesList(Map dateMap) {
+		// TODO Auto-generated method stub
+		return aShopDao.searchDateSalesList(sqlSession, dateMap);
+	}
+
+	
+
 
 
 }

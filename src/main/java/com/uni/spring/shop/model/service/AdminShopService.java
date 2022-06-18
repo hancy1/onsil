@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.uni.spring.shop.model.dto.Freebie;
 import com.uni.spring.shop.model.dto.ProOrder;
@@ -71,7 +72,13 @@ public interface AdminShopService {
 
 	void cancelAdminOrder(int orderNo);
 
-	ProOrder selectSalesList();
+	ArrayList<ProOrder> selectSalesList();
+
+	ArrayList<ProOrder> searchDateSalesList(Map dateMap);
+
+	
+
+	
 
 	
 

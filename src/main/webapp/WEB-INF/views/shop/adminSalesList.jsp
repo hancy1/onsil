@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ADMIN :: 매출 관리</title>
+<title>ADMIN :: 매출 확인</title>
 
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
@@ -16,10 +17,16 @@
 <!-- 부트스트랩아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
+<!-- datepicker -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <style>
 
 	#salesList{
 	text-align: left;
+	width:65%;
 	}
     #salesList>tbody>tr:hover{
     cursor:pointer;
@@ -40,14 +47,12 @@
     .text{
     width:53%;
     }
-    .searchBtn{
-    Width:20%;
-    }
+
     
    .btn-grad {
       background-image: linear-gradient(to right, #16A085 0%, #F4D03F  51%, #16A085  100%);
       margin: 10px;
-      padding: 15px 45px;
+      padding: 10px;
       text-align: center;
       text-transform: uppercase;
       transition: 0.5s;
@@ -66,6 +71,12 @@
       text-decoration: none;
     }
     
+    #dateSearchBtn{
+	 padding: 3.5px;
+	 border-radius: 10px;
+	 width: 27px;
+	 height: 27px;
+	}
     
 </style>
 </head>
@@ -81,7 +92,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>ADMIN :: 매출 관리</h2>
+			<h2>ADMIN :: 매출 확인</h2>
 		</div>
 
 		<div class="container">
@@ -91,7 +102,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.jsp"><i
 									class="fa fa-home"></i> Home</a></li>							
-							<li class="breadcrumb-item active" aria-current="page">매출관리</li>
+							<li class="breadcrumb-item active" aria-current="page">매출확인</li>
 						</ol>
 					</nav>
 				</div>
@@ -105,36 +116,131 @@
     
 	<!-- 매출관리 테이블 -->
     <div class="content" align="center">
+    	<h4>총 매출은 <span id="finalTotal" style="color:#6EB4B5; font-weight:bold" ></span>원 입니다. </h4>
+    	
+    	<form action="dateSearch.do" method="post">    	
+    		<input type="text" id="startDate" name="startDate" placeholder="시작일 입력"/> ~
+			<input type="text" id="endDate" name="endDate" placeholder="종료일 입력"/>
+    		<button class="btn btn-info btn-sm" id="dateSearchBtn" type="submit"><i class="icon_search"></i></button>
+    	</form>
+    	
+
+    	
+    	
+    	<script type="text/javascript">
+	    	$(document).ready(function () {
+	    		    $.datepicker.regional['ko'] = {
+	    		        closeText: '닫기',
+	    		        prevText: '이전달',
+	    		        nextText: '다음달',
+	    		        currentText: '오늘',
+	    		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+	    		        '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+	    		        monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+	    		        '7월','8월','9월','10월','11월','12월'],
+	    		        dayNames: ['일','월','화','수','목','금','토'],
+	    		        dayNamesShort: ['일','월','화','수','목','금','토'],
+	    		        dayNamesMin: ['일','월','화','수','목','금','토'],
+	    		        weekHeader: 'Wk',
+	    		        dateFormat: 'yy-mm-dd',
+	    		        firstDay: 0,
+	    		        isRTL: false,
+	    		        showMonthAfterYear: true,
+	    		        yearSuffix: '',
+	    		        showOn: 'focus',    				
+	    				//buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", //버튼 이미지 경로
+	    			    //buttonImageOnly: true, //버튼 이미지만 깔끔하게 보이게함
+	    		        //buttonText: "🔢",
+	    		        changeMonth: true,
+	    		        changeYear: true,
+	    		        showButtonPanel: true,
+	    		        yearRange: 'c-99:c+99',
+	    		    };
+	    		    $.datepicker.setDefaults($.datepicker.regional['ko']);
+	    		 
+	    		    $('#startDate').datepicker();
+	    		    $('#startDate').datepicker("option", "maxDate", $("#endDate").val());
+	    		    $('#startDate').datepicker("option", "onClose", function ( selectedDate ) {
+	    		        $("#endDate").datepicker( "option", "minDate", selectedDate );
+	    		    });
+	    		 
+	    		    $('#endDate').datepicker();
+	    		    $('#endDate').datepicker("option", "minDate", $("#startDate").val());
+	    		    $('#endDate').datepicker("option", "onClose", function ( selectedDate ) {
+	    		        $("#endDate").datepicker( "option", "maxDate", selectedDate );
+	    		    });
+	    		});
+    		
+		</script>
+    	
+    	
+    	<br>
         <div class="innerOuter" style="padding:0px 10% 15% 10%;">    	
             <table id="salesList" class="table table-hover" align="center">
                 <thead>
                   <tr>
                   	<th width=100>주문No</th><!-- 누르면 오더디테일로 이동하게? 구현 -->
-                  	<th width=350>제품명</th>
+                  	<th>제품명</th>
+                  	<th>수령인</th>
                     <th>수량</th>
-                    <th>날짜</th>
-                    <th>금액</th>
+                    <th>주문날짜</th>
+                    <th>결제금액</th>
                                         
                   </tr>
                 </thead>
+                <c:forEach items="${ list }" var="o">
                 <tbody>
-                	<c:forEach items="${ list }" var="o">
+                	
 	                    <tr>
 	                    	<td>${ o.orderNo }</td>
-	                    	<td>${ o.proName }</td>	                        
+	                    	<td>${ o.proName }</td>
+	                    	<td>${ o.orderName }</td>	                        
 	                        <td>${ o.amount }</td>
 	                        <td>${ o.orderDate }</td>
-	                        <td>${ o.orderDate }</td>
+	                        <td id="totalVal">
+	                        <c:set var="total" value="${o.amount*o.price }"/>${total}
+	                        
+	                        </td>
+
 	                        <!--확정하면서 금액을 담는 DB를 만들지 단순 계산할지 생각을 잘 해야될듯... -->	                    	               	                        
 	                    </tr>
-                    </c:forEach>
-                </tbody>
+                    
+                </tbody>                
+                </c:forEach>
             </table>
             <br>
 			
             <br clear="both"><br>
             
+  		    <script type="text/javascript">		
+				
+				$(document).ready(function() {	
+					
+					const table = document.getElementById('salesList');
+					  
+					 
+					  // 합계 계산
+					  let finalSum = 0;
+					  for(let i = 1; i < table.rows.length; i++)  {
+						 const totalOne = parseInt(table.rows[i].cells[5].innerHTML);
+						 finalSum += totalOne;
+					    
+					    console.log("totalOne 가져와진거야?"+totalOne);
+					  }
+					  
+					  //정규식통해서 ,(쉼표)찍고 가독성 높힘
+					  const finalSumComma = finalSum.toString()
+					  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					  
+					  
+					  // 합계 출력
+					  document.getElementById('finalTotal').innerText = finalSumComma;
+						
+							
+			    });
 			
+			</script>
+
             <br><br>
         </div>
         <br><br>

@@ -349,5 +349,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		WHERE ORDER_NO=#{orderNo}
     
   	</update>
+  	
+     <!-- 관리자 페이지(매출관리) : 주문최종완료된건 조회하기-->
+	<select id="selectSalesList" parameterType="ProOrder" resultMap="ProOrderResultSet">	
+	
+	  SELECT  A.*, B.PRO_NAME, B.PRICE
+	  FROM PRO_ORDER A	  
+	  JOIN PRODUCT B ON A.PRO_CODE = B.PRO_CODE	  	
+	  WHERE A.ORDER_STATUS = 'C'
+	  ORDER BY A.ORDER_DATE
+	    
+	</select>
+	
+	<!-- 관리자 페이지(매출관리) : 주문최종완료된건 조회하기-->
+	<select id="searchDateSalesList" parameterType="ProOrder" resultMap="ProOrderResultSet">	
+	
+	SELECT *
+	FROM PRO_ORDER
+	WHERE ORDER_DATE BETWEEN TO_DATE('#{startDate}','YYYY-MM-DD') AND TO_DATE('#{endDate}','YYYY-MM-DD')
+	AND ORDER_STATUS = 'C'
+	ORDER BY ORDER_DATE
+	    
+	    
+	       
+      
+	</select>
 	
 </mapper>
