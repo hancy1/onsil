@@ -417,7 +417,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   	</select>
 	
-	<!-- 리뷰등록(사용자) -->	
+	<!-- 주문등록(사용자) -->	
 	<insert id="insertOrder">	
 	
 		INSERT INTO PRO_ORDER
@@ -497,6 +497,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  WHERE FREE_AMOUNT > 0
 	    
 	</select>
+	
+	
+	<!-- 사은품 조회해오기(1개) -->	
+  	<select id = "selectFreebie" parameterType="Freebie" resultMap="freebieResultSet">
+
+	  SELECT *
+	  FROM FREEBIE 	  	  
+	  WHERE FREE_NO=#{freeNo}
+    
+ 	</select>
+	
+	
 	
 	<select id="selectBestSeller" resultMap="productResultSet">
 	

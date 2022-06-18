@@ -31,9 +31,36 @@
 <!-- 아임포트 API -->
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
+<style type="text/css">
+
+  /*radio 버튼 색상변경 */
+  input[type='radio'] {
+    -webkit-appearance:none;
+    width:16px;
+    height:16px;
+    border:1px solid darkgray;
+    border-radius:50%;
+    outline:none;
+    background:#e6e6e6;
+  }
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;  
+    border-radius:50%;  
+  }
+  input[type='radio']:checked:before {
+  	background:#008675;
+  }
+
+
+</style>
 
 <!-- Title -->
 <title>온실 - 주문하기 </title>
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -74,7 +101,7 @@
                     <div class="checkout_details_area clearfix">
                         <h5>SHOP : Order 내역서</h5>
                         <form action="" method="post" id="orderForm">
-                        
+                        	<input type="hidden" id="freeNo" name="freeNo" value="">
                         	<input type="hidden" name="proCode" value="${p.proCode }">
                         	<input type="hidden" name="amount" value="${ amount }">
 							<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
@@ -85,13 +112,13 @@
                                         <!-- Single Checkbox -->
                                         <div class="custom-control custom-checkbox d-flex align-items-center mr-30">
                                             <div class="form-check">
-											  <input class="form-check-input" onclick="memberInfo();" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+											  <input style="width:15px; height:15px;" onclick="memberInfo();" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
 											  <label class="form-check-label" for="flexRadioDefault1">
 											    회원 정보와 동일
 											  </label>
 											</div>
 											<div class="form-check">
-											  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+											  <input style="width:15px; height:15px;" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
 											  <label class="form-check-label" for="flexRadioDefault2">
 											    새 배송지
 											  </label>
@@ -128,33 +155,7 @@
                                 
                                <div class="col-md-3 mb-4">
                                     
-                               </div>                                  
-                                
-                               <div class="col-md-4 mb-4">
-                                    <label for="order-notes">사은품을 선택하세요.</label>
-                                    <!-- 사은품 리스트로 체크박스랑 들어감 -->
-                                    <table align="center" class="table">
-										<c:forEach items="${ fList }" var="f"> 										
-										<tr>
-											<td><img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${f.changeName}" width="100"></td>											
-										</tr>
-										
-										<tr>
-											<td>${ f.freeName }</td>															
-										</tr>
-										
-										<tr>
-										  <td>${ f.freePoint }point</td>
-										</tr>
-										<tr>
-										  <td>
-										  	<input type="checkbox" class="custom-control-input" id="customCheck2">
-                                            <label class="custom-control-label" for="customCheck2"></label>
-                                           </td>
-										</tr>	
-										</c:forEach>
-									</table>                                    
-                                </div>
+                               </div>      
                             </div>
                         </form>
                     </div>
@@ -233,6 +234,58 @@
                     </div>
                 </div>
             </div>
+            <h5>사은품 선택</h5>
+            <!-- All 사은품 Area -->
+			<div class="col-12 col-md-8 col-lg-9">
+				<div class="shop-products-area">
+					<div class="row">
+						
+						<c:forEach items="${ fList }" var="f">
+						<!-- Single Product Area -->
+						<div style="margin-left: 10px">
+							<div class="single-product-area mb-80">
+								<!-- Product Image -->
+								<div class="text-left">	
+									<img style="width: 100px; height: 100px; border-radius: 5px;" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${f.changeName}" >																			
+								</div>
+								<!-- Product Info -->
+								<div class="product-info mt-15 text-left">									
+									<p>${ f.freeName }<br>									
+									<span><fmt:formatNumber type="number" value="${ f.freePoint }"/>point</span></p>
+									<button class="btn btn-warning btn-sm" onclick="buyPoint(${ f.freeNo });">포인트구매</button>
+									<script type="text/javascript">
+									
+									function buyPoint(freeNo) {
+											
+											//input 태그에 사은품 번호 넣기(주문페이지로 넘기기 위함)
+									        $('#freeNo').val(freeNo);
+									        
+											//포인트 사용하기 위해 ajax
+									        $.ajax({
+												url: "buyFreebie.do",
+								                type: "POST",
+								                data: {
+								                	'freeNo':freeNo									        		
+								                },
+								                success: function (pointVal) {
+								                	alert(pointVal+"point가 사용되었습니다.")
+								                },
+											})
+									
+									}
+									
+									
+									</script>
+								
+								
+								
+								</div>
+							</div>
+						</div>						
+						</c:forEach>					
+					</div>
+				</div>
+			</div>	
         </div>
     </div>
     <!-- ##### Checkout Area End ##### -->
@@ -307,6 +360,7 @@
 			});
 				  
 	</script>
+    
     
     
     

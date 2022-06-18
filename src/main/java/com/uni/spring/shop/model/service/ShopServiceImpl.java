@@ -430,6 +430,14 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public Freebie selectFreebie(int freeNo) {
+		// TODO Auto-generated method stub
+		return shopDao.selectFreebie(sqlSession,freeNo);
+	}
+
+
+
 
 
 
