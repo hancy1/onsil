@@ -421,7 +421,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertOrder">	
 	
 		INSERT INTO PRO_ORDER
-		VALUES(SEQ_ORDER_NO.NEXTVAL, NULL, #{proCode},#{freeNo},#{userNo},#{payCode},#{amount},#{orderName},#{orderPhone},#{address},#{addressDetail}, DEFAULT, DEFAULT,DEFAULT)
+		VALUES(SEQ_ORDER_NO.NEXTVAL, null, #{proCode}, #{freeNo}, #{userNo}, #{payCode}, #{amount}, #{orderName}, #{orderPhone}, #{address}, #{addressDetail}, DEFAULT, DEFAULT,DEFAULT)
   
   	</insert>
 	

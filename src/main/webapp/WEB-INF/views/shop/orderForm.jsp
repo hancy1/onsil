@@ -101,10 +101,11 @@
                     <div class="checkout_details_area clearfix">
                         <h5>SHOP : Order 내역서</h5>
                         <form action="" method="post" id="orderForm">
-                        	<input type="hidden" id="freeNo" name="freeNo" value="">
+                        	
                         	<input type="hidden" name="proCode" value="${p.proCode }">
                         	<input type="hidden" name="amount" value="${ amount }">
 							<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+                            <input type="hidden" id="freeNo" name="freeNo" value="">
                             <div class="row">
                                 
                                  <div class="col-12">
