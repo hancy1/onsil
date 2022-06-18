@@ -62,7 +62,8 @@
 		<mapper resource="/mappers/adminShop-mapper.xml"/>
 		<mapper resource="/mappers/shop-mapper.xml"/>
 		
-		<mapper resource="/mappers/board-mapper.xml"/>	
+		<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/adminBoard-mapper.xml"/>	
 		
 		<mapper resource="/mappers/ticket-mapper.xml"/>
 		<mapper resource="/mappers/reviewBoard-mapper.xml"/>
