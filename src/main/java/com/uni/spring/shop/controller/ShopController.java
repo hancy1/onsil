@@ -608,7 +608,8 @@ public class ShopController {
 		Member m = (Member) session.getAttribute("loginUser");		
 		int userNo = Integer.parseInt(m.getUserNo());
 		
-		System.out.println("컨트롤러에서 freeNo제대로 받아지나?" + freeNo);
+		//System.out.println("컨트롤러에서 freeNo제대로 받아지나?" + freeNo);
+		//System.out.println("컨트롤러에서 proCode제대로 받아지나?" + proCode);
 		
 		//토탈가격이랑 포인트 가격 계산
 		int price = p.getPrice();

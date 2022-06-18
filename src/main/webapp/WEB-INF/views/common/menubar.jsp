@@ -144,7 +144,7 @@
 							<c:choose>
 								<c:when test="${ sessionScope.loginUser.userId eq 'admin'}">
 								<ul>									
-						            <li><a href="#" style="font-size: 15px;">상품</a>
+						            <li><a href="#" style="font-size: 15px;">SHOP</a>
 										<ul class="dropdown">
 											<li><a href="listProducts.do">구매하기</a></li>											
 											<li><a href="myReviewList.do">내 리뷰 보기</a></li>
@@ -201,7 +201,7 @@
 									<c:otherwise>
 									
 									<ul>									
-						            <li><a href="#">상품</a>
+						            <li><a href="#">SHOP</a>
 										<ul class="dropdown">
 											<li><a href="listProducts.do">구매하기</a></li>											
 											<li><a href="myReviewList.do">내 리뷰 보기</a></li>
