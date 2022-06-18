@@ -124,21 +124,36 @@
 											  <div class="window">
 											    <div class="popup">
 											    	<br>
-											    	<form action="bReport.do" method="get">
+											    	<form id="bReportForm" action="bReport.do" method="get">
+											    		<input type="hidden" name="bno" value="${ b.BNo }">
 												    	<h3 style="color: #2C3539">신고하기</h3>
-												    	<hr>												    	
+												    	<hr>	
+												    	<div class="radio">											    	
 												        <ol style="color: #7BCCB5">
-													        <li><input type="radio" name="bReport" value="1"> 1. 욕설, 비방, 차별, 혐오 </li>
-													        <li><input type="radio" name="bReport" value="2"> 2. 홍보, 영리 목적 </li>
-													        <li><input type="radio" name="bReport" value="3"> 3. 음란, 청소년 유해 </li>
-													        <li><input type="radio" name="bReport" value="4"> 4. 개인정보 노출, 유포, 거래 </li>
-													        <li><input type="radio" name="bReport" value="5"> 5. 도배, 스팸 </li>
-													        <li><input type="radio" name="bReport" value="6"> 6. 기타 </li>
+													        <li><input type="radio" name="bReport" value="1" required> 1. 욕설, 비방, 차별, 혐오 </li>
+													        <li><input type="radio" name="bReport" value="2" required> 2. 홍보, 영리 목적 </li>
+													        <li><input type="radio" name="bReport" value="3" required> 3. 음란, 청소년 유해 </li>
+													        <li><input type="radio" name="bReport" value="4" required> 4. 개인정보 노출, 유포, 거래 </li>
+													        <li><input type="radio" name="bReport" value="5" required> 5. 도배, 스팸 </li>
+													        <li><input type="radio" name="bReport" value="6" required> 6. 기타 </li>
 												        </ol>
+												        </div>
 												        <br><br>
-												        <button type="submit">신고</button>	
-												      	<button id="close" >취소</button>
-											      	</form>									    
+												        <button type="submit" class="btn" onclick="bReport();">신고</button>	
+												      	<button type="button" class="btn" id="close">취소</button>
+											      	</form>
+											      	<script>
+														function bReport(){
+															
+															var bReportForm = $("#bReportForm");
+												
+															bReportForm.attr("action", "bReport.do");
+											
+															alert("신고가 완료되었습니다.");
+															
+															bReportForm.submit();
+														}
+											      	</script>									    
 											      </div>
 											  </div>
 											</div>
@@ -358,11 +373,15 @@
         </div>
     </section>
     <!-- ##### Blog Content Area End ##### -->
+        
+    <jsp:include page="../common/footer.jsp" />
+    
 	<script>
+		// 모달 창 보임
 		function show() {
 		  document.querySelector(".background").className = "background show";
 		}
-		
+		// 모달 창 닫힘
 		function close() {
 		  document.querySelector(".background").className = "background";
 		  return;
@@ -372,6 +391,14 @@
 		document.querySelector("#close").addEventListener("click", close);
 	</script>
     
+    <script>
+    // 게시물 신고하기
+    $(".btn_report").on("click",function(){
+    	$("#bReport").val("");
+    	
+    })
+    
+    </script>
     
 	<script>
 		// 댓글 작성
@@ -465,8 +492,6 @@
 			}
 		}
     </script>
-    
-    <jsp:include page="../common/footer.jsp" />
 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->

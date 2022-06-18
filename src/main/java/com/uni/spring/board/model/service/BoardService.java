@@ -24,4 +24,6 @@ public interface BoardService {
 
 	int insertReply(Reply r);
 
+	void bReportBoard(int bno);
+
 }

@@ -2,12 +2,7 @@ package com.uni.spring.board.model.dto;
 
 import java.sql.Timestamp;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Data 
 public class Reply {
@@ -18,6 +13,7 @@ public class Reply {
 	private String reContent;
 	private Timestamp reDate;
 	private String reStatus;
-	private String userName; // 작성자 이름 출력용
+	
+	private String userName;	// 작성자 이름 출력용
 	
 }

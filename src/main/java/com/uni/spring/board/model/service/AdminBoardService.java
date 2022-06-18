@@ -8,15 +8,9 @@ import com.uni.spring.board.model.dto.Reply;
 
 public interface AdminBoardService {
 
-	static int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	int selectListCount();
 
-	static ArrayList<Board> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	ArrayList<Board> selectList(PageInfo pi);
 
 
 }

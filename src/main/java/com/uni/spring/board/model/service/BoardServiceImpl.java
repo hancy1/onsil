@@ -99,4 +99,16 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return result;
 	}
+
+	@Override
+	public void bReportBoard(int bno) {
+		// TODO Auto-generated method stub
+		
+		int result = boardDao.bReportBoard(sqlSession, bno);
+		System.out.println(result);
+		
+		if(result < 0) { // 0보다 작으면
+			throw new CommException("게시글 신고 실패");
+		}
+	}
 }

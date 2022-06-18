@@ -46,7 +46,7 @@ public class BoardController {
 	    // @RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage
 	    // defaultValue : 넘어오는 값이 null 인 경우에 해당 파라미터 기본 값 지정
 	      
-	    int listCount = boardService.selectListCount();
+	    int listCount = boardService.selectListCount(); // 조회수
 	      
 	    PageInfo pi = BoardPagination.getPageInfo(listCount, currentPage, 10, 10); // 페이지 번호 10개씩, 게시글 10개씩 출력
 	      
@@ -67,7 +67,8 @@ public class BoardController {
 		b.setBNo(bno);	// 객체에 글번호 + 게시글 정보 담기
 		
 		mv.addObject("b", b).setViewName("board/boardDetail");
-		System.out.println("상세보기 객체 확인용 : " + b);   
+		//System.out.println("상세보기 객체 확인용 : " + b);   
+		
 		return mv;		   
 	}
 	
@@ -96,6 +97,7 @@ public class BoardController {
 	  
 	  boardService.insertBoard(b);   
 	  //System.out.println("글 작성후 객체 생성 : " + b);
+	  
 	  return "redirect:boardList.do"; //글 작성하면 게시글 목록으로
 		   
 	}
@@ -134,7 +136,7 @@ public class BoardController {
 	public String deleteBoard(int bno, String fileName, HttpServletRequest request) {
 		   
 		boardService.deleteBoard(bno);
-		System.out.println("컨트롤러 삭제하기 글번호" + bno);
+		//System.out.println("컨트롤러 삭제하기 글번호" + bno);
 		   
 		if(!fileName.equals("")) { //파일이 첨부됐다면?
 			deleteFile(fileName, request); //파일 지우기
@@ -181,14 +183,14 @@ public class BoardController {
 			b.setBOriginName(file.getOriginalFilename());
 			b.setBChangeName(changeName);
 			
-			System.out.println("정보 잘 넘어왔는지 확인 : " + b);
+			//System.out.println("수정할 객체 확인 : " + b);
 
 			// 새로 넘어온 파일이 있을 때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
 			if(orgchangeName != null) { // null은 새로운 파일도 있는데 기존의 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
 				deleteFile(orgchangeName, request);	// 값이 있으면 삭제함
 			}
 		}		
-		//System.out.println(b);
+		//System.out.println("수정할 객체 확인" + b);
 
 		boardService.updateBoard(b);
 							
@@ -213,6 +215,7 @@ public class BoardController {
 	public String insertReply(Reply r) {
 		
 		int result = boardService.insertReply(r);
+		
 		return String.valueOf(result);
 	}
 
@@ -224,6 +227,17 @@ public class BoardController {
 		//int result = boardService.deleteReply(reno);
 		
 		return null;
+	}
+	
+	
+	// 신고된 게시글 상태값 변경
+	@RequestMapping("bReport.do")
+	public String bReport(int bno, HttpServletRequest request) {
+		
+		System.out.println("신고할 글번호 확인" + bno);
+		boardService.bReportBoard(bno);
+		
+		return "redirect:detailBoard.do";
 	}
 
 }

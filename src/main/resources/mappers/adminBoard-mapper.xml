@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="adminBoardMapper">
+
+	<resultMap type="Board" id="boardResultSet"> 
+		<id property="bNo" column="B_NO"/>
+         <result property="userNo" column="USER_NO"/>
+         <result property="bCategoryNo" column="B_CATEGORY_NO"/>
+         <result property="bTitle" column="B_TITLE"/>
+         <result property="bContent" column="B_CONTENT"/>
+         <result property="bDate" column="B_DATE"/>
+         <result property="bCount" column="B_COUNT"/>
+         <result property="bOriginName" column="B_ORIGIN_NAME"/>
+         <result property="bChangeName" column="B_CHANGE_NAME"/>
+         <result property="bStatus" column="B_STATUS"/>
+         <result property="adbCategoryNo" column="ADB_CATEGORY_NO"/>
+         <!-- 화면 출력용 -->
+         <result property="userName" column="USER_NAME"/>
+         <result property="bCategoryName" column="B_CATEGORY_NAME"/>
+         <result property="adbCategoryName" column="ADB_CATEGORY_NAME"/>
+	</resultMap>
+
+	
+	<!-- 게시글 카운트 -->
+	<select id="selectListCount" resultType="_int"><!-- 파라미터 없음. 숫자만 출력하기 때문에 int로 함 -->
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE B_STATUS='Y'
+	</select>
+	
+	<!-- 게시판 목록 -->
+	<select id="selectList" parameterType="Board" resultMap="boardResultSet">
+		SELECT A.B_NO, C.ADB_CATEGORY_NAME, A.B_TITLE, B.USER_NAME, A.B_DATE 
+		FROM BOARD A
+		JOIN MEMBER B ON A.USER_NO = B.USER_NO
+		JOIN ADB_CATEGORY C ON A.ADB_CATEGORY_NO = C.ADB_CATEGORY_NO
+		WHERE B_STATUS='R'
+		ORDER BY B_NO DESC
+	</select>
+	
+
+</mapper>

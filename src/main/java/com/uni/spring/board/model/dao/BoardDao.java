@@ -50,8 +50,7 @@ public class BoardDao {
 	}
 
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 		return sqlSession.update("boardMapper.updateBoard", b);
 		//System.out.println("다오 : " + a);
 	}
@@ -64,6 +63,11 @@ public class BoardDao {
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("boardMapper.insertReply", r);
+	}
+
+	public int bReportBoard(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.bReportBoard", bno);
 	}
 
 }

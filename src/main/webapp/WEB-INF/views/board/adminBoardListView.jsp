@@ -70,7 +70,7 @@
 		                	<c:forEach items="${ list }" var="b">
 			                    <tr>
 			                        <td>${ b.BNo }</td>
-			                        <td>${ b.BCategoryName }</td>
+			                        <td>${ b.AdbCategoryName }</td>
 			                        <td>${ b.BTitle }</td>
 			                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userName }</a></td>
 			                        <td>${ b.BDate }</td>
