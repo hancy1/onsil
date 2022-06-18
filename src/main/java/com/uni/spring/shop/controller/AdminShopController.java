@@ -2,9 +2,13 @@ package com.uni.spring.shop.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -533,21 +537,39 @@ public class AdminShopController {
 		}
 		
 
-		// 주문관리 페이지 
+		// 매출관리 페이지 
 		@RequestMapping("salesList.do")
-		public String selectSalesList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+		public String selectSalesList(Model model) {
 			
-			
-			
-			int listCount = aShopService.orderListCountAll();
-			
-			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
-			
-			
-			ArrayList<ProOrder> list = aShopService.selectOrderList(pi); 
+			ArrayList<ProOrder> list = aShopService.selectSalesList(); 
 			
 			model.addAttribute("list", list);
-			model.addAttribute("pi", pi);		
+				
+			
+			return "shop/adminSalesList";
+		}
+		
+		
+		//검색 페이지연결
+		@RequestMapping("dateSearch.do")
+		public String searchDateSalesList(Model model, String startDate, String endDate) {
+			
+			System.out.println("어떤식으로가져오는지?"+startDate);
+			System.out.println("어떤식으로가져오는지?"+endDate);
+			
+			
+			
+			Map dateMap = new HashMap<String, String>();
+			dateMap.put("startDate", startDate);
+			dateMap.put("endDate", endDate);
+			
+			
+			
+			ArrayList<ProOrder> list = aShopService.searchDateSalesList(dateMap); 
+			
+			model.addAttribute("list", list);
+					
+		
 			
 			return "shop/adminSalesList";
 		}

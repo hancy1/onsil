@@ -188,7 +188,7 @@
 											<li><a href="adminFreebieList.do">사은품관리</a></li>											
 											<li><a href="inventoryList.do">재고관리</a></li>
 											<li><a href="adminOrderList.do">주문관리</a></li>
-											<li><a href="salesList.do">매출관리</a></li>
+											<li><a href="salesList.do">매출확인</a></li>
 											<li><a href="adminReviewList.do">리뷰관리</a></li>
 											<li><a href="adminBList.do">신고된 게시글</a></li>
 											<li><a href="listTicket.do">티켓등록</a></li>

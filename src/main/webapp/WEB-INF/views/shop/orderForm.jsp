@@ -354,6 +354,7 @@
 						  msg += '결제 금액 : ' + rsp.paid_amount;
 						  msg += '카드 승인번호 : ' + rsp.apply_num;
 						  
+						  
 						  var postForm = $("#orderForm");
 						  postForm.attr("action", "orderPay.do");
 						  postForm.submit();

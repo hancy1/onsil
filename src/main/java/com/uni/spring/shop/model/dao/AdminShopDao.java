@@ -1,6 +1,7 @@
 package com.uni.spring.shop.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -187,10 +188,17 @@ public class AdminShopDao {
 		return sqlSession.update("adminShopMapper.cancelAdminOrder",orderNo);
 	}
 
-	public ProOrder selectSalesList(SqlSessionTemplate sqlSession) {
+	public ArrayList<ProOrder> selectSalesList(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("adminShopMapper.selectSalesList");
 	}
+
+	public ArrayList<ProOrder> searchDateSalesList(SqlSessionTemplate sqlSession, Map dateMap) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminShopMapper.searchDateSalesList",dateMap );
+	}
+
+
 
 
 

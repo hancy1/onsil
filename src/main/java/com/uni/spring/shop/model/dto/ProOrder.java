@@ -1,7 +1,8 @@
 package com.uni.spring.shop.model.dto;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class ProOrder {
 	ORDER_R_INSERT
 	
 	PRO_NAME
+	PRICE
 	FREE_NAME
 	USER_ID
 	*/
@@ -59,9 +61,13 @@ public class ProOrder {
 	private String orderRInsert; 	//리뷰등록 여부 디폴트 N
 
 	private String proName; 		//제품명
+	private int price;				//가격(개당가격)
 	private String freeName; 		//사은품이름
 	private String userId; 			//회원아이디
 	
+	
+	private String startDate;	//검색시작일(주문날짜기준)
+	private String endDate;		//검색종료일(주문날짜기준)
 
 	
 }
