@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Title -->
-    <title> 온실 - Gardening SHOP 장바구니 </title>
+    <title> 온실 - Gardening SHOP 찜하기 </title>
     
     <!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -34,7 +34,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(resources/img/bg-img/24.jpg);">
-            <h2>Cart</h2>
+            <h2>My pick</h2>
         </div>
 
         <div class="container">
@@ -43,7 +43,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                            <li class="breadcrumb-item active" aria-current="page">찜목록</li>
                         </ol>
                     </nav>
                 </div>
@@ -82,9 +82,10 @@
                                         <h5>${ cart.proName }</h5>                                       
                                     </td>
                                     <td class="qty">
+                                    ${cart.amount}
                                         <div class="quantity">
                                             
-                                            <input type="number" class="qty-text" id="qty" name="amount" value="${cart.amount}">
+                                            <input type="hidden" class="qty-text" id="qty" name="amount" value="${cart.amount}">
                                             
                                         </div>
                                     </td>
@@ -92,7 +93,7 @@
                                     
                                     <span><fmt:formatNumber type="number" value="${ cart.price }"/>원</span></td>
                                     <td class="total_price"><span><c:set var="sTotal" value="${cart.amount*cart.price }"/><fmt:formatNumber type="number" value="${sTotal}"/>원</span></td>
-                                    <td><button type="button"  onclick="postFormSubmit(1);" id = "delete_btn" class="btn btn-light btn-sm" ><i class="icon_close"></i></button></td>
+                                    <td><button type="button"  onclick="deleteCart(${cart.cartNo});" id = "delete_btn" class="btn btn-light btn-sm" ><i class="icon_close"></i></button></td>
 
                                 </tr>
 
@@ -113,13 +114,9 @@
 			<script>
 			
 	
-			function postFormSubmit(num){
-				var postForm = $("#postForm");	
-
-				if(num == 1){
-					postForm.attr("action", "deleteCart.do");
-				}				
-				postForm.submit();
+			function deleteCart(cartNo){
+		
+				location.href="deleteCart.do?cartNo="+cartNo;	
 			}
 
 			</script>
@@ -129,7 +126,7 @@
 
                
 
-                <!-- Cart Totals -->
+                <!-- Cart Totals --> <!--  
                 <div class="col-12 col-lg-6">
                     <div class="cart-totals-area mt-70">
                         <h5 class="title--">Total</h5>
@@ -143,7 +140,7 @@
                             <a href="#" class="btn alazea-btn w-100">구매하기</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </div>

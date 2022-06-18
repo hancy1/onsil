@@ -223,6 +223,12 @@
                                     <p><fmt:formatNumber type="number" value="${p.price}"/>원</p>
                                 </div>
                             </div>
+                           <div class="products-data">
+                                <h5>Gift :</h5>
+                                <div class="single-products d-flex justify-content-between align-items-center">
+                                    <p id=freebieName></p>                                                                        
+                                </div>
+                            </div>
                         </div>                        
                         <div class="order-total d-flex justify-content-between align-items-center">
                             <h5>Order Total</h5>
@@ -268,8 +274,9 @@
 								                data: {
 								                	'freeNo':freeNo									        		
 								                },
-								                success: function (pointVal) {
-								                	alert(pointVal+"point가 사용되었습니다.")
+								                success: function (data) {
+								                	alert(data.freePoint+"point가 사용되었습니다.");
+								                	$('#freebieName').text(data.freeName);
 								                },
 											})
 									
