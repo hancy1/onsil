@@ -260,6 +260,38 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.selectFreebie", freeNo);
 	}
 
+	public ArrayList<Product> sortPriceList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.sortPriceList", null, rowdounds);
+	}
+
+	public ArrayList<Product> sortNameList(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.sortNameList", null, rowdounds);
+	}
+
+	public ArrayList<Product> sortPriceListDesc(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.sortPriceListDesc", null, rowdounds);
+	}
+
+	public ArrayList<Product> sortNameListDesc(SqlSessionTemplate sqlSession, ShopPageInfo pi) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowdounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.sortNameListDesc", null, rowdounds);
+	}
+
 
 
 

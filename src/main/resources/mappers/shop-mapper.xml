@@ -620,6 +620,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	
     	
   	</select>
+  	
+  	<!-- 싼가격순 -->
+	<select id="sortPriceList" parameterType="Product" resultMap="productResultSet" >
 	
+      SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+      ORDER BY PRICE
+      
+	</select>
+	
+	
+	<!--제품명 ㄱㄴㄷ  -->
+	<select id="sortNameList" parameterType="Product" resultMap="productResultSet" >
+	
+	  SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+      ORDER BY PRO_NAME
+		
+	</select>
+	
+	<!-- 비싼가격순 -->
+	<select id="sortPriceListDesc" parameterType="Product" resultMap="productResultSet" >
+	
+      SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+      ORDER BY PRICE DESC
+		
+	</select>
+	
+	<!-- 제품명역순  -->
+	<select id="sortNameListDesc" parameterType="Product" resultMap="productResultSet" >
+	
+      SELECT *
+	  FROM PRODUCT
+	  WHERE PRO_STATUS='Y'
+      ORDER BY PRO_NAME DESC
+		
+	</select>
  	
 </mapper>

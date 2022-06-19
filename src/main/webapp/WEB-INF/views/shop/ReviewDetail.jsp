@@ -201,10 +201,10 @@
 								    		that.prop('name',data);
 								        	if(data==1) {
 								        		 $('#good').prop("src","resources/img/core-img/hand-thumbs-up-fill.svg");
-								        		 likeCount();
+								        		 likeCount(); //새로 화면에 [도움됐어요] 수 카운팅해야됨
 								        	} else {
 								        		  $('#good').prop("src","resources/img/core-img/hand-thumbs-up.svg");
-								        		  likeCount();
+								        		  likeCount(); //새로 화면에 [도움됐어요] 수 카운팅해야됨
 								        	}
 							             	}
 								        	  

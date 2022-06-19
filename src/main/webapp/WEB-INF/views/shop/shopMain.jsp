@@ -156,24 +156,6 @@
 				<div class="col-12 col-md-4 col-lg-3">
 					<div class="shop-sidebar-area">
 
-						<!--가격순보기
-                        <div class="shop-widget price mb-50">
-                            <h4 class="widget-title">Prices</h4>
-                            <div class="widget-desc">
-                                <div class="slider-range">
-                                    <div data-min="8" data-max="30" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="8" data-value-max="30" data-label-result="Price:">
-                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all first-handle" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                    </div>
-                                    <div class="range-price">Price: $8 - $30</div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
-
-
 						<!-- Shop Widget -->
 						<div class="shop-widget sort-by mb-50">
 							<!-- 검색기능 -->
@@ -187,105 +169,29 @@
 								 </div>							 
 							</div>
 							<br>
-							<h4 class="widget-title">Sort by</h4>
+						    <!-- 정렬기능 -->
+						  	<h4 class="widget-title">Sort by</h4>
 							<div class="widget-desc">
-								<!-- Single Checkbox -->
-								<div
-									class="custom-control custom-checkbox d-flex align-items-center mb-2">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck7"> <label class="custom-control-label"
-										for="customCheck7">New arrivals</label>
-								</div>
-								<!-- Single Checkbox -->
-								<div
-									class="custom-control custom-checkbox d-flex align-items-center mb-2">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck8"> <label class="custom-control-label"
-										for="customCheck8">Alphabetically, A-Z</label>
-								</div>
-								<!-- Single Checkbox -->
-								<div
-									class="custom-control custom-checkbox d-flex align-items-center mb-2">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck9"> <label class="custom-control-label"
-										for="customCheck9">Alphabetically, Z-A</label>
-								</div>
-								<!-- Single Checkbox -->
-								<div
-									class="custom-control custom-checkbox d-flex align-items-center mb-2">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck10"> <label
-										class="custom-control-label" for="customCheck10">Price:
-										low to high</label>
-								</div>
-								<!-- Single Checkbox -->
-								<div
-									class="custom-control custom-checkbox d-flex align-items-center">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck11"> <label
-										class="custom-control-label" for="customCheck11">Price:
-										high to low</label>
-								</div>
-							</div>
-						</div>
-
-						<!-- Shop Widget -->
-						<div class="shop-widget best-seller mb-50">
-						
-							<h4 class="widget-title">Best Seller</h4>
-							<div class="widget-desc">
-
-								<!-- Single Best Seller Products -->
-								<div class="single-best-seller-product d-flex align-items-center">
-									<div class="product-thumbnail">
-										<a href="shop-details.html"><img src="resources/img/bg-img/4.jpg" alt=""></a>
-									</div>
-									<div class="product-info">
-										<a href="shop-details.html">Cactus Flower</a>
-										<p>$10.99</p>
-										<div class="ratings">
-											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i>
-										</div>
-									</div>
-								</div>
-
-								<!-- Single Best Seller Products -->
-								<div
-									class="single-best-seller-product d-flex align-items-center">
-									<div class="product-thumbnail">
-										<a href="shop-details.html"><img src="resources/img/bg-img/5.jpg"
-											alt=""></a>
-									</div>
-									<div class="product-info">
-										<a href="shop-details.html">Tulip Flower</a>
-										<p>$11.99</p>
-										<div class="ratings">
-											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i>
-										</div>
-									</div>
-								</div>
-
-								<!-- Single Best Seller Products -->
-								<div class="single-best-seller-product d-flex align-items-center">
-									<div class="product-thumbnail">
-										<a href="shop-details.html"><img src="resources/img/bg-img/34.jpg"
-											alt=""></a>
-									</div>
-									<div class="product-info">
-										<a href="shop-details.html">Recuerdos Plant</a>
-										<p>$9.99</p>
-										<div class="ratings">
-											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-												class="fa fa-star"></i>
-										</div>
-									</div>
-								</div>
-
+								 <div class="d-flex align-items-center">
+									 <select id="selectsort" name="selectbox" onchange="chageSort()" class="custom-select widget-title">
+	                                  <option value="">Sort select </option>	                                  
+	                                  <option value="1">Price: low to high</option>
+	                                  <option value="2">Price: high to low</option>
+	                                  <option value="3">Alphabetically, A-Z</option>
+	                                  <option value="4">Alphabetically, Z-A</option>
+	                                </select>
+	                                <script type="text/javascript">
+	                                
+	                                	function chageSort() {
+	                                		
+	                                		var sort = $("#selectsort").val();
+	                                		console.log("나오냐?" + sort);
+	                                		location.href="listSort.do?sort="+ sort;
+											
+										};
+	                                
+	                                </script>
+								 </div>							 
 							</div>
 						</div>
 					</div>
