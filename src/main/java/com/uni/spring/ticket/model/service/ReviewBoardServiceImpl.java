@@ -139,9 +139,9 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 
 	//후기게시판 댓글 등록
 	@Override
-	public int insertReply(RBReply r) {
+	public int insertReply(RBReply rb) {
 	
-		int result = rbDao.insertReply(sqlSession, r);
+		int result = rbDao.insertReply(sqlSession, rb);
 		
 		if(result < 0) {
 			throw new CommException("댓글 추가 실패");
@@ -149,6 +149,34 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		
 		return result;	
 	}
+
+	//댓글삭제
+	@Override
+	public int deleteReply(int replyNo) {
+
+		int result = rbDao.deleteReply(sqlSession, replyNo);
+		
+		if(result < 0) {
+			throw new CommException("댓글 삭제 실패");
+		}
+		
+		return result;
+	}
+
+	//댓글수정
+	@Override
+	public int updateReply(RBReply rb) {
+	
+		int result = rbDao.updateReply(sqlSession, rb);
+		
+		if(result < 0) {
+			throw new CommException("댓글 수정 실패");
+		}
+		
+		return result;
+	}
+
+	
 	
 	
 

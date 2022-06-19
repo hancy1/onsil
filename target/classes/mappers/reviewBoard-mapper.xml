@@ -62,8 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertRBoard">
 
 		INSERT INTO REVIEWBOARD
-		VALUES (SEQ_TICKET.NEXTVAL,
-		#{userNo},#{TCategoryNo},#{rbTitle},#{rbContent},#{count},SYSDATE,#{originName},#{changeName},DEFAULT)
+		VALUES (SEQ_TICKET.NEXTVAL,#{userNo},#{TCategoryNo},#{rbTitle},#{rbContent},#{count},SYSDATE,#{originName},#{changeName},DEFAULT)
 	</insert>
 
 	<!-- 후기게시판 디테일페이지 조회 -->
@@ -129,13 +128,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<resultMap type="RBReply" id="replyResultSet">
-		<id property="reNo" column="RB_REPLY_NO" />
+		<id property="replyNo" column="RB_REPLY_NO" />
 		<result property="rbNo" column="RB_NO" />
 		<result property="userNo" column="USER_NO" />
-
-		<result property="reContent" column="RB_REPLY_CONTENT" />
-		<result property="reDate" column="RB_REPLY_DATE" />
-		<result property="status" column="RE_STATUS" />
+        <result property="userId" column="USER_Id" />
+		<result property="content" column="RB_REPLY_CONTENT" />
+		<result property="date" column="RB_REPLY_DATE" />
+		<result property="status" column="RB_REPLY_STATUS" />
 
 	</resultMap>
 
@@ -143,18 +142,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectReplyList" parameterType="_int"
 		resultMap="replyResultSet">
 	<![CDATA[
-		SELECT A.RB_REPLY_NO, A.RB_REPLY_CONTENT, B.USER_ID, B.USER_NAME, A.CREATE_DATE
+		  SELECT A.*,B.USER_ID
 		FROM RB_REPLY A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
-		WHERE A.RB_NO = #{bno} AND A.RB_REPLY_STATUS ='Y'
+		WHERE A.RB_NO = ${rbNo} AND A.RB_REPLY_STATUS ='Y'
 		ORDER BY A.RB_REPLY_NO DESC
 		]]>
 	</select>
+	
+	
 
 	<!-- 댓글 작성 -->
 	<insert id="insertReply" parameterType="RBReply">
 		INSERT INTO RB_REPLY
-		VALUES(SEQ_RB_REPLY.NEXTVAL, #{rbNo}, #{userNo}, #{reContent},SYSDATE, DEFAULT)
+		VALUES(SEQ_RB_REPLY.NEXTVAL, #{rbNo}, #{userNo}, #{content},SYSDATE, DEFAULT)
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE FROM RB_REPLY
+		WHERE RB_REPLY_NO = #{replyNo}
+	</delete>
+	
+	<!-- 댓글수정 -->
+	<update id="updateReply">
+		UPDATE RB_REPLY
+		SET RB_REPLY_CONTENT = #{content}
+		WHERE RB_REPLY_NO = #{replyNo}
+	</update>
+	
 
 </mapper>

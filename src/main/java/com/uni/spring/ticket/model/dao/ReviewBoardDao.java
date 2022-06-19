@@ -68,14 +68,14 @@ public class ReviewBoardDao {
 	}
 
 	//후기게시글 댓글
-	public int insertReply(SqlSessionTemplate sqlSession, RBReply r) {
+	public int insertReply(SqlSessionTemplate sqlSession, RBReply rb) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("reviewBoardmapper.insertReply", r);
+		return sqlSession.insert("reviewBoardmapper.insertReply", rb);
 	}
 
 	public ArrayList<RBReply> selectReplyList(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
-		sqlSession.update("reviewBoardmapper.updateReplyCount", bno); // 댓글 수 업데이트
+		
 
 		return (ArrayList) sqlSession.selectList("reviewBoardmapper.selectReplyList", bno);
 	}
@@ -96,6 +96,18 @@ public class ReviewBoardDao {
 	public int deleteRBoard(SqlSessionTemplate sqlSession, int bno) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("reviewBoardmapper.deleteRBoard", bno);
+	}
+
+	//댓글삭제
+	public int deleteReply(SqlSessionTemplate sqlSession, int replyNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("reviewBoardmapper.deleteReply", replyNo);
+	}
+
+	//댓글수정
+	public int updateReply(SqlSessionTemplate sqlSession, RBReply rb) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("reviewBoardmapper.updateReply", rb);
 	}
 
 }
