@@ -116,11 +116,17 @@
     
 	<!-- 매출관리 테이블 -->
     <div class="content" align="center">
-    	<h4>총 매출은 <span id="finalTotal" style="color:#6EB4B5; font-weight:bold" ></span>원 입니다. </h4>
+      
+    	<h4>
+    	<c:if test="${not empty startDate}">
+    	해당기간
+    	</c:if> 
+    	총 매출은 <span id="finalTotal" style="color:#6EB4B5; font-weight:bold" ></span>원 입니다.    	
+    	</h4>
     	
     	<form action="dateSearch.do" method="post">    	
-    		<input type="text" id="startDate" name="startDate" placeholder="시작일 입력"/> ~
-			<input type="text" id="endDate" name="endDate" placeholder="종료일 입력"/>
+    		<input type="text" id="startDate" name="startDate" placeholder="시작일 입력" value="${ startDate }"/> ~
+			<input type="text" id="endDate" name="endDate" placeholder="종료일 입력" value="${ endDate }"/>
     		<button class="btn btn-info btn-sm" id="dateSearchBtn" type="submit"><i class="icon_search"></i></button>
     	</form>
     	
