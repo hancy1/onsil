@@ -438,6 +438,35 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public ArrayList<Product> sortList(ShopPageInfo pi, int sort) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Product> list = null;
+		
+		if(sort==1 || sort==3) {
+			if(sort==1) {
+				
+				list=shopDao.sortPriceList(sqlSession,pi);
+			}else {
+				
+				list=shopDao.sortNameList(sqlSession,pi);
+			}
+		}else {
+			if(sort==2) {
+				
+				list=shopDao.sortPriceListDesc(sqlSession,pi);
+			}else {
+				
+				list=shopDao.sortNameListDesc(sqlSession,pi);
+			}
+		}
+		
+		return list;
+	}
+
+
+
 
 
 

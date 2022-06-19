@@ -85,6 +85,23 @@ public class ShopController {
 	}
 	
 	
+	//정렬 페이지 연결
+	@RequestMapping("listSort.do")
+	public String sortList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
+								 Model model, int sort) {
+		
+		
+		int listCount = shopService.productListCount();
+		ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Product> list = shopService.sortList(pi,sort);
+				
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "shop/shopMain";
+	}
+	
 	
 	//tree카테
 	@RequestMapping("treeListProducts.do")
