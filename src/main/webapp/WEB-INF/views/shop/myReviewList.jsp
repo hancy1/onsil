@@ -16,10 +16,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 <style>
-	#boardList{
-	text-align: center;
+	#myReviewList{
+		text-align: left;	
+		width:80%;	
+		margin-right: 30px;
+		margin-bottom: 30px;
+		margin-left: 40px;
 	}
-    #boardList>tbody>tr:hover{
+	
+    #myReviewList>tbody>tr:hover{
     cursor:pointer;
     }
 
@@ -110,11 +115,11 @@
    
     
 	<!-- 마이 리뷰 테이블 -->
-    <div class="content">
+    <div class="content" align="center">
      	
         
-        <div class="innerOuter" style="padding:5% 10%;">
-    	<h4> ${ sessionScope.loginUser.userName }님이 작성하신 리뷰입니다.</h4><br><br>
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">
+    	<h4> ${ sessionScope.loginUser.userName }님이 작성하신 리뷰입니다.</h4><br>
             <table id="myReviewList" class="table table-hover" align="center">
                 <thead>
                   <tr>
