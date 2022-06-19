@@ -14,8 +14,13 @@
 
 <style>
 	#myPointList{
-	text-align: center;
+		text-align: center;	
+		width:60%;	
+		margin-right: 30px;
+		margin-bottom: 30px;
+		margin-left: 40px;
 	}
+	
     #myPointList>tbody>tr:hover{
     cursor:pointer;
     }
@@ -107,10 +112,10 @@
    
     
 	<!-- 포인트 테이블 -->
-    <div class="content">
+    <div class="content" align="center">
      	
         
-        <div class="innerOuter" style="padding:5% 10%;">
+        <div class="innerOuter" style="padding:0px 10% 15% 10%;">
     	<h4> ${ sessionScope.loginUser.userName }님의 현재 포인트는 <span style="color:red">${point.totalPoint } point </span> 입니다.</h4><br><br>
             <table id="myPointList" class="table table-hover" align="center">
                 <thead>
