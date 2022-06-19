@@ -219,12 +219,15 @@
 						
 						  
 						<div align="center">
-							<button class="btn btn-outline-success" onclick="postFormSubmit(1);">수정</button>
+						
+							<c:if test="${r.reviewWriter eq loginUser.userNo}">
+								<button class="btn btn-outline-success" onclick="postFormSubmit(1);">수정</button>
+							</c:if>
+							
 							<button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 						</div>
 			
 						<form id="postForm" action="" method="post">
-						
 							<input type="hidden" name="reviewNo" value="${ r.reviewNo }">
 							<input type="hidden" name="fileName" value="${ r.changeName }">
 						</form>
