@@ -103,7 +103,7 @@ textarea {
 							<th>글번호</th>
 							<td colspan="3">${ rb.rbNo }</td>
 							<th>카테고리</th>
-							<td colspan="3">${ rb.TCategoryNo }</td>
+							<td colspan="3">${ rb.TCategoryName }</td>
 
 						</tr>
 						<tr>
