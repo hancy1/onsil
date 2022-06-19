@@ -568,8 +568,12 @@ public class AdminShopController {
 			ArrayList<ProOrder> list = aShopService.searchDateSalesList(dateMap); 
 			
 			model.addAttribute("list", list);
-					
-		
+			
+			if(startDate != null && !startDate.isEmpty()) {
+				model.addAttribute("startDate", startDate);		
+				model.addAttribute("endDate", endDate);
+			}
+			
 			
 			return "shop/adminSalesList";
 		}
