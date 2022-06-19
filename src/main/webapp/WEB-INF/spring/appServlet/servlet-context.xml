@@ -30,6 +30,11 @@
 	<!-- 인터셉터 추가 -->
 	<interceptors>
 		<interceptor>
+			<mapping path="/detailShop.do"/>
+			<mapping path="/myReviewList.do"/>
+			<mapping path="/myOrderList.do"/>
+			<mapping path="/myPointList.do"/>
+			
 			<mapping path="/gardenMain.do"/>
 			<mapping path="/visitorBoard.do"/>
 			<mapping path="/neighborList.do"/>
