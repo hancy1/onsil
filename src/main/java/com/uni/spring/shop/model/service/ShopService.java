@@ -97,6 +97,8 @@ public interface ShopService {
 
 	ArrayList<Product> sortList(ShopPageInfo pi, int sort);
 
+	void buyFreebie(int freeNo);
+
 	
 
 

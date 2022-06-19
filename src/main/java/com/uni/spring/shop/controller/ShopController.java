@@ -698,7 +698,7 @@ public class ShopController {
 		return "shop/pointshop";
 	}
 	
-	
+	//사은품 구매
 	@ResponseBody
 	@RequestMapping(value = "buyFreebie.do", produces="application/json; charset=utf-8")
 	public Freebie buyFreebie (int freeNo,HttpSession session) {
@@ -707,7 +707,11 @@ public class ShopController {
 		Member m = (Member) session.getAttribute("loginUser");		
 		int userNo = Integer.parseInt(m.getUserNo());
 		
-		//사은품넘버로 사은품객체 조회하기	
+		//사은품 재고하나 빼기
+		shopService.buyFreebie(freeNo);
+		
+		
+		//사은품넘버로 사은품객체 조회하기(=>데이터 보내서 화면에 바로표시해야함)	
 		Freebie f = shopService.selectFreebie(freeNo);
 		
 		//포인스 사용값 받기

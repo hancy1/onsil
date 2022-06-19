@@ -292,6 +292,11 @@ public class ShopDao {
 		return (ArrayList)sqlSession.selectList("shopMapper.sortNameListDesc", null, rowdounds);
 	}
 
+	public int buyFreebie(SqlSessionTemplate sqlSession, int freeNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shopMapper.buyFreebie",freeNo);
+	}
+
 
 
 
