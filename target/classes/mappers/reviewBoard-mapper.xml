@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="USER_ID" property="userId" />
 
 		<result column="T_CATEGORY_NO" property="TCategoryNo" />
+		<result column="T_CATEGORY_NAME" property="TCategoryName" />
 
 		<result column="RB_TITLE" property="rbTitle" />
 
@@ -121,10 +122,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update> 
 
 	<!-- <select id="findHeart" parameterType="_int" resultType="RBLike"> select 
-		* from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo} </select> <insert 
-		id="insertHeart" > insert into RB_LIKE(RB_NO, USER_NO, HEART) values(#{rbNo}, 
-		#{userNo}, 1) </insert> <delete id="deleteHeart" parameterType="_int" > delete 
-		from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo} </delete> -->
+		* from RB_LIKE where RB_NO=#{rbNo} and USER_NO=#{userNo} </select>
+		 <insert id="insertHeart" > 
+		 insert into RB_LIKE(RB_NO, USER_NO, HEART) values(#{rbNo}, #{userNo}, 1) 
+		 </insert> 
+		 <delete id="deleteHeart" parameterType="_int" >
+		 delete 
+		from RB_LIKE 
+		where RB_NO=#{rbNo} and USER_NO=#{userNo} 
+		</delete> -->
 
 
 	<resultMap type="RBReply" id="replyResultSet">

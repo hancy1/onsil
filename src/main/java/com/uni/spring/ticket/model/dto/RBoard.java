@@ -23,6 +23,7 @@ public class RBoard {
 	private String userNo;//회원번호
 	private String userId;//회원아이디
 	private String TCategoryNo;//카테고리번호
+	private String TCategoryName;//카테고리이름
 	private String rbTitle;//게시글제목
 	private String rbContent;//게시글 내용
 	private int count;//조회수
