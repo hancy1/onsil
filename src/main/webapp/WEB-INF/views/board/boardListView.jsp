@@ -212,7 +212,16 @@
     			location.href="detailBoard.do?bno=" + $(this).children().eq(0).text();
     		});
     	});
+        
+    	var msg = "${msg}";
+    	if(msg){
+			alert(msg);
+    	}
+		//<c:if test="${ !empty msg }">
+
+		//</c:if>  	
     </script>
+    
     
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->

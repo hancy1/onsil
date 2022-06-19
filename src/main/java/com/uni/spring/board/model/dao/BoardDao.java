@@ -1,6 +1,7 @@
 package com.uni.spring.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -65,9 +66,9 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertReply", r);
 	}
 
-	public int bReportBoard(SqlSessionTemplate sqlSession, int bno) {
+	public int bReportBoard(SqlSessionTemplate sqlSession, Map<String, Object> bReportMap) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("boardMapper.bReportBoard", bno);
+		return sqlSession.update("boardMapper.bReportBoard", bReportMap);
 	}
 
 }
