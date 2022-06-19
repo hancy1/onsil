@@ -508,7 +508,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
  	</select>
 	
+	<!--사은품 구매 시 재고 수정 -->
+	<update id="buyFreebie">
 	
+	  UPDATE FREEBIE
+	  SET FREE_AMOUNT=FREE_AMOUNT-1
+	  WHERE FREE_NO=#{freeNo}
+	  
+	</update>
 	
 	<select id="selectBestSeller" resultMap="productResultSet">
 	

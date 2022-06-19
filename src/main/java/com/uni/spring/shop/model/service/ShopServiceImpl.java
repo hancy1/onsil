@@ -467,6 +467,19 @@ public class ShopServiceImpl implements ShopService {
 
 
 
+	@Override
+	public void buyFreebie(int freeNo) {
+		// TODO Auto-generated method stub
+		
+		int result = shopDao.buyFreebie(sqlSession, freeNo);
+		
+		if(result <0) {
+			throw new CommException("재고 update 실패");
+		}	
+	}
+
+
+
 
 
 
