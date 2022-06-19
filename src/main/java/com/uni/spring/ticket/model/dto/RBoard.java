@@ -27,6 +27,7 @@ public class RBoard {
 	private String rbTitle;//게시글제목
 	private String rbContent;//게시글 내용
 	private int count;//조회수
+	
 	private Date date;//작성일
 	private String originName;//첨부파일원본명
 	private String changeName;//첨부파일수정명

@@ -75,16 +75,18 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	public RBLike findHeart(int bno, int userNo) {
 		
 		// 2개의 parameter를 보내기 위해 Map 선언 및 Map에 데이터 삽입
-		Map<String, Integer> number = new HashMap<String, Integer>();
+		Map number = new HashMap<String, String>();
 		number.put("rbNo", bno);
 		number.put("userNo", userNo);
 		return rbDao.findHeart(sqlSession,number);
 	}
 
+	//하트 눌렀을때
 	@Override
 	public int insertHeart(RBLike heart) {
 		// 좋아요가 DB에 저장이 되는것이 없으면 0이 그대로 리턴으로 넘어감
 		int result = 0;
+		
 		// 좋아요가 이미 있는지 확인하는 코드
 		RBLike find = rbDao.findHeart(sqlSession,heart);
 		
@@ -92,6 +94,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		// find가 null이 아니면 좋아요가 있는 상태이므로 정보 삭제
 		if(find==null) {
 			// insert의 리턴값은 DB에 성공적으로 insert된 갯수를 보내므로 result가 1이 됨
+			
 			result = rbDao.insertHeart(sqlSession,heart);
 		} else {
 			rbDao.deleteHeart(sqlSession,heart);
@@ -176,6 +179,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 		return result;
 	}
 
+	
 	
 	
 	

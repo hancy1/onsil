@@ -20,7 +20,7 @@ public class RBLike {
 	private int rbLikeNo;//좋아요번호
 	private int rbNo;//게시글번호
 	private int userNo;//회원번호
-	private int likecheck;//좋아요여부
+	private int heart;//좋아요여부
 	private String userId;//회원아이디
 	
 	

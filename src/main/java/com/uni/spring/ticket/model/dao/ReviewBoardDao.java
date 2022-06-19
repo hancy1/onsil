@@ -35,6 +35,7 @@ public class ReviewBoardDao {
 		return sqlSession.update("reviewBoardmapper.increaseCount", bno);
 	}
 
+	//게시글 등록
 	public int insertRBoard(SqlSessionTemplate sqlSession, RBoard rb) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("reviewBoardmapper.insertRBoard", rb);
@@ -45,9 +46,10 @@ public class ReviewBoardDao {
 		return sqlSession.selectOne("reviewBoardmapper.selectRBoard", bno);
 	}
 
-	public RBLike findHeart(SqlSessionTemplate sqlSession, Map<String, Integer> number) {
+	// 좋아요가 DB에 있는지 확인
+	public RBLike findHeart(SqlSessionTemplate sqlSession, Map number) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("reviewBoardmapper.findHeart", number);
+		return sqlSession.selectOne("reviewBoardmapper.checkHeart", number);
 	}
 
 	public RBLike findHeart(SqlSessionTemplate sqlSession, RBLike heart) {
@@ -57,6 +59,8 @@ public class ReviewBoardDao {
 
 	public int insertHeart(SqlSessionTemplate sqlSession, RBLike heart) {
 		// TODO Auto-generated method stub
+		
+		 
 		return sqlSession.insert("reviewBoardmapper.insertHeart", heart);
 	}
 
@@ -109,5 +113,7 @@ public class ReviewBoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("reviewBoardmapper.updateReply", rb);
 	}
+
+
 
 }

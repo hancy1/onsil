@@ -14,6 +14,13 @@
 <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png">
 
+<!-- 부트스트랩아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+
+
+
+
 <style>
 #contentArea {
 	width: 80%
@@ -43,16 +50,15 @@ textarea {
 	margin: 5px;
 }
 
-.bi-heart {
-	font-size: 30px;
-	line-height: 30px;
-	color: crimson;
-}
 
-.bi-heart-fill {
-	font-size: 30px;
-	line-height: 30px;
-	color: crimson;
+ img{
+     width: 35px;
+     height: 35px;
+     fill:"red" ;
+     border: 1px solid red;
+        }
+
+  
 }
 </style>
 </head>
@@ -88,8 +94,11 @@ textarea {
 		<div class="innerOuter" align="center">
 			<br>
 			<h2>후기게시판</h2>
-
-			<i id="heart" class="bi bi-heart"></i> <br>
+			<a class="text-red heart" style="text-decoration-line: none;">
+			 <img id="heart" src="resources/img/core-img/heart.svg">
+			 [${ i.heartCount }]
+			</a>			
+            <br>
 
 			<div class="content">
 				<br> <br>
@@ -205,23 +214,24 @@ textarea {
 
 
 
-					<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
 
-					<script>
+	<script>
 
   $(document).ready(function () {
 		
 		// 좋아요가 있는지 확인한 값을 heartval에 저장
 	        var heartval = ${heart.heart}
+	        console.log(heartval);
 	        // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
 	        if(heartval>0) {
 	            console.log(heartval);
-	            $("#heart").prop("class", 'bi-heart-fill');
+	            $("#heart").prop("src", "resources/img/core-img/heart-fill.svg");
 	            $(".heart").prop('name',heartval)
 	        }
 	        else {
 	            console.log(heartval);
-	            $("#heart").prop("class", 'bi-heart');
+	            $("#heart").prop("src","resources/img/core-img/heart.svg");
 	            $(".heart").prop('name',heartval)
 	        }
 
@@ -229,20 +239,28 @@ textarea {
          // 좋아요 버튼을 클릭 시 실행되는 코드
             $(".heart").on("click", function () {
                 var that = $(".heart");
+                var bno = ${ rb.rbNo };
     	    $.ajax({
-    	    	url :'detailRBoard.do',
-    	        type :'POST',
-    	        data : {'rbNo':${bno},'userNo':${loginUser.userNo}},
+    	    	url :"insertHeart.do",
+    	        type :"POST",
+    	        data : {'rbNo':bno,'userNo':${sessionScope.loginUser.userNo}},
     	    	success : function(data){
     	    		that.prop('name',data);
     	        	if(data==1) {
-    	        		   $("#heart").prop("class", 'bi-heart-fill');
+    	        		   $("#heart").prop("src", "resources/img/core-img/heart-fill.svg");
     	        	} else {
-    	        		  $("#heart").prop("class", 'bi-heart');
+    	        		  $("#heart").prop("src","resources/img/core-img/heart.svg");
     	        	}
                  	
-    	    });
-    	    }
+    	    	}
+	        	  
+	   		 });
+       });								
+
+	
+   });
+  
+ 
     </script>
 
 				
