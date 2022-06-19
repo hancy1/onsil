@@ -96,7 +96,7 @@ textarea {
 			<h2>후기게시판</h2>
 			<a class="text-red heart" style="text-decoration-line: none;">
 			 <img id="heart" src="resources/img/core-img/heart.svg">
-			 [${ i.heartCount }]
+			
 			</a>			
             <br>
 
