@@ -113,20 +113,25 @@ public class ReviewBoardController {
 
 	// 후기게시판 디테일페이지 연결
 	@RequestMapping("detailRBoard.do")
-	public ModelAndView selectBoard(int bno, ModelAndView mv, HttpSession session, Model model) {
+	public ModelAndView selectBoard(int bno, ModelAndView mv, HttpSession session) {
 
 		RBoard rb = reviewBoard.selectRBoard(bno);
 
+		
+		
 		int userNo = Integer.parseInt(((Member) session.getAttribute("loginUser")).getUserNo());
 
-		mv.addObject("rb", rb).setViewName("Ticket/rboardDetailView");
 
 		RBLike heart = new RBLike();
 		// 좋아요가 되있는지 게시글번호와 회원번호를 보냄.
 		heart = reviewBoard.findHeart(bno, userNo);
 
+
 		// 찾은 정보를 heart로 담아서 보냄
-		model.addAttribute("heart", heart);
+		mv.addObject("heart", heart);
+		
+		mv.addObject("rb", rb).setViewName("Ticket/rboardDetailView");
+
 		// ((Model) mv).addAttribute("heart",heart);
 
 		return mv;
@@ -208,9 +213,10 @@ public class ReviewBoardController {
 
 	}
 
-	// 좋아요
-	@RequestMapping(value = "heart", method = RequestMethod.POST)
-	public @ResponseBody int heart(@ModelAttribute RBLike heart) {
+	// Ajax에서 요청한 정보를 받아서 처리후 보내는 메서드
+	@ResponseBody
+	@RequestMapping(value = "insertHeart.do", produces = "application/json; charset=utf-8")
+	public int heart( RBLike heart) {
 		int result = reviewBoard.insertHeart(heart);
 		return result;
 	}
