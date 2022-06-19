@@ -149,7 +149,7 @@
 												
 															bReportForm.attr("action", "bReport.do");
 											
-															alert("신고가 완료되었습니다.");
+															alert("신고가 완료되었습니다. 감사합니다.");
 															
 															bReportForm.submit();
 														}
@@ -261,7 +261,7 @@
                         <!-- ##### Single Widget Area ##### -->
                         <div class="single-widget-area">
                             <!-- Title -->
-                            <div class="widget-title">
+                            <div class="widget-title" style="color: #2C3539">
                                 <h4>인기 게시글</h4>
                             </div>
 

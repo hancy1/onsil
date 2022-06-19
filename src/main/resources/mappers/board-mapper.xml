@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectListCount" resultType="_int"><!-- 파라미터 없음. 숫자만 출력하기 때문에 int로 함 -->
 		SELECT COUNT(*)
 		FROM BOARD
-		WHERE B_STATUS='Y'
+		WHERE B_STATUS IN ('Y', 'R')
 	</select>
 	
 	<!-- 게시판 목록 -->
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BOARD A
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
-		WHERE B_STATUS='Y'
+		WHERE B_STATUS IN ('Y', 'R')
 		ORDER BY B_NO DESC
 	</select>
 	
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE BOARD
 		SET B_COUNT = B_COUNT + 1
 		WHERE B_NO=#{bno}
-		AND B_STATUS = 'Y' 
+		AND B_STATUS IN ('Y', 'R')
 	</update>
 
 	<!-- 게시글 선택 -->
@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN MEMBER B ON A.USER_NO = B.USER_NO
 		JOIN B_CATEGORY C ON A.B_CATEGORY_NO = C.B_CATEGORY_NO
 		WHERE B_NO=#{bno}
-		AND B_STATUS = 'Y' 
+		AND B_STATUS IN ('Y', 'R')
 	</select>
 	
 	<!-- 게시글 작성 -->
@@ -106,9 +106,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 게시글 신고 -->
-	<update id="bReportBoard" parameterType="_int">
+	<update id="bReportBoard" parameterType="hashMap">
 		UPDATE BOARD
-		SET B_STATUS = 'R' 
+		SET ADB_CATEGORY_NO=#{bReport}, B_STATUS = 'R'
 		WHERE B_NO=#{bno}
 	</update>
 </mapper>

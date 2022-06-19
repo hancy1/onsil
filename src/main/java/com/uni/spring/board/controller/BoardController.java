@@ -230,14 +230,26 @@ public class BoardController {
 	}
 	
 	
-	// 신고된 게시글 상태값 변경
+	// 신고된 게시글 상태값 변경, 신고 카테고리 추가하기
 	@RequestMapping("bReport.do")
-	public String bReport(int bno, HttpServletRequest request) {
+	public String bReport(int bno, int bReport, Model model) {
 		
-		System.out.println("신고할 글번호 확인" + bno);
-		boardService.bReportBoard(bno);
+		System.out.println("신고할 글번호 확인 : " + bno);
+		System.out.println("카테고리 넘버 : " + bReport);
+		int brb = boardService.bReportBoard(bno, bReport);
 		
-		return "redirect:detailBoard.do";
+		if(brb > 0) {	// 업데이트 성공시
+			Board b = boardService.selectBoard(bno);
+			model.addAttribute("b", b);
+			System.out.println("신고후 상세보기로 돌아기기 : " + b);
+			model.addAttribute("msg", "신고가 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "신고가 실패되었습니다.");
+		}
+		
+		System.out.println("결과 확인용 : " + brb);   
+	            
+		return "board/boardDetail";
 	}
 
 }

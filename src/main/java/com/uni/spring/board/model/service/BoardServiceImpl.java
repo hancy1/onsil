@@ -1,6 +1,8 @@
 package com.uni.spring.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,14 +103,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void bReportBoard(int bno) {
-		// TODO Auto-generated method stub
+	public int bReportBoard(int bno, int bReport) {
 		
-		int result = boardDao.bReportBoard(sqlSession, bno);
-		System.out.println(result);
+		Map<String, Object> bReportMap = new HashMap<String, Object>();
 		
-		if(result < 0) { // 0보다 작으면
+		bReportMap.put("bno", bno);
+		bReportMap.put("bReport", bReport);
+		
+		int result = boardDao.bReportBoard(sqlSession, bReportMap);
+		
+		if(result < 0) { // 결과가 0보다 작으면 
 			throw new CommException("게시글 신고 실패");
 		}
+		
+		return result;
 	}
+
 }
