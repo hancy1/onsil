@@ -31,7 +31,11 @@ public interface ReviewBoardService {
 
 	void deleteRBoard(int bno);
 
-	int insertReply(RBReply r);
+	int insertReply(RBReply rb);
+
+	int deleteReply(int replyNo);
+
+	int updateReply(RBReply rb);
 
 	
 

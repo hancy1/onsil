@@ -129,11 +129,11 @@ textarea {
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td colspan="3"><c:if test="${ !empty t.originName }">
+							<td colspan="3"><c:if test="${ !empty rb.originName }">
 									<a
-										href="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}"
-										download="${ t.originName }" readonly>${ t.originName }</a>
-								</c:if> <c:if test="${ empty t.originName }">
+										href="${ pageContext.servletContext.contextPath }/resources/RB_upload_files/${rb.changeName}"
+										download="${ rb.originName }" readonly>${ rb.originName }</a>
+								</c:if> <c:if test="${ empty rb.originName }">
                         	첨부파일이 없습니다.
                            </c:if></td>
 						</tr>
@@ -271,17 +271,17 @@ textarea {
 					if("${loginUser.userId}" == obj.userId){
 						value += "<tr style='background:#EAFAF1'>";
 						
-						value += "<th>" + obj.writer + "</th>" + 
-									 "<td colspan=2>" + obj.answer + "</td>" + 
-									 "<td colspan=2>" + obj.createDate + "</td>" +								 
-									 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReplyForm(" + obj.answerNo + ");'> 수정 </button> </td>" +
-									 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='deleteReply(" + obj.answerNo + ");'> 삭제 </button> </td>" + 
+						value += "<th>" + obj.userId + "</th>" + 
+									 "<td colspan=2>" + obj.content + "</td>" + 
+									 "<td colspan=2>" + obj.date + "</td>" +								 
+									 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReplyForm(" + obj.replyNo + ");'> 수정 </button> </td>" +
+									 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='deleteReply(" + obj.replyNo + ");'> 삭제 </button> </td>" + 
 							 "</tr>";
 					}else{
 						value += "<tr>";
-						value += "<th>" + obj.writer + "</th>" + 
-										 "<td colspan=2>" + obj.answer + "</td>" + 
-										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+						value += "<th>" + obj.userId + "</th>" + 
+										 "<td colspan=2>" + obj.content + "</td>" + 
+										 "<td colspan=2>" + obj.date + "</td>" +								 
 										 "<td colspan=1></td>" +
 										 "<td colspan=1></td>" + 
 								 "</tr>";
@@ -304,8 +304,8 @@ textarea {
 			$.ajax({
 				url:"rbinsert.do",
 				type:"post",
-				data:{answer:$("#replyContent").val(),
-					reperNo:bno,
+				data:{content:$("#replyContent").val(),
+					rbNo:bno,
 					userNo:"${loginUser.userNo}"},
 				success:function(result){
 					if(result > 0) {
@@ -324,13 +324,13 @@ textarea {
 	});
 	
 	// 댓글 삭제
-	function deleteReply(answerNo) {
+	function deleteReply(replyNo) {
 		var q = confirm("댓글을 삭제하시겠습니까?")
 		
 		if(q == true) {
 			$.ajax({
-				url:"deleteReply.do",
-				data:{answerNo:answerNo},
+				url:"deleteRBReply.do",
+				data:{replyNo:replyNo},
 				type:"get",
 				success:function(result){
 					if(result > 0) {
@@ -349,7 +349,7 @@ textarea {
 	}
 	
 	// 댓글 수정 폼
-	function updateReplyForm(answerNo){
+	function updateReplyForm(replyNo){
 		var bno = ${ rb.rbNo };
 		
 		$.ajax({
@@ -360,27 +360,27 @@ textarea {
 				$("#rcount").text(list.length);
 				
 				var value="";
-				$.each(list, function(i, obj){
+				$.each(list, function(rb, obj){
 					if("${loginUser.userId}" == obj.userId){
 						value += "<tr style='background:#EAFAF1'>";
 					}else{
 						value += "<tr>";
 					}
 					
-					if(obj.answerNo == answerNo){
-						value += "<th>" + obj.writer + "</th>" + 
-								 "<td colspan=2><textarea id='updateReplyContent' placeholder=" + obj.answer + "></textarea></td>" + 
-								 "<td colspan=2>" + obj.createDate + "</td>" +
-								 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReply(" + obj.answerNo + ");'> 저장 </button> </td>" +
+					if(obj.replyNo == replyNo){
+						value += "<th>" + obj.userId + "</th>" + 
+								 "<td colspan=2><textarea id='updateReplyContent' placeholder=" + obj.content + "></textarea></td>" + 
+								 "<td colspan=2>" + obj.date + "</td>" +
+								 "<td colspan=1> <button id='updateReply' class='btn btn-danger' onclick='updateReply(" + obj.replyNo + ");'> 저장 </button> </td>" +
 								 "<td colspan=1> <button id='deleteReply' class='btn btn-danger' onclick='selectReplyList();'> 취소 </button> </td>" + 									 
 						 "</tr>";
 					}
 					
-					if(obj.answerNo != answerNo) {						
+					if(obj.replyNo != replyNo) {						
 						value += "<tr>";
-						value += "<th>" + obj.writer + "</th>" + 
-										 "<td colspan=2>" + obj.answer + "</td>" + 
-										 "<td colspan=2>" + obj.createDate + "</td>" +								 
+						value += "<th>" + obj.userId + "</th>" + 
+										 "<td colspan=2>" + obj.content + "</td>" + 
+										 "<td colspan=2>" + obj.date + "</td>" +								 
 										 "<td colspan=1></td>" +
 										 "<td colspan=1></td>" + 
 								 "</tr>";
@@ -395,14 +395,14 @@ textarea {
 	}
 	
 	// 댓글 수정
-	function updateReply(answerNo){		
+	function updateReply(replyNo){		
 		
 		if($("#updateReplyContent").val().trim().length != 0){
 			$.ajax({
-				url:"updateReply.do",
+				url:"updateRBReply.do",
 				type:"post",
-				data:{answer:$("#updateReplyContent").val(),
-					answerNo:answerNo,
+				data:{content:$("#updateReplyContent").val(),
+					replyNo:replyNo,
 					userNo:"${loginUser.userNo}"},
 				success:function(result) {
 					if(result > 0) {

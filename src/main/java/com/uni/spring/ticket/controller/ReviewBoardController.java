@@ -181,7 +181,7 @@ public class ReviewBoardController {
 		return mv;
 	}
 
-	// 티켓첨부파일 삭제
+	// 후기게시판 파일 삭제
 	private void deleteFile(String fileName, HttpServletRequest request) {
 
 		String resources = request.getSession().getServletContext().getRealPath("resources");// 웹 컨테이너 에서의
@@ -230,12 +230,33 @@ public class ReviewBoardController {
 	//후기게시판 댓글 등록
 	@ResponseBody 
 	@RequestMapping(value = "rbinsert.do")
-	public String insertReply(RBReply r) {
+	public String insertReply(RBReply rb) {
 		
-		int result = reviewBoard.insertReply(r);
+		int result = reviewBoard.insertReply(rb);
 		
 		return String.valueOf(result);
 	}
+	
+	//후기게시판 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="deleteRBReply.do")
+	public String deleteReply(int replyNo) {
+		
+		int result = reviewBoard.deleteReply(replyNo);
+		
+		return String.valueOf(result);
+	}
+	
+	//후기게시판 댓글 수정
+		@ResponseBody
+		@RequestMapping(value="updateRBReply.do")
+		public String updateReply(RBReply rb) {
+			
+			int result = reviewBoard.updateReply(rb);
+			
+			return String.valueOf(result);
+		}
+		
 	
 
 }
