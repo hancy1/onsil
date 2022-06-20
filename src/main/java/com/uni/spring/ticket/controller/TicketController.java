@@ -286,7 +286,7 @@ public class TicketController {
 				}	
 				
 				//예약
-				@RequestMapping("reservation.do")
+				@RequestMapping("reservationForm.do")
 				
 				public String reservation(int ticketNo, Model model, HttpSession session) {
 				

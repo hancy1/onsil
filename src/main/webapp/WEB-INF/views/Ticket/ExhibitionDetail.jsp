@@ -94,7 +94,7 @@
 				
 			    <p> <b>소개</b> :${ t.ticketNotice }
 			
-				<p> <a href="reservation.do?ticketNo=${ t.ticketNo }" class="btn btn-info"> 예약 &raquo;</a>
+				<p> <a href="reservationForm.do?ticketNo=${ t.ticketNo }" class="btn btn-info"> 예약 &raquo;</a>
 					<a href= "exhibition.do" class="btn btn-secondary">티켓목록 &raquo;</a>
 		   <button type="button" onclick="location.href='ticketAddress.do' " class="btn btn-primary">위치확인</button>
 				
