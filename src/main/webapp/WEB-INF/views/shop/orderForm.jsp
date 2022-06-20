@@ -105,7 +105,7 @@
                         	<input type="hidden" name="proCode" value="${p.proCode }">
                         	<input type="hidden" name="amount" value="${ amount }">
 							<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
-                            <input type="hidden" id="freeNo" name="freeNo" value="">
+                            <input type="hidden" id="freeNo" name="freeNo" value="0">
                             <div class="row">
                                 
                                  <div class="col-12">
@@ -264,7 +264,8 @@
 									
 									function buyPoint(freeNo) {
 											
-											//input 태그에 사은품 번호 넣기(주문페이지로 넘기기 위함)
+											//input 태그에 사은품 번호 넣기
+											//(결제시 사은품 정보를 controller로 넘기기 위함)
 									        $('#freeNo').val(freeNo);
 									        
 											//포인트 사용하기 위해 ajax
@@ -278,9 +279,8 @@
 								                	alert(data.freePoint+"point가 사용되었습니다.");
 								                	$('#freebieName').text(data.freeName);
 								                },
-											})
-									
-									}
+											})									
+										}
 									
 									
 									</script>
