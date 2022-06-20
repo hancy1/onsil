@@ -309,9 +309,7 @@
 					<div class="checkout_details_area clearfix">
 						<h5>예약하기</h5>
 						
-						<form action="" method="post" id="reservation3">
-							<input id="ticketNo" type="hidden" name="ticketNo" value="${r.ticketNo}">								
-							<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
+						
 							<div class="row">
 
 								<div class="col-12">
@@ -330,8 +328,26 @@
 											   직접입력
 											  </label>
 											</div>
+											<form action="" id="postForm" method="post" class="reservation_form">
+				                            <input id="ticketNo" type="hidden" name="ticketNo"value="${t.ticketNo}"> 
+				                            <input type="hidden" name="userNo"value="${ sessionScope.loginUser.userNo }"> 
+				                            
+			                                </form>
+										<script>
+					                           function addFormSubmit(num){
+											
+												var postForm = $("#postForm");
 
-										</div>
+												if (num == 1) {
+													postForm.attr("action","insertRV.do");
+												} else {
+													postForm.attr("action","deleteRV.do");
+												}
+												postForm.submit();
+											}
+										</script>
+
+									</div>
 									</div>
 								</div>
 								<br> <br>
@@ -362,8 +378,8 @@
                            <select name="TCategoryNo" class="form-control"  required>
                              
                                <option></option>
-                               <option value="1">현장수령</option>
-                               <option value="2">모바일 수령</option>
+                               <option value="1">현장</option>
+                               <option value="2">모바일</option>
                               
                                </select>
                                  </div>
@@ -398,6 +414,10 @@
 						}
 					});
 
+					
+
+                  
+					
 					
 					 function count(type)  {
 				    	  // 결과를 표시할 element
@@ -483,14 +503,14 @@
 							</h5>
 						</div>
 						<div class="checkout-btn mt-30">
-							<a href="reservation.do?ticketNo=${ t.ticketNo }"  id="check_module" class="btn btn-outline-success">예약하기</a>
+						<button type="button" name="addReservation" onclick="addFormSubmit(1);"  class="btn alazea-btn ml-15">예약하기</button>
 
 						</div>
 					</div>
 				</div>
 			</div>
-
-
+	
+                                </form>
 
 
       

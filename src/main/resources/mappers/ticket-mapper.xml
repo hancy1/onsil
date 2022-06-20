@@ -165,5 +165,24 @@ T_CHANGE_NAME-->
      WHERE TICKET_NO=#{ticketNo} AND TICKET_STATUS='Y'
  
  	</select>
+ 	
+ 	
+<!--  예약전부 select해오기 -->
+ 
+	<select id = "selectReservationList" parameterType="Reservation" resultMap="reservationResultSet">
+
+	  SELECT *
+	  FROM RESERVATION A	  
+	  JOIN TICKET B ON A.TICKET_NO = B.TICKET_NO 	  	  
+	  WHERE A.USER_NO=#{userNo}
+    
+  	</select>
+  	
+  	<!-- 예약추가 -->
+	<insert id="insertReservation">
 	
+		INSERT INTO RESERVATION VALUES
+		(SEQ_RESERVATION.NEXTVAL,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)
+		
+	</insert>
 </mapper>

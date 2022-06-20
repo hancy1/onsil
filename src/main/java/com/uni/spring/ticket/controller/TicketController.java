@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -305,5 +307,33 @@ public class TicketController {
 					
 					return "Ticket/reservation";
 				}
+				
+				
+
+				// 예약확인
+					@RequestMapping("reservation.do")
+					public String selectReservationList(HttpSession session,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
+						
+					
+						int userNo = Integer.parseInt(((Member) session.getAttribute("loginUser")).getUserNo());
+					
+						ArrayList<Reservation> list = ticketService.selectReservationList(userNo);
+						
+						
+						model.addAttribute("userNo", userNo);
+					
+						return "Ticket/ReservationList";
+					}
+					
+					//예약추가
+					@RequestMapping("insertRV.do")
+					public String insertReservation(int ticketNo,  HttpServletRequest request) {
+						
+						
+						
+						
+						
+						return "redirect:reservation.do";
+					}
 		
 }
