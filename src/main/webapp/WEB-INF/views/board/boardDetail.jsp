@@ -391,15 +391,6 @@
 		document.querySelector("#close").addEventListener("click", close);
 	</script>
     
-    <script>
-    // 게시물 신고하기
-    $(".btn_report").on("click",function(){
-    	$("#bReport").val("");
-    	
-    })
-    
-    </script>
-    
 	<script>
 		// 댓글 작성
 	 	$(function(){
