@@ -20,7 +20,7 @@
 
 <style>
 #contentArea {
-	width: 100%
+	width: 75%
 }
 
 #contentArea * {
@@ -62,14 +62,14 @@
 	</div>
 	<!-- ##### Breadcrumb Area End ##### -->
     
-    <div class="container">
+    <div class="container" align="center">
 	 	<div class="input-form-backgroud row">
 	 		<div class="input-form col-md-12 mx-auto" style="margin-top: 0px; margin-left: 0px; margin-bottom: 100px;">
 			    <div class="content">
 					<br>
 					<br>
 					<div class="innerOuter">			
-						<table id="contentArea" align="center" class="table">
+						<table id="contentArea" class="table">
 							
 							<tr>
 								<th>주문No</th>
