@@ -106,9 +106,13 @@ public class TicketServiceImpl implements TicketService{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectReservation(int userNo) {
+	public Ticket selectReservation(String bno) {
 		// TODO Auto-generated method stub
-		return ticketDao.selectReservation(sqlSession,userNo);
+		return ticketDao.selectReservation(sqlSession,bno);
 	}
+
+	
+
+	
 
 }

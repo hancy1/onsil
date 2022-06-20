@@ -82,9 +82,12 @@ public class TicketDao {
 
 	}
 
-	public ArrayList<Reservation> selectReservation(SqlSessionTemplate sqlSession, int userNo) {
+	
+
+	public Ticket selectReservation(SqlSessionTemplate sqlSession, String bno) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("ticketMapper.selectReservation",userNo);
+		return sqlSession.selectOne("ticketMapper.selectReservation",bno);
+
 	}
 
 }

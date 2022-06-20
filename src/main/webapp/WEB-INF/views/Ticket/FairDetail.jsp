@@ -78,21 +78,24 @@
                 </div>
 	      <div class="col-md-6">
 				<h3>${ t.ticketTitle }</h3>
-				
+				<input id="ticketNo" type="hidden" name="ticketNo"value="${t.ticketNo}"> 
 				<p> <b>구분 : </b><span class="badge badge-danger">
 				${ t.division }</span>
 				<p> <b>주소</b> : ${ t.ticketLocation }
 				<p> <b>전화번호</b> : ${ t.ticketPhone }
 				
 			    <p> <b>소개</b> :${ t.ticketNotice }
-				<p> <a href="reservation.do" class="btn btn-info"> 예약 &raquo;</a>
-					<a href= "exhibition.do" class="btn btn-secondary">티켓
-					 목록 &raquo;</a>
+               <p> <a href="reservation.do?ticketNo=${ t.ticketNo }" class="btn btn-info"> 예약 &raquo;</a>					
+               <a href= "exhibition.do" class="btn btn-secondary">티켓목록 &raquo;</a>
 				<button type="button" onclick="location.href='ticketAddress.do' " class="btn btn-primary">위치확인</button>
 					 
 			</div>
 	
-			
+			<form action="" id="postForm" method="post" class="reservation_form">
+				<input id="ticketNo" type="hidden" name="ticketNo"value="${t.ticketNo}"> 
+				<input type="hidden" name="userNo"value="${ sessionScope.loginUser.userNo }"> 
+				<input type="hidden" name="amount" value="1">
+			</form>
 		
 			
 		

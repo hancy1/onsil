@@ -158,14 +158,12 @@ T_CHANGE_NAME-->
 		
 	</resultMap>
 	
+<select id = "selectReservation" parameterType="TICKET" resultMap="ticketResultSet">
 
-	<select id = "selectReservation" parameterType="Reservation" resultMap="reservationResultSet">
-
-	  SELECT *
-	  FROM RESERVATION A	  
-	  JOIN TICKET B ON A.TICKET_NO = B.TICKET_NO 	  	  
-	  WHERE A.USER_NO=#{userNo}
-    
-  	</select>
-  
+	SELECT *
+     FROM TICKET
+     WHERE TICKET_NO=#{ticketNo} AND TICKET_STATUS='Y'
+ 
+ 	</select>
+	
 </mapper>
