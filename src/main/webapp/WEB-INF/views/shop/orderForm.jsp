@@ -190,7 +190,7 @@
 			    	new daum.Postcode({
 			            oncomplete: function(data) {
 			            	document.getElementById("address").value = data.address; 
-			                document.getElementById("addressDetail").focus();                
+			                document.getElementById("address2").focus();                
 			            }
 			        }).open();
 			    }

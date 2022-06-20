@@ -32,6 +32,8 @@ public interface TicketService {
 
 	Ticket selectFair(int ticketNo);
 
-	ArrayList<Reservation> selectReservation(int userNo);
+	Ticket selectReservation(String bno);
+
+	
 
 }

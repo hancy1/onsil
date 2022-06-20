@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.member.model.dto.Member;
 import com.uni.spring.shop.model.dto.Cart;
+import com.uni.spring.shop.model.dto.Freebie;
+import com.uni.spring.shop.model.dto.Product;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.Reservation;
@@ -247,7 +249,7 @@ public class TicketController {
 			
 		}
 		
-		//박람회 페이지연결 
+		    //박람회 페이지연결 
 				@RequestMapping("fair.do")
 				public String selectFairList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 					
@@ -285,15 +287,21 @@ public class TicketController {
 				
 				//예약
 				@RequestMapping("reservation.do")
-				public String selectReservation(Model model, HttpSession session) {
+				
+				public String reservation(int ticketNo, Model model, HttpSession session) {
+				
+					//int bno = Integer.parseInt(ticketNo); 
+					String bno=Integer.toString(ticketNo);
 					
-					int userNo = Integer.parseInt(((Member)session.getAttribute("loginUser")).getUserNo());
+					System.out.println(bno);
+				   Ticket r = ticketService.selectReservation(bno);
+					Member m = (Member) session.getAttribute("loginUser");			
+					
+					
 
-					
-					ArrayList<Reservation> list = ticketService.selectReservation(userNo);
-					
-					model.addAttribute("list", list);
-					
+					model.addAttribute("bno",bno);
+					model.addAttribute("r", r);
+					model.addAttribute("m", m);
 					
 					return "Ticket/reservation";
 				}

@@ -150,10 +150,7 @@ T_CHANGE_NAME-->
 		<result property="ticketNo" column="TICKET_NO" />
 		<result property="userNo" column="USER_NO" />
 		<result property="payCode" column="PAY_CODE" />
-		
-		
-				
-		<result property="tCode" column="TICKET_CODE" />
+	    <result property="tCode" column="TICKET_CODE" />
 		<result property="count" column="RESERVATION_COUNT" />
 		<result property="price" column="PRICE" />	
 		<result property="status" column="RESERVATION_STATUS" />
@@ -161,14 +158,12 @@ T_CHANGE_NAME-->
 		
 	</resultMap>
 	
+<select id = "selectReservation" parameterType="TICKET" resultMap="ticketResultSet">
 
-	<select id = "selectReservation" parameterType="Reservation" resultMap="reservationResultSet">
-
-	  SELECT *
-	  FROM RESERVATION A	  
-	  JOIN TICKET B ON A.TICKET_CODE = B.TICKET_CODE 	  	  
-	  WHERE A.USER_NO=#{userNo}
-    
-  	</select>
-  
+	SELECT *
+     FROM TICKET
+     WHERE TICKET_NO=#{ticketNo} AND TICKET_STATUS='Y'
+ 
+ 	</select>
+	
 </mapper>

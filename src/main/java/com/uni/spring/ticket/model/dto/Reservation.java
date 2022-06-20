@@ -22,4 +22,5 @@ public class Reservation {
 	private String count;//인원수
 	private String status;//상태값
 	private String changeName;
+	private String division;//티켓구분
 }
