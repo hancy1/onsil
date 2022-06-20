@@ -1,6 +1,7 @@
 package com.uni.spring.ticket.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -90,4 +91,15 @@ public class TicketDao {
 
 	}
 
+
+
+	public ArrayList<Reservation> selectReservationList(SqlSessionTemplate sqlSession, int userNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ticketMapper.selectReservationList",userNo);
+
+	}
+
+	
+
+	
 }

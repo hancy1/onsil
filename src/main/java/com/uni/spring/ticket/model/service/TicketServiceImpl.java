@@ -1,6 +1,8 @@
 package com.uni.spring.ticket.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -111,8 +113,33 @@ public class TicketServiceImpl implements TicketService{
 		return ticketDao.selectReservation(sqlSession,bno);
 	}
 
+
+
+	@Override
+	public ArrayList<Reservation> selectReservationList(int userNo) {
+		// TODO Auto-generated method stub
+		return ticketDao.selectReservationList(sqlSession,userNo);
+	}
+
+	
+	}
+
+	
+
+	
+		
+	
+
+	
+	
+
+
+
+
+	
+
 	
 
 	
 
-}
+
