@@ -527,7 +527,7 @@ public class AdminShopController {
 			return "redirect:adminOrderListCancel.do";
 		}
 		
-		
+		//재고등록시 제품 정보 조회해서 넘김
 		@ResponseBody
 		@RequestMapping(value = "selectProductInfo.do", produces="application/json; charset=utf-8")
 		public Product selectProductInfo(String proCode) {
