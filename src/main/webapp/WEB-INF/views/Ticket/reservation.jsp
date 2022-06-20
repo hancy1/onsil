@@ -477,13 +477,13 @@
 							class="reservation check">
 							<h5>총금액</h5>
 							<h5>
-								<c:set var="Total" value="${r.price }" />
-								<fmt:formatNumber type="number" value="${r.price}" />
+								<c:set var="Total" value="${(result*20000)+(result1*15000)+(result2*8000)}" />
+								<fmt:formatNumber type="number" value="${(result*20000)+(result1*15000)+(result2*8000)}" />
 								원
 							</h5>
 						</div>
 						<div class="checkout-btn mt-30">
-							<a id="check_module" class="btn btn-outline-success">예약하기</a>
+							<a href="reservation.do?ticketNo=${ t.ticketNo }"  id="check_module" class="btn btn-outline-success">예약하기</a>
 
 						</div>
 					</div>
