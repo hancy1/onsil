@@ -631,7 +631,7 @@ public class ShopController {
 		//토탈가격이랑 포인트 가격 계산
 		int price = p.getPrice();
 		int totalPrice = amount*price;
-		int point = (int) (totalPrice * 0.1);
+		
 		
 	
 		o.setAddress(address);
@@ -645,6 +645,9 @@ public class ShopController {
 		o.setPayCode("card");
 		
 		shopService.insertOrder(o);
+		
+		//금액의 10퍼적립
+		int point = (int) (totalPrice * 0.1);
 		insertPoint(userNo, point, "적립");
 		
 		model.addAttribute("point", point);
