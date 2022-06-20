@@ -16,6 +16,10 @@ public class CommonExceptionHandler {
 			return new ModelAndView("member/login").addObject("msg",e.getMessage());
 		}
 		
+		if(e.getMessage().equals("존재하지 않는 아이디 입니다.")) {
+			return new ModelAndView("main").addObject("msg",e.getMessage());
+		}
+		
 		return new ModelAndView("common/errorPage").addObject("msg",e.getMessage());
 	}
 	

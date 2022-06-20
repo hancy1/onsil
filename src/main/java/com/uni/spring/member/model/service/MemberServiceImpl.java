@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
-	@Override // 암호화 전 로그인
+	@Override // 로그인
 	public Member loginMember(Member m) throws Exception {
 		
 		Member loginUser = memberDao.loginMember(sqlSession, m);
@@ -72,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
 				
 		if(loginUser == null) {
 			
-			throw new CommException("loginUser 확인");
+			throw new CommException("존재하지 않는 아이디 입니다.");
 		}
 		
 		// matches (평문, 암호화) --> true, false 반환
