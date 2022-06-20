@@ -70,12 +70,27 @@
 		                	<c:forEach items="${ list }" var="b">
 			                    <tr>
 			                        <td>${ b.BNo }</td>
-			                        <td>${ b.AdbCategoryName }</td>
+			                        <td>${ b.adbCategoryName }</td>
 			                        <td>${ b.BTitle }</td>
 			                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userName }</a></td>
 			                        <td>${ b.BDate }</td>
-			                        <td><a href="#">-</a></td>
+			                        <td><button type="button" class="btn" onclick="deleteBtn();">-</button></td>
 			                    </tr>
+			                    <form id="deleteBtn" action="" method="post">
+									<input type="hidden" name="bno" value="${ b.BNo }">
+								</form>
+	                            <script>
+									function deleteBtn(){
+										
+										var deleteBtn = $("#deleteBtn");
+							
+										deleteBtn.attr("action", "deleteReport.do");
+						
+										alert("신고된 게시물이 삭제되었습니다.");
+										
+										deleteBtn.submit();
+									}
+								</script>
 		                    </c:forEach>
 				        </tbody>
 					</table>
@@ -134,6 +149,8 @@
     			location.href="detailBoard.do?bno=" + $(this).children().eq(0).text();
     		});
     	});
+    	
+    	
     </script>
     
     <!-- ##### All Javascript Files ##### -->

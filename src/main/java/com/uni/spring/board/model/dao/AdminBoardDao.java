@@ -26,5 +26,10 @@ public class AdminBoardDao {
 		return (ArrayList)sqlSession.selectList("adminBoardMapper.selectList", null, rowBounds);
 	}
 
+	public int deleteBoard(SqlSessionTemplate sqlSession, int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminBoardMapper.deleteBoard", bno);
+	}
+
 
 }

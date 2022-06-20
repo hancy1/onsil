@@ -38,6 +38,17 @@ public class AdminBoardController {
 	    
 	    return "board/adminBoardListView";
 	}
+	
+	// 신고 게시글 삭제하기
+	@RequestMapping("deleteReport.do")
+	public String deleteReport(int bno) {
+		
+		System.out.println(bno);
+		adminBoardService.deleteBoard(bno);
+		
+		return "redirect:adminBList.do";
+	}
+	
 
 
 }
