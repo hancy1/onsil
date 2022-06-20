@@ -12,5 +12,7 @@ public interface AdminBoardService {
 
 	ArrayList<Board> selectList(PageInfo pi);
 
+	void deleteBoard(int bno);
+
 
 }
