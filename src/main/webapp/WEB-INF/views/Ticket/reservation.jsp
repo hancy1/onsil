@@ -23,6 +23,9 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="resources/style.css">
+    
+    
+    
 <style>
 
 .basketdiv {
@@ -277,38 +280,28 @@
 	
 	<div style="padding-top:50px">
 	
-	<table class="table table-hover">
-	<tr>
-	<th>티켓번호</th>
-	
-	</tr>
-	</table>
-
-	<tr>
-	
-	<td>티켓명</td>
-	<td>가격</td>
-	<td> 인원수</td>>
-	<td>총금액</td>
-	
-	<c:forEach items="${ list }" var="rv">
+ <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                	
+                                    <th>분류코드</th>
+                                    <th>전시회명</th>
+                                    <th>가격</th>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<c:forEach items="${ list }" var="rv">
                             	
                                 <tr>                                	
                                     <td class="ticket_img">
                                         <a href="#">
-                                        <img src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${rv.changeName}" alt="TICKET" >                                        
+                                        <img src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${rv.changeName}"  >                                        
                                         </a>
-                                        <h5>${ rv.ticketTitle }</h5> 
-                                        
-                                        	<form action="" id="postForm" method="post" class="reservation_form">
-												<input id="ticketNo" type="hidden" name="ticketNo" value="${rv.ticketNo}">								
-												<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
-												<input type="hidden" name="amount" value="1">
-											</form>	    
-	
-	</div>		
-        
-        
+                                        <h5>${ rv.proName }</h5>                                       
+                                    </td>
+                                  
                         <div class="num">
                             <div class="updown">
                                 <input type="text" name="p_num1" id="p_num1" size="1" maxlength="4" class="p_num" value="2" onkeyup="javascript:basket.changePNum(1);">
@@ -318,11 +311,32 @@
                         </div>
                          
                     </div>
-                    <div class="subdiv">
+                            <td>${ rv.ticketNo }</td>
+                             <td>${ rv.userNo }</td>
+	                        <td>${ rv.division }</td>
+                                </tr>
+                        <td><input type="hidden" id="writer" class="form-control"  name="userNo" value="${ loginUser.userNo }" readonly></td>
+                        <td><input type="hidden" id="ticketNo" class="form-control"  name="ticketNo" value="${ rv.ticketNo }" readonly></td>
+
+                                <div class="subdiv">
                         <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
                     </div>
                 </div>
-              
+                     
+                             
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+				
+                                        
+                                        
+	</div>		
+        
+        
+                    
                               
                   
                 </div>

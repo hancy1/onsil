@@ -285,14 +285,14 @@ public class TicketController {
 				
 				//예약
 				@RequestMapping("reservation.do")
-				public String selectReservation(Model model, HttpSession session) {
-					
-					int userNo = Integer.parseInt(((Member)session.getAttribute("loginUser")).getUserNo());
+				public String selectReservation() {
+					//(Model model, HttpSession session)
+					//int userNo = Integer.parseInt(((Member)session.getAttribute("loginUser")).getUserNo());
 
 					
-					ArrayList<Reservation> list = ticketService.selectReservation(userNo);
+					//ArrayList<Reservation> list = ticketService.selectReservation(userNo);
 					
-					model.addAttribute("list", list);
+					//model.addAttribute("list", list);
 					
 					
 					return "Ticket/reservation";
