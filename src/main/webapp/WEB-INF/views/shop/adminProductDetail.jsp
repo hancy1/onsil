@@ -89,11 +89,21 @@
 			                    </c:if></td>
 							</tr>
 							<tr>
-								<th>내용</th>
-								<td colspan="3"></td>
+								<th>이미지</th>
+								<td colspan="3">
+								
+									<c:if test="${ !empty p.detailOri }">	
+										<img src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" width="300">	
+									</c:if>
+									<c:if test="${ empty p.detailOri }">
+				                        이미지가 없습니다.
+				                    </c:if>
+			                    
+								</td>
 							</tr>
 							<tr>
-								<td colspan="4"><p style="height: 150px">${ p.proContent }</p></td>
+								<th>내용</th>
+								<td colspan="3"><p style="height: 150px">${ p.proContent }</p></td>
 							</tr>
 						</table>
 						<br>
