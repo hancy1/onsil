@@ -246,129 +246,6 @@
                     </div>
                 </div> 
                    
-                <!-- 게시글 사이드바 -->
-                <div class="col-12 col-sm-9 col-md-4">
-                    <div class="post-sidebar-area">
-                    
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <form action="#" method="get" class="search-form">
-                                <input type="search" name="search" id="widgetSearch" placeholder="Search...">
-                                <button type="submit"><i class="icon_search"></i></button>
-                            </form>
-                        </div>                      
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title" style="color: #2C3539">
-                                <h4>인기 게시글</h4>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>New Harris Bugg design for Bridgewater</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>The designers will create a new kitchen garden</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-thumb">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>SGD Members win Best of Houzz Design Award</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>최근 게시글</h4>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Cactus Flower</a>
-                                    <p>$10.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Tulip Flower</a>
-                                    <p>$11.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Recuerdos Plant</a>
-                                    <p>$9.99</p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -397,14 +274,16 @@
 			selectReplyList();
 			
 			$("#addReply").click(function(){
+				
+				let bno = ${b.BNo};
 	
 				if($("#reContent").val().trim().length != 0){
 					
 					$.ajax({
-						url:"rinsertBoard.do",
+						url:"rinsert.do",
 						type:"post",
 						data:{reContent:$("#reContent").val(),
-								bno:"${b.BNo}",
+								bno:bno,
 								userNo:"${ loginUser.userNo }"},
 						success:function(result){
 							if(result > 0){
@@ -429,7 +308,7 @@
 		//댓글 목록 생성
 	 	function selectReplyList(){
 	 		
-	 		var bno = ${b.BNo};
+	 		let bno = ${b.BNo};
 	 		
 			$.ajax({
 				url:"rlistBoard.do",
@@ -450,7 +329,7 @@
 						value += "<th>" + obj.userName + "</th>" + 
 								"<td>" + obj.reContent + "</td>" + 
 								"<td>" + obj.reDate + "</td>" +
-								"<td><button class='btn btn-danger' onclick='deleteReply(" + obj.reNo + ");'>삭제</button></td>" + 
+								"<td><button class='btn' onclick='deleteReply(" + obj.reNo + ");'>삭제</button></td>" + 
 							 "</tr>";
 					});
 					$("#replyArea tbody").html(value);
@@ -461,11 +340,15 @@
 		}
 		
 		// 댓글 삭제...
-	 	function deleteReply() {
+	 	function deleteReply(ReNo) {
 			
-			if(){
+	 		let msg = confirm("댓글을 삭제하시겠습니까?")
+	 		//let bno = ${b.BNo};	 		
+	 		//let reno = ${r.ReNo};
+			
+			if(msg){
 				$.ajax({
-					url:"rdeleteBoard.do",
+					url:"rdelete.do",
 					type:"post",
 					data:{reNo:reNo},				
 					success:function(result){

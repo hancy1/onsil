@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 작성 -->
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD VALUES
-        (SEQ_B_NO.NEXTVAL, #{userNo}, #{BCategoryNo}, #{BTitle}, #{BContent}, SYSDATE, DEFAULT, #{BOriginName}, #{BChangeName}, DEFAULT)
+        (SEQ_B_NO.NEXTVAL, #{userNo}, #{BCategoryNo}, #{BTitle}, #{BContent}, SYSDATE, DEFAULT, #{BOriginName}, #{BChangeName}, DEFAULT, #{adbCategoryNo})
 	</insert>
 		
 	<!-- 게시글 삭제 -->	
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD
 		SET B_CATEGORY_NO=#{BCategoryNo}, B_TITLE=#{BTitle}, B_CONTENT=#{BContent}, B_ORIGIN_NAME=#{BOriginName}, B_CHANGE_NAME=#{BChangeName}
-		WHERE B_NO=#{bNo}	
+		WHERE B_NO=#{BNo}	
 	</update>
 	
 	<!-- 댓글 목록 -->
@@ -102,8 +102,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 작성 -->
 	<insert id="insertReply" parameterType="Reply">
 		INSERT INTO REPLY
-		VALUES(SEQ_RNO.NEXTVAL, #{userNo}, #{BNo}, #{ReContent}, SYSDATE, DEFAULT, #{UserName})
+		VALUES(SEQ_RNO.NEXTVAL, #{userNo}, #{BNo}, #{ReContent}, SYSDATE, DEFAULT)
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply" parameterType="_int">
+		UPDATE REPLY
+		SET RE_STATUS = 'N' 
+		WHERE RE_NO=#{reno}
+	</update>
 	
 	<!-- 게시글 신고 -->
 	<update id="bReportBoard" parameterType="hashMap">
