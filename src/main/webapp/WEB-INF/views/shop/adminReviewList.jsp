@@ -20,6 +20,7 @@
 	margin-right: 30px;
 	margin-bottom: 30px;
 	margin-left: 40px;
+	width: 75%;
 	}
 	
     #reviewList>tbody>tr:hover{
@@ -111,7 +112,7 @@
     
     
 	<!-- 리뷰 테이블 -->
-    <div class="content">
+    <div class="content" align="center">
         <br><br>
         <div class="innerOuter" style="padding:0px 10% 15% 10%;">
     
@@ -212,6 +213,8 @@
     	
 		$("#reviewList>tbody>tr>td>button").click(function(){ 
 			var reviewNo = $(this).parentsUntil().eq(1).children().eq(0).text();
+			
+			alert("회원리뷰가 관리자 권한으로 삭제되었습니다.❌");
 			
 			location.href="deleteAdminReview.do?reviewNo="+reviewNo;		
 		});	
