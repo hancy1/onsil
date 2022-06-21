@@ -461,7 +461,7 @@ public class AdminShopController {
 			
 			int listCount = aShopService.orderListCountAll();
 			
-			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 15);			
+			ShopPageInfo pi = ShopPagination.getPageInfo(listCount, currentPage, 10, 10);			
 			
 			
 			ArrayList<ProOrder> list = aShopService.selectOrderList(pi); 

@@ -21,6 +21,7 @@
 
 	#adminOrderList{
 	text-align: left;
+	width: 80%;
 	
 	}
     #adminOrderList>tbody>tr:hover{
@@ -55,6 +56,7 @@
     #cateArea{
     
     float: right;
+    padding-right: 200px;
     
     }
 
@@ -119,7 +121,7 @@
 	<!-- ##### Breadcrumb Area End ##### -->
 
 	<!-- 본문 -->
-	<div class="content">
+	<div class="content" align="center">
         <br><br>
         <div class="innerOuter" style="padding:0px 10% 15% 10%;">           
          	<div id=cateArea>

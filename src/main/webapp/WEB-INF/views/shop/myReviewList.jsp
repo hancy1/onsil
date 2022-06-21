@@ -125,7 +125,7 @@
                   <tr>
                   	<th width=50>No</th>
                   	<th width=80>작성자</th>
-                    <th>제품이름</th>
+                    <th width=200>제품이름</th>
                     <th width=60>별점</th>
                     <th>제목</th>
                     <th>사진</th>

@@ -208,7 +208,7 @@
 								<div class="single-product-area mb-50">
 									<!-- Product Image -->
 									<div class="product-img">	
-										<img style="max-width: 100%; height: auto;" onclick="detailPage('${ p.proCode }');" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
+										<img style="max-width: 100%; height: 260px;" onclick="detailPage('${ p.proCode }');" src="${ pageContext.servletContext.contextPath }/resources/pro_upload_files/${p.detailCha}" >
 																				
 									</div>
 									<!-- Product Info -->
