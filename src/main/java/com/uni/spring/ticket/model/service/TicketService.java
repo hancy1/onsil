@@ -36,10 +36,9 @@ public interface TicketService {
 	Ticket selectReservation(String bno);
 
 	
-
-	
-
 	ArrayList<Reservation> selectReservationList(int userNo);
+
+	void insertReservation(Map map);
 
 
 

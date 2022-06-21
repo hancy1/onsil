@@ -121,6 +121,16 @@ public class TicketServiceImpl implements TicketService{
 		return ticketDao.selectReservationList(sqlSession,userNo);
 	}
 
+	@Override
+	public void insertReservation(Map map) {
+		// TODO Auto-generated method stub
+     int result = ticketDao.insertReservation(sqlSession, map);
+		
+		if(result <0) {
+			throw new CommException("에약 추가 실패");
+		}
+	}
+
 	
 	}
 

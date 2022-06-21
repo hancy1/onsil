@@ -72,9 +72,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-<a class="product-img" href="resources/T_upload_files/${t.changeName}" title="Exhibition Image">
-                                 <img class="d-block w-100" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" alt="1">
-                              </a>
+                  <a class="exhibition_img" href="resources/T_upload_files/${t.changeName}" title="Exhibition Image">
+                   <img class="d-block w-100" src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${t.changeName}" alt="1">
+                   </a>
                 </div>
 	      <div class="col-md-6">
 				<h3>${ t.ticketTitle }</h3>

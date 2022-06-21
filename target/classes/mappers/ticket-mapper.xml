@@ -181,8 +181,11 @@ T_CHANGE_NAME-->
   	<!-- 예약추가 -->
 	<insert id="insertReservation">
 	
-		INSERT INTO RESERVATION VALUES
-		(SEQ_RESERVATION.NEXTVAL,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)
+		<!--  INSERT INTO RESERVATION VALUES
+		(SEQ_RESERVATION.NEXTVAL,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)-->
 		
+		INSERT INTO RESERVATION VALUES(1,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)
 	</insert>
+	
+	
 </mapper>
