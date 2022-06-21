@@ -89,7 +89,13 @@
 							<h4 class="title">${ shop.proName }</h4>
 							<h4 class="price"><fmt:formatNumber type="number" value="${ shop.price }"/></h4>
 							<div class="short_overview">
-								<p> 현재 남은 수량은 ${ shop.proAmount }개 입니다. </p>
+								<p> 현재 남은 수량은 ${ shop.proAmount }개 입니다. 
+								
+								<c:if test="${ shop.proAmount eq 0}">
+									<span style="color: red;"> 재고부족으로 주문이 불가능합니다.</span>
+								</c:if>
+								</p>
+								
 							</div>
 
 							<div class="cart--area d-flex flex-wrap align-items-center">
@@ -111,7 +117,12 @@
 										
 									</div>
 									<button type="button" name="addToCart" onclick="addFormSubmit(1);" value="5" class="btn alazea-btn ml-15">❤️찜하기</button>
+									
+									<c:if test="${ shop.proAmount gt 0}">
 									<button type="button" name="addToOrder" onclick="addFormSubmit(2);" value="5" class="btn alazea-btn ml-15">바로구매</button>
+									</c:if>
+									
+								
 								</form>
 								<!-- 오더폼과 인서트가트 두가지중 원하는 action을 하게 하는 JS -->
 							    <script>

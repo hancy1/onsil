@@ -109,7 +109,7 @@
 			    <div class="content">
 		        <br><br>
 		       		           
-		            <form id="enrollForm" method="post" action="insertReview.do" enctype="multipart/form-data">
+		            <form id="enrollForm" method="post" action="insertReview.do" enctype="multipart/form-data" onsubmit="point();">
 		            	
 		            	<input type="hidden" name="orderNo" value="${ orderNo }">
 					    <input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
@@ -166,7 +166,7 @@
 		                        <th><label for="upfile">리뷰이미지</label></th>
 		                        
 		                        <td colspan="3">
-		                        	<input type="file" id="upfile" class="form-control-file border" name="uploadFile">		                          
+		                        	<input type="file" id="upfile" class="form-control-file border" name="uploadFile" required>		                          
 		                        </td>
 		                    </tr>
 		 
@@ -177,7 +177,7 @@
 		                <br>
 		
 		                <div align="center">
-		                    <button onclick="insertSubmit();" class="btn btn-outline-success">작성하기</button>
+		                    <button type="submit" class="btn btn-outline-success">작성하기</button>
 		                    <button type="button" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">이전으로</button>
 		                </div>
 		            </form>
@@ -189,11 +189,8 @@
 		</div>
 		
 		<script>
-			function insertSubmit(){
+			function point(){
 				
-				var enrollForm = $("#enrollForm");				
-				enrollForm.submit();
-
 				alert("100point 적립 완료!💐");
 			}
 		</script>

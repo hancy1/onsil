@@ -161,7 +161,14 @@
                         </form>
                     </div>
                 </div>
-				<script>
+			<script>
+				
+				$(function(){
+			
+					 
+				}); 
+				
+				
 				
 				//멤버정보 불러오기		
 				$('#flexRadioDefault1').click(function() {
@@ -171,17 +178,30 @@
 					    $('#orderPhone').val("${ m.phone }");
 					    $('#address').val("${ m.address }");
 					    $('#addressDetail').val("${ m.addressDetail }");
+					   
+					    $('#orderName').attr("readonly", true);
+					    $('#orderPhone').attr("readonly", true);
+					    $('#address').attr("readonly", true);
+					    $('#addressDetail').attr("readonly", true);
+					    
+					    
 					  }                     
 				});
 				
 				//새로 정보 입력하기누르면 지워짐
 				$('#flexRadioDefault2').click(function() {
 					  if($('#flexRadioDefault2').is(':checked')){ 
-						//input where you put a value
+						  
+						  $('#orderName').attr("readonly", false);
+						  $('#orderPhone').attr("readonly", false);
+						  $('#address').attr("readonly", false);
+						  $('#addressDetail').attr("readonly", false);
+						  				
 						  $('#orderName').val("");
 						  $('#orderPhone').val("");
 					      $('#address').val("");
-						  $('#addressDetail').val("");
+						  $('#addressDetail').val("");						  
+						 
 					  }					   	             
 				});
 				
@@ -210,7 +230,7 @@
 				    }
 				}
 
-				</script>
+			</script>
                 <div class="col-12 col-lg-4">
                     <div class="checkout-content">
                         <h5 class="title--">Your Order</h5>
@@ -234,9 +254,13 @@
                             <h5>Order Total</h5>
                             <h5><c:set var="oTotal" value="${amount*p.price }"/><fmt:formatNumber type="number" value="${oTotal}"/>원</h5>
                         </div>
-                        <div class="checkout-btn mt-30">
-                            <a id="check_module" class="btn alazea-btn w-100">결제하기</a>
-							                           
+                        <div class="checkout-btn mt-30" id="payBtnArea">
+                            <!--<a id="check_module" class="btn alazea-btn w-100">결제하기</a>  -->
+							<button id="check_module" type="button" class="btn btn-success" >
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							결제하기
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</button>                         
                         </div>
                     </div>
                 </div>
@@ -259,7 +283,7 @@
 								<div class="product-info mt-15 text-left">									
 									<p>${ f.freeName }<br>									
 									<span><fmt:formatNumber type="number" value="${ f.freePoint }"/>point</span></p>
-									<button class="btn btn-warning btn-sm" onclick="buyPoint(${ f.freeNo });">포인트구매</button>
+									<button class="btn btn-warning btn-sm buyPointBtn"  onclick="buyPoint(${ f.freeNo });">포인트구매</button>
 									<script type="text/javascript">
 									
 									function buyPoint(freeNo) {
@@ -267,7 +291,10 @@
 											//input 태그에 사은품 번호 넣기
 											//(결제시 사은품 정보를 controller로 넘기기 위함)
 									        $('#freeNo').val(freeNo);
-									        
+																						
+											//두개이상 구매 못하게 버튼 비활성화시킴
+									        $('.buyPointBtn').prop("disabled", true);
+											
 											//포인트 사용하기 위해 ajax
 									        $.ajax({
 												url: "buyFreebie.do",
@@ -301,7 +328,18 @@
     <script>
 	  
  		$("#check_module").click(function () {
-				  var IMP = window.IMP; // 생략가능        
+ 			
+
+		 	var name = $('#orderName').val().length;
+			var phone = $('#orderPhone').val().length;
+			var address = $('#address').val().length;
+			var addtessD = $('#addressDetail').val().length;
+			
+			//console.log("길이 잘 받아와지냐?" + name);
+			
+			if(name>0 && phone>0 && address>0 && addtessD>0){
+				
+				var IMP = window.IMP; // 생략가능        
 				  IMP.init('imp62250320');         
 				  // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용        
 				  // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드        
@@ -365,7 +403,15 @@
 					}            
 					  alert(msg);
 					  }); 
-				  				  
+				
+				
+				
+				}else{				
+					
+					alert("주문서를 모두 작성해주세요");
+					//$('#check_module').prop("disabled", true);
+				}	
+ 							  				  
 			});
 				  
 	</script>
