@@ -39,6 +39,8 @@ public interface TicketService {
 
 	void insertReservation(Reservation re);
 
+	void deleteRv(int ticketNo);
+
 
 
 	

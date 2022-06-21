@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-   <title>온실-후기게시판</title>
+   <title>온실-예약확인</title>
    <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png"> 
 <style>
@@ -48,6 +48,10 @@
       color: #fff;
       text-decoration: none;
     }
+    
+   
+    
+    
 </style>
 
 </head>
@@ -63,7 +67,7 @@
 		<div
 			class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
 			style="background-image: url(resources/img/bg-img/admin1.jpg);">
-			<h2>후기게시판</h2>
+			<h2>예약확인</h2>
 		</div>
     	<div class="container">
 			<div class="row">
@@ -73,7 +77,7 @@
 							<li class="breadcrumb-item"><a href="#"><i
 									class="fa fa-home"></i> Home</a></li>
 							<li class="breadcrumb-item"><a href="#">예약</a></li>
-							<li class="breadcrumb-item active" aria-current="page">후기게시판</li>
+							<li class="breadcrumb-item active" aria-current="page">예약확인</li>
 						</ol>
 					</nav>
 				</div>
@@ -89,8 +93,10 @@
             <table id="ReservationList" class="table table-hover" align="center">
                 <thead>
                   <tr>
-                     <th>티켓번호</th>              
-                    <th>전시회명</th>
+                     
+                      
+                      <th>티켓</th>
+                     <th>전시회명</th>
                     <th>티켓구분번호</th>
                     <th>예약자</th>
                   
@@ -98,16 +104,16 @@
                 </thead>
                 <tbody>
                 	<c:forEach items="${ list }" var="r">
+                	
 	                    <tr>
-	                        <td>${ r.ticketNo }</td>              
+	                    <td>${ r.ticketNo }</td>
+	                    
+	                                  
 	                        <td>${ r.ticketTitle }</td>
-	                        <td>${ r.ticketLocation }</td>
-	                         <td class="img">
-                            <a href="#">
-                                                                   
-                           </a>
-                           </td>  
-                   <td><button type="button"  onclick="deleteCart(${r.ticketNo});" id = "delete_btn" class="btn btn-light btn-sm" ><i class="icon_close"></i></button></td>
+	                        
+	                         <td>${ r.division }</td>
+	                         <td>${ r.userName }</td>
+	                          
                            
 	                         <!-- 삭제 form -->
 								<form action="" id="postForm" method="post" class="delete_form">
@@ -165,9 +171,11 @@
     <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
     
     <script>
-	function deleteCart(ticketNo){
+	function deleteRv(ticketNo){
 		
-		location.href="deleteCart.do?ticketNo="+ticketNo;	
+		alert("예약을 취소 하시겠습니까?");
+		
+		location.href="deleteRv.do?ticketNo="+ticketNo;	
 	}
 
     </script>

@@ -21,9 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.member.model.dto.Member;
-import com.uni.spring.shop.model.dto.Cart;
-import com.uni.spring.shop.model.dto.Freebie;
-import com.uni.spring.shop.model.dto.Product;
+
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.Reservation;
@@ -355,5 +353,19 @@ public class TicketController {
 						
 						return "redirect:reservation.do";
 					}
+				
+					//예약 삭제
+					@RequestMapping("deleteRv.do")
+					public String deleteRv(int ticketNo) {
+						
+						System.out.println(ticketNo);
+						 ticketService.deleteRv(ticketNo);
+						
+						
+						return "redirect:reservation.do";
+						
+					}
+					
+					
 		
 }

@@ -19,6 +19,7 @@ T_CHANGE_NAME-->
 
     <id property="ticketNo" column="TICKET_NO"/>
          <result property="userNo" column="USER_NO"/>
+          <result property="userName" column="USER_NAME"/>
          <result property="price" column="TICKET_CODE"/>
          <result property="ticketPhone" column="TICKET_PHONE"/>
          <result property="ticketTitle" column="TICKET_NAME"/>
@@ -149,6 +150,7 @@ T_CHANGE_NAME-->
 		<id property="rNo" column="RESERVATION_NO"/>
 		<result property="ticketNo" column="TICKET_NO" />
 		<result property="userNo" column="USER_NO" />
+		<result property="userName" column="USER_NAME" />
 		<result property="payCode" column="PAY_CODE" />
 	    <result property="tCode" column="TICKET_CODE" />
 		<result property="count" column="RESERVATION_COUNT" />
@@ -171,12 +173,12 @@ T_CHANGE_NAME-->
  
 	<select id = "selectReservationList" resultMap="ticketResultSet">
 
-	  SELECT *
+	  SELECT A.*,B.*, C.USER_NAME
 	  FROM TICKET A 
-	  JOIN RESERVATION B ON A.TICKET_NO = B.TICKET_NO  	  
+	  JOIN RESERVATION B ON A.TICKET_NO = B.TICKET_NO 
+	  JOIN MEMBER C ON B.USER_NO=C.USER_NO 	  
 	  WHERE B.USER_NO = #{userNo}
 	  AND TICKET_STATUS='Y'
-    
   	</select>
   	
   	<!-- 예약추가 -->
@@ -187,6 +189,12 @@ T_CHANGE_NAME-->
 		
 		<!-- INSERT INTO RESERVATION VALUES(1,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)-->
 	</insert>
+	
+	 <update id="deleteRv" parameterType="_int">
+		 UPDATE RESERVATION
+      SET RESERVATION_STATUS = 'N' 
+      WHERE TICKET_NO=#{ticketNo}     
+	</update> 
 	
 	
 </mapper>
