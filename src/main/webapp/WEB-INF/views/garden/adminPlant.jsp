@@ -155,7 +155,7 @@ th, td {
 			type:"post",
 			success:function(map){
 				
-				var value = "<tr class='danger'><td>등록번호</td><td>카테고리</td><td>품종</td><td>관수량</td><td>일조량</td><td>상태</td><td></td></tr>";
+				var value = "<tr class='danger'><td>등록번호</td><td>카테고리</td><td>품종</td><td>관수량</td><td>일조량</td><td>검색상태</td><td></td></tr>";
 				
 				$.each(map.info, function(i, i){
 					

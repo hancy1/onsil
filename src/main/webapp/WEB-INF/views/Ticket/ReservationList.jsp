@@ -101,10 +101,10 @@
 	                    <tr>
 	                        <td>${ r.ticketNo }</td>              
 	                        <td>${ r.ticketTitle }</td>
-	                        <td>${ r.userNo }</td>
+	                        <td>${ r.ticketLocation }</td>
 	                         <td class="img">
                             <a href="#">
-                            <img src="${ pageContext.servletContext.contextPath }/resources/T_upload_files/${r.changeName}"  >                                        
+                                                                   
                            </a>
                            </td>  
                    <td><button type="button"  onclick="deleteCart(${r.ticketNo});" id = "delete_btn" class="btn btn-light btn-sm" ><i class="icon_close"></i></button></td>

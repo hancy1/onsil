@@ -336,9 +336,6 @@
 											</div>
 											<form action="" id="postForm" method="post" class="reservation_form">
 				                            <input id="ticketNo" type="hidden" name="ticketNo"value="${bno}">
-				                            <input type="hidden" name="payCode" value="${r.payCode}">
-				                            <input type="hidden" name="count" value="${r.count}">
-				                             <input type="hidden" name="tCode" value="${r.tCode}">
 				                            <input type="hidden" name="userNo"value="${ sessionScope.loginUser.userNo }"> 
 				                            
 			                                </form>
