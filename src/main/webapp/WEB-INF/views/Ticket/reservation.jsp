@@ -336,7 +336,9 @@
 											</div>
 											<form action="" id="postForm" method="post" class="reservation_form">
 				                            <input id="ticketNo" type="hidden" name="ticketNo"value="${bno}">
-				                            
+				                            <input type="hidden" name="payCode" value="${r.payCode}">
+				                            <input type="hidden" name="count" value="${r.count}">
+				                             <input type="hidden" name="tCode" value="${r.tCode}">
 				                            <input type="hidden" name="userNo"value="${ sessionScope.loginUser.userNo }"> 
 				                            
 			                                </form>
@@ -389,8 +391,12 @@
 									<label for="phone">핸드폰번호 *</label>
 									 <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
 								</div>
-
-
+								
+								<div class="col-12 mb-4">
+									<label for="payCode">결제수단*</label>
+								 <input style="width: 20px; height: 20px;"  type="radio" name="payCode" id="payCode" value="" required> 
+								</div>
+								
 								
 								<div class="col-12 mb-4">
 									<label for="email">이메일</label> <input type="email"
