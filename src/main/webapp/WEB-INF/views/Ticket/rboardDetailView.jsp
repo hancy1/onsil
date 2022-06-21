@@ -159,7 +159,8 @@ textarea {
 						</div>
 
 						<form id="postForm" action="" method="post">
-							<input type="hidden" name="bno" value="${ rb.rbNo }"> <input
+							<input type="hidden" name="bno" value="${ rb.rbNo }"> 
+							<input
 								type="hidden" name="fileName" value="${ rb.changeName }">
 
 						</form>

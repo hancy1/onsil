@@ -327,10 +327,23 @@ public class TicketController {
 					
 					//예약추가
 					@RequestMapping("insertRV.do")
-					public String insertReservation(int ticketNo,  HttpServletRequest request) {
+					public String insertReservation(int ticketNo,int userNo,  HttpServletRequest request) {
 						
 						
+						System.out.println("ticketNO  : " + ticketNo);
+						System.out.println("userNo  : " + userNo);
 						
+						//int bno = Integer.parseInt(ticketNo); 
+						//String bno=Integer.toString(ticketNo);
+						
+						Map map = new HashMap<String, String>();
+						map.put("ticketNo", ticketNo);
+						map.put("userNo", userNo);
+						
+						
+						ticketService.insertReservation(map);
+						
+
 						
 						
 						return "redirect:reservation.do";

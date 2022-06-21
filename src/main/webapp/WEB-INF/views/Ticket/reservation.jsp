@@ -271,6 +271,12 @@
 	font-size: 0.8125em;
 }
 
+#number {
+  width:50px;
+  hight:500px
+  text-align: center;
+}
+
 </style>
 </head>
 
@@ -318,18 +324,19 @@
 										<div
 											class="custom-control custom-checkbox d-flex align-items-center mr-30">
 											<div class="form-check">
-												<input style="width: 20px; height: 20px;" onclick="memberInfo();" type="checkbox" name="reservation1" id="reservation1" > 
+												<input style="width: 20px; height: 20px;" onclick="memberInfo();" type="checkbox" name="reservation" id="reservation1" > 
 													<labe class="form-check-label" for="reservation1">
 													회원 정보와 동일 </label>
 											</div>
 											<div class="form-check">
-											  <input style="width:20px; height:20px;" type="checkbox" name="reservation2" id="reservation2" >
+											  <input style="width:20px; height:20px;" type="checkbox" name="reservation" id="reservation2" >
 											  <label class="form-check-label" >
 											   직접입력
 											  </label>
 											</div>
 											<form action="" id="postForm" method="post" class="reservation_form">
-				                            <input id="ticketNo" type="hidden" name="ticketNo"value="${t.ticketNo}"> 
+				                            <input id="ticketNo" type="hidden" name="ticketNo"value="${bno}">
+				                            
 				                            <input type="hidden" name="userNo"value="${ sessionScope.loginUser.userNo }"> 
 				                            
 			                                </form>
@@ -345,6 +352,27 @@
 												}
 												postForm.submit();
 											}
+					                           
+					                           
+					                           $(document).ready(function() {
+					                        	   
+					                        	   
+					                        	   
+					                        	   $('input[type="checkbox"][name="reservation"]').click(function(){
+					                        	   
+					                        	    if($(this).prop('checked')){
+					                        	   
+					                        	       $('input[type="checkbox"][name="reservation"]').prop('checked',false);
+					                        	   
+					                        	       $(this).prop('checked',true);
+					                        	   
+					                        	      }
+					                        	    
+					                        	     });
+					                        	    
+					                        	   });     
+					                           
+					                           
 										</script>
 
 									</div>
@@ -389,7 +417,7 @@
 
 								
 							</div>
-						</form>
+						
 					</div>
 				</div>
 				<script>
@@ -418,64 +446,7 @@
 
                   
 					
-					
-					 function count(type)  {
-				    	  // 결과를 표시할 element
-				    	  const resultElement = document.getElementById('result');
-				    	  
-				    	  // 현재 화면에 표시된 값
-				    	  let number = resultElement.innerText;
-				    	  
-				    	  // 더하기/빼기
-				    	  if(type === 'plus') {
-				    	    number = parseInt(number) + 1;
-				    	  }else if(type === 'minus')  {
-				    	    number = parseInt(number) - 1;
-				    	  }
-				    	  
-				    	  // 결과 출력
-				    	  resultElement.innerText = number;
-				    	}
-					 
-					 
-					 function count1(type)  {
-				    	  // 결과를 표시할 element
-				    	  const resultElement = document.getElementById('result1');
-				    	  
-				    	  // 현재 화면에 표시된 값
-				    	  let number = resultElement.innerText;
-				    	  
-				    	  // 더하기/빼기
-				    	  if(type === 'plus1') {
-				    	    number = parseInt(number) + 1;
-				    	  }else if(type === 'minus1')  {
-				    	    number = parseInt(number) - 1;
-				    	  }
-				    	  
-				    	  // 결과 출력
-				    	  resultElement.innerText = number;
-				    	}
-					 
-					 
-					 
-					 function count2(type)  {
-				    	  // 결과를 표시할 element
-				    	  const resultElement = document.getElementById('result2');
-				    	  
-				    	  // 현재 화면에 표시된 값
-				    	  let number = resultElement.innerText;
-				    	  
-				    	  // 더하기/빼기
-				    	  if(type === 'plus2') {
-				    	    number = parseInt(number) + 1;
-				    	  }else if(type === 'minus2')  {
-				    	    number = parseInt(number) - 1;
-				    	  }
-				    	  
-				    	  // 결과 출력
-				    	  resultElement.innerText = number;
-				    	}
-				    	 
+			
 				</script>
 				<div class="col-12 col-lg-4">
 					<div class="checkout-content">
@@ -485,9 +456,10 @@
 								<h5>전시회명: ${ r.ticketTitle }</h5>
 								<div
 									class="single-products d-flex justify-content-between align-items-center">
-								    <p>어른:<input type='button'onclick='count("plus")' value='+'/><div id='result'>0</div><input type='button'onclick='count("minus")' value='-'/></p>
-                                    <p>청소년:<input type='button'onclick='count1("plus1")' value='+'/><div id='result1'>0</div><input type='button'onclick='count1("minus1")' value='-'/> </p>
-                                    <p>어린이:<input type='button'onclick='count2("plus2")' value='+'/><div id='result2'>0</div><input type='button'onclick='count2("minus2")' value='-'/></p>
+								    <p>어른:<input  type="number" min="1" max="10" id='number'></p>
+								    <p>청소년:<input type="number" min="1" max="10" id='number'></p>
+								    <p>어린이:<input type="number" min="1" max="10" id='number'></p>
+                                    
                                     <p><fmt:formatNumber type="number" value="${p.price}"/></p>
                                 </div>
 							</div>
@@ -504,23 +476,13 @@
 						</div>
 						<div class="checkout-btn mt-30">
 						<button type="button" name="addReservation" onclick="addFormSubmit(1);"  class="btn alazea-btn ml-15">예약하기</button>
-
+                          
+                        
 						</div>
 					</div>
 				</div>
 			</div>
 	
-                                </form>
-
-
-      
-			
-
-
-
-
-
-
 		</div>
 	</div>
 

@@ -99,6 +99,11 @@ public class TicketDao {
 
 	}
 
+	public int insertReservation(SqlSessionTemplate sqlSession, Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ticketMapper.insertReservation", map);
+	}
+
 	
 
 	
