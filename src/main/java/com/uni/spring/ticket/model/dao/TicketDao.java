@@ -93,15 +93,15 @@ public class TicketDao {
 
 
 
-	public ArrayList<Reservation> selectReservationList(SqlSessionTemplate sqlSession, int userNo) {
+	public ArrayList<Ticket> selectReservationList(SqlSessionTemplate sqlSession, String userNo) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("ticketMapper.selectReservationList",userNo);
 
 	}
 
-	public int insertReservation(SqlSessionTemplate sqlSession, Map map) {
+	public int insertReservation(SqlSessionTemplate sqlSession, Reservation re) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("ticketMapper.insertReservation", map);
+		return sqlSession.insert("ticketMapper.insertReservation", re);
 	}
 
 	

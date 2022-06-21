@@ -169,22 +169,23 @@ T_CHANGE_NAME-->
  	
 <!--  예약전부 select해오기 -->
  
-	<select id = "selectReservationList" parameterType="Reservation" resultMap="reservationResultSet">
+	<select id = "selectReservationList" resultMap="ticketResultSet">
 
 	  SELECT *
-	  FROM RESERVATION A	  
-	  JOIN TICKET B ON A.TICKET_NO = B.TICKET_NO 	  	  
-	  WHERE A.USER_NO=#{userNo}
+	  FROM TICKET A 
+	  JOIN RESERVATION B ON A.TICKET_NO = B.TICKET_NO  	  
+	  WHERE B.USER_NO = #{userNo}
+	  AND TICKET_STATUS='Y'
     
   	</select>
   	
   	<!-- 예약추가 -->
 	<insert id="insertReservation">
 	
-		<!--  INSERT INTO RESERVATION VALUES
-		(SEQ_RESERVATION.NEXTVAL,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)-->
+		 INSERT INTO RESERVATION VALUES
+		(SEQ_RESERVATION.NEXTVAL,#{ticketNo},#{userNo},'card',1,1,DEFAULT)
 		
-		INSERT INTO RESERVATION VALUES(1,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)
+		<!-- INSERT INTO RESERVATION VALUES(1,#{ticketNo},#{userNo},#{payCode},#{tCode},#{count},DEFAULT)-->
 	</insert>
 	
 	

@@ -299,7 +299,7 @@ public class TicketController {
 				   Ticket r = ticketService.selectReservation(bno);
 					Member m = (Member) session.getAttribute("loginUser");			
 					
-					
+					System.out.println("r확인" + r);
 
 					model.addAttribute("bno",bno);
 					model.addAttribute("r", r);
@@ -315,34 +315,40 @@ public class TicketController {
 					public String selectReservationList(HttpSession session,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 						
 					
-						int userNo = Integer.parseInt(((Member) session.getAttribute("loginUser")).getUserNo());
+						//int userNo = Integer.parseInt(((Member) session.getAttribute("loginUser")).getUserNo());
 					
-						ArrayList<Reservation> list = ticketService.selectReservationList(userNo);
+						String userNo = ((Member) session.getAttribute("loginUser")).getUserNo();
+						System.out.println("userNo"  + userNo);
 						
+						ArrayList<Ticket> list = ticketService.selectReservationList(userNo);
+						System.out.println("list"  + list);
 						
-						model.addAttribute("userNo", userNo);
+						model.addAttribute("list", list);
 					
 						return "Ticket/ReservationList";
 					}
 					
 					//예약추가
 					@RequestMapping("insertRV.do")
-					public String insertReservation(int ticketNo,int userNo,  HttpServletRequest request) {
+					public String insertReservation(Reservation re,  HttpServletRequest request) {
 						
 						
-						System.out.println("ticketNO  : " + ticketNo);
-						System.out.println("userNo  : " + userNo);
+						//System.out.println("ticketNO  : " + ticketNo);
+						//System.out.println("userNo  : " + userNo);
 						
 						//int bno = Integer.parseInt(ticketNo); 
 						//String bno=Integer.toString(ticketNo);
 						
 					   //Reservation r = ticketService.selectReservation(ticketNO);
-						Map map = new HashMap<String, String>();
-						map.put("ticketNo", ticketNo);
-						map.put("userNo", userNo);
+						//Map map = new HashMap<String, String>();
+						//map.put("ticketNo", ticketNo);
+						//map.put("userNo", userNo);
+						
+						System.out.println("r확인" + re)  ;
 						
 						
-						ticketService.insertReservation(map);
+						
+						ticketService.insertReservation(re);
 						
 
 						

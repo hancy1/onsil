@@ -1,7 +1,6 @@
 package com.uni.spring.ticket.model.service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.Reservation;
@@ -36,9 +35,9 @@ public interface TicketService {
 	Ticket selectReservation(String bno);
 
 	
-	ArrayList<Reservation> selectReservationList(int userNo);
+	ArrayList<Ticket> selectReservationList(String userNo);
 
-	void insertReservation(Map map);
+	void insertReservation(Reservation re);
 
 
 

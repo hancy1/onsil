@@ -164,7 +164,7 @@
 					if("${loginUser.userId}" == "${hostUser}" || "${loginUser.userId}" == b.writer){
 						value += "<button class='btn btn-outline-success deleteBoard' onclick='deleteBoard(" + b.boardNo + ");' ><i class='fa-solid fa-trash-can'></i></button>";
 					}
-					if("${loginUser.userId}" == b.writer){
+					if("${loginUser.userId}" != b.writer){
 						value += "<button class='btn btn-outline-success visitGarden' onclick='visitGarden(" + b.boardNo + ");'><i class='fa-solid fa-leaf'></i></button>";
 					}
 					
