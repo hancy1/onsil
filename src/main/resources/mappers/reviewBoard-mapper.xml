@@ -65,12 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    
 	</select>
 	 
-	 <update id="deleteARBBoard" parameterType="_int">
-		 UPDATE REVIEWBOARD
-      SET RB_STATUS = 'N' 
-      WHERE RB_NO=#{rbNo}     
-	</update> 
-
+	 <delete id="deleteARBBoard">
+		DELETE FROM REVIEWBOARD
+		WHERE RB_NO = #{rbNo}
+	</delete>
+	
 	<!-- 예약카테고리 - 후기게시판 등록 수 -->
 	<select id="selectRBListCount" resultType="_int">
 		SELECT COUNT(*)FROM REVIEWBOARD

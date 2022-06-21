@@ -9,17 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uni.spring.common.exception.CommException;
-import com.uni.spring.help.model.dao.HelpDao;
-import com.uni.spring.help.model.dto.Inquiry;
-import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.ticket.model.dao.ReviewBoardDao;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
 import com.uni.spring.ticket.model.dto.RBReply;
 import com.uni.spring.ticket.model.dto.RBoard;
 import com.uni.spring.ticket.model.dto.Ticket;
-
-
 
 @Service
 public class ReviewBoardServiceImpl implements ReviewBoardService{
@@ -187,19 +182,22 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	}
 
 	@Override
-	public ArrayList<ProReview> selectReviewList(PageInfo pi) {
+	public ArrayList<RBoard> selectReviewList(PageInfo pi) {
 		// TODO Auto-generated method stub
 		return rbDao.selectReviewList(sqlSession,pi);
 	}
 
 	@Override
-	public void deleteARBBoard(int bno) {
+	public int deleteARBBoard(int bno) {
 		// TODO Auto-generated method stub
-		  int result = rbDao.deleteARBBoard(sqlSession, bno);
-	      
-	      if(result < 0) {
-	         throw new CommException(" 삭제 실패");
-	      }
+     int result = rbDao.deleteARBBoard(sqlSession, bno);
+		
+		if(result < 0) {
+			throw new CommException(" 삭제 실패");
+		}
+		
+		return result;
+	
 }
 	
 	

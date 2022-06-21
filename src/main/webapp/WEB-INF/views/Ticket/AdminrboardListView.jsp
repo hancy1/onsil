@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-   <title>온실-후기게시판</title>
+   <title>관리자-후기게시판</title>
    <!-- Favicon -->
 <link rel="icon" href="resources/img/core-img/icon.png"> 
 <style>
@@ -114,7 +114,7 @@
 	                        <c:if test="${ empty r.originName }">
 	                        	<td>&nbsp;</td>
 	                        </c:if>
-	                        <td><button id="deleteButton" class="btn btn-outline-secondary btn-sm" >&#128163;&#128165;</button></td>	                        	                        
+	                        <td><button id="deleteButton" class="btn btn-outline-secondary btn-sm" >삭제</button></td>	                        	                        
 	                        
 	                    </tr>
                     </c:forEach>
@@ -170,7 +170,8 @@
     	$(function(){
     		$("#AdminRBList tbody tr").click(function(){
     			
-    			alert("후기게시글을 관리자 권한으로 삭제합니다.");
+    			alert("삭제하시겠습니까?");
+    			var bno =$(this).children().eq(0).text(); 
     		
     			location.href="deleteAdminRRlist.do?bno" + $(this).children().eq(0).text();
     			

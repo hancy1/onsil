@@ -131,8 +131,18 @@ public class TicketServiceImpl implements TicketService{
 		}
 	}
 
-	
+	@Override
+	public void deleteRv(int ticketNo) {
+      int result = ticketDao.deleteRv(sqlSession, ticketNo);
+		
+		if(result < 0) { // 결과가 0보다 작으면 
+			throw new CommException("에약 삭제 실패");
+		
 	}
+
+	}
+}
+
 
 	
 

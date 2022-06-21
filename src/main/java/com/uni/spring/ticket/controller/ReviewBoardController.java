@@ -1,5 +1,6 @@
 package com.uni.spring.ticket.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,14 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.google.gson.GsonBuilder;
 import com.uni.spring.common.exception.CommException;
-import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.member.model.dto.Member;
-import com.uni.spring.shop.ShopPagination;
-import com.uni.spring.shop.model.dto.ProReview;
-import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
@@ -278,7 +274,7 @@ public class ReviewBoardController {
 			
 			PageInfo pi = ticketPagination.getPageInfo(listCount, currentPage, 10, 5);
 			
-			ArrayList<ProReview> list = reviewBoard.selectReviewList(pi);
+			ArrayList<RBoard> list = reviewBoard.selectReviewList(pi);
 			
 			
 			model.addAttribute("list", list);
@@ -290,16 +286,14 @@ public class ReviewBoardController {
 			return "Ticket/AdminrboardListView";
 		}
 		
-		//게시글 삭제
+		//관리자가 게시글 삭제
 		@RequestMapping("deleteAdminRRlist.do")
-		public String deleteARBBoard(int bno,String fileName,HttpServletRequest request) {
+		public String deleteARBBoard(int bno,HttpServletRequest request) {
 			
-			reviewBoard.deleteARBBoard(bno);
 			
-			if(!fileName.equals("")) {
-				deleteFile(fileName,request);
-			}
-			return "redirect:AdminRRlist.do";
+			int result = reviewBoard.deleteARBBoard(bno);
+			
+			return String.valueOf(result);
 			
 		}
 

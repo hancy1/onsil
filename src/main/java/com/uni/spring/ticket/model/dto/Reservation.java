@@ -15,9 +15,8 @@ public class Reservation {
 
 	private String rNo;//예약번호
 	private String ticketNo;//티켓번호
-
-
 	private String userNo;//회원번호
+	private String userName;//회원이름
 	private String payCode;//결제코드
 	private String tCode;//티켓코드
 	private String count;//인원수

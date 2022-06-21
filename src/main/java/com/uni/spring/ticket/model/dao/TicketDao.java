@@ -104,6 +104,11 @@ public class TicketDao {
 		return sqlSession.insert("ticketMapper.insertReservation", re);
 	}
 
+	public int deleteRv(SqlSessionTemplate sqlSession, int ticketNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ticketMapper.deleteRv", ticketNo);
+	}
+
 	
 
 	

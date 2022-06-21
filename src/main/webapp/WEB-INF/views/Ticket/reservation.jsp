@@ -389,11 +389,7 @@
 									 <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
 								</div>
 								
-								<div class="col-12 mb-4">
-									<label for="payCode">결제수단*</label>
-								 <input style="width: 20px; height: 20px;"  type="radio" name="payCode" id="payCode" value="" required> 
-								</div>
-								
+							
 								
 								<div class="col-12 mb-4">
 									<label for="email">이메일</label> <input type="email"
@@ -468,15 +464,7 @@
 							</div>
 
 						</div>
-						<div
-							class="reservation check">
-							<h5>총금액</h5>
-							<h5>
-								<c:set var="Total" value="${(result*20000)+(result1*15000)+(result2*8000)}" />
-								<fmt:formatNumber type="number" value="${(result*20000)+(result1*15000)+(result2*8000)}" />
-								원
-							</h5>
-						</div>
+						
 						<div class="checkout-btn mt-30">
 						<button type="button" name="addReservation" onclick="addFormSubmit(1);"  class="btn alazea-btn ml-15">예약하기</button>
                           

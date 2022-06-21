@@ -7,7 +7,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
 import com.uni.spring.ticket.model.dto.RBReply;
@@ -121,7 +120,7 @@ public class ReviewBoardDao {
 		return sqlSession.selectOne("reviewBoardmapper.selectReviewListCount");
 	}
 
-	public ArrayList<ProReview> selectReviewList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<RBoard> selectReviewList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		// TODO Auto-generated method stub
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
