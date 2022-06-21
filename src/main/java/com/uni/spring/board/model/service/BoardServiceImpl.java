@@ -103,6 +103,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public int deleteReply(int reno) {
+		
+		int result = boardDao.deleteReply(sqlSession, reno);
+		
+		if(result < 0) {
+			throw new CommException("댓글 삭제 실패");
+		}
+		return result;
+	}
+	
+	@Override
 	public int bReportBoard(int bno, int bReport) {
 		
 		Map<String, Object> bReportMap = new HashMap<String, Object>();

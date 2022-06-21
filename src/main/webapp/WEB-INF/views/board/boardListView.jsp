@@ -101,10 +101,10 @@
                                 <ul class="pagination">
 				                	<c:choose>
 				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage-1 }">←</a></li>
+				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage-1 }"><</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="">←</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href=""><</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
 				                	
@@ -121,10 +121,10 @@
 				                    				                    
 				                    <c:choose>
 				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
+				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">></a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">></a></li>
 				                		</c:otherwise>
 				                	</c:choose>
                                 </ul>
@@ -132,72 +132,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-12 col-md-4">
-                    <div class="post-sidebar-area">
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <form action="#" method="get" class="search-form">
-                                <input type="search" name="search" id="widgetsearch" placeholder="Search...">
-                                <button type="submit"><i class="icon_search"></i></button>
-                            </form>
-                        </div>
-                        
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>카테고리</h4>
-                            </div>
-                            <!-- Tags -->
-                            <ol class="popular-tags d-flex flex-wrap">
-                                <li><a href="#">정보</a></li>
-                                <li><a href="#">사진</a></li>
-                                <li><a href="#">후기</a></li>
-                                <li><a href="#">기타</a></li>
-                            </ol>
-                        </div>
-                        
-                        <!-- ##### Single Widget Area ##### -->
-                        <div class="single-widget-area">
-                            <!-- Title -->
-                            <div class="widget-title">
-                                <h4>인기 게시글</h4>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>New Harris Bugg design for Bridgewater</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>SGD Members win Best of Houzz Design Award</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-
-                            <!-- Single Latest Posts -->
-                            <div class="single-latest-post d-flex align-items-center">
-                                <div class="post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>Shepherding Vegetables From Roof to Restaurant</h6>
-                                    </a>
-                                    <a href="#" class="post-date">20 Jun 2018</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+         
             </div>
         </div>
     </section>    

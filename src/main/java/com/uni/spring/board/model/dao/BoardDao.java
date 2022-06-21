@@ -66,6 +66,11 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertReply", r);
 	}
 
+	public int deleteReply(SqlSessionTemplate sqlSession, int reno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("boardMapper.deleteReply", reno);
+	}
+	
 	public int bReportBoard(SqlSessionTemplate sqlSession, Map<String, Object> bReportMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("boardMapper.bReportBoard", bReportMap);

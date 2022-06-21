@@ -26,4 +26,6 @@ public interface BoardService {
 
 	int bReportBoard(int bno, int bReport);
 
+	int deleteReply(int reno);
+
 }

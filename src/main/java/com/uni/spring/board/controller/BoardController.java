@@ -210,7 +210,7 @@ public class BoardController {
 	
 	// 댓글 작성
 	@ResponseBody
-	@RequestMapping(value = "rinsertBoard.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rinsert.do", produces = "application/json; charset=utf-8")
 	public String insertReply(Reply r) {
 		
 		int result = boardService.insertReply(r);
@@ -220,12 +220,12 @@ public class BoardController {
 
 	// 댓글 삭제
 	@ResponseBody
-	@RequestMapping(value = "rdeleteBoard.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rdelete.do", produces = "application/json; charset=utf-8")
 	public String deleteReply(int reno) {
 		
-		//int result = boardService.deleteReply(reno);
+		int result = boardService.deleteReply(reno);
 		
-		return null;
+		return String.valueOf(result);
 	}
 	
 	
