@@ -24,6 +24,9 @@ import com.google.gson.GsonBuilder;
 import com.uni.spring.common.exception.CommException;
 import com.uni.spring.help.model.dto.Answer;
 import com.uni.spring.member.model.dto.Member;
+import com.uni.spring.shop.ShopPagination;
+import com.uni.spring.shop.model.dto.ProReview;
+import com.uni.spring.shop.model.dto.ShopPageInfo;
 import com.uni.spring.ticket.ticketPagination;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
@@ -263,6 +266,41 @@ public class ReviewBoardController {
 			return String.valueOf(result);
 		}
 		
-	
+		
+		//관리자 후기게시글 관리
+		
+		@RequestMapping("AdminRRlist.do")
+		public String selectReviewList(@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage, Model model ) {
+			
+			
+			int listCount = reviewBoard.selectReviewListCount();
+			
+			
+			PageInfo pi = ticketPagination.getPageInfo(listCount, currentPage, 10, 5);
+			
+			ArrayList<ProReview> list = reviewBoard.selectReviewList(pi);
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			
+			
+			
+			return "Ticket/AdminrboardListView";
+		}
+		
+		//게시글 삭제
+		@RequestMapping("deleteAdminRRlist.do")
+		public String deleteARBBoard(int bno,String fileName,HttpServletRequest request) {
+			
+			reviewBoard.deleteARBBoard(bno);
+			
+			if(!fileName.equals("")) {
+				deleteFile(fileName,request);
+			}
+			return "redirect:AdminRRlist.do";
+			
+		}
 
 }

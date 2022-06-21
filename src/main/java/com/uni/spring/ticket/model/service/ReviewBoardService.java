@@ -2,6 +2,7 @@ package com.uni.spring.ticket.model.service;
 
 import java.util.ArrayList;
 
+import com.uni.spring.shop.model.dto.ProReview;
 import com.uni.spring.ticket.model.dto.PageInfo;
 import com.uni.spring.ticket.model.dto.RBLike;
 import com.uni.spring.ticket.model.dto.RBReply;
@@ -36,6 +37,12 @@ public interface ReviewBoardService {
 	int deleteReply(int replyNo);
 
 	int updateReply(RBReply rb);
+
+	int selectReviewListCount();
+
+	ArrayList<ProReview> selectReviewList(PageInfo pi);
+
+	void deleteARBBoard(int bno);
 
 	
 

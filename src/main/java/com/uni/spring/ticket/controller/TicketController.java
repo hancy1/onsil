@@ -336,6 +336,7 @@ public class TicketController {
 						//int bno = Integer.parseInt(ticketNo); 
 						//String bno=Integer.toString(ticketNo);
 						
+					   //Reservation r = ticketService.selectReservation(ticketNO);
 						Map map = new HashMap<String, String>();
 						map.put("ticketNo", ticketNo);
 						map.put("userNo", userNo);
