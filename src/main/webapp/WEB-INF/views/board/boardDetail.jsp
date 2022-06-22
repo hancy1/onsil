@@ -25,51 +25,49 @@
     
     <!-- 모달창 -->
     <style>
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
-      z-index: 1000;
+	.background {
+		position: fixed;
+      	top: 0;
+      	left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+		z-index: 1000;
 
-      /* 숨기기 */
-      z-index: -1;
-      opacity: 0;
-    }
+		/* 숨기기 */
+		z-index: -1;
+		opacity: 0;
+	}
 
-    .show {
-      opacity: 1;
-      z-index: 1000;
-      transition: all 0.5s;
+	.show {
+		opacity: 1;
+		z-index: 1000;
+		transition: all 0.5s;
     }
 
     .window {
-      position: relative;
-      width: 100%;
-      height: 100%;
+		position: relative;
+		width: 100%;
+		height: 100%;
     }
 
     .popup {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #ffffff;
-      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-
-      /* 모달창 크기 */
-      width: 400px;
-      height: 350px;
-
-      /* 초기에 약간 아래에 배치 */
-      transform: translate(-50%, 20%);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: #ffffff;
+		box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+		text-align: center;
+		
+		/* 모달창 크기 */
+		width: 400px;
+		height: 350px;
     }
 
     .show .popup {
-      transform: translate(-50%, -50%);
-      transition: all 0.5s;
+		transform: translate(-50%, -50%);
+		transition: all 0.5s;
     }
   </style>
 </head>
@@ -81,7 +79,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(img/bg-img/24.jpg);">
-            <h2>자유게시판</h2>
+            <h2>온실 :: 자유게시판</h2>
         </div>
 
         <div class="container">
@@ -117,46 +115,7 @@
                                     <a href="gardenMain.do?hostUser=${ loginUser.userNo }"><i class="fa fa-user" aria-hidden="true"></i>${ b.userName }</a>
                                         <div class="post-meta mb-30" align="right">
 											<a>좋아요♡</a>
-											<a><i>/</i></a>
 		                                    <a id="show">신고하기</a>
-		                                    <!-- 모달 창 -->
-											<div class="background">
-											  <div class="window">
-											    <div class="popup">
-											    	<br>
-											    	<form id="bReportForm" action="bReport.do" method="get">
-											    		<input type="hidden" name="bno" value="${ b.BNo }">
-												    	<h3 style="color: #2C3539">신고하기</h3>
-												    	<hr>	
-												    	<div class="radio">											    	
-												        <ol style="color: #7BCCB5">
-													        <li><input type="radio" name="bReport" value="1" required> 1. 욕설, 비방, 차별, 혐오 </li>
-													        <li><input type="radio" name="bReport" value="2" required> 2. 홍보, 영리 목적 </li>
-													        <li><input type="radio" name="bReport" value="3" required> 3. 음란, 청소년 유해 </li>
-													        <li><input type="radio" name="bReport" value="4" required> 4. 개인정보 노출, 유포, 거래 </li>
-													        <li><input type="radio" name="bReport" value="5" required> 5. 도배, 스팸 </li>
-													        <li><input type="radio" name="bReport" value="6" required> 6. 기타 </li>
-												        </ol>
-												        </div>
-												        <br><br>
-												        <button type="submit" class="btn" onclick="bReport();">신고</button>	
-												      	<button type="button" class="btn" id="close">취소</button>
-											      	</form>
-											      	<script>
-														function bReport(){
-															
-															var bReportForm = $("#bReportForm");
-												
-															bReportForm.attr("action", "bReport.do");
-											
-															alert("신고가 완료되었습니다. 감사합니다.");
-															
-															bReportForm.submit();
-														}
-											      	</script>									    
-											      </div>
-											  </div>
-											</div>
 		                                </div>                                
                                 </div>
                                 
@@ -195,7 +154,7 @@
 								</form>
 	                            <script>
 									function bSubmit(num){
-										var postForm = $("#postForm");
+										let postForm = $("#postForm");
 							
 										if(num == 1){
 											postForm.attr("action", "updateForm.do");
@@ -213,39 +172,72 @@
                         <!-- 댓글 -->
                         <div class="comment_area clearfix" id="replyArea">
                             <h4 class="headline">댓글 [ <span id="rcount">0</span> ]</h4>
-                            <ol>
-                                <!-- Single Comment Area -->
-                                <li class="single_comment_area">
-                                    <div class="comment-wrapper d-flex">
-                                        <!-- Comment Content -->
-                                        <div class="comment-content">
-                                        	<table id="replyArea" class="table" align="center">
-								                <thead>
-								                    <tr>
-								                    	<c:if test="${ !empty loginUser }">
-									                        <th colspan="2" style="width:75%">
-									                            <textarea class="form-control" id="reContent" rows="2" style="resize:none; width:100%"></textarea>
-									                        </th>
-									                        <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록하기</button></th>
-								                        </c:if>
-								                        <c:if test="${ empty loginUser }">
-								                        	<th colspan="2" style="width:75%">
-									                            <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인 후 이용해주세요.</textarea>
-									                        </th>
-									                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
-								                        </c:if>
-								                    </tr>
-								                </thead>
-								                <tbody></tbody>
-								            </table>
-                                        </div>
-                                    </div>
-                                </li>                           
-                            </ol>
-                        </div>                      
+
+							<!-- Comment Content -->
+							<div class="comment-content">
+								<table id="replyArea" class="table" align="center">
+									<thead>
+						                 <tr>
+						                 	<c:if test="${ !empty loginUser }">
+						                      <th colspan="2" style="width:75%">
+						                          <textarea class="form-control" id="reContent" rows="2" style="resize:none; width:100%"></textarea>
+						                      </th>
+						                      <th></th>
+						                      <th style="vertical-align: middle"><button class="btn btn-secondary" id="addReply">등록</button></th>
+						                     </c:if>
+						                     <c:if test="${ empty loginUser }">
+						                     	<th colspan="2" style="width:75%">
+						                          <textarea class="form-control" readonly rows="2" style="resize:none; width:100%">로그인 후 이용해주세요.</textarea>
+						                      	</th>
+						                      	<th></th>
+						                      	<th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록</button></th>
+						                     </c:if>
+						                 </tr>
+									</thead>
+					             	<tbody></tbody>
+								</table>
+							</div>
+						</div>
+                     
                     </div>
                 </div> 
-                   
+				<!-- 모달 창 -->
+				<div class="background">
+				  <div class="window">
+				    <div class="popup">
+				    	<br>
+				    	<form id="bReportForm" action="bReport.do" method="get">
+				    		<input type="hidden" name="bno" value="${ b.BNo }"><!-- 현재 글번호 보냄 -->
+					    	<h3 style="color: #306754">신고하기</h3>
+					    	<hr>	
+					    	<div class="radio">											    	
+					        <ol style="color: #3CB371">
+						        <li><input type="radio" name="bReport" value="1" required> 1. 욕설, 비방, 차별, 혐오 </li>
+						        <li><input type="radio" name="bReport" value="2" required> 2. 홍보, 영리 목적 </li>
+						        <li><input type="radio" name="bReport" value="3" required> 3. 음란, 청소년 유해 </li>
+						        <li><input type="radio" name="bReport" value="4" required> 4. 개인정보 노출, 유포, 거래 </li>
+						        <li><input type="radio" name="bReport" value="5" required> 5. 도배, 스팸 </li>
+						        <li><input type="radio" name="bReport" value="6" required> 6. 기타 </li>
+					        </ol>
+					        </div>
+					        <hr>
+					        <button type="submit" class="btn" onclick="bReport();">신고</button>	
+					      	<button type="button" class="btn" id="close">취소</button>
+				      	</form>
+				      	<script>
+							function bReport(){
+								
+								let bReportForm = $("#bReportForm");
+					
+								bReportForm.attr("action", "bReport.do");												
+								bReportForm.submit();
+								
+								alert("신고가 완료되었습니다. 감사합니다.");
+							}
+				      	</script>									    
+				      </div>
+				  </div>
+				</div>                  
             </div>
         </div>
     </section>
@@ -254,12 +246,12 @@
     <jsp:include page="../common/footer.jsp" />
     
 	<script>
-		// 모달 창 보임
-		function show() {
+		// 모달 생성, 제거
+		function show() {	// 모달 창 보임
 		  document.querySelector(".background").className = "background show";
 		}
-		// 모달 창 닫힘
-		function close() {
+		
+		function close() { // 모달 창 닫힘
 		  document.querySelector(".background").className = "background";
 		  return;
 		}
@@ -276,15 +268,19 @@
 			$("#addReply").click(function(){
 				
 				let bno = ${b.BNo};
+				console.log("댓글 번호" + bno);
+				let userNo = ${loginUser.userNo};
+				console.log("유저 번호" + userNo);
+				let reContent = $("#reContent").val();
 	
 				if($("#reContent").val().trim().length != 0){
-					
+
 					$.ajax({
-						url:"rinsert.do",
+						url:"rInsert.do",
 						type:"post",
-						data:{reContent:$("#reContent").val(),
+						data:{reContent:reContent,
 								bno:bno,
-								userNo:"${ loginUser.userNo }"},
+								userNo:userNo},
 						success:function(result){
 							if(result > 0){
 								$("#reContent").val("");
@@ -311,7 +307,7 @@
 	 		let bno = ${b.BNo};
 	 		
 			$.ajax({
-				url:"rlistBoard.do",
+				url:"rListBoard.do",
 				data:{bno:bno},
 				type:"get",
 				success:function(list){
@@ -340,7 +336,7 @@
 		}
 		
 		// 댓글 삭제...
-	 	function deleteReply(ReNo) {
+	 	function deleteReply(reNo) {
 			
 	 		let msg = confirm("댓글을 삭제하시겠습니까?")
 	 		//let bno = ${b.BNo};	 		
@@ -348,7 +344,7 @@
 			
 			if(msg){
 				$.ajax({
-					url:"rdelete.do",
+					url:"rDelete.do",
 					type:"post",
 					data:{reNo:reNo},				
 					success:function(result){

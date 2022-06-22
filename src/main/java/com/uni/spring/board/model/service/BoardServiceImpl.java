@@ -125,8 +125,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(result < 0) { // 결과가 0보다 작으면 
 			throw new CommException("게시글 신고 실패");
-		}
-		
+		}		
 		return result;
 	}
 

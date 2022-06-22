@@ -148,13 +148,11 @@
     		});
     	});
         
+    	// 메세지 띄우기
     	var msg = "${msg}";
     	if(msg){
 			alert(msg);
-    	}
-		//<c:if test="${ !empty msg }">
-
-		//</c:if>  	
+    	}	
     </script>
     
     

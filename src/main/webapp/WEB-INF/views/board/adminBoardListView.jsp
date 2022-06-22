@@ -51,108 +51,105 @@
 
     <!-- ##### Blog Area Start ##### -->
     <section class="alazea-blog-area mb-100">
-        <div class="container">
-            <div class="row">
+        <div class="container" align="center">            
                 	
-                	<!-- 게시판 목록 -->                
-					<table id="boardList" class="table table-hover">
-			        	<thead>
-			          		<tr>
-								<th width="90">글번호</th>
-								<th width="200">신고사유</th>
-								<th width="300">글제목</th>
-								<th width="100">작성자</th>
-								<th width="130">작성일</th>
-								<th width="60">삭제</th>
-					        </tr>
-					    </thead>
-						<tbody>
-		                	<c:forEach items="${ list }" var="b">
-			                    <tr>
-			                        <td>${ b.BNo }</td>
-			                        <td>${ b.adbCategoryName }</td>
-			                        <td>${ b.BTitle }</td>
-			                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userName }</a></td>
-			                        <td>${ b.BDate }</td>
-			                        <td><button type="button" class="btn" onclick="deleteBtn();">-</button></td>
-			                    </tr>
-			                    <form id="deleteBtn" action="" method="post">
-									<input type="hidden" name="bno" value="${ b.BNo }">
-								</form>
-	                            <script>
-									function deleteBtn(){
-										
-										var deleteBtn = $("#deleteBtn");
-							
-										deleteBtn.attr("action", "deleteReport.do");
-						
-										alert("신고된 게시물이 삭제되었습니다.");
-										
-										deleteBtn.submit();
-									}
-								</script>
-		                    </c:forEach>
-				        </tbody>
-					</table>
-				<br><br>								
-
-                	<!-- 페이징 처리 -->
-                	<div align="center">		
-                    <div class="row">
-                        <div class="col-12">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-				                	<c:choose>
-				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage-1 }">←</a></li>
+           	<!-- 게시판 목록 -->
+           	<form id="deleteForm" action="deleteReport.do" method="post">			            
+				<table id="boardList" class="table table-hover">					
+		        	<thead>
+		          		<tr>
+							<th width="90">글번호</th>
+							<th width="200">신고사유</th>
+							<th width="300">글제목</th>
+							<th width="100">작성자</th>
+							<th width="130">작성일</th>
+							<th width="60">삭제</th>
+				        </tr>
+				    </thead>
+					<tbody>
+	                	<c:forEach items="${ list }" var="b">
+		                    <tr>		                    
+		                        <td>
+		                        	<input type="hidden" name="bno" value="${ b.BNo }" />
+		                        	${ b.BNo }
+		                        </td>
+		                        <td>${ b.adbCategoryName }</td>
+		                        <td>${ b.BTitle }</td>
+		                        <td><a href="gardenMain.do?hostUser=${ loginUser.userNo }">${ b.userName }</a></td>
+		                        <td>${ b.BDate }</td>
+		                       <!--  <td><input type="button" id="deleteBtn" class="btn" onclick="deleteBtn();" value="-"></td> -->
+								<td><input type="submit" id="deleteBtn" class="btn" value="-"></td>			                       
+		                    </tr>						
+	                    </c:forEach>
+			        </tbody>				        
+				</table>
+			</form> 								
+		</div>
+           	<!-- 페이징 처리 -->
+           	<div align="center">		
+               <div class="row">
+                   <div class="col-12">
+                       <nav aria-label="Page navigation">
+                           <ul class="pagination">
+				               	<c:choose>
+				               		<c:when test="${ pi.currentPage ne 1 }">
+				               			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage-1 }"><</a></li>
+				               		</c:when>
+				               		<c:otherwise>
+				               			<li class="page-item disabled"><a class="page-link" href=""><</a></li>
+				               		</c:otherwise>
+								</c:choose>
+				               	
+				                   <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+				                   	<c:choose>
+				                		<c:when test="${ pi.currentPage ne p }">
+				                   			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ p }">${ p }</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="">←</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
-				                	
-				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-				                    	<c:choose>
-					                		<c:when test="${ pi.currentPage ne p }">
-				                    			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ p }">${ p }</a></li>
-					                		</c:when>
-					                		<c:otherwise>
-					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-					                		</c:otherwise>
-					                	</c:choose>
-				                    </c:forEach>
-				                    				                    
-				                    <c:choose>
-				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
-				                		</c:when>
-				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">→</a></li>
-				                		</c:otherwise>
-				                	</c:choose>
-                                </ul>
-                            </nav>
-                    	</div>
-                    </div>
-                </div>                                                      
-            </div>
-        </div>
+				                   </c:forEach>
+				                   				                    
+				                   <c:choose>
+				               		<c:when test="${ pi.currentPage ne pi.maxPage }">
+				               			<li class="page-item"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">></a></li>
+				               		</c:when>
+				               		<c:otherwise>
+				               			<li class="page-item disabled"><a class="page-link" href="boardList.do?currentPage=${ pi.currentPage+1 }">></a></li>
+				               		</c:otherwise>
+				               	</c:choose>
+                           </ul>
+                       </nav>
+					</div>
+				</div>
+           </div>                                                      
+                    
     </section>    
     <!-- ##### Blog Area End ##### -->
 
     <jsp:include page="../common/footer.jsp" />
 
-	<!-- 테이블 클릭시 게시글 상세보기로 이동 -->
+	<!-- 게시글 클릭시 신고된 현재 게시글의 상세보기로 이동 -->
     <script>
     	$(function(){
     		$("#boardList tbody tr").click(function(){
     			location.href="detailBoard.do?bno=" + $(this).children().eq(0).text();
     		});
-    	});
-    	
-    	
+    	}); 
     </script>
     
+    <!-- 신고된 게시글 삭제 버튼후 알람창 -->   	
+	<script>
+		$('#deleteBtn').on('click', function() { 
+			  
+			  alert("삭제가 완료되었습니다.");
+			  
+			})
+	</script>
+
+	
+	 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="resources/js/jquery/jquery-2.2.4.min.js"></script>
