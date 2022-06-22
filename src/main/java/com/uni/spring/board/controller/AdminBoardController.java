@@ -2,8 +2,6 @@ package com.uni.spring.board.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,10 +39,11 @@ public class AdminBoardController {
 	
 	// 신고 게시글 삭제하기
 	@RequestMapping("deleteReport.do")
-	public String deleteReport(int bno) {
+	public String deleteReport(int bno, Model model) {
 		
-		System.out.println(bno);
+		System.out.println("삭제할 신고 게시글 번호 : " + bno);
 		adminBoardService.deleteBoard(bno);
+		model.addAttribute("msg", "삭제가 완료되었습니다.");	
 		
 		return "redirect:adminBList.do";
 	}

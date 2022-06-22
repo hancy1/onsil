@@ -63,10 +63,10 @@ public class BoardController {
 	public ModelAndView selectboard(int bno, ModelAndView mv, Board b) {
 		   
 		b = boardService.selectBoard(bno);
-		b.setBNo(bno);	// 객체에 글번호 + 게시글 정보 담기
+		b.setBNo(bno);		// 객체에 글번호 + 게시글 정보 담기
 		
 		mv.addObject("b", b).setViewName("board/boardDetail");
-		//System.out.println("상세보기 객체 확인용 : " + b);   
+		//System.out.println("게시글 상세보기 객체 확인용 : " + b);   
 		
 		return mv;		   
 	}
@@ -80,13 +80,14 @@ public class BoardController {
 	
 	// 게시글 작성하기
 	@RequestMapping("insertBoard.do")
-	public String insertBoard(@RequestParam(name="uploadFile", required = false) MultipartFile file, Board b, HttpServletRequest request) {
+	public String insertBoard(@RequestParam(name="uploadFile", required = false) 
+								MultipartFile file, Board b, HttpServletRequest request) {
 
-	   //System.out.println(file.getOriginalFilename());		저장한 파일 기존 이름
+	   //System.out.println(file.getOriginalFilename());	// 저장한 파일 기존 이름
 	   
-	   if(!file.getOriginalFilename().equals("")) {			//전달받은 파일이 없으면 빈 문자열
+	   if(!file.getOriginalFilename().equals("")) {			// 전달받은 파일이 없으면 빈 문자열
 	   
-	   String changeName = saveFile(file, request);		//메소드 생성해 줌
+	   String changeName = saveFile(file, request);			// 메소드 생성해 줌
 	   
 	   if(changeName != null) {
 	        b.setBOriginName(file.getOriginalFilename());
@@ -95,7 +96,7 @@ public class BoardController {
 	  } 
 	  
 	  boardService.insertBoard(b);   
-	  //System.out.println("글 작성후 객체 생성 : " + b);
+	  //System.out.println("글 작성후 객체 생성 확인 : " + b);
 	  
 	  return "redirect:boardList.do"; //글 작성하면 게시글 목록으로
 		   
@@ -135,16 +136,16 @@ public class BoardController {
 	public String deleteBoard(int bno, String fileName, HttpServletRequest request) {
 		   
 		boardService.deleteBoard(bno);
-		//System.out.println("컨트롤러 삭제하기 글번호" + bno);
+		//System.out.println("삭제하기 글번호 확인 : " + bno);
 		   
-		if(!fileName.equals("")) { //파일이 첨부됐다면?
-			deleteFile(fileName, request); //파일 지우기
+		if(!fileName.equals("")) { 				// 파일이 첨부됐다면
+			deleteFile(fileName, request); 		// 파일 삭제
 		}
 		   
-		return "redirect:boardList.do"; //삭제하면 게시글 목록으로 		   
+		return "redirect:boardList.do";			// 삭제하면 게시글 목록으로 		   
 	}
 
-	// 첨부파일 삭제
+	// 게시글에 같이 첨부된 파일 삭제
 	private void deleteFile(String fileName, HttpServletRequest request) {
 
 		String resources = request.getSession().getServletContext().getRealPath("resources");	
@@ -170,35 +171,37 @@ public class BoardController {
 
 	// 게시글 수정
 	@RequestMapping("updateBoard.do")
-	public String updateBoard(Board b, HttpServletRequest request,
+	public String updateBoard(Board b, HttpServletRequest request, Model model,
 							@RequestParam(name = "reUploadFile", required = false) MultipartFile file) {
-		//System.out.println(b); //수정할 정보 넘어가는지 확인
-		String orgchangeName = b.getBChangeName(); 
 		
-		if(!file.getOriginalFilename().equals("")) {	//새로 넘어온 파일이 있는 경우
+		//System.out.println(b);							// 수정할 정보 넘어가는지 확인
+		//System.out.println(b.getBNo());
+		String orgfile = b.getBChangeName();				// 기존에 저장된 파일명
+		
+		// 새로 추가할 첨부 파일이 있는 경우
+		if(!file.getOriginalFilename().equals("")) {		
 			
-			String changeName = saveFile(file, request); //file, request 정보를 넘겨서 changeName에 받아옴
+			String changeName = saveFile(file, request);	// 저장된 파일 정보를 넘겨서 changeName 변수에 넣음
 			
 			b.setBOriginName(file.getOriginalFilename());
-			b.setBChangeName(changeName);
-			
-			//System.out.println("수정할 객체 확인 : " + b);
+			b.setBChangeName(changeName);					// 새로운 파일을 저장함 
 
-			// 새로 넘어온 파일이 있을 때만 기존파일 삭제. 파일 추가 안했을시 기존 파일도 삭제하려면 바깥으로 옮기기
-			if(orgchangeName != null) { // null은 새로운 파일도 있는데 기존의 파일도 있는 경우 --> 서버에 업로드된 기존 파일 삭제
-				deleteFile(orgchangeName, request);	// 값이 있으면 삭제함
+			// 새로 넘어온 파일이 있을 때만 기존파일 삭제. 파일 추가 안했을시 기존 파일 삭제 안함
+			if(orgfile != null) { 							// 기존 파일 있는 경우 --> 서버에 업로드된 기존 파일 삭제
+				deleteFile(orgfile, request);				// 기존 파일의 값이 있으면 삭제
 			}
 		}		
-		//System.out.println("수정할 객체 확인" + b);
+		//System.out.println("수정할 객체 확인 : " + b);
 
 		boardService.updateBoard(b);
+		model.addAttribute("msg", "게시글 수정이 완료되었습니다.");
 							
-		return "redirect:detailBoard.do";
+		return "redirect:detailBoard.do";				// 게시글 수정 후 상세보기로 이동
 	}
 	
-	// 댓글 (라이브러리 gson 추가)
+	// 댓글 목록 (라이브러리 gson 추가)
 	@ResponseBody
-	@RequestMapping(value = "rlistBoard.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rListBoard.do", produces = "application/json; charset=utf-8")
 	public String selectReplyList(int bno) {
 		
 		// select 먼저 해서 가져옴
@@ -210,7 +213,7 @@ public class BoardController {
 	
 	// 댓글 작성
 	@ResponseBody
-	@RequestMapping(value = "rinsert.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rInsert.do", produces = "application/json; charset=utf-8")
 	public String insertReply(Reply r) {
 		
 		int result = boardService.insertReply(r);
@@ -220,7 +223,7 @@ public class BoardController {
 
 	// 댓글 삭제
 	@ResponseBody
-	@RequestMapping(value = "rdelete.do", produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "rDelete.do", produces = "application/json; charset=utf-8")
 	public String deleteReply(int reno) {
 		
 		int result = boardService.deleteReply(reno);
@@ -235,17 +238,18 @@ public class BoardController {
 		
 		System.out.println("신고할 글번호 확인 : " + bno);
 		System.out.println("카테고리 넘버 : " + bReport);
+		
 		int brb = boardService.bReportBoard(bno, bReport);
 		
-		if(brb > 0) {	// 업데이트 성공시
+		if(brb > 0) {									// 게시글 신고 성공할 경우
 			Board b = boardService.selectBoard(bno);
-			model.addAttribute("b", b);
-			System.out.println("신고후 상세보기로 돌아기기 : " + b);
-			model.addAttribute("msg", "신고가 완료되었습니다.");
+			
+			model.addAttribute("b", b);					// model을 이용해 view에 객체 정보 전달	
+			//System.out.println("신고후 상세보기로 돌아기기 : " + b);
+			model.addAttribute("msg", "신고가 완료되었습니다.");			
 		}else {
 			model.addAttribute("msg", "신고가 실패되었습니다.");
-		}
-		
+		}		
 		System.out.println("결과 확인용 : " + brb);   
 	            
 		return "board/boardDetail";
